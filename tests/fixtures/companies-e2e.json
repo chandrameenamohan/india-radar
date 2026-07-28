@@ -1,0 +1,58 @@
+{
+  "schema_version": 2,
+  "snapshot": "2026-07-28",
+  "companies": [
+    {
+      "name": "Acme Cloud",
+      "ats": "greenhouse",
+      "slug": "acmecloud",
+      "india_roles": 12,
+      "cities": ["Bengaluru", "Pune"],
+      "amount": 40000000,
+      "currency": "USD",
+      "round_letter": "B",
+      "date": "2026-06-30",
+      "source_url": "https://www.finsmes.com/2026/06/acme-cloud-raises-40m.html",
+      "qualified_by": "letter"
+    },
+    {
+      "name": "Beta Logistics",
+      "ats": "greenhouse",
+      "slug": "betalogistics",
+      "india_roles": 3,
+      "cities": ["Pune"],
+      "amount": 6000000,
+      "currency": "USD",
+      "round_letter": "A",
+      "date": "2026-07-20",
+      "source_url": "https://www.finsmes.com/2026/07/beta-logistics-raises-6m.html",
+      "qualified_by": "letter"
+    },
+    {
+      "name": "Gamma Health",
+      "ats": "greenhouse",
+      "slug": "gammahealth",
+      "india_roles": 45,
+      "cities": ["Bengaluru", "Hyderabad"],
+      "amount": 120000000,
+      "currency": "USD",
+      "round_letter": "C",
+      "date": "2025-02-14",
+      "source_url": "https://www.finsmes.com/2025/02/gamma-health-raises-120m.html",
+      "qualified_by": "letter"
+    },
+    {
+      "name": "Delta Remote",
+      "ats": "greenhouse",
+      "slug": "deltaremote",
+      "india_roles": 1,
+      "cities": [],
+      "amount": 9000000,
+      "currency": "USD",
+      "round_letter": null,
+      "date": "2026-07-01",
+      "source_url": "https://www.finsmes.com/2026/07/delta-remote-raises-9m.html",
+      "qualified_by": "amount"
+    }
+  ]
+}

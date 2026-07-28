@@ -436,3 +436,93 @@ So the chain is intact and the input is thin. The same shape as T1.5's >=1,000
 line: **T1.2 (YC) and T1.3 (EDGAR) carry a real website field**, which raises slug
 resolution, which is the only thing standing between this emitter and a populated
 site. Nothing in T5.1 needs to change when that lands.
+
+---
+
+# The site — measured during T5.2 (2026-07-28)
+
+## A `file://` page cannot `fetch()` the JSON next to it
+
+The gate drove `file://$(pwd)/site/index.html` because that needed no server.
+Measured: the page loads, and the fetch fails outright —
+
+```
+[error] Fetch API cannot load file:///tmp/fetchprobe/d.json.
+        URL scheme "file" is not supported.
+```
+
+No header or flag fixes that from inside the page; it is Chromium's scheme rule.
+So `scripts/e2e.sh` serves the repo over `python -m http.server` on 127.0.0.1 and
+drives `http://`. That is also the deployment we ship (GitHub Pages is HTTP), so
+the gate now exercises the real loading path rather than a local-only one.
+
+Corollary worth keeping: the tempting fix — emit a `site/data.js` that assigns
+`window.COMPANIES` — would have worked on `file://` and cost a second copy of the
+published data. A server is cheaper than a second source of truth.
+
+## A missing favicon is a failed network request
+
+`console-clean` asserts zero non-2xx responses, and a page with no `<link
+rel=icon>` makes Chromium request `/favicon.ico` and get a 404. The site carries
+`<link rel="icon" href="data:,">` for exactly that reason. Any new page in this
+repo needs the same line or the gate will fail on a file nobody meant to request.
+
+## `browse` quirks the e2e is built around
+
+Measured while wiring layer 4, all three of which cost a debugging cycle:
+
+| Thing | Behaviour | What the e2e does |
+|---|---|---|
+| `browse click <sel>` with a selector matching >1 element | refuses: "Selector matched multiple elements" | `.row:first-of-type summary` |
+| `browse fill <sel> ''` | rejected, "Usage: browse fill <selector> <value>"; the old value stays | search checks run LAST, so nothing needs clearing |
+| two `browse` daemons alive at once | commands split across two browsers; the symptom is row diffs that read exactly like site bugs | `open_page` asserts `location.href` is the URL it asked for and says "try: browse stop" |
+
+## A collapsed `<details>` is in the DOM and has a bounding box
+
+Rows are native `<details>`/`<summary>` disclosures — no click handler, no
+`aria-expanded`, keyboard-reachable for free. But asserting "the detail is
+hidden" cannot use `querySelector` (it matches when closed) or `offsetHeight`
+(112px when closed, same as open). `checkVisibility({contentVisibilityAuto:
+true, visibilityProperty: true})` is the one that reports `false` closed and
+`true` open. A weaker assertion here would have passed against a row whose detail
+was permanently unreachable.
+
+## The gate was broken on purpose, three ways, before being believed
+
+Per VERIFICATION.md's "only once the gate has caught at least one real failure":
+
+| Injected bug | Caught by |
+|---|---|
+| city filter keeps any company with *any* city | `filtering to a city…` — expected `Gamma Health\|Acme Cloud`, got the Pune-only company too |
+| a stray undefined function call at load | 12 checks failed, starting with `zero console errors` |
+| snapshot date never written to the DOM | `snapshot date is visible` — expected `2026-07-28`, got `—` |
+
+## `cities` is now in the schema, and why that landed here rather than in T4.1
+
+T5.2's own DoD requires `e2e:filter_city_returns_only_matching`, and a city
+filter cannot be verified — or built — without city data. Schema v1 had none:
+T3.4 deliberately left "which cities they are" to T4.1, which the graph places
+two phases later. Rather than test the filter against a fixture shape the emitter
+could never produce, `src/india.py:cities` and row field `cities` landed here and
+`SCHEMA_VERSION` went to 2. **T4.1 keeps role titles, apply URLs and the explicit
+remote flag; its `test_city_and_remote_parsing` will find the city half already
+done.** Search before rebuilding it.
+
+Two things fell out of writing it:
+
+- **Alias collapsing is load-bearing for a filter, not cosmetic.** `CITIES`
+  carries both spellings of six cities (bengaluru/bangalore, gurgaon/gurugram,
+  kochi/cochin, trivandrum/thiruvananthapuram, mysore/mysuru,
+  vizag/visakhapatnam). Left alone, the site offers "Bangalore" and "Bengaluru"
+  as two places and each hides the other's roles. `india.ALIASES` maps variants
+  onto one canonical name.
+- **An India role with no named city is a real answer.** `Remote - India` yields
+  `cities: []`, which is not missing data. The site renders it "India — city not
+  stated"; an empty cell would read as a bug and a fabricated city would be a lie.
+
+## Visual regression (VERIFICATION 4c) is deliberately NOT in the gate
+
+It needs baseline screenshots a human approves once. An agent that approves its
+own baselines asserts nothing, so this is left outside the gate and named here
+rather than faked inside it. Everything else in layer 4 (4a console-clean, 4b
+behavioural, 4d a11y basics) runs.

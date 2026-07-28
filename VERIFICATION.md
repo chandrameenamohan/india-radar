@@ -197,7 +197,9 @@ Adding any of these now would be over-engineering for where we are.
    Ralph iteration unable to stop — and the obvious "fix" available to a stuck
    agent is to weaken the e2e check, which is exactly what the gate exists to
    prevent. A gate that cannot go green does not create back-pressure; it creates
-   an incentive to defeat it. e2e now SKIPS when there is no site to verify.
+   an incentive to defeat it. e2e SKIPPED while there was no site to verify;
+   T5.2 has since built `site/index.html`, so it now runs for real and a missing
+   site is a failure. It still skips where `browse` is absent, i.e. in CI.
 2. Each task in `TASKS.md` turns its own checks green as it lands. The honesty
    guarantee is `strict=True` xfail in `tests/test_invariants.py`: an invariant
    that starts passing by accident **fails the build**, so nobody can quietly

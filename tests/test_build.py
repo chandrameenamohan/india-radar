@@ -58,6 +58,7 @@ def test_listed_row_carries_the_corpus_and_the_board():
             "ats": "greenhouse",
             "slug": "acme",
             "india_roles": 2,  # of four roles; Warsaw and In-Office are not India
+            "cities": ["Bengaluru", "Mumbai"],  # what the site's city filter offers
             "amount": 21000000,
             "currency": "USD",
             "round_letter": "A",
@@ -144,6 +145,25 @@ def test_a_company_never_checked_is_never_listed():
         "Broken": Outcome.SLUG_UNRESOLVED,  # the board 404'd
     }
     assert {row["name"] for row in rows} == {"Acme", "Beta"}
+
+
+def test_the_e2e_dataset_is_a_file_this_build_could_have_written():
+    """The site's e2e drives a committed fixture dataset, because a real build's
+    output is legitimately empty today (T5.1). A fixture the emitter could never
+    produce would test the site against a shape that doesn't exist — so it is
+    held to the same schema, and a version bump breaks it here rather than
+    silently leaving the e2e testing last year's site."""
+    shipped = json.loads(Path("tests/fixtures/companies-e2e.json").read_text())
+
+    assert shipped["schema_version"] == SCHEMA_VERSION
+    assert [errors(row) for row in shipped["companies"]] == [[]] * len(shipped["companies"])
+    # The city filter's negative case: filtering to Bengaluru must drop a company
+    # whose only India city is Pune. Both have to be in the fixture for the e2e
+    # assertion to mean anything.
+    listed = [row["cities"] for row in shipped["companies"]]
+    assert ["Pune"] in listed, "no city-filter negative case"
+    assert any("Bengaluru" in cities for cities in listed), "no city-filter positive case"
+    assert [] in listed, "no India-without-a-city case"
 
 
 def test_no_india_roles_is_a_finding_not_a_gap():

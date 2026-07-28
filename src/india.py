@@ -28,6 +28,18 @@ CITIES = (
     "mohali", "thane", "faridabad", "vellore", "madurai",
 )
 
+#: Spellings of one city. The site's city filter offers the cities it finds in
+#: the data, so without this "Bengaluru" and "Bangalore" become two places and a
+#: filter on either hides half the roles. Both spellings are live on real boards.
+ALIASES = {
+    "bangalore": "bengaluru",
+    "gurgaon": "gurugram",
+    "cochin": "kochi",
+    "trivandrum": "thiruvananthapuram",
+    "mysore": "mysuru",
+    "vizag": "visakhapatnam",
+}
+
 #: `\b` is load-bearing twice over: it keeps "india" out of "Indianapolis,
 #: Indiana" and "thane" out of "Thanet, UK". Plain substring matching is what
 #: makes a city list quietly wrong.
@@ -45,6 +57,20 @@ def is_india(location: str | None) -> bool:
 
     Multi-city postings ("Bengaluru, India; Mumbai, India") need no splitting —
     one India city anywhere in the string makes the posting an India posting.
-    Which cities they are is T4.1's question.
+    Which cities they are is `cities` below.
     """
     return bool(location and _INDIA.search(location))
+
+
+def cities(location: str | None) -> list[str]:
+    """The India cities this location names, deduplicated and canonically spelled.
+
+    Empty for a location that is India without naming a city ("Remote - India",
+    "India - Remote"). That is a real answer, not a gap: the company is hiring in
+    India and hasn't said where, and the site renders it as such rather than as a
+    blank. Multi-city postings yield every city they name.
+    """
+    matched = (m.lower() for m in _INDIA.findall(location or ""))
+    found = {ALIASES.get(city, city) for city in matched}
+    found.discard("india")
+    return sorted(city.title() for city in found)

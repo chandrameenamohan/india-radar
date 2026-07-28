@@ -23,26 +23,28 @@ from typing import Any
 from src.greenhouse import Roles
 from src.greenhouse import parse as parse_board
 from src.greenhouse import probe as greenhouse_probe
-from src.india import is_india
+from src.india import cities, is_india
 from src.outcomes import Outcome, report, write_report
 from src.slugs import Slug
 
 #: Bump when a row's shape changes. The site reads this and refuses a version it
 #: doesn't know, rather than silently rendering fields that moved.
-SCHEMA_VERSION = 1
+#: v2 added `cities` — the site's city filter is the one thing it cannot fake.
+SCHEMA_VERSION = 2
 
 Probe = Callable[[str], Roles | Outcome]
 Row = dict[str, Any]
 
-#: A v1 row: what the corpus knew about the funding, plus what the board proved
+#: A v2 row: what the corpus knew about the funding, plus what the board proved
 #: about the hiring. Types only — the value rules that carry meaning are in
-#: `errors`. Roles, cities and apply links are T4.1; they widen this, and the
-#: version is how the site will know which shape it's holding.
+#: `errors`. Role titles and apply links are T4.1; they widen this, and the
+#: version is how the site knows which shape it's holding.
 FIELDS: dict[str, type | tuple[type, ...]] = {
     "name": str,
     "ats": str,
     "slug": str,
     "india_roles": int,
+    "cities": list,
     "amount": (int, type(None)),
     "currency": (str, type(None)),
     "round_letter": (str, type(None)),
@@ -78,6 +80,10 @@ def errors(row: Mapping[str, Any]) -> list[str]:
     # this project exists to refuse.
     if isinstance(row.get("india_roles"), int) and row["india_roles"] < 1:
         problems.append("india_roles < 1: a listed company has at least one India role")
+    # An empty city list is legal (a role can be "Remote - India"); a non-string
+    # inside it is not, because the site renders these straight into the filter.
+    if isinstance(row.get("cities"), list) and not all(isinstance(c, str) for c in row["cities"]):
+        problems.append(f"cities {row['cities']!r} is not a list of strings")
     if row.get("qualified_by") not in ("letter", "amount"):
         problems.append(f"qualified_by {row.get('qualified_by')!r} is not 'letter' or 'amount'")
     if row.get("ats") not in PROBES:
@@ -118,7 +124,9 @@ def build(
 
         # Greenhouse nests the location; unwrapped here rather than in india.py
         # because the three ATSes genuinely disagree on a role's shape.
-        india = [r for r in result if is_india((r.get("location") or {}).get("name"))]
+        # One location string per role, so counting them counts roles.
+        located = [(role.get("location") or {}).get("name") for role in result]
+        india = [location for location in located if is_india(location)]
         if not india:
             outcomes[name] = Outcome.NO_INDIA_ROLES
             continue
@@ -130,6 +138,7 @@ def build(
                 "ats": slug["ats"],
                 "slug": slug["slug"],
                 "india_roles": len(india),
+                "cities": sorted({city for location in india for city in cities(location)}),
                 "amount": company["amount"],
                 "currency": company["currency"],
                 "round_letter": company["round_letter"],

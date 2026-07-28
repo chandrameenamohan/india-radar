@@ -277,6 +277,10 @@ Out of scope: cities outside the list inside "IN-<City>" strings. Measured
 > Every enrichment must degrade to absent. None may fail a build.
 
 ### T4.1 — Roles, apply links, city, remote flag `todo` · *Phase 2* · after T3.4
+> **The city half is already built** — `src/india.py:cities` and the row's
+> `cities` field landed with T5.2, whose city filter could not exist without them.
+> What remains here: role titles, per-role apply URLs, the explicit remote flag,
+> and the integration check that sampled apply URLs return 200.
 ```
 Acceptance (observable):
   Every listed company has >=1 India role with an apply URL returning 200 on that
@@ -358,7 +362,23 @@ Checks:
 Out of scope: the UI.
 ```
 
-### T5.2 — Search, sort, filter, detail `in-progress` · *Phase 0* · after T5.1
+### T5.2 — Search, sort, filter, detail `done` · *Phase 0* · after T5.1
+> **The city filter forced `cities` into the schema (v1 → v2), one task earlier
+> than the graph puts it.** T3.4 left "which cities they are" to T4.1, but this
+> task's own DoD check is the city filter, and a filter cannot be built or
+> verified without city data. The alternative was an e2e fixture shaped like
+> nothing the emitter could produce. So `india.cities` and the row's `cities`
+> landed here; **T4.1 still owns role titles, apply URLs and the remote flag** and
+> will find the city half done. See FINDINGS.
+> Behaviour is driven against `tests/fixtures/companies-e2e.json`, because a real
+> build lists 0 companies today (T5.1's note). A unit test holds that fixture to
+> the shipped schema, so it cannot drift into testing a site we don't ship.
+> Gate proven by breaking it three ways first — a filter that ignores the chosen
+> city, a stray console error, a missing snapshot date — each caught. FINDINGS.
+> **Skipped deliberately:** the remote-only and MCA-verified filters SPEC feature
+> 10 lists. Both filter on fields no row carries yet (T4.1, T4.4); a control that
+> can only return nothing is worse than no control. Visual regression (4c) is
+> outside the gate — baselines need one human approval.
 ```
 Acceptance (observable):
   Loads with ZERO console errors and ZERO failed network requests. Filtering to a
