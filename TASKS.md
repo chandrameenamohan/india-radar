@@ -152,7 +152,7 @@ Out of scope: cross-source conflict resolution beyond T1.5's dedup rule.
 > Measured baseline to beat: **~50%** from careers-page + guessing combined.
 > This rate, not funding coverage, is the ceiling on site size.
 
-### T2.1 — Careers-page slug discovery `todo` · *Phase 0* · after T1.5
+### T2.1 — Careers-page slug discovery `in-progress` · *Phase 0* · after T1.5
 ```
 Acceptance (observable):
   slugs.json maps company -> {ats, slug, method:"careers-page"}. Unresolved
