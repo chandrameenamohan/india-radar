@@ -981,3 +981,71 @@ companies. Guessing alone against the corpus would resolve **~10-15%** — 3/20 
 a random sample — in ~34 minutes, which is the cheap partial refresh if one is
 wanted before T6.2 automates the whole thing. `data/companies.json` is untouched
 and the site still renders T1.2's snapshot.
+
+---
+
+# The override file — measured during T2.3 (2026-07-28)
+
+## `board_name` cannot tell a dead slug from a Greenhouse outage; `probe` can
+
+The obvious way to check an override is `greenhouse.board_name(slug) is None`.
+It is the wrong call, and the reason is in T3.1's own docstring: `board_name`
+returns None for **any** non-200, so a 404 and a 502 arrive identically. An
+override checked that way fails the run whenever Greenhouse hiccups, blaming a
+human for somebody else's outage — and a check that cries wolf is a check people
+route around.
+
+`greenhouse.probe` already separates them, because T3.1 needed the same
+distinction for a different reason: 404 → `SLUG_UNRESOLVED`, anything else →
+`PROBE_FAILED`. So verification tests `is Outcome.SLUG_UNRESOLVED` and lets every
+other failure through to the build, where it is counted `probe-failed` as usual.
+**Generalises:** where an outcome enum already encodes "wrong" vs "unreadable",
+reuse it rather than re-deriving the distinction from a truthiness check.
+
+## The four companies the override file exists for
+
+Each was found by T2.2's guessing, verified against the live board, and then
+**deliberately refused** because the board states a name that does not contain
+the company's. Re-verified live today, all four still 200 with real roles:
+
+| company | slug | board states | roles today |
+|---|---|---|---|
+| A24 Films | `a24` | `A24` | 9 |
+| Cross River Bank | `crossriverbank` | `Cross River` | 28 |
+| Prove Identity | `prove` | `Prove` | 11 |
+| Stoke Space Technologies | `stokespacetechnologies` | `Stoke Space ` | 50 |
+
+All four are in the corpus under exactly those names. **Razorpay was considered
+and left out**: it resolves by careers-page live (measured in T2.2 above), so an
+override would only pre-empt a working automatic method. An override that
+duplicates automation is clutter that rots.
+
+## Precedence is cheaper implemented as absence than as a comparison
+
+An overridden company never enters the automatic pass at all, rather than being
+resolved automatically and then overwritten. Same answer, and it skips two
+careers-page fetches plus up to six board calls per overridden company — ~8.6s
+each at the measured rates. Trivial at four entries; the point is that the
+expensive shape is the one that looks more natural to write.
+
+## No PyYAML: the parser is one regex, and it rejects rather than half-reads
+
+This project still has **zero runtime dependencies**, and a flat
+`<name>: <ats>/<slug>` mapping is not worth its first. The hazard of a partial
+YAML parser is not that it fails — it is that it succeeds differently from what
+was meant, and every such misread ends as a company quietly missing from the
+site. So anything outside that one shape raises with the line number: nesting,
+lists, a quoted *value*, a missing slug. A quoted *key* is accepted and stripped,
+because that is the one YAML habit that would otherwise parse fine and then match
+no company at all.
+
+YAML over JSON for exactly one feature: comments. Every entry is a human
+overruling measured evidence, and an override whose reason went unrecorded is one
+nobody dares delete a year later. A unit test enforces that house rule — every
+entry line must be preceded by a comment line.
+
+## Still not done: data/slugs.json is still not regenerated
+
+Fifth iteration. Unchanged from T2.2's note (~2.5–3h at 8 workers for 2,953
+companies), and overrides do not move it — they add four companies to a file
+nobody has rebuilt. `data/companies.json` still renders T1.2's snapshot.

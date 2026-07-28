@@ -9,7 +9,20 @@ from pathlib import Path
 
 import pytest
 
-from src.slugs import careers_urls, find_boards, guess, resolve, resolve_all, states_company
+from src.outcomes import Outcome
+from src.slugs import (
+    OVERRIDES,
+    Slug,
+    careers_urls,
+    find_boards,
+    guess,
+    load_overrides,
+    parse_overrides,
+    resolve,
+    resolve_all,
+    states_company,
+    verify_override,
+)
 
 FIXTURES = Path(__file__).parent / "fixtures"
 BOARD_LINKS = (FIXTURES / "board-links.txt").read_text()
@@ -269,3 +282,124 @@ def test_guessing_strictly_raises_the_combined_rate(boards, monkeypatch):
     assert combined.rate > len(careers_page_alone) / len(companies)
     assert set(combined.resolved) == {"Figma", "Anthropic", "Glean", "Automattic", "Tide"}
     assert {"Anthropic", "Glean"} <= set(combined.resolved)
+
+
+# --- T2.3: the override file, where a human overrules the evidence ------------
+
+
+def test_override_precedence(boards, monkeypatch):
+    """The DoD's headline. Figma's own careers page names greenhouse/figma and
+    Glean is reachable by guessing — and an override beats both, because it is
+    the only method that knows something the boards cannot say.
+
+    Precedence is asserted as *silence*, not as a winning value: neither
+    automatic method may even be consulted for an overridden company. Anything
+    else spends two fetches per company on an answer it then throws away, and
+    2,953 of those is an hour.
+    """
+    only_figma_has_a_careers_page(monkeypatch)
+    guessed: list[str] = []
+    monkeypatch.setattr("src.slugs.guess", lambda name: guessed.append(name) or guess(name))
+
+    resolution = resolve_all(
+        ["Figma", "Glean", "Brave Care"],
+        overrides={
+            "Figma": Slug(ats="greenhouse", slug="figma-holdings", method="override"),
+            "Brave Care": Slug(ats="greenhouse", slug="bravecare", method="override"),
+        },
+    )
+
+    assert resolution.resolved["Figma"] == {
+        "ats": "greenhouse",
+        "slug": "figma-holdings",  # NOT greenhouse/figma, which its careers page linked
+        "method": "override",
+    }
+    # `brave` is the browser; only a human can say Brave Care is `bravecare`.
+    assert resolution.resolved["Brave Care"]["slug"] == "bravecare"
+    assert resolution.methods == {"override": 2, "guess": 1}
+    assert guessed == ["Glean"]  # the overridden two were never guessed at
+
+
+def test_dead_override_fails_loudly(monkeypatch):
+    """A hand-written slug that has gone dead must stop the run. Every other
+    unresolved company is counted and left off the site; this one claims a human
+    already checked, so the same silence reads as "they aren't hiring"."""
+    monkeypatch.setattr(
+        "src.slugs.greenhouse_probe", lambda slug: Outcome.SLUG_UNRESOLVED
+    )
+
+    with pytest.raises(ValueError, match=r"Ghost Corp.*greenhouse/gone.*no such board"):
+        verify_override("Ghost Corp", Slug(ats="greenhouse", slug="gone", method="override"))
+
+
+def test_a_probe_that_merely_failed_is_not_the_humans_mistake(monkeypatch):
+    """The other side of the same check, and the reason it can be trusted.
+    Greenhouse being down is not an error in this file. Failing the run on it
+    would make a green run depend on somebody else's uptime and teach everyone
+    to reach for --no-verify."""
+    monkeypatch.setattr("src.slugs.greenhouse_probe", lambda slug: Outcome.PROBE_FAILED)
+
+    verify_override("Flaky Corp", Slug(ats="greenhouse", slug="flaky", method="override"))
+
+
+def test_an_unverifiable_ats_is_refused(monkeypatch):
+    """Only Greenhouse can be asked whether a board exists today. An Ashby or
+    Lever override would be an unchecked human claim — and Lever's dead slug
+    answers 200 with an empty array, which is precisely the silent zero."""
+    with pytest.raises(ValueError, match=r"only greenhouse boards can be verified"):
+        verify_override("Ramp", Slug(ats="ashby", slug="ramp", method="override"))
+
+
+@pytest.mark.parametrize(
+    "line",
+    [
+        "Acme: greenhouse",  # no slug
+        "Acme greenhouse/acme",  # no colon
+        "  nested:\n    ats: greenhouse",  # YAML this parser does not speak
+        'Acme: "greenhouse/acme"',  # quoted value
+    ],
+)
+def test_the_override_file_refuses_what_it_cannot_read(line):
+    """A partial YAML parser's real danger is reading a line into something
+    other than what was meant, so it rejects instead of interpreting. The line
+    number is in the message because that is what makes it a 10-second fix."""
+    with pytest.raises(ValueError, match=r"line \d+: expected '<company>: <ats>/<slug>'"):
+        parse_overrides(line)
+
+
+def test_comments_and_quoted_names_parse():
+    """Comments are the entire reason this file is YAML and not JSON. A quoted
+    key parses to the same company as an unquoted one — otherwise the override
+    silently matches nobody, which is the failure this task exists to prevent.
+    """
+    assert parse_overrides(
+        '# why this exists\n\n"A24 Films": greenhouse/a24  # board states "A24"\n'
+    ) == {"A24 Films": {"ats": "greenhouse", "slug": "a24", "method": "override"}}
+
+
+def test_the_shipped_override_file_is_readable_and_justified():
+    """The committed file itself, held to the format and to its own house rule:
+    every entry carries a comment saying why a human overruled the machine. An
+    unexplained override is one nobody dares delete later."""
+    text = OVERRIDES.read_text()
+    overrides = parse_overrides(text)
+
+    assert overrides, "the file ships four measured companies; an empty one is a regression"
+    assert all(slug["method"] == "override" for slug in overrides.values())
+    assert overrides["A24 Films"] == {"ats": "greenhouse", "slug": "a24", "method": "override"}
+
+    lines = [line for line in text.splitlines() if line.strip()]
+    for index, line in enumerate(lines):
+        if not line.lstrip().startswith("#"):
+            assert lines[index - 1].lstrip().startswith("#"), f"unexplained override: {line!r}"
+
+
+def test_load_overrides_verifies_every_entry(monkeypatch):
+    """Loading is parse *and* check. A file read without verification is how a
+    dead slug reaches slugs.json in the first place."""
+    checked: list[str] = []
+    monkeypatch.setattr("src.slugs.greenhouse_probe", lambda slug: checked.append(slug) or [])
+
+    overrides = load_overrides()
+
+    assert sorted(checked) == sorted(slug["slug"] for slug in overrides.values())

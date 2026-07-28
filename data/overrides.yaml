@@ -1,0 +1,25 @@
+# Slug overrides — the tail automatic discovery cannot reach (T2.3).
+#
+# One entry per line:  <name, spelled exactly as the corpus spells it>: <ats>/<slug>
+# `#` starts a comment. Say WHY, always: an override nobody can justify is an
+# override nobody later dares delete.
+#
+# Every entry here is checked against the live board each time slug resolution
+# runs. A slug that has gone dead stops the run instead of quietly listing
+# nobody — this file is hand-maintained, so its errors are the kind that rot
+# silently unless something shouts.
+#
+# The four below are not hypothetical. Each is a real company whose real board
+# T2.2's guessing found and then deliberately refused, because the board states
+# a name that does not CONTAIN the company's — and nothing in a Greenhouse
+# response separates them from `Brave Care` -> `brave`, which is the browser.
+# Only a human can tell those apart. This file is where a human does it.
+
+# Board states "A24".
+A24 Films: greenhouse/a24
+# Board states "Cross River".
+Cross River Bank: greenhouse/crossriverbank
+# Board states "Prove".
+Prove Identity: greenhouse/prove
+# Board states "Stoke Space " — trailing space and all, verbatim.
+Stoke Space Technologies: greenhouse/stokespacetechnologies

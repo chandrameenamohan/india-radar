@@ -1,4 +1,4 @@
-"""ATS slug discovery — careers page first (T2.1), then guessing (T2.2).
+"""ATS slug discovery — overrides (T2.3), careers page (T2.1), guessing (T2.2).
 
 A company's job board lives at an ATS slug we don't know. The cheapest honest way
 to learn it is to read the company's own careers page and take the board URL it
@@ -22,19 +22,28 @@ Whatever careers-page discovery leaves, `guess` tries: build a Greenhouse slug
 out of the name, then ask Greenhouse *whose board that is*. The second half is
 the load-bearing one — guessing without it resolves more companies, and some of
 them are a different company (`greenhouse/brave` is the browser, not Brave Care).
+
+Above both sits `data/overrides.yaml`. A human's answer does not merely win the
+tie — the automatic methods do not run at all for a company listed there, since
+they could only spend two fetches to produce an answer we would discard. It is
+the one method that can resolve what `states_company` correctly refuses, and the
+one whose mistakes belong to a person rather than to a source, which is why a
+dead slug here stops the run instead of joining the counted failures.
 """
 from __future__ import annotations
 
 import json
 import re
 from collections import Counter
-from collections.abc import Iterable
+from collections.abc import Iterable, Mapping
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 from typing import NamedTuple, TypedDict
 
 from src.greenhouse import board_name
+from src.greenhouse import probe as greenhouse_probe
 from src.net import fetch
+from src.outcomes import Outcome
 
 #: Board URLs as the three providers actually emit them, captured verbatim from
 #: live careers pages (see tests/fixtures/board-links.txt):
@@ -90,10 +99,23 @@ _MIN_PAGE = 2_000
 _GUESS_SUFFIXES = ("", "work", "ai", "labs", "jobs", "careers")
 
 
+#: The hand-maintained tail. YAML rather than JSON for one reason: a comment.
+#: Every entry is a human overruling the evidence, and an override whose reason
+#: went unrecorded is one nobody can safely delete a year later.
+#: ponytail: one regex reads `<name>: <ats>/<slug>` rather than adding PyYAML —
+#: this project carries no runtime dependency at all today, and buying its first
+#: one for a flat mapping is a poor trade. Ceiling: everything else YAML can
+#: express (nesting, lists, anchors, block scalars) is REJECTED, loudly, rather
+#: than half-read. Upgrade path: if this file ever needs structure, `pip install
+#: pyyaml` and delete `_ENTRY`.
+OVERRIDES = Path("data/overrides.yaml")
+_ENTRY = re.compile(r"^(.+?)\s*:\s*([a-z]+)/([a-z0-9_.-]+)$", re.I)
+
+
 class Slug(TypedDict):
     ats: str
     slug: str
-    method: str  # "careers-page" (T2.1), "guess" (T2.2); "override" is T2.3
+    method: str  # "careers-page" (T2.1), "guess" (T2.2), "override" (T2.3)
 
 
 class Resolution(NamedTuple):
@@ -195,8 +217,79 @@ def resolve(name: str) -> Slug | str:
     return Slug(ats=ats, slug=slug, method="careers-page")
 
 
-def resolve_all(names: Iterable[str], workers: int = 8) -> Resolution:
-    """Resolve a corpus: read their careers page, then guess what that missed.
+def parse_overrides(text: str) -> dict[str, Slug]:
+    """The override file, or an error naming the line we could not read.
+
+    Strict on purpose. A hand-edited file's failure mode is a line that parses
+    into something subtly other than what was meant — a quoted key that then
+    matches no company, a nested block silently flattened — and every one of
+    those ends as a company quietly missing from the site. So anything this
+    doesn't recognise stops the run and says which line it was.
+    """
+    overrides: dict[str, Slug] = {}
+    for number, raw in enumerate(text.splitlines(), start=1):
+        if not raw.strip() or raw.lstrip().startswith("#"):
+            continue
+        line = raw.split(" #")[0].strip()
+        entry = _ENTRY.match(line)
+        if not entry:
+            raise ValueError(
+                f"override file line {number}: expected '<company>: <ats>/<slug>', got {raw!r}"
+            )
+        name, ats, slug = entry.groups()
+        overrides[name.strip("\"'")] = Slug(
+            ats=ats.casefold(), slug=slug.casefold(), method="override"
+        )
+    return overrides
+
+
+def verify_override(name: str, slug: Slug) -> None:
+    """Raise unless this override names a board that is really there.
+
+    A dead override is the one failure this project cannot absorb quietly. Every
+    other unresolved company is *counted* as unresolved and left off the site;
+    an override says a human already checked, so the same silence would read as
+    "we looked, they aren't hiring" — and on Lever it literally is a 200 with an
+    empty array (T3.3). It is also the only failure a person can simply fix.
+
+    A probe that failed for any other reason is deliberately NOT an error: a
+    Greenhouse outage is not a mistake in this file, and blaming the human for
+    it teaches everyone to distrust the check. That company reaches the build
+    holding a slug, fails there, and is counted `probe-failed` as it should be.
+    """
+    if slug["ats"] != "greenhouse":
+        raise ValueError(
+            f"override {name!r} -> {slug['ats']}/{slug['slug']}: only greenhouse boards can be "
+            f"verified today, and this file must not hold an unchecked claim. {slug['ats']} "
+            f"probes land with T3.2/T3.3, and until then a row on one is `probe-failed` anyway."
+        )
+    if greenhouse_probe(slug["slug"]) is Outcome.SLUG_UNRESOLVED:
+        raise ValueError(
+            f"override {name!r} -> greenhouse/{slug['slug']}: no such board. A hand-written "
+            f"slug that has gone dead would list this company as hiring nobody."
+        )
+
+
+def load_overrides(path: str | Path = OVERRIDES) -> dict[str, Slug]:
+    """The override file, parsed and checked against the live boards.
+
+    Not guarded against a missing file: it is committed, the pipeline reads it
+    every run, and resolving a whole corpus without the overrides nobody noticed
+    had vanished is exactly the quiet wrong answer this module keeps refusing.
+    """
+    overrides = parse_overrides(Path(path).read_text())
+    for name, slug in overrides.items():
+        verify_override(name, slug)
+    return overrides
+
+
+def resolve_all(
+    names: Iterable[str],
+    workers: int = 8,
+    overrides: Mapping[str, Slug] | None = None,
+) -> Resolution:
+    """Resolve a corpus: take the human's answer, read careers pages for the
+    rest, then guess what that missed.
 
     Concurrent because it is entirely network wait — two sequential fetches per
     company would put a 1,000-company corpus in hours.
@@ -205,12 +298,18 @@ def resolve_all(names: Iterable[str], workers: int = 8) -> Resolution:
     there is no single host to be rude to. Raise it if this ever dominates a run.
     """
     names = list(names)
-    with ThreadPoolExecutor(max_workers=workers) as pool:
-        outcomes = pool.map(resolve, names)
+    overrides = overrides or {}
 
-    resolved: dict[str, Slug] = {}
+    # Precedence is structural rather than a comparison: an overridden company
+    # never enters the automatic pass at all, so there is no answer to prefer.
+    resolved: dict[str, Slug] = {name: overrides[name] for name in names if name in overrides}
+    automatic = [name for name in names if name not in resolved]
+
+    with ThreadPoolExecutor(max_workers=workers) as pool:
+        outcomes = pool.map(resolve, automatic)
+
     unresolved: dict[str, str] = {}
-    for name, outcome in zip(names, outcomes, strict=True):
+    for name, outcome in zip(automatic, outcomes, strict=True):
         if isinstance(outcome, str):
             unresolved[name] = outcome
         else:
@@ -243,7 +342,7 @@ def main() -> None:
     corpus = json.loads(Path("data/corpus.json").read_text())
     names = [company["name"] for company in corpus["companies"]]
 
-    resolution = resolve_all(names)
+    resolution = resolve_all(names, overrides=load_overrides())
     write("data", resolution)
     print(f"slugs.json: {len(resolution.resolved)}/{len(names)} resolved ({resolution.rate:.0%})")
     for method, count in sorted(resolution.methods.items()):
