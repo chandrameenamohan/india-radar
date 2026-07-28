@@ -191,7 +191,7 @@ Out of scope: name normalisation for MCA matching (T4.4).
 > corpus that just doubled), so `data/companies.json` is untouched and the site
 > still renders T1.2's snapshot. Slug resolution is still the binding constraint.
 
-### T1.4 — TechCrunch / Forbes / CBI sources `todo` · *Phase 1* · parallel
+### T1.4 — TechCrunch / Forbes / CBI sources `in-progress` · *Phase 1* · parallel
 ```
 Acceptance (observable) [each]:
   Emits records in the same schema as T1.1 and flows through T1.5's dedup without
