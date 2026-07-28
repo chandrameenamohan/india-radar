@@ -393,3 +393,46 @@ same way.
 
 `navi mumbai` is removed from the list in §2: `mumbai` already matches it, and a
 second alternative that can never fire alone is dead code in a regex.
+
+---
+
+# Build spine — measured during T5.1 (2026-07-28)
+
+Re-run with `.venv/bin/python learning-tests/build_live.py`.
+
+## `location.name` is present and a string on all 1,556 live roles
+
+The spine unwraps a Greenhouse role as `(role.get("location") or {}).get("name")`.
+If a live board carried a null or differently-shaped location, those roles would
+quietly fail the India test — an undercount indistinguishable from a correct
+answer, which is this project's signature failure mode.
+
+| slug | roles | India | location not a dict | name not a string |
+|---|---|---|---|---|
+| databricks | 801 | 77 | 0 | 0 |
+| anthropic | 415 | 3 | 0 | 0 |
+| gleanwork | 104 | 21 | 0 | 0 |
+| togetherai | 59 | 3 | 0 | 0 |
+| figma | 177 | 3 | 0 | 0 |
+
+**0 exceptions in 1,556 roles**, and **5/5 boards produce a listed row**. So the
+one-line unwrap is safe for Greenhouse, and a non-empty `companies.json` is
+demonstrated against live data. Ashby's role shape is a different question and
+belongs to T3.2 — it has a flat `location` plus `secondaryLocations`, so it will
+need its own unwrap, not this one.
+
+Note the India counts are a *fraction* of each board (77/801 is Databricks' best
+showing here). Nothing about "a funded company" implies "hiring in India", which
+is the whole reason the site probes rather than claims.
+
+## `companies.json` is empty today, and that is the corpus, not the emitter
+
+A full real build right now: **7 corpus companies → 0 listed, 7 slug-unresolved.**
+`data/slugs.json` is `{}` because T2.1 measured 0/7 on this corpus — freshly-funded
+obscure companies whose names don't map onto their domains (T2.1 §"The rate is 71%
+on known companies and 0% on the actual corpus").
+
+So the chain is intact and the input is thin. The same shape as T1.5's >=1,000
+line: **T1.2 (YC) and T1.3 (EDGAR) carry a real website field**, which raises slug
+resolution, which is the only thing standing between this emitter and a populated
+site. Nothing in T5.1 needs to change when that lands.

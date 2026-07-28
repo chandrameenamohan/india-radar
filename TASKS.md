@@ -336,7 +336,18 @@ Out of scope: director/DIN data — personal data, helps nobody here.
 
 ## E5 · The site
 
-### T5.1 — JSON schema and emit `in-progress` · *Phase 0* · after T3.4
+### T5.1 — JSON schema and emit `done` · *Phase 0* · after T3.4
+> **"Non-empty" is proven against live data but is 0 on today's corpus.** A real
+> build right now is 7 companies → 0 listed, 7 `slug-unresolved`, because
+> `slugs.json` is `{}` (T2.1 measured 0/7 on these obscure freshly-funded names).
+> Measured live instead: the five FINDINGS boards yield 1,556 roles → 107 India →
+> **5/5 would produce a listed row**, with 0 exceptions to the `location.name`
+> unwrap the spine assumes — `learning-tests/build_live.py`. The emitter is
+> complete; its input is thin until T1.2/T1.3 supply the website field that lifts
+> slug resolution. Same shape as T1.5's ≥1,000 line, and nothing here changes when
+> that lands.
+> The smoke build writes `data/companies.smoke.json`, never the published file —
+> a fixture-derived `companies.json` is exactly what T6.4 exists to prevent.
 ```
 Acceptance (observable):
   data/companies.json is produced, non-empty, schema-valid. Schema is versioned

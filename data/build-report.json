@@ -1,0 +1,23 @@
+{
+  "corpus_size": 7,
+  "checked": 0,
+  "unchecked": 7,
+  "counts": {
+    "listed": 0,
+    "no-india-roles": 0,
+    "slug-unresolved": 7,
+    "probe-failed": 0,
+    "empty-board-unverified": 0,
+    "not-qualified": 0
+  },
+  "listed": [],
+  "companies": {
+    "Alpen High Performance Products": "slug-unresolved",
+    "Antares Labs": "slug-unresolved",
+    "CORE Biomedicine": "slug-unresolved",
+    "Claros Technologies": "slug-unresolved",
+    "Dwelly": "slug-unresolved",
+    "Epitel": "slug-unresolved",
+    "Flourish Health": "slug-unresolved"
+  }
+}

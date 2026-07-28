@@ -40,14 +40,18 @@ mkdir -p src tests scripts data site logs
 
 echo ""
 echo "=== init: smoke test ==="
+# --smoke drives the whole spine (build -> validate -> write) over a fixture
+# board, offline, in milliseconds. It writes data/companies.smoke.json, NOT the
+# published data/companies.json: a smoke test that overwrites the shipped
+# artifact with fixture-derived rows is the exact failure T6.4 exists to prevent.
 if "$VENV/bin/python" -m src.build --smoke >/dev/null 2>&1; then
-  if [ -s data/companies.json ]; then
-    good "smoke build -> data/companies.json"
+  if [ -s data/companies.smoke.json ]; then
+    good "smoke build -> data/companies.smoke.json"
   else
-    bad "smoke build" "ran but produced no data/companies.json"
+    bad "smoke build" "ran but produced no data/companies.smoke.json"
   fi
 else
-  bad "smoke build" "src/build.py --smoke not implemented yet (expected pre-T5.1)"
+  bad "smoke build" "src/build.py --smoke failed"
 fi
 
 echo ""

@@ -1,0 +1,29 @@
+{
+  "jobs": [
+    {
+      "id": 5988684004,
+      "title": "Senior Software Engineer, Platform",
+      "location": { "name": "Bengaluru, India" },
+      "absolute_url": "https://job-boards.greenhouse.io/acme/jobs/5988684004"
+    },
+    {
+      "id": 5988684005,
+      "title": "Account Executive",
+      "location": { "name": "Warsaw, Poland" },
+      "absolute_url": "https://job-boards.greenhouse.io/acme/jobs/5988684005"
+    },
+    {
+      "id": 5988684006,
+      "title": "Staff Engineer, Data",
+      "location": { "name": "Bengaluru, India; Mumbai, India" },
+      "absolute_url": "https://job-boards.greenhouse.io/acme/jobs/5988684006"
+    },
+    {
+      "id": 5988684007,
+      "title": "Recruiter",
+      "location": { "name": "In-Office" },
+      "absolute_url": "https://job-boards.greenhouse.io/acme/jobs/5988684007"
+    }
+  ],
+  "meta": { "total": 4 }
+}
