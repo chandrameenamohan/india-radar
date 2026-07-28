@@ -156,7 +156,7 @@ Out of scope: name normalisation for MCA matching (T4.4).
 > carries a `website` for 1,072 of 1,075 — unused today because nothing consumes
 > it. That is T2.2/T2.3's highest-value change, sized in FINDINGS.
 
-### T1.3 — SEC Form D (EDGAR) source `todo` · *Phase 1* · parallel
+### T1.3 — SEC Form D (EDGAR) source `in-progress` · *Phase 1* · parallel
 ### T1.4 — TechCrunch / Forbes / CBI sources `todo` · *Phase 1* · parallel
 ```
 Acceptance (observable) [each]:
