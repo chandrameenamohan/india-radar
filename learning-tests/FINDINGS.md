@@ -174,3 +174,61 @@ the nightly job reads rather than re-fetching. 367 calls, run rarely, cached.
 4. **MCA is a deferred enrichment bead**, blocked on one cheap human action
    (get an API key), and it must use the RoC dataset — never the state-wise ones.
 5. **No freshness figure belongs in the spec** beyond what's measured here.
+
+---
+
+# FinSMEs scraping — measured during T1.1 (2026-07-28)
+
+Re-run with `.venv/bin/python learning-tests/finsmes_live.py`.
+
+## Python cannot fetch finsmes.com. curl can.
+
+`urllib.request.urlopen` **hangs indefinitely** against `finsmes.com` — past a
+15s `timeout=`, past 60s wall. The socket timeout never fires because the
+connection is accepted and then simply never answered. curl fetches the same URL
+in ~4.4s over both HTTP/1.1 and HTTP/2.
+
+Cloudflare is fingerprinting the TLS handshake, so this is not fixable with
+headers and would not be fixed by `requests` either (same OpenSSL fingerprint).
+`src/finsmes.py:fetch` shells out to curl. Do not "clean this up" back to
+urllib — it will hang the nightly run rather than fail it, which is worse.
+
+## Two more traps on the same host
+
+| Thing | Result | Consequence |
+|---|---|---|
+| curl's default UA | **403** | a browser UA is load-bearing, not decoration |
+| `HEAD` on an article URL | **403** | a HEAD-based liveness check reports every good source URL as dead. Use GET with the body discarded. |
+| `GET` on the same article URL | 200 | |
+
+## Pagination is blocked; only bare category pages are reachable
+
+`/category/usa` returns 200 reliably. `/category/usa/page/2/`, `/category/uk`
+and `/category/india` all return Cloudflare's "Just a moment..." interstitial
+(403, ~5KB), including with full browser headers and `--retry`.
+
+**Consequence for T1.5 (≥1,000 distinct companies): FinSMEs yields ~12 records
+per reachable page, and right now exactly one page is reachable.** FinSMEs alone
+cannot reach 1,000. That target depends on T1.2/T1.3/T1.4 (YC, SEC Form D,
+TC/Forbes/CBI) — SEC EDGAR in particular is a bulk API with no bot wall and is
+the realistic source of volume. Do not plan T1.5 around crawling FinSMEs deeply.
+
+## Headline grammar (12 live headlines, one page)
+
+Two verbs observed: `Raises` (8), `Receives` (4).
+
+```
+CORE Biomedicine Raises $21M in Series A Funding
+PawPay Receives Investment From VANE
+```
+
+Amount and round letter come from the headline; the date comes from the
+listing's `<time datetime="...">`; the source URL is the article link. No
+article fetch is needed for a complete record.
+
+Scales seen: `$700K`, `$7.25M`, `$170M` — decimals are real, and `K` must not be
+read as `M`. Rounds without a letter are real and common (`Seed`, `Pre-Seed`,
+`Seed Extension`) and must yield `round_letter=None` rather than a guess.
+
+`COR Receives Investment From FTV Capital` is a real company called COR, not a
+truncation bug. It looks exactly like one next to `CORE Biomedicine`.
