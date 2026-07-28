@@ -1,4 +1,4 @@
-.PHONY: check lint typecheck unit e2e clean
+.PHONY: check check-fast lint typecheck unit e2e clean
 
 VENV := .venv
 PY   := $(VENV)/bin/python
@@ -9,6 +9,14 @@ BIN  := $(VENV)/bin
 check: lint typecheck unit e2e
 	@echo ""
 	@echo "GATE GREEN"
+
+# The fast gate: everything except e2e. Used by the pre-commit hook, because a
+# pre-commit that takes 20s is a pre-commit people learn to bypass with --no-verify,
+# and a bypassed gate is worse than a fast one. The FULL gate (incl. e2e) is
+# enforced by the Stop hook, which is what actually guards the Ralph loop.
+check-fast: lint typecheck unit
+	@echo ""
+	@echo "FAST GATE GREEN (e2e not run -- full gate is 'make check')"
 
 lint:
 	@echo "==> lint"
