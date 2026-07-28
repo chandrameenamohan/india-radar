@@ -93,7 +93,7 @@ Out of scope: the UI display of these counts (that's T5.3).
 
 ## E1 · Funding corpus
 
-### T1.1 — FinSMEs corpus source `todo` · *Phase 0*
+### T1.1 — FinSMEs corpus source `in-progress` · *Phase 0*
 ```
 Acceptance (observable):
   Produces corpus records with name, amount, currency, date, round letter (when
