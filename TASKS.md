@@ -312,7 +312,43 @@ Checks:
 Out of scope: guessing against Lever/Ashby (Greenhouse is the cheap one).
 ```
 
-### T2.3 — Manual override file `in-progress` · *Phase 1* · after T2.2
+### T2.3 — Manual override file `done` · *Phase 1* · after T2.2
+> **Ships four real companies, not empty scaffolding** — A24 Films, Cross River
+> Bank, Prove Identity, Stoke Space Technologies. Each is a board T2.2's guessing
+> found and then deliberately refused, because the board states a name SHORTER
+> than the company's and is therefore string-for-string the same shape as
+> `Brave Care → brave`, the browser. Nothing in a Greenhouse response tells those
+> apart; a human can, and this is where a human does it. All four re-verified
+> live today. **Razorpay was considered and dropped**: it resolves by careers-page
+> already, and an override duplicating working automation is clutter that rots.
+>
+> **"Fails loudly" is narrower than it first reads, deliberately.** A *dead*
+> override stops the run — every other unresolved company is counted and left
+> off the site, but an override claims a human already checked, so the same
+> silence would read as "they aren't hiring" (on Lever, literally a 200 with an
+> empty array). A probe that failed for any OTHER reason does NOT fail the run:
+> a Greenhouse outage is not a mistake in this file, and a check that blames a
+> human for someone else's downtime is one people learn to route around. That
+> company reaches the build and is counted `probe-failed`, as it should be.
+> The distinction was free — `board_name` returns None for a 404 and a 502 alike,
+> but T3.1's `probe` already separates them, so verification reuses the outcome
+> enum. See FINDINGS.
+>
+> **An Ashby or Lever override is refused, loudly.** Only Greenhouse can be asked
+> whether a board exists today, and an unverified override is the one thing this
+> file must not hold. Such a row would be `probe-failed` anyway until T3.2/T3.3.
+>
+> **No PyYAML.** The project still carries zero runtime dependencies; one regex
+> reads `<name>: <ats>/<slug>` and rejects everything else with a line number
+> rather than half-reading it. YAML over JSON buys exactly one thing — the
+> comment saying why a human overruled the machine — and a test holds every entry
+> to it. Precedence is structural: an overridden company never enters the
+> automatic pass, so there is no answer to prefer.
+>
+> **Not done here, fifth iteration running:** `data/slugs.json` was not
+> regenerated (~2.5–3h at 8 workers for 2,953 companies), so overrides add four
+> companies to a file nobody has rebuilt and `data/companies.json` still renders
+> T1.2's snapshot.
 ```
 Acceptance (observable):
   overrides.yaml wins over both automatic methods; a company listed there resolves
