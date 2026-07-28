@@ -336,7 +336,7 @@ Out of scope: director/DIN data — personal data, helps nobody here.
 
 ## E5 · The site
 
-### T5.1 — JSON schema and emit `todo` · *Phase 0* · after T3.4
+### T5.1 — JSON schema and emit `in-progress` · *Phase 0* · after T3.4
 ```
 Acceptance (observable):
   data/companies.json is produced, non-empty, schema-valid. Schema is versioned
