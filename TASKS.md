@@ -200,8 +200,12 @@ Out of scope: automating what belongs in the override file.
 
 ## E3 · Probe and filter
 
-### T3.1 — Greenhouse probe `in-progress` · *Phase 0* · after T2.1, T6.1
+### T3.1 — Greenhouse probe `done` · *Phase 0* · after T2.1, T6.1
 0.35s/company, one call, `meta.total` is authoritative.
+> Measured live on the 5 FINDINGS slugs: meta.total exact on all five (801 roles
+> for databricks in one call), and a nonsense slug 404s → `slug-unresolved`.
+> `learning-tests/greenhouse_live.py`. A short board is `probe-failed`, never the
+> roles that happened to arrive.
 ```
 Acceptance (observable):
   Returned role count equals meta.total in the same response. For a known slug the
