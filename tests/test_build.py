@@ -70,6 +70,27 @@ def test_listed_row_carries_the_corpus_and_the_board():
     assert errors(rows[0]) == []
 
 
+def test_a_directory_sourced_company_ships_without_a_round():
+    """T1.2's rows: YC states that a company is past Series A, never which round
+    or when. The absent date has to survive validation as an absence — a schema
+    that demanded a string here would force the build to invent one."""
+    company = {
+        "name": "Epsilon",
+        "amount": None,
+        "currency": None,
+        "date": None,
+        "round_letter": None,
+        "source_url": "https://www.ycombinator.com/companies/epsilon",
+        "qualified_by": "stage",
+    }
+
+    rows, outcomes = build([company], {"Epsilon": GREENHOUSE}, answering(acme=BOARD))
+
+    assert outcomes == {"Epsilon": Outcome.LISTED}
+    assert errors(rows[0]) == []
+    assert rows[0]["date"] is None and rows[0]["qualified_by"] == "stage"
+
+
 @pytest.mark.parametrize(
     ("field", "value", "because"),
     [
@@ -164,6 +185,13 @@ def test_the_e2e_dataset_is_a_file_this_build_could_have_written():
     assert ["Pune"] in listed, "no city-filter negative case"
     assert any("Bengaluru" in cities for cities in listed), "no city-filter positive case"
     assert [] in listed, "no India-without-a-city case"
+    # And the fully-degraded row a directory source produces (T1.2): no amount,
+    # no letter, no date. Deleting it is how the site's null handling would come
+    # back green with nothing exercising it.
+    assert any(
+        row["date"] is None and row["amount"] is None and row["qualified_by"] == "stage"
+        for row in shipped["companies"]
+    ), "no undated stage-qualified case"
 
 
 def test_no_india_roles_is_a_finding_not_a_gap():

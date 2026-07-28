@@ -30,15 +30,20 @@ from src.slugs import Slug
 #: Bump when a row's shape changes. The site reads this and refuses a version it
 #: doesn't know, rather than silently rendering fields that moved.
 #: v2 added `cities` — the site's city filter is the one thing it cannot fake.
-SCHEMA_VERSION = 2
+#: v3 made `date` nullable and admitted `qualified_by: "stage"` — a directory
+#: source (T1.2) can state that a company is past Series A without stating which
+#: round or when, and the site has to render that absence rather than a guess.
+SCHEMA_VERSION = 3
 
 Probe = Callable[[str], Roles | Outcome]
 Row = dict[str, Any]
 
-#: A v2 row: what the corpus knew about the funding, plus what the board proved
+#: A row: what the corpus knew about the funding, plus what the board proved
 #: about the hiring. Types only — the value rules that carry meaning are in
-#: `errors`. Role titles and apply links are T4.1; they widen this, and the
-#: version is how the site knows which shape it's holding.
+#: `errors`. `amount`, `round_letter` and `date` are all nullable because the
+#: sources genuinely differ in what they state, and the site renders each
+#: absence as an absence. Role titles and apply links are T4.1; they widen this,
+#: and the version is how the site knows which shape it's holding.
 FIELDS: dict[str, type | tuple[type, ...]] = {
     "name": str,
     "ats": str,
@@ -48,7 +53,7 @@ FIELDS: dict[str, type | tuple[type, ...]] = {
     "amount": (int, type(None)),
     "currency": (str, type(None)),
     "round_letter": (str, type(None)),
-    "date": str,
+    "date": (str, type(None)),
     "source_url": str,
     "qualified_by": str,
 }
@@ -60,7 +65,7 @@ PROBES: dict[str, Probe] = {"greenhouse": greenhouse_probe}
 
 
 def errors(row: Mapping[str, Any]) -> list[str]:
-    """Every way this row fails schema v1. Empty means it may ship.
+    """Every way this row fails the current schema. Empty means it may ship.
 
     Unknown fields are a violation, not a courtesy: an enrichment that adds a
     field without bumping the version is exactly how the site starts rendering
@@ -84,8 +89,10 @@ def errors(row: Mapping[str, Any]) -> list[str]:
     # inside it is not, because the site renders these straight into the filter.
     if isinstance(row.get("cities"), list) and not all(isinstance(c, str) for c in row["cities"]):
         problems.append(f"cities {row['cities']!r} is not a list of strings")
-    if row.get("qualified_by") not in ("letter", "amount"):
-        problems.append(f"qualified_by {row.get('qualified_by')!r} is not 'letter' or 'amount'")
+    # The three rules corpus._qualified_by can fire. A row qualified by anything
+    # else was admitted by a rule the site has no wording for.
+    if row.get("qualified_by") not in ("letter", "amount", "stage"):
+        problems.append(f"qualified_by {row.get('qualified_by')!r} is not a corpus rule")
     if row.get("ats") not in PROBES:
         problems.append(f"ats {row.get('ats')!r} has no probe, so nothing verified this row")
     return problems

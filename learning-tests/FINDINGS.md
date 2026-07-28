@@ -526,3 +526,106 @@ It needs baseline screenshots a human approves once. An agent that approves its
 own baselines asserts nothing, so this is left outside the gate and named here
 rather than faked inside it. Everything else in layer 4 (4a console-clean, 4b
 behavioural, 4d a11y basics) runs.
+
+---
+
+# YC directory — measured during T1.2 (2026-07-28)
+
+Re-run with `.venv/bin/python learning-tests/yc_live.py`.
+
+## YC's own API cannot qualify a single company; the mirror can
+
+Two endpoints serve the same 6,087 companies, and only one is usable here:
+
+| Source | Calls | Carries `stage`? |
+|---|---|---|
+| `api.ycombinator.com/v0.1/companies` (official) | **244** (25/page) | **no** |
+| `yc-oss.github.io/api/companies/all.json` (mirror) | **1** (10.2MB) | yes |
+
+The official API takes `batch=` and `status=` as filters but not `stage=`, and
+`stage` is absent from every record it returns. That matters more than call
+count: **`stage` is the only fundedness signal YC publishes.** The directory
+states no amount, no round letter and no round date for anybody, so without
+`stage` all 6,087 records are unqualifiable and the source contributes nothing.
+So the mirror is not a convenience here, it is the only version of this source
+that works — first-party is the wrong tradeoff when first-party omits the field.
+
+`ponytail:` ceiling — the mirror is one person's GitHub Pages build of YC's
+Algolia index (`last_updated` was the morning of this run). If it goes stale or
+away, the upgrade path is the Algolia index directly, whose keys are in the
+`ycombinator.com/companies` HTML. Not worth doing before it breaks.
+
+## `Growth` means past Series A, and it checks out on every name I know
+
+`stage` has exactly two values over 6,087 records: `Early` 5,012, `Growth` 1,075.
+Spot-checked against companies whose funding history is public:
+
+```
+Growth: Stripe · Airbnb · Razorpay · Groww · Zepto · Meesho · Instacart
+        Coinbase · Rappi · Flexport · Brex · Deel · Vanta · Whatnot
+Early:  Conifer (S26, team of 3)
+```
+
+No misclassification found in either direction. So `Growth` is read as
+qualifying evidence — SPEC feature 2's third rule, `qualified_by: "stage"`,
+alongside `letter` and `amount`. **This extends SPEC feature 2, which named two
+rules.** The alternative was to record `round_letter="A"`, which invents a round
+YC never stated, or to drop the source, which throws away the only evidence it
+has. Flagged for the human; nothing else in the build changes if it's reversed.
+
+## What a directory source cannot say, and what that cost
+
+YC states **no round date**. A batch date is not one — reading `Winter 2015` as
+Razorpay's funding date would rank it under "recently funded" by when YC first
+wrote a cheque, and sort Stripe by 2009. So `date` is `None`, which pushed
+`Record.date` and the published schema to nullable (**schema v3**), and the site
+now renders `date not stated` and **excludes undated rows from the recency
+filter** — an absent date can't satisfy "funded in the last 90 days".
+
+Same shape as `cities: []` in T5.2: the absence is a real answer, not missing data.
+
+## Two bugs the gate caught, one of which was already live
+
+Per VERIFICATION's "only once the gate has caught a real failure":
+
+| Injected bug | Caught by |
+|---|---|
+| `announced ${c.date}` instead of `when(c)` | `an absent fact never renders as null` — got 1 row reading "announced null" |
+| undated row treated as funded on the snapshot date | `an undated company is not claimed as recently funded` — Epsilon Directory appeared under "last 90 days" |
+
+And one that was **not injected**. The e2e reported `../data/companies.json is
+v2` while the file on disk was v3, twice, after a clean rebuild. Chromium was
+serving the JSON from cache: neither the page nor the file carries
+`Cache-Control`, so a browser is free to invent a freshness lifetime and pair
+yesterday's data with today's renderer. `site/index.html` now fetches with
+`{cache: 'no-cache'}` — revalidate always, a 304 still keeps the bytes. This was
+a **production** bug on a site whose entire claim is "as of the snapshot date",
+and the only reason it surfaced is that a schema bump made stale data *loud*.
+Any future check that reads a committed JSON through a browser should assume the
+same trap.
+
+## The corpus is now 1,081 and slug resolution is the new wall
+
+```
+corpus.json: 9 -> 1081 qualified (1072 stage, 6 letter, 3 amount), 4916 unqualified
+```
+
+**The >=1,000 line that T1.5 relocated to the Phase 1 sources is met by T1.2
+alone** — before EDGAR, which was expected to carry it. T1.3/T1.4 now widen a
+corpus that already clears the bar rather than rescuing one that doesn't.
+
+The binding constraint moved. Careers-page slug resolution on 20 random YC
+Growth companies: **2/20 (10%)**, 60s wall at 8 workers — so ~3s/company, ~54
+minutes for the full 1,081, and `data/slugs.json` was deliberately NOT
+regenerated in this iteration. The failures split 10 `no-careers-page` / 8
+`no-board-link`.
+
+That 10 is the interesting half, and it is **fixable data, not a hard limit**:
+`src/slugs.py` guesses the domain from the company name because no source
+carried one, and **the YC payload has a `website` field on 1,072 of the 1,075
+Growth companies**. `src/yc.py` does not read it today — deliberately, because
+nothing consumes it yet (`slugs.resolve` takes a name, not a record). Wiring it
+is one line in `yc.parse`, one field on `Record`, and threading the company
+rather than the name through `resolve`/`resolve_all`. **That is the single
+highest-value change available to T2.2/T2.3**, and it is measured rather than
+assumed: half the current failures never reached a page at all.

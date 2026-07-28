@@ -1,5 +1,5 @@
 {
-  "schema_version": 2,
+  "schema_version": 3,
   "snapshot": "2026-07-28",
   "companies": [
     {
@@ -53,6 +53,19 @@
       "date": "2026-07-01",
       "source_url": "https://www.finsmes.com/2026/07/delta-remote-raises-9m.html",
       "qualified_by": "amount"
+    },
+    {
+      "name": "Epsilon Directory",
+      "ats": "greenhouse",
+      "slug": "epsilondirectory",
+      "india_roles": 2,
+      "cities": ["Bengaluru"],
+      "amount": null,
+      "currency": null,
+      "round_letter": null,
+      "date": null,
+      "source_url": "https://www.ycombinator.com/companies/epsilon-directory",
+      "qualified_by": "stage"
     }
   ]
 }

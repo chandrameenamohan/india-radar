@@ -97,7 +97,11 @@ rows() { val '[...document.querySelectorAll(".name")].map(n=>n.textContent).join
 # so a check states an invariant rather than freezing today's answer.
 expect() { $PY -c "
 import json
-rows = json.load(open('tests/fixtures/companies-e2e.json'))['companies']
+from datetime import date
+data = json.load(open('tests/fixtures/companies-e2e.json'))
+rows, snapshot = data['companies'], date.fromisoformat(data['snapshot'])
+# Days since the round was announced, or None where the source stated no date.
+age = lambda r: None if r['date'] is None else (snapshot - date.fromisoformat(r['date'])).days
 keep = [r for r in rows if $1]
 print('|'.join(r['name'] for r in sorted(keep, key=lambda r: ${2:-(-r['india_roles'], r['name'])})))"; }
 
@@ -115,8 +119,17 @@ check "clearing the city filter restores every company" "$(expect True)" "$(rows
 $B select '#sort' 'name' >/dev/null 2>&1
 check "sorting by name" "$(expect True "r['name']")" "$(rows)"
 $B select '#bracket' 'large' >/dev/null 2>&1
-check "filtering by funding bracket" "$(expect "r['amount'] >= 50_000_000")" "$(rows)"
+check "filtering by funding bracket" \
+  "$(expect "r['amount'] is not None and r['amount'] >= 50_000_000")" "$(rows)"
 $B select '#bracket' 'any' >/dev/null 2>&1
+
+# A row whose source stated no round date must not be swept into "funded
+# recently" — that is a claim, and the data doesn't make it. Same shape as the
+# ambiguous zero: an absent fact is not a convenient default.
+$B select '#recency' '90' >/dev/null 2>&1
+check "an undated company is not claimed as recently funded" \
+  "$(expect "age(r) is not None and age(r) <= 90")" "$(rows)"
+$B select '#recency' 'any' >/dev/null 2>&1
 
 # Row detail. A closed row's children are in the DOM, so the assertion has to be
 # about what is *visible* -- checkVisibility() sees through the collapse, a
@@ -137,6 +150,12 @@ check "clicking a row reveals its board and its funding source" "open shown boar
 # as a place.
 check "no listed company renders an empty location" "0" \
   "$(val '[...document.querySelectorAll(".where")].filter(n=>!n.textContent.trim()).length')"
+# The absences a directory source ships with (no amount, no letter, no date) must
+# read as English. A row that renders "announced null" is the degraded case
+# looking broken rather than deliberate.
+check "an absent fact never renders as null" "0" \
+  "$(val '[...document.querySelectorAll(".row")]
+       .filter(n=>/\bnull\b|\bundefined\b|\bNaN\b/.test(n.textContent)).length')"
 
 # 4d accessibility basics: every control reachable and named. Not an audit.
 check "every control has an accessible name" "" \
@@ -163,7 +182,7 @@ console_clean "after interaction"
 echo "-- a dataset this page doesn't know how to read"
 open_page "$ROOT?data=../data/build-report.json"
 check "an unknown schema is refused, not rendered" "refused 0 rows" \
-  "$(val '(document.querySelector("#status").textContent.startsWith("This page reads schema v2")
+  "$(val '(document.querySelector("#status").textContent.startsWith("This page reads schema v3")
        ? "refused " : "rendered ") + document.querySelectorAll(".row").length + " rows"')"
 console_clean "unknown schema"
 

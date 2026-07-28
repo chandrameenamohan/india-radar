@@ -13,7 +13,13 @@ from src.finsmes import Record, parse
 FIXTURE = (Path(__file__).parent / "fixtures" / "finsmes-usa.html").read_text()
 
 
-def _record(name: str, *, letter: str | None = None, amount: int | None = None) -> Record:
+def _record(
+    name: str,
+    *,
+    letter: str | None = None,
+    amount: int | None = None,
+    stage: str | None = None,
+) -> Record:
     return Record(
         name=name,
         amount=amount,
@@ -21,6 +27,7 @@ def _record(name: str, *, letter: str | None = None, amount: int | None = None) 
         date="2026-07-28",
         round_letter=letter,
         source_url=f"https://www.finsmes.com/2026/07/{name.casefold()}-{letter}-{amount}.html",
+        stage=stage,
     )
 
 
@@ -54,16 +61,21 @@ def test_qualified_by_exclusive():
             _record("Lettered", letter="B", amount=1_000),  # letter wins over a tiny amount
             _record("Big Seed", amount=MIN_AMOUNT),  # threshold is inclusive
             _record("Small Seed", amount=MIN_AMOUNT - 1),
+            _record("Grown", stage="growth"),  # a stage is the weakest evidence
+            _record("Grown Up", letter="A", stage="growth"),  # ...and the last rule tried
+            _record("Sprout", stage="early"),  # a stated stage that admits nothing
         ]
     )
 
     by_name = {c["name"]: c for c in corpus.companies}
     assert by_name["Lettered"]["qualified_by"] == "letter"
     assert by_name["Big Seed"]["qualified_by"] == "amount"
-    assert corpus.unqualified == ["Small Seed"]
+    assert by_name["Grown"]["qualified_by"] == "stage"
+    assert by_name["Grown Up"]["qualified_by"] == "letter"
+    assert corpus.unqualified == ["Small Seed", "Sprout"]
 
     for company in corpus.companies:
-        assert company["qualified_by"] in {"letter", "amount"}
+        assert company["qualified_by"] in {"letter", "amount", "stage"}
 
 
 def test_unqualifiable_counted_not_dropped():

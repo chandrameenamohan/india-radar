@@ -99,7 +99,7 @@
 // The site is a renderer and nothing else: it reads the JSON the build wrote and
 // never recomputes a fact. The snapshot date in particular ships with the data,
 // because a date taken at render time would claim a freshness the JSON lacks.
-const SCHEMA = 2;                                  // src/build.py SCHEMA_VERSION
+const SCHEMA = 3;                                  // src/build.py SCHEMA_VERSION
 const DEFAULT_SRC = '../data/companies.json';
 
 // Test seam: e2e drives this same page over a fixture dataset (data/companies.json
@@ -129,6 +129,15 @@ const link = (href, text) => {
 
 const BOARDS = { greenhouse: 'https://job-boards.greenhouse.io/' };
 
+// Which corpus rule admitted the company (src/corpus.py _qualified_by). Spelled
+// out rather than shown raw: "by stage" tells a reader nothing, and the whole
+// footer claim rests on them being able to see why a row is here.
+const RULES = {
+  letter: 'a stated round letter',
+  amount: 'the size of a disclosed round',
+  stage: "its funding directory's growth-stage label",
+};
+
 const money = (c) => c.amount == null
   ? 'undisclosed'
   : `${c.currency === 'USD' ? '$' : (c.currency || '') + ' '}${+(c.amount / 1e6).toFixed(2)}M`;
@@ -136,6 +145,10 @@ const round = (c) => c.round_letter ? `Series ${c.round_letter}` : 'round letter
 // No city named on any India role is a real state ("Remote - India"), not missing
 // data -- so it renders as a place, never as an empty cell.
 const where = (c) => c.cities.length ? c.cities.join(' · ') : 'India — city not stated';
+// A directory source knows a company is past Series A without knowing when it
+// raised (schema v3). That is an absent fact, so it reads as one -- and it can
+// never satisfy "funded in the last 90 days", which would be a claim.
+const when = (c) => c.date || 'date not stated';
 const days = (from, to) => (Date.parse(to) - Date.parse(from)) / 86400000;
 
 const brackets = {
@@ -147,7 +160,7 @@ const brackets = {
 const sorts = {
   reqs: (a, b) => b.india_roles - a.india_roles || a.name.localeCompare(b.name),
   raised: (a, b) => (b.amount ?? -1) - (a.amount ?? -1),
-  date: (a, b) => b.date.localeCompare(a.date),
+  date: (a, b) => (b.date || '').localeCompare(a.date || ''),   // undated sort last
   name: (a, b) => a.name.localeCompare(b.name),
 };
 
@@ -165,14 +178,15 @@ function row(c) {
   );
 
   const body = el('div', 'detail');
-  const funding = el('p', null, `Raised ${money(c)} · ${round(c)} · announced ${c.date} · `);
+  const funding = el('p', null, `Raised ${money(c)} · ${round(c)} · announced ${when(c)} · `);
   funding.append(link(c.source_url, 'funding source'));
   const board = el('p', null, `${c.india_roles} open India ${
     c.india_roles === 1 ? 'role' : 'roles'} in ${where(c)} · `);
   board.append(BOARDS[c.ats]
     ? link(BOARDS[c.ats] + c.slug, `${c.ats}/${c.slug}`)
     : el('span', null, `${c.ats}/${c.slug}`));
-  body.append(board, funding, el('p', null, `Qualified as Series A or later by ${c.qualified_by}.`));
+  body.append(board, funding,
+    el('p', null, `Qualified as Series A or later by ${RULES[c.qualified_by]}.`));
 
   details.append(summary, body);
   return details;
@@ -186,7 +200,7 @@ function render() {
     .filter((c) => c.name.toLowerCase().includes(q))
     .filter((c) => city === 'any' || c.cities.includes(city))
     .filter(brackets[$('#bracket').value])
-    .filter((c) => recency === 'any' || days(c.date, snapshot) <= +recency)
+    .filter((c) => recency === 'any' || (c.date != null && days(c.date, snapshot) <= +recency))
     .sort(sorts[$('#sort').value]);
 
   $('#list').replaceChildren(...shown.map(row));
@@ -216,7 +230,12 @@ function load(data) {
 $('#controls').addEventListener('input', render);
 $('#controls').addEventListener('change', render);   // some agents/browsers fire only this
 
-fetch(src)
+// no-cache, not no-store: revalidate every load, but let a 304 keep the bytes.
+// Neither the JSON nor this page carries Cache-Control, so a browser is free to
+// invent a freshness lifetime for the data and serve yesterday's snapshot under
+// today's page -- measured here, as a v2 file rendered beside a v3 renderer. On
+// a site whose whole claim is "as of the snapshot date", that is the bug.
+fetch(src, { cache: 'no-cache' })
   .then((r) => r.ok ? r.json() : Promise.reject(new Error(`HTTP ${r.status}`)))
   .then(load)
   .catch((e) => { $('#status').textContent = `Could not load ${src}: ${e.message}`; });

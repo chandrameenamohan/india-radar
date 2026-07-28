@@ -6,10 +6,10 @@ collapse to the *strongest* round rather than the first one seen: a company that
 raised Seed and later Series B qualifies on the B, whichever record the scraper
 happened to yield first.
 
-A company that states neither a round letter nor an amount cannot be judged
-either way. It is excluded and named in `unqualified` — never silently dropped,
-because a corpus that shrinks quietly is indistinguishable from a scraper that
-broke.
+A company no qualifying rule admits is excluded and named in `unqualified` —
+never silently dropped, because a corpus that shrinks quietly is
+indistinguishable from a scraper that broke. Both kinds land there: the company
+whose round was undisclosed, and the one a directory calls early-stage.
 """
 from __future__ import annotations
 
@@ -20,6 +20,7 @@ from itertools import chain
 from pathlib import Path
 from typing import NamedTuple
 
+from src import yc
 from src.finsmes import BASE, Record, parse
 from src.net import fetch
 
@@ -46,7 +47,7 @@ class Company(Record):
 
 class Corpus(NamedTuple):
     companies: list[Company]
-    unqualified: list[str]  # judged on no evidence, so excluded and counted
+    unqualified: list[str]  # no rule admits them, so excluded and counted
 
 
 def merge(*sources: Iterable[Record]) -> Corpus:
@@ -74,17 +75,18 @@ def merge(*sources: Iterable[Record]) -> Corpus:
     return Corpus(companies, sorted(unqualified))
 
 
-def _strength(record: Record) -> tuple[str, int, str, str]:
+def _strength(record: Record) -> tuple[str, int, str, str, str]:
     """Total order over rounds for the same company, independent of input order.
 
-    Letter first (a later letter is a bigger round), then amount. Date and URL
-    are not signal — they are there so two equally-strong rounds still resolve to
-    the same winner every run.
+    Letter first (a later letter is a bigger round), then amount, then a stated
+    stage. Date and URL are not signal — they are there so two equally-strong
+    rounds still resolve to the same winner every run.
     """
     return (
         record["round_letter"] or "",
         record["amount"] or 0,
-        record["date"],
+        record["stage"] or "",
+        record["date"] or "",
         record["source_url"],
     )
 
@@ -95,11 +97,21 @@ def _qualified_by(record: Record) -> str | None:
     Any stated letter qualifies: the parser only reads `Series <A-Z>`, and every
     such letter is A or later. Seed and pre-seed carry no letter and fall through
     to the amount proxy, which is exactly the case that proxy exists for.
+
+    `stage` is the third rule and the weakest, so it is tried last. It exists
+    because a directory can say *that* a company is past Series A without saying
+    which letter or how much — YC labels Stripe, Razorpay and Groww `Growth` and
+    a three-person current-batch company `Early`. Reading that as `letter="A"`
+    would invent a round; excluding it would throw away the only qualifying
+    evidence a whole source has. So the label qualifies as itself and the site
+    says so.
     """
     if record["round_letter"]:
         return "letter"
     if record["amount"] is not None and record["amount"] >= MIN_AMOUNT:
         return "amount"
+    if record["stage"] == "growth":
+        return "stage"
     return None
 
 
@@ -114,11 +126,17 @@ def write(path: str | Path, corpus: Corpus) -> None:
 
 def main() -> None:
     page = fetch(f"{BASE}/category/usa")
-    if page is None:
-        raise SystemExit("FinSMEs unreachable — corpus.json left as it was, never fabricated")
+    # 10MB in one call, so it wants more than net.get's page-sized default.
+    directory = fetch(yc.API, timeout=120)
+    if page is None or directory is None:
+        dead = "FinSMEs" if page is None else "the YC directory"
+        # All or nothing: a corpus missing a source is a corpus that shrank, and
+        # a company that silently left it is indistinguishable from one that
+        # stopped hiring. Better to keep yesterday's file and say why.
+        raise SystemExit(f"{dead} unreachable — corpus.json left as it was, never truncated")
 
     records, unparsed = parse(page)
-    corpus = merge(records)
+    corpus = merge(records, yc.parse(directory))
     write("data/corpus.json", corpus)
     print(
         f"corpus.json: {len(corpus.companies)} qualified, "

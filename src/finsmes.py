@@ -19,15 +19,22 @@ BASE = "https://www.finsmes.com"
 
 
 class Record(TypedDict):
-    """One funding round. `amount` and `round_letter` are absent when the
-    headline doesn't state them — T1.5 decides what that disqualifies."""
+    """What one corpus source found out about one company — the shared contract
+    every E1 source emits, defined here with the first of them.
+
+    Everything but the name and the source URL is optional, because the sources
+    genuinely differ in what they state: a FinSMEs headline gives an amount and a
+    date but never a stage, YC's directory gives a stage but never an amount or a
+    round date. An absent field is absent, never guessed — T1.5 decides what each
+    absence disqualifies."""
 
     name: str
     amount: int | None
     currency: str | None
-    date: str  # ISO, YYYY-MM-DD
+    date: str | None  # ISO, YYYY-MM-DD; None when the source states no round date
     round_letter: str | None
     source_url: str
+    stage: str | None  # a source's own funding-stage label, e.g. YC's "growth"
 
 
 class ParseResult(NamedTuple):
@@ -77,6 +84,7 @@ def parse(page: str) -> ParseResult:
                 date=entry["date"],
                 round_letter=series["letter"] if series else None,
                 source_url=entry["url"],
+                stage=None,  # a headline announces a round, never a stage
             )
         )
 

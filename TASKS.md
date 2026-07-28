@@ -129,7 +129,33 @@ Checks:
 Out of scope: name normalisation for MCA matching (T4.4).
 ```
 
-### T1.2 — YC directory source `in-progress` · *Phase 1* · parallel
+### T1.2 — YC directory source `done` · *Phase 1* · parallel
+> **The >=1,000 line is MET, by this task alone: 1,081 qualified companies**
+> (1,072 by stage, 6 by letter, 3 by amount), up from 9. T1.5 relocated that
+> assertion here expecting EDGAR to carry it; it did not need to. T1.3/T1.4 now
+> widen a corpus that already clears the bar.
+>
+> **This extends SPEC feature 2 with a third qualification rule and needs a human
+> nod.** YC states no amount, no round letter and no round date for anyone — its
+> only fundedness signal is `stage`, which is `Growth` for Stripe, Razorpay,
+> Groww and Zepto and `Early` for a three-person current-batch company. So
+> `qualified_by` gained `stage` beside `letter` and `amount`. Recording it as
+> `letter="A"` would invent a round; dropping it makes the source contribute
+> nothing. Reversing the call changes nothing else in the build. See FINDINGS.
+>
+> Consequences that landed with it: `Record.date` and the published `date` are
+> now nullable (**schema v3**) because a YC batch date is not a funding date, the
+> site renders `date not stated` and keeps undated rows out of the recency
+> filter, and `site/index.html` now fetches with `{cache: 'no-cache'}` — the
+> schema bump exposed a live bug where Chromium paired a cached v2 JSON with the
+> v3 renderer.
+>
+> **Not done here, and now measured:** `data/slugs.json` was not regenerated.
+> Careers-page resolution is ~3s/company (~54min for 1,081) and hits 2/20 on YC
+> Growth names, 10 of the 18 failures never reaching a page. The YC payload
+> carries a `website` for 1,072 of 1,075 — unused today because nothing consumes
+> it. That is T2.2/T2.3's highest-value change, sized in FINDINGS.
+
 ### T1.3 — SEC Form D (EDGAR) source `todo` · *Phase 1* · parallel
 ### T1.4 — TechCrunch / Forbes / CBI sources `todo` · *Phase 1* · parallel
 ```
