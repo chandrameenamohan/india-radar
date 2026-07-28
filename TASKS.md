@@ -2,6 +2,10 @@
 
 Decomposition of `SPEC.md`. Markdown, not beads (bd is broken for this project).
 
+**The loop counts actionable work by matching `^### T<n>` headers carrying**
+**`` `todo` `` or `` `in-progress` ``.** Keep that header format exactly, or
+`ralph.sh` will miscount and either stop early or claim a blocked task.
+
 **Rules that apply to every task below:**
 - Tasks are outcome-level. *What is true when it's done*, not *which function to write*.
 - Every task carries a Definition of Done: **Acceptance / Checks / Out of scope**.
@@ -14,7 +18,7 @@ Decomposition of `SPEC.md`. Markdown, not beads (bd is broken for this project).
 
 ## The shape of it
 
-Seven epics, 23 tasks. That is more than fits in one head at a glance — so the
+Seven epics, 25 tasks. That is more than fits in one head at a glance — so the
 sequencing below is deliberately **thin-slice first**: Phase 0 builds one narrow
 end-to-end path (one funding source → Greenhouse only → live site). Everything
 after widens a working system rather than assembling an unproven one.
@@ -367,7 +371,7 @@ Out of scope: rollback UI.
 
 ## E7 · Velocity  *(SPEC feature 13)*
 
-### T7.1 — Trend from git history `todo` · *Phase 4* · **blocked**
+### T7.1 — Trend from git history `blocked` · *Phase 4*
 > **Blocked on T6.1 AND ~30 days of accumulated T6.2 snapshots.** History accrues
 > from the first nightly commit whether or not this ships — so the cost of waiting
 > is zero, and shipping early means shipping an empty or lying feature.
@@ -392,7 +396,7 @@ Out of scope: alerting on trend changes — held until trend is proven over a re
               month of snapshots.
 ```
 
-### T7.2 — Sparkline and ramping filter `todo` · *Phase 4* · after T7.1
+### T7.2 — Sparkline and ramping filter `blocked` · *Phase 4* · after T7.1
 ```
 Acceptance (observable):
   Ramping companies render a sparkline and appear under the ramping filter.
