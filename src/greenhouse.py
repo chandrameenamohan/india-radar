@@ -24,6 +24,11 @@ from src.outcomes import Outcome
 #: the full payload is orders of magnitude larger for no gain.
 API = "https://boards-api.greenhouse.io/v1/boards/{slug}/jobs?content=false"
 
+#: The board itself, rather than its jobs — the one place Greenhouse states
+#: *whose* board a slug belongs to. The jobs payload never says, so a guessed
+#: slug (T2.2) has no way to tell "this company's board" from "a board".
+BOARD = "https://boards-api.greenhouse.io/v1/boards/{slug}"
+
 Roles = list[dict[str, Any]]
 
 
@@ -62,3 +67,21 @@ def probe(slug: str, timeout: int = 30) -> Roles | Outcome:
     if status != 200:
         return Outcome.PROBE_FAILED
     return parse(body)
+
+
+def board_name(slug: str, timeout: int = 20) -> str | None:
+    """The company name this board states it belongs to, or None if there is no
+    such board.
+
+    Anything short of a 200 carrying a string `name` is None: this answer only
+    ever admits a slug, so an unreadable board must not become a claim about
+    which company it is.
+    """
+    status, body = get(BOARD.format(slug=slug), timeout)
+    if status != 200:
+        return None
+    try:
+        name = json.loads(body).get("name")
+    except (json.JSONDecodeError, AttributeError):
+        return None
+    return name if isinstance(name, str) else None

@@ -1,4 +1,4 @@
-"""T2.1 — careers-page slug discovery.
+"""T2.1 careers-page slug discovery, and T2.2 guessing what it missed.
 
 Two fixtures, both real. `board-links.txt` carries board URLs exactly as live
 careers pages emit them, framed in their real markup; `careers-anthropic.html` is
@@ -9,7 +9,7 @@ from pathlib import Path
 
 import pytest
 
-from src.slugs import careers_urls, find_boards, resolve, resolve_all
+from src.slugs import careers_urls, find_boards, guess, resolve, resolve_all, states_company
 
 FIXTURES = Path(__file__).parent / "fixtures"
 BOARD_LINKS = (FIXTURES / "board-links.txt").read_text()
@@ -24,6 +24,19 @@ def page(markup: str) -> str:
     is a stronger claim than one found in a one-line string.
     """
     return ANTHROPIC + markup
+
+
+def only_figma_has_a_careers_page(monkeypatch):
+    """Careers-page discovery resolving exactly one company, so that what
+    guessing adds afterwards is visible next to what it started from."""
+    monkeypatch.setattr(
+        "src.slugs.fetch",
+        lambda url, timeout=45: (
+            page('<a href="https://boards.greenhouse.io/figma/jobs/1">Role</a>')
+            if "figma" in url
+            else None
+        ),
+    )
 
 
 def test_board_url_regexes_on_fixtures():
@@ -80,7 +93,7 @@ def test_real_js_rendered_page_finds_no_board():
         ),
     ],
 )
-def test_unresolved_has_reason(monkeypatch, pages, reason):
+def test_unresolved_has_reason(monkeypatch, boards, pages, reason):
     """Three different kinds of not-knowing, and they must not collapse into one.
     "we never reached a page" and "we read the page and it linked no board" send
     a company down different recovery paths — the second is T2.2's whole remit."""
@@ -96,7 +109,7 @@ def test_unresolved_has_reason(monkeypatch, pages, reason):
     assert resolution.rate == 0.0
 
 
-def test_every_company_lands_on_exactly_one_side(monkeypatch):
+def test_every_company_lands_on_exactly_one_side(monkeypatch, boards):
     """A company resolves or it is named with a reason. Never both, never
     neither — an unaccounted company is one T6.1 cannot report on."""
     monkeypatch.setattr(
@@ -134,3 +147,125 @@ def test_careers_urls_from_name():
         "https://antareslabs.com/careers",
         "https://antareslabs.com/jobs",
     ]
+
+
+# --- T2.2: guessing, and the reason it must verify whose board answered -------
+
+#: What Greenhouse actually answered for each of these slugs on 2026-07-28,
+#: names verbatim from learning-tests/slug_guess_live.py — trailing space and
+#: all. Everything below is measured; none of it is a plausible-looking example.
+GREENHOUSE = {
+    "anthropic": "Anthropic",
+    "gleanwork": "Glean",  # bare `glean` 404s — this is what the suffix list is for
+    "automatticcareers": "Automattic Careers",
+    "tide": "Careers at Tide",
+    "crossriverbank": "Cross River",
+    "stokespacetechnologies": "Stoke Space ",
+    "brave": "Brave",  # the browser
+    "razorpaysoftwareprivatelimited": "Razorpay Software Private Limited",
+}
+
+#: Company -> the slug guessing must return, or None and the reason it must not.
+GUESSES = {
+    "Anthropic": "anthropic",
+    "Glean": "gleanwork",
+    "Automattic": "automatticcareers",
+    "Tide": "tide",
+    # A board answers, states a SHORTER name, and we refuse it. Both of these are
+    # in fact the right company — and they are string-for-string the same shape
+    # as Brave Care -> `brave`, which is the browser. Nothing in the response
+    # tells them apart, so the conservative direction costs these two.
+    "Cross River Bank": None,
+    "Stoke Space Technologies": None,
+    # Verifiable name, unguessable slug: no suffix builds a legal entity name.
+    # This is the tail T2.3's override file exists for.
+    "Razorpay": None,
+    # `brave` is not reachable from "Brave Care" at all — the first-word variant
+    # that reached it found three boards on 60 companies and all three were a
+    # different company, which is why it is not in _GUESS_SUFFIXES.
+    "Brave Care": None,
+}
+
+
+@pytest.fixture
+def boards(monkeypatch):
+    """Greenhouse answering for the measured slugs and 404ing everything else."""
+    monkeypatch.setattr("src.slugs.board_name", lambda slug, **kw: GREENHOUSE.get(slug))
+
+
+@pytest.mark.parametrize("company", GUESSES)
+def test_a_guess_is_only_kept_if_the_board_says_whose_it_is(boards, company):
+    """The whole safety of this method. A board that answers proves a board
+    exists, never that it is this company's, and a wrong slug publishes somebody
+    else's roles under this company's name — worse than the unresolved row we
+    would otherwise have."""
+    slug = GUESSES[company]
+    expected = {"ats": "greenhouse", "slug": slug, "method": "guess"} if slug else None
+
+    assert guess(company) == expected
+
+
+@pytest.mark.parametrize(("board", "company", "same"), [
+    ("Automattic Careers", "Automattic", True),  # the company saying more
+    ("Careers at Tide", "Tide", True),
+    ("Razorpay Software Private Limited", "Razorpay", True),
+    ("Cross River", "Cross River Bank", False),  # the company saying less
+    ("Brave", "Brave Care", False),
+    (None, "Nowhere Inc", False),  # no board at all is not a match
+])
+def test_a_board_states_a_company_only_by_containing_its_whole_name(board, company, same):
+    """The rule, isolated from the fetching: the board may extend the company's
+    name, never shorten it."""
+    assert states_company(board, company) is same
+
+
+def test_only_runs_on_unresolved(monkeypatch, boards):
+    """A company whose own careers page named its board is never guessed at: it
+    already told us the answer, and a guess could only disagree with it."""
+    guessed = []
+    only_figma_has_a_careers_page(monkeypatch)
+    def record(name):
+        guessed.append(name)
+        return None
+
+    monkeypatch.setattr("src.slugs.guess", record)
+
+    resolve_all(["Figma", "Glean"])
+
+    assert guessed == ["Glean"]
+
+
+def test_method_recorded(boards, monkeypatch):
+    """Two methods resolved this corpus and the report has to be able to say
+    which did what — a combined rate that rose is a different fact from a
+    combined rate that rose because guessing accepted anything."""
+    only_figma_has_a_careers_page(monkeypatch)
+
+    resolution = resolve_all(["Figma", "Glean", "Brave Care"])
+
+    assert resolution.resolved["Figma"]["method"] == "careers-page"
+    assert resolution.resolved["Glean"] == {
+        "ats": "greenhouse",
+        "slug": "gleanwork",
+        "method": "guess",
+    }
+    assert resolution.methods == {"careers-page": 1, "guess": 1}
+    # Brave Care stayed out, and kept the reason careers-page discovery gave it.
+    assert resolution.unresolved == {"Brave Care": "no-careers-page"}
+
+
+def test_guessing_strictly_raises_the_combined_rate(boards, monkeypatch):
+    """The DoD's headline, over a corpus careers-page discovery partly resolves.
+    Anthropic and Glean are both genuinely on Greenhouse and both fail that
+    method here — Anthropic's board link lives a page deeper than /careers,
+    Glean's listing is JS-rendered — and both come back through guessing."""
+    only_figma_has_a_careers_page(monkeypatch)
+    companies = ["Figma", *GUESSES]
+
+    careers_page_alone = [c for c in companies if not isinstance(resolve(c), str)]
+    combined = resolve_all(companies)
+
+    assert careers_page_alone == ["Figma"]
+    assert combined.rate > len(careers_page_alone) / len(companies)
+    assert set(combined.resolved) == {"Figma", "Anthropic", "Glean", "Automattic", "Tide"}
+    assert {"Anthropic", "Glean"} <= set(combined.resolved)

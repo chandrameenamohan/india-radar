@@ -12,3 +12,5 @@ max-complexity = 10
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+# tests/conftest.py refuses every network call except in tests marked `network`.
+markers = ["network: exercises the real fetching path (localhost only)"]

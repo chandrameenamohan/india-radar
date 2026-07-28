@@ -893,3 +893,91 @@ reasoning (~3s/company against a corpus that grew another 44%), so
 `data/companies.json` is untouched and the site still renders T1.2's snapshot.
 Slug resolution is now the binding constraint against 2,953 companies, and every
 source that could widen the corpus has landed. **T2.2 is the next real gain.**
+
+---
+
+# Slug guessing — measured during T2.2 (2026-07-28)
+
+Re-run with `.venv/bin/python learning-tests/slug_guess_live.py`.
+
+## The 8-company fixture: 6/8 by careers-page, 8/8 combined
+
+```
+Anthropic  greenhouse/anthropic (careers-page)   Glean    greenhouse/gleanwork (guess)
+Figma      greenhouse/figma     (careers-page)   Postman  greenhouse/postman   (guess)
+Ramp       ashby/ramp           (careers-page)   Vercel   greenhouse/vercel    (careers-page)
+Notion     ashby/notion         (careers-page)   Razorpay greenhouse/razorpay… (careers-page)
+```
+
+**The DoD names Anthropic and Glean as the two that must come back through
+guessing. Live, only Glean does** — Anthropic has resolved by careers-page since
+T2.1 started trying `/jobs`, which is measured in this file above. Postman took
+its place, so the pairing holds in shape (two JS-rendered boards recovered) and
+not in names. The unit test still drives Anthropic through guessing, because
+there the careers page is stubbed away and the DoD's claim is what's under test.
+
+## A board that answers is not this company's board
+
+**The single load-bearing fact of this task.** `boards-api.greenhouse.io/v1/boards/{slug}`
+(no `/jobs`) returns `{"name": "Figma", …}` — the only place Greenhouse states
+*whose* board a slug is. The jobs endpoint never says.
+
+Guessing the first word of the name is what makes this matter. Over 60 corpus
+companies it found 5 boards, and it cannot tell these apart:
+
+| guess | board says | same company? |
+|---|---|---|
+| `A24 Films` → `a24` | `A24` | yes |
+| `Cross River Bank` → `crossriverbank` | `Cross River` | yes |
+| `Prove Identity` → `prove` | `Prove` | yes |
+| `DOC GPT (1-4)` → `doc` | `Marshall Wace - DOC Job Board` | **no** |
+| `Brave Care` → `brave` | `Brave` | **no** (the browser) |
+| `Foundry Robotics` → `foundry` | `Foundry` | **no** |
+| `Starburst Labs` → `starburst` | `Starburst` | **no** |
+
+Nothing in the response separates the top three from the bottom four. So
+`states_company` requires the board name to **contain the whole company name** —
+it may say more (`Automattic Careers`, `Careers at Tide`, `Razorpay Software
+Private Limited`) and never less. That costs the three real companies above,
+and `first-word` guessing is dropped entirely rather than kept and filtered.
+Consistent with the project's existing calls: unresolved beats wrong.
+
+## Which candidates earn their call
+
+Measured across 260 corpus companies:
+
+| candidate | boards found | verified |
+|---|---|---|
+| bare normalised name | 26 | 23 (~9% of companies) |
+| `+work` `+ai` `+labs` `+jobs` `+careers` | 1 each | 1 each |
+| hyphenated, `+hq` `+inc` `+io` `+team` | **0** | 0 |
+| first word | 5 (per 60) | 1 |
+
+`gleanwork` is why the suffix list exists at all — Glean is in the DoD and files
+under a suffix. Cost: **5.6s per unresolved company** (6 sequential calls, and
+the board endpoint is ~0.9s, not the jobs endpoint's 0.35s) → **~34 min for the
+2,953-company corpus at 8 workers**, against ~6 min for the bare name alone.
+Both are noise beside careers-page discovery's ~2.5 hours.
+
+## The gate started calling Greenhouse and nobody would have noticed
+
+Adding the guessing pass inside `resolve_all` put a live HTTP call inside two
+**existing** T2.1 unit tests that stub `fetch` but had no reason to know about
+`board_name`. They passed, so nothing failed — the suite just went from 0.18s to
+29s and quietly acquired a dependency on Greenhouse's uptime, which VERIFICATION.md
+forbids in as many words.
+
+`tests/conftest.py` now refuses any unstubbed call at `net.get_bytes` (the one
+door `get` and `fetch` both go through) and names the URL. Opt out with
+`@pytest.mark.network`, which exactly one test uses and which dials 127.0.0.1:1.
+**Any future task that adds a network call to a shared function inherits this
+guard** — and would otherwise repeat the same silent regression.
+
+## Still not done: data/slugs.json is still not regenerated
+
+Fourth iteration running. The cost is now precise: careers-page ~3s/company plus
+guessing ~5.6s on what it misses ≈ **2.5–3 hours at 8 workers** for 2,953
+companies. Guessing alone against the corpus would resolve **~10-15%** — 3/20 on
+a random sample — in ~34 minutes, which is the cheap partial refresh if one is
+wanted before T6.2 automates the whole thing. `data/companies.json` is untouched
+and the site still renders T1.2's snapshot.

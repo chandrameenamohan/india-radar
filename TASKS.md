@@ -261,8 +261,45 @@ Checks:
 Out of scope: JS-rendered pages (that's what T2.2 exists to cover).
 ```
 
-### T2.2 — Slug guessing fallback `in-progress` · *Phase 1* · after T2.1
+### T2.2 — Slug guessing fallback `done` · *Phase 1* · after T2.1
 Guess from company name, probe Greenhouse (~0.3s, effectively free).
+> **8-company fixture: 6/8 by careers-page alone → 8/8 combined**, the split
+> reported by method. Live, the two recovered by guessing are Glean and Postman
+> — **not Anthropic and Glean as the DoD names**, because Anthropic has resolved
+> by careers-page ever since T2.1 started trying `/jobs`. Two JS-rendered boards
+> recovered, different names. The unit test still drives Anthropic through
+> guessing, where the careers page is stubbed away and the DoD's claim is what's
+> under test.
+>
+> **A board that answers is not this company's board, and that is the whole
+> task.** `boards-api.greenhouse.io/v1/boards/{slug}` — no `/jobs` — is the only
+> place Greenhouse states *whose* board a slug is. Guessing the first word of a
+> name found 5 boards across 60 companies and could not tell `A24 Films → A24`
+> (right) from `Brave Care → brave` (the browser). So a guess is kept only if
+> the board's own name **contains the whole company name** — it may say more
+> (`Automattic Careers`), never less. That costs three real companies
+> (A24, Cross River Bank, Prove Identity) and first-word guessing is dropped
+> outright rather than kept and filtered. Unresolved beats wrong, as everywhere
+> else here.
+>
+> Candidates are measured, not imagined: over 260 companies the bare normalised
+> name found 26 boards, five suffixes found one each (`gleanwork` is why the
+> list exists — Glean is in the DoD), and a hyphenated variant plus `hq`/`inc`/
+> `io`/`team` found nothing at all.
+>
+> **A regression this task introduced and fixed:** putting a network call inside
+> `resolve_all` made two *existing* T2.1 unit tests probe live Greenhouse. They
+> still passed — the suite just went 0.18s → 29s and silently acquired the
+> dependency on third-party uptime VERIFICATION.md forbids. `tests/conftest.py`
+> now refuses any unstubbed call at `net.get_bytes` and names the URL; opt out
+> with `@pytest.mark.network` (one test, 127.0.0.1 only). Any future task adding
+> a network call to a shared function inherits the guard.
+>
+> **Not done here, fourth iteration running:** `data/slugs.json` was not
+> regenerated. The cost is now precise — ~3s/company careers-page plus ~5.6s
+> guessing on what it misses ≈ **2.5–3h at 8 workers** for 2,953 companies.
+> Guessing alone would resolve ~10-15% in ~34 min if a cheap partial refresh is
+> wanted before T6.2 automates it. See FINDINGS.
 ```
 Acceptance (observable):
   Runs only on companies T2.1 failed. Combined resolution rate is strictly higher
