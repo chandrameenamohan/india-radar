@@ -250,7 +250,7 @@ Out of scope: distinguishing bad-slug from genuinely-empty. We can't, so we
               refuse to guess.
 ```
 
-### T3.4 — India role matcher `todo` · *Phase 0* · after T3.1
+### T3.4 — India role matcher `in-progress` · *Phase 0* · after T3.1
 City-name list only. **No ISO-prefix regex** — measured: it adds 0 real hits and
 introduced 47 false positives by matching the literal string `In-Office`.
 ```
