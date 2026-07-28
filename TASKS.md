@@ -200,7 +200,7 @@ Out of scope: automating what belongs in the override file.
 
 ## E3 · Probe and filter
 
-### T3.1 — Greenhouse probe `todo` · *Phase 0* · after T2.1, T6.1
+### T3.1 — Greenhouse probe `in-progress` · *Phase 0* · after T2.1, T6.1
 0.35s/company, one call, `meta.total` is authoritative.
 ```
 Acceptance (observable):
