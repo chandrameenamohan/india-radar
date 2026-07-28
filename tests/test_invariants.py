@@ -20,10 +20,19 @@ def test_unchecked_never_listed():
     assert r["checked"] == 1 and r["unchecked"] == 1
 
 
-@pytest.mark.xfail(reason="T3.4 not implemented", strict=True)
 def test_location_fixture_exact():
-    from src import india  # noqa: F401
-    raise AssertionError("T3.4: India matcher not implemented")
+    """Invariant 2 (T3.4). `In-Office` is not India. The fixture of real location
+    strings classifies with zero false positives AND zero false negatives."""
+    from src.india import is_india
+    from tests.test_india import INDIA, NOT_INDIA
+
+    assert [loc for loc in INDIA if not is_india(loc)] == [], "false negatives"
+    assert [loc for loc in NOT_INDIA if is_india(loc)] == [], "false positives"
+
+    # The traps must stay IN the fixture. Deleting one is how this invariant
+    # would come back green while the bug it was written for is back.
+    assert {"In-Office", "Hybrid; In-Office"} <= set(NOT_INDIA)
+    assert "IN-Pune" in INDIA and "Bengaluru, India; Mumbai, India" in INDIA
 
 
 @pytest.mark.xfail(reason="T3.3 not implemented", strict=True)

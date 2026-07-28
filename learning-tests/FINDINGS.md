@@ -362,3 +362,34 @@ writes `000` for DNS failure, refused connection and timeout alike.
 Consequence for the remaining probes: **T3.2 and T3.3 should use `net.get`, not
 `net.fetch`.** Both need the status to classify an outcome honestly, and both
 have a silent-failure mode that a boolean "did we get a page" hides.
+
+---
+
+# India matcher — measured during T3.4 (2026-07-28)
+
+## Word boundaries are free, and they close a trap the substring rule left open
+
+§2 established the rule (city list, no ISO regex). `src/india.py` matches those
+same city names with `\b` boundaries rather than plain `in` substring tests.
+Compared over **1,497 live Greenhouse postings** (databricks, anthropic,
+gleanwork, figma), the two rules agree exactly:
+
+```
+boundary rule: 104   substring rule: 104
+lost by boundaries: []   gained: []
+```
+
+So the boundaries cost nothing real, and they buy `Indianapolis, Indiana`
+(`india` is a substring of `Indiana`) and `Thanet, UK` (`thane`). Neither appeared
+in this sample, which is the point: the substring rule was *unfalsified*, not
+correct, and a single US-Midwest posting would have shipped as an India role.
+
+The corollary is that this class of bug is invisible in aggregate counts. §2's
+own precision bug was caught by looking at the *distinct strings* a rule admitted,
+not at how many it admitted. Any future widening of `CITIES` should be checked the
+same way.
+
+## Redundant city entries were dropped
+
+`navi mumbai` is removed from the list in §2: `mumbai` already matches it, and a
+second alternative that can never fire alone is dead code in a regex.
