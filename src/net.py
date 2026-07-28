@@ -17,6 +17,28 @@ UA = (
 )
 
 
+def get_bytes(url: str, timeout: int = 45, ua: str = UA) -> tuple[int, bytes]:
+    """GET a URL, returning (status, body) with the body undecoded.
+
+    Bytes, because not every source is a web page: SEC ships Form D as a zip
+    archive, and decoding that as text corrupts it.
+
+    `ua` is overridable because one host's requirement is another host's block —
+    SEC serves 403 to the browser UA above and 200 to a declared contact string.
+    """
+    done = subprocess.run(
+        [
+            "curl", "--location", "--silent", "--max-time", str(timeout),
+            "-A", ua, "--write-out", "%{http_code}", url,
+        ],
+        capture_output=True,
+    )
+    # curl appends the status to the body on stdout, and prints 000 when the
+    # transfer never happened.
+    body, status = done.stdout[:-3], done.stdout[-3:].decode("ascii", errors="replace")
+    return (int(status) if status.isdigit() else 0), body
+
+
 def get(url: str, timeout: int = 45) -> tuple[int, str]:
     """GET a URL, returning (status, body). Status 0 means the request never got
     an answer at all — DNS failure, refused connection, timeout.
@@ -29,18 +51,8 @@ def get(url: str, timeout: int = 45) -> tuple[int, str]:
     wrong slug, a 502 is a board we failed to read, and they send a company to
     different outcomes.
     """
-    done = subprocess.run(
-        [
-            "curl", "--location", "--silent", "--max-time", str(timeout),
-            "-A", UA, "--write-out", "%{http_code}", url,
-        ],
-        capture_output=True,
-    )
-    # curl appends the status to the body on stdout, and prints 000 when the
-    # transfer never happened.
-    out = done.stdout.decode("utf-8", errors="replace")
-    body, status = out[:-3], out[-3:]
-    return (int(status) if status.isdigit() else 0), body
+    status, body = get_bytes(url, timeout)
+    return status, body.decode("utf-8", errors="replace")
 
 
 def fetch(url: str, timeout: int = 45) -> str | None:

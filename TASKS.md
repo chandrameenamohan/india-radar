@@ -156,7 +156,41 @@ Out of scope: name normalisation for MCA matching (T4.4).
 > carries a `website` for 1,072 of 1,075 — unused today because nothing consumes
 > it. That is T2.2/T2.3's highest-value change, sized in FINDINGS.
 
-### T1.3 — SEC Form D (EDGAR) source `in-progress` · *Phase 1* · parallel
+### T1.3 — SEC Form D (EDGAR) source `done` · *Phase 1* · parallel
+> **Corpus 1,081 → 2,054 qualified (+973 new, 0 lost); 989 now qualify by
+> `amount`, where before only 3 did.** EDGAR is the one source that states a
+> dollar figure structurally rather than in prose, so it is what SPEC feature 2's
+> amount proxy was written for.
+>
+> The bulk route: SEC republishes each quarter's Form D as a zip of TSVs, so a
+> quarter is **one** call rather than ~16,000 `primary_doc.xml` fetches.
+> `QUARTERS = 4` — a year of filings.
+>
+> **A naive Form D scrape builds a directory of venture funds.** Of 15,981 issuer
+> rows, 5,765 are amendments, 5,757 are pooled investment funds (Bain's and
+> Sequoia's own funds file Form D), 3,360 are real estate/oil/biotech and 247 are
+> co-issuers. 852 are technology operating companies; 247 clear $5M. The filters
+> are the source, not housekeeping.
+>
+> **A bug this task introduced and fixed:** `corpus._strength` picked the record
+> with the biggest number, so YC's `Growth` label for Lob lost to EDGAR's $2M
+> filing — which then failed the $5M proxy. 4 companies (Datafold, Legion Health,
+> Lob, Overview) were demoted from qualified purely by adding a source. `_strength`
+> now ranks qualifying evidence above a bigger number. **Generalises to T1.4:** the
+> invariant to watch is not "did the corpus grow" but "did anything qualified
+> leave". Regression test confirmed failing with the old ordering restored.
+>
+> **Two corrections landed with it.** `net.UA` — load-bearing against Cloudflare
+> — gets a blanket 403 from sec.gov, which wants a declared contact string; so
+> `net.get_bytes` grew a `ua=` parameter and returns bytes (a zip is not a page).
+> And **EDGAR does not carry a website field**, contrary to what T1.2's findings
+> and `slugs.py`'s comment both said — Form D gives a street address and a phone
+> number. T2.2 should be sized on YC alone; that comment is corrected.
+>
+> **Not done here:** `data/slugs.json` was not regenerated (~3s/company against a
+> corpus that just doubled), so `data/companies.json` is untouched and the site
+> still renders T1.2's snapshot. Slug resolution is still the binding constraint.
+
 ### T1.4 — TechCrunch / Forbes / CBI sources `todo` · *Phase 1* · parallel
 ```
 Acceptance (observable) [each]:

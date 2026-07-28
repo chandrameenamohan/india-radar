@@ -629,3 +629,143 @@ is one line in `yc.parse`, one field on `Record`, and threading the company
 rather than the name through `resolve`/`resolve_all`. **That is the single
 highest-value change available to T2.2/T2.3**, and it is measured rather than
 assumed: half the current failures never reached a page at all.
+
+---
+
+# SEC Form D — measured during T1.3 (2026-07-28)
+
+Re-run with `.venv/bin/python learning-tests/edgar_live.py`.
+
+## The UA that works everywhere else gets a blanket 403 here
+
+`net.UA` — the browser string that is load-bearing against Cloudflare on
+FinSMEs — returns **403 on every sec.gov URL tried**: the data sets, the
+full-index files, `cgi-bin`. SEC's automated-access policy wants a declared
+contact instead, and enforces it:
+
+| UA | result |
+|---|---|
+| `Mozilla/5.0 ... Chrome/126.0 ...` | **403** |
+| `india-radar chandra@hakimo.ai` | **200** |
+
+So `net.get_bytes` grew a `ua=` parameter. One host's requirement is another
+host's block, and there is no single string that satisfies both.
+
+## The bulk data set, not 16,000 filings
+
+SEC republishes each quarter's Form D as a zip of TSVs — `ISSUERS` and
+`OFFERING`, joined on `ACCESSIONNUMBER`. One call, 3.6MB, ~15,700 filings. The
+per-filing route (`primary_doc.xml`) is the same data at ~16,000 requests.
+
+**The path is `files/structureddata/data/form-d-data-sets/`, not `files/dera/...`** —
+the `dera` spelling 404s.
+
+## Publication lag is real and is not a fixed number of months
+
+On 2026-07-28, four weeks after Q2 closed:
+
+```
+2026q3 404 · 2026q2 404 · 2026q1 200 · 2025q4 200 · 2025q3 200 · 2025q2 200
+```
+
+2026Q1 had been up since 3 April. So the newest quarter **cannot be computed
+from today's date** — `edgar.quarters()` offers `QUARTERS + 3` candidates newest
+first and lets the 404s choose. Anything that assumes "current quarter minus
+one" builds an empty corpus for weeks at a time and reports it as success.
+
+## A naive Form D scrape builds a directory of venture funds
+
+This is the finding that matters. Of 15,981 issuer rows in 2026Q1:
+
+| dropped | why |
+|---|---|
+| 5,765 | amendments (`D/A`) restating a round already counted |
+| 5,757 | pooled investment funds — **Bain's and Sequoia's own funds file Form D** |
+| 3,360 | not technology: real estate, oil and gas, REITs, restaurants, biotech |
+| 247 | co-issuers on someone else's raise (`IS_PRIMARYISSUER_FLAG = NO`) |
+| **852** | **technology operating companies — what we keep** |
+
+Of those 852, **247 clear the $5M proxy**. So ~1.6% of a quarter's Form D
+filings are companies this site would ever list. Filtering is not tidying here;
+without it the corpus is 64% venture funds, none of which hire engineers.
+
+Form D's industry taxonomy has **no "Software" value** — its entire technology
+branch is `Computers`, `Other Technology`, `Telecommunications`.
+
+## Fields: what Form D states and what it doesn't
+
+- `TOTALAMOUNTSOLD`, not `TOTALOFFERINGAMOUNT`. The latter is the ceiling the
+  filer may raise and is routinely open-ended; the former is money in the door.
+  `0` is a real answer (announced, nothing closed yet), not missing data.
+- `SALE_DATE` is ISO and present on **all 247** qualifying rows. `FILING_DATE`
+  is `31-MAR-2026`, not ISO — don't reach for it without converting.
+- **No round letter, ever.** Form D states dollars. So every EDGAR record
+  qualifies by `amount`, never by `letter`.
+- Source URL `…/Archives/edgar/data/{int(CIK)}/{accession-no-dashes}/{accession}-index.htm`
+  — verified 200 on five sampled filings. CIK is zero-padded in the TSV and
+  unpadded in the path.
+
+### EDGAR does NOT carry a website field — correcting T2.1 and T1.2
+
+Both `src/slugs.py`'s ponytail comment and T1.2's FINDINGS entry say "T1.2 (YC)
+and T1.3 (EDGAR) both carry a real website field". **Measured: EDGAR does not.**
+`ISSUERS.tsv` has street, city, state, zip and phone, and no URL column of any
+kind. The YC half of that claim stands (1,072 of 1,075). Whoever picks up T2.2
+should size it on YC alone.
+
+## EDGAR files a registry name; every other source publishes a company name
+
+244 of 247 qualifying names carry a legal suffix — `Legora, Inc.`,
+`SOLIDROAD INC.`, `Core Foundry Labs, LLC`. Under `corpus.py`'s dedup key
+(casefold, drop non-alphanumerics) that is a **different company** from YC's
+`Legora`, so the corpus would list both.
+
+`corpus.py` had already named this as the trigger: *"add suffix stripping when
+T1.2–T1.4 produce a duplicate this misses."* Measured, it does — so the strip
+went in `edgar.py`, at the source, rather than in the shared key:
+
+| approach | cross-source merges | false collapses |
+|---|---|---|
+| plain key, name as filed | 0 | 0 |
+| plain key, suffix stripped **at the source** | **5** | **0** |
+| shared key strips descriptive words too (`technologies`, `holdings`) | 6 | risks `Garage` ≡ `Garage Technologies` |
+
+Stripping at the source also fixes what the shared-key version would not: the
+merged row keeps the *clean* name, and `slugs.py` guesses a domain from the
+name — `legora.com` resolves, `legorainc.com` does not. Trailing legal wrappers
+only; descriptive words are part of what a company is called.
+
+## The bug adding a second amount-bearing source introduced
+
+`corpus._strength` picked the record with the biggest number. YC calls Lob
+`Growth`; EDGAR reports Lob filing a $2M round. Both are true — but the $2M
+record won and then failed the $5M proxy, so **a company past Series A left the
+corpus because a second source mentioned a small raise.**
+
+Measured: 4 real companies (Datafold, Legion Health, Lob, Overview) were
+demoted from qualified to unqualified purely by adding EDGAR.
+
+`_strength` now ranks `_qualified_by(record) is not None` first — qualifying
+evidence outranks a bigger number; everything else is unchanged. Two sources
+describing one company are **complementary, not contradictory**, and the merge
+must not discard one source's qualifying evidence because another mentioned a
+smaller round. `test_a_small_recent_round_never_disqualifies_a_company_another_source_qualifies`
+was confirmed to fail with the old ordering restored.
+
+**Generalises to T1.4:** any further amount-bearing source can demote companies
+the same way. The invariant to check is not "did the corpus grow" (it grew by
+976 while losing 4) but "did anything qualified leave".
+
+## Corpus after T1.3
+
+```
+1,081 -> 2,054 qualified   (+973 new, 0 lost)
+qualified_by: stage 1,059 · amount 989 · letter 6
+unqualified:  4,916 -> 6,974
+```
+
+A year of filings — `QUARTERS = 4`, so a spring round is still in the corpus and
+2019's is not. `data/slugs.json` was **not** regenerated (unchanged from T1.2's
+reasoning: ~3s/company, and the corpus just doubled), so `data/companies.json`
+is untouched and the site still renders T1.2's snapshot. Slug resolution remains
+the binding constraint on site size, and it is now against 2,054 companies.

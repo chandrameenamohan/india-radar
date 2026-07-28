@@ -47,11 +47,13 @@ BOARDS = {
     "ashby": re.compile(r"jobs\.ashbyhq\.com/([a-z0-9_.-]+)", re.I),
 }
 
-#: ponytail: the domain is guessed from the name, because no corpus source
-#: carries one — FinSMEs headlines have no website link. Ceiling: this only
-#: finds companies whose name maps cleanly onto their domain. Upgrade path:
-#: T1.2/T1.3 (YC, EDGAR) do carry a real website field; feed it in here and
-#: these two lines go away. The tail is T2.3's override file.
+#: ponytail: the domain is guessed from the name, because nothing feeds one in
+#: yet — FinSMEs headlines have no website link. Ceiling: this only finds
+#: companies whose name maps cleanly onto their domain. Upgrade path: YC's
+#: payload carries a real website on 1,072 of 1,075 Growth companies; feed it in
+#: here and these two lines go away. EDGAR does NOT — measured in T1.3, Form D
+#: gives a street address and a phone number and no URL. The tail is T2.3's
+#: override file.
 #: Both paths are load-bearing: corebiomedicine.com/careers 404s while /jobs is
 #: the real listing, and anthropic.com/jobs redirects to the listing its
 #: /careers landing page doesn't link.

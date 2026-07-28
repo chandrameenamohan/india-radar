@@ -20,7 +20,7 @@ from itertools import chain
 from pathlib import Path
 from typing import NamedTuple
 
-from src import yc
+from src import edgar, yc
 from src.finsmes import BASE, Record, parse
 from src.net import fetch
 
@@ -75,14 +75,22 @@ def merge(*sources: Iterable[Record]) -> Corpus:
     return Corpus(companies, sorted(unqualified))
 
 
-def _strength(record: Record) -> tuple[str, int, str, str, str]:
+def _strength(record: Record) -> tuple[bool, str, int, str, str, str]:
     """Total order over rounds for the same company, independent of input order.
 
-    Letter first (a later letter is a bigger round), then amount, then a stated
-    stage. Date and URL are not signal — they are there so two equally-strong
-    rounds still resolve to the same winner every run.
+    **Qualifying evidence outranks a bigger number.** Two sources describing one
+    company are complementary, not contradictory: YC calls Lob `Growth` and EDGAR
+    reports it filing a $2M round, and both are true. Ranking on the amount alone
+    let the $2M record win and then fail the $5M proxy, so a company three sources
+    agree is past Series A left the corpus because one of them mentioned a small
+    round. Measured when EDGAR landed: 4 companies demoted that way.
+
+    After that, letter first (a later letter is a bigger round), then amount, then
+    a stated stage. Date and URL are not signal — they are there so two
+    equally-strong rounds still resolve to the same winner every run.
     """
     return (
+        _qualified_by(record) is not None,
         record["round_letter"] or "",
         record["amount"] or 0,
         record["stage"] or "",
@@ -128,15 +136,20 @@ def main() -> None:
     page = fetch(f"{BASE}/category/usa")
     # 10MB in one call, so it wants more than net.get's page-sized default.
     directory = fetch(yc.API, timeout=120)
-    if page is None or directory is None:
-        dead = "FinSMEs" if page is None else "the YC directory"
+    quarters = edgar.download()
+    if page is None or directory is None or not quarters:
+        dead = "FinSMEs" if page is None else "the YC directory" if directory is None else "EDGAR"
         # All or nothing: a corpus missing a source is a corpus that shrank, and
         # a company that silently left it is indistinguishable from one that
         # stopped hiring. Better to keep yesterday's file and say why.
         raise SystemExit(f"{dead} unreachable — corpus.json left as it was, never truncated")
 
     records, unparsed = parse(page)
-    corpus = merge(records, yc.parse(directory))
+    corpus = merge(
+        records,
+        yc.parse(directory),
+        *(edgar.parse(quarter) for quarter in quarters),
+    )
     write("data/corpus.json", corpus)
     print(
         f"corpus.json: {len(corpus.companies)} qualified, "
