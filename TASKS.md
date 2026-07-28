@@ -250,9 +250,14 @@ Out of scope: distinguishing bad-slug from genuinely-empty. We can't, so we
               refuse to guess.
 ```
 
-### T3.4 — India role matcher `in-progress` · *Phase 0* · after T3.1
+### T3.4 — India role matcher `done` · *Phase 0* · after T3.1
 City-name list only. **No ISO-prefix regex** — measured: it adds 0 real hits and
 introduced 47 false positives by matching the literal string `In-Office`.
+> Matched on word boundaries, not substrings: over 1,497 live postings both rules
+> find the same 104 India roles, so boundaries are free, and they keep
+> `Indianapolis, Indiana` and `Thanet, UK` out. `test_location_fixture_exact` also
+> asserts the traps are still IN the fixture — deleting `In-Office` from it is the
+> obvious way this invariant comes back green with the bug restored. See FINDINGS.
 ```
 Acceptance (observable):
   The fixture of real location strings classifies with ZERO false positives and
