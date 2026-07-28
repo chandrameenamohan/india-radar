@@ -1,0 +1,14 @@
+[tool.ruff]
+line-length = 100
+exclude = [".venv", "data", "site"]
+
+[tool.ruff.lint]
+# F401 unused imports / F841 unused locals: the dead-code signal from
+# VERIFICATION.md. The Ralph loop leaves scaffolding behind; this catches it.
+select = ["E", "F", "W", "I", "UP", "B", "C90"]
+
+[tool.ruff.lint.mccabe]
+max-complexity = 10
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
