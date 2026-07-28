@@ -312,7 +312,7 @@ Checks:
 Out of scope: guessing against Lever/Ashby (Greenhouse is the cheap one).
 ```
 
-### T2.3 — Manual override file `todo` · *Phase 1* · after T2.2
+### T2.3 — Manual override file `in-progress` · *Phase 1* · after T2.2
 ```
 Acceptance (observable):
   overrides.yaml wins over both automatic methods; a company listed there resolves
