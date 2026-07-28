@@ -104,7 +104,7 @@ Checks:
 Out of scope: other sources; dedup across sources (T1.5).
 ```
 
-### T1.5 — Merge, dedup, qualify `todo` · *Phase 0* · after T1.1
+### T1.5 — Merge, dedup, qualify `in-progress` · *Phase 0* · after T1.1
 Amount-based proxy: qualify on stated letter ≥ A, else disclosed round ≥ $5M.
 ```
 Acceptance (observable):
