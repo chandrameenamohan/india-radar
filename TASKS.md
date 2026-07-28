@@ -261,7 +261,7 @@ Checks:
 Out of scope: JS-rendered pages (that's what T2.2 exists to cover).
 ```
 
-### T2.2 — Slug guessing fallback `todo` · *Phase 1* · after T2.1
+### T2.2 — Slug guessing fallback `in-progress` · *Phase 1* · after T2.1
 Guess from company name, probe Greenhouse (~0.3s, effectively free).
 ```
 Acceptance (observable):
