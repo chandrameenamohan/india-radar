@@ -67,7 +67,7 @@ T4.2/T4.3.
 
 ## E0 · Foundation
 
-### T6.1 — Outcome vocabulary and build report `in-progress`
+### T6.1 — Outcome vocabulary and build report `done`
 > Scheduled first despite its number. Every probe task depends on this contract,
 > and retrofitting it later means rewriting all of them. This is SPEC feature 12.
 

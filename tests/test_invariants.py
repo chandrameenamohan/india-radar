@@ -6,10 +6,18 @@ initial state: a gate that passes an empty project teaches nothing.
 import pytest
 
 
-@pytest.mark.xfail(reason="T6.1 not implemented", strict=True)
 def test_unchecked_never_listed():
-    from src import outcomes  # noqa: F401
-    raise AssertionError("T6.1: outcome vocabulary not implemented")
+    """Invariant 1 (T6.1). A company that was never successfully checked is
+    excluded from the site and counted, never rendered as "not hiring"."""
+    from src.outcomes import Outcome, report
+
+    r = report(["Checked", "Never"], {"Checked": Outcome.LISTED})
+
+    assert r["companies"]["Never"] == "probe-failed"
+    assert "Never" not in r["listed"]
+    # The failure mode this guards: a missing answer quietly becoming a finding.
+    assert r["counts"]["no-india-roles"] == 0
+    assert r["checked"] == 1 and r["unchecked"] == 1
 
 
 @pytest.mark.xfail(reason="T3.4 not implemented", strict=True)
