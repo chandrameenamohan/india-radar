@@ -1,0 +1,74 @@
+{
+  "companies": [
+    {
+      "name": "Alpen High Performance Products",
+      "amount": 6000000,
+      "currency": "USD",
+      "date": "2026-07-28",
+      "round_letter": "B",
+      "source_url": "https://www.finsmes.com/2026/07/alpen-high-performance-products-raises-6m-in-series-b-funding.html",
+      "qualified_by": "letter"
+    },
+    {
+      "name": "Antares Labs",
+      "amount": 7250000,
+      "currency": "USD",
+      "date": "2026-07-28",
+      "round_letter": null,
+      "source_url": "https://www.finsmes.com/2026/07/antares-labs-raises-7-25m-in-seed-funding.html",
+      "qualified_by": "amount"
+    },
+    {
+      "name": "Claros Technologies",
+      "amount": 55000000,
+      "currency": "USD",
+      "date": "2026-07-28",
+      "round_letter": "B",
+      "source_url": "https://www.finsmes.com/2026/07/claros-technologies-raises-55m-in-series-b-funding.html",
+      "qualified_by": "letter"
+    },
+    {
+      "name": "CORE Biomedicine",
+      "amount": 21000000,
+      "currency": "USD",
+      "date": "2026-07-28",
+      "round_letter": "A",
+      "source_url": "https://www.finsmes.com/2026/07/core-biomedicine-raises-21m-in-series-a-funding.html",
+      "qualified_by": "letter"
+    },
+    {
+      "name": "Dwelly",
+      "amount": 170000000,
+      "currency": "USD",
+      "date": "2026-07-28",
+      "round_letter": "B",
+      "source_url": "https://www.finsmes.com/2026/07/dwelly-raises-170m-in-series-b-funding.html",
+      "qualified_by": "letter"
+    },
+    {
+      "name": "Epitel",
+      "amount": 26000000,
+      "currency": "USD",
+      "date": "2026-07-28",
+      "round_letter": "B",
+      "source_url": "https://www.finsmes.com/2026/07/epitel-raises-26m-in-series-b-funding.html",
+      "qualified_by": "letter"
+    },
+    {
+      "name": "Flourish Health",
+      "amount": 26000000,
+      "currency": "USD",
+      "date": "2026-07-28",
+      "round_letter": "A",
+      "source_url": "https://www.finsmes.com/2026/07/flourish-health-raises-26m-in-series-a-funding.html",
+      "qualified_by": "letter"
+    }
+  ],
+  "unqualified": [
+    "COR",
+    "Conversica",
+    "Frenos",
+    "Liquid Interactive",
+    "PawPay"
+  ]
+}

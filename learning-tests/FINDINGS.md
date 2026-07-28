@@ -232,3 +232,15 @@ read as `M`. Rounds without a letter are real and common (`Seed`, `Pre-Seed`,
 
 `COR Receives Investment From FTV Capital` is a real company called COR, not a
 truncation bug. It looks exactly like one next to `CORE Biomedicine`.
+
+## Qualification yield — measured during T1.5 (2026-07-28)
+
+Running the live category page through merge/qualify: **12 records → 7 qualified
+(6 by letter, 1 by amount), 5 unqualified**. So **~42% of headlines state neither
+a round letter nor an amount** and cannot be judged either way.
+
+Consequence for sizing T1.2/T1.3/T1.4: raw record count is not corpus count.
+Reaching 1,000 qualified companies needs roughly **1.7× that many raw records**,
+before any cross-source dedup takes its own cut. EDGAR is the source to lean on —
+Form D states the amount structurally rather than in prose, so its yield should be
+far above 58%; that is worth measuring rather than assuming when T1.3 lands.

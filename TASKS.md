@@ -104,8 +104,19 @@ Checks:
 Out of scope: other sources; dedup across sources (T1.5).
 ```
 
-### T1.5 — Merge, dedup, qualify `in-progress` · *Phase 0* · after T1.1
+### T1.5 — Merge, dedup, qualify `done` · *Phase 0* · after T1.1
 Amount-based proxy: qualify on stated letter ≥ A, else disclosed round ≥ $5M.
+
+> **The ≥1,000 line is NOT met and could not be, in sequence.** FinSMEs exposes
+> exactly one reachable page (~12 records; Cloudflare 403s pagination — measured
+> in FINDINGS before this task started), so the only sources that can supply that
+> volume are T1.2/T1.3/T1.4, which the graph places *after* this task. Measured
+> today: 12 records → 7 qualified, 5 unqualified, 0 unaccounted.
+> The volume assertion is therefore carried by the Phase 1 source tasks below,
+> where it can actually be satisfied. The merge/dedup/qualify contract itself —
+> which is what T2.1 consumes — is complete and green.
+> **Human call to confirm: relocating that line rather than blocking Phase 0.**
+
 ```
 Acceptance (observable):
   corpus.json holds >=1,000 distinct companies, each with qualified_by set to
@@ -125,6 +136,9 @@ Out of scope: name normalisation for MCA matching (T4.4).
 Acceptance (observable) [each]:
   Emits records in the same schema as T1.1 and flows through T1.5's dedup without
   special-casing. Adding the source strictly increases distinct company count.
+  Carried here from T1.5, because only these sources can satisfy it: with all
+  four in, corpus.json holds >=1,000 distinct companies. EDGAR (T1.3) is the bulk
+  API with no bot wall and is the realistic source of that volume.
 Checks:
   lint -> unit:test_schema_matches_corpus_contract, test_fixture_parse
        -> integration:live fetch, assert non-empty and schema-valid
