@@ -12,17 +12,10 @@ and the run reporting a confident zero; surfacing the misses makes that loud.
 from __future__ import annotations
 
 import re
-import subprocess
 from html import unescape
 from typing import NamedTuple, TypedDict
 
 BASE = "https://www.finsmes.com"
-
-#: Load-bearing: measured 403 with curl's default UA, 200 with this one.
-_UA = (
-    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
-    "(KHTML, like Gecko) Chrome/126.0 Safari/537.36"
-)
 
 
 class Record(TypedDict):
@@ -93,21 +86,3 @@ def parse(page: str) -> ParseResult:
 def _to_units(amount: re.Match[str]) -> int:
     """$7.25M -> 7250000. Currency units, not USD — no rate is applied here."""
     return round(float(amount["value"]) * _SCALE[amount["scale"].upper()])
-
-
-def fetch(url: str) -> str | None:
-    """GET a page, or None if it isn't a clean 200. A blocked page is a gap in
-    the corpus, never fabricated data.
-
-    Uses curl, not urllib: Cloudflare fingerprints the TLS handshake, and
-    Python's is tarpitted — the connection is accepted and then never answered,
-    so even a socket timeout doesn't fire. curl's handshake gets through. See
-    learning-tests/FINDINGS.md.
-    """
-    done = subprocess.run(
-        ["curl", "--fail", "--silent", "--max-time", "45", "-A", _UA, url],
-        capture_output=True,
-    )
-    if done.returncode != 0:
-        return None
-    return done.stdout.decode("utf-8", errors="replace")

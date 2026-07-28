@@ -1,0 +1,26 @@
+# Board-link markup for T2.1's regexes. Every CAPTURED line below is verbatim
+# from a live page on 2026-07-28 — the surrounding attributes and JSON escaping
+# are part of the test, because that framing is what the regexes have to survive.
+#
+# CAPTURED — https://www.figma.com/careers/  (Greenhouse, older boards. host)
+ Account Executive, SMB</span></a></li><li><a href="https://boards.greenhouse.io/figma/jobs/5988684004?gh_jid=5988684004
+#
+# CAPTURED — https://vercel.com/careers  (Greenhouse, newer job-boards. host, inside a Next.js JSON payload)
+"$\",\"$L9b\",\".1\",{\"jobs\":[{\"absolute_url\":\"https://job-boards.greenhouse.io/vercel/jobs/5999792004\
+#
+# CAPTURED — https://razorpay.com/jobs/  (Greenhouse, bare board URL, long slug)
+ data-framer-name="Large" data-reset="button" href="https://job-boards.greenhouse.io/razorpaysoftwareprivatelimited
+#
+# CAPTURED — https://ramp.com/careers  (Ashby, JSON-LD jobUrl, slug followed by a UUID)
+"addressLocality\":\"New York City\"}},\"jobUrl\":\"https://jobs.ashbyhq.com/ramp/09a9381c-677b-40a5-9ff1-027bd4302c13\
+#
+# CAPTURED — https://jobs.lever.co/voleon  (Lever, og:url. No careers page in the
+# 7-page sample linked a Lever board, so this comes from Lever's own board page.)
+" /><meta property="og:url" content="https://jobs.lever.co/voleon
+#
+# CONSTRUCTED — not captures. The two shapes that turn a link into a WRONG slug:
+#   the marketing site is not a board, and must yield nothing
+<a href="https://www.greenhouse.io/customers">Powered by Greenhouse</a>
+#   the script-tag include, where the slug is in ?for= and the path segment is
+#   the literal "embed" — must yield examplecorp, never embed
+<script src="https://boards.greenhouse.io/embed/job_board/js?for=examplecorp"></script>

@@ -244,3 +244,76 @@ Reaching 1,000 qualified companies needs roughly **1.7× that many raw records**
 before any cross-source dedup takes its own cut. EDGAR is the source to lean on —
 Form D states the amount structurally rather than in prose, so its yield should be
 far above 58%; that is worth measuring rather than assuming when T1.3 lands.
+
+---
+
+# Careers-page slug discovery — measured during T2.1 (2026-07-28)
+
+Re-run with `.venv/bin/python learning-tests/careers_slugs_live.py`.
+
+## 5/7 by name, up from the 4/7 baseline — and trying `/jobs` is why
+
+Resolving the same 7 companies §3 used, but starting from **the name alone**
+(guess the domain, then regex the careers page) rather than from a hand-written
+careers URL:
+
+| company | outcome |
+|---|---|
+| Anthropic | greenhouse/anthropic |
+| Figma | greenhouse/figma |
+| Ramp | ashby/ramp |
+| Vercel | greenhouse/vercel |
+| Razorpay | greenhouse/razorpaysoftwareprivatelimited |
+| Glean | `no-board-link` |
+| Postman | `no-board-link` |
+
+**§3 was wrong about Anthropic.** It is not that the page is JS-rendered — it is
+that `/careers` is a *marketing* page and the board lives one level deeper.
+`anthropic.com/jobs` redirects to `/careers/jobs`, which carries 1,355 plain
+`job-boards.greenhouse.io/anthropic` links in the HTML. Two consequences:
+
+- **Try `/jobs` as well as `/careers`.** It is also the only thing that reaches
+  CORE Biomedicine, whose `/careers` 404s while `/jobs` is a real 130KB page.
+- **Follow redirects** (`curl --location`). Every win above went through at least
+  one redirect — bare domain → www, or `/jobs` → the real listing path.
+
+Glean and Postman are genuine `no-board-link`: real careers pages, no board URL
+in the HTML. That is T2.2's territory, and it is why the reason vocabulary
+distinguishes "never reached a page" from "read the page, no board on it".
+
+## A parked domain answers 200, and it will lie to you
+
+`antareslabs.com/careers` returns **HTTP 200 with 114 bytes**:
+
+```html
+<!DOCTYPE html><html><head><script>window.onload=function(){window.location.href="/lander"}</script></head></html>
+```
+
+A domain squatter, not the company. Taken at face value this records
+`no-board-link` — *"we read Antares Labs' careers page and it linked no board"* —
+about a company we never reached. `src/slugs.py` therefore floors the body at
+2,000 bytes. The smallest **real** careers page measured in this sample is 130KB,
+so there are three orders of magnitude of headroom and the threshold is not
+delicate.
+
+## The rate is 71% on known companies and 0% on the actual corpus
+
+Running the real corpus (7 FinSMEs companies, all freshly-funded and obscure):
+**0/7 resolved** — 5 `no-careers-page`, 2 `no-board-link`.
+
+This is not a bug and the numbers do not contradict each other. The 50% baseline
+was measured on companies whose name maps cleanly onto their domain
+(Figma → figma.com). Newly-funded companies mostly do not: "Alpen High
+Performance Products" is not `alpenhighperformanceproducts.com`, and several
+have no public ATS board at all yet.
+
+**The domain guess is the binding constraint, not the board regex.** The regex
+found every board that was actually on a page it reached. What is missing is a
+real website field — which **T1.2 (YC) and T1.3 (EDGAR) both carry**. Feed that
+in and this method's ceiling rises without touching the extraction at all. The
+residual tail is T2.3's override file.
+
+Worth stating plainly for whoever sizes Phase 1: **a name-guessed domain is
+unverified**. Reaching a 200 does not prove the site belongs to the company. The
+length floor catches squatters; it does not catch a legitimate different company
+at the same name. A real website field removes that whole class of error.

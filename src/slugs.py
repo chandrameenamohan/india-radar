@@ -1,0 +1,170 @@
+"""Careers-page ATS slug discovery — T2.1 (SPEC feature 3a).
+
+A company's job board lives at an ATS slug we don't know. The cheapest honest way
+to learn it is to read the company's own careers page and take the board URL it
+already links to — no guessing, the company told us.
+
+This method resolves roughly half of them (measured 4/7 on real pages), and the
+half it misses miss for two different reasons that must not be conflated:
+
+  `no-careers-page`  we never reached a page, so we know nothing
+  `no-board-link`    we read the page and it linked no board — almost always a
+                     JS-rendered listing, which is exactly what T2.2's slug
+                     guessing exists to recover
+  `ambiguous-board`  the page linked more than one board and we will not pick
+
+Every unresolved company carries its reason. An unresolved company is a company
+we could not check, and the build report must be able to say which kind of
+not-knowing it was.
+"""
+from __future__ import annotations
+
+import json
+import re
+from collections import Counter
+from collections.abc import Iterable
+from concurrent.futures import ThreadPoolExecutor
+from pathlib import Path
+from typing import NamedTuple, TypedDict
+
+from src.net import fetch
+
+#: Board URLs as the three providers actually emit them, captured verbatim from
+#: live careers pages (see tests/fixtures/board-links.txt):
+#:   https://boards.greenhouse.io/figma/jobs/5988684004
+#:   https://job-boards.greenhouse.io/vercel/jobs/5999792004   (newer host)
+#:   https://jobs.ashbyhq.com/ramp/09a9381c-677b-40a5-9ff1-027bd4302c13
+#: The `embed/job_board/js?for=` branch is Greenhouse's script-tag include; the
+#: lookahead stops the bare host + "embed" from being read as a company slug.
+BOARDS = {
+    "greenhouse": re.compile(
+        r"(?:job-boards|boards)\.greenhouse\.io/"
+        r"(?:embed/job_board(?:/js)?\?for=)?"
+        r"(?!embed\b)([a-z0-9_-]+)",
+        re.I,
+    ),
+    "lever": re.compile(r"jobs\.(?:eu\.)?lever\.co/([a-z0-9_-]+)", re.I),
+    "ashby": re.compile(r"jobs\.ashbyhq\.com/([a-z0-9_.-]+)", re.I),
+}
+
+#: ponytail: the domain is guessed from the name, because no corpus source
+#: carries one — FinSMEs headlines have no website link. Ceiling: this only
+#: finds companies whose name maps cleanly onto their domain. Upgrade path:
+#: T1.2/T1.3 (YC, EDGAR) do carry a real website field; feed it in here and
+#: these two lines go away. The tail is T2.3's override file.
+#: Both paths are load-bearing: corebiomedicine.com/careers 404s while /jobs is
+#: the real listing, and anthropic.com/jobs redirects to the listing its
+#: /careers landing page doesn't link.
+_PATHS = ("careers", "jobs")
+_NOT_ALNUM = re.compile(r"[^a-z0-9]+")
+
+#: A parked domain answers 200 with a redirect stub — measured 114 bytes for
+#: antareslabs.com/careers, against 130KB for the smallest real careers page in
+#: the sample. Below this, we did not reach a careers page, and saying we did
+#: would report "read their page, no board on it" about a domain squatter.
+#: ponytail: a length floor rather than content sniffing. Three orders of
+#: magnitude of headroom, so the exact number isn't delicate.
+_MIN_PAGE = 2_000
+
+
+class Slug(TypedDict):
+    ats: str
+    slug: str
+    method: str  # always "careers-page" here; "guess" is T2.2, "override" T2.3
+
+
+class Resolution(NamedTuple):
+    resolved: dict[str, Slug]
+    unresolved: dict[str, str]  # company -> reason it isn't resolved
+
+    @property
+    def rate(self) -> float:
+        total = len(self.resolved) + len(self.unresolved)
+        return len(self.resolved) / total if total else 0.0
+
+
+def find_boards(html: str) -> list[tuple[str, str]]:
+    """Every distinct (ats, slug) the page links to, sorted.
+
+    Distinct rather than first-match: a page linking two different boards is a
+    real signal that we don't know which is the company's, and the caller has to
+    see that instead of silently taking whichever appeared first.
+    """
+    return sorted(
+        {(ats, m.group(1).casefold()) for ats, rx in BOARDS.items() for m in rx.finditer(html)}
+    )
+
+
+def careers_urls(name: str) -> list[str]:
+    """Candidate careers-page URLs for a company name."""
+    host = _NOT_ALNUM.sub("", name.casefold())
+    return [f"https://{host}.com/{path}" for path in _PATHS]
+
+
+def resolve(name: str) -> Slug | str:
+    """Resolve one company to a Slug, or to the reason it stayed unresolved."""
+    pages = [
+        page
+        for url in careers_urls(name)
+        if (page := fetch(url, timeout=30)) and len(page) >= _MIN_PAGE
+    ]
+    if not pages:
+        return "no-careers-page"
+
+    boards = sorted({board for page in pages for board in find_boards(page)})
+    if not boards:
+        return "no-board-link"
+    if len(boards) > 1:
+        return "ambiguous-board: " + ", ".join(f"{ats}/{slug}" for ats, slug in boards)
+
+    ats, slug = boards[0]
+    return Slug(ats=ats, slug=slug, method="careers-page")
+
+
+def resolve_all(names: Iterable[str], workers: int = 8) -> Resolution:
+    """Resolve a corpus. Concurrent because it is entirely network wait — two
+    sequential fetches per company would put a 1,000-company corpus in hours.
+
+    ponytail: 8 workers, each hitting a different company's own domain, so
+    there is no single host to be rude to. Raise it if this ever dominates a run.
+    """
+    names = list(names)
+    with ThreadPoolExecutor(max_workers=workers) as pool:
+        outcomes = pool.map(resolve, names)
+
+    resolved: dict[str, Slug] = {}
+    unresolved: dict[str, str] = {}
+    for name, outcome in zip(names, outcomes, strict=True):
+        if isinstance(outcome, str):
+            unresolved[name] = outcome
+        else:
+            resolved[name] = outcome
+    return Resolution(resolved, unresolved)
+
+
+def write(directory: str | Path, resolution: Resolution) -> None:
+    """Emit slugs.json and unresolved.json side by side. They are two halves of
+    one answer, and shipping one without the other invites reading a short
+    slugs.json as "these are all the companies"."""
+    out = Path(directory)
+    for name, part in (("slugs", resolution.resolved), ("unresolved", resolution.unresolved)):
+        (out / f"{name}.json").write_text(json.dumps(part, indent=2, sort_keys=True) + "\n")
+
+
+def main() -> None:
+    corpus = json.loads(Path("data/corpus.json").read_text())
+    names = [company["name"] for company in corpus["companies"]]
+
+    resolution = resolve_all(names)
+    write("data", resolution)
+    print(
+        f"slugs.json: {len(resolution.resolved)}/{len(names)} resolved "
+        f"({resolution.rate:.0%}) by careers-page"
+    )
+    reasons = Counter(resolution.unresolved.values())
+    for reason, count in sorted(reasons.items()):
+        print(f"  unresolved {count:3d}  {reason}")
+
+
+if __name__ == "__main__":
+    main()
