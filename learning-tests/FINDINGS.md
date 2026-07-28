@@ -317,3 +317,48 @@ Worth stating plainly for whoever sizes Phase 1: **a name-guessed domain is
 unverified**. Reaching a 200 does not prove the site belongs to the company. The
 length floor catches squatters; it does not catch a legitimate different company
 at the same name. A real website field removes that whole class of error.
+
+---
+
+# Greenhouse probe — measured during T3.1 (2026-07-28)
+
+Re-run with `.venv/bin/python learning-tests/greenhouse_live.py`.
+
+## §1's meta.total claim still holds, on boards 4× bigger than when it was made
+
+Same 5 slugs, re-measured today, `meta.total` compared against the returned
+count on a raw response:
+
+| slug | roles | meta.total |
+|---|---|---|
+| databricks | 801 | 801 |
+| anthropic | 415 | 415 |
+| gleanwork | 104 | 104 |
+| togetherai | 59 | 59 |
+| figma | 177 | 177 |
+
+Exact on all five, at 801 roles in a single unauthenticated call. There is no
+pagination to walk and no page-size ceiling in sight. Anthropic's board has gone
+from the 1,355 job links seen on its careers page (§T2.1) to 415 open roles —
+the careers-page link count is not a role count, and nothing should read it as
+one.
+
+**A wrong Greenhouse slug 404s.** Verified against a nonsense slug: HTTP 404,
+not a 200-with-empty-array. That is precisely the distinction Lever cannot make
+(§1), and it is why a Greenhouse board returning zero roles is trustworthy as a
+real zero while a Lever one is `empty-board-unverified`. Do not generalise the
+Greenhouse handling to Lever — the two look identical and mean opposite things.
+
+## curl's exit code is not enough to tell a 404 from a 502
+
+`src/net.py` originally used `curl --fail`, which collapses every non-2xx into
+one "no page" signal. T3.1 needs the two apart: a 404 means T2.1 resolved the
+wrong slug (`slug-unresolved`, a fixable data problem) while a 502 means we
+failed to read a board we may well own (`probe-failed`, a retry). `net.get` now
+returns `(status, body)` via `--write-out %{http_code}` and `fetch` is a thin
+wrapper over it. Status `0` means the transfer never happened at all — curl
+writes `000` for DNS failure, refused connection and timeout alike.
+
+Consequence for the remaining probes: **T3.2 and T3.3 should use `net.get`, not
+`net.fetch`.** Both need the status to classify an outcome honestly, and both
+have a silent-failure mode that a boolean "did we get a page" hides.
