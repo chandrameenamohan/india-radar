@@ -186,9 +186,22 @@ Adding any of these now would be over-engineering for where we are.
 
 ## Order of enforcement
 
-1. `make check` exists and runs today — **most checks stubbed to FAIL**. Red is the
-   correct initial state; a gate that passes an empty project teaches nothing.
-2. Each task in `TASKS.md` turns its own checks green as it lands.
+1. `make check` exists and runs today and is **GREEN**, because nothing is broken
+   yet. Green means "everything that exists, works" — it does **not** mean the
+   project is done. Completion is tracked by `TASKS.md`, never by holding the gate
+   red.
+
+   This was a corrected mistake. The gate was originally left permanently red
+   (e2e failed because `site/index.html` doesn't exist until T5.2, the eighth
+   task). Since the Stop hook enforces the full gate, that would have made every
+   Ralph iteration unable to stop — and the obvious "fix" available to a stuck
+   agent is to weaken the e2e check, which is exactly what the gate exists to
+   prevent. A gate that cannot go green does not create back-pressure; it creates
+   an incentive to defeat it. e2e now SKIPS when there is no site to verify.
+2. Each task in `TASKS.md` turns its own checks green as it lands. The honesty
+   guarantee is `strict=True` xfail in `tests/test_invariants.py`: an invariant
+   that starts passing by accident **fails the build**, so nobody can quietly
+   satisfy a check they didn't implement.
 3. Only once the gate has **caught at least one real failure** does the loop earn
    the right to run unattended (`ralph.sh --auto`).
 
