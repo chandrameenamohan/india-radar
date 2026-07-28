@@ -358,7 +358,7 @@ Checks:
 Out of scope: the UI.
 ```
 
-### T5.2 — Search, sort, filter, detail `todo` · *Phase 0* · after T5.1
+### T5.2 — Search, sort, filter, detail `in-progress` · *Phase 0* · after T5.1
 ```
 Acceptance (observable):
   Loads with ZERO console errors and ZERO failed network requests. Filtering to a
