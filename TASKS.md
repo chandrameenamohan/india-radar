@@ -129,7 +129,7 @@ Checks:
 Out of scope: name normalisation for MCA matching (T4.4).
 ```
 
-### T1.2 — YC directory source `todo` · *Phase 1* · parallel
+### T1.2 — YC directory source `in-progress` · *Phase 1* · parallel
 ### T1.3 — SEC Form D (EDGAR) source `todo` · *Phase 1* · parallel
 ### T1.4 — TechCrunch / Forbes / CBI sources `todo` · *Phase 1* · parallel
 ```
