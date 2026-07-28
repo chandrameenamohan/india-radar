@@ -55,10 +55,13 @@ _ENTRY = re.compile(
 # synonyms. Anything else lands in `unparsed`, which is the signal to add one.
 _HEADLINE = re.compile(r"^(?P<name>.+?)\s+(?:Raises|Receives|Closes|Secures|Lands)\b")
 
-_AMOUNT = re.compile(r"(?P<symbol>[$£€])(?P<value>\d+(?:\.\d+)?)(?P<scale>[KMB])\b", re.I)
-_SERIES = re.compile(r"\bSeries\s+(?P<letter>[A-Z])\b")
+# Public because a headline is a headline: TechCrunch (T1.4) writes money and
+# round letters exactly the way a funding wire does, so it reads them with these
+# rather than with a second copy that could drift out of step.
+AMOUNT = re.compile(r"(?P<symbol>[$£€])(?P<value>\d+(?:\.\d+)?)(?P<scale>[KMB])\b", re.I)
+SERIES = re.compile(r"\bSeries\s+(?P<letter>[A-Z])\b")
 
-_CURRENCY = {"$": "USD", "£": "GBP", "€": "EUR"}
+CURRENCY = {"$": "USD", "£": "GBP", "€": "EUR"}
 _SCALE = {"K": 1_000, "M": 1_000_000, "B": 1_000_000_000}
 
 
@@ -74,13 +77,13 @@ def parse(page: str) -> ParseResult:
             unparsed.append(title)
             continue
 
-        amount = _AMOUNT.search(title)
-        series = _SERIES.search(title)
+        amount = AMOUNT.search(title)
+        series = SERIES.search(title)
         records.append(
             Record(
                 name=headline["name"].strip(),
-                amount=_to_units(amount) if amount else None,
-                currency=_CURRENCY[amount["symbol"]] if amount else None,
+                amount=to_units(amount) if amount else None,
+                currency=CURRENCY[amount["symbol"]] if amount else None,
                 date=entry["date"],
                 round_letter=series["letter"] if series else None,
                 source_url=entry["url"],
@@ -91,6 +94,6 @@ def parse(page: str) -> ParseResult:
     return ParseResult(records, unparsed)
 
 
-def _to_units(amount: re.Match[str]) -> int:
+def to_units(amount: re.Match[str]) -> int:
     """$7.25M -> 7250000. Currency units, not USD — no rate is applied here."""
     return round(float(amount["value"]) * _SCALE[amount["scale"].upper()])

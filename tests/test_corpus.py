@@ -7,10 +7,14 @@ duplicates, which one source's single page cannot.
 import random
 from pathlib import Path
 
+import pytest
+
+from src import cbinsights, forbes, techcrunch
 from src.corpus import MIN_AMOUNT, merge
 from src.finsmes import Record, parse
 
-FIXTURE = (Path(__file__).parent / "fixtures" / "finsmes-usa.html").read_text()
+FIXTURES = Path(__file__).parent / "fixtures"
+FIXTURE = (FIXTURES / "finsmes-usa.html").read_text()
 
 
 def _record(
@@ -76,6 +80,26 @@ def test_qualified_by_exclusive():
 
     for company in corpus.companies:
         assert company["qualified_by"] in {"letter", "amount", "stage"}
+
+
+@pytest.mark.parametrize(
+    "source, fixture",
+    [
+        (techcrunch.parse, "techcrunch-venture.json"),
+        (forbes.parse, "forbes-ai50.json"),
+        (cbinsights.parse, "cbinsights-unicorns.html"),
+    ],
+)
+def test_adding_a_source_grows_the_corpus_and_demotes_nobody(source, fixture):
+    """T1.4's DoD line, plus the invariant T1.3 learned the hard way: the thing
+    to watch when a source lands is not whether the corpus grew but whether
+    anything qualified left it. EDGAR's arrival demoted four companies by
+    reporting a small round for them, and a bigger corpus hid it."""
+    before = merge(parse(FIXTURE).records)
+    after = merge(parse(FIXTURE).records, source((FIXTURES / fixture).read_text()))
+
+    assert len(after.companies) > len(before.companies)
+    assert {c["name"] for c in before.companies} <= {c["name"] for c in after.companies}
 
 
 def test_unqualifiable_counted_not_dropped():

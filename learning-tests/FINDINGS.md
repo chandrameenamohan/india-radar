@@ -769,3 +769,127 @@ A year of filings — `QUARTERS = 4`, so a spring round is still in the corpus a
 reasoning: ~3s/company, and the corpus just doubled), so `data/companies.json`
 is untouched and the site still renders T1.2's snapshot. Slug resolution remains
 the binding constraint on site size, and it is now against 2,054 companies.
+
+---
+
+# T1.4 — TechCrunch, Forbes, CB Insights (2026-07-28)
+
+All three are reachable and all three are **structural**, which was not the
+expectation going in. The surprise is that two of them state no round at all.
+
+## What each source actually states
+
+| source | route | what it states | qualifies by |
+|---|---|---|---|
+| TechCrunch | WordPress REST API, 100 posts/call | a round: money, sometimes a letter, a date | `amount` / `letter` |
+| Forbes | `forbesapi/org/<list>/<year>/position/true.json` | **cumulative** funding, $M | `stage` |
+| CB Insights | one server-rendered HTML page | a **valuation**, $B | `stage` |
+
+## Neither Forbes nor CB Insights states a funding round
+
+Forbes' `funding: 830` is $830M raised across Abridge's whole life — there is no
+letter, no round size and no round date anywhere in the payload. CB Insights'
+`$965` is what Anthropic is *worth*, and its "Date Joined" column is the day the
+company first crossed $1B, not its latest round.
+
+Putting either number in `amount` would report a round nobody raised and hand
+SPEC feature 2's $5M proxy a figure it was not written for. So both carry
+`stage="growth"` instead — T1.2's third rule, unchanged, doing exactly the job it
+was added for. **No fourth qualification rule was needed.**
+
+For Forbes the stage claim is gated on the total being stated at all, because
+the zeroes are real: Forbes reports `funding: 0` for **Midjourney, Surge AI,
+Hyperliquid and Increase**, and no funding field for **Zoho** — the bootstrapped
+companies, correctly identified. A total Forbes does not state is not evidence
+of a Series A, so those five leave by `corpus.py`'s counted door.
+
+## A naive TechCrunch scrape builds a directory of VC firms and sentence fragments
+
+Measured over 1,000 live venture posts (`categories=577030455`, ~17 months):
+**77 headlines announce a round.** A plain `^(name) raises` on them yields:
+
+- four VC firms raising their own funds — Accel, Lightspeed, CRV, SignalFire
+- a company called `Edtech platform` (the headline never names it)
+- a company called `Gen Zers`, from *"…, founded by two Gen Zers, raises $22M"*
+- `Crypto VC firm Paradigm`, `Seedcamp`, `Benchmark`, `Menlo Ventures` — funds
+
+This is EDGAR's pooled-investment-fund lesson again: the venture category covers
+the *industry*, not only the companies in it. Three structural rules, not a name
+list, get it to 69 clean records:
+
+1. **The name is the trailing proper-noun run** of what precedes the verb.
+   TechCrunch writes sentence-case prose with the descriptor first — `Amazon
+   fulfillment competitor Stord` → `Stord`, `Edtech platform` → nothing.
+2. **A clause closing on a comma right before the verb is grammar, not a name.**
+   Kills the `Gen Zers` class outright.
+3. **A fund raise is rejected**: `fund(s)`, `VC`, `venture capital/firm`, `LPs`,
+   `fresh capital`, `to back`, `to invest in`, or a name ending `Ventures` /
+   `Capital` / `Partners` / `Fund` / `Management`.
+
+**A valuation is not a round.** `raises $250M at $3B valuation` is a $250M round,
+and `Glean lands a $7.2B valuation` is no round at all. The parser takes the
+first money figure *not* followed by `valuation` / `valuing` / `ARR` / `revenue`;
+where that leaves nothing, the record needs a stated letter or it is dropped.
+
+Known residue, accepted and measured: 1 in 77 absorbs a one-word capitalised
+descriptor (`How Lucra`), because the first word of a headline is capitalised for
+being first. Lerer Hippeau (a fund, phrased with none of the signals above) also
+gets through. Both then fail slug resolution and are counted, rather than
+appearing wrongly on the site.
+
+## Two structural filters that did NOT work
+
+- **Requiring `category-startups`** (present on the class_list of company posts,
+  absent from the fund posts) looked like the clean EDGAR-style flag. Measured,
+  it drops 19 of 77 records to kill 4 VC firms — 15 real companies for 4 junk
+  rows. Rejected; the regex filter above is strictly better here.
+- **Matching `Ventures|Capital|Partners` anywhere in the title** rejects real
+  companies, because those words are in the *investors'* names —
+  `Infinity raises $15M from Touring Capital` is a real company. The firm-suffix
+  test only runs against the extracted company name.
+
+## TechCrunch throttles paging, intermittently and without a 429
+
+Walking 12 pages back-to-back: page 11 returned **403** and page 12 returned 200.
+Roughly one page in ten, no pattern, and the failure is a 403 rather than a 429
+or a `Retry-After`. So `techcrunch.download()` retries a page once and then keeps
+walking — stopping at the first failure silently halves the source, which is how
+a first attempt at this fixture came back with 7 of 11 posts and no error.
+
+## CB Insights: the whole unicorn board is one unpaywalled server-rendered page
+
+1,404 companies with valuation, date joined, country, city, industry and a
+profile link that resolves 200 — no key, no pagination, no JS. The industry
+column is the source's own, and SPEC's non-goals applied to it drop 553:
+Industrials 213, Consumer & Retail 209, Healthcare & Life Sciences 128 (plus 3
+rows of data noise: `Industrial`, `Health`, `West Palm Beach`). **851 kept.**
+Unfiltered, this source's largest contribution to a site about software jobs
+would be manufacturers and biotechs.
+
+Company profile slugs are not derivable from names — SingleStore files under
+`/company/memsql` — so the link is read from the row, never rebuilt.
+
+## Corpus after T1.4
+
+```
+2,054 -> 2,953 qualified   (+899 new, 0 demoted)
+qualified_by: stage 1,897 · amount 1,040 · letter 16
+contributing the winning record: YC 1,051 · EDGAR 985 · CB Insights 683 ·
+                                 Forbes 163 · TechCrunch 63 · FinSMEs 8
+```
+
+Each source alone, against a corpus rebuilt live from T1.1–T1.3: CB Insights
++784, Forbes +166, TechCrunch +53. Re-run with
+`.venv/bin/python learning-tests/t14_sources_live.py` — the baseline is rebuilt
+from the earlier sources rather than read from `data/corpus.json`, because once a
+build has run that file already contains all six and the comparison answers
+itself.
+
+The whole six-source corpus build is **44 seconds**. Nothing here is the
+expensive part of this project.
+
+`data/slugs.json` was **not** regenerated — unchanged from T1.2's and T1.3's
+reasoning (~3s/company against a corpus that grew another 44%), so
+`data/companies.json` is untouched and the site still renders T1.2's snapshot.
+Slug resolution is now the binding constraint against 2,953 companies, and every
+source that could widen the corpus has landed. **T2.2 is the next real gain.**

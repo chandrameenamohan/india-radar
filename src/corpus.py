@@ -20,7 +20,7 @@ from itertools import chain
 from pathlib import Path
 from typing import NamedTuple
 
-from src import edgar, yc
+from src import cbinsights, edgar, forbes, techcrunch, yc
 from src.finsmes import BASE, Record, parse
 from src.net import fetch
 
@@ -136,19 +136,37 @@ def main() -> None:
     page = fetch(f"{BASE}/category/usa")
     # 10MB in one call, so it wants more than net.get's page-sized default.
     directory = fetch(yc.API, timeout=120)
+    unicorns = fetch(cbinsights.UNICORNS, timeout=60)
     quarters = edgar.download()
-    if page is None or directory is None or not quarters:
-        dead = "FinSMEs" if page is None else "the YC directory" if directory is None else "EDGAR"
+    articles = techcrunch.download()
+    lists = forbes.download()
+    reachable = quarters and articles and lists
+    if page is None or directory is None or unicorns is None or not reachable:
         # All or nothing: a corpus missing a source is a corpus that shrank, and
         # a company that silently left it is indistinguishable from one that
         # stopped hiring. Better to keep yesterday's file and say why.
+        dead = ", ".join(
+            name
+            for name, got in (
+                ("FinSMEs", page),
+                ("the YC directory", directory),
+                ("CB Insights", unicorns),
+                ("EDGAR", quarters),
+                ("TechCrunch", articles),
+                ("Forbes", lists),
+            )
+            if not got
+        )
         raise SystemExit(f"{dead} unreachable — corpus.json left as it was, never truncated")
 
     records, unparsed = parse(page)
     corpus = merge(
         records,
         yc.parse(directory),
+        cbinsights.parse(unicorns),
         *(edgar.parse(quarter) for quarter in quarters),
+        *(techcrunch.parse(article) for article in articles),
+        *(forbes.parse(payload) for payload in lists),
     )
     write("data/corpus.json", corpus)
     print(

@@ -191,7 +191,37 @@ Out of scope: name normalisation for MCA matching (T4.4).
 > corpus that just doubled), so `data/companies.json` is untouched and the site
 > still renders T1.2's snapshot. Slug resolution is still the binding constraint.
 
-### T1.4 — TechCrunch / Forbes / CBI sources `in-progress` · *Phase 1* · parallel
+### T1.4 — TechCrunch / Forbes / CBI sources `done` · *Phase 1* · parallel
+> **Corpus 2,054 → 2,953 qualified (+899 new, 0 demoted).** Each alone, against a
+> corpus rebuilt live from T1.1–T1.3: CB Insights +784, Forbes +166, TechCrunch
+> +53. All four E1 sources are now in and the ≥1,000 line (relocated here by
+> T1.5, met by T1.2) stands at nearly three times it.
+>
+> **Neither Forbes nor CB Insights states a funding round, and that needed no new
+> rule.** Forbes' `funding: 830` is Abridge's *lifetime* total; CB Insights' `$965`
+> is what Anthropic is *worth*, and its "Date Joined" is the day it first crossed
+> $1B, not its latest round. Either in `amount` would report a round nobody raised
+> and hand SPEC feature 2's $5M proxy a figure it was not written for. So both
+> carry `stage="growth"` — T1.2's third rule, unchanged, doing what it was added
+> for. For Forbes the claim is gated on a total being stated at all, because the
+> zeroes are real: Forbes reports 0 for Midjourney, Surge AI, Hyperliquid and
+> Increase and nothing for Zoho — the bootstrapped companies, correctly — and
+> those five leave by the counted door.
+>
+> **A naive TechCrunch scrape builds a directory of VC firms.** Of 77 round
+> headlines in 1,000 venture posts, a plain `^(name) raises` yields four VC firms
+> raising their own funds (Accel, Lightspeed, CRV, SignalFire), a company called
+> `Edtech platform` and one called `Gen Zers`. Three structural rules fix it — the
+> name is the trailing proper-noun run, a clause closing on a comma before the verb
+> is grammar rather than a name, and a fund raise is rejected — and a valuation is
+> never read as a round (`raises $250M at $3B valuation` is $250M). EDGAR's lesson,
+> in prose form: the filters are the source.
+>
+> **Not done here, again:** `data/slugs.json` was not regenerated (~3s/company
+> against a corpus that grew another 44%), so `data/companies.json` is untouched
+> and the site still renders T1.2's snapshot. Every source that could widen the
+> corpus has now landed, so **slug resolution is the only remaining constraint on
+> site size — T2.2 is the next real gain.** See FINDINGS.
 ```
 Acceptance (observable) [each]:
   Emits records in the same schema as T1.1 and flows through T1.5's dedup without
