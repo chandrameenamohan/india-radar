@@ -152,7 +152,14 @@ Out of scope: cross-source conflict resolution beyond T1.5's dedup rule.
 > Measured baseline to beat: **~50%** from careers-page + guessing combined.
 > This rate, not funding coverage, is the ceiling on site size.
 
-### T2.1 — Careers-page slug discovery `in-progress` · *Phase 0* · after T1.5
+### T2.1 — Careers-page slug discovery `done` · *Phase 0* · after T1.5
+> Measured 5/7 (71%) resolving real companies by name, above the ~50% baseline —
+> `learning-tests/careers_slugs_live.py`. On the current 7-company FinSMEs corpus
+> it resolves 0/7, every one with a reason. That is the guessed domain failing,
+> not the extraction: freshly-funded companies don't map name → domain, and
+> FinSMEs carries no website field. T1.2 (YC) and T1.3 (EDGAR) do, and feeding
+> one in raises this without touching the regexes. See FINDINGS.
+
 ```
 Acceptance (observable):
   slugs.json maps company -> {ats, slug, method:"careers-page"}. Unresolved
