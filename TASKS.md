@@ -843,7 +843,7 @@ Out of scope:
     string "91", a phone country code in a country field. Corrupt. Never use.
 ```
 
-### T4.4 — MCA name matching `todo` · *Phase 2* · after T4.3
+### T4.4 — MCA name matching `in-progress` · *Phase 2* · after T4.3
 Join "Stripe" → "STRIPE INDIA PRIVATE LIMITED". No shared identifier exists.
 ```
 Acceptance (observable):
