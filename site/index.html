@@ -48,6 +48,11 @@
   .where { color: var(--muted); }
   .detail { padding: .25rem .25rem 1.1rem; font-size: .92rem; color: var(--muted); }
   .detail p { margin: .35rem 0; }
+  .roles { margin: .45rem 0; padding-left: 1.15rem; }
+  .roles li { margin: .2rem 0; }
+  .tag { margin-left: .5rem; padding: .05rem .45rem; border: 1px solid var(--line);
+         border-radius: 999px; font-size: .72rem; letter-spacing: .06em;
+         text-transform: uppercase; }
   a { color: var(--accent); }
   footer { margin-top: 2.5rem; padding-top: 1.25rem; border-top: 1px solid var(--line);
            font-size: .8rem; color: var(--muted); }
@@ -66,6 +71,13 @@
 <div id="controls">
   <label>Search<input id="q" type="search" placeholder="company name" autocomplete="off"></label>
   <label>Hiring city<select id="city"><option value="any">Anywhere in India</option></select></label>
+  <!-- SPEC feature 10's remote-only filter. T5.2 left it out deliberately: it
+       filters on a field no row carried until T4.1, and a control that can only
+       return nothing is worse than no control. -->
+  <label>Workplace<select id="remote">
+    <option value="any">Any</option>
+    <option value="remote">Remote India roles</option>
+  </select></label>
   <label>Raised<select id="bracket">
     <option value="any">Any amount</option>
     <option value="small">Under $10M</option>
@@ -99,7 +111,7 @@
 // The site is a renderer and nothing else: it reads the JSON the build wrote and
 // never recomputes a fact. The snapshot date in particular ships with the data,
 // because a date taken at render time would claim a freshness the JSON lacks.
-const SCHEMA = 3;                                  // src/build.py SCHEMA_VERSION
+const SCHEMA = 4;                                  // src/build.py SCHEMA_VERSION
 const DEFAULT_SRC = '../data/companies.json';
 
 // Test seam: e2e drives this same page over a fixture dataset (data/companies.json
@@ -142,9 +154,20 @@ const money = (c) => c.amount == null
   ? 'undisclosed'
   : `${c.currency === 'USD' ? '$' : (c.currency || '') + ' '}${+(c.amount / 1e6).toFixed(2)}M`;
 const round = (c) => c.round_letter ? `Series ${c.round_letter}` : 'round letter not stated';
-// No city named on any India role is a real state ("Remote - India"), not missing
-// data -- so it renders as a place, never as an empty cell.
-const where = (c) => c.cities.length ? c.cities.join(' · ') : 'India — city not stated';
+// How a role is worked, in the site's words rather than the board's.
+const WORKPLACE = { remote: 'remote', hybrid: 'hybrid', onsite: 'on-site' };
+const isRemote = (c) => c.roles.some((r) => r.workplace === 'remote');
+
+// No city named on any India role is a real state, not missing data, so it never
+// renders as an empty cell -- but the three ways of being placeless are NOT the
+// same and the row says which. "Remote - India" is a remote job; a board stating
+// only "India" has not said where and has not said remote, and inventing either
+// would be this site's own kind of lie. So the last fallback shows what the
+// board literally said. `locations` is schema-guaranteed non-empty, so there is
+// no fourth case.
+const where = (c) => c.cities.length ? c.cities.join(' · ')
+  : isRemote(c) ? 'Remote — India'
+  : [...new Set(c.roles.flatMap((r) => r.locations))].join(' · ');
 // A directory source knows a company is past Series A without knowing when it
 // raised (schema v3). That is an absent fact, so it reads as one -- and it can
 // never satisfy "funded in the last 90 days", which would be a claim.
@@ -158,7 +181,7 @@ const brackets = {
   large: (c) => c.amount != null && c.amount >= 5e7,
 };
 const sorts = {
-  reqs: (a, b) => b.india_roles - a.india_roles || a.name.localeCompare(b.name),
+  reqs: (a, b) => b.roles.length - a.roles.length || a.name.localeCompare(b.name),
   raised: (a, b) => (b.amount ?? -1) - (a.amount ?? -1),
   date: (a, b) => (b.date || '').localeCompare(a.date || ''),   // undated sort last
   name: (a, b) => a.name.localeCompare(b.name),
@@ -167,12 +190,26 @@ const sorts = {
 let companies = [];
 let snapshot = '';
 
+// One India role: what it's called, where it is, and how it's worked. The title
+// IS the apply link -- a separate "apply" button beside it would be two controls
+// for one destination.
+function roleItem(r) {
+  const item = el('li');
+  item.append(link(r.url, r.title), el('span', null, ` — ${r.locations.join(' · ')}`));
+  // Absent is absent: 822 of 1,112 published India roles state no workplace at
+  // all (Greenhouse never does), so a missing badge means "not stated", not
+  // "on-site".
+  if (WORKPLACE[r.workplace]) item.append(el('span', 'tag', WORKPLACE[r.workplace]));
+  return item;
+}
+
 function row(c) {
+  const reqs = c.roles.length;
   const details = el('details', 'row');
   const summary = el('summary');
   summary.append(
     el('span', 'name', c.name),
-    el('span', 'reqs', `${c.india_roles} India ${c.india_roles === 1 ? 'role' : 'roles'}`),
+    el('span', 'reqs', `${reqs} India ${reqs === 1 ? 'role' : 'roles'}`),
     el('span', 'raised', money(c)),
     el('span', 'where', where(c)),
   );
@@ -180,12 +217,15 @@ function row(c) {
   const body = el('div', 'detail');
   const funding = el('p', null, `Raised ${money(c)} · ${round(c)} · announced ${when(c)} · `);
   funding.append(link(c.source_url, 'funding source'));
-  const board = el('p', null, `${c.india_roles} open India ${
-    c.india_roles === 1 ? 'role' : 'roles'} in ${where(c)} · `);
+  const board = el('p', null, `${reqs} open India ${reqs === 1 ? 'role' : 'roles'} in ${
+    where(c)} · `);
   board.append(BOARDS[c.ats]
     ? link(BOARDS[c.ats] + c.slug, `${c.ats}/${c.slug}`)
     : el('span', null, `${c.ats}/${c.slug}`));
-  body.append(board, funding,
+
+  const roles = el('ul', 'roles');
+  roles.append(...c.roles.map(roleItem));
+  body.append(board, roles, funding,
     el('p', null, `Qualified as Series A or later by ${RULES[c.qualified_by]}.`));
 
   details.append(summary, body);
@@ -199,6 +239,7 @@ function render() {
   const shown = companies
     .filter((c) => c.name.toLowerCase().includes(q))
     .filter((c) => city === 'any' || c.cities.includes(city))
+    .filter((c) => $('#remote').value === 'any' || isRemote(c))
     .filter(brackets[$('#bracket').value])
     .filter((c) => recency === 'any' || (c.date != null && days(c.date, snapshot) <= +recency))
     .sort(sorts[$('#sort').value]);

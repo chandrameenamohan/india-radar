@@ -62,6 +62,42 @@ def is_india(location: str | None) -> bool:
     return bool(location and _INDIA.search(location))
 
 
+#: How a role is worked. The same three words the boards themselves use, so a
+#: stated `workplaceType` needs only `.lower()` to join this vocabulary — Ashby
+#: says `OnSite`/`Hybrid`/`Remote`, Lever says `onsite`/`hybrid` (T4.1 measured
+#: 173 India roles across both). Greenhouse states nothing at all, ever, which is
+#: why reading the location string has to work on its own.
+WORKPLACES = ("remote", "hybrid", "onsite")
+
+#: Ordered, and the order is the answer when a string says two things: `hybrid`
+#: is the most specific claim a company makes, so "Hybrid; In-Office" is hybrid
+#: rather than onsite. Measured vocabulary — `Remote - India`, `India (Remote)`,
+#: `Hybrid - India`, `India Office` are all real strings on live boards.
+_WORKPLACE = (
+    ("hybrid", re.compile(r"\bhybrid\b", re.IGNORECASE)),
+    ("remote", re.compile(r"\bremote\b|\bwork from home\b|\banywhere\b", re.IGNORECASE)),
+    ("onsite", re.compile(r"\bon-?site\b|\bin-office\b|\boffice\b", re.IGNORECASE)),
+)
+
+
+def workplace(location: str | None) -> str | None:
+    """How this location says the role is worked, or None if it doesn't say.
+
+    None is a real answer and the common one: 939 of 1,112 measured India roles
+    are Greenhouse's, and a Greenhouse board states the workplace nowhere — not
+    in the role, not in `metadata`. Defaulting those to `onsite` would invent the
+    most common answer for the largest provider, so absence stays absence.
+
+    `In-Office` is matched here on purpose, and does NOT contradict T3.4: that
+    trap was about the string being read as *India*, which it is not. Asked
+    instead how a role is worked, `In-Office` answers.
+    """
+    for name, pattern in _WORKPLACE:
+        if location and pattern.search(location):
+            return name
+    return None
+
+
 def cities(location: str | None) -> list[str]:
     """The India cities this location names, deduplicated and canonically spelled.
 

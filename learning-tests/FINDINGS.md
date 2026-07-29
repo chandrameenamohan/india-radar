@@ -1479,3 +1479,99 @@ is India-headquartered, so a high ratio is right and a low one would have meant
 the `allLocations` unwrap was wrong). `lever/moonpay` → 1 of 15, located
 `Remote - India` with no city, so the row carries `cities: []`. `lever/nium` → 13
 across four cities including Surat, which no other listing on this site reaches.
+
+---
+
+# Roles, apply links and the remote flag — measured during T4.1 (2026-07-29)
+
+`learning-tests/roles_live.py`, over the 116 companies the site lists today.
+
+## Every role states a title and a URL, and all 10 sampled apply URLs are 200
+
+1,112 India roles across all three providers: **1,112 carry a string title and a
+string URL**, no nulls, no missing keys. So the per-provider difference is a
+*spelling*, not a shape, and it lives in `build.PROBES` as three field names
+rather than as three functions:
+
+| provider | title | posting URL | apply-form URL | workplace |
+|---|---|---|---|---|
+| greenhouse | `title` | `absolute_url` | — | *never states one* |
+| ashby | `title` | `jobUrl` | `applyUrl` | `workplaceType` |
+| lever | `text` | `hostedUrl` | `applyUrl` | `workplaceType` |
+
+The **posting page** is what ships, not the deep link to the form: Greenhouse has
+no counterpart to `applyUrl`, and the posting carries the apply button anyway.
+T4.1's DoD check — 10 listed companies spread across all three providers, one
+India role each — returned **10/10 HTTP 200**. Two of them are worth noting:
+Airbnb's `absolute_url` is `careers.airbnb.com`, not a greenhouse.io domain (a
+board can be white-labelled onto the company's own host), and 6Sense's is
+`boards.greenhouse.io` where the site's own board link builds
+`job-boards.greenhouse.io`. Both resolve; a check that pattern-matched the host
+instead of fetching it would have failed on live data that is fine.
+
+## Ashby says `OnSite`, Lever says `onsite`, Greenhouse says nothing at all
+
+Measured over the same 1,112 India roles:
+
+```
+ashby       135 roles   workplaceType: OnSite 91, Hybrid 21, Remote 11, absent 12
+lever        38 roles   workplaceType: hybrid 20, onsite 18
+greenhouse  939 roles   workplaceType: ABSENT ON ALL 939
+```
+
+Two vocabularies that differ only in casing, so `.lower()` merges them and
+`india.WORKPLACES` is the same three words. **Greenhouse states this nowhere** —
+not on the role, not in `metadata` (null on Komodo Health and YugaByte; on Scale
+AI it holds `Domain` and `External Department` and nothing about workplace), and
+the description is dropped by `content=false` anyway. Since Greenhouse is 84% of
+the India roles, a location-string rule has to carry it, and `workplace` is
+`None` far more often than not. **That absence stays an absence**: defaulting it
+to `onsite` would invent the most common answer for the largest provider.
+
+Where a board states a workplace it is believed over the string, because it is
+the field that exists to answer the question. The two disagree on **2 of 173**
+roles that have both: a role located `India - Remote` that states `OnSite`, and
+one located `India Office` that states `hybrid`. That is a company contradicting
+itself, not a rule to pick.
+
+## The DoD's "a city OR an explicit remote flag" does not hold on live data
+
+Of the 116 listed companies, **28 name no India city at all**, and only 8 of
+those state remote by any route. The remaining **20 companies have a board that
+says literally `India`** and nothing else:
+
+```
+27  'Remote - India'      -> remote
+ 7  'India'               -> nothing stated
+ 4  'India (Remote)'      -> remote
+ 2  'Remote, India'       -> remote
+ 2  'India Remote'        -> remote
+ 1  'India, Remote'       -> remote
+ 1  'Remote - Anywhere, Remote - India'  -> remote
+ (and, with a city AND a remote claim: 2x 'Remote - Bangalore, India')
+```
+
+Komodo Health, Scale AI, Starburst, Tamara, Temporal and YugaByte are the shape
+of it: Greenhouse boards, location `India`, no `workplaceType`, no metadata, no
+second question to ask. **There is no honest way to give those companies a city
+or a remote flag.** The third clause of the same acceptance — "no company
+displays an empty location" — is satisfiable and is what protects the reader, so
+the site renders the three cases apart: cities where named, `Remote — India`
+where the board says remote, and otherwise **what the board literally said**.
+Flagged for the human rather than quietly reworded; see TASKS.md T4.1.
+
+`role_errors` enforces the deterministic half: a role's `locations` list must be
+non-empty. A role became an India role by naming a place in India, so a role with
+nothing to render a location from is a contradiction rather than a gap.
+
+## `In-Office` answers the workplace question it refuses the India one
+
+T3.4 deleted the `IN-` prefix rule because it matched `In-Office` and produced 47
+false-positive *India* roles. Asked instead how a role is worked, `In-Office` is
+a perfectly good answer — the same string, read for a different fact, and only
+one of the two readings is a claim about where the job is. Both rules now live in
+`src/india.py` beside each other and `test_in_office_answers_the_workplace_...`
+pins the distinction so a future reader doesn't "fix" one into the other.
+
+`hybrid` is matched before `remote` and `onsite`: `Hybrid; In-Office` states two
+things and the more specific one is the answer.

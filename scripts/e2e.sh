@@ -44,16 +44,30 @@ check() { # label expected actual
   if [ "$2" = "$3" ]; then echo "  ok    $1"; else echo "  FAIL  $1: expected [$2] got [$3]"; fail=1; fi
 }
 val() { $B js "$1" 2>/dev/null; }
+
+# Unique per run. The page is served with no Cache-Control, so the browser gives
+# it a heuristic freshness lifetime and re-serves the copy it already has for
+# this URL -- and the port is fixed, so "this URL" is the same one every run.
+# Measured: an e2e run validated an index.html from BEFORE the edit under test,
+# reporting "This page reads schema v3" while the file on disk said 4. Every
+# behavioural check below still passed against it, which is the dangerous part:
+# a green gate that proves nothing about the code just written.
+# `fetch(..., {cache:'no-cache'})` in the page covers the JSON, not the document
+# that fetches it (FINDINGS T1.2 is the same trap one level down).
+RUN="$$-$(date +%s)"
+bust() { case "$1" in *\?*) echo "$1&_=$RUN";; *) echo "$1?_=$RUN";; esac; }
+
 open_page() {
+  local url; url=$(bust "$1")
   $B network --clear >/dev/null 2>&1
   $B console --clear >/dev/null 2>&1
-  $B goto "$1" >/dev/null 2>&1
+  $B goto "$url" >/dev/null 2>&1
   $B wait --networkidle >/dev/null 2>&1
   # Two browse daemons on one machine split these commands across two browsers,
   # and the symptom is row diffs that look like site bugs. Name it instead.
   local at; at=$(val 'location.href')
-  if [ "$at" != "$1" ]; then
-    echo "  FAIL  browser is on [$at], not [$1]"
+  if [ "$at" != "$url" ]; then
+    echo "  FAIL  browser is on [$at], not [$url]"
     echo "        a second browse daemon is likely serving these commands; try: browse stop"
     fail=1
   fi
@@ -103,7 +117,7 @@ rows, snapshot = data['companies'], date.fromisoformat(data['snapshot'])
 # Days since the round was announced, or None where the source stated no date.
 age = lambda r: None if r['date'] is None else (snapshot - date.fromisoformat(r['date'])).days
 keep = [r for r in rows if $1]
-print('|'.join(r['name'] for r in sorted(keep, key=lambda r: ${2:-(-r['india_roles'], r['name'])})))"; }
+print('|'.join(r['name'] for r in sorted(keep, key=lambda r: ${2:-(-len(r['roles']), r['name'])})))"; }
 
 check "every company renders" "$(expect True)" "$(rows)"
 
@@ -118,6 +132,11 @@ check "clearing the city filter restores every company" "$(expect True)" "$(rows
 
 $B select '#sort' 'name' >/dev/null 2>&1
 check "sorting by name" "$(expect True "r['name']")" "$(rows)"
+# Put the sort back, as every filter below puts its own control back. Left on
+# `name`, it silently reorders the checks that follow, and `expect`'s default
+# key stops describing the page -- which is a failing check for the wrong
+# reason, the one kind that gets "fixed" by editing the expectation.
+$B select '#sort' 'reqs' >/dev/null 2>&1
 $B select '#bracket' 'large' >/dev/null 2>&1
 check "filtering by funding bracket" \
   "$(expect "r['amount'] is not None and r['amount'] >= 50_000_000")" "$(rows)"
@@ -145,11 +164,37 @@ detail() { val '(() => {
 check "a row starts closed" "closed hidden board+source" "$(detail)"
 $B click '.row:first-of-type summary' >/dev/null 2>&1
 check "clicking a row reveals its board and its funding source" "open shown board+source" "$(detail)"
-# T4.1 will add per-role links; what must hold already is that no listed company
-# renders an empty location. "Remote - India" names no city and must still read
-# as a place.
+
+# T4.1. Every India role is named and linked -- the row is the site's answer to
+# "who is hiring, for what, and where do I apply", and a count alone answers only
+# the first third. Derived from the dataset, so it stays true as the data grows.
+check "an opened row lists every India role, each linked to its own posting" \
+  "$($PY -c "
+import json
+c = json.load(open('tests/fixtures/companies-e2e.json'))['companies']
+first = sorted(c, key=lambda r: (-len(r['roles']), r['name']))[0]
+print('|'.join(f\"{r['title']} {r['url']}\" for r in first['roles']))")" \
+  "$(val '[...document.querySelector(".row[open] .roles").querySelectorAll("li")]
+       .map((li)=>`${li.querySelector("a").textContent} ${li.querySelector("a").href}`).join("|")')"
+
+# No listed company renders an empty location. The dataset holds all three ways
+# of being placeless: cities named, "Remote - India" (remote, no city), and a
+# board stating only "India" -- which is neither a city nor a remote claim, and
+# must still read as a place rather than as a blank cell.
 check "no listed company renders an empty location" "0" \
   "$(val '[...document.querySelectorAll(".where")].filter(n=>!n.textContent.trim()).length')"
+check "a company whose board states only \"India\" says so, rather than nothing" \
+  "India" \
+  "$(val '[...document.querySelectorAll(".row")].find((r)=>
+       r.querySelector(".name").textContent === "Zeta Placeless").querySelector(".where").textContent')"
+
+# SPEC feature 10's remote-only filter, now that a row carries the field. A
+# company hiring only on-site in Pune must vanish from it.
+$B select '#remote' 'remote' >/dev/null 2>&1
+check "the remote filter returns only companies with a remote India role" \
+  "$(expect "any(role['workplace'] == 'remote' for role in r['roles'])")" "$(rows)"
+$B select '#remote' 'any' >/dev/null 2>&1
+check "clearing the remote filter restores every company" "$(expect True)" "$(rows)"
 # The absences a directory source ships with (no amount, no letter, no date) must
 # read as English. A row that renders "announced null" is the degraded case
 # looking broken rather than deliberate.
@@ -182,7 +227,7 @@ console_clean "after interaction"
 echo "-- a dataset this page doesn't know how to read"
 open_page "$ROOT?data=../data/build-report.json"
 check "an unknown schema is refused, not rendered" "refused 0 rows" \
-  "$(val '(document.querySelector("#status").textContent.startsWith("This page reads schema v3")
+  "$(val '(document.querySelector("#status").textContent.startsWith("This page reads schema v4")
        ? "refused " : "rendered ") + document.querySelectorAll(".row").length + " rows"')"
 console_clean "unknown schema"
 

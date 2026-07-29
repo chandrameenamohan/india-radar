@@ -8,8 +8,8 @@ from pathlib import Path
 
 import pytest
 
-from src import ashby, greenhouse, lever
-from src.build import SCHEMA_VERSION, Provider, build, errors, website_counts, write
+from src import lever
+from src.build import PROBES, SCHEMA_VERSION, build, errors, website_counts, write
 from src.outcomes import Outcome
 from src.slugs import Slug
 from tests.test_ashby import board as ashby_board
@@ -44,14 +44,19 @@ CORPUS = [
 GREENHOUSE = Slug(ats="greenhouse", slug="acme", method="careers-page")
 
 
-def answering(**boards):
-    """A probe map answering with the given roles-or-outcome per slug."""
-    return {"greenhouse": Provider(lambda slug: boards[slug], greenhouse.locations)}
+def answering(ats="greenhouse", **boards):
+    """A probe map answering with the given roles-or-outcome per slug.
+
+    The real Provider with only its probe swapped: the field names it reads a
+    title, a URL and a workplace from are part of what these tests are checking,
+    so a hand-built stand-in would test a table nothing ships.
+    """
+    return {ats: PROBES[ats]._replace(probe=lambda slug: boards[slug])}
 
 
 def test_listed_row_carries_the_corpus_and_the_board():
-    """A listed row is the funding facts plus what the board proved — and the
-    count is India roles, not the board's size."""
+    """A listed row is the funding facts plus what the board proved — and what it
+    carries is the India roles themselves, not the board's size and not a count."""
     rows, outcomes = build(CORPUS[:1], {"Acme": GREENHOUSE}, answering(acme=BOARD))
 
     assert outcomes == {"Acme": Outcome.LISTED}
@@ -60,7 +65,23 @@ def test_listed_row_carries_the_corpus_and_the_board():
             "name": "Acme",
             "ats": "greenhouse",
             "slug": "acme",
-            "india_roles": 2,  # of four roles; Warsaw and In-Office are not India
+            # Two of the board's four roles; Warsaw and In-Office are not India.
+            # Greenhouse states no workplace on any role, ever — so `None` here
+            # is the measured normal case, not a fixture that forgot to say.
+            "roles": [
+                {
+                    "title": "Senior Software Engineer, Platform",
+                    "url": "https://job-boards.greenhouse.io/acme/jobs/5988684004",
+                    "locations": ["Bengaluru, India"],
+                    "workplace": None,
+                },
+                {
+                    "title": "Staff Engineer, Data",
+                    "url": "https://job-boards.greenhouse.io/acme/jobs/5988684006",
+                    "locations": ["Bengaluru, India; Mumbai, India"],
+                    "workplace": None,
+                },
+            ],
             "cities": ["Bengaluru", "Mumbai"],  # what the site's city filter offers
             "amount": 21000000,
             "currency": "USD",
@@ -88,12 +109,16 @@ def test_an_ashby_row_counts_roles_not_places():
     rows, outcomes = build(
         CORPUS[:1],
         {"Acme": Slug(ats="ashby", slug="acme", method="guess")},
-        {"ashby": Provider(lambda _: postings, ashby.locations)},
+        answering("ashby", acme=postings),
     )
 
     assert outcomes == {"Acme": Outcome.LISTED}
-    assert rows[0]["india_roles"] == 2  # two postings, not the three India strings
+    assert len(rows[0]["roles"]) == 2  # two postings, not the three India strings
     assert rows[0]["cities"] == ["Bengaluru", "Mumbai"]  # the Warsaw role is also Remote - India
+    # T4.1: the Warsaw posting is listed for its Remote - India half alone, and
+    # its Warsaw location does not come along — this is a site about India roles.
+    assert rows[0]["roles"][1]["locations"] == ["Remote - India"]
+    assert rows[0]["roles"][1]["workplace"] == "remote"
     assert errors(rows[0]) == []
 
 
@@ -106,15 +131,16 @@ def test_a_lever_empty_board_never_reaches_the_site():
     postings = json.loads(lever_board(("Bengaluru, Karnataka", "Pune, Maharashtra")))
     slugs = {"Acme": Slug(ats="lever", slug="acme", method="careers-page")}
 
-    read = {"lever": Provider(lambda _: postings, lever.locations)}
-    rows, outcomes = build(CORPUS[:1], slugs, read)
+    rows, outcomes = build(CORPUS[:1], slugs, answering("lever", acme=postings))
     assert outcomes == {"Acme": Outcome.LISTED}
-    assert rows[0]["india_roles"] == 1, "one posting open in two cities is one role"
+    assert len(rows[0]["roles"]) == 1, "one posting open in two cities is one role"
     assert rows[0]["cities"] == ["Bengaluru", "Pune"]
+    # T4.1: Lever states the workplace itself, in its own casing. The board's
+    # word wins over anything read out of the location string.
+    assert rows[0]["roles"][0]["workplace"] == "hybrid"
     assert errors(rows[0]) == []
 
-    empty = {"lever": Provider(lambda _: lever.parse("[]"), lever.locations)}
-    rows, outcomes = build(CORPUS[:1], slugs, empty)
+    rows, outcomes = build(CORPUS[:1], slugs, answering("lever", acme=lever.parse("[]")))
     assert outcomes == {"Acme": Outcome.EMPTY_BOARD_UNVERIFIED}
     assert rows == []
 
@@ -140,14 +166,34 @@ def test_a_directory_sourced_company_ships_without_a_round():
     assert rows[0]["date"] is None and rows[0]["qualified_by"] == "stage"
 
 
+ROLE = {
+    "title": "Staff Engineer",
+    "url": "https://job-boards.greenhouse.io/acme/jobs/1",
+    "locations": ["Bengaluru, India"],
+    "workplace": None,
+}
+
+
 @pytest.mark.parametrize(
     ("field", "value", "because"),
     [
-        ("india_roles", 0, "at least one India role"),  # the ambiguous zero
-        ("india_roles", "two", "not"),
+        ("roles", [], "at least one India role"),  # the ambiguous zero
+        ("roles", "two", "not"),
         ("name", None, "not"),
         ("qualified_by", "vibes", "qualified_by"),
         ("ats", "workday", "no probe"),
+        # T4.1's own, one per way a role can be unpublishable. The location list
+        # is the one that carries SPEC feature 7: a role that reached the site
+        # by naming a place in India cannot then have nowhere to render.
+        ("roles", [{**ROLE, "title": "  "}], "not a non-empty string"),
+        ("roles", [{**ROLE, "url": None}], "not an http(s) URL"),
+        ("roles", [{**ROLE, "url": "javascript:alert(1)"}], "not an http(s) URL"),
+        ("roles", [{**ROLE, "locations": []}], "not a non-empty list of place names"),
+        ("roles", [{**ROLE, "locations": "Bengaluru"}], "not a non-empty list of place names"),
+        ("roles", [{**ROLE, "workplace": "wfh"}], "workplace"),
+        ("roles", [{k: v for k, v in ROLE.items() if k != "url"}], "missing 'url'"),
+        ("roles", [{**ROLE, "salary": "20 LPA"}], "unknown field"),
+        ("roles", ["Staff Engineer"], "not a role"),
     ],
 )
 def test_schema_validation_rejects_bad_row(field, value, because):
@@ -174,7 +220,7 @@ def test_a_bad_row_fails_the_build_and_writes_nothing(tmp_path):
     out = tmp_path / "companies.json"
 
     with pytest.raises(ValueError, match="nothing written"):
-        write(out, [good, {**good, "name": "Zero", "india_roles": 0}])
+        write(out, [good, {**good, "name": "Zero", "roles": []}])
 
     assert not out.exists()
 
@@ -241,6 +287,18 @@ def test_the_e2e_dataset_is_a_file_this_build_could_have_written():
         row["date"] is None and row["amount"] is None and row["qualified_by"] == "stage"
         for row in shipped["companies"]
     ), "no undated stage-qualified case"
+    # T4.1's three, all measured on live boards and all rendered differently by
+    # the site: a role stating remote, a role stating nothing, and a company with
+    # no city AND no remote claim, whose location can only be what the board
+    # literally said. Losing the last one is how the e2e's "never an empty
+    # location" check would come back green with the blank cell restored.
+    roles = [role for row in shipped["companies"] for role in row["roles"]]
+    assert any(role["workplace"] == "remote" for role in roles), "no remote-filter positive case"
+    assert any(role["workplace"] is None for role in roles), "no workplace-unstated case"
+    assert any(
+        not row["cities"] and not any(role["workplace"] == "remote" for role in row["roles"])
+        for row in shipped["companies"]
+    ), "no placeless-and-not-remote case"
 
 
 def test_the_two_halves_of_slug_unresolved_are_counted_apart():

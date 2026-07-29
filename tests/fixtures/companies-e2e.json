@@ -1,12 +1,31 @@
 {
-  "schema_version": 3,
+  "schema_version": 4,
   "snapshot": "2026-07-28",
   "companies": [
     {
       "name": "Acme Cloud",
       "ats": "greenhouse",
       "slug": "acmecloud",
-      "india_roles": 12,
+      "roles": [
+        {
+          "title": "Staff Engineer, Platform",
+          "url": "https://job-boards.greenhouse.io/acmecloud/jobs/4001",
+          "locations": ["Bengaluru, India"],
+          "workplace": null
+        },
+        {
+          "title": "Product Designer",
+          "url": "https://job-boards.greenhouse.io/acmecloud/jobs/4002",
+          "locations": ["Pune, India"],
+          "workplace": "hybrid"
+        },
+        {
+          "title": "Engineering Manager",
+          "url": "https://job-boards.greenhouse.io/acmecloud/jobs/4003",
+          "locations": ["Bengaluru, India; Pune, India"],
+          "workplace": null
+        }
+      ],
       "cities": ["Bengaluru", "Pune"],
       "amount": 40000000,
       "currency": "USD",
@@ -19,7 +38,20 @@
       "name": "Beta Logistics",
       "ats": "greenhouse",
       "slug": "betalogistics",
-      "india_roles": 3,
+      "roles": [
+        {
+          "title": "Warehouse Systems Engineer",
+          "url": "https://job-boards.greenhouse.io/betalogistics/jobs/5001",
+          "locations": ["Pune, India"],
+          "workplace": "onsite"
+        },
+        {
+          "title": "Data Analyst",
+          "url": "https://job-boards.greenhouse.io/betalogistics/jobs/5002",
+          "locations": ["Pune, India"],
+          "workplace": null
+        }
+      ],
       "cities": ["Pune"],
       "amount": 6000000,
       "currency": "USD",
@@ -32,7 +64,32 @@
       "name": "Gamma Health",
       "ats": "greenhouse",
       "slug": "gammahealth",
-      "india_roles": 45,
+      "roles": [
+        {
+          "title": "Senior Backend Engineer",
+          "url": "https://job-boards.greenhouse.io/gammahealth/jobs/6001",
+          "locations": ["Bengaluru, India"],
+          "workplace": null
+        },
+        {
+          "title": "Clinical Data Lead",
+          "url": "https://job-boards.greenhouse.io/gammahealth/jobs/6002",
+          "locations": ["Hyderabad, India"],
+          "workplace": "onsite"
+        },
+        {
+          "title": "Site Reliability Engineer",
+          "url": "https://job-boards.greenhouse.io/gammahealth/jobs/6003",
+          "locations": ["Remote - Bangalore, India"],
+          "workplace": "remote"
+        },
+        {
+          "title": "Engineering Manager, Platform",
+          "url": "https://job-boards.greenhouse.io/gammahealth/jobs/6004",
+          "locations": ["Bengaluru, India", "Hyderabad, India"],
+          "workplace": "hybrid"
+        }
+      ],
       "cities": ["Bengaluru", "Hyderabad"],
       "amount": 120000000,
       "currency": "USD",
@@ -45,7 +102,14 @@
       "name": "Delta Remote",
       "ats": "greenhouse",
       "slug": "deltaremote",
-      "india_roles": 1,
+      "roles": [
+        {
+          "title": "Customer Support Lead",
+          "url": "https://job-boards.greenhouse.io/deltaremote/jobs/7001",
+          "locations": ["Remote - India"],
+          "workplace": "remote"
+        }
+      ],
       "cities": [],
       "amount": 9000000,
       "currency": "USD",
@@ -58,7 +122,20 @@
       "name": "Epsilon Directory",
       "ats": "greenhouse",
       "slug": "epsilondirectory",
-      "india_roles": 2,
+      "roles": [
+        {
+          "title": "Founding Engineer",
+          "url": "https://job-boards.greenhouse.io/epsilondirectory/jobs/8001",
+          "locations": ["Bengaluru, India"],
+          "workplace": null
+        },
+        {
+          "title": "Growth Marketer",
+          "url": "https://job-boards.greenhouse.io/epsilondirectory/jobs/8002",
+          "locations": ["Bengaluru, India"],
+          "workplace": "hybrid"
+        }
+      ],
       "cities": ["Bengaluru"],
       "amount": null,
       "currency": null,
@@ -66,6 +143,26 @@
       "date": null,
       "source_url": "https://www.ycombinator.com/companies/epsilon-directory",
       "qualified_by": "stage"
+    },
+    {
+      "name": "Zeta Placeless",
+      "ats": "greenhouse",
+      "slug": "zetaplaceless",
+      "roles": [
+        {
+          "title": "Solutions Consultant",
+          "url": "https://job-boards.greenhouse.io/zetaplaceless/jobs/9001",
+          "locations": ["India"],
+          "workplace": null
+        }
+      ],
+      "cities": [],
+      "amount": 15000000,
+      "currency": "USD",
+      "round_letter": "A",
+      "date": "2026-05-05",
+      "source_url": "https://www.finsmes.com/2026/05/zeta-placeless-raises-15m.html",
+      "qualified_by": "letter"
     }
   ]
 }
