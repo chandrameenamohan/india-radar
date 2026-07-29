@@ -20,7 +20,7 @@ from itertools import chain
 from pathlib import Path
 from typing import NamedTuple
 
-from src import cbinsights, edgar, forbes, techcrunch, websites, yc
+from src import cbinsights, edgar, forbes, software, techcrunch, websites, yc
 from src.finsmes import BASE, Record, parse
 from src.net import fetch
 
@@ -48,6 +48,8 @@ class Company(Record):
 class Corpus(NamedTuple):
     companies: list[Company]
     unqualified: list[str]  # no rule admits them, so excluded and counted
+    not_software: dict[str, str]  # outside SPEC's sectors — name -> the evidence
+    ambiguous: dict[str, str]  # kept, but flagged for a human — name -> the evidence
 
 
 def merge(*sources: Iterable[Record]) -> Corpus:
@@ -73,15 +75,27 @@ def merge(*sources: Iterable[Record]) -> Corpus:
 
     companies: list[Company] = []
     unqualified: list[str] = []
+    not_software: dict[str, str] = {}
+    ambiguous: dict[str, str] = {}
     for key in sorted(best):
         record = best[key].copy()
         record["website"] = addresses.get(key)
+        # Sector before funding, because it is the more fundamental question: a
+        # biotech's Series B is a real round we would still never list, so
+        # judging its funding first would file it under the wrong reason. Both
+        # doors are counted, so the totals hold either way.
+        verdict, evidence = software.classify(record["name"])
+        if verdict is software.Verdict.NOT_SOFTWARE:
+            not_software[record["name"]] = evidence
+            continue
+        if verdict is software.Verdict.AMBIGUOUS:
+            ambiguous[record["name"]] = evidence
         if rule := _qualified_by(record):
             companies.append(Company(**record, qualified_by=rule))
         else:
             unqualified.append(record["name"])
 
-    return Corpus(companies, sorted(unqualified))
+    return Corpus(companies, sorted(unqualified), not_software, ambiguous)
 
 
 def _strength(record: Record) -> tuple[bool, str, int, str, str, str]:
@@ -133,10 +147,20 @@ def _qualified_by(record: Record) -> str | None:
 
 
 def write(path: str | Path, corpus: Corpus) -> None:
-    """Emit corpus.json. The unqualified names ship with it — the count of what
-    we couldn't judge is part of the corpus, not a build-time aside."""
+    """Emit corpus.json. The excluded names ship with it — the count of what we
+    couldn't judge, and of what we judged out of scope, is part of the corpus
+    rather than a build-time aside. `ambiguous` is the read-me list: those
+    companies ARE in the corpus, named so a human can overrule the machine."""
     Path(path).write_text(
-        json.dumps({"companies": corpus.companies, "unqualified": corpus.unqualified}, indent=2)
+        json.dumps(
+            {
+                "companies": corpus.companies,
+                "unqualified": corpus.unqualified,
+                "not_software": corpus.not_software,
+                "ambiguous": corpus.ambiguous,
+            },
+            indent=2,
+        )
         + "\n"
     )
 
@@ -186,7 +210,10 @@ def main() -> None:
     write("data/corpus.json", corpus)
     print(
         f"corpus.json: {len(corpus.companies)} qualified, "
-        f"{len(corpus.unqualified)} unqualified, {len(unparsed)} unparsed headlines"
+        f"{len(corpus.unqualified)} unqualified, "
+        f"{len(corpus.not_software)} not software, "
+        f"{len(corpus.ambiguous)} ambiguous (kept), "
+        f"{len(unparsed)} unparsed headlines"
     )
     print(
         f"  websites: {stated + found} of {len(corpus.companies)} "
