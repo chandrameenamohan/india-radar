@@ -642,7 +642,7 @@ Out of scope: cities outside the list inside "IN-<City>" strings. Measured
 
 > Every enrichment must degrade to absent. None may fail a build.
 
-### T4.1 — Roles, apply links, city, remote flag `todo` · *Phase 2* · after T3.4
+### T4.1 — Roles, apply links, city, remote flag `in-progress` · *Phase 2* · after T3.4
 > **The city half is already built** — `src/india.py:cities` and the row's
 > `cities` field landed with T5.2, whose city filter could not exist without them.
 > What remains here: role titles, per-role apply URLs, the explicit remote flag,
