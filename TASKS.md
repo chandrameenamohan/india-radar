@@ -700,7 +700,7 @@ Checks:
 Out of scope: role deduplication across boards.
 ```
 
-### T4.2 — Salary benchmark `todo` · *Phase 2* · after T5.1 · parallel
+### T4.2 — Salary benchmark `in-progress` · *Phase 2* · after T5.1 · parallel
 ```
 Acceptance (observable):
   Where present, renders the figure with its observation date and a working source
