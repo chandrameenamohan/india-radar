@@ -242,7 +242,7 @@ Out of scope: cross-source conflict resolution beyond T1.5's dedup rule.
 > Measured baseline to beat: **~50%** from careers-page + guessing combined.
 > This rate, not funding coverage, is the ceiling on site size.
 
-### T1.6 — Resolve a website per company `todo` · *Phase 1* · after T1.5
+### T1.6 — Resolve a website per company `in-progress` · *Phase 1* · after T1.5
 > **Added 2026-07-29 after the pipeline ran end to end and listed ZERO companies.**
 > Root cause: corpus records carry `name`, `amount`, `date`, `source_url` — and no
 > company website. T2.1 discovers ATS slugs by fetching a company's careers page,
