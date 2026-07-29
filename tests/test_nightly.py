@@ -1,4 +1,4 @@
-"""The nightly refresh, dry-run — T6.2.
+"""The nightly refresh, dry-run — T6.2, and its tiering — T6.3.
 
 VERIFICATION.md keeps full-corpus builds out of the gate: a real run is ~14
 minutes against three live APIs. So these drive `scripts/nightly.sh` — the exact
@@ -8,9 +8,15 @@ build stubbed. The publish logic is what can break, and it is all here.
 The two halves of "commits fresh JSON *on success*" get a test each: a build
 that succeeds is published, and a build that fails or overruns leaves the
 previously published JSON byte-for-byte intact.
+
+The last two are T6.3's, and they pin a decision rather than a behaviour: every
+provider is refreshed on the one schedule whose date the site stamps. See the
+module docstring in `learning-tests/nightly_tiers_live.py` for the measurement
+that ruled out the weekly Ashby tier T6.3 was named for.
 """
 from __future__ import annotations
 
+import json
 import os
 import subprocess
 import time
@@ -18,8 +24,12 @@ from pathlib import Path
 
 import pytest
 
+from src.build import PROBES
+
 SCRIPT = Path("scripts/nightly.sh")
-WORKFLOW = Path(".github/workflows/nightly.yml")
+WORKFLOWS = Path(".github/workflows")
+WORKFLOW = WORKFLOWS / "nightly.yml"
+SLUGS = Path("data/slugs.json")
 PUBLISHED = "the last good build\n"
 
 
@@ -123,3 +133,40 @@ def test_workflow_runs_the_tested_script_nightly() -> None:
     assert "scripts/nightly.sh" in workflow
     assert 'cron: "0 20 * * *"' in workflow
     assert "contents: write" in workflow, "the job commits; without this it 403s"
+
+
+def test_the_nightly_probes_every_resolved_provider() -> None:
+    """T6.3. The nightly runs the build, so the build's providers ARE the refresh
+    tiering: an ATS the corpus holds slugs for but the build cannot probe is a
+    slice of the site refreshed never, while the footer stamps tonight's date on
+    it. That is how a weekly Ashby tier would have failed — 261 companies
+    republished from last week under today's snapshot date.
+    """
+    resolved = {entry["ats"] for entry in json.loads(SLUGS.read_text()).values()}
+
+    assert resolved <= set(PROBES), (
+        f"{resolved - set(PROBES)} resolved but unprobeable: those companies are "
+        "probe-failed for want of a probe, not for want of a readable board"
+    )
+
+
+def test_one_schedule_because_a_second_would_be_a_slower_tier() -> None:
+    """T6.3. Measured 2026-07-29 (`learning-tests/nightly_tiers_live.py`): the
+    whole Ashby corpus is 36.9s concurrently, 9% of the probe time and 5% of an
+    11-minute build. A weekly tier buys back 37 seconds a night and pays six days
+    of staleness for it.
+
+    So a second scheduled workflow is not a free addition to this repo — it is
+    the tiering decision being reversed. Whoever adds one is asserting a cost
+    that this measurement says does not exist, and should have to say so here.
+    """
+    # `*.y*ml` because GitHub reads both spellings, and a weekly tier landing as
+    # `weekly.yaml` would otherwise walk straight past this check.
+    scheduled = [
+        path.name for path in sorted(WORKFLOWS.glob("*.y*ml")) if "schedule:" in path.read_text()
+    ]
+
+    assert scheduled == ["nightly.yml"], (
+        f"{scheduled}: a second schedule refreshes part of the corpus less often "
+        "than the snapshot date the site publishes"
+    )

@@ -17,6 +17,15 @@
 # tiers would mean republishing one provider's rows from yesterday's file while
 # stamping today's snapshot on them, which is the kind of quiet lie this project
 # has invariants against. So: one nightly, everything fresh, 14 minutes.
+#
+# T6.3 re-measured the tiering rather than inheriting it — its whole DoD —
+# and did not build the weekly workflow it is named for. The Ashby corpus is
+# 36.9s whole, 9% of probe time; a weekly tier buys back 37 seconds a night and
+# pays six days of staleness. `learning-tests/nightly_tiers_live.py` is the run,
+# and two tests in tests/test_nightly.py hold the ruling: every provider probed,
+# exactly one schedule. Provider cost has also inverted AGAIN since T6.2 — the
+# per-call slowest is now Lever at 2.81s, and its 51 sequential slugs cost 2.4
+# min against Greenhouse's 422 at 3.8. Re-measure before tiering on any of this.
 name: nightly
 
 on:

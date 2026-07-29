@@ -1966,3 +1966,61 @@ the bound bites (exit 124, nothing committed) instead of hoping. `timeout` ships
 on ubuntu-latest and came from homebrew here; a bare macOS without coreutils has
 no `timeout` and the script will fail loudly on the first line rather than run
 unbounded, which is the right failure.
+
+---
+
+# The weekly tier that should not exist — measured during T6.3 (2026-07-29)
+
+## Ashby is 9% of the probe time. The tier it was named for buys 37 seconds.
+
+T6.3's entire DoD is "tiering is by measured cost — re-measured, not inherited",
+so the measurement is the deliverable and the workflow is what it ruled out.
+Measured against the live 744-slug corpus (`learning-tests/nightly_tiers_live.py`,
+logs/t63-tiers.txt):
+
+```
+ashby       261 slugs, WHOLE corpus, concurrent      36.9s     9%
+greenhouse  422 slugs, 0.54s/call sequential          3.8 min  56%
+lever        51 slugs, 2.81s/call sequential          2.4 min  35%
+                                                     --------
+all three probes                                      6.8 min
+```
+
+A weekly Ashby tier saves **37 seconds a night** and pays for it with six days of
+staleness on 261 companies — republished under a snapshot date claiming today.
+That is the same class of untruth as rendering an unchecked company as "not
+hiring", for a saving of 0.5% of the nightly. Not built.
+
+## The per-provider ordering has now inverted TWICE, and each time on real data
+
+FINDINGS §1: Ashby ~151s/call, the most expensive thing in the project, and the
+reason the nightly/weekly split was designed at all. T3.2: Ashby ~2s. T6.2:
+Greenhouse 1.2s/call and the new slow provider. Today: **Greenhouse 0.54s and
+Lever 2.81s** — Lever is now the per-call slowest by five times, and its 51 slugs
+cost within striking distance of Greenhouse's 422.
+
+Nothing in this repo changed between T6.2's measurement and this one; they are
+hours apart. So these are not stable numbers to design around, and the lesson
+generalises past tiering: **a schedule derived from a provider's latency is a
+schedule derived from someone else's weather.** The build fits in 3% of the job
+cap by an 8x margin. Spending that margin to avoid re-measuring is the trade
+worth making.
+
+Corollary for T6.4 and anyone tempted to parallelise: the obvious target is no
+longer Greenhouse. Lever at 2.81s x 51 sequential is 35% of probe time for 7% of
+the slugs. Measure before optimising — twice now, the answer was not the one
+everyone was quoting at each other.
+
+## The decision is pinned by tests, because a decision not to build has no diff
+
+Two checks in `tests/test_nightly.py`, both mutation-verified:
+
+- `test_the_nightly_probes_every_resolved_provider` — every ATS in `slugs.json`
+  has a probe in `build.PROBES`. Dropping Ashby from `PROBES` (a weekly tier in
+  its crudest form) turns it red. It also catches the unrelated case where T2.x
+  resolves a fourth ATS nothing can read.
+- `test_one_schedule_because_a_second_would_be_a_slower_tier` — exactly one
+  workflow carries a `schedule:`. Adding `weekly.yml` turns it red.
+
+The glob is `*.y*ml`: GitHub reads both spellings and a `weekly.yaml` would
+otherwise walk past the check.

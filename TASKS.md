@@ -1040,18 +1040,43 @@ Out of scope: a per-company diagnostic view.
 ## E6 · Automation
 
 ### T6.2 — Greenhouse nightly workflow `done` · *Phase 3* · after T3.1, T6.1
-### T6.3 — Ashby weekly workflow `in-progress` · *Phase 3* · after T3.2, T6.1
-> **Re-measure before building this.** T3.2 measured Ashby at ~2s/company, not
-> the ~151s the weekly tier was chosen for — the whole Ashby corpus is ~35s, and
-> the slow provider in a real build is now Greenhouse's 429 sequential calls.
-> Weekly may still be right (politeness, and the throttling was real once), but
-> it needs a reason that is true today.
+### T6.3 — Ashby weekly workflow `done` · *Phase 3* · after T3.2, T6.1
+> **Re-measured, and the weekly workflow was NOT built — that is the task's
+> deliverable, not a shortfall against it.** The DoD's own words are "tiering is
+> by measured cost — re-measured per T3.2, not inherited from FINDINGS §1", so
+> the measurement decides, and it says no. Against the live 744-slug corpus
+> today (`learning-tests/nightly_tiers_live.py`, logs/t63-tiers.txt):
 >
-> **T6.2 measured it and did not split** (FINDINGS "The nightly workflow"): the
-> whole build, every provider, is **11m26s** — 3% of the 6h cap — so
-> `.github/workflows/nightly.yml` already refreshes Ashby nightly. A separate
-> weekly tier would have to *reduce* Ashby's freshness to earn its keep. Decide
-> that on the measurement; do not build a second workflow by default.
+> ```
+> ashby       261 slugs, WHOLE corpus, concurrent      36.9s     9%
+> greenhouse  422 slugs, 0.54s/call sequential          3.8 min  56%
+> lever        51 slugs, 2.81s/call sequential          2.4 min  35%
+> ```
+>
+> A weekly Ashby tier buys back **37 seconds a night** and pays six days of
+> staleness on 261 companies, republished under a snapshot date claiming today.
+> That is the same class of untruth as rendering an unchecked company as "not
+> hiring", for 0.5% of the nightly. The acceptance is met by the nightly, which
+> already refreshes Ashby: inside the 6h cap by 30x, commits fresh JSON on
+> success, and its tiering is now justified by a cost that is true today.
+>
+> **A decision not to build has no diff, so two tests hold it instead** — both
+> mutation-verified. `test_the_nightly_probes_every_resolved_provider`: every ATS
+> in `slugs.json` has a probe in `build.PROBES` (dropping Ashby from `PROBES` —
+> the crudest form of a weekly tier — turns it red). `test_one_schedule_because_a
+> _second_would_be_a_slower_tier`: exactly one workflow carries a `schedule:`
+> (adding `weekly.yml` turns it red). Without these, the next iteration reads a
+> task named "Ashby weekly workflow" and builds one.
+>
+> **The provider ordering has now inverted TWICE, on real data, and the third
+> reading is hours after the second.** FINDINGS §1: Ashby ~151s/call, the reason
+> the split was designed. T3.2: Ashby ~2s. T6.2: Greenhouse the new slow one at
+> 1.2s/call. Today: **Greenhouse 0.54s, and Lever the per-call slowest at 2.81s**
+> — 35% of probe time for 7% of the slugs. Nothing in this repo changed between
+> those last two. **A schedule derived from a provider's latency is a schedule
+> derived from someone else's weather;** the build fits the job cap by 8x, and
+> spending that margin rather than re-measuring is the right trade. Corollary for
+> whoever optimises next: the target is Lever, not Greenhouse. See FINDINGS.
 
 ```
 Acceptance (observable) [each]:
