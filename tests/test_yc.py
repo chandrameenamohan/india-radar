@@ -66,9 +66,14 @@ def test_a_stated_round_outranks_a_stage_label():
         round_letter="F",
         source_url="https://www.finsmes.com/2026/07/razorpay-raises-375m.html",
         stage=None,
+        website=None,  # a FinSMEs headline states no address
     )
 
     for order in ([yc_row], [announced]), ([announced], [yc_row]):
         company, = merge(*order).companies
         assert company["qualified_by"] == "letter"
         assert company["round_letter"] == "F" and company["date"] == "2026-07-28"
+        # The round that lost still knew where the company lives (T1.6). A
+        # website is a fact about the company, not about the round, so losing
+        # on strength must not take the only address in the corpus with it.
+        assert company["website"] == "https://razorpay.com"

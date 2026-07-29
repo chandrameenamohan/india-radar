@@ -1049,3 +1049,97 @@ entry line must be preceded by a comment line.
 Fifth iteration. Unchanged from T2.2's note (~2.5–3h at 8 workers for 2,953
 companies), and overrides do not move it — they add four companies to a file
 nobody has rebuilt. `data/companies.json` still renders T1.2's snapshot.
+
+---
+
+# Company websites — measured during T1.6 (2026-07-29)
+
+Re-run with `.venv/bin/python learning-tests/websites_live.py`.
+
+## The corpus had no address, and that is why the site was empty
+
+Five iterations produced sources, dedup, slug discovery, guessing, an override
+file and an emitter, and a real build listed **zero** companies. Not one of those
+tasks was wrong. The gap was between them: a corpus record carried `name`,
+`amount`, `date` and `source_url`, and `slugs.resolve` needs a *place to look*.
+It guessed `<name>.com` — so half its failures (10 of 18, measured at T1.2) never
+reached a page at all, and T2.2's guessing then correctly refused to verify
+boards it had no name to check against.
+
+Every task's DoD passed. T2.1's ("resolve 7 real careers pages, rate >= 50%") was
+satisfiable with hardcoded URLs while the pipeline it fed resolved nothing.
+**A DoD that can be met without the thing working end to end is the failure mode
+this project's acceptance criteria exist to prevent, and this one didn't.**
+
+## Where a website can honestly be found
+
+| source | states one? | coverage |
+|---|---|---|
+| YC directory | yes, `website` | **6,056 / 6,093** |
+| Forbes lists | sometimes, `webSite` | 79 / 220 |
+| CB Insights | not on the board — on each company's profile page | 11/12 sampled |
+| FinSMEs | not in the listing — in the article | 11/12 |
+| TechCrunch | not in the API payload — in the article | 5/9 |
+| EDGAR | **no**, and there is no URL column of any kind | 0 |
+
+## Two structural shapes, and nothing else is the company's site
+
+Measured over 33 live pages, a publisher links the company it covers in exactly
+two ways:
+
+```
+<a href="https://weaveos.com/">Weave</a>          the company's NAME is the text
+<a href="https://anthropic.com">anthropic.com</a> the DOMAIN is its own text
+```
+
+FinSMEs and TechCrunch use the first, CB Insights the second. Both are read, name
+first. **A page offering two different hosts yields None** — zero of the 33 did,
+but the entire point of this field is that `slugs.py` stops guessing, and a coin
+flip between two domains is the same guess wearing a source's clothes.
+
+The publisher's own links are excluded, which matters more than it sounds: a
+FinSMEs tag page is literally `<a href="finsmes.com/tag/weave">Weave</a>`, a
+perfect match under the first rule.
+
+## A website is a fact about the company, not about the round
+
+`corpus.merge` keeps the strongest round per company and discards the rest. YC
+states an address for a company whose strongest round came from EDGAR, which
+states none — so the merge would have thrown away the only address in the corpus
+in the act of choosing the better round. Websites are therefore collected across
+*all* a company's records and reattached to the winner. Same class of bug as
+T1.3's `_strength` demotion: **the merge must not lose one source's evidence
+because another source's record won.**
+
+## The lift from a real website is smaller than expected, and still decisive
+
+30 random YC Growth companies, careers-page discovery run twice — once on the
+guessed domain, once on the stated website:
+
+```
+guessed domain  5/30      real website  6/30
+```
+
+One company. That is because a YC company's name usually *is* its domain
+(`triomics` → triomics.com), so the guess was already right. The number that
+matters is the corpus this now runs against, where EDGAR and CB Insights names
+are `Alpen High Performance Products` (thinkalpen.com) and `Mystery.org`
+(mystery.org, never mysteryorg.com) — and Mystery.org is exactly the one company
+in the 30 that the website resolved and the guess did not.
+
+**So the guessed domain stays.** It resolves 5 companies the corpus would
+otherwise lose, and dropping it in favour of "real websites only" would have been
+a net loss dressed up as rigour.
+
+## `no-careers-page` was two different failures wearing one name
+
+Split, because they have different fixes and only one of them is this task's:
+
+```
+no-website        we never had an address — a corpus problem
+no-careers-page   we had one and reached nothing — a retry or a JS-rendered site
+no-board-link     we read their page and it named no board — T2.2's remit
+```
+
+`build-report.json` now carries the same split under `websites`, so the next
+bottleneck is visible rather than inferred.

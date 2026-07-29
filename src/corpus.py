@@ -20,7 +20,7 @@ from itertools import chain
 from pathlib import Path
 from typing import NamedTuple
 
-from src import cbinsights, edgar, forbes, techcrunch, yc
+from src import cbinsights, edgar, forbes, techcrunch, websites, yc
 from src.finsmes import BASE, Record, parse
 from src.net import fetch
 
@@ -58,15 +58,24 @@ def merge(*sources: Iterable[Record]) -> Corpus:
     (or the records within them) yields an identical corpus.
     """
     best: dict[str, Record] = {}
+    addresses: dict[str, str] = {}
     for record in chain.from_iterable(sources):
         key = _NOT_ALNUM.sub("", record["name"].casefold())
         if key not in best or _strength(record) > _strength(best[key]):
             best[key] = record
+        # A website belongs to the company, not to the round, so it survives its
+        # record losing on strength: YC states an address for a company whose
+        # strongest round came from EDGAR, which states none at all. Two sources
+        # stating different addresses resolve by max() — arbitrary, but the same
+        # arbitrary answer whatever order the sources arrive in.
+        if website := record["website"]:
+            addresses[key] = max(addresses.get(key, ""), website)
 
     companies: list[Company] = []
     unqualified: list[str] = []
     for key in sorted(best):
-        record = best[key]
+        record = best[key].copy()
+        record["website"] = addresses.get(key)
         if rule := _qualified_by(record):
             companies.append(Company(**record, qualified_by=rule))
         else:
@@ -168,10 +177,20 @@ def main() -> None:
         *(techcrunch.parse(article) for article in articles),
         *(forbes.parse(payload) for payload in lists),
     )
+    # After the merge, not before: only ~3,000 companies survive dedup, and the
+    # article read is a fetch each. Doing it per record would pay for every
+    # duplicate round and every company no rule qualifies.
+    stated = sum(1 for company in corpus.companies if company["website"])
+    found = websites.fill(corpus.companies)
+
     write("data/corpus.json", corpus)
     print(
         f"corpus.json: {len(corpus.companies)} qualified, "
         f"{len(corpus.unqualified)} unqualified, {len(unparsed)} unparsed headlines"
+    )
+    print(
+        f"  websites: {stated + found} of {len(corpus.companies)} "
+        f"({stated} stated by a source, {found} read off an article)"
     )
 
 

@@ -19,6 +19,7 @@ from __future__ import annotations
 import json
 
 from src.finsmes import Record
+from src.websites import site
 
 #: One GET, ~10MB, the whole directory. There is no per-stage bucket to fetch a
 #: tenth of; `all.json` is the smallest URL that carries `stage`.
@@ -46,6 +47,9 @@ def parse(payload: str) -> list[Record]:
             round_letter=None,
             source_url=company["url"],
             stage=(company.get("stage") or "").casefold() or None,
+            # Stated on 6,056 of 6,093 companies, and the reason T1.6 exists:
+            # no other source covers this many companies with an address.
+            website=site(company["website"]) if company.get("website") else None,
         )
         for company in json.loads(payload)
     ]

@@ -35,6 +35,7 @@ class Record(TypedDict):
     round_letter: str | None
     source_url: str
     stage: str | None  # a source's own funding-stage label, e.g. YC's "growth"
+    website: str | None  # the company's own address; None until T1.6 finds one
 
 
 class ParseResult(NamedTuple):
@@ -88,6 +89,7 @@ def parse(page: str) -> ParseResult:
                 round_letter=series["letter"] if series else None,
                 source_url=entry["url"],
                 stage=None,  # a headline announces a round, never a stage
+                website=None,  # stated in the article, not the listing — websites.fill
             )
         )
 

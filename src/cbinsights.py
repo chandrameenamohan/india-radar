@@ -63,6 +63,7 @@ def parse(page: str) -> list[Record]:
             round_letter=None,
             source_url=row["url"],
             stage="growth",  # a $1B valuation is past Series A by any reading
+            website=None,  # the profile page links it; the board doesn't — websites.fill
         )
         for row in _ROW.finditer(page)
         if row["industry"] in SOFTWARE

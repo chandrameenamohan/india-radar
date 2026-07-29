@@ -158,6 +158,26 @@ def build(
     return rows, outcomes
 
 
+def website_counts(
+    corpus: Iterable[Mapping[str, Any]], outcomes: Mapping[str, Outcome]
+) -> dict[str, int]:
+    """How many companies we have an address for, and how the ones we found no
+    board for split by whether we had one.
+
+    Both halves land on `slug-unresolved`, and until T1.6 that hid which
+    bottleneck the site was actually up against: a company whose own careers page
+    named no board wants a better slug method, while a company we never had an
+    address for wants a better website source. Counting them apart is what makes
+    the next task's target visible rather than inferred.
+    """
+    unresolved = [c for c in corpus if outcomes.get(c["name"]) is Outcome.SLUG_UNRESOLVED]
+    return {
+        "with_website": sum(1 for c in corpus if c.get("website")),
+        "slug_unresolved_with_website": sum(1 for c in unresolved if c.get("website")),
+        "slug_unresolved_without_website": sum(1 for c in unresolved if not c.get("website")),
+    }
+
+
 def write(path: str | Path, rows: list[Row], snapshot: str | None = None) -> None:
     """Emit companies.json — or refuse to, loudly, and leave the last good file
     where it is. The snapshot date ships with the data because the site has to
@@ -205,6 +225,7 @@ def main(argv: list[str]) -> None:
     write(out, rows)
 
     built = report([c["name"] for c in corpus], outcomes)
+    built["websites"] = website_counts(corpus, outcomes)
     if not smoke:
         write_report("data/build-report.json", built)
 
@@ -212,6 +233,8 @@ def main(argv: list[str]) -> None:
     for outcome, count in sorted(built["counts"].items()):
         if count:
             print(f"  {count:4d}  {outcome}")
+    for label, count in built["websites"].items():
+        print(f"  {count:4d}  {label}")
 
 
 if __name__ == "__main__":

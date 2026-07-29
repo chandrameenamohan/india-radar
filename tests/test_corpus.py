@@ -23,6 +23,7 @@ def _record(
     letter: str | None = None,
     amount: int | None = None,
     stage: str | None = None,
+    website: str | None = None,
 ) -> Record:
     return Record(
         name=name,
@@ -32,6 +33,7 @@ def _record(
         round_letter=letter,
         source_url=f"https://www.finsmes.com/2026/07/{name.casefold()}-{letter}-{amount}.html",
         stage=stage,
+        website=website,
     )
 
 

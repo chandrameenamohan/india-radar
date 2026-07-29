@@ -129,6 +129,7 @@ def test_a_small_recent_round_never_disqualifies_a_company_another_source_qualif
         round_letter=None,
         source_url="https://www.sec.gov/Archives/edgar/data/1/1/1-index.htm",
         stage=None,
+        website=None,  # Form D states no URL of any kind
     )]
 
     for order in (yc_row, small), (small, yc_row):

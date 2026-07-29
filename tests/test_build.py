@@ -8,7 +8,7 @@ from pathlib import Path
 
 import pytest
 
-from src.build import SCHEMA_VERSION, build, errors, write
+from src.build import SCHEMA_VERSION, build, errors, website_counts, write
 from src.outcomes import Outcome
 from src.slugs import Slug
 from tests.test_greenhouse import board
@@ -192,6 +192,27 @@ def test_the_e2e_dataset_is_a_file_this_build_could_have_written():
         row["date"] is None and row["amount"] is None and row["qualified_by"] == "stage"
         for row in shipped["companies"]
     ), "no undated stage-qualified case"
+
+
+def test_the_two_halves_of_slug_unresolved_are_counted_apart():
+    """T1.6: "we read their careers page and found no board" and "we never had an
+    address to read" both land on `slug-unresolved`, and they have different
+    fixes — a better slug method against one, a better website source against the
+    other. The build report has to say which is costing the site companies, or
+    the next task is chosen by guesswork."""
+    corpus = [
+        {**CORPUS[0], "name": "Acme", "website": "https://acme.example"},
+        {**CORPUS[0], "name": "Addressed", "website": "https://addressed.example"},
+        {**CORPUS[0], "name": "Nameless Inc", "website": None},
+    ]
+
+    _, outcomes = build(corpus, {"Acme": GREENHOUSE}, answering(acme=BOARD))
+
+    assert website_counts(corpus, outcomes) == {
+        "with_website": 2,
+        "slug_unresolved_with_website": 1,  # Addressed: a board we couldn't find
+        "slug_unresolved_without_website": 1,  # Nameless Inc: nowhere to look
+    }
 
 
 def test_no_india_roles_is_a_finding_not_a_gap():

@@ -120,6 +120,7 @@ def parse(payload: str) -> list[Record]:
                 round_letter=series["letter"] if series else None,
                 source_url=post["link"],
                 stage=None,  # a headline announces a round, never a stage
+                website=None,  # stated in the article body — websites.fill reads it
             )
         )
     return records

@@ -131,6 +131,10 @@ def parse(blob: bytes) -> list[Record]:
                 round_letter=None,  # Form D states a dollar figure, never a letter
                 source_url=_filing_url(issuer["CIK"], issuer["ACCESSIONNUMBER"]),
                 stage=None,
+                # Form D states a street address and a phone number and no URL of
+                # any kind (measured, T1.3), so an EDGAR company legitimately ends
+                # the build with no website rather than a guessed one.
+                website=None,
             )
         )
     return records

@@ -26,6 +26,7 @@ from typing import Any
 
 from src.finsmes import Record
 from src.net import fetch
+from src.websites import site
 
 API = "https://www.forbes.com/forbesapi/org/{name}/{year}/position/true.json?limit=200"
 
@@ -71,6 +72,9 @@ def parse(payload: str) -> list[Record]:
             round_letter=None,
             source_url=f"https://www.forbes.com/companies/{row['uri']}/",
             stage="growth" if row.get("funding") else None,
+            # Stated on 79 of 220 rows and absent on the rest — a Forbes list
+            # entry is editorial, so the field is optional in a way YC's isn't.
+            website=site(row["webSite"]) if row.get("webSite") else None,
         )
         for row in _rows(payload)
     ]

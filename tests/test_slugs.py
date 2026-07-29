@@ -96,26 +96,34 @@ def test_real_js_rendered_page_finds_no_board():
 
 
 @pytest.mark.parametrize(
-    ("pages", "reason"),
+    ("company", "pages", "reason"),
     [
-        ({}, "no-careers-page"),
-        ({"careers": ANTHROPIC}, "no-board-link"),
+        ("Acme", {}, "no-website"),
+        ({"name": "Acme", "website": "https://acme.example"}, {}, "no-careers-page"),
+        ({"name": "Acme", "website": "https://acme.example"}, {"careers": ANTHROPIC},
+         "no-board-link"),
         (
+            "Acme",
             {"careers": page("boards.greenhouse.io/one jobs.ashbyhq.com/two")},
             "ambiguous-board: ashby/two, greenhouse/one",
         ),
     ],
 )
-def test_unresolved_has_reason(monkeypatch, boards, pages, reason):
-    """Three different kinds of not-knowing, and they must not collapse into one.
-    "we never reached a page" and "we read the page and it linked no board" send
-    a company down different recovery paths — the second is T2.2's whole remit."""
+def test_unresolved_has_reason(monkeypatch, boards, company, pages, reason):
+    """Four different kinds of not-knowing, and they must not collapse into one.
+
+    "we had no address for them at all", "we had one and never reached a page"
+    and "we read the page and it linked no board" send a company down three
+    different recovery paths — a better website source, a retry, and T2.2's
+    guessing. T1.6 exists because the first two were one reason and the site
+    could not say which of them was actually costing it companies.
+    """
     monkeypatch.setattr(
         "src.slugs.fetch",
         lambda url, timeout=45: next((p for k, p in pages.items() if k in url), None),
     )
 
-    resolution = resolve_all(["Acme"])
+    resolution = resolve_all([company])
 
     assert resolution.resolved == {}
     assert resolution.unresolved == {"Acme": reason}
@@ -150,7 +158,7 @@ def test_parked_domain_is_not_a_careers_page(monkeypatch):
     )
     monkeypatch.setattr("src.slugs.fetch", lambda url, timeout=45: stub)
 
-    assert resolve("Antares Labs") == "no-careers-page"
+    assert resolve("Antares Labs", "https://antareslabs.com") == "no-careers-page"
 
 
 def test_careers_urls_from_name():
@@ -159,6 +167,16 @@ def test_careers_urls_from_name():
     assert careers_urls("Antares Labs") == [
         "https://antareslabs.com/careers",
         "https://antareslabs.com/jobs",
+    ]
+
+
+def test_a_stated_website_is_used_instead_of_the_guessed_domain():
+    """T1.6's payoff: a company whose name doesn't map onto its domain was
+    invisible to careers-page discovery, because the only address it had was one
+    it made up. Mystery.org files under mystery.org, never mysteryorg.com."""
+    assert careers_urls("Mystery.org", "https://mystery.org/") == [
+        "https://mystery.org/careers",
+        "https://mystery.org/jobs",
     ]
 
 
@@ -263,8 +281,9 @@ def test_method_recorded(boards, monkeypatch):
         "method": "guess",
     }
     assert resolution.methods == {"careers-page": 1, "guess": 1}
-    # Brave Care stayed out, and kept the reason careers-page discovery gave it.
-    assert resolution.unresolved == {"Brave Care": "no-careers-page"}
+    # Brave Care stayed out, and kept the reason careers-page discovery gave it —
+    # here the corpus knows no address for it, so nothing was ever read.
+    assert resolution.unresolved == {"Brave Care": "no-website"}
 
 
 def test_guessing_strictly_raises_the_combined_rate(boards, monkeypatch):

@@ -38,7 +38,7 @@ from collections import Counter
 from collections.abc import Iterable, Mapping
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
-from typing import NamedTuple, TypedDict
+from typing import Any, NamedTuple, TypedDict
 
 from src.greenhouse import board_name
 from src.greenhouse import probe as greenhouse_probe
@@ -63,13 +63,11 @@ BOARDS = {
     "ashby": re.compile(r"jobs\.ashbyhq\.com/([a-z0-9_.-]+)", re.I),
 }
 
-#: ponytail: the domain is guessed from the name, because nothing feeds one in
-#: yet — FinSMEs headlines have no website link. Ceiling: this only finds
-#: companies whose name maps cleanly onto their domain. Upgrade path: YC's
-#: payload carries a real website on 1,072 of 1,075 Growth companies; feed it in
-#: here and these two lines go away. EDGAR does NOT — measured in T1.3, Form D
-#: gives a street address and a phone number and no URL. The tail is T2.3's
-#: override file.
+#: The two paths a careers page actually lives at, tried under the company's own
+#: website (T1.6) or, for a company that states none, under a domain guessed from
+#: its name. The guess stays because it earns its keep — measured over 30 corpus
+#: companies it resolves 5, one short of what their real websites resolve — but a
+#: company whose name doesn't map onto its domain was invisible without T1.6.
 #: Both paths are load-bearing: corebiomedicine.com/careers 404s while /jobs is
 #: the real listing, and anthropic.com/jobs redirects to the listing its
 #: /careers landing page doesn't link.
@@ -153,9 +151,11 @@ def key(name: str) -> str:
     return _NOT_ALNUM.sub("", name.casefold())
 
 
-def careers_urls(name: str) -> list[str]:
-    """Candidate careers-page URLs for a company name."""
-    return [f"https://{key(name)}.com/{path}" for path in _PATHS]
+def careers_urls(name: str, website: str | None = None) -> list[str]:
+    """Candidate careers-page URLs: the company's own site when it stated one,
+    and a domain guessed from its name when it didn't."""
+    base = website.rstrip("/") if website else f"https://{key(name)}.com"
+    return [f"{base}/{path}" for path in _PATHS]
 
 
 def states_company(board: str | None, name: str) -> bool:
@@ -197,15 +197,19 @@ def guess(name: str) -> Slug | None:
     return None
 
 
-def resolve(name: str) -> Slug | str:
+def resolve(name: str, website: str | None = None) -> Slug | str:
     """Resolve one company to a Slug, or to the reason it stayed unresolved."""
     pages = [
         page
-        for url in careers_urls(name)
+        for url in careers_urls(name, website)
         if (page := fetch(url, timeout=30)) and len(page) >= _MIN_PAGE
     ]
     if not pages:
-        return "no-careers-page"
+        # Two different not-knowings, and T1.6 exists because they were one:
+        # a company whose own site we read is a slug problem, a company we only
+        # ever had a guessed domain for is a corpus problem, and only the second
+        # is fixed by finding more websites.
+        return "no-careers-page" if website else "no-website"
 
     boards = sorted({board for page in pages for board in find_boards(page)})
     if not boards:
@@ -284,29 +288,33 @@ def load_overrides(path: str | Path = OVERRIDES) -> dict[str, Slug]:
 
 
 def resolve_all(
-    names: Iterable[str],
-    workers: int = 8,
+    companies: Iterable[str | Mapping[str, Any]],
+    workers: int = 16,
     overrides: Mapping[str, Slug] | None = None,
 ) -> Resolution:
     """Resolve a corpus: take the human's answer, read careers pages for the
     rest, then guess what that missed.
 
+    Takes corpus records, or bare names for a caller that has nothing else to
+    say about a company — a name alone still resolves, on a guessed domain.
+
     Concurrent because it is entirely network wait — two sequential fetches per
     company would put a 1,000-company corpus in hours.
 
-    ponytail: 8 workers, each hitting a different company's own domain, so
-    there is no single host to be rude to. Raise it if this ever dominates a run.
+    ponytail: 16 workers, each hitting a different company's own domain, so
+    there is no single host to be rude to. It was 8 while the corpus was 1,000;
+    at 2,953 companies this step is the run, and 16 halves an hour of it.
     """
-    names = list(names)
+    sites = dict(_named(company) for company in companies)
     overrides = overrides or {}
 
     # Precedence is structural rather than a comparison: an overridden company
     # never enters the automatic pass at all, so there is no answer to prefer.
-    resolved: dict[str, Slug] = {name: overrides[name] for name in names if name in overrides}
-    automatic = [name for name in names if name not in resolved]
+    resolved: dict[str, Slug] = {name: overrides[name] for name in sites if name in overrides}
+    automatic = [name for name in sites if name not in resolved]
 
     with ThreadPoolExecutor(max_workers=workers) as pool:
-        outcomes = pool.map(resolve, automatic)
+        outcomes = pool.map(lambda name: resolve(name, sites[name]), automatic)
 
     unresolved: dict[str, str] = {}
     for name, outcome in zip(automatic, outcomes, strict=True):
@@ -329,6 +337,13 @@ def resolve_all(
     return Resolution(resolved, unresolved)
 
 
+def _named(company: str | Mapping[str, Any]) -> tuple[str, str | None]:
+    """(name, website) from either a corpus record or a bare name."""
+    if isinstance(company, str):
+        return company, None
+    return company["name"], company.get("website")
+
+
 def write(directory: str | Path, resolution: Resolution) -> None:
     """Emit slugs.json and unresolved.json side by side. They are two halves of
     one answer, and shipping one without the other invites reading a short
@@ -339,12 +354,13 @@ def write(directory: str | Path, resolution: Resolution) -> None:
 
 
 def main() -> None:
-    corpus = json.loads(Path("data/corpus.json").read_text())
-    names = [company["name"] for company in corpus["companies"]]
+    companies = json.loads(Path("data/corpus.json").read_text())["companies"]
+    stated = sum(1 for company in companies if company.get("website"))
 
-    resolution = resolve_all(names, overrides=load_overrides())
+    resolution = resolve_all(companies, overrides=load_overrides())
     write("data", resolution)
-    print(f"slugs.json: {len(resolution.resolved)}/{len(names)} resolved ({resolution.rate:.0%})")
+    print(f"slugs.json: {len(resolution.resolved)}/{len(companies)} resolved "
+          f"({resolution.rate:.0%}), {stated} with a stated website")
     for method, count in sorted(resolution.methods.items()):
         print(f"  resolved   {count:3d}  by {method}")
     reasons = Counter(resolution.unresolved.values())
