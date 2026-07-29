@@ -18,7 +18,7 @@ Decomposition of `SPEC.md`. Markdown, not beads (bd is broken for this project).
 
 ## The shape of it
 
-Seven epics, 25 tasks. That is more than fits in one head at a glance — so the
+Seven epics, 27 tasks. That is more than fits in one head at a glance — so the
 sequencing below is deliberately **thin-slice first**: Phase 0 builds one narrow
 end-to-end path (one funding source → Greenhouse only → live site). Everything
 after widens a working system rather than assembling an unproven one.
@@ -241,6 +241,64 @@ Out of scope: cross-source conflict resolution beyond T1.5's dedup rule.
 
 > Measured baseline to beat: **~50%** from careers-page + guessing combined.
 > This rate, not funding coverage, is the ceiling on site size.
+
+### T1.6 — Resolve a website per company `todo` · *Phase 1* · after T1.5
+> **Added 2026-07-29 after the pipeline ran end to end and listed ZERO companies.**
+> Root cause: corpus records carry `name`, `amount`, `date`, `source_url` — and no
+> company website. T2.1 discovers ATS slugs by fetching a company's careers page,
+> so it had nothing to fetch and resolved 0 of 1,081. T2.2's name-guessing then
+> resolved 0 verified, correctly, because "a board that answers is not proof of
+> whose board it is" — and without a website there is nothing to verify against.
+>
+> This was a gap in the DECOMPOSITION, not in any task's execution. T2.1's
+> acceptance ("resolve 7 real careers pages, rate >= 50%") was satisfiable with
+> hardcoded URLs while the real pipeline resolved nothing. Acceptance criteria
+> exist to prevent exactly that, and this one did not.
+
+Derive a company website per corpus record. The funding article itself is the
+cheapest honest source — FinSMEs and TechCrunch link the company they cover.
+EDGAR does not, so Form D records may legitimately end with no website.
+
+```
+Acceptance (observable):
+  corpus.json records carry `website` where one could be found, and `null` where
+  none could — never a guessed domain. The build report counts how many companies
+  have a website, and slug resolution rises above zero as a direct result.
+  A company with a website but no discoverable board is `slug-unresolved`, which
+  is different from having no website at all — report those separately so the
+  next bottleneck is visible rather than inferred.
+Checks:
+  lint -> unit:test_website_absent_is_null_not_guessed,
+          test_website_extracted_from_article_fixture
+       -> integration:run over the real corpus, assert website coverage > 0 and
+          that end-to-end `listed` count is no longer 0
+Out of scope: buying a data source. Free extraction only.
+```
+
+### T1.7 — Software/sector filter `todo` · *Phase 1* · after T1.5
+> **Added 2026-07-29.** `grep -i software TASKS.md` returned nothing: SPEC.md says
+> "software companies" and names non-software sectors as a non-goal, but no task
+> ever implemented it. SEC Form D covers EVERY private placement — hedge funds,
+> real estate, food — and contributed 989 of 2,054 corpus companies. Observed in
+> the live corpus: `Spero Foods`, `KYG Trade`, `Seegrid`, and `011235813`.
+
+Filter the corpus to software/SaaS/internet/AI companies.
+
+```
+Acceptance (observable):
+  The corpus excludes obvious non-software companies and COUNTS what it excluded
+  (never a silent drop — same rule as T1.5). A hand-labelled set of 30 companies
+  spanning clear-software, clear-not-software and genuinely-ambiguous classifies
+  with zero clear-software rejections; ambiguous cases are KEPT and flagged, since
+  wrongly excluding a real company is invisible while wrongly including one is
+  visible and fixable.
+  Entries with non-name identifiers (e.g. "011235813") are excluded as unusable.
+Checks:
+  lint -> unit:test_30_labelled_companies, test_ambiguous_kept_and_flagged,
+          test_exclusions_are_counted_not_dropped
+Out of scope: a formal taxonomy. MCA NIC codes are too coarse and often stale;
+              this is a tag, as SPEC.md assumed.
+```
 
 ### T2.1 — Careers-page slug discovery `done` · *Phase 0* · after T1.5
 > Measured 5/7 (71%) resolving real companies by name, above the ~50% baseline —
