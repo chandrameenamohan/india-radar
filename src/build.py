@@ -42,7 +42,11 @@ from src.slugs import Slug
 #: the match is. Null for most rows by construction, not by failure: the register
 #: slice covers subsidiaries of foreign-incorporated parents, so an India-founded
 #: company can never carry one.
-SCHEMA_VERSION = 6
+#: v7 added `integrity` (T5.3) — how many companies this build checked and how
+#: many it could not. It is the only field that describes the companies NOT in
+#: the file, and the site cannot derive it: a renderer counting its own rows can
+#: only ever report "116 of 116".
+SCHEMA_VERSION = 7
 
 Probe = Callable[[str], Roles | Outcome]
 Row = dict[str, Any]
@@ -125,6 +129,13 @@ SALARY_FIELDS = ("avg_lpa", "reports", "observed", "source_url")
 #: company — hence the shape check on the identifier itself and the refusal of
 #: any confidence below the publish threshold.
 MCA_FIELDS = ("cin", "name", "incorporated", "city", "status", "confidence")
+
+#: The footer's counts (T5.3), lifted from the build report rather than derived
+#: from the rows. `checked` is the companies whose board we actually read —
+#: `outcomes.CHECKED`, listed or not — and `unchecked` is every absence of
+#: knowledge. They are here, in the data file, so the site stays one fetch and so
+#: the numbers it shows are the ones the report accounted for.
+INTEGRITY_FIELDS = ("corpus_size", "checked", "unchecked")
 
 #: A CIN as the register issues it: listing status, industry code, state, year of
 #: incorporation, ownership class and the registration number. All 24,102 rows in
@@ -221,6 +232,36 @@ def mca_errors(found: Any) -> list[str]:
         problems.append(f"city {found.get('city')!r} is not a string")
     if found.get("confidence") != mca.EXACT:
         problems.append(f"confidence {found.get('confidence')!r} is below the publish threshold")
+    return problems
+
+
+def integrity_errors(found: Any, listed: int) -> list[str]:
+    """Every way the footer's counts fail the schema. Empty means they may ship.
+
+    On the real path these are three fields copied out of a report that computed
+    `unchecked` as a subtraction, so the sum can only hold. What this catches is
+    the counts and the rows describing different builds: a hand-written dataset
+    (the e2e fixture), or a report from another run — `checked` below the number
+    of rows shipped means the footer is accounting for a build that isn't this
+    one. That is the failure the footer exists to make impossible, so it is
+    refused at the write like every other claim the site renders.
+    """
+    if not isinstance(found, Mapping):
+        return [f"is {type(found).__name__}, not a count of what was checked"]
+    problems = _shape(found, INTEGRITY_FIELDS)
+    for field in INTEGRITY_FIELDS:
+        count = found.get(field)
+        if not (isinstance(count, int) and not isinstance(count, bool) and count >= 0):
+            problems.append(f"{field} {count!r} is not a count")
+    if problems:
+        return problems
+    if found["checked"] + found["unchecked"] != found["corpus_size"]:
+        problems.append(
+            f"checked {found['checked']} + unchecked {found['unchecked']} is not the "
+            f"{found['corpus_size']}-company corpus: the footer would not add up"
+        )
+    if found["checked"] < listed:
+        problems.append(f"checked {found['checked']} is fewer than the {listed} companies listed")
     return problems
 
 
@@ -381,13 +422,26 @@ def website_counts(
     }
 
 
-def write(path: str | Path, rows: list[Row], snapshot: str | None = None) -> None:
+def write(
+    path: str | Path,
+    rows: list[Row],
+    built: Mapping[str, Any],
+    snapshot: str | None = None,
+) -> None:
     """Emit companies.json — or refuse to, loudly, and leave the last good file
     where it is. The snapshot date ships with the data because the site has to
     show it (SPEC feature 10) and a date computed at render time would claim a
     freshness the JSON doesn't have.
+
+    `built` is this run's own build report, and the footer's counts are taken
+    from it (T5.3). The site is a renderer: it can see the companies that made
+    it, and only the report knows how many didn't.
     """
-    if bad := {row.get("name"): problems for row in rows if (problems := errors(row))}:
+    counted = {field: built[field] for field in INTEGRITY_FIELDS if field in built}
+    bad = {row.get("name"): problems for row in rows if (problems := errors(row))}
+    if problems := integrity_errors(counted, len(rows)):
+        bad["integrity"] = problems
+    if bad:
         raise ValueError(f"schema v{SCHEMA_VERSION} violations, nothing written: {bad}")
 
     Path(path).write_text(
@@ -395,6 +449,7 @@ def write(path: str | Path, rows: list[Row], snapshot: str | None = None) -> Non
             {
                 "schema_version": SCHEMA_VERSION,
                 "snapshot": snapshot or date.today().isoformat(),
+                "integrity": counted,
                 "companies": rows,
             },
             indent=2,
@@ -446,9 +501,13 @@ def main(argv: list[str]) -> None:
     if not smoke:
         salary.attach(rows)
     held = mca.attach(rows)
-    write(out, rows)
 
+    # The report comes first now: the site's footer counts what this build could
+    # not check (T5.3), and those numbers are the report's, copied rather than
+    # counted twice.
     built = report([c["name"] for c in corpus], outcomes)
+    write(out, rows, built)
+
     built["websites"] = website_counts(corpus, outcomes)
     # Off the disk, never off the API: data.gov.in 502s under sustained load, and
     # a nightly build that called it inline would be a site that goes down when

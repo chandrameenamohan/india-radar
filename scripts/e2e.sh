@@ -94,6 +94,22 @@ console_clean "published"
 check "snapshot date is visible" \
   "$($PY -c 'import json;print(json.load(open("data/companies.json"))["snapshot"])')" \
   "$(val 'document.querySelector("#snapshot").textContent')"
+# T5.3, and the assertion is deliberately against the OTHER file: two artifacts
+# of one build, agreeing on how much of the corpus that build managed to check.
+# A site counting its own rows would say "116 of 116" -- completeness it cannot
+# back. Read back out of the rendered sentence because the sentence is what a
+# reader gets; the en-IN grouping is the browser's, and is stripped here for the
+# same reason the salary check strips it below.
+report() { $PY -c "import json;d=json.load(open('data/build-report.json'));print($1)"; }
+read -r checked corpus unchecked <<<"$(val '(() =>
+     document.querySelector("#integrity").textContent
+       .match(/[\d,]+/g).map((n) => n.replace(/,/g, "")).join(" "))()')"
+check "the footer's counts are the build report's" \
+  "$(report "d['checked'], d['corpus_size'], d['unchecked']")" \
+  "$checked $corpus $unchecked"
+check "the footer accounts for every company in the corpus" \
+  "$(report "d['corpus_size']")" "$(( ${checked:-0} + ${unchecked:-0} ))"
+
 check "the empty snapshot says so instead of implying nothing is hiring" \
   "$($PY -c '
 import json
@@ -316,8 +332,13 @@ console_clean "after interaction"
 echo "-- a dataset this page doesn't know how to read"
 open_page "$ROOT?data=../data/build-report.json"
 check "an unknown schema is refused, not rendered" "refused 0 rows" \
-  "$(val '(document.querySelector("#status").textContent.startsWith("This page reads schema v6")
+  "$(val '(document.querySelector("#status").textContent.startsWith("This page reads schema v7")
        ? "refused " : "rendered ") + document.querySelectorAll(".row").length + " rows"')"
+# And the footer goes with it. A count left over from the last dataset, sitting
+# under a refusal to render this one, is the site stating a coverage figure for a
+# build it just declined to read.
+check "a refused dataset leaves the footer's counts blank rather than stale" "" \
+  "$(val 'document.querySelector("#integrity").textContent')"
 console_clean "unknown schema"
 
 # 4c visual regression is NOT here. It needs baseline screenshots a human

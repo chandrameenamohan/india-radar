@@ -1,6 +1,11 @@
 {
-  "schema_version": 6,
+  "schema_version": 7,
   "snapshot": "2026-07-28",
+  "integrity": {
+    "corpus_size": 30,
+    "checked": 9,
+    "unchecked": 21
+  },
   "companies": [
     {
       "name": "Acme Cloud",

@@ -114,6 +114,10 @@
 <main id="list"></main>
 
 <footer>
+  <!-- T5.3. Filled from the data file's own `integrity` block, so it is empty
+       until a dataset loads and stays empty for one this page refuses to read —
+       a count with no build behind it would be the exact claim this says. -->
+  <p id="integrity"></p>
   <p>Every company here showed at least one open India role on its own job board on the snapshot
     date. A company we could not check is excluded rather than shown as "not hiring".</p>
   <p>The MCA data we hold lists companies registered in India as subsidiaries of a parent
@@ -127,7 +131,7 @@
 // The site is a renderer and nothing else: it reads the JSON the build wrote and
 // never recomputes a fact. The snapshot date in particular ships with the data,
 // because a date taken at render time would claim a freshness the JSON lacks.
-const SCHEMA = 6;                                  // src/build.py SCHEMA_VERSION
+const SCHEMA = 7;                                  // src/build.py SCHEMA_VERSION
 const DEFAULT_SRC = '../data/companies.json';
 
 // Test seam: e2e drives this same page over a fixture dataset (data/companies.json
@@ -166,6 +170,8 @@ const RULES = {
   stage: "its funding directory's growth-stage label",
 };
 
+// Grouped the way a reader here groups them (en-IN: 24,102 but 2,41,02,000).
+const count = (n) => n.toLocaleString('en-IN');
 const money = (c) => c.amount == null
   ? 'undisclosed'
   : `${c.currency === 'USD' ? '$' : (c.currency || '') + ' '}${+(c.amount / 1e6).toFixed(2)}M`;
@@ -202,7 +208,7 @@ function salaryLine(s) {
   const line = el('p', 'salary');
   line.append(
     el('span', 'ctc', `₹${s.avg_lpa.toFixed(1)}L`),
-    el('span', null, ` average India CTC · ${s.reports.toLocaleString('en-IN')} `
+    el('span', null, ` average India CTC · ${count(s.reports)} `
       + `${s.reports === 1 ? 'report' : 'reports'} · as of ${s.observed} · `),
     link(s.source_url, 'AmbitionBox'),
   );
@@ -316,6 +322,17 @@ function load(data) {
   }
   companies = data.companies;
   snapshot = data.snapshot;
+  // The integrity footer (T5.3, SPEC feature 12). The rows can only say how many
+  // companies made it; this says how many we asked about, and the difference is
+  // the whole reason the site is trustworthy. The build counts it -- a renderer
+  // counting its own rows would always report everything it has as everything
+  // there is.
+  const n = data.integrity;
+  $('#integrity').textContent =
+    `Checked ${count(n.checked)} of the ${count(n.corpus_size)} funded companies in our corpus. `
+    + `The other ${count(n.unchecked)} could not be checked — no job board we could find, or one `
+    + `we could not read — so they are left off rather than shown as not hiring. This is not `
+    + `every funded company hiring in India; it is every one we could prove.`;
   $('#snapshot').textContent = snapshot;
   $('#snapshot').dateTime = snapshot;
   $('#city').append(...[...new Set(companies.flatMap((c) => c.cities))].sort()

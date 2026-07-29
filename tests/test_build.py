@@ -9,8 +9,16 @@ from pathlib import Path
 import pytest
 
 from src import lever
-from src.build import PROBES, SCHEMA_VERSION, build, errors, website_counts, write
-from src.outcomes import Outcome
+from src.build import (
+    PROBES,
+    SCHEMA_VERSION,
+    build,
+    errors,
+    integrity_errors,
+    website_counts,
+    write,
+)
+from src.outcomes import Outcome, report
 from src.slugs import Slug
 from tests.test_ashby import board as ashby_board
 from tests.test_greenhouse import board
@@ -42,6 +50,10 @@ CORPUS = [
 ]
 
 GREENHOUSE = Slug(ats="greenhouse", slug="acme", method="careers-page")
+
+#: A build report's footer counts (T5.3), for the tests that are about a row
+#: rather than about the footer. The ones about the footer build a real report.
+COUNTED = {"corpus_size": 2, "checked": 2, "unchecked": 0}
 
 
 def answering(ats="greenhouse", **boards):
@@ -226,22 +238,76 @@ def test_a_bad_row_fails_the_build_and_writes_nothing(tmp_path):
     out = tmp_path / "companies.json"
 
     with pytest.raises(ValueError, match="nothing written"):
-        write(out, [good, {**good, "name": "Zero", "roles": []}])
+        write(out, [good, {**good, "name": "Zero", "roles": []}], COUNTED)
 
     assert not out.exists()
 
 
 def test_written_file_is_versioned_and_revalidates(tmp_path):
     """Build → write → read back → every row still conforms."""
-    rows, _ = build(CORPUS[:1], {"Acme": GREENHOUSE}, answering(acme=BOARD))
+    rows, outcomes = build(CORPUS[:1], {"Acme": GREENHOUSE}, answering(acme=BOARD))
     out = tmp_path / "companies.json"
-    write(out, rows, snapshot="2026-07-28")
+    write(out, rows, report([c["name"] for c in CORPUS], outcomes), snapshot="2026-07-28")
 
     shipped = json.loads(out.read_text())
 
     assert shipped["schema_version"] == SCHEMA_VERSION
     assert shipped["snapshot"] == "2026-07-28"  # the site shows this, so it ships with the data
     assert [errors(row) for row in shipped["companies"]] == [[]]
+    # T5.3: the file also says who ISN'T in it. Acme was checked and listed; Beta
+    # never reached a board, so the footer has one company to account for.
+    assert shipped["integrity"] == {"corpus_size": 2, "checked": 1, "unchecked": 1}
+
+
+def test_the_footer_counts_the_companies_the_site_cannot_show(tmp_path):
+    """T5.3. The site's whole claim is that a company it can't check is left off
+    rather than shown as not hiring — so the file carries how many those were.
+    The numbers are the report's own, because a second count of the same thing is
+    a second chance to disagree with it."""
+    rows, outcomes = build(CORPUS, {"Acme": GREENHOUSE}, answering(acme=BOARD))
+    built = report([c["name"] for c in CORPUS], outcomes)
+    out = tmp_path / "companies.json"
+    write(out, rows, built)
+
+    shipped = json.loads(out.read_text())["integrity"]
+
+    assert shipped == {field: built[field] for field in shipped}
+    assert shipped["checked"] + shipped["unchecked"] == shipped["corpus_size"]
+    assert shipped["corpus_size"] == len(CORPUS)
+
+
+@pytest.mark.parametrize(
+    "counted, because",
+    [
+        ({"corpus_size": 9, "checked": 1, "unchecked": 1}, "footer would not add up"),
+        ({"corpus_size": 2, "checked": 0, "unchecked": 2}, "fewer than the 1 companies listed"),
+        ({"corpus_size": 2, "checked": 1}, "missing 'unchecked'"),
+        ({"corpus_size": 2, "checked": 1, "unchecked": None}, "unchecked None is not a count"),
+        ({"corpus_size": 2, "checked": 1, "unchecked": 1, "listed": 1}, "unknown field"),
+    ],
+)
+def test_footer_counts_that_do_not_account_for_the_corpus_are_refused(counted, because):
+    """A footer that doesn't add up is worse than no footer: it states a number
+    for the companies nobody checked, which is the one thing on this site a
+    reader cannot check for themselves."""
+    rows, _ = build(CORPUS[:1], {"Acme": GREENHOUSE}, answering(acme=BOARD))
+
+    assert any(because in problem for problem in integrity_errors(counted, len(rows)))
+
+
+def test_a_footer_that_does_not_add_up_fails_the_build_and_writes_nothing(tmp_path):
+    """The same refusal a bad row gets, for the same reason: the site renders
+    this straight. In practice it arrives as a report from a different run than
+    the rows — `write` takes the whole report, so its OTHER keys are its own
+    business and are filtered, but the three it publishes must describe these
+    rows and this corpus."""
+    rows, _ = build(CORPUS[:1], {"Acme": GREENHOUSE}, answering(acme=BOARD))
+    out = tmp_path / "companies.json"
+
+    with pytest.raises(ValueError, match="nothing written"):
+        write(out, rows, {"corpus_size": 9, "checked": 1, "unchecked": 1})
+
+    assert not out.exists()
 
 
 def test_a_company_never_checked_is_never_listed():
@@ -279,6 +345,11 @@ def test_the_e2e_dataset_is_a_file_this_build_could_have_written():
 
     assert shipped["schema_version"] == SCHEMA_VERSION
     assert [errors(row) for row in shipped["companies"]] == [[]] * len(shipped["companies"])
+    # T5.3's footer, which is about the companies that are NOT in this file — so
+    # a fixture where everything was checked would render the one sentence the
+    # footer exists to avoid, and prove nothing.
+    assert integrity_errors(shipped["integrity"], len(shipped["companies"])) == []
+    assert shipped["integrity"]["unchecked"], "no unchecked-companies case for the footer"
     # The city filter's negative case: filtering to Bengaluru must drop a company
     # whose only India city is Pune. Both have to be in the fixture for the e2e
     # assertion to mean anything.
