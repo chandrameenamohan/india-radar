@@ -177,6 +177,19 @@ print('|'.join(f\"{r['title']} {r['url']}\" for r in first['roles']))")" \
   "$(val '[...document.querySelector(".row[open] .roles").querySelectorAll("li")]
        .map((li)=>`${li.querySelector("a").textContent} ${li.querySelector("a").href}`).join("|")')"
 
+# The ambiguous zero, in badge form. 822 of the 1,112 published India roles state
+# no workplace at all -- Greenhouse states one nowhere -- so a site that defaulted
+# the blank to "on-site" would be inventing the most common answer for the
+# largest provider and showing it as though the company had said it.
+check "a role whose board stated no workplace shows no badge" \
+  "$($PY -c "
+import json
+c = json.load(open('tests/fixtures/companies-e2e.json'))['companies']
+first = sorted(c, key=lambda r: (-len(r['roles']), r['name']))[0]
+print(sum(1 for r in first['roles'] if r['workplace']), 'of', len(first['roles']))")" \
+  "$(val '(() => { const ul = document.querySelector(".row[open] .roles");
+       return `${ul.querySelectorAll(".tag").length} of ${ul.querySelectorAll("li").length}` })()')"
+
 # No listed company renders an empty location. The dataset holds all three ways
 # of being placeless: cities named, "Remote - India" (remote, no city), and a
 # board stating only "India" -- which is neither a city nor a remote claim, and

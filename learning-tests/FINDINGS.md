@@ -1536,9 +1536,9 @@ itself, not a rule to pick.
 
 ## The DoD's "a city OR an explicit remote flag" does not hold on live data
 
-Of the 116 listed companies, **28 name no India city at all**, and only 8 of
-those state remote by any route. The remaining **20 companies have a board that
-says literally `India`** and nothing else:
+Of the 116 listed companies, **28 name no India city at all**. With both routes
+in — the board's own `workplaceType` and the location string — 13 of those state
+remote and **15 state nothing at all**: a board that says literally `India`.
 
 ```
 27  'Remote - India'      -> remote
@@ -1575,3 +1575,48 @@ pins the distinction so a future reader doesn't "fix" one into the other.
 
 `hybrid` is matched before `remote` and `onsite`: `Hybrid; In-Office` states two
 things and the more specific one is the answer.
+
+## The published shape, and where the 1,112 roles land
+
+```
+116 companies, 1,112 India roles, 0 with an empty location list
+workplace:  822 not stated · 117 onsite · 107 remote · 66 hybrid
+cities:      88 companies name at least one · 28 name none
+             of those 28: 13 state remote · 15 state nothing but "India"
+```
+
+Outcomes are unchanged by this task (116 listed, 595 no-india-roles, 2,201
+slug-unresolved, 3 empty-board-unverified, 0 probe-failed) — enrichment must not
+move the listed set, and it didn't.
+
+## The e2e was validating a CACHED COPY of the page under test
+
+Worth more than the feature it was found by. `make check` went green on an
+`index.html` from **before the edit under test**: the page reported "This page
+reads schema v3" while the file on disk said 4, and *every behavioural check
+still passed against it*, because the stale page and the stale data agreed with
+each other.
+
+The mechanism: `scripts/e2e.sh` serves on a fixed port, so the document URL is
+byte-identical every run; `python -m http.server` sends no `Cache-Control`, so
+the browser assigns a heuristic freshness lifetime and re-serves the copy it
+already has. Proven by loading the same file on a fresh port — identical bytes,
+correct result. The page's own `fetch(src, {cache: 'no-cache'})` fixes the JSON
+and cannot fix the document that fetches it; **FINDINGS T1.2 is the same trap one
+level down**, and fixing it there is what hid it here.
+
+`open_page` now appends a per-run token to every URL. The failure mode this
+closes is the dangerous kind: not a red gate, a *green* one that proves nothing
+about the code just written.
+
+## Four mutations, and the one that got away
+
+Confirmed biting: unlinking the role titles, a remote filter that ignores
+`workplace`, and a placeless company rendering a blank location.
+
+The fourth passed a full green gate and had to have a check written for it —
+**defaulting an unstated workplace to `on-site` in the badge**. 822 of 1,112
+roles state nothing, so that mutation invents the most common answer for the
+largest provider and prints it as though the company had said it. It is the
+ambiguous zero wearing a badge, and nothing in the suite objected until
+`a role whose board stated no workplace shows no badge` existed.

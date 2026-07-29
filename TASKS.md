@@ -642,11 +642,53 @@ Out of scope: cities outside the list inside "IN-<City>" strings. Measured
 
 > Every enrichment must degrade to absent. None may fail a build.
 
-### T4.1 — Roles, apply links, city, remote flag `in-progress` · *Phase 2* · after T3.4
-> **The city half is already built** — `src/india.py:cities` and the row's
+### T4.1 — Roles, apply links, city, remote flag `needs-review` · *Phase 2* · after T3.4
+> **1,112 India roles now ship with a title, an apply link and a workplace, and
+> 10/10 sampled apply URLs returned 200** — the DoD's own integration check,
+> spread across all three providers (`learning-tests/roles_live.py`). Schema v4:
+> the `india_roles` count is replaced by the `roles` themselves, because carrying
+> both invites them to disagree. Outcomes are unchanged (116 listed, 0
+> probe-failed) — enrichment must not move the listed set, and it didn't.
+>
+> **NEEDS REVIEW — "shows ≥1 India city OR an explicit remote flag" is false for
+> 15 of 116 companies, and I did not reword it.** 28 listed companies name no
+> India city. Both honest routes were built and measured: the board's own
+> `workplaceType` (Ashby says `OnSite`/`Hybrid`/`Remote`, Lever says the same in
+> lowercase) and the location string (`Remote - India`, `India (Remote)`, …).
+> Together they resolve 13. The remaining **15 have a board that says literally
+> `India`** — Komodo Health, Scale AI, Starburst, Tamara, Temporal, YugaByte and
+> nine more, all Greenhouse, which states a workplace **nowhere**: not on the
+> role, not in `metadata`, and the description is dropped by `content=false`.
+> There is no second question to ask, so a city or a remote flag for those 15
+> could only be invented.
+>
+> The same acceptance's third clause — *no company displays an empty location* —
+> is satisfiable and is the one that protects the reader, so the site renders the
+> three cases apart: cities where named, `Remote — India` where the board says
+> remote, and otherwise **what the board literally said**. `role_errors` enforces
+> the deterministic half: a role's `locations` list may not be empty.
+> **The human call: accept that substitution, or reword the DoD.** Nothing else
+> in the task depends on the answer. (Same shape as T3.3's open question.)
+>
+> **A gate defect found by this task, worth more than the feature.** `make check`
+> went green against a **cached copy of `index.html` from before the edit under
+> test** — the page said "schema v3" while the file said 4, and every behavioural
+> check passed anyway because the stale page and the stale data agreed. Fixed
+> port ⇒ identical document URL ⇒ browser heuristic cache. `open_page` now
+> cache-busts per run. The page's `{cache:'no-cache'}` covers the JSON, never the
+> document that fetches it. See FINDINGS.
+>
+> Four mutations were run against the new checks; three bit. The fourth —
+> **defaulting an unstated workplace to `on-site`** — passed a full green gate,
+> which is why `a role whose board stated no workplace shows no badge` now
+> exists. 822 of 1,112 roles state nothing, so that default would invent the
+> commonest answer for the largest provider: the ambiguous zero, wearing a badge.
+>
+> Also landed: SPEC feature 10's **remote-only filter**, which T5.2 deliberately
+> left out because no row carried the field yet. It has an e2e check.
+>
+> **The city half was already built** — `src/india.py:cities` and the row's
 > `cities` field landed with T5.2, whose city filter could not exist without them.
-> What remains here: role titles, per-role apply URLs, the explicit remote flag,
-> and the integration check that sampled apply URLs return 200.
 ```
 Acceptance (observable):
   Every listed company has >=1 India role with an apply URL returning 200 on that
