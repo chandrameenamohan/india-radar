@@ -500,10 +500,46 @@ Checks:
 Out of scope: Ashby and Lever.
 ```
 
-### T3.2 — Ashby probe `in-progress` · *Phase 1* · after T3.1
-~151s fixed latency, payload- and concurrency-independent; 16.8s/company at
+### T3.2 — Ashby probe `done` · *Phase 1* · after T3.1
+> **88 → 110 listed, and `probe-failed` 315 → 51 — which is exactly T3.3's Lever
+> share and nothing else.** Of the 264 Ashby companies: 22 listed, 232
+> `no-india-roles` (board read, hiring, not here), 10 `slug-unresolved` (resolved
+> cleanly at T2.1 time, 404 now — T1.6's "a resolved slug is not a probeable
+> slug", seen again). Lever is now the entire remaining probe gap.
+>
+> **The latency line below is stale by two orders of magnitude, and it was this
+> project's most load-bearing number.** Measured before writing any code: one
+> call **2s**, and **12/12 concurrent in 1.7s wall** — not ~151s with 3 of 12
+> failing. The whole Ashby corpus costs ~35s; a full build is 5m12s end to end,
+> dominated by Greenhouse's 429 *sequential* calls. **T6.3's premise ("Ashby
+> weekly because it is ~151s/company") no longer holds — re-measure rather than
+> inherit it.** The retries and backoff stayed regardless: the throttling was
+> real when it was measured, it can return, and at 2s the guard is free.
+>
+> **Ashby is not Lever's trap: a wrong slug 404s** (plain text `Not Found`), so
+> an empty `jobs` array is an honest zero and `empty-board-unverified` belongs to
+> T3.3 alone. But there is **no `meta.total`**, so Greenhouse's agreement check
+> has no counterpart and a truncated board is undetectable — which is why a
+> malformed 200 is *retried* rather than recorded. A half-received transfer is
+> transient in exactly the way a 503 is and the status line cannot tell them
+> apart.
+>
+> **`secondaryLocations` forced a structural change, not a parser tweak.** One
+> posting open in Bengaluru and Mumbai is one job in two cities: reading only the
+> primary undercounts it, counting the location strings over-counts it. So
+> `build.Provider` pairs each probe with its own location unwrap — Greenhouse
+> nests exactly one `location.name`, Ashby returns a list — and India roles are
+> counted by role. `india.is_india` stays a function of a string, as its own
+> docstring argued.
+>
+> Four mutations confirmed the new checks bite: dropping `secondaryLocations`,
+> returning on the first failure, retrying without backoff, and counting location
+> strings instead of roles each turn the suite red.
+
+~~~151s fixed latency, payload- and concurrency-independent; 16.8s/company at
 concurrency 12; 3/12 failed at that concurrency; latency grew 50s→151s across
-repeat runs (progressive throttling).
+repeat runs (progressive throttling).~~ **Measured 2026-07-29: ~2s/call, 12/12
+concurrent in 1.7s. See the note above and FINDINGS.**
 ```
 Acceptance (observable):
   1,000 companies complete inside the 6h GitHub Actions cap. Transient failures
@@ -690,10 +726,16 @@ Out of scope: a per-company diagnostic view.
 
 ### T6.2 — Greenhouse nightly workflow `todo` · *Phase 3* · after T3.1, T6.1
 ### T6.3 — Ashby weekly workflow `todo` · *Phase 3* · after T3.2, T6.1
+> **Re-measure before building this.** T3.2 measured Ashby at ~2s/company, not
+> the ~151s the weekly tier was chosen for — the whole Ashby corpus is ~35s, and
+> the slow provider in a real build is now Greenhouse's 429 sequential calls.
+> Weekly may still be right (politeness, and the throttling was real once), but
+> it needs a reason that is true today.
+
 ```
 Acceptance (observable) [each]:
   Completes inside the 6h job cap. Commits fresh JSON on success. Tiering is by
-  measured cost: Greenhouse 0.35s/company nightly, Ashby ~151s/company weekly.
+  measured cost — re-measured per T3.2, not inherited from FINDINGS §1.
 Checks:
   lint -> integration:dry-run the workflow, assert wall time is bounded and a
           commit is produced

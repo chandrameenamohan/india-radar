@@ -18,11 +18,10 @@ import sys
 from collections.abc import Callable, Iterable, Mapping
 from datetime import date
 from pathlib import Path
-from typing import Any
+from typing import Any, NamedTuple
 
+from src import ashby, greenhouse
 from src.greenhouse import Roles
-from src.greenhouse import parse as parse_board
-from src.greenhouse import probe as greenhouse_probe
 from src.india import cities, is_india
 from src.outcomes import Outcome, report, write_report
 from src.slugs import Slug
@@ -37,6 +36,21 @@ SCHEMA_VERSION = 3
 
 Probe = Callable[[str], Roles | Outcome]
 Row = dict[str, Any]
+
+
+class Provider(NamedTuple):
+    """How to read one ATS: fetch a board, then find the places in a role.
+
+    Two functions rather than one because the providers disagree on both halves
+    and neither difference is incidental — Greenhouse nests a single
+    `location.name`, Ashby has a flat `location` plus a `secondaryLocations`
+    array, and Lever (T3.3) differs again. Unwrapping lives beside the probe
+    that knows the shape; `india.is_india` stays a function of a string.
+    """
+
+    probe: Probe
+    locations: Callable[[Mapping[str, Any]], list[str]]
+
 
 #: A row: what the corpus knew about the funding, plus what the board proved
 #: about the hiring. Types only — the value rules that carry meaning are in
@@ -58,10 +72,13 @@ FIELDS: dict[str, type | tuple[type, ...]] = {
     "qualified_by": str,
 }
 
-#: The probes that exist. Ashby (T3.2) and Lever (T3.3) join by adding a line
-#: here — and until they do, a company on either board is `probe-failed`, which
-#: is the truth: we hold a slug we cannot read.
-PROBES: dict[str, Probe] = {"greenhouse": greenhouse_probe}
+#: The probes that exist. Lever (T3.3) joins by adding a line here — and until
+#: it does, a company on that board is `probe-failed`, which is the truth: we
+#: hold a slug we cannot read.
+PROBES: dict[str, Provider] = {
+    "greenhouse": Provider(greenhouse.probe, greenhouse.locations),
+    "ashby": Provider(ashby.probe, ashby.locations),
+}
 
 
 def errors(row: Mapping[str, Any]) -> list[str]:
@@ -101,7 +118,7 @@ def errors(row: Mapping[str, Any]) -> list[str]:
 def build(
     corpus: Iterable[Mapping[str, Any]],
     slugs: Mapping[str, Slug],
-    probes: Mapping[str, Probe] = PROBES,
+    probes: Mapping[str, Provider] = PROBES,
 ) -> tuple[list[Row], dict[str, Outcome]]:
     """The spine: corpus → slug → board → India filter → rows.
 
@@ -119,21 +136,24 @@ def build(
             outcomes[name] = Outcome.SLUG_UNRESOLVED
             continue
 
-        probe = probes.get(slug["ats"])
-        if probe is None:
+        provider = probes.get(slug["ats"])
+        if provider is None:
             outcomes[name] = Outcome.PROBE_FAILED
             continue
 
-        result = probe(slug["slug"])
+        result = provider.probe(slug["slug"])
         if isinstance(result, Outcome):
             outcomes[name] = result
             continue
 
-        # Greenhouse nests the location; unwrapped here rather than in india.py
-        # because the three ATSes genuinely disagree on a role's shape.
-        # One location string per role, so counting them counts roles.
-        located = [(role.get("location") or {}).get("name") for role in result]
-        india = [location for location in located if is_india(location)]
+        # A role, not a location string: one Ashby posting open in Bengaluru and
+        # Mumbai is one role in two cities, and counting the strings would
+        # report it as two jobs.
+        india = [
+            places
+            for role in result
+            if (places := [p for p in provider.locations(role) if is_india(p)])
+        ]
         if not india:
             outcomes[name] = Outcome.NO_INDIA_ROLES
             continue
@@ -145,7 +165,7 @@ def build(
                 "ats": slug["ats"],
                 "slug": slug["slug"],
                 "india_roles": len(india),
-                "cities": sorted({city for location in india for city in cities(location)}),
+                "cities": sorted({c for places in india for p in places for c in cities(p)}),
                 "amount": company["amount"],
                 "currency": company["currency"],
                 "round_letter": company["round_letter"],
@@ -212,14 +232,26 @@ SMOKE_OUT = "data/companies.smoke.json"
 def main(argv: list[str]) -> None:
     corpus = json.loads(Path("data/corpus.json").read_text())["companies"]
     slugs: dict[str, Slug] = json.loads(Path("data/slugs.json").read_text())
-    probes = PROBES
     out = "data/companies.json"
 
     if smoke := ("--smoke" in argv):
         corpus = corpus[:1]
         slugs = {c["name"]: Slug(ats="greenhouse", slug="smoke", method="smoke") for c in corpus}
-        probes = {"greenhouse": lambda _: parse_board(SMOKE_BOARD.read_text())}
+        board = greenhouse.parse(SMOKE_BOARD.read_text())
+        probes = {"greenhouse": Provider(lambda _: board, greenhouse.locations)}
         out = SMOKE_OUT
+    else:
+        # Ashby's cost is a server-side delay, not throughput, so its boards are
+        # fetched together up front and the spine reads the answers. Sequentially
+        # this is the one provider that could put a real run outside the nightly
+        # budget if its throttling returns (src/ashby.py).
+        boards = ashby.probe_all(s["slug"] for s in slugs.values() if s["ats"] == "ashby")
+        probes = {
+            **PROBES,
+            "ashby": Provider(
+                lambda slug: boards.get(slug, Outcome.PROBE_FAILED), ashby.locations
+            ),
+        }
 
     rows, outcomes = build(corpus, slugs, probes)
     write(out, rows)

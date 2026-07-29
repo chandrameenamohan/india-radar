@@ -8,9 +8,11 @@ from pathlib import Path
 
 import pytest
 
-from src.build import SCHEMA_VERSION, build, errors, website_counts, write
+from src import ashby, greenhouse
+from src.build import SCHEMA_VERSION, Provider, build, errors, website_counts, write
 from src.outcomes import Outcome
 from src.slugs import Slug
+from tests.test_ashby import board as ashby_board
 from tests.test_greenhouse import board
 
 #: The same fixture board init.sh's smoke build runs on: four roles, of which
@@ -43,7 +45,7 @@ GREENHOUSE = Slug(ats="greenhouse", slug="acme", method="careers-page")
 
 def answering(**boards):
     """A probe map answering with the given roles-or-outcome per slug."""
-    return {"greenhouse": lambda slug: boards[slug]}
+    return {"greenhouse": Provider(lambda slug: boards[slug], greenhouse.locations)}
 
 
 def test_listed_row_carries_the_corpus_and_the_board():
@@ -67,6 +69,30 @@ def test_listed_row_carries_the_corpus_and_the_board():
             "qualified_by": "letter",
         }
     ]
+    assert errors(rows[0]) == []
+
+
+def test_an_ashby_row_counts_roles_not_places():
+    """T3.2. One Ashby posting open in Bengaluru and Mumbai is one role in two
+    cities. The unwrap is per-provider precisely so that the count doesn't
+    quietly become "location strings that mention India" the moment a second
+    ATS lands — Greenhouse gives one place per role and Ashby gives several.
+
+    `errors()` passing is the other half: it rejects any `ats` without a probe,
+    so a row reaching the site as `ashby` proves T3.2 is registered in PROBES."""
+    postings = json.loads(
+        ashby_board(("Bengaluru, India", "Mumbai, India"), ("Warsaw, Poland", "Remote - India"))
+    )["jobs"]
+
+    rows, outcomes = build(
+        CORPUS[:1],
+        {"Acme": Slug(ats="ashby", slug="acme", method="guess")},
+        {"ashby": Provider(lambda _: postings, ashby.locations)},
+    )
+
+    assert outcomes == {"Acme": Outcome.LISTED}
+    assert rows[0]["india_roles"] == 2  # two postings, not the three India strings
+    assert rows[0]["cities"] == ["Bengaluru", "Mumbai"]  # the Warsaw role is also Remote - India
     assert errors(rows[0]) == []
 
 
@@ -146,11 +172,11 @@ def test_written_file_is_versioned_and_revalidates(tmp_path):
 def test_a_company_never_checked_is_never_listed():
     """Three ways to not know, none of which is "not hiring". The site's whole
     claim rests on the difference between a finding and a gap."""
-    corpus = CORPUS + [{**CORPUS[0], "name": name} for name in ("Gone", "OnAshby", "Broken")]
+    corpus = CORPUS + [{**CORPUS[0], "name": name} for name in ("Gone", "OnLever", "Broken")]
     slugs = {
         "Acme": GREENHOUSE,
         "Beta": GREENHOUSE,
-        "OnAshby": Slug(ats="ashby", slug="onashby", method="careers-page"),
+        "OnLever": Slug(ats="lever", slug="onlever", method="careers-page"),
         "Broken": Slug(ats="greenhouse", slug="broken", method="careers-page"),
     }
 
@@ -162,7 +188,7 @@ def test_a_company_never_checked_is_never_listed():
         "Acme": Outcome.LISTED,
         "Beta": Outcome.LISTED,
         "Gone": Outcome.SLUG_UNRESOLVED,  # no slug was ever found
-        "OnAshby": Outcome.PROBE_FAILED,  # a slug we hold but cannot read until T3.2
+        "OnLever": Outcome.PROBE_FAILED,  # a slug we hold but cannot read until T3.3
         "Broken": Outcome.SLUG_UNRESOLVED,  # the board 404'd
     }
     assert {row["name"] for row in rows} == {"Acme", "Beta"}

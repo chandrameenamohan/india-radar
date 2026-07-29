@@ -66,6 +66,21 @@
       "qualified_by": "stage"
     },
     {
+      "name": "Ambient.ai",
+      "ats": "ashby",
+      "slug": "ambient.ai",
+      "india_roles": 5,
+      "cities": [
+        "Bengaluru"
+      ],
+      "amount": null,
+      "currency": null,
+      "round_letter": null,
+      "date": null,
+      "source_url": "https://www.ycombinator.com/companies/ambient-ai",
+      "qualified_by": "stage"
+    },
+    {
       "name": "Amplitude",
       "ats": "greenhouse",
       "slug": "amplitude",
@@ -96,6 +111,21 @@
       "qualified_by": "stage"
     },
     {
+      "name": "Anyscale",
+      "ats": "ashby",
+      "slug": "anyscale",
+      "india_roles": 4,
+      "cities": [
+        "Bengaluru"
+      ],
+      "amount": null,
+      "currency": null,
+      "round_letter": null,
+      "date": null,
+      "source_url": "https://www.cbinsights.com/company/anyscale",
+      "qualified_by": "stage"
+    },
+    {
       "name": "Apollo.io",
       "ats": "greenhouse",
       "slug": "apolloio",
@@ -121,6 +151,21 @@
       "round_letter": null,
       "date": null,
       "source_url": "https://www.cbinsights.com/company/appdirect",
+      "qualified_by": "stage"
+    },
+    {
+      "name": "Applied Intuition",
+      "ats": "ashby",
+      "slug": "applied",
+      "india_roles": 1,
+      "cities": [
+        "Bengaluru"
+      ],
+      "amount": null,
+      "currency": null,
+      "round_letter": null,
+      "date": null,
+      "source_url": "https://www.forbes.com/companies/applied-intuition/",
       "qualified_by": "stage"
     },
     {
@@ -167,6 +212,21 @@
       "round_letter": null,
       "date": null,
       "source_url": "https://www.cbinsights.com/company/armada-6",
+      "qualified_by": "stage"
+    },
+    {
+      "name": "AtoB",
+      "ats": "ashby",
+      "slug": "atob",
+      "india_roles": 1,
+      "cities": [
+        "Bengaluru"
+      ],
+      "amount": null,
+      "currency": null,
+      "round_letter": null,
+      "date": null,
+      "source_url": "https://www.ycombinator.com/companies/atob",
       "qualified_by": "stage"
     },
     {
@@ -245,6 +305,19 @@
       "qualified_by": "stage"
     },
     {
+      "name": "Cognition",
+      "ats": "ashby",
+      "slug": "cognition",
+      "india_roles": 3,
+      "cities": [],
+      "amount": null,
+      "currency": null,
+      "round_letter": null,
+      "date": null,
+      "source_url": "https://www.forbes.com/companies/cognition/",
+      "qualified_by": "stage"
+    },
+    {
       "name": "Cohere Health",
       "ats": "greenhouse",
       "slug": "coherehealth",
@@ -288,6 +361,34 @@
       "qualified_by": "stage"
     },
     {
+      "name": "Cursor",
+      "ats": "ashby",
+      "slug": "cursor",
+      "india_roles": 2,
+      "cities": [],
+      "amount": null,
+      "currency": null,
+      "round_letter": null,
+      "date": null,
+      "source_url": "https://www.forbes.com/companies/cursor/",
+      "qualified_by": "stage"
+    },
+    {
+      "name": "Cyberhaven",
+      "ats": "ashby",
+      "slug": "cyberhaven",
+      "india_roles": 4,
+      "cities": [
+        "Bengaluru"
+      ],
+      "amount": null,
+      "currency": null,
+      "round_letter": null,
+      "date": null,
+      "source_url": "https://www.cbinsights.com/company/cyberhaven",
+      "qualified_by": "stage"
+    },
+    {
       "name": "Databricks",
       "ats": "greenhouse",
       "slug": "databricks",
@@ -304,6 +405,19 @@
       "date": "2025-12-16",
       "source_url": "https://www.sec.gov/Archives/edgar/data/1587468/000158746825000010/0001587468-25-000010-index.htm",
       "qualified_by": "amount"
+    },
+    {
+      "name": "Deepgram",
+      "ats": "ashby",
+      "slug": "deepgram",
+      "india_roles": 1,
+      "cities": [],
+      "amount": null,
+      "currency": null,
+      "round_letter": null,
+      "date": null,
+      "source_url": "https://www.ycombinator.com/companies/deepgram",
+      "qualified_by": "stage"
     },
     {
       "name": "Degreed",
@@ -350,6 +464,21 @@
       "round_letter": null,
       "date": null,
       "source_url": "https://www.forbes.com/companies/dialpad/",
+      "qualified_by": "stage"
+    },
+    {
+      "name": "d-Matrix",
+      "ats": "ashby",
+      "slug": "d-matrix",
+      "india_roles": 2,
+      "cities": [
+        "Bengaluru"
+      ],
+      "amount": null,
+      "currency": null,
+      "round_letter": null,
+      "date": null,
+      "source_url": "https://www.cbinsights.com/company/d-matrix",
       "qualified_by": "stage"
     },
     {
@@ -535,6 +664,32 @@
       "qualified_by": "stage"
     },
     {
+      "name": "Handshake",
+      "ats": "ashby",
+      "slug": "handshake",
+      "india_roles": 9,
+      "cities": [],
+      "amount": null,
+      "currency": null,
+      "round_letter": null,
+      "date": null,
+      "source_url": "https://www.cbinsights.com/company/handshake",
+      "qualified_by": "stage"
+    },
+    {
+      "name": "HappyRobot",
+      "ats": "ashby",
+      "slug": "happyrobot.ai",
+      "india_roles": 1,
+      "cities": [],
+      "amount": null,
+      "currency": null,
+      "round_letter": null,
+      "date": null,
+      "source_url": "https://www.ycombinator.com/companies/happyrobot",
+      "qualified_by": "stage"
+    },
+    {
       "name": "Harness",
       "ats": "greenhouse",
       "slug": "harnessinc",
@@ -608,6 +763,19 @@
       "qualified_by": "stage"
     },
     {
+      "name": "Infisical",
+      "ats": "ashby",
+      "slug": "infisical",
+      "india_roles": 2,
+      "cities": [],
+      "amount": null,
+      "currency": null,
+      "round_letter": null,
+      "date": null,
+      "source_url": "https://www.ycombinator.com/companies/infisical",
+      "qualified_by": "stage"
+    },
+    {
       "name": "InMobi",
       "ats": "greenhouse",
       "slug": "inmobi",
@@ -673,7 +841,7 @@
       "name": "Ivalua",
       "ats": "greenhouse",
       "slug": "ivalua",
-      "india_roles": 7,
+      "india_roles": 6,
       "cities": [
         "Pune"
       ],
@@ -726,6 +894,37 @@
       "round_letter": null,
       "date": null,
       "source_url": "https://www.forbes.com/companies/komodo-health/",
+      "qualified_by": "stage"
+    },
+    {
+      "name": "Kong",
+      "ats": "ashby",
+      "slug": "kong",
+      "india_roles": 16,
+      "cities": [
+        "Bengaluru",
+        "Mumbai"
+      ],
+      "amount": null,
+      "currency": null,
+      "round_letter": null,
+      "date": null,
+      "source_url": "https://www.cbinsights.com/company/mashape",
+      "qualified_by": "stage"
+    },
+    {
+      "name": "Lambda Labs",
+      "ats": "ashby",
+      "slug": "lambda",
+      "india_roles": 2,
+      "cities": [
+        "Bengaluru"
+      ],
+      "amount": null,
+      "currency": null,
+      "round_letter": null,
+      "date": null,
+      "source_url": "https://www.cbinsights.com/company/Lambda Labs",
       "qualified_by": "stage"
     },
     {
@@ -879,6 +1078,21 @@
       "qualified_by": "stage"
     },
     {
+      "name": "Notion",
+      "ats": "ashby",
+      "slug": "notion",
+      "india_roles": 5,
+      "cities": [
+        "Hyderabad"
+      ],
+      "amount": null,
+      "currency": null,
+      "round_letter": null,
+      "date": null,
+      "source_url": "https://www.forbes.com/companies/notion/",
+      "qualified_by": "stage"
+    },
+    {
       "name": "Observe",
       "ats": "greenhouse",
       "slug": "observeai",
@@ -921,6 +1135,32 @@
       "round_letter": null,
       "date": null,
       "source_url": "https://www.forbes.com/companies/onetrust/",
+      "qualified_by": "stage"
+    },
+    {
+      "name": "Oyster",
+      "ats": "ashby",
+      "slug": "oyster",
+      "india_roles": 2,
+      "cities": [],
+      "amount": null,
+      "currency": null,
+      "round_letter": null,
+      "date": null,
+      "source_url": "https://www.cbinsights.com/company/oyster-1",
+      "qualified_by": "stage"
+    },
+    {
+      "name": "PermitFlow",
+      "ats": "ashby",
+      "slug": "permitflow",
+      "india_roles": 1,
+      "cities": [],
+      "amount": null,
+      "currency": null,
+      "round_letter": null,
+      "date": null,
+      "source_url": "https://www.ycombinator.com/companies/permitflow",
       "qualified_by": "stage"
     },
     {
@@ -1018,6 +1258,24 @@
       "qualified_by": "stage"
     },
     {
+      "name": "Sarvam",
+      "ats": "ashby",
+      "slug": "sarvam",
+      "india_roles": 63,
+      "cities": [
+        "Bengaluru",
+        "Chennai",
+        "Delhi",
+        "Mumbai"
+      ],
+      "amount": null,
+      "currency": null,
+      "round_letter": null,
+      "date": null,
+      "source_url": "https://www.cbinsights.com/company/sarvam-ai",
+      "qualified_by": "stage"
+    },
+    {
       "name": "Scale",
       "ats": "greenhouse",
       "slug": "scaleai",
@@ -1071,6 +1329,19 @@
       "round_letter": null,
       "date": null,
       "source_url": "https://www.ycombinator.com/companies/singlestore",
+      "qualified_by": "stage"
+    },
+    {
+      "name": "Socure",
+      "ats": "ashby",
+      "slug": "socure",
+      "india_roles": 4,
+      "cities": [],
+      "amount": null,
+      "currency": null,
+      "round_letter": null,
+      "date": null,
+      "source_url": "https://www.forbes.com/companies/socure/",
       "qualified_by": "stage"
     },
     {
@@ -1205,6 +1476,19 @@
       "qualified_by": "stage"
     },
     {
+      "name": "Triomics",
+      "ats": "ashby",
+      "slug": "triomics",
+      "india_roles": 4,
+      "cities": [],
+      "amount": 22000000,
+      "currency": "USD",
+      "round_letter": null,
+      "date": "2026-05-27",
+      "source_url": "https://techcrunch.com/2026/05/27/triomics-nabs-22m-to-bring-oncology-specific-ai-to-cancer-centers/",
+      "qualified_by": "amount"
+    },
+    {
       "name": "Turing",
       "ats": "greenhouse",
       "slug": "turing",
@@ -1269,6 +1553,21 @@
       "qualified_by": "stage"
     },
     {
+      "name": "Wispr Flow",
+      "ats": "ashby",
+      "slug": "wispr-flow",
+      "india_roles": 2,
+      "cities": [
+        "Bengaluru"
+      ],
+      "amount": 30000000,
+      "currency": "USD",
+      "round_letter": null,
+      "date": "2025-06-24",
+      "source_url": "https://techcrunch.com/2025/06/24/wispr-flow-raises-30m-from-menlo-ventures-for-its-ai-powered-dictation-app/",
+      "qualified_by": "amount"
+    },
+    {
       "name": "Workato",
       "ats": "greenhouse",
       "slug": "workato",
@@ -1321,6 +1620,19 @@
       "round_letter": null,
       "date": null,
       "source_url": "https://www.cbinsights.com/company/yugabyte",
+      "qualified_by": "stage"
+    },
+    {
+      "name": "Zip",
+      "ats": "ashby",
+      "slug": "zip",
+      "india_roles": 1,
+      "cities": [],
+      "amount": null,
+      "currency": null,
+      "round_letter": null,
+      "date": null,
+      "source_url": "https://www.ycombinator.com/companies/zip",
       "qualified_by": "stage"
     }
   ]

@@ -1297,3 +1297,88 @@ name cannot settle — `Gecko Robotics` sells inspection software, `Green Energy
 Exchange` is a trading platform, `Fleet Device Management` is SaaS — so those
 companies stay in the corpus and land in `corpus.json`'s `ambiguous` map, which
 is a human-sized list rather than a 2,948-row hunt.
+
+# T3.2 — the Ashby probe
+
+Re-run with `.venv/bin/python learning-tests/ashby_live.py`.
+
+## FINDINGS §1's ~151s Ashby latency is STALE. It is ~2s.
+
+This is the single most load-bearing number the project got wrong. §1 measured a
+**fixed ~151s per call, growing across runs, with 3 of 12 concurrent requests
+failing**, and everything downstream was sized on it: the ~4.7h-per-1,000 refresh
+budget, "Ashby weekly" versus "Greenhouse nightly" in T6.2/T6.3, and this task's
+own DoD line about the 6h GitHub Actions cap. Measured today, twice, before any
+code was written:
+
+```
+one call        ramp        200   2s   (1.97 MB, 120 roles)
+12 concurrent   real slugs  12/12 200, 1.7s WALL  (0.1s per company)
+```
+
+The whole 264-company Ashby corpus now costs ~35s, and a full build is 5m12s end
+to end — dominated by Greenhouse's 429 sequential calls, not by Ashby.
+
+**The retries and backoff stayed anyway.** §1's throttling was real when it was
+measured and read as progressive throttling of a repeat caller; it can come back,
+and at 2s the guard costs nothing. What should NOT survive is the tiering
+decision: **T6.3's "Ashby weekly because it is 151s/company" no longer has a
+premise.** Re-measure before building that workflow rather than inheriting the
+number.
+
+## A wrong Ashby slug 404s. Ashby is not Lever's trap.
+
+Measured against a deliberately unregisterable slug: `404`, body `Not Found` as
+plain text rather than JSON. So an empty `jobs` array from a 200 is an honest
+"no open roles" and can be believed, exactly as on Greenhouse. Only Lever (T3.3)
+needs `empty-board-unverified`.
+
+## There is no `meta.total`. Truncation is undetectable.
+
+The response is `{"jobs": [...], "apiVersion": "1"}` and nothing else, so
+Greenhouse's agreement check — the thing that makes a short board *detectable* —
+has no counterpart here. All the probe can refuse is a body that isn't whole
+JSON, which is why a malformed 200 is RETRIED rather than recorded: a truncated
+transfer is transient in exactly the way a 503 is, and the status line cannot
+tell them apart.
+
+Also absent: any way to decline the job descriptions. Greenhouse has
+`content=false`; Ashby ships `descriptionHtml` *and* `descriptionPlain` inline,
+which is why one 120-role board is 1.97 MB.
+
+## One role can be in several places, so India roles are counted by ROLE
+
+`secondaryLocations` sits beside the flat `location` string — 158 of them across
+Ramp's 120 roles — and each entry is an object wrapping its own `location`
+string, not a bare string. Reading only the primary undercounts multi-location
+postings (§2 predicted this); counting the *strings* over-counts them, because
+one posting open in Bengaluru and Mumbai is one job in two cities.
+
+That is what forced `build.Provider`: the probe and the location-unwrap travel
+together per ATS, because Greenhouse nests exactly one `location.name` and Ashby
+gives a list. `india.is_india` stays a function of a string, as its own docstring
+argued it should.
+
+## Where the 2,915 go now
+
+```
+   110  listed                  was 88
+   558  no-india-roles          was 326  (+232 Ashby boards read, hiring, not here)
+    51  probe-failed            was 315  -- exactly T3.3's Lever share, nothing else
+  2196  slug-unresolved
+```
+
+Of the 264 Ashby companies: 22 listed, 232 no-india-roles, 10 `slug-unresolved`
+(the slug resolved cleanly at T2.1 time and 404s now — the same "a resolved slug
+is not a probeable slug" effect T1.6 measured on Greenhouse).
+
+**T3.3 (Lever, 51 companies) is now the entire remaining probe gap**, and after
+it `probe-failed` should be 0. The 2,196 `slug-unresolved` are the next real
+frontier, and they are a slug problem, not a probe one.
+
+## Spot-checked, because "matched India" is the claim that can quietly be wrong
+
+`ashby/cursor` → 2 of 122 roles, both literally located `India` with no city, so
+the row carries `cities: []` — the "India without naming where" case T3.4 wrote
+that field for. `ashby/ambient.ai` → 5 of 15, all `Bengaluru` with no `, India`
+suffix, caught by the city list rather than by the country name.

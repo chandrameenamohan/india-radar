@@ -15,6 +15,7 @@ site as "we checked, they aren't hiring in India".
 from __future__ import annotations
 
 import json
+from collections.abc import Mapping
 from typing import Any
 
 from src.net import get
@@ -67,6 +68,18 @@ def probe(slug: str, timeout: int = 30) -> Roles | Outcome:
     if status != 200:
         return Outcome.PROBE_FAILED
     return parse(body)
+
+
+def locations(role: Mapping[str, Any]) -> list[str]:
+    """Where this role is open. Greenhouse nests exactly one place per role and
+    has no second-location field, so this is a list of one — or of none, when
+    the board left the location off entirely.
+
+    A list because Ashby genuinely gives several (`secondaryLocations`), and the
+    build counts India roles by role rather than by location string.
+    """
+    name = (role.get("location") or {}).get("name")
+    return [name] if isinstance(name, str) else []
 
 
 def board_name(slug: str, timeout: int = 20) -> str | None:
