@@ -59,7 +59,11 @@ if at_prompt; then
   fi
   note "startup: already at a prompt (iteration finished before watching); advancing unvalidated"
   tmux send-keys -t "$SESSION" "" Enter 2>/dev/null
-  sleep 20
+  cleared=0
+  while at_prompt; do
+    sleep 5; cleared=$((cleared+5))
+    [ $cleared -ge 120 ] && { note "HALT: prompt did not clear after startup Enter"; exit 1; }
+  done
 fi
 
 for _ in $(seq 1 "$MAX"); do
@@ -128,5 +132,16 @@ for _ in $(seq 1 "$MAX"); do
     exit 0
   fi
   tmux send-keys -t "$SESSION" "" Enter 2>/dev/null || { note "HALT: tmux send failed"; exit 1; }
+
+  # Wait for the prompt to actually CLEAR before looping. Without this the pane
+  # still shows the prompt as its last non-empty line until the next iteration
+  # header prints, so at_prompt matches immediately and the SAME iteration gets
+  # evaluated twice -- the second pass sees nothing moved and halts. That produced
+  # two false halts while the loop was running perfectly well.
+  cleared=0
+  while at_prompt; do
+    sleep 5; cleared=$((cleared+5))
+    [ $cleared -ge 120 ] && { note "HALT: prompt did not clear after Enter"; exit 1; }
+  done
 done
 note "watcher hit max=$MAX iterations"
