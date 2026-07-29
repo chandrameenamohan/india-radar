@@ -45,9 +45,28 @@ def test_probe_failed_snapshot_contributes_no_point():
     raise AssertionError("T7.1: trend derivation not implemented")
 
 
-@pytest.mark.xfail(reason="T4.4 not implemented", strict=True)
 def test_20_known_pairs_zero_false_positives():
-    raise AssertionError("T4.4: MCA name matching not implemented")
+    """Invariant 5 (T4.4). A wrong CIN is worse than no CIN: publishing somebody
+    else's company registration is a real-world error, not a cosmetic one."""
+    from src import build, mca
+    from tests.test_mca import PAIRS, labelled_pairs_verdicts, register
+
+    assert len(PAIRS) >= 20
+    assert labelled_pairs_verdicts() == [(company, label) for company, _, label in PAIRS]
+
+    # The traps must stay IN the fixture, the same rule invariant 2 keeps. Each
+    # is a registered name that OPENS with a listed company's letters and belongs
+    # to somebody else, so deleting one is how this comes back green with the
+    # boundary rule gone.
+    traps = {name for _, name, label in PAIRS if label == ""}
+    assert {"KONGSBERG MARITIME INDIA PRIVATE LIMITED", "NOTIONEXT INDIA PRIVATE LIMITED",
+            "HIGH TOUCH HEALTH SOLUTIONS GLOBAL PRIVATE LIMITED"} <= traps
+    # And the schema is the second lock: nothing below the publish threshold can
+    # reach a row even if the matcher one day hands it over.
+    rows = [{"name": "Stripe", "mca": None}]
+    mca.attach(rows, register("STRIPE INDIA PRIVATE LIMITED"))
+    assert not build.mca_errors(rows[0]["mca"])
+    assert build.mca_errors({**rows[0]["mca"], "confidence": mca.PREFIX})
 
 
 @pytest.mark.xfail(reason="T6.4 not implemented", strict=True)

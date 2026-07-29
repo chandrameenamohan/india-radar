@@ -1756,3 +1756,87 @@ SPEC feature 9 wants a registered city, and that is `rsplit(",")[-4]` — on the
 rows inspected. It is **not** validated over all 24,102, so T4.4 owns proving it.
 The snapshot keeps the address WHOLE for exactly that reason: a lossy trim here
 would cost a re-pull against the flaky API to undo.
+
+---
+
+# MCA name matching — measured during T4.4 (2026-07-29)
+
+## The word boundary is the entire difference between a match and a wrong CIN
+
+A registered name is the company's name followed by the register's own words, so
+the join looks like a prefix test — and a *character* prefix test is wrong on
+live data in both directions. Measured against all 24,102 registered names:
+
+| corpus name | character prefix finds | what it is |
+|---|---|---|
+| `Kong` | `KONGSBERG MARITIME INDIA` | a Norwegian maritime group |
+| `Notion` | `NOTIONEXT INDIA` | somebody else |
+| `Stripe` | `STRIPES ACADEMY LEARNING AND DEVELOPMENT INDIA` | somebody else |
+| `Scale` | `SCALEFFICIENT`, `SCALEFLUIDLY`, `SCALEUP STREET`, `SCALETRON` | four of them |
+
+So the match cuts only between words. But the words have to be run together to
+compare, because the register JOINS names the corpus spaces: `AMBIENTAI INDIA`
+is `Ambient.ai`. Running them together re-opens the trap from the other side —
+`HIGH TOUCH HEALTH SOLUTIONS GLOBAL` concatenates to `hightouch...`, and that is
+a healthcare company, not the data one.
+
+**The rule that survives both: the register may JOIN the company's words but
+never SPLIT one.** A candidate is kept only if the words of the registered name
+it consumed number no more than the company's own words. `Ambient.ai` spends two
+words and consumes one; `Hightouch` spends one and would need two, so it is
+refused. That single comparison is what all five false positives above die on.
+
+The other direction is `slugs.states_company`'s rule unchanged — the register may
+say MORE and never less. `COCKROACH INDIA` for `Cockroach Labs` is refused for
+the same reason `greenhouse/brave` is refused for `Brave Care`.
+
+## Two tiers, because "says more" is right and wrong in the same shape
+
+Of the 116 listed companies, 32 reach a registered name that is theirs plus at
+most `INDIA` and a legal form. Another 30 reach one that says more — and that
+set contains both `GLEAN SEARCH TECHNOLOGIES INDIA` (Glean) and `FERN & ADE
+INDIA` (not Fern). Nothing in the register tells those apart, so the tier is
+published nowhere and reported in `build-report.json` under `mca.held` for a
+human. Unresolved beats wrong, as everywhere else here.
+
+**Zero ambiguity at the publishing tier, measured over the whole corpus**: all
+2,915 corpus names against all 24,102 registered names produce 92 `exact`
+matches and **not one** name reaching two different CINs. The guard still ships,
+because `Scale` reaching both `SCALE AI INDIA` and `SCALE FACILITATION PARTNERS
+INDIA` is a live one-word-away miss — and the corpus holds `Scale AI` as its own
+company.
+
+## The registered city is the district field, NOT the locality — correcting T4.3
+
+T4.3 read `rsplit(",")[-4]` off one Mumbai row where the locality and the
+district both said `Mumbai`, and flagged it unvalidated. Validated now over all
+24,102:
+
+| field | blank | distinct | what it holds |
+|---|---|---|---|
+| `[-4]` locality | 252 | 2,271 | `Kandivali West` (EBANX), `Shaikpet` (Workato), `Sector -45`, `NH-8` — 349 street fragments |
+| `[-3]` district | **0** | 476 | `Bangalore`, `Pune`, `Hyderabad`, `South West Delhi` |
+| `[-2]` state | 0 | 29 | clean |
+
+The locality is a neighbourhood; the district is the city a person would name.
+Case is the register's own noise — `NEW DELHI` (680) sits beside `New Delhi`
+(1,894) for one place — so it is evened out and nothing else is.
+
+## A CIN has a shape, and all 24,102 keep it
+
+`[LU]\d{5}[A-Z]{2}\d{4}[A-Z]{3}\d{6}` matches every row in the snapshot, so
+`build.mca_errors` refuses one that doesn't: this is the one enrichment whose
+mistake is a public claim about another company's legal identity, and a CIN that
+isn't a CIN means the parse went wrong rather than that the company is unusual.
+
+## An Indian-origin company CAN be in the slice — partly correcting T4.3
+
+T4.3 concluded that `RAZORPAY SOFTWARE PRIVATE LIMITED` cannot be a foreign
+subsidiary and no name matching would find it. True of that entity — but
+**`RAZORPAY TECHNOLOGIES PRIVATE LIMITED` is in the slice**, because Razorpay's
+holding company is incorporated outside India. The ceiling T4.3 described is
+real and slightly higher than it said: the filter excludes companies whose
+*parent* is Indian, not companies that feel Indian. It is still a filter about
+corporate structure, which is why the site's footer now says so — a badge no
+India-founded company can earn reads as a verdict on them unless the page states
+what it is.

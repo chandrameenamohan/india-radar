@@ -1,12 +1,12 @@
 {
   "corpus_size": 2915,
-  "checked": 709,
-  "unchecked": 2206,
+  "checked": 711,
+  "unchecked": 2204,
   "counts": {
-    "listed": 115,
-    "no-india-roles": 594,
+    "listed": 116,
+    "no-india-roles": 595,
     "slug-unresolved": 2201,
-    "probe-failed": 2,
+    "probe-failed": 0,
     "empty-board-unverified": 3,
     "not-qualified": 0
   },
@@ -110,6 +110,7 @@
     "Stripe",
     "Talkdesk",
     "Tamara",
+    "Temporal",
     "TensTorrent",
     "Tide",
     "Together AI",
@@ -2647,7 +2648,7 @@
     "Temelio": "slug-unresolved",
     "Templarbit": "slug-unresolved",
     "Tempo": "no-india-roles",
-    "Temporal": "probe-failed",
+    "Temporal": "listed",
     "TeneoSeven": "slug-unresolved",
     "Tennr": "no-india-roles",
     "TensTorrent": "listed",
@@ -2739,7 +2740,7 @@
     "Trumid": "no-india-roles",
     "Truora": "slug-unresolved",
     "TrustWise": "slug-unresolved",
-    "Tulea Health": "probe-failed",
+    "Tulea Health": "no-india-roles",
     "Tulip": "no-india-roles",
     "Turing": "listed",
     "Turing Labs Inc.": "slug-unresolved",
@@ -3048,5 +3049,437 @@
     "with_website": 1815,
     "slug_unresolved_with_website": 1251,
     "slug_unresolved_without_website": 950
+  },
+  "mca": {
+    "records": 24102,
+    "pulled": "2026-07-29",
+    "matched": 32,
+    "held": [
+      {
+        "name": "6Sense",
+        "confidence": "prefix",
+        "candidates": [
+          {
+            "cin": "U74999PN2018FTC182702",
+            "name": "6SENSE INSIGHTS INDIA PRIVATE LIMITED",
+            "incorporated": "2018-05-24",
+            "address": "91Springboard,SkyLoft,Creaticity Mall,Opposite   Golf Course,Off Airport Road,Shastrinaga,r,Yerawada,Pune,Pune,Maharashtra,411006-India",
+            "status": "Active"
+          }
+        ]
+      },
+      {
+        "name": "AlphaSense",
+        "confidence": "prefix",
+        "candidates": [
+          {
+            "cin": "U72900PN2019FTC186220",
+            "name": "ALPHASENSE TECHNOLOGY (INDIA) PRIVATE LIMITED",
+            "incorporated": "2019-08-21",
+            "address": "3rd Floor, Tower B, Panchshil Business Park,   Survey No. 20, Balewadi,,Pune,Pune,Maharashtra,411045-India",
+            "status": "Active"
+          }
+        ]
+      },
+      {
+        "name": "ASAPP",
+        "confidence": "prefix",
+        "candidates": [
+          {
+            "cin": "U62099KA2023FTC172837",
+            "name": "ASAPP SERVICES INDIA PRIVATE LIMITED",
+            "incorporated": "2023-04-26",
+            "address": "Survey No 414/190/13, Suite No 208, 2nd Floor,PSR Complex, Govinda Reddy Layout,Bangalore South,Bangalore,Karnataka,560076-India",
+            "status": "Active"
+          }
+        ]
+      },
+      {
+        "name": "Aviatrix",
+        "confidence": "prefix",
+        "candidates": [
+          {
+            "cin": "U72900KA2021FTC148761",
+            "name": "AVIATRIX SYSTEMS INDIA PRIVATE LIMITED",
+            "incorporated": "2021-06-25",
+            "address": "5th Floor, Godrej Indiranagar,Baiyyappanahalli, Old Madras Road,Bangalore North,Bangalore,Karnataka,560038-India",
+            "status": "Active"
+          }
+        ]
+      },
+      {
+        "name": "Cockroach Labs",
+        "confidence": "prefix",
+        "candidates": [
+          {
+            "cin": "U72200KA2022FTC163152",
+            "name": "COCKROACH LABS TECHNOLOGIES INDIA PRIVATE LIMITED",
+            "incorporated": "2022-06-29",
+            "address": "WeWork Roshni Tech Hub, 7B-102, Roshni Arcade,, Marathahalli Main Road, Lakshminarayana Pura, EPIP Zone, Chinnapanna Halli,Bangalore North,Bangalore,Karnataka,560037-India",
+            "status": "Active"
+          }
+        ]
+      },
+      {
+        "name": "Degreed",
+        "confidence": "prefix",
+        "candidates": [
+          {
+            "cin": "U74999MH2019FTC319055",
+            "name": "DEGREED APAC PRIVATE LIMITED",
+            "incorporated": "2019-01-04",
+            "address": "We work 247 Park 13th Floor Vikhroli Corporate Park,Hindustan C. Bus Stop  Lal Bahadur Shastri Rd Gandhi Nagar Vikhroli West Mumbai,Mumbai,Mumbai,Maharashtra,400083-India",
+            "status": "Active"
+          }
+        ]
+      },
+      {
+        "name": "DevRev",
+        "confidence": "prefix",
+        "candidates": [
+          {
+            "cin": "U72900KA2020FTC141826",
+            "name": "DEVREV CLOUD INDIA PRIVATE LIMITED",
+            "incorporated": "2020-12-03",
+            "address": "Villa/460, Phase 2, Adarsh Palm Retreat,   Near Intel Office, Deverabisanahalli,,Bangalore,Bangalore,Karnataka,560103-India",
+            "status": "Active"
+          }
+        ]
+      },
+      {
+        "name": "Dialpad",
+        "confidence": "prefix",
+        "candidates": [
+          {
+            "cin": "U72900KA2018FTC118558",
+            "name": "DIALPAD SERVICES PRIVATE LIMITED",
+            "incorporated": "2018-11-15",
+            "address": "Salarpuria Magnificia, 12th Floor, No. 78,   Next to KR Puram Tin Factory, Old Madras, Road,,Bengaluru,Bangalore,Karnataka,560016-India",
+            "status": "Active"
+          }
+        ]
+      },
+      {
+        "name": "Druva",
+        "confidence": "prefix",
+        "candidates": [
+          {
+            "cin": "U72900PN2013FTC146210",
+            "name": "DRUVA DATA SOLUTIONS PRIVATE LIMITED",
+            "incorporated": "2013-02-11",
+            "address": "PLOT NO- 403/1, CTS NO- 985, 8TH FLOOR   THE PAVILION, SENAPATI BAPAT ROAD,SHIVAJ,I NAGAR,PUNE,Pune,Maharashtra,411016-India",
+            "status": "Active"
+          }
+        ]
+      },
+      {
+        "name": "Fern",
+        "confidence": "prefix",
+        "candidates": [
+          {
+            "cin": "U74999TN2022FTC152237",
+            "name": "FERN & ADE INDIA PRIVATE LIMITED",
+            "incorporated": "2022-05-17",
+            "address": "Gate No.2, No. 57,Adam Nagar Road Nagalkeni, Chrompet,,Sriperumbudur,Kanchipuram,Tamil Nadu,600044-India",
+            "status": "Active"
+          }
+        ]
+      },
+      {
+        "name": "Flexport",
+        "confidence": "prefix",
+        "candidates": [
+          {
+            "cin": "U52292MH2026FTC468569",
+            "name": "FLEXPORT INTERNATIONAL (INDIA) PRIVATE LIMITED",
+            "incorporated": "2026-02-17",
+            "address": "B/205, BLDG -42, B-WING,AZAD NAGAR SANGAM CHS,Mumbai,Mumbai,Maharashtra,400053-India",
+            "status": "Active"
+          }
+        ]
+      },
+      {
+        "name": "Glean",
+        "confidence": "prefix",
+        "candidates": [
+          {
+            "cin": "U72900KA2022FTC161348",
+            "name": "GLEAN SEARCH TECHNOLOGIES INDIA PRIVATE LIMITED",
+            "incorporated": "2022-05-18",
+            "address": "30, Seventh Floor,IndiQube Tech Point,100 Feet Road,, Srinivagilu,Ward No.68,Kathalipalya,Ejipura,Begur Hobli,Bangalore South,Bangalore,Karnataka,560068-India",
+            "status": "Active"
+          }
+        ]
+      },
+      {
+        "name": "Instead",
+        "confidence": "prefix",
+        "candidates": [
+          {
+            "cin": "U62090TS2025FTC198274",
+            "name": "INSTEAD TAX INDIA PRIVATE LIMITED",
+            "incorporated": "2025-05-08",
+            "address": "Tower 1, Survey No. 199, Vamsiram,Jyothi Granules opposite Chirec School Laxmi Nagar,,Serilingampally,K.V.Rangareddy,Telangana,500084-India",
+            "status": "Active"
+          }
+        ]
+      },
+      {
+        "name": "Kaseya",
+        "confidence": "prefix",
+        "candidates": [
+          {
+            "cin": "U72200KA2008FTC046666",
+            "name": "KASEYA SOFTWARE INDIA PRIVATE LIMITED",
+            "incorporated": "2008-06-04",
+            "address": "Tower B, Ground Floor, Prestige Shantiniketan,   Whitefield Main Road, Mahadevapura Post,Bangalore,Bangalore,Karnataka,560048-India",
+            "status": "Active"
+          }
+        ]
+      },
+      {
+        "name": "Kong",
+        "confidence": "prefix",
+        "candidates": [
+          {
+            "cin": "U62099KA2024FTC184132",
+            "name": "KONG SOFTWARE AND BUSINESS SERVICES INDIA PRIVATE LIMITED",
+            "incorporated": "2024-02-01",
+            "address": "7th Floor, TS Towers Camelia,Plot No.6, Devasandra Industrial Area, Mahadevapura, White Field,Bangalore North,Bangalore,Karnataka,560048-India",
+            "status": "Active"
+          }
+        ]
+      },
+      {
+        "name": "Lighthouse",
+        "confidence": "prefix",
+        "candidates": [
+          {
+            "cin": "U74110MH2006FTC163172",
+            "name": "LIGHTHOUSE ASIA PACIFIC PRIVATE LIMITED",
+            "incorporated": "2006-07-19",
+            "address": "Smartworks, 2nd Floor, Fleet House, Marol Naka   Metro Station, Gamdevi, Marol, Andheri E,ast,MUMBAI,Mumbai City,Maharashtra,400059-India",
+            "status": "Active"
+          }
+        ]
+      },
+      {
+        "name": "Mixpanel",
+        "confidence": "prefix",
+        "candidates": [
+          {
+            "cin": "U82990KA2024FTC184600",
+            "name": "MIXPANEL INDIA SERVICES PRIVATE LIMITED",
+            "incorporated": "2024-02-10",
+            "address": "No. 1, Ground Floor, 79,,Coles Road,PulikeshiNagar,Bangalore North,Bangalore,Karnataka,560005-India",
+            "status": "Active"
+          }
+        ]
+      },
+      {
+        "name": "Moniepoint",
+        "confidence": "prefix",
+        "candidates": [
+          {
+            "cin": "U62013KA2025FTC197271",
+            "name": "MONIEPOINT TECHNOLOGIES INDIA PRIVATE LIMITED",
+            "incorporated": "2025-01-24",
+            "address": "Wework Prestige Cube, Site No. 26,,Laskar Hosur Road,Koramangala,,Bangalore South,Bangalore,Karnataka,560030-India",
+            "status": "Active"
+          }
+        ]
+      },
+      {
+        "name": "NanoNets",
+        "confidence": "prefix",
+        "candidates": [
+          {
+            "cin": "U72502KA2017FTC100862",
+            "name": "NANONETS WEB SERVICES PRIVATE LIMITED",
+            "incorporated": "2017-02-27",
+            "address": "51/2, Venkat Reddy Layout,   Koramangala 6th Block,,Bengaluru,Bangalore,Karnataka,560095-India",
+            "status": "Active"
+          }
+        ]
+      },
+      {
+        "name": "Netskope",
+        "confidence": "prefix",
+        "candidates": [
+          {
+            "cin": "U72200KA2013FTC068065",
+            "name": "NETSKOPE SOFTWARE INDIA PRIVATE LIMITED",
+            "incorporated": "2013-03-01",
+            "address": "KNOWLEDGE COURT, WING B, 1ST FLR, PLOT NO 9,   SURVEY NO 77, DODDANAKUNDI PHASE 1 INDUS,TRIAL AREA,WHITEFIELD ROAD BANGALORE,Bangalore,Karnataka,560048-India",
+            "status": "Active"
+          }
+        ]
+      },
+      {
+        "name": "Oleria",
+        "confidence": "prefix",
+        "candidates": [
+          {
+            "cin": "U62011KA2024FTC186167",
+            "name": "OLERIA CORPORATION INDIA PRIVATE LIMITED",
+            "incorporated": "2024-03-13",
+            "address": "No.01-121 & 04-120, WeWork Vaishnavi Signature East Ground Floor,,78/9, Outer Ring Road, Hobli, Varthur,Bangalore South,Bangalore,Karnataka,560103-India",
+            "status": "Active"
+          }
+        ]
+      },
+      {
+        "name": "Project44",
+        "confidence": "prefix",
+        "candidates": [
+          {
+            "cin": "U62011KA2023FTC171316",
+            "name": "PROJECT44 SOFTWARE SERVICES PRIVATE LIMITED",
+            "incorporated": "2023-03-16",
+            "address": "6th Floor, Zonasha IT Building,,Laxmi Sagar Layout, Mahadevapura,,Bangalore North,Bangalore,Karnataka,560048-India",
+            "status": "Active"
+          }
+        ]
+      },
+      {
+        "name": "Pump",
+        "confidence": "prefix",
+        "candidates": [
+          {
+            "cin": "U62099TS2023FTC175387",
+            "name": "PUMP BILLING TECHNOLOGIES INDIA PRIVATE LIMITED",
+            "incorporated": "2023-07-25",
+            "address": "Flat 101,Ganesh GHR & MSY,Plaza, Vittal Rao Nagar,,Shaikpet,Hyderabad,Telangana,500081-India",
+            "status": "Active"
+          }
+        ]
+      },
+      {
+        "name": "Razorpay",
+        "confidence": "prefix",
+        "candidates": [
+          {
+            "cin": "U67100KA2015FTC082538",
+            "name": "RAZORPAY TECHNOLOGIES PRIVATE LIMITED",
+            "incorporated": "2015-08-28",
+            "address": "1st Floor, SJR Cyber   22, Laskar Hosur Road, Adugodi,Bangalore,Bangalore,Karnataka,560030-India",
+            "status": "Active"
+          }
+        ]
+      },
+      {
+        "name": "Scale",
+        "confidence": "prefix",
+        "candidates": [
+          {
+            "cin": "U62099KA2026FTC215467",
+            "name": "SCALE AI INDIA PRIVATE LIMITED",
+            "incorporated": "2026-02-06",
+            "address": "33/1, 1st Flr, 32nd Cross, Jayanagar 7th Block,Jayanagar West, Bangalore South,Bangalore South,Bangalore,Karnataka,560070-India",
+            "status": "Active"
+          },
+          {
+            "cin": "U31100KA2022FTC164964",
+            "name": "SCALE FACILITATION PARTNERS INDIA PRIVATE LIMITED",
+            "incorporated": "2022-08-17",
+            "address": "No. 55, SV Complex,,K R Road, Basavanagudi,Bangalore North,Bangalore,Karnataka,560002-India",
+            "status": "Active"
+          }
+        ]
+      },
+      {
+        "name": "SeekOut",
+        "confidence": "prefix",
+        "candidates": [
+          {
+            "cin": "U62099KA2023FTC205613",
+            "name": "SEEKOUT TALENT INNOVATIONS INDIA PRIVATE LIMITED",
+            "incorporated": "2023-08-25",
+            "address": "4th Floor, Kabra Excelsior,,6/A, 80 Feet Rd, Koramangala 1A Block,,Bangalore South,Bangalore,Karnataka,560034-India",
+            "status": "Active"
+          }
+        ]
+      },
+      {
+        "name": "Starburst",
+        "confidence": "prefix",
+        "candidates": [
+          {
+            "cin": "U62099KA2023FTC177349",
+            "name": "STARBURST DATA INDIA PRIVATE LIMITED",
+            "incorporated": "2023-08-16",
+            "address": "WeWork Galaxy, 43, Residency Rd,Shanthala Nagar, Ashok Nagar,Bangalore North,Bangalore,Karnataka,560025-India",
+            "status": "Active"
+          }
+        ]
+      },
+      {
+        "name": "Tide",
+        "confidence": "prefix",
+        "candidates": [
+          {
+            "cin": "U72900DL2020FTC438677",
+            "name": "TIDE PLATFORM PRIVATE LIMITED",
+            "incorporated": "2020-02-06",
+            "address": "03rd Floor, Videocon Tower,,Jhandewalan Extension, New Delhi-110005,New Delhi,Central Delhi,Delhi,110005-India",
+            "status": "Active"
+          },
+          {
+            "cin": "U66220DC2026FTC471849",
+            "name": "TIDE INSURANCE SERVICES PRIVATE LIMITED",
+            "incorporated": "2026-05-27",
+            "address": "03rd Floor,Videocon Tower,Jhandewalan Extension,New Delhi,Central Delhi,Delhi,110005-India",
+            "status": "Active"
+          },
+          {
+            "cin": "U72900TG2021FTC155357",
+            "name": "TIDE PLATFORM TECHNOLOGY AND SERVICING PRIVATE LIMITED",
+            "incorporated": "2021-09-27",
+            "address": "Office 13 AB, Level 13, Sanali Spazio Plot No. 19,   Software Unit Layout, Madhapur,Hyderabad,Hyderabad,Telangana,500081-India",
+            "status": "Active"
+          },
+          {
+            "cin": "U66190DC2026FTC470426",
+            "name": "TIDE CAPITAL SERVICES PRIVATE LIMITED",
+            "incorporated": "2026-04-10",
+            "address": "03rd Floor,Videocon Tower,Jhandewalan Extension,New Delhi,Central Delhi,Delhi,110005-India",
+            "status": "Active"
+          },
+          {
+            "cin": "U74999KL2022FTC076950",
+            "name": "TIDE TRAK INDIA PRIVATE LIMITED",
+            "incorporated": "2022-07-21",
+            "address": "3/1104-Zuhani,IMA Hall Road   Nadakkavu,Kozhikode,Kozhikode,Kerala,673011-India",
+            "status": "Strike Off"
+          }
+        ]
+      },
+      {
+        "name": "Turing",
+        "confidence": "prefix",
+        "candidates": [
+          {
+            "cin": "U62099KA2023FTC174428",
+            "name": "TURING GLOBAL INDIA PRIVATE LIMITED",
+            "incorporated": "2023-06-01",
+            "address": "WeWork Prestige Cube,Site No. 26 Laskar Hosur Road,Bangalore South,Bangalore,Karnataka,560030-India",
+            "status": "Active"
+          }
+        ]
+      },
+      {
+        "name": "YugaByte",
+        "confidence": "prefix",
+        "candidates": [
+          {
+            "cin": "U72900KA2021FTC143648",
+            "name": "YUGABYTE SOFTWARE PRIVATE LIMITED",
+            "incorporated": "2021-02-01",
+            "address": "4TH FLOOR, INDIQUBE ORION, SYNO 55/11B&55/13,   2ND SECTOR, 24TH MAIN ROAD, HSR LAYOUT,,HARALUKUNTE VILLAGE,Bangalore,Karnataka,560102-India",
+            "status": "Active"
+          }
+        ]
+      }
+    ]
   }
 }

@@ -1,5 +1,5 @@
 {
-  "schema_version": 5,
+  "schema_version": 6,
   "snapshot": "2026-07-28",
   "companies": [
     {
@@ -42,7 +42,8 @@
       "date": "2026-06-30",
       "source_url": "https://www.finsmes.com/2026/06/acme-cloud-raises-40m.html",
       "qualified_by": "letter",
-      "salary": null
+      "salary": null,
+      "mca": null
     },
     {
       "name": "Beta Logistics",
@@ -75,7 +76,15 @@
       "date": "2026-07-20",
       "source_url": "https://www.finsmes.com/2026/07/beta-logistics-raises-6m.html",
       "qualified_by": "letter",
-      "salary": null
+      "salary": null,
+      "mca": {
+        "cin": "U63030MH2019FTC320014",
+        "name": "BETA LOGISTICS INDIA PRIVATE LIMITED",
+        "incorporated": "2019-11-08",
+        "city": "Mumbai",
+        "status": "Strike Off",
+        "confidence": "exact"
+      }
     },
     {
       "name": "Gamma Health",
@@ -131,6 +140,14 @@
         "reports": 1204,
         "observed": "2026-07-21",
         "source_url": "https://www.ambitionbox.com/salaries/gamma-health-salaries"
+      },
+      "mca": {
+        "cin": "U62099KA2021FTC150001",
+        "name": "GAMMA HEALTH INDIA PRIVATE LIMITED",
+        "incorporated": "2021-04-21",
+        "city": "Bangalore",
+        "status": "Active",
+        "confidence": "exact"
       }
     },
     {
@@ -159,7 +176,8 @@
         "reports": 1,
         "observed": "2025-10-14",
         "source_url": "https://www.ambitionbox.com/salaries/delta-remote-salaries"
-      }
+      },
+      "mca": null
     },
     {
       "name": "Epsilon Directory",
@@ -192,7 +210,8 @@
       "date": null,
       "source_url": "https://www.ycombinator.com/companies/epsilon-directory",
       "qualified_by": "stage",
-      "salary": null
+      "salary": null,
+      "mca": null
     },
     {
       "name": "Zeta Placeless",
@@ -215,7 +234,8 @@
       "date": "2026-05-05",
       "source_url": "https://www.finsmes.com/2026/05/zeta-placeless-raises-15m.html",
       "qualified_by": "letter",
-      "salary": null
+      "salary": null,
+      "mca": null
     }
   ]
 }

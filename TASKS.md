@@ -843,8 +843,79 @@ Out of scope:
     string "91", a phone country code in a country field. Corrupt. Never use.
 ```
 
-### T4.4 — MCA name matching `in-progress` · *Phase 2* · after T4.3
+### T4.4 — MCA name matching `done` · *Phase 2* · after T4.3
 Join "Stripe" → "STRIPE INDIA PRIVATE LIMITED". No shared identifier exists.
+
+> **32 of 116 listed companies now ship a CIN, an incorporation date, a
+> registered city and an entity status; 30 more are held for review and appear
+> nowhere.** Schema v6. The listed set is unchanged by the enrichment, which is
+> the point — it runs after the spine, on the rows the spine produced.
+>
+> **A word boundary is the entire difference between a match and a wrong CIN.**
+> A registered name is the company's name followed by the register's own words,
+> so the join looks like a prefix test — and a *character* prefix test is wrong
+> in both directions on live data. It hands `Kong` the Norwegian maritime group
+> `KONGSBERG MARITIME INDIA`, `Notion` a company called `NOTIONEXT`, `Stripe` a
+> tutoring firm called `STRIPES ACADEMY`, and `Scale` four separate strangers.
+> So the match cuts only between words. But the words must then be run together
+> to compare at all, because the register JOINS what the corpus spaces —
+> `AMBIENTAI INDIA` is `Ambient.ai` — and that re-opens the trap from the other
+> side: `HIGH TOUCH HEALTH SOLUTIONS GLOBAL` concatenates onto `Hightouch`, and
+> it is a healthcare company.
+>
+> **The rule that survives both: the register may JOIN a company's words but
+> never SPLIT one.** One comparison — the registered words consumed must not
+> outnumber the company's own — and all five of those die on it. The other
+> direction is `slugs.states_company` unchanged: the register may say MORE and
+> never less, so `COCKROACH INDIA` for `Cockroach Labs` is refused for the same
+> reason `greenhouse/brave` is refused for `Brave Care`.
+>
+> **Two tiers, because "says more" is right and wrong in the same shape.** 32 of
+> 116 listed companies reach a registered name that is theirs plus at most
+> `INDIA` and a legal form; those publish. Another 30 reach one that says more —
+> and that set holds both `GLEAN SEARCH TECHNOLOGIES INDIA` (Glean) and `FERN &
+> ADE INDIA` (not Fern). Nothing in the register tells them apart, so the whole
+> tier is held in `build-report.json` under `mca.held` for a human and appears
+> nowhere on the site. Unresolved beats wrong, as everywhere else here.
+>
+> **Zero ambiguity at the publishing tier, measured over the whole corpus:** all
+> 2,915 corpus names against all 24,102 registered names give 92 `exact` matches
+> and not one name reaching two different CINs. The guard ships anyway, because
+> `Scale` reaching both `SCALE AI INDIA` and `SCALE FACILITATION PARTNERS INDIA`
+> is one word away — and the corpus holds `Scale AI` as its own company.
+>
+> **The registered city is the district field, not the locality — correcting
+> T4.3**, which read `rsplit(",")[-4]` off one Mumbai row where both said
+> `Mumbai` and flagged it unvalidated. Validated now over all 24,102: the
+> locality is blank on 252 rows, a street fragment on 349 (`Sector -45`, `NH-8`)
+> and elsewhere a neighbourhood (`Kandivali West` for EBANX). The district is
+> never blank, holds 476 values, and reads as the city a person would name.
+>
+> **The badge says what it is, because it cannot mean what it looks like.** T4.3
+> warned that a mark only foreign subsidiaries can earn reads as a mark against
+> Indian startups. So the filter is labelled "Has an India registration" rather
+> than "verified", and the footer states that the register slice covers
+> subsidiaries of foreign-incorporated parents — a missing CIN says nothing about
+> a company. (One correction to T4.3 while here: an Indian-origin company *can*
+> appear — `RAZORPAY TECHNOLOGIES PRIVATE LIMITED` is in the slice, because
+> Razorpay's holdco is incorporated abroad. The filter is about corporate
+> structure, not about where a company feels like it is from.)
+>
+> Five mutations were run against the new checks and all five bit: dropping the
+> join-not-split guard, publishing the prefix tier, reading the locality as the
+> city, accepting any confidence on a published row, and dropping the CIN shape
+> check.
+>
+> **"Resolves on the MCA portal" is satisfied by provenance, not by a fetch.**
+> Every CIN published is the register's own string, unmodified, and all 24,102 in
+> the snapshot match the 21-character CIN shape — which `build.mca_errors`
+> enforces, so a parse gone wrong fails the build rather than shipping. Asking
+> mca.gov.in directly is not available to us: SPEC records it as a hard 403 and
+> a non-goal.
+>
+> **The MCA enrichment now runs in the smoke build too**, since it reads a local
+> file and touches no network. T4.3 could only prove its hookup by a printed
+> report line; `./init.sh` now exercises the whole path offline.
 ```
 Acceptance (observable):
   A matched company displays a CIN that resolves on the MCA portal. Match

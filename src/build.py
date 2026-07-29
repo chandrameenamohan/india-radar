@@ -14,6 +14,7 @@ between to catch it. Validation belongs at the write, not at the read.
 from __future__ import annotations
 
 import json
+import re
 import sys
 from collections.abc import Callable, Iterable, Mapping
 from datetime import date
@@ -37,7 +38,11 @@ from src.slugs import Slug
 #: worked. The count is `len(roles)` — carrying both invites them to disagree.
 #: v5 added `salary` (T4.2), which is null for most rows and must be: it is the
 #: first field the site renders only when the enrichment found something.
-SCHEMA_VERSION = 5
+#: v6 added `mca` (T4.4) — a CIN, the name it is registered under, and how sure
+#: the match is. Null for most rows by construction, not by failure: the register
+#: slice covers subsidiaries of foreign-incorporated parents, so an India-founded
+#: company can never carry one.
+SCHEMA_VERSION = 6
 
 Probe = Callable[[str], Roles | Outcome]
 Row = dict[str, Any]
@@ -89,6 +94,7 @@ FIELDS: dict[str, type | tuple[type, ...]] = {
     "source_url": str,
     "qualified_by": str,
     "salary": (dict, type(None)),
+    "mca": (dict, type(None)),
 }
 
 #: Every ATS this corpus holds a slug for. With Lever in, no company is
@@ -113,6 +119,18 @@ ROLE_FIELDS = ("title", "url", "locations", "workplace")
 #: read as a statement about now. Absence of the whole benchmark is fine; a
 #: benchmark that can't say when is not.
 SALARY_FIELDS = ("avg_lpa", "reports", "observed", "source_url")
+
+#: An MCA registration's fields (T4.4). A CIN names a real legal entity, so this
+#: is the one enrichment whose mistake is a public claim about somebody else's
+#: company — hence the shape check on the identifier itself and the refusal of
+#: any confidence below the publish threshold.
+MCA_FIELDS = ("cin", "name", "incorporated", "city", "status", "confidence")
+
+#: A CIN as the register issues it: listing status, industry code, state, year of
+#: incorporation, ownership class and the registration number. All 24,102 rows in
+#: the snapshot conform, so a row that doesn't is a parse gone wrong rather than
+#: an unusual company.
+CIN = re.compile(r"[LU]\d{5}[A-Z]{2}\d{4}[A-Z]{3}\d{6}")
 
 
 def _shape(found: Mapping[str, Any], names: Iterable[str]) -> list[str]:
@@ -178,6 +196,34 @@ def salary_errors(found: Any) -> list[str]:
     return problems
 
 
+def mca_errors(found: Any) -> list[str]:
+    """Every way one MCA registration fails the schema. Empty means it may ship.
+
+    A row with no registration is the normal case — 84 of 116 measured, and most
+    of those can never have one — and `errors` never calls this for one. What
+    this refuses is a registration the site would render as a fact about a
+    company that may not be this one: a malformed CIN, or a match the matcher
+    itself held below the publish threshold.
+    """
+    if not isinstance(found, Mapping):
+        return [f"is {type(found).__name__}, not a registration"]
+    problems = _shape(found, MCA_FIELDS)
+    if not (isinstance(cin := found.get("cin"), str) and CIN.fullmatch(cin)):
+        problems.append(f"cin {cin!r} is not a CIN")
+    for field in ("name", "status"):
+        if not (isinstance(value := found.get(field), str) and value.strip()):
+            problems.append(f"{field} {value!r} is not a non-empty string")
+    if not salary.is_iso_date(found.get("incorporated")):
+        problems.append(f"incorporated {found.get('incorporated')!r} is not an ISO date")
+    # Blank is legal: the register writes the city into an address field, and a
+    # short address is an absence the site renders as one.
+    if not isinstance(found.get("city"), str):
+        problems.append(f"city {found.get('city')!r} is not a string")
+    if found.get("confidence") != mca.EXACT:
+        problems.append(f"confidence {found.get('confidence')!r} is below the publish threshold")
+    return problems
+
+
 def errors(row: Mapping[str, Any]) -> list[str]:
     """Every way this row fails the current schema. Empty means it may ship.
 
@@ -206,6 +252,8 @@ def errors(row: Mapping[str, Any]) -> list[str]:
     # held to the same bar as everything else the site renders.
     if row.get("salary") is not None:
         problems += [f"salary: {p}" for p in salary_errors(row["salary"])]
+    if row.get("mca") is not None:
+        problems += [f"mca: {p}" for p in mca_errors(row["mca"])]
     # The three rules corpus._qualified_by can fire. A row qualified by anything
     # else was admitted by a rule the site has no wording for.
     if row.get("qualified_by") not in ("letter", "amount", "stage"):
@@ -302,10 +350,11 @@ def build(
                 "date": company["date"],
                 "source_url": company["source_url"],
                 "qualified_by": company["qualified_by"],
-                # The spine states the absence; `salary.attach` fills in what it
+                # The spine states the absence; the enrichments fill in what they
                 # can find afterwards. An enrichment inside the loop would put a
                 # third-party site between a company and being listed at all.
                 "salary": None,
+                "mca": None,
             }
         )
 
@@ -388,12 +437,15 @@ def main(argv: list[str]) -> None:
         }
 
     rows, outcomes = build(corpus, slugs, probes)
+    # Enrichment, after the spine and outside it: it runs on the listed rows
+    # only, it cannot change who is listed, and every failure inside it is an
+    # absent field rather than a failed build. `salary` is skipped in smoke for
+    # the same reason the probes are — the smoke path touches no network. The
+    # MCA match reads a local file, so it runs there too and init.sh proves the
+    # whole enrichment offline rather than only the report line.
     if not smoke:
-        # Enrichment, after the spine and outside it: it runs on the listed rows
-        # only, it cannot change who is listed, and every failure inside it is an
-        # absent benchmark rather than a failed build. Skipped in smoke for the
-        # same reason the probes are — the smoke path touches no network.
         salary.attach(rows)
+    held = mca.attach(rows)
     write(out, rows)
 
     built = report([c["name"] for c in corpus], outcomes)
@@ -402,7 +454,15 @@ def main(argv: list[str]) -> None:
     # a nightly build that called it inline would be a site that goes down when
     # somebody else's Elasticsearch does. `src/mca.py` refreshes the cache by
     # hand; this only ever reads it, and reads nothing as zero.
-    built["mca"] = mca.counts()
+    #
+    # `held` is the honest half of the match: names the register plausibly knows
+    # under a longer spelling, published nowhere and listed here so a human can
+    # settle them. It is a work list, not a failure.
+    built["mca"] = {
+        **mca.counts(),
+        "matched": sum(1 for row in rows if row["mca"]),
+        "held": held,
+    }
     if not smoke:
         write_report("data/build-report.json", built)
 
@@ -414,6 +474,8 @@ def main(argv: list[str]) -> None:
         print(f"  {count:4d}  {label}")
     print(f"  {built['mca']['records']:4d}  MCA foreign subsidiaries cached "
           f"(pulled {built['mca']['pulled'] or 'never'})")
+    print(f"  {built['mca']['matched']:4d}  matched to a CIN, "
+          f"{len(built['mca']['held'])} held for review")
 
 
 if __name__ == "__main__":

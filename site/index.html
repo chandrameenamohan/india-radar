@@ -51,6 +51,10 @@
   .roles { margin: .45rem 0; padding-left: 1.15rem; }
   .roles li { margin: .2rem 0; }
   .salary .ctc { color: var(--text); font-variant-numeric: tabular-nums; font-weight: 600; }
+  /* A CIN is 21 characters a reader may retype into the MCA portal, so it is
+     set to be copied rather than skimmed. */
+  .mca .cin { color: var(--text); font-family: ui-monospace, SFMono-Regular, monospace;
+              font-size: .88em; user-select: all; }
   .tag { margin-left: .5rem; padding: .05rem .45rem; border: 1px solid var(--line);
          border-radius: 999px; font-size: .72rem; letter-spacing: .06em;
          text-transform: uppercase; }
@@ -79,6 +83,14 @@
     <option value="any">Any</option>
     <option value="remote">Remote India roles</option>
   </select></label>
+  <!-- SPEC feature 10's MCA-verified filter, now that a row can carry a CIN.
+       Labelled by what the register actually holds rather than as a quality
+       mark: the slice covers subsidiaries of foreign-incorporated parents, so
+       an India-founded company can never appear in it (footer). -->
+  <label>MCA register<select id="mca">
+    <option value="any">Any</option>
+    <option value="matched">Has an India registration</option>
+  </select></label>
   <label>Raised<select id="bracket">
     <option value="any">Any amount</option>
     <option value="small">Under $10M</option>
@@ -104,6 +116,9 @@
 <footer>
   <p>Every company here showed at least one open India role on its own job board on the snapshot
     date. A company we could not check is excluded rather than shown as "not hiring".</p>
+  <p>The MCA data we hold lists companies registered in India as subsidiaries of a parent
+    incorporated abroad. An India-founded company cannot appear in it at all, so a missing CIN
+    says nothing about a company — and a present one is a registration, not an endorsement.</p>
   <p><a href="../data/build-report.json">build report</a> ·
      <a href="../data/companies.json">the data</a></p>
 </footer>
@@ -112,7 +127,7 @@
 // The site is a renderer and nothing else: it reads the JSON the build wrote and
 // never recomputes a fact. The snapshot date in particular ships with the data,
 // because a date taken at render time would claim a freshness the JSON lacks.
-const SCHEMA = 5;                                  // src/build.py SCHEMA_VERSION
+const SCHEMA = 6;                                  // src/build.py SCHEMA_VERSION
 const DEFAULT_SRC = '../data/companies.json';
 
 // Test seam: e2e drives this same page over a fixture dataset (data/companies.json
@@ -193,6 +208,22 @@ function salaryLine(s) {
   );
   return line;
 }
+
+// The India registration, where the name match was certain enough to publish
+// (32 of 116 measured). The registered name ships beside the CIN because it is
+// what lets a reader check the join themselves -- "STRIPE INDIA PRIVATE LIMITED"
+// under "Stripe" is the whole claim, stated rather than implied. The status is
+// the register's own word and is not always "Active": a struck-off India entity
+// beside an open India role is a real thing to know.
+function registrationLine(m) {
+  const line = el('p', 'mca');
+  line.append(
+    el('span', 'cin', m.cin),
+    el('span', null, ` · ${m.name} · incorporated ${m.incorporated.slice(0, 4)}`
+      + `${m.city ? ' · ' + m.city : ''} · ${m.status} · on the MCA register`),
+  );
+  return line;
+}
 const days = (from, to) => (Date.parse(to) - Date.parse(from)) / 86400000;
 
 const brackets = {
@@ -248,6 +279,7 @@ function row(c) {
   roles.append(...c.roles.map(roleItem));
   body.append(board, roles, funding);
   if (c.salary) body.append(salaryLine(c.salary));
+  if (c.mca) body.append(registrationLine(c.mca));
   body.append(el('p', null, `Qualified as Series A or later by ${RULES[c.qualified_by]}.`));
 
   details.append(summary, body);
@@ -262,6 +294,7 @@ function render() {
     .filter((c) => c.name.toLowerCase().includes(q))
     .filter((c) => city === 'any' || c.cities.includes(city))
     .filter((c) => $('#remote').value === 'any' || isRemote(c))
+    .filter((c) => $('#mca').value === 'any' || c.mca != null)
     .filter(brackets[$('#bracket').value])
     .filter((c) => recency === 'any' || (c.date != null && days(c.date, snapshot) <= +recency))
     .sort(sorts[$('#sort').value]);

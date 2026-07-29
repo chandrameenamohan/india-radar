@@ -232,6 +232,51 @@ print(sum(1 for r in c if r['salary']), 'of', len(c))")" \
   "$(val '`${document.querySelectorAll(".salary").length} of `
        + document.querySelectorAll(".row").length')"
 
+# T4.4. The registration renders the CIN and the name it was matched to, because
+# the name IS the claim: a reader who can see "GAMMA HEALTH INDIA PRIVATE
+# LIMITED" under "Gamma Health" can check the join, and one shown a bare CIN
+# cannot. The status ships too, and is not always "Active".
+check "a matched company renders its CIN, its registered name and its status" \
+  "$($PY -c "
+import json
+c = json.load(open('tests/fixtures/companies-e2e.json'))['companies']
+first = sorted(c, key=lambda r: (-len(r['roles']), r['name']))[0]
+m = first['mca']
+print(m['cin'], m['name'], m['incorporated'][:4], m['city'], m['status'])")" \
+  "$(val '(() => { const p = document.querySelector(".row[open] .mca"), t = p.textContent;
+       return [p.querySelector(".cin").textContent,
+               t.match(/· (.+?) · incorporated/)[1],
+               t.match(/incorporated (\d{4})/)[1],
+               t.split(" · ").slice(-3)[0],
+               t.split(" · ").slice(-2)[0]].join(" ") })()')"
+
+# The degraded row again, for the enrichment where absence is the MAJORITY:
+# 84 of 116 listed companies carry no CIN, and most never can -- the register
+# slice holds subsidiaries of foreign parents only. So a row without one says
+# nothing at all rather than announcing a gap it cannot close.
+check "a company with no MCA registration renders no registration line at all" \
+  "$($PY -c "
+import json
+c = json.load(open('tests/fixtures/companies-e2e.json'))['companies']
+print(sum(1 for r in c if r['mca']), 'of', len(c))")" \
+  "$(val '`${document.querySelectorAll(".mca").length} of `
+       + document.querySelectorAll(".row").length')"
+
+# SPEC feature 10's MCA filter, now that a row can carry a CIN.
+$B select '#mca' 'matched' >/dev/null 2>&1
+check "the MCA filter returns only companies with a registration" \
+  "$(expect "r['mca'] is not None")" "$(rows)"
+$B select '#mca' 'any' >/dev/null 2>&1
+check "clearing the MCA filter restores every company" "$(expect True)" "$(rows)"
+
+# And the site says what the absence means. Without this the badge reads as a
+# quality mark, and its absence as a mark against every India-founded company on
+# the page -- which is exactly backwards, since they are excluded by the filter
+# that built the register slice rather than by anything about them.
+check "the site explains that a missing CIN is not a verdict" "1" \
+  "$(val '[...document.querySelectorAll("footer p")]
+       .filter(p=>/incorporated abroad/.test(p.textContent)).length')"
+
 # SPEC feature 10's remote-only filter, now that a row carries the field. A
 # company hiring only on-site in Pune must vanish from it.
 $B select '#remote' 'remote' >/dev/null 2>&1
@@ -271,7 +316,7 @@ console_clean "after interaction"
 echo "-- a dataset this page doesn't know how to read"
 open_page "$ROOT?data=../data/build-report.json"
 check "an unknown schema is refused, not rendered" "refused 0 rows" \
-  "$(val '(document.querySelector("#status").textContent.startsWith("This page reads schema v5")
+  "$(val '(document.querySelector("#status").textContent.startsWith("This page reads schema v6")
        ? "refused " : "rendered ") + document.querySelectorAll(".row").length + " rows"')"
 console_clean "unknown schema"
 

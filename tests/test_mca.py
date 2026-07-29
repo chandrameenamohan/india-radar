@@ -1,10 +1,12 @@
-"""T4.3 — MCA snapshot pull.
+"""T4.3 — MCA snapshot pull. T4.4 — the name match.
 
-Two rules carry this module and both are about what a failure costs. The pull
-either produces the whole universe or leaves the last snapshot alone, because a
-silently short cache understates the enrichment by thousands of companies. And
-the build's side of it cannot fail at all: no snapshot, a truncated one, or a
-file that isn't the shape it was are one absence, and the site ships regardless.
+Three rules carry this module and all of them are about what a failure costs.
+The pull either produces the whole universe or leaves the last snapshot alone,
+because a silently short cache understates the enrichment by thousands of
+companies. The build's side of it cannot fail at all: no snapshot, a truncated
+one, or a file that isn't the shape it was are one absence, and the site ships
+regardless. And the match publishes only what it is sure of, because a CIN is a
+claim about a real legal entity and a wrong one is worse than none.
 """
 import json
 from datetime import date
@@ -246,6 +248,162 @@ def test_main_leaves_the_last_snapshot_alone_when_the_pull_fails(monkeypatch, tm
     monkeypatch.delenv("DATA_GOV_IN_KEY")
     monkeypatch.chdir(tmp_path)  # no .env here either
     assert mca.main([str(snapshot)]) == 1, "a missing key must not be a silent no-op"
+
+
+# --- the name match (T4.4) ----------------------------------------------------
+
+#: Twenty hand-labelled pairs: a corpus name, a name the register really holds,
+#: and what the match may conclude from the two. Every registered name below is
+#: a live row in `data/mca.json` — pinned by
+#: `test_the_labelled_pairs_are_rows_the_register_really_holds`, because a
+#: hand-labelled set that drifts from the register is how this check goes green
+#: while being wrong about the world.
+#:
+#: The three labels are the three answers: `exact` publishes, `prefix` is held
+#: for a human, and `""` is the register talking about somebody else.
+PAIRS = [
+    # The register says the company's name and nothing else that carries
+    # information. Ten companies, and the spellings that make the rule non-trivial:
+    # a joined name, a two-word name, a digit inside a name, no `INDIA` at all.
+    ("Stripe", "STRIPE INDIA PRIVATE LIMITED", mca.EXACT),
+    ("Databricks", "DATABRICKS INDIA PRIVATE LIMITED", mca.EXACT),
+    ("Minio", "MINIO PRIVATE LIMITED", mca.EXACT),
+    ("Ambient.ai", "AMBIENTAI INDIA PRIVATE LIMITED", mca.EXACT),
+    ("Scale AI", "SCALE AI INDIA PRIVATE LIMITED", mca.EXACT),
+    ("Neo4j", "NEO4J INDIA PRIVATE LIMITED", mca.EXACT),
+    ("Cohere Health", "COHERE HEALTH INDIA PRIVATE LIMITED", mca.EXACT),
+    ("Airbnb", "AIRBNB INDIA PRIVATE LIMITED", mca.EXACT),
+    ("Imply Data", "IMPLY DATA INDIA PRIVATE LIMITED", mca.EXACT),
+    ("YipitData", "YIPITDATA INDIA PRIVATE LIMITED", mca.EXACT),
+    # The register says MORE. Four of these five are plainly the right company
+    # and the fifth (`FERN & ADE`, below) is plainly not, in the same shape —
+    # which is why the tier exists and why none of them is published.
+    ("Glean", "GLEAN SEARCH TECHNOLOGIES INDIA PRIVATE LIMITED", mca.PREFIX),
+    ("Kaseya", "KASEYA SOFTWARE INDIA PRIVATE LIMITED", mca.PREFIX),
+    ("Netskope", "NETSKOPE SOFTWARE INDIA PRIVATE LIMITED", mca.PREFIX),
+    ("Airbnb", "AIRBNB PAYMENTS INDIA PRIVATE LIMITED", mca.PREFIX),
+    ("Fern", "FERN & ADE INDIA PRIVATE LIMITED", mca.PREFIX),
+    # A different company whose registered name opens with the same letters.
+    # These are the false positives, and the word boundary is what stops all of
+    # them: KONGSBERG is a Norwegian maritime group, not the API gateway;
+    # NOTIONEXT, STRIPES ACADEMY and SCALEFFICIENT are nobody the corpus knows.
+    ("Kong", "KONGSBERG MARITIME INDIA PRIVATE LIMITED", ""),
+    ("Notion", "NOTIONEXT INDIA PRIVATE LIMITED", ""),
+    ("Stripe", "STRIPES ACADEMY LEARNING AND DEVELOPMENT INDIA PRIVATE LIMITED", ""),
+    ("Scale", "SCALEFFICIENT OUTSOURCED SOLUTIONS PRIVATE LIMITED", ""),
+    # The other half of the boundary rule: the register may JOIN a company's
+    # words but never SPLIT one. `Hightouch` is one word; this is two, and a
+    # healthcare company.
+    ("Hightouch", "HIGH TOUCH HEALTH SOLUTIONS GLOBAL PRIVATE LIMITED", ""),
+]
+
+
+def register(*names):
+    """A snapshot holding exactly these registered names, CINs invented per row."""
+    return mca.Snapshot(
+        pulled="2026-07-29",
+        companies=[{**COMPANY, "cin": f"U16000KA2018FTC{i:06d}", "name": name}
+                   for i, name in enumerate(names)],
+    )
+
+
+def registered(*names):
+    """The same, indexed for `find`."""
+    return mca.index(register(*names)["companies"])
+
+
+def labelled_pairs_verdicts():
+    """Each labelled pair matched against a register holding only its own row.
+
+    One row at a time is the point: a pair labelled `""` must find nothing
+    because the two names disagree, not because a better candidate outranked it.
+
+    The assertion over this lives in `tests/test_invariants.py` under the name
+    VERIFICATION.md gives it, `test_20_known_pairs_zero_false_positives`.
+    """
+    return [(company, mca.find(company, registered(name))[0]) for company, name, _ in PAIRS]
+
+
+def test_the_labelled_pairs_are_rows_the_register_really_holds():
+    """The labels above are claims about MCA's data, so they are pinned to it.
+
+    Without this the fixture is 20 strings somebody typed, and the obvious way
+    to make a failing match go green is to edit the string it failed on.
+    """
+    known = {c["name"] for c in mca.load()["companies"]}
+    assert known, "data/mca.json is missing; the labelled pairs cannot be checked"
+    assert [name for _, name, _ in PAIRS if name not in known] == []
+
+
+def test_a_register_that_says_LESS_than_the_company_is_not_a_match():
+    """The direction that cannot be settled from the strings, refused rather
+    than judged — `slugs.states_company`'s rule, anchored at the front.
+
+    `COCKROACH INDIA` for `Cockroach Labs` is the same shape as `brave` for
+    `Brave Care`: possibly the company, possibly a different one, and nothing in
+    the register tells them apart.
+    """
+    assert mca.find("Cockroach Labs", registered("COCKROACH INDIA PRIVATE LIMITED")) == ("", [])
+
+
+def test_below_threshold_held_for_review():
+    """A plausible-but-unproven match is published nowhere and reported to a
+    human — the third state between "matched" and "no such company"."""
+    rows = [{"name": "Stripe", "mca": None}, {"name": "Glean", "mca": None},
+            {"name": "Nobody At All", "mca": None}]
+
+    held = mca.attach(rows, register(
+        "STRIPE INDIA PRIVATE LIMITED", "GLEAN SEARCH TECHNOLOGIES INDIA PRIVATE LIMITED"
+    ))
+
+    assert rows[0]["mca"]["cin"] and rows[0]["mca"]["confidence"] == mca.EXACT
+    assert rows[1]["mca"] is None, "a prefix match reached the site"
+    assert rows[2]["mca"] is None
+    assert [(h["name"], h["confidence"]) for h in held] == [("Glean", mca.PREFIX)]
+    assert [c["name"] for c in held[0]["candidates"]] == [
+        "GLEAN SEARCH TECHNOLOGIES INDIA PRIVATE LIMITED"
+    ]
+    # An unmatched company is not held: there is nothing for a human to settle.
+    assert "Nobody At All" not in {h["name"] for h in held}
+
+
+def test_two_registered_companies_at_the_same_tier_publish_neither():
+    """`Scale` reaches `SCALE AI INDIA` and `SCALE FACILITATION PARTNERS INDIA`,
+    and the corpus holds `Scale AI` as a separate company. Picking one would be
+    inventing the answer; this is a question for a human."""
+    rows = [{"name": "Scale", "mca": None}]
+
+    held = mca.attach(rows, register("SCALE INDIA PRIVATE LIMITED", "SCALE PRIVATE LIMITED"))
+
+    assert rows[0]["mca"] is None
+    assert held[0]["confidence"] == mca.EXACT and len(held[0]["candidates"]) == 2
+
+
+def test_city_is_the_district_field_not_the_locality():
+    """The register writes `street,locality,district,state,pincode-India`.
+
+    An earlier reading of one Mumbai row took the locality for the city, where
+    both happened to say `Mumbai`. Measured over 24,102 rows the locality is a
+    neighbourhood (`Kandivali West`), blank on 252 and a street fragment on 349;
+    the district is never blank and reads as the city a person would name.
+    """
+    assert mca.city("Teleperformance Towers,Kandivali West,Mumbai,Maharashtra,400104-India") \
+        == "Mumbai"
+    # The register's own case noise: `NEW DELHI` and `New Delhi` are one place.
+    assert mca.city("Plot 5,Vasant Kunj,NEW DELHI,Delhi,110070-India") == "New Delhi"
+    # Absence, not a crash: a short address states no district.
+    assert mca.city("Somewhere,411014-India") == ""
+
+
+def test_attach_survives_a_register_that_was_never_pulled(tmp_path):
+    """The enrichment reads a file that may not exist, and that costs the build
+    nothing — the same guarantee `counts` gives the report. `load` turns every
+    way of having no register into one empty snapshot, and an empty register
+    matches nobody rather than raising."""
+    rows = [{"name": "Stripe", "mca": None}]
+
+    assert mca.attach(rows, mca.load(tmp_path / "never-pulled.json")) == []
+    assert rows[0]["mca"] is None
 
 
 #: The spine's own fixture, imported rather than rebuilt: this file asserts that
