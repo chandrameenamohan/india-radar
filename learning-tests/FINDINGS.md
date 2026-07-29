@@ -2024,3 +2024,102 @@ Two checks in `tests/test_nightly.py`, both mutation-verified:
 
 The glob is `*.y*ml`: GitHub reads both spellings and a `weekly.yaml` would
 otherwise walk past the check.
+
+---
+
+# A broken provider does not fail the build — measured during T6.4 (2026-07-29)
+
+## `set -e` cannot see the failure T6.4 is about
+
+`scripts/nightly.sh` claimed this task's guarantee outright: "`set -e` plus the
+build's own refusal to write a schema-invalid file means a failed or killed run
+leaves the published JSON exactly as it was. That is T6.4's guarantee, arrived at
+here by not having a way to break it."
+
+It is half of it. Every probe — `greenhouse.probe`, `ashby.probe`, `lever.probe`
+— returns `Outcome.PROBE_FAILED` on a bad status rather than raising, and that is
+correct and deliberate: a company we could not read is excluded and counted,
+never listed as hiring nobody. The consequence is that **a provider going down
+does not produce a failed run. It produces a successful run with most of the site
+missing** — schema-valid, footer adding up, exit code 0. `set -e` sees a clean
+build and the nightly commits it.
+
+So the guarantee has two halves and only one of them lives in the shell:
+
+| the run | what stops it | where |
+|---|---|---|
+| dies, or is killed at the timeout | `set -e`, and now an atomic write | `scripts/nightly.sh`, `build.write` |
+| completes, having read almost nothing | `build.COLLAPSE` | `src/build.py` |
+
+## What each provider going dark would publish, against the live file
+
+Measured against today's `data/companies.json` (116 rows: 88 greenhouse, 22
+ashby, 6 lever), by rebuilding the row set without one provider and offering it
+to `build.write`:
+
+```
+unchanged rebuild     116 rows (100%)  -> PUBLISHED
+lever dark            110 rows  (95%)  -> PUBLISHED
+ashby dark             94 rows  (81%)  -> PUBLISHED
+greenhouse dark        28 rows  (24%)  -> REFUSED
+```
+
+The floor is **half**, and the gap it sits in is measured rather than picked: the
+spine is byte-stable across runs hours apart (§T6.2 — 116 rows both times, zero
+non-salary differences between any pair of rows), so real churn is near zero,
+while the biggest provider going dark leaves 24% and any two leave under 20%.
+
+**A Lever outage publishes, by design.** Those 6 companies leave counted as
+`probe-failed` and the footer's `checked` drops to say so — the degradation this
+project already ships for one company. A floor tight enough to catch 5% would
+fire on the days it is wrong, and a nightly that is red on ordinary nights is a
+nightly nobody reads. Revisit with 30 nights of snapshots — the same history T7.1
+is blocked on.
+
+## `write_text` truncates its target the moment it opens it
+
+So the failure mode is not hypothetical: a build killed while writing leaves half
+a JSON document where the site expects a whole one, and the site renders nothing
+at all. `build.write` now writes a sibling `.tmp` and `Path.replace`s it over the
+target, which is `os.replace` and atomic within a filesystem. The nightly's
+`timeout` is 90 minutes and does fire (§T6.2), so this is the one place a real
+signal can land mid-write.
+
+Testing it needs the kill to be simulated at the write itself — everything else
+is computed before the call, so nothing else can truncate the destination.
+`tests/test_build.py:kill_mid_write` replaces `Path.write_text` with one that
+writes half the text and raises.
+
+## The salary enrichment was deleting good published data every throttled night
+
+§T6.2 handed this to T6.4 and it is now built. The published file today holds
+**71 salary figures of 116 rows** — a throttled snapshot; the same build has
+published 82. Without carry-forward a fully throttled night publishes **zero**
+figures, and the site reports a coverage collapse that nothing in the world
+caused. With it, measured against the live file: a night where AmbitionBox 403s
+everything carries all **71** forward, unchanged.
+
+**This is not the staleness T6.3 refused, and the difference is a date.** T6.3
+would not republish a board row from last week because a row carries no date but
+the snapshot's, so a stale row claims to be today. A benchmark states its own
+`observed` date beside the figure — which is exactly why T4.2 made that field
+mandatory and refuses a figure arriving without one. A carried figure makes no
+claim about tonight; it says what the source said, and when.
+
+A figure that no longer conforms is dropped rather than carried, and that guard
+is not theoretical: on the next schema bump the build would read its own last
+output, carry a figure the new schema refuses, and then decline to write — every
+night, until a human deleted the file.
+
+## Seven mutations, all of which bite
+
+`published()` is the shared read, so it is worth knowing which check dies with
+what: removing the collapse comparison, `COLLAPSE = 1.0` (refuse every loss),
+writing in place instead of renaming, making the carry a no-op, carrying without
+the conformance check, carrying over a figure observed tonight, and letting
+`published()` raise on a corrupt file — each turns a named test red, and five of
+the seven also turn invariant 6 red.
+
+The `COLLAPSE = 1.0` mutation is the one to keep in mind: it is the shape a
+future iteration would reach for to make this "safer", and it holds the site at
+its high-water mark forever.

@@ -21,6 +21,11 @@ data/mca_foreign_subs.json
 # to data/companies.json.
 data/companies.smoke.json
 
+# The half-written file a killed build leaves behind (T6.4). companies.json is
+# written to a sibling and renamed over, so an interrupted run leaves this rather
+# than a truncated site.
+data/*.json.tmp
+
 # NOTE: data/companies.json IS committed on purpose. The nightly commit history
 # of that file IS the time series that feature 13 (hiring velocity) reads via
 # `git log`. Never add it here.

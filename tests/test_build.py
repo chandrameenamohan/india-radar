@@ -13,8 +13,10 @@ from src.build import (
     PROBES,
     SCHEMA_VERSION,
     build,
+    carry_salary,
     errors,
     integrity_errors,
+    published,
     website_counts,
     write,
 )
@@ -408,3 +410,173 @@ def test_no_india_roles_is_a_finding_not_a_gap():
 
     assert outcomes == {"Acme": Outcome.NO_INDIA_ROLES}
     assert rows == []
+
+
+# --- T6.4, fail-safe publish --------------------------------------------------
+
+#: A corpus with room for a provider to go dark in the MIDDLE of, which is the
+#: shape of the failure: the companies probed before it went are listed, the ones
+#: after it are `probe-failed`, and the file that results is complete and valid.
+PARTIAL = [{**CORPUS[0], "name": f"Co{i}"} for i in range(10)]
+SLUGS = {c["name"]: Slug(ats="greenhouse", slug=c["name"], method="careers-page") for c in PARTIAL}
+
+#: A published benchmark, in the shape the schema demands (T4.2).
+BENCHMARK = {
+    "avg_lpa": 21.2,
+    "reports": 340,
+    "observed": "2025-10-12",
+    "source_url": "https://www.ambitionbox.com/salaries/acme-salaries",
+}
+
+
+#: A night where every board answered. Named because it is the default: most of
+#: these tests need one good run before they can break the next one.
+EVERY = len(PARTIAL)
+
+
+def dark_after(answers=EVERY):
+    """A Greenhouse that answers `answers` boards and then stops. The default
+    answers every one of them, which is a good night.
+
+    Not a hypothetical: `greenhouse.probe` returns `probe-failed` on any status
+    that isn't 200 or 404, so a provider going down does not raise, does not stop
+    the run and does not fail the nightly's `set -e`. It empties the site.
+    """
+    seen = []
+
+    def probe(slug):
+        seen.append(slug)
+        return BOARD if len(seen) <= answers else Outcome.PROBE_FAILED
+
+    return {"greenhouse": PROBES["greenhouse"]._replace(probe=probe)}
+
+
+def publish(path, probes, corpus=PARTIAL, slugs=SLUGS):
+    """One whole run against the real spine: build, report, write."""
+    rows, outcomes = build(corpus, slugs, probes)
+    write(path, rows, report([c["name"] for c in corpus], outcomes))
+
+
+def test_a_provider_that_goes_dark_mid_run_never_reaches_the_site(tmp_path):
+    """T6.4's own check: break a probe mid-run, and the site still serves the last
+    good data rather than a file with most of the companies missing."""
+    out = tmp_path / "companies.json"
+    publish(out, dark_after())
+    good = out.read_bytes()
+
+    with pytest.raises(ValueError, match="collapse, nothing written"):
+        publish(out, dark_after(3))
+
+    assert out.read_bytes() == good
+
+
+def test_a_credible_loss_still_publishes(tmp_path):
+    """The floor is a floor, not a hair trigger. Companies do stop hiring in
+    India, and a guard that refused every loss would either hold the site at its
+    high-water mark forever or teach whoever reads the failing nightly to ignore
+    it."""
+    out = tmp_path / "companies.json"
+    publish(out, dark_after())
+    publish(out, dark_after(6))
+
+    assert len(json.loads(out.read_text())["companies"]) == 6
+
+
+def kill_mid_write(monkeypatch):
+    """Make the next write leave half a file behind and die, which is what a
+    signal at the timeout does. Nothing computes the bytes lazily, so this is the
+    only way the destination can be found truncated."""
+    whole = Path.write_text
+
+    def killed(self, text, *args, **kwargs):
+        whole(self, text[: len(text) // 2])
+        raise OSError("killed at the timeout")
+
+    monkeypatch.setattr(Path, "write_text", killed)
+
+
+def test_a_write_killed_partway_leaves_the_published_file_whole(tmp_path, monkeypatch):
+    """The other half of a partial run: not a build that decides not to publish,
+    a build that is killed while publishing. `timeout` in the nightly is 90
+    minutes and it does fire; a truncated companies.json is a site that renders
+    nothing at all."""
+    out = tmp_path / "companies.json"
+    publish(out, dark_after())
+    good = out.read_bytes()
+
+    kill_mid_write(monkeypatch)
+    with pytest.raises(OSError):
+        publish(out, dark_after())
+
+    assert out.read_bytes() == good
+
+
+@pytest.mark.parametrize(
+    "content, because",
+    [
+        ('{"companies": [{"name": "Co0", "sal', "truncated mid-write by an older build"),
+        ("", "the file exists and is empty"),
+        ('{"schema_version": 9, "rows": []}', "a shape this code does not know"),
+        ('{"companies": ["Co0", 3]}', "companies that are not companies"),
+    ],
+)
+def test_a_corrupt_published_file_never_blocks_its_own_replacement(tmp_path, content, because):
+    """The guard reads the file it is about to replace, so a bad file must not be
+    able to fail the build — otherwise the one state that needs a fresh build the
+    most is the one state that can't get one."""
+    out = tmp_path / "companies.json"
+    out.write_text(content)
+
+    assert published(out) == [], because
+
+    publish(out, dark_after())
+    assert len(json.loads(out.read_text())["companies"]) == len(PARTIAL)
+
+
+def test_a_throttled_night_keeps_the_figure_the_last_build_published(tmp_path):
+    """T6.4, one field down. AmbitionBox rate-limits on cumulative volume (T4.2),
+    and measured across two runs three hours apart it dropped 11 figures and
+    added 11 — so a build that overwrites a real figure with `null` publishes a
+    coverage regression that nothing in the world caused."""
+    out = tmp_path / "companies.json"
+    rows, outcomes = build(CORPUS[:1], {"Acme": GREENHOUSE}, answering(acme=BOARD))
+    rows[0]["salary"] = BENCHMARK
+    write(out, rows, report([c["name"] for c in CORPUS], outcomes))
+
+    tonight, _ = build(CORPUS[:1], {"Acme": GREENHOUSE}, answering(acme=BOARD))
+
+    assert tonight[0]["salary"] is None, "the enrichment found nothing tonight"
+    assert carry_salary(tonight, out) == 1
+    # Carried WITH its own observation date, which is the whole reason this is
+    # honest: the figure states when it was sampled, so it claims nothing about
+    # tonight. A board row has no date but the snapshot's — which is why T6.3
+    # refused to republish one.
+    assert tonight[0]["salary"] == BENCHMARK
+
+
+def test_a_figure_observed_tonight_is_never_replaced_by_the_last_one(tmp_path):
+    """Carrying forward is for an absence, never for a disagreement: the source
+    recomputes, and the fresh figure is the one it recomputed."""
+    out = tmp_path / "companies.json"
+    rows, outcomes = build(CORPUS[:1], {"Acme": GREENHOUSE}, answering(acme=BOARD))
+    rows[0]["salary"] = BENCHMARK
+    write(out, rows, report([c["name"] for c in CORPUS], outcomes))
+
+    tonight, _ = build(CORPUS[:1], {"Acme": GREENHOUSE}, answering(acme=BOARD))
+    fresh = {**BENCHMARK, "avg_lpa": 24.8, "observed": "2026-07-29"}
+    tonight[0]["salary"] = fresh
+
+    assert carry_salary(tonight, out) == 0
+    assert tonight[0]["salary"] == fresh
+
+
+def test_a_carried_figure_that_no_longer_conforms_is_dropped_not_carried(tmp_path):
+    """A schema bump would otherwise deadlock the build: it reads its own last
+    output, carries a figure the new schema refuses, and then declines to write —
+    every night, until a human deletes the file."""
+    out = tmp_path / "companies.json"
+    out.write_text(json.dumps({"companies": [{"name": "Acme", "salary": {"avg_lpa": 21.2}}]}))
+    tonight, _ = build(CORPUS[:1], {"Acme": GREENHOUSE}, answering(acme=BOARD))
+
+    assert carry_salary(tonight, out) == 0
+    assert tonight[0]["salary"] is None

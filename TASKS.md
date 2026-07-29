@@ -1088,7 +1088,59 @@ Checks:
 Out of scope: sub-daily refresh.
 ```
 
-### T6.4 — Fail-safe publish `in-progress` · *Phase 3* · after T6.2, T6.3
+### T6.4 — Fail-safe publish `done` · *Phase 3* · after T6.2, T6.3
+> **A broken provider does not fail this build — it empties it, and `set -e`
+> cannot see that.** `scripts/nightly.sh` claimed this task's guarantee outright
+> ("a failed or killed run leaves the published JSON exactly as it was — T6.4's
+> guarantee, arrived at here by not having a way to break it"). It is half of it.
+> Every probe returns `probe-failed` on a bad status rather than raising, which is
+> correct and is the reason: a company we could not read is excluded and counted,
+> never listed as hiring nobody. So a night when Greenhouse is down exits **0**
+> with a complete, schema-valid file missing 88 of 116 companies, and the nightly
+> commits it. The comment is corrected and the missing half is `build.COLLAPSE`.
+>
+> **The floor is half, and the gap it sits in is measured.** Against today's live
+> file, rebuilding the row set without one provider and offering it to `write`:
+>
+> ```
+> unchanged rebuild     116 rows (100%)  -> PUBLISHED
+> lever dark            110 rows  (95%)  -> PUBLISHED
+> ashby dark             94 rows  (81%)  -> PUBLISHED
+> greenhouse dark        28 rows  (24%)  -> REFUSED
+> ```
+>
+> Real churn is near zero (T6.2 measured 116 rows twice, hours apart, with zero
+> non-salary differences) and the biggest provider going dark leaves 24%, so half
+> is the wide part of that gap. **A Lever outage publishes, deliberately:** those
+> 6 companies leave counted as `probe-failed` and the footer's `checked` says so,
+> and a floor tight enough to catch 5% would be red on the nights it is wrong.
+>
+> **The other half of a partial run is a build killed while publishing.**
+> `write_text` truncates its target the moment it opens it, and the nightly's
+> `timeout` does fire — so the write is now a sibling `.tmp` renamed over the
+> target. Half a JSON document is a site that renders nothing at all.
+>
+> **The salary enrichment was deleting good published data every throttled
+> night** — handed here by T6.2's measurement, and now fixed. The live file holds
+> 71 figures of 116 rows; without carry-forward a fully throttled night publishes
+> **zero** and the site reports a coverage collapse nothing caused. Measured: a
+> night where AmbitionBox 403s everything now carries all 71 forward. **This is
+> not the staleness T6.3 refused, and the difference is a date** — a board row
+> carries none but the snapshot's, so a stale one claims to be today, while a
+> benchmark states its own `observed` date beside the figure. That is what T4.2
+> made mandatory, and it is what makes carrying one honest.
+>
+> **A corrupt published file cannot block its own replacement.** `published()`
+> never raises, the rule `mca.load` already keeps — otherwise the one state that
+> most needs a fresh build is the one state that cannot get one. Same reason a
+> carried figure that no longer conforms is dropped: on the next schema bump the
+> build would read its own last output, carry a figure the new schema refuses,
+> and decline to write, every night, until a human deleted the file.
+>
+> Seven mutations were run against the new checks and all seven bite. The one to
+> watch is `COLLAPSE = 1.0` — refuse every loss — because it is the shape someone
+> reaches for to make this "safer", and it holds the site at its high-water mark
+> forever. Invariant 6 asserts `0 < COLLAPSE < 1` for exactly that reason.
 ```
 Acceptance (observable):
   A failed or partial run leaves the previously published JSON INTACT. Deliberately

@@ -69,6 +69,33 @@ def test_20_known_pairs_zero_false_positives():
     assert build.mca_errors({**rows[0]["mca"], "confidence": mca.PREFIX})
 
 
-@pytest.mark.xfail(reason="T6.4 not implemented", strict=True)
-def test_partial_run_leaves_published_json_intact():
-    raise AssertionError("T6.4: fail-safe publish not implemented")
+def test_partial_run_leaves_published_json_intact(tmp_path, monkeypatch):
+    """Invariant 6 (T6.4). A failed run never clobbers good data.
+
+    The run that matters is the one that does NOT fail: every probe returns
+    `probe-failed` on a bad status rather than raising, so a provider going down
+    mid-run produces a complete, schema-valid file with most of the site missing,
+    and the nightly's `set -e` sees a clean exit. Both halves are here — the run
+    that publishes too little, and the run that is killed while publishing.
+    """
+    from src.build import COLLAPSE
+    from tests.test_build import dark_after, kill_mid_write, publish
+
+    out = tmp_path / "companies.json"
+    publish(out, dark_after())
+    good = out.read_bytes()
+
+    with pytest.raises(ValueError, match="collapse, nothing written"):
+        publish(out, dark_after(3))
+    assert out.read_bytes() == good
+
+    kill_mid_write(monkeypatch)
+    with pytest.raises(OSError):
+        publish(out, dark_after())
+    assert out.read_bytes() == good
+
+    # The floor has to leave room for a real loss. Satisfying this invariant by
+    # refusing every loss would hold the site at its high-water mark and make the
+    # nightly red on the days it is right — the way this comes back green with
+    # the guarantee gone.
+    assert 0 < COLLAPSE < 1

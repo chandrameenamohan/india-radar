@@ -6,9 +6,16 @@
 # run should not publish and the workflow is the only thing that should.
 #
 # It commits ONLY on success. `set -e` plus the build's own refusal to write a
-# schema-invalid file (src/build.write validates, then writes) means a failed or
-# killed run leaves the published JSON exactly as it was. That is T6.4's
-# guarantee, arrived at here by not having a way to break it.
+# schema-invalid file (src/build.write validates, then writes) means a run that
+# DIES leaves the published JSON exactly as it was.
+#
+# That was claimed here as T6.4's whole guarantee, and it is only half of it: a
+# broken provider does not make this run die. Every probe returns `probe-failed`
+# on a bad status, by design (a company we could not read is excluded and
+# counted, never listed as hiring nobody) — so a night when Greenhouse is down
+# exits 0 with a complete, schema-valid file missing 88 of 116 companies, and
+# nothing in this script can tell that from a quiet week. The half `set -e`
+# cannot see is `build.COLLAPSE`, in the build.
 set -euo pipefail
 cd "$(dirname "$0")/.."
 

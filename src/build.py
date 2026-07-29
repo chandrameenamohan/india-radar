@@ -143,6 +143,26 @@ INTEGRITY_FIELDS = ("corpus_size", "checked", "unchecked")
 #: an unusual company.
 CIN = re.compile(r"[LU]\d{5}[A-Z]{2}\d{4}[A-Z]{3}\d{6}")
 
+#: The share of the last published companies a build must still list to publish
+#: (T6.4). A broken provider does not fail this build — every probe returns
+#: `probe-failed` on a bad status, by design — so a night when Greenhouse is down
+#: produces a complete, schema-valid file with 88 of 116 companies missing, and
+#: `set -e` in the nightly cannot see it. This is what sees it.
+#:
+#: Half, because that is the gap between measured churn and an outage. The spine
+#: is byte-stable across runs hours apart (FINDINGS: 116 rows both times, zero
+#: non-salary differences), and today's listed set is 88 greenhouse + 22 ashby +
+#: 6 lever — so the biggest provider going dark leaves 24%, and any two leave
+#: under 20%.
+#:
+#: ponytail: one number over the whole file, not a floor per provider. Ceiling:
+#: Lever going dark leaves 95% and publishes — those 6 companies leave counted as
+#: `probe-failed` and the footer's `checked` drops, which is the honest
+#: degradation this project already ships for one company. Upgrade path: a
+#: per-provider floor once 30 nights of snapshots exist to say what real churn
+#: looks like — the same history T7.1 is blocked on.
+COLLAPSE = 0.5
+
 
 def _shape(found: Mapping[str, Any], names: Iterable[str]) -> list[str]:
     """Fields the schema names and this mapping doesn't, and the reverse.
@@ -422,6 +442,56 @@ def website_counts(
     }
 
 
+def published(path: str | Path) -> list[Row]:
+    """The rows the last good build put on the site, or none if there aren't any.
+
+    Never raises, the same rule `mca.load` keeps: no snapshot yet, a version this
+    code doesn't know, a truncated file — all of it is the same absence, and the
+    absence must cost the build nothing. A corrupt published file that could
+    fail a run would be a corrupt published file that blocks its own replacement.
+    """
+    try:
+        found = json.loads(Path(path).read_text())["companies"]
+    except (OSError, json.JSONDecodeError, KeyError, TypeError):
+        return []
+    return [row for row in found if isinstance(row, dict)] if isinstance(found, list) else []
+
+
+def carry_salary(rows: list[Row], path: str | Path) -> int:
+    """Keep a benchmark the last build published where this one found none, and
+    say how many were carried (T6.4).
+
+    Measured (FINDINGS, two runs three hours apart): 11 figures lost and 11
+    gained between runs, all of it AmbitionBox's rolling request window rather
+    than companies changing what they pay. Without this the site oscillates
+    between 82 and 71 salaries for no real-world reason, and a throttled night
+    publishes a coverage regression — the enrichment overwriting a real figure
+    with `null` is a failed fetch deleting good published data.
+
+    This is NOT the staleness T6.3 refused. A republished board row would carry
+    no date but the snapshot's, so it would claim to be today; a benchmark states
+    its own `observed` date beside the figure, which is why T4.2 made that field
+    mandatory. A carried figure makes no claim about tonight.
+
+    ponytail: carried indefinitely, so a company AmbitionBox drops keeps its last
+    figure and the `observed` date ages in plain sight. Ceiling: a page that goes
+    away for good. Upgrade path: expire past some age, once anything here has an
+    age worth expiring — the oldest figure measured is nine months.
+    """
+    known = {
+        row["name"]: row["salary"]
+        # A figure that no longer conforms is not carried: on a schema bump it
+        # would fail the write, and a build that cannot publish because of what
+        # it read from its own last output has no way out.
+        for row in published(path)
+        if row.get("salary") and not salary_errors(row["salary"])
+    }
+    carried = [row for row in rows if row["salary"] is None and row["name"] in known]
+    for row in carried:
+        row["salary"] = known[row["name"]]
+    return len(carried)
+
+
 def write(
     path: str | Path,
     rows: list[Row],
@@ -436,6 +506,12 @@ def write(
     `built` is this run's own build report, and the footer's counts are taken
     from it (T5.3). The site is a renderer: it can see the companies that made
     it, and only the report knows how many didn't.
+
+    Three refusals, one rule (T6.4): a run that could not read something must not
+    delete what the last run could. A row that doesn't conform, a footer that
+    doesn't add up, and a build that lost half the site all leave the previous
+    file exactly where it is — and the write itself is atomic, so a run killed at
+    the timeout leaves the whole last file rather than half of a new one.
     """
     counted = {field: built[field] for field in INTEGRITY_FIELDS if field in built}
     bad = {row.get("name"): problems for row in rows if (problems := errors(row))}
@@ -444,7 +520,21 @@ def write(
     if bad:
         raise ValueError(f"schema v{SCHEMA_VERSION} violations, nothing written: {bad}")
 
-    Path(path).write_text(
+    if len(rows) < COLLAPSE * len(last := published(path)):
+        raise ValueError(
+            f"collapse, nothing written: {len(rows)} companies against the {len(last)} "
+            f"published, under the {COLLAPSE:.0%} floor. A provider that stops answering "
+            f"does not fail this build — it empties it. Rerun; if the loss is real "
+            f"(a smaller corpus, a deliberate change), delete {path} and build again."
+        )
+
+    # Written whole or not at all: `write_text` truncates its target the moment it
+    # opens it, so a build killed mid-write — `timeout` in the nightly is 90
+    # minutes and a real hang would hit it — would leave the site serving half a
+    # JSON document. os.replace is atomic within a filesystem.
+    out = Path(path)
+    tmp = out.with_name(out.name + ".tmp")
+    tmp.write_text(
         json.dumps(
             {
                 "schema_version": SCHEMA_VERSION,
@@ -456,6 +546,7 @@ def write(
         )
         + "\n"
     )
+    tmp.replace(out)
 
 
 #: init.sh's smoke test drives the whole emit path offline through a fixture
@@ -498,8 +589,11 @@ def main(argv: list[str]) -> None:
     # the same reason the probes are — the smoke path touches no network. The
     # MCA match reads a local file, so it runs there too and init.sh proves the
     # whole enrichment offline rather than only the report line.
+    carried = 0
     if not smoke:
         salary.attach(rows)
+        # Before the write, off the file the write is about to replace.
+        carried = carry_salary(rows, out)
     held = mca.attach(rows)
 
     # The report comes first now: the site's footer counts what this build could
@@ -535,6 +629,8 @@ def main(argv: list[str]) -> None:
           f"(pulled {built['mca']['pulled'] or 'never'})")
     print(f"  {built['mca']['matched']:4d}  matched to a CIN, "
           f"{len(built['mca']['held'])} held for review")
+    print(f"  {sum(1 for row in rows if row['salary']):4d}  salary benchmarks "
+          f"({carried} carried from the last build)")
 
 
 if __name__ == "__main__":
