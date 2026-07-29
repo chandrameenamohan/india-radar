@@ -775,7 +775,7 @@ Checks:
 Out of scope: imputing salaries. We show sourced figures or nothing.
 ```
 
-### T4.3 — MCA snapshot pull `todo` · *Phase 2* · after T5.1 · parallel
+### T4.3 — MCA snapshot pull `in-progress` · *Phase 2* · after T5.1 · parallel
 Resource `4dbe5667-7b6b-41d7-82af-211562424d9a`, page size 10,000, filter
 `CompanySubCategory = "subsidiary of company incorporated outside India"`
 → **24,102 companies**.
