@@ -65,6 +65,27 @@ surrounding code. Then re-run the fast checks so the cleanup is still green.
 
 Craft is part of done, not a later sweep.
 
+## 6b. NEVER stop with uncommitted work
+
+If you are stopping for any reason — task done, blocked, out of budget, deferring
+to something long-running — **commit what you have first**, even if the task is
+unfinished. Say so in the message: `T<id> (partial): <what landed>`.
+
+This is not tidiness. Step 1 tells the next iteration to run
+`git checkout -- . && git clean -fd` when it finds a task `in-progress`. That rule
+is only safe because the last commit is green, and it assumes an iteration either
+commits its work or produced nothing worth keeping. **Uncommitted work is
+destroyed, silently.**
+
+It has already happened once: iteration 15 resolved 1,833 company websites, left
+them uncommitted, and reported a background job that was not running. A monitoring
+session caught it and rescue-committed. Do not rely on someone watching.
+
+**Also: never report a background process as still running.** Anything you spawn
+dies with your iteration. If work is unfinished, say it is unfinished and commit
+the partial result — do not describe an ongoing job that will not exist the moment
+you stop.
+
 ## 7. Close it out
 
 - Commit with a descriptive message explaining **why**, not just what.
