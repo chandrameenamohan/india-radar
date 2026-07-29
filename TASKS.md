@@ -242,7 +242,29 @@ Out of scope: cross-source conflict resolution beyond T1.5's dedup rule.
 > Measured baseline to beat: **~50%** from careers-page + guessing combined.
 > This rate, not funding coverage, is the ceiling on site size.
 
-### T1.6 — Resolve a website per company `in-progress` · *Phase 1* · after T1.5
+### T1.6 — Resolve a website per company `done` · *Phase 1* · after T1.5
+> **The site is no longer empty: 0 → 88 listed companies, slug resolution 0 →
+> 744 of 2,948 (25%).** Split: 480 careers-page, 260 guess, 4 override. 1,833
+> companies carry a website; the remaining 1,115 are almost all EDGAR, which
+> states none.
+>
+> **The 2.5–3h cost estimate deferred this step for five iterations and was never
+> measured.** Measured now on a 64-company sample: 0.96s/company at 16 workers,
+> 0.28s at 48 — it is pure network wait, so threads cost sockets. The real run
+> was ~30 minutes, more than the sample's 14 (a random 64 under-represents the
+> domains that hang to the timeout) and an order of magnitude under the estimate
+> every iteration since T2.2 quoted at each other without anyone timing it.
+>
+> **The next bottleneck is now measured rather than inferred, and it is not slug
+> resolution.** 315 companies hold a VERIFIED slug and are `probe-failed` purely
+> because no probe exists — 264 Ashby, 51 Lever. **T3.2 and T3.3 are worth up to
+> 315 companies against a listed count of 88**, which is more than any slug
+> improvement can reach: of the 2,219 still `slug-unresolved`, 837 have a website
+> whose careers page names no board and 619 a website we could not reach at all.
+>
+> Also measured: 15 slugs that resolved cleanly 404 at probe time. They land as
+> `slug-unresolved`, which is correct — a board that isn't there is not a board
+> with no roles — but it means a resolved slug is not a probeable one.
 > **Added 2026-07-29 after the pipeline ran end to end and listed ZERO companies.**
 > Root cause: corpus records carry `name`, `amount`, `date`, `source_url` — and no
 > company website. T2.1 discovers ATS slugs by fetching a company's careers page,

@@ -309,9 +309,11 @@ def resolve_all(
     company would put a 1,000-company corpus in hours.
 
     ponytail: 48 workers, each hitting a different company's own domain, so
-    there is no single host to be rude to. Measured on a 64-company sample:
-    0.96s/company at 16, 0.28s at 48 — 47 minutes against the corpus becomes 14.
-    The work is pure network wait, so the threads cost nothing but sockets.
+    there is no single host to be rude to. On a 64-company sample it is
+    0.96s/company at 16 and 0.28s at 48 — the work is pure network wait, so the
+    threads cost sockets and nothing else. The full corpus took ~30 minutes,
+    against the sample's ~14: a random 64 under-represents the domains that hang
+    to the 30s timeout, so trust the 30 and not the extrapolation.
     """
     sites = dict(_named(company) for company in companies)
     overrides = overrides or {}

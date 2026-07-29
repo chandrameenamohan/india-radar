@@ -1143,3 +1143,78 @@ no-board-link     we read their page and it named no board — T2.2's remit
 
 `build-report.json` now carries the same split under `websites`, so the next
 bottleneck is visible rather than inferred.
+
+---
+
+# Spending the websites — measured during T1.6's second half (2026-07-29)
+
+Re-run with `.venv/bin/python -m src.slugs && .venv/bin/python -m src.build`.
+
+## The estimate that deferred this step five times was never measured
+
+Every iteration from T2.2 onward closed with a note saying `data/slugs.json` was
+not regenerated because it costs ~2.5–3h, and each one quoted the previous one.
+Nobody timed it. Timed now, on a random 64-company sample:
+
+```
+workers=16   0.96s/company
+workers=48   0.28s/company
+```
+
+The full corpus ran in **~30 minutes**. The sample extrapolated to 14, so the
+sample was optimistic by 2x — a random 64 under-represents the domains that hang
+to the 30s timeout — but the estimate in circulation was wrong by ~6x, in the
+direction that costs the most: it made a half-hour step look like a whole
+iteration's budget, so five iterations in a row deferred it and shipped notes
+about deferring it instead.
+
+**An unmeasured cost estimate repeated across iterations hardens into fact.**
+The loop has no memory except what gets written down, which means a number
+written down once is quoted forever. Time it or don't cite it.
+
+## Worker counts follow the target host, not the step
+
+`resolve_all` ran one worker count for both its phases, justified by a comment
+saying each thread hits a different company's domain. True of careers-page
+discovery, false of guessing — which is 100% `boards-api.greenhouse.io`. Raising
+the shared number to 48 would have pointed 48 threads at one host on the strength
+of an argument about 48 hosts. Guessing keeps 16 (`_GUESS_WORKERS`), the same
+reasoning `websites.fill` already applied for CB Insights.
+
+## Where the 2,948 actually go
+
+```
+    88  listed
+   326  no-india-roles          board read, hiring, not here
+   315  probe-failed            slug VERIFIED, no probe exists  <- T3.2/T3.3
+  2219  slug-unresolved
+```
+
+Resolution: 744 (25%) — 480 careers-page, 260 guess, 4 override. By ATS:
+greenhouse 429, ashby 264, lever 51.
+
+**The bottleneck moved, and the next task is not the obvious one.** Since T1.2
+every note has said slug resolution is the only constraint on site size. It no
+longer is. All 315 `probe-failed` companies already hold a slug a careers page or
+Greenhouse itself confirmed; they are excluded solely because `build.PROBES` has
+one entry. T3.2 (Ashby, 264) and T3.3 (Lever, 51) are worth up to **315 companies
+against a listed count of 88** — adding a line to `PROBES` each. No slug method
+can reach that: the 2,219 unresolved split 837 `no-board-link` (website read,
+named no board — JS-rendered), 619 `no-careers-page` (website unreachable) and
+740 `no-website` (EDGAR, which states none).
+
+## A resolved slug is not a probeable slug
+
+15 slugs resolved cleanly and then 404'd at probe time, landing as
+`slug-unresolved` (that is why the report's 2,219 exceeds the 2,204 that
+`unresolved.json` holds). Correct — a board that isn't there is not a board with
+no roles — but worth knowing before reading a resolution rate as a listing
+ceiling.
+
+## Eight companies link two boards and we still refuse to choose
+
+`ambiguous-board` fired 8 times across the corpus, and every case is a real
+ambiguity rather than a parser bug: `ashby/oaknorth` vs `lever/oaknorth`,
+`ashby/commure` vs `ashby/commure-athelas`, `ashby/cargado` vs `ashby/cargado.`
+(a trailing period from prose). Eight companies is a rounding error against 2,219
+and each one is a plausible override-file entry, which is where T2.3 put the tail.
