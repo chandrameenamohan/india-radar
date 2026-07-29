@@ -1,6 +1,11 @@
 {
-  "schema_version": 6,
+  "schema_version": 7,
   "snapshot": "2026-07-29",
+  "integrity": {
+    "corpus_size": 2915,
+    "checked": 711,
+    "unchecked": 2204
+  },
   "companies": [
     {
       "name": "6Sense",
@@ -1647,7 +1652,7 @@
       "salary": {
         "avg_lpa": 27.5,
         "reports": 251,
-        "observed": "2026-07-27",
+        "observed": "2026-07-29",
         "source_url": "https://www.ambitionbox.com/salaries/celonis-salaries"
       },
       "mca": {
@@ -2611,17 +2616,17 @@
         },
         {
           "title": "Solutions Architect",
-          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8637783002",
+          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8641892002",
           "locations": [
-            "Delhi, India"
+            "Pune, India"
           ],
           "workplace": null
         },
         {
           "title": "Solutions Architect",
-          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8641892002",
+          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8637783002",
           "locations": [
-            "Pune, India"
+            "Delhi, India"
           ],
           "workplace": null
         },
@@ -2667,9 +2672,9 @@
         },
         {
           "title": "Sr. Delivery Solutions Architect",
-          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8538914002",
+          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8105504002",
           "locations": [
-            "Mumbai, India"
+            "Bengaluru, India"
           ],
           "workplace": null
         },
@@ -2683,9 +2688,9 @@
         },
         {
           "title": "Sr. Delivery Solutions Architect",
-          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8105504002",
+          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8538914002",
           "locations": [
-            "Bengaluru, India"
+            "Mumbai, India"
           ],
           "workplace": null
         },
@@ -9813,12 +9818,7 @@
       "date": null,
       "source_url": "https://www.cbinsights.com/company/sparkcognition",
       "qualified_by": "stage",
-      "salary": {
-        "avg_lpa": 14.9,
-        "reports": 143,
-        "observed": "2026-07-18",
-        "source_url": "https://www.ambitionbox.com/salaries/sparkcognition-salaries"
-      },
+      "salary": null,
       "mca": {
         "cin": "U72200KA2022FTC158300",
         "name": "SPARKCOGNITION INDIA PRIVATE LIMITED",
@@ -9865,12 +9865,7 @@
       "date": null,
       "source_url": "https://www.cbinsights.com/company/starburst",
       "qualified_by": "stage",
-      "salary": {
-        "avg_lpa": 15.7,
-        "reports": 3,
-        "observed": "2025-10-15",
-        "source_url": "https://www.ambitionbox.com/salaries/starburst-salaries"
-      },
+      "salary": null,
       "mca": null
     },
     {
@@ -10184,12 +10179,7 @@
       "date": null,
       "source_url": "https://www.ycombinator.com/companies/stripe",
       "qualified_by": "stage",
-      "salary": {
-        "avg_lpa": 28.1,
-        "reports": 982,
-        "observed": "2026-07-27",
-        "source_url": "https://www.ambitionbox.com/salaries/stripe-salaries"
-      },
+      "salary": null,
       "mca": {
         "cin": "U72200KA2016FTC096320",
         "name": "STRIPE INDIA PRIVATE LIMITED",
@@ -10230,12 +10220,7 @@
       "date": null,
       "source_url": "https://www.forbes.com/companies/talkdesk/",
       "qualified_by": "stage",
-      "salary": {
-        "avg_lpa": 30.9,
-        "reports": 68,
-        "observed": "2026-07-05",
-        "source_url": "https://www.ambitionbox.com/salaries/talkdesk-salaries"
-      },
+      "salary": null,
       "mca": {
         "cin": "U62099KA2025FTC199651",
         "name": "TALKDESK INDIA PRIVATE LIMITED",
@@ -10306,12 +10291,7 @@
       "date": null,
       "source_url": "https://www.cbinsights.com/company/tamara",
       "qualified_by": "stage",
-      "salary": {
-        "avg_lpa": 33.6,
-        "reports": 43,
-        "observed": "2026-07-21",
-        "source_url": "https://www.ambitionbox.com/salaries/tamara-salaries"
-      },
+      "salary": null,
       "mca": null
     },
     {
@@ -10385,12 +10365,7 @@
       "date": null,
       "source_url": "https://www.cbinsights.com/company/tenstorrent",
       "qualified_by": "stage",
-      "salary": {
-        "avg_lpa": 49.6,
-        "reports": 12,
-        "observed": "2026-07-26",
-        "source_url": "https://www.ambitionbox.com/salaries/tenstorrent-salaries"
-      },
+      "salary": null,
       "mca": {
         "cin": "U72900KA2022FTC160657",
         "name": "TENSTORRENT INDIA PRIVATE LIMITED",
@@ -10777,12 +10752,7 @@
       "date": null,
       "source_url": "https://www.cbinsights.com/company/tide",
       "qualified_by": "stage",
-      "salary": {
-        "avg_lpa": 21.9,
-        "reports": 1556,
-        "observed": "2026-07-27",
-        "source_url": "https://www.ambitionbox.com/salaries/tide-salaries"
-      },
+      "salary": null,
       "mca": null
     },
     {
@@ -10872,12 +10842,7 @@
       "date": "2026-05-27",
       "source_url": "https://techcrunch.com/2026/05/27/triomics-nabs-22m-to-bring-oncology-specific-ai-to-cancer-centers/",
       "qualified_by": "amount",
-      "salary": {
-        "avg_lpa": 19.1,
-        "reports": 49,
-        "observed": "2026-07-14",
-        "source_url": "https://www.ambitionbox.com/salaries/triomics-salaries"
-      },
+      "salary": null,
       "mca": null
     },
     {
@@ -10969,12 +10934,7 @@
       "date": null,
       "source_url": "https://www.cbinsights.com/company/turing",
       "qualified_by": "stage",
-      "salary": {
-        "avg_lpa": 19.0,
-        "reports": 1776,
-        "observed": "2026-07-27",
-        "source_url": "https://www.ambitionbox.com/salaries/turing-salaries"
-      },
+      "salary": null,
       "mca": null
     },
     {
@@ -11084,12 +11044,7 @@
       "date": "2025-05-07",
       "source_url": "https://www.sec.gov/Archives/edgar/data/1816525/000181652525000001/0001816525-25-000001-index.htm",
       "qualified_by": "amount",
-      "salary": {
-        "avg_lpa": 12.2,
-        "reports": 564,
-        "observed": "2026-07-28",
-        "source_url": "https://www.ambitionbox.com/salaries/twin-health-salaries"
-      },
+      "salary": null,
       "mca": null
     },
     {
@@ -11352,12 +11307,7 @@
       "date": null,
       "source_url": "https://www.forbes.com/companies/workato/",
       "qualified_by": "stage",
-      "salary": {
-        "avg_lpa": 40.7,
-        "reports": 144,
-        "observed": "2026-07-22",
-        "source_url": "https://www.ambitionbox.com/salaries/workato-salaries"
-      },
+      "salary": null,
       "mca": {
         "cin": "U72900TG2022FTC158596",
         "name": "WORKATO INDIA PRIVATE LIMITED",

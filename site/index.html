@@ -322,19 +322,19 @@ function load(data) {
   }
   companies = data.companies;
   snapshot = data.snapshot;
-  // The integrity footer (T5.3, SPEC feature 12). The rows can only say how many
-  // companies made it; this says how many we asked about, and the difference is
-  // the whole reason the site is trustworthy. The build counts it -- a renderer
-  // counting its own rows would always report everything it has as everything
-  // there is.
-  const n = data.integrity;
-  $('#integrity').textContent =
-    `Checked ${count(n.checked)} of the ${count(n.corpus_size)} funded companies in our corpus. `
-    + `The other ${count(n.unchecked)} could not be checked — no job board we could find, or one `
-    + `we could not read — so they are left off rather than shown as not hiring. This is not `
-    + `every funded company hiring in India; it is every one we could prove.`;
   $('#snapshot').textContent = snapshot;
   $('#snapshot').dateTime = snapshot;
+  // The integrity footer (T5.3, SPEC feature 12). The rows can only say how many
+  // companies made it; this says how many we asked about, and the difference is
+  // the whole reason to trust the ones that did. The build counts it -- a
+  // renderer counting its own rows would always report everything it has as
+  // everything there is.
+  const counted = data.integrity;
+  $('#integrity').textContent =
+    `Checked ${count(counted.checked)} of the ${count(counted.corpus_size)} funded companies in `
+    + `our corpus. The other ${count(counted.unchecked)} could not be checked — no job board we `
+    + `could find, or one we could not read — so they are left off rather than shown as not `
+    + `hiring. This is not every funded company hiring in India; it is every one we could prove.`;
   $('#city').append(...[...new Set(companies.flatMap((c) => c.cities))].sort()
     .map((city) => el('option', null, city)));
   render();

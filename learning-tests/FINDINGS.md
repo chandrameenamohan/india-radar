@@ -1840,3 +1840,62 @@ real and slightly higher than it said: the filter excludes companies whose
 corporate structure, which is why the site's footer now says so — a badge no
 India-founded company can earn reads as a verdict on them unless the page states
 what it is.
+
+---
+
+# The integrity footer — measured during T5.3 (2026-07-29)
+
+## The site cannot count this, and that is the whole reason the field exists
+
+`companies.json` holds 116 rows. The honest footer says **711 of 2,915 checked,
+2,204 not** — three numbers, none of which is derivable from the file's own rows.
+A renderer counting what it has can only ever produce "116 of 116", which is the
+one sentence this project's premise forbids: a claim of completeness the data
+cannot back.
+
+So schema **v7** adds an `integrity` block (`corpus_size`, `checked`,
+`unchecked`) copied out of the build report rather than recomputed. Copied, not
+re-derived, because a second count of the same thing is a second chance to
+disagree with the first — and the two files are then two artifacts of one build
+that can be asserted against each other.
+
+`checked` is `outcomes.CHECKED` — listed **or** `no-india-roles`. A company we
+read and found nothing on was checked; that is a finding. The other 2,204 are
+absences of knowledge and the footer says so.
+
+## The failure this can actually have is the two files drifting apart
+
+On the real path the sum can only hold: `report()` computes `unchecked` as a
+subtraction, so validating it there proves nothing. The check earns its place
+one level up — `integrity_errors` refuses counts that do not account for the
+corpus, and refuses `checked` below the number of rows being written, which is
+the deterministic form of "this footer is describing a different build than
+these rows". The e2e then asserts the rendered sentence against
+`build-report.json`, the OTHER file.
+
+The hand-written e2e fixture is the case that exercises the schema half, so it
+carries 9 checked of 30 rather than a full-coverage block: a fixture where
+everything was checked would render the one sentence the footer exists to avoid.
+
+## Three mutations, all of which bite
+
+- `write` stops validating the counts → `test_a_footer_that_does_not_add_up_...` red.
+- the site counts its own rows → e2e: `expected [711 2915 2204] got [116 116 0]`.
+- the footer is filled *before* the schema-version guard → a dataset the page
+  refuses to render still gets a coverage figure printed under the refusal. This
+  is the one that needed care: the first attempt at it left `n` undefined, so
+  `load()` threw, the fetch `.catch` swallowed it, and the check went green for
+  a reason that had nothing to do with the mutation. **A mutation that makes the
+  page fail EARLIER can pass a check it was written to break.**
+
+## Rebuild cost, re-measured: 10m59s
+
+Against T4.2's 10m41s, on a corpus of 2,915 with the same outcomes (116 listed,
+0 probe-failed, 3 empty-board-unverified). `build-report.json` regenerated
+byte-identical, which is the useful part: the pipeline is reproducible across a
+day, so **T6.2/T6.3 can diff snapshots for real change rather than churn.**
+
+A schema bump now costs a full live rebuild, because the page refuses the
+published file the moment `SCHEMA_VERSION` moves. That is the correct failure —
+it is the stale-data trap from T1.2 caught by design instead of by luck — but it
+means **a schema change is an ~11-minute task, not a one-line one.**
