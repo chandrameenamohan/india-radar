@@ -297,7 +297,7 @@ Checks:
 Out of scope: buying a data source. Free extraction only.
 ```
 
-### T1.7 — Software/sector filter `todo` · *Phase 1* · after T1.5
+### T1.7 — Software/sector filter `in-progress` · *Phase 1* · after T1.5
 > **Added 2026-07-29.** `grep -i software TASKS.md` returned nothing: SPEC.md says
 > "software companies" and names non-software sectors as a non-goal, but no task
 > ever implemented it. SEC Form D covers EVERY private placement — hedge funds,
