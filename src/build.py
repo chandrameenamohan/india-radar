@@ -20,7 +20,7 @@ from datetime import date
 from pathlib import Path
 from typing import Any, NamedTuple
 
-from src import ashby, greenhouse
+from src import ashby, greenhouse, lever
 from src.greenhouse import Roles
 from src.india import cities, is_india
 from src.outcomes import Outcome, report, write_report
@@ -72,12 +72,13 @@ FIELDS: dict[str, type | tuple[type, ...]] = {
     "qualified_by": str,
 }
 
-#: The probes that exist. Lever (T3.3) joins by adding a line here — and until
-#: it does, a company on that board is `probe-failed`, which is the truth: we
-#: hold a slug we cannot read.
+#: Every ATS this corpus holds a slug for. With Lever in, no company is
+#: `probe-failed` for want of a probe — the outcome now means only what it says,
+#: that we tried and could not read the board.
 PROBES: dict[str, Provider] = {
     "greenhouse": Provider(greenhouse.probe, greenhouse.locations),
     "ashby": Provider(ashby.probe, ashby.locations),
+    "lever": Provider(lever.probe, lever.locations),
 }
 
 

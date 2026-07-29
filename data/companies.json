@@ -215,6 +215,22 @@
       "qualified_by": "stage"
     },
     {
+      "name": "ASAPP",
+      "ats": "lever",
+      "slug": "asapp-2",
+      "india_roles": 3,
+      "cities": [
+        "Bengaluru",
+        "Chennai"
+      ],
+      "amount": null,
+      "currency": null,
+      "round_letter": null,
+      "date": null,
+      "source_url": "https://www.cbinsights.com/company/getasapp",
+      "qualified_by": "stage"
+    },
+    {
       "name": "AtoB",
       "ats": "ashby",
       "slug": "atob",
@@ -278,7 +294,7 @@
       "name": "Celonis",
       "ats": "greenhouse",
       "slug": "celonis",
-      "india_roles": 35,
+      "india_roles": 34,
       "cities": [
         "Bengaluru"
       ],
@@ -841,7 +857,7 @@
       "name": "Ivalua",
       "ats": "greenhouse",
       "slug": "ivalua",
-      "india_roles": 6,
+      "india_roles": 4,
       "cities": [
         "Pune"
       ],
@@ -871,7 +887,7 @@
       "name": "Kaseya",
       "ats": "greenhouse",
       "slug": "kaseya",
-      "india_roles": 15,
+      "india_roles": 14,
       "cities": [
         "Bengaluru",
         "Pune"
@@ -975,6 +991,22 @@
       "qualified_by": "amount"
     },
     {
+      "name": "MindTickle",
+      "ats": "lever",
+      "slug": "mindtickle",
+      "india_roles": 19,
+      "cities": [
+        "Bengaluru",
+        "Pune"
+      ],
+      "amount": null,
+      "currency": null,
+      "round_letter": null,
+      "date": null,
+      "source_url": "https://www.cbinsights.com/company/mindtickle",
+      "qualified_by": "stage"
+    },
+    {
       "name": "Minio",
       "ats": "greenhouse",
       "slug": "minio",
@@ -1017,6 +1049,19 @@
       "round_letter": null,
       "date": null,
       "source_url": "https://www.cbinsights.com/company/teamapt",
+      "qualified_by": "stage"
+    },
+    {
+      "name": "MoonPay",
+      "ats": "lever",
+      "slug": "moonpay",
+      "india_roles": 1,
+      "cities": [],
+      "amount": null,
+      "currency": null,
+      "round_letter": null,
+      "date": null,
+      "source_url": "https://www.cbinsights.com/company/moonpay",
       "qualified_by": "stage"
     },
     {
@@ -1078,6 +1123,24 @@
       "qualified_by": "stage"
     },
     {
+      "name": "NIUM",
+      "ats": "lever",
+      "slug": "nium",
+      "india_roles": 13,
+      "cities": [
+        "Bengaluru",
+        "Chennai",
+        "Mumbai",
+        "Surat"
+      ],
+      "amount": null,
+      "currency": null,
+      "round_letter": null,
+      "date": null,
+      "source_url": "https://www.cbinsights.com/company/instarem",
+      "qualified_by": "stage"
+    },
+    {
       "name": "Notion",
       "ats": "ashby",
       "slug": "notion",
@@ -1121,6 +1184,21 @@
       "date": null,
       "source_url": "https://www.ycombinator.com/companies/observe-ai",
       "qualified_by": "stage"
+    },
+    {
+      "name": "Oleria",
+      "ats": "lever",
+      "slug": "oleria-security",
+      "india_roles": 1,
+      "cities": [
+        "Bengaluru"
+      ],
+      "amount": 18999996,
+      "currency": "USD",
+      "round_letter": null,
+      "date": "2025-10-23",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1960598/000196059825000003/0001960598-25-000003-index.htm",
+      "qualified_by": "amount"
     },
     {
       "name": "OneTrust",
@@ -1182,7 +1260,7 @@
       "name": "Project44",
       "ats": "greenhouse",
       "slug": "project44",
-      "india_roles": 7,
+      "india_roles": 8,
       "cities": [
         "Bengaluru"
       ],
@@ -1230,7 +1308,7 @@
       "name": "Razorpay",
       "ats": "greenhouse",
       "slug": "razorpaysoftwareprivatelimited",
-      "india_roles": 23,
+      "india_roles": 22,
       "cities": [
         "Bengaluru",
         "Mumbai"
@@ -1240,6 +1318,21 @@
       "round_letter": null,
       "date": null,
       "source_url": "https://www.ycombinator.com/companies/razorpay",
+      "qualified_by": "stage"
+    },
+    {
+      "name": "Rigetti Computing",
+      "ats": "lever",
+      "slug": "rigetti",
+      "india_roles": 1,
+      "cities": [
+        "Bengaluru"
+      ],
+      "amount": null,
+      "currency": null,
+      "round_letter": null,
+      "date": null,
+      "source_url": "https://www.ycombinator.com/companies/rigetti-computing",
       "qualified_by": "stage"
     },
     {
@@ -1571,7 +1664,7 @@
       "name": "Workato",
       "ats": "greenhouse",
       "slug": "workato",
-      "india_roles": 14,
+      "india_roles": 15,
       "cities": [
         "Bengaluru",
         "Hyderabad"

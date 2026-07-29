@@ -1382,3 +1382,100 @@ frontier, and they are a slug problem, not a probe one.
 the row carries `cities: []` — the "India without naming where" case T3.4 wrote
 that field for. `ashby/ambient.ai` → 5 of 15, all `Bengaluru` with no `, India`
 suffix, caught by the city list rather than by the country name.
+
+---
+
+# T3.3 — the Lever probe (2026-07-29)
+
+## The documented trap does not reproduce. A wrong Lever slug 404s.
+
+§1 recorded that a wrong slug "can return HTTP 200 with an empty array", and
+that single sentence is why `empty-board-unverified` exists in the outcome
+vocabulary at all. Re-read the row it came from: **5 slugs tried, 3 404'd, and
+the 2 that returned 200 returned zero postings.** The 200-empty pair were never
+shown to be *wrong* slugs — the inference was that they might be, and that we
+could not tell. That was the honest reading then and it is still the honest
+reading now.
+
+Ten wrong slugs of three deliberately different shapes, measured today:
+
+| shape | examples | answer |
+|---|---|---|
+| nonsense | `no-such-company-india-radar-xyz`, `zzzz-not-a-board-99` | 404 |
+| near-miss spelling | `matillon`, `mindtickle-inc`, `tala-mobile` | 404 |
+| our own slug minus its suffix | `asapp` (we hold `asapp-2`), `easypost`, `oleria` | 404 |
+
+All ten: `404`, body `{"ok":false,"error":"Document not found"}`. Dropping
+`?mode=json` changes nothing — the parameter is the format, not the door. So the
+**mechanism** is narrower than it was written down as: nothing constructible
+answers 200-with-empty-array.
+
+## The outcome earns its place anyway, and three live companies are why
+
+`ramenvr`, `tesorio` and `trela` — all three in our own corpus, all three
+resolved by careers-page — answer **200 with `[]`** right now. An abandoned
+board, a renamed company and a firm that genuinely isn't hiring produce that
+byte for byte, and unlike Greenhouse there is no `boards/{slug}` name lookup to
+ask a second question of. So an empty Lever board stays `empty-board-unverified`:
+excluded, and counted as an absence of knowledge rather than as a finding.
+
+This is the one place the three probes deliberately disagree. Ashby's empty array
+is believed (§"A wrong Ashby slug 404s") and Lever's is not, even though both
+providers 404 a wrong slug. The difference is not the 404 — it is that Ashby was
+checked against a board we could name and Lever cannot be. Keeping the stricter
+rule costs 3 companies out of 51, all of which would have been excluded from the
+site either way; what it buys is that T5.3's integrity footer counts them under
+"could not check" instead of claiming we did.
+
+**The DoD's integration check is therefore unsatisfiable as written** — "probe a
+known-bad slug, assert outcome is `empty-board-unverified`" now yields
+`slug-unresolved`, correctly. `learning-tests/lever_live.py` §5 asserts what the
+check is *for*, against boards that really do answer 200-empty today, and pins
+the 404 case beside it. **Flagged for the human rather than quietly reworded.**
+
+## The response is a bare array, and `allLocations` is the whole location answer
+
+No envelope, no `meta.total` — the JSON array *is* the body, so truncation is
+undetectable here exactly as on Ashby. `categories.allLocations` sits beside the
+primary `categories.location` and, across 158 postings on six boards, is present
+on all 158 and **contains the primary in every case where a primary exists**. So
+it is used whole rather than prepended to, unlike Ashby's `secondaryLocations`
+which is genuinely the *other* places. Prepending would double every city on
+every row — invisible in the role count, visible in the site's city filter.
+
+The one exception found: a Kpler posting states `location: null` with
+`allLocations: []`. A role with nowhere stated, not a crash.
+
+## Cost, and where probe-failed went
+
+51 slugs in **15.1s** wall at 12 workers; individual calls 2–5.4s; every one
+answered first try, no 5xx and no throttling. So no retry loop and no batch
+wrapper — the same shape as `greenhouse.probe`, which carries 429 companies to
+this one's 51. The full sequential build went **5m12s → 9m38s**, against a 6h
+cap. `ashby.probe_all` is the upgrade path if that stops being true.
+
+```
+   116  listed                  was 110
+   595  no-india-roles          was 558
+     3  empty-board-unverified  was 0
+     0  probe-failed            was 51   <- the probe gap is closed
+  2201  slug-unresolved         was 2196
+```
+
+The 51 Lever companies split 6 listed / 37 no-india-roles / 5 slug-unresolved
+(404 today, resolved cleanly at T2.1 time — "a resolved slug is not a probeable
+slug", now seen on all three providers) / 3 empty-board-unverified.
+
+**`probe-failed` is 0 for the first time, and that is the point.** It no longer
+means "we hold a slug nothing can read"; it means only what the vocabulary says
+it means — we tried and failed. Every remaining exclusion is a slug problem:
+**2,201 `slug-unresolved`, of which 1,251 have a website we already hold.** That
+is the whole of the next frontier, and it is E2's, not E3's.
+
+## Spot-checked, because "matched India" is the claim that can quietly be wrong
+
+`lever/mindtickle` → 19 of 21 postings in India (Bengaluru and Pune; MindTickle
+is India-headquartered, so a high ratio is right and a low one would have meant
+the `allLocations` unwrap was wrong). `lever/moonpay` → 1 of 15, located
+`Remote - India` with no city, so the row carries `cities: []`. `lever/nium` → 13
+across four cities including Surat, which no other listing on this site reaches.

@@ -8,12 +8,13 @@ from pathlib import Path
 
 import pytest
 
-from src import ashby, greenhouse
+from src import ashby, greenhouse, lever
 from src.build import SCHEMA_VERSION, Provider, build, errors, website_counts, write
 from src.outcomes import Outcome
 from src.slugs import Slug
 from tests.test_ashby import board as ashby_board
 from tests.test_greenhouse import board
+from tests.test_lever import board as lever_board
 
 #: The same fixture board init.sh's smoke build runs on: four roles, of which
 #: two are India — and one of the other two is the `In-Office` trap.
@@ -94,6 +95,28 @@ def test_an_ashby_row_counts_roles_not_places():
     assert rows[0]["india_roles"] == 2  # two postings, not the three India strings
     assert rows[0]["cities"] == ["Bengaluru", "Mumbai"]  # the Warsaw role is also Remote - India
     assert errors(rows[0]) == []
+
+
+def test_a_lever_empty_board_never_reaches_the_site():
+    """T3.3. The two halves of the last probe, in the spine rather than in the
+    module: a board with India roles becomes a row — which `errors()` only
+    accepts because `lever` is registered in PROBES — and an empty board leaves
+    as `empty-board-unverified`, with no row and no zero.
+    """
+    postings = json.loads(lever_board(("Bengaluru, Karnataka", "Pune, Maharashtra")))
+    slugs = {"Acme": Slug(ats="lever", slug="acme", method="careers-page")}
+
+    read = {"lever": Provider(lambda _: postings, lever.locations)}
+    rows, outcomes = build(CORPUS[:1], slugs, read)
+    assert outcomes == {"Acme": Outcome.LISTED}
+    assert rows[0]["india_roles"] == 1, "one posting open in two cities is one role"
+    assert rows[0]["cities"] == ["Bengaluru", "Pune"]
+    assert errors(rows[0]) == []
+
+    empty = {"lever": Provider(lambda _: lever.parse("[]"), lever.locations)}
+    rows, outcomes = build(CORPUS[:1], slugs, empty)
+    assert outcomes == {"Acme": Outcome.EMPTY_BOARD_UNVERIFIED}
+    assert rows == []
 
 
 def test_a_directory_sourced_company_ships_without_a_round():

@@ -554,9 +554,56 @@ Checks:
 Out of scope: making Ashby faster. It isn't possible; it's a fixed server delay.
 ```
 
-### T3.3 — Lever probe `in-progress` · *Phase 1* · after T3.1
-**The trap:** a wrong slug returns HTTP 200 with an empty array, indistinguishable
-from "no open roles".
+### T3.3 — Lever probe `needs-review` · *Phase 1* · after T3.1
+> **`probe-failed` is 0 for the first time — 51 → 0 — and 110 → 116 listed.** The
+> 51 Lever companies split 6 listed, 37 `no-india-roles`, 5 `slug-unresolved`
+> (404 today, resolved cleanly at T2.1 time) and 3 `empty-board-unverified`. That
+> outcome counts as *unchecked*, so the honest total is 711 checked of 2,915.
+>
+> **NEEDS REVIEW — the DoD's integration check is unsatisfiable as written, and I
+> did not reword it.** "Probe a known-bad slug, assert outcome is
+> `empty-board-unverified`" now yields `slug-unresolved`, correctly: ten wrong
+> slugs of three shapes (nonsense, near-miss spellings, and our own slugs minus
+> their `-2` suffix) **all 404** with `{"ok":false,"error":"Document not found"}`.
+> Nothing constructible answers 200-with-empty-array any more. Re-reading the row
+> this task was built on, FINDINGS §1 never showed otherwise — 5 slugs, 3 404s,
+> and 2 that returned 200-empty and *might* have been wrong. The trap was always
+> an inability to tell, not a demonstrated behaviour.
+>
+> **The outcome still earns its place, and three live companies are why.**
+> `ramenvr`, `tesorio` and `trela` answer 200 with `[]` today. An abandoned
+> board, a renamed company and a firm that isn't hiring are byte-identical, and
+> Lever has no counterpart to Greenhouse's `boards/{slug}` name lookup — there is
+> no second question to ask. So an empty board is excluded and counted as an
+> absence of knowledge. `learning-tests/lever_live.py` §5 asserts what the check
+> is *for* against boards that really do answer that way, and pins the 404 case
+> beside it. **The human call: accept that substitution, or reword the DoD.**
+> Nothing else in the task depends on the answer.
+>
+> **This is the one place the three probes deliberately disagree.** Ashby's empty
+> array is believed and Lever's is not, though both 404 a wrong slug. The
+> difference isn't the 404 — Ashby was checked against a board we could name and
+> Lever cannot be. It costs 3 companies, all excluded either way; it buys T5.3 a
+> footer that counts them under "could not check" rather than claiming we did.
+>
+> **`allLocations` is the whole location answer, not a second half.** Present on
+> all 158 postings across six boards, and it *contains* the primary — unlike
+> Ashby's `secondaryLocations`, which is genuinely the other places. Prepending
+> `location` would double every city on every row: invisible in the role count,
+> visible in the site's city filter. Four mutations confirmed the checks bite —
+> believing the empty array, prepending the primary, unregistering the probe, and
+> letting a 404 borrow the unverified outcome each turn the suite red.
+>
+> **The bottleneck moves for the last time inside E3.** `probe-failed` no longer
+> means "we hold a slug nothing can read"; it means only what the vocabulary
+> says. Every remaining exclusion is a slug problem: **2,201 `slug-unresolved`,
+> 1,251 of them with a website we already hold.** That is E2's frontier, not
+> E3's.
+
+~~**The trap:** a wrong slug returns HTTP 200 with an empty array,
+indistinguishable from "no open roles".~~ **Measured 2026-07-29: every wrong slug
+404s. Only real boards answer 200-empty — which is still unverifiable, for a
+different reason. See the note above and FINDINGS.**
 ```
 Acceptance (observable):
   A 200-with-empty-array is recorded `empty-board-unverified` and the company is
