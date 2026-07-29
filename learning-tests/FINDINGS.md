@@ -1218,3 +1218,82 @@ ambiguity rather than a parser bug: `ashby/oaknorth` vs `lever/oaknorth`,
 `ashby/commure` vs `ashby/commure-athelas`, `ashby/cargado` vs `ashby/cargado.`
 (a trailing period from prose). Eight companies is a rounding error against 2,219
 and each one is a plausible override-file entry, which is where T2.3 put the tail.
+
+# T1.7 — the sector filter
+
+## No source states whether a company is software. All four were checked.
+
+SPEC's non-goals rule out hardware, biotech and services, and the obvious
+implementation — read the sector the source already publishes — does not exist.
+Measured across the live corpus:
+
+| source | in corpus | sector signal available |
+|---|---|---|
+| YC | 1,045 | `industry` / `subindustry` / `tags`, and unusable — see below |
+| EDGAR | 985 | `Computers`, `Other Technology`, `Telecommunications`. Nothing finer exists |
+| CB Insights | 683 | already filtered at the source (`cbinsights.SOFTWARE`) |
+| Forbes | 163 | already filtered at the source (four software lists) |
+| TechCrunch | 63 | none |
+| FinSMEs | 9 | none |
+
+## YC's subindustry categorises by market served, not by what is built
+
+This is the finding that decided the design, and it is counter-intuitive enough
+that a reasonable implementation gets it backwards. YC's taxonomy looks precise —
+59 subindustry values across the corpus — and reading the non-software-sounding
+buckets out would be one line. What is actually in them:
+
+```
+Consumer -> Food and Beverage    DoorDash, Instacart, Rappi, ZEPTO, Snackpass,
+                                 Chowdeck ... beside Nobell Foods, Eclipse Foods
+Industrials -> Automotive        Cruise, May Mobility, Embark Trucks, Zendar
+Consumer -> Apparel and Cosmetics  GOAT Group, Teespring, Curtsy
+```
+
+Zepto is an Indian company hiring in India — the single most on-thesis row this
+site could carry — and it is filed under Food and Beverage. Excluding that bucket
+deletes exactly what the site exists to list. Only two buckets are reliably
+non-software (`Healthcare -> Industrial Bio`, `Industrials -> Aviation and
+Space`), and the second holds Stoke Space, which `overrides.yaml` already ships.
+
+**So the only signal is the company's own name**, and the filter says so rather
+than dressing a coarse label up as precision. Same shape as the MCA NIC-code note
+in T1.7's own out-of-scope line, arrived at from the other direction.
+
+## A name vocabulary is wrong until it is measured against the real names
+
+Every candidate term was run against all 2,948 live corpus names before it was
+kept. Four would have been shipped by anyone reasoning from the armchair, and
+each one deletes real companies:
+
+| term | looks like | actually hits |
+|---|---|---|
+| `labs` | a laboratory | 82 names: Cockroach, Grafana, dbt, Modal, Monad, Mysten, Ripple, Protocol, Lambda, AI21, Dapper — **dropped entirely** |
+| `medical` | medical devices | Circle Medical (telehealth software) among 9 — **demoted to ambiguous** |
+| `surgical` | surgical devices | Surgical Safety Technologies (OR analytics) of 2 — **demoted to ambiguous** |
+| `capital` / `ventures` / `partners` | an investment vehicle | Drip Capital, Scalable Capital, Cerebro Capital, Red Ventures, Globalization Partners — all software — **dropped entirely** |
+
+`fund` survives where `capital` does not: bounded on word boundaries it hits
+`AYC Fund`, `Silicon Road Opportunity Fund I` and `SR RetailTech Fund I` and
+nothing else, and it never touches `Fundbox`-shaped names.
+
+## Non-name identifiers: demand the absence of every letter
+
+`011235813` is a real EDGAR registrant name and T1.7 names it. The rule that
+catches it has to be narrower than it first looks — the corpus also holds `0x`,
+`N26`, `G2`, `R2`, `D6`, `H1`, `M1` and `01.AI`, all real software companies with
+more digits than letters. "No ASCII letter at all" hits exactly two names
+(`011235813`, `1910`) and zero real companies. Any rule phrased as a ratio takes
+`0x` with it.
+
+## Three verdicts, because a name is weak evidence
+
+`software` (kept) / `ambiguous` (kept AND flagged) / `not-software` (excluded and
+counted). The middle one is not indecision, it is the DoD's asymmetry made
+structural: wrongly excluding a real company is invisible, wrongly including one
+is visible and fixable. `robotics`, `space`, `energy`, `medical`, `surgical`,
+`bio`, `devices`, `solar`, `nano` and `materials` all carry real signal that a
+name cannot settle — `Gecko Robotics` sells inspection software, `Green Energy
+Exchange` is a trading platform, `Fleet Device Management` is SaaS — so those
+companies stay in the corpus and land in `corpus.json`'s `ambiguous` map, which
+is a human-sized list rather than a 2,948-row hunt.

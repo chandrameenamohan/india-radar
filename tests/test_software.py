@@ -10,6 +10,8 @@ never measured rejects every one of them.
 """
 import pytest
 
+from src.corpus import merge
+from src.finsmes import Record
 from src.software import AMBIGUOUS, NOT_SOFTWARE, Verdict, classify
 
 #: Hand-labelled, all from data/corpus.json. Ambiguous means genuinely so: each
@@ -121,9 +123,6 @@ def test_vocabularies_are_disjoint():
 def _merge_names(names):
     """Run real names through the real merge — the filter is only correct where
     it actually runs, and that is inside the corpus, not beside it."""
-    from src.corpus import merge
-    from src.finsmes import Record
-
     return merge(
         Record(
             name=name,

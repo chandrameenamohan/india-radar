@@ -297,7 +297,47 @@ Checks:
 Out of scope: buying a data source. Free extraction only.
 ```
 
-### T1.7 — Software/sector filter `in-progress` · *Phase 1* · after T1.5
+### T1.7 — Software/sector filter `done` · *Phase 1* · after T1.5
+> **109 excluded and counted, 192 kept and flagged, 0 listed companies lost.**
+> Corpus 2,948 → 2,915 (the filter removed 109; a live re-scrape added 76). All
+> four `overrides.yaml` companies survive, including Stoke Space Technologies,
+> which lands in `ambiguous` — kept, exactly as intended.
+>
+> **No source states whether a company is software, and all four were checked.**
+> Form D's whole technology branch is `Computers`/`Other Technology`/
+> `Telecommunications`, so Seegrid and KYG Trade file exactly as a SaaS company
+> does. YC states a rich `subindustry` — and it categorises by **market served,
+> not by what the company builds**: `Consumer -> Food and Beverage` holds
+> DoorDash, Instacart, Rappi and **Zepto** beside Nobell Foods, and `Industrials
+> -> Automotive` holds Cruise. Reading those buckets out is one line and deletes
+> the most on-thesis row the site could carry. Same shape as this task's own
+> out-of-scope note about NIC codes, reached from the other direction.
+>
+> **So the filter reads the name — and a name is weak evidence, so it returns
+> three verdicts rather than two.** Conclusive terms exclude and are counted;
+> real-but-unsettled ones keep the company and flag it, because wrongly excluding
+> a real company is invisible while wrongly including one is visible and fixable.
+> `ambiguous` is 192 names, a human-sized list rather than a 2,915-row hunt.
+>
+> **The vocabulary is measured, and four plausible terms had to be thrown out.**
+> Every candidate ran against all 2,948 live names first. `labs` reads as a
+> laboratory and is really Cockroach, Grafana, dbt, Modal, Mysten, Ripple and
+> Protocol — 82 names, dropped entirely. `capital`/`ventures`/`partners` read as
+> investment vehicles and are Drip Capital, Scalable Capital and Globalization
+> Partners — dropped. `medical` and `surgical` would have deleted Circle Medical
+> and Surgical Safety Technologies — demoted to ambiguous. The unusable-name rule
+> demands the absence of *every* letter (it catches `011235813`, `1910`, `222`,
+> `42`) because `0x`, `N26`, `G2`, `R2` and `01.AI` are real companies and any
+> ratio-shaped rule takes them too.
+>
+> **Two exclusions are genuinely arguable and were let stand:** `CODA Farm
+> Technologies` (agtech software, but agriculture is a named non-goal) and `Data
+> Driven Bioscience`. Both are one line in `NOT_SOFTWARE` away from returning.
+>
+> **Not touched here:** `data/slugs.json`. Excluded companies simply stop being
+> looked up, so no re-resolution was needed; `companies.json` was rebuilt and is
+> unchanged at 88 listed. T3.2/T3.3 remain the 315-company gain.
+
 > **Added 2026-07-29.** `grep -i software TASKS.md` returned nothing: SPEC.md says
 > "software companies" and names non-software sectors as a non-goal, but no task
 > ever implemented it. SEC Form D covers EVERY private placement — hedge funds,

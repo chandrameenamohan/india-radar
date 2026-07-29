@@ -414,7 +414,7 @@
       "name": "Fivetran",
       "ats": "greenhouse",
       "slug": "fivetran",
-      "india_roles": 13,
+      "india_roles": 14,
       "cities": [
         "Bengaluru"
       ],
@@ -703,7 +703,7 @@
       "name": "Kaseya",
       "ats": "greenhouse",
       "slug": "kaseya",
-      "india_roles": 16,
+      "india_roles": 15,
       "cities": [
         "Bengaluru",
         "Pune"
