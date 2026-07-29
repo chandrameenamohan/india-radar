@@ -554,7 +554,7 @@ Checks:
 Out of scope: making Ashby faster. It isn't possible; it's a fixed server delay.
 ```
 
-### T3.3 — Lever probe `todo` · *Phase 1* · after T3.1
+### T3.3 — Lever probe `in-progress` · *Phase 1* · after T3.1
 **The trap:** a wrong slug returns HTTP 200 with an empty array, indistinguishable
 from "no open roles".
 ```
