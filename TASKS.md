@@ -554,7 +554,7 @@ Checks:
 Out of scope: making Ashby faster. It isn't possible; it's a fixed server delay.
 ```
 
-### T3.3 — Lever probe `needs-review` · *Phase 1* · after T3.1
+### T3.3 — Lever probe `done` · *Phase 1* · after T3.1
 > **`probe-failed` is 0 for the first time — 51 → 0 — and 110 → 116 listed.** The
 > 51 Lever companies split 6 listed, 37 `no-india-roles`, 5 `slug-unresolved`
 > (404 today, resolved cleanly at T2.1 time) and 3 `empty-board-unverified`. That
@@ -610,10 +610,21 @@ Acceptance (observable):
   EXCLUDED from the site. It is never silently treated as "not hiring".
 Checks:
   lint -> unit:test_empty_array_is_unverified_not_zero
-       -> integration:probe a known-bad slug, assert outcome is
-          empty-board-unverified
+       -> integration:learning-tests/lever_live.py -- assert the outcome against
+          boards that REALLY answer 200-with-[] (ramenvr, tesorio, trela), and
+          pin the 404 case beside it.
 Out of scope: distinguishing bad-slug from genuinely-empty. We can't, so we
               refuse to guess.
+
+REWORDED 2026-07-29 (human ruling). The original check was
+"probe a known-bad slug, assert empty-board-unverified". It is unsatisfiable:
+ten wrong slugs of three shapes all 404 now. The substitution is BETTER -- it
+tests the outcome against boards that genuinely behave that way instead of a
+hypothetical. Also corrects me: FINDINGS originally claimed Lever "returns 200
+with an empty array on a bad slug"; I had observed two slugs that returned
+200-empty and MIGHT have been wrong. The trap was always an inability to tell,
+never a demonstrated behaviour. The outcome still earns its place -- three live
+companies answer that way and Lever has no name-lookup to ask a second question.
 ```
 
 ### T3.4 — India role matcher `done` · *Phase 0* · after T3.1
@@ -642,7 +653,7 @@ Out of scope: cities outside the list inside "IN-<City>" strings. Measured
 
 > Every enrichment must degrade to absent. None may fail a build.
 
-### T4.1 — Roles, apply links, city, remote flag `needs-review` · *Phase 2* · after T3.4
+### T4.1 — Roles, apply links, city, remote flag `done` · *Phase 2* · after T3.4
 > **1,112 India roles now ship with a title, an apply link and a workplace, and
 > 10/10 sampled apply URLs returned 200** — the DoD's own integration check,
 > spread across all three providers (`learning-tests/roles_live.py`). Schema v4:
@@ -692,8 +703,21 @@ Out of scope: cities outside the list inside "IN-<City>" strings. Measured
 ```
 Acceptance (observable):
   Every listed company has >=1 India role with an apply URL returning 200 on that
-  company's real posting, and shows >=1 India city or an explicit remote flag.
-  No listed company renders an empty location.
+  company's real posting. Location renders in three honest cases: named cities
+  where the board names them, "Remote — India" where the board says remote, and
+  otherwise VERBATIM WHAT THE BOARD SAID.
+  No listed company renders an empty location. (`role_errors` enforces the
+  deterministic half: a role's `locations` list may not be empty.)
+
+  REWORDED 2026-07-29 (human ruling). The original demanded ">=1 India city or an
+  explicit remote flag", which is false for 15 of 116 companies whose Greenhouse
+  board says literally `India` and states a workplace NOWHERE -- not on the role,
+  not in metadata, and `content=false` drops the description. Both honest routes
+  were built and measured (board `workplaceType`, and location-string parsing);
+  together they resolve 13 of 28. For the remaining 15 a city or remote flag could
+  only be INVENTED. This project's premise is "proven by their own job board, not
+  by a claim", so fabricating a location to satisfy my wording would have been the
+  worst possible way to pass.
 Checks:
   lint -> unit:test_city_and_remote_parsing
        -> integration:sample 10 listed companies, assert every apply URL is 200
