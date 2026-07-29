@@ -40,6 +40,28 @@ note "WATCHER START  actionable=$A0 done=$(done_ct) parked=$(parked_ct) passed=$
 
 seen=$(grep -c "VALIDATION SUMMARY" "$LOG" 2>/dev/null || echo 0)
 
+at_prompt() {
+  tmux capture-pane -t "$SESSION" -p 2>/dev/null \
+    | grep -v '^[[:space:]]*$' | tail -1 | grep -q 'q=quit'
+}
+
+# Startup case: if ralph.sh is ALREADY at a prompt, that iteration finished before
+# we were watching. Our baseline was taken from its post-state, so validating it
+# compares the state against itself -- nothing has moved and it halts on
+# no-progress every time. Advance past it once, unvalidated, and start judging
+# from the next iteration. Refuse if the tree is dirty: advancing past uncommitted
+# work is the destructive case this watcher exists to prevent.
+if at_prompt; then
+  if [ -n "$(git status --porcelain)" ]; then
+    note "HALT at startup: already at a prompt WITH uncommitted work."
+    note "  Advancing would run the loop's recovery and delete it. Human review required."
+    exit 1
+  fi
+  note "startup: already at a prompt (iteration finished before watching); advancing unvalidated"
+  tmux send-keys -t "$SESSION" "" Enter 2>/dev/null
+  sleep 20
+fi
+
 for _ in $(seq 1 "$MAX"); do
   # Wait until ralph.sh is actually sitting at its prompt.
   #
@@ -52,10 +74,6 @@ for _ in $(seq 1 "$MAX"); do
   # The prompt itself is the real signal: ralph.sh only prints it when it wants an
   # answer. Read the last non-empty line of the pane rather than the scrollback,
   # so an old prompt further up doesn't match.
-  at_prompt() {
-    tmux capture-pane -t "$SESSION" -p 2>/dev/null \
-      | grep -v '^[[:space:]]*$' | tail -1 | grep -q 'q=quit'
-  }
   waited=0
   while ! at_prompt; do
     if ! pgrep -f 'bash ./ralph.sh' >/dev/null 2>&1; then
