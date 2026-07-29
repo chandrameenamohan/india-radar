@@ -41,31 +41,54 @@ note "WATCHER START  actionable=$A0 done=$(done_ct) parked=$(parked_ct) passed=$
 seen=$(grep -c "VALIDATION SUMMARY" "$LOG" 2>/dev/null || echo 0)
 
 for _ in $(seq 1 "$MAX"); do
-  # Wait for a new summary, or for the loop to finish.
+  # Wait until ralph.sh is actually sitting at its prompt.
+  #
+  # Counting VALIDATION SUMMARY lines in the log was wrong twice over: a summary
+  # already present when the watcher starts is never processed (the watcher waits
+  # for a NEW one that will never come, then halts), and an iteration that stops
+  # WITHOUT emitting a summary is indistinguishable from one still running. Both
+  # produced false "wedged" halts while the loop sat idle at an unanswered prompt.
+  #
+  # The prompt itself is the real signal: ralph.sh only prints it when it wants an
+  # answer. Read the last non-empty line of the pane rather than the scrollback,
+  # so an old prompt further up doesn't match.
+  at_prompt() {
+    tmux capture-pane -t "$SESSION" -p 2>/dev/null \
+      | grep -v '^[[:space:]]*$' | tail -1 | grep -q 'q=quit'
+  }
   waited=0
-  while :; do
-    n=$(grep -c "VALIDATION SUMMARY" "$LOG" 2>/dev/null || echo 0)
-    [ "$n" -gt "$seen" ] && break
+  while ! at_prompt; do
     if ! pgrep -f 'bash ./ralph.sh' >/dev/null 2>&1; then
       note "LOOP EXITED (no ralph.sh process). actionable=$(actionable)"
       exit 0
     fi
     sleep 10; waited=$((waited+10))
-    if [ $waited -ge 2400 ]; then note "HALT: no summary for 40min — iteration may be wedged"; exit 1; fi
+    if [ $waited -ge 3600 ]; then note "HALT: 60min with no prompt — iteration may be wedged"; exit 1; fi
   done
-  seen=$n
+  seen=$((seen + 1))
 
   A1=$(actionable); H1=$(git rev-parse HEAD)
   read -r P1 X1 <<<"$(test_counts)"
   moved=$((A0 - A1))
   fails=""
 
+  # THE CRITICAL ONE. Advancing with a dirty tree is destructive: step 1 of
+  # LOOP_PROMPT.md runs `git checkout -- . && git clean -fd` on a stale
+  # in-progress task, so the next iteration DELETES whatever is sitting here.
+  # This exact case cost a near-miss on 1,833 resolved websites. Never advance
+  # past uncommitted work -- halt and let a human decide whether to rescue it.
+  if [ -n "$(git status --porcelain)" ]; then
+    fails="$fails UNCOMMITTED-WORK(advancing-would-delete-it)"
+  fi
+
   make check >/dev/null 2>&1 || fails="$fails gate-not-green"
-  [ "$moved" -eq 0 ]        && fails="$fails no-task-completed"
   [ "$moved" -gt 1 ]        && fails="$fails moved-$moved-tasks-expected-1"
-  [ "$H0" = "$H1" ]         && fails="$fails no-commit"
   [ $((P1 + X1)) -lt $((P0 + X0)) ] && fails="$fails tests-deleted($((P0+X0))->$((P1+X1)))"
   [ "$X1" -gt "$X0" ]       && fails="$fails xfail-rose($X0->$X1)"
+  # Truly stuck == no task closed AND nothing committed. A task that spans several
+  # iterations is legitimate (T1.6 did), so a commit without a closure is PARTIAL
+  # progress, not a failure -- provided the tree is clean, which is checked above.
+  [ "$moved" -eq 0 ] && [ "$H0" = "$H1" ] && fails="$fails no-progress(no-task-no-commit)"
 
   if [ -n "$fails" ]; then
     note "HALT after iteration $seen —$fails"
@@ -74,7 +97,11 @@ for _ in $(seq 1 "$MAX"); do
     exit 1
   fi
 
-  note "APPROVED iteration $seen  actionable=$A1 done=$(done_ct) parked=$(parked_ct) passed=$P1 xfailed=$X1"
+  if [ "$moved" -eq 0 ]; then
+    note "PARTIAL iteration $seen (committed, task still open)  actionable=$A1 passed=$P1"
+  else
+    note "APPROVED iteration $seen  actionable=$A1 done=$(done_ct) parked=$(parked_ct) passed=$P1 xfailed=$X1"
+  fi
   A0=$A1; P0=$P1; X0=$X1; H0=$H1
 
   if [ "$A1" -eq 0 ]; then

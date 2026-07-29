@@ -287,9 +287,16 @@ def load_overrides(path: str | Path = OVERRIDES) -> dict[str, Slug]:
     return overrides
 
 
+#: Guessing is 48 threads against ONE host — boards-api.greenhouse.io — where
+#: careers-page discovery is 48 threads against 48 different companies' domains.
+#: The politeness argument for a high worker count does not survive that change
+#: of target, so the guess pool keeps the old number.
+_GUESS_WORKERS = 16
+
+
 def resolve_all(
     companies: Iterable[str | Mapping[str, Any]],
-    workers: int = 16,
+    workers: int = 48,
     overrides: Mapping[str, Slug] | None = None,
 ) -> Resolution:
     """Resolve a corpus: take the human's answer, read careers pages for the
@@ -301,9 +308,10 @@ def resolve_all(
     Concurrent because it is entirely network wait — two sequential fetches per
     company would put a 1,000-company corpus in hours.
 
-    ponytail: 16 workers, each hitting a different company's own domain, so
-    there is no single host to be rude to. It was 8 while the corpus was 1,000;
-    at 2,953 companies this step is the run, and 16 halves an hour of it.
+    ponytail: 48 workers, each hitting a different company's own domain, so
+    there is no single host to be rude to. Measured on a 64-company sample:
+    0.96s/company at 16, 0.28s at 48 — 47 minutes against the corpus becomes 14.
+    The work is pure network wait, so the threads cost nothing but sockets.
     """
     sites = dict(_named(company) for company in companies)
     overrides = overrides or {}
@@ -327,7 +335,7 @@ def resolve_all(
     # whose own careers page named its board has already told us the answer, and
     # a guess could only disagree with it.
     missed = list(unresolved)
-    with ThreadPoolExecutor(max_workers=workers) as pool:
+    with ThreadPoolExecutor(max_workers=min(workers, _GUESS_WORKERS)) as pool:
         guesses = pool.map(guess, missed)
     for name, slug in zip(missed, guesses, strict=True):
         if slug is not None:

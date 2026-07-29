@@ -1,5 +1,1327 @@
 {
   "schema_version": 3,
-  "snapshot": "2026-07-28",
-  "companies": []
+  "snapshot": "2026-07-29",
+  "companies": [
+    {
+      "name": "6Sense",
+      "ats": "greenhouse",
+      "slug": "6sense",
+      "india_roles": 12,
+      "cities": [
+        "Bengaluru",
+        "Pune"
+      ],
+      "amount": null,
+      "currency": null,
+      "round_letter": null,
+      "date": null,
+      "source_url": "https://www.cbinsights.com/company/6sense-insights",
+      "qualified_by": "stage"
+    },
+    {
+      "name": "Airbnb",
+      "ats": "greenhouse",
+      "slug": "airbnb",
+      "india_roles": 9,
+      "cities": [
+        "Bengaluru",
+        "Gurugram"
+      ],
+      "amount": null,
+      "currency": null,
+      "round_letter": null,
+      "date": null,
+      "source_url": "https://www.ycombinator.com/companies/airbnb",
+      "qualified_by": "stage"
+    },
+    {
+      "name": "Alpaca",
+      "ats": "greenhouse",
+      "slug": "alpaca",
+      "india_roles": 1,
+      "cities": [],
+      "amount": null,
+      "currency": null,
+      "round_letter": null,
+      "date": null,
+      "source_url": "https://www.ycombinator.com/companies/alpaca",
+      "qualified_by": "stage"
+    },
+    {
+      "name": "AlphaSense",
+      "ats": "greenhouse",
+      "slug": "alphasense",
+      "india_roles": 49,
+      "cities": [
+        "Bengaluru",
+        "Delhi",
+        "Mumbai",
+        "Pune"
+      ],
+      "amount": null,
+      "currency": null,
+      "round_letter": null,
+      "date": null,
+      "source_url": "https://www.forbes.com/companies/alphasense/",
+      "qualified_by": "stage"
+    },
+    {
+      "name": "Amplitude",
+      "ats": "greenhouse",
+      "slug": "amplitude",
+      "india_roles": 2,
+      "cities": [
+        "Bengaluru"
+      ],
+      "amount": null,
+      "currency": null,
+      "round_letter": null,
+      "date": null,
+      "source_url": "https://www.ycombinator.com/companies/amplitude",
+      "qualified_by": "stage"
+    },
+    {
+      "name": "Anthropic",
+      "ats": "greenhouse",
+      "slug": "anthropic",
+      "india_roles": 3,
+      "cities": [
+        "Bengaluru"
+      ],
+      "amount": null,
+      "currency": null,
+      "round_letter": null,
+      "date": null,
+      "source_url": "https://www.forbes.com/companies/anthropic/",
+      "qualified_by": "stage"
+    },
+    {
+      "name": "Apollo.io",
+      "ats": "greenhouse",
+      "slug": "apolloio",
+      "india_roles": 1,
+      "cities": [],
+      "amount": null,
+      "currency": null,
+      "round_letter": null,
+      "date": null,
+      "source_url": "https://www.ycombinator.com/companies/apollo-io",
+      "qualified_by": "stage"
+    },
+    {
+      "name": "AppDirect",
+      "ats": "greenhouse",
+      "slug": "appdirect",
+      "india_roles": 1,
+      "cities": [
+        "Pune"
+      ],
+      "amount": null,
+      "currency": null,
+      "round_letter": null,
+      "date": null,
+      "source_url": "https://www.cbinsights.com/company/appdirect",
+      "qualified_by": "stage"
+    },
+    {
+      "name": "AppsFlyer",
+      "ats": "greenhouse",
+      "slug": "appsflyer",
+      "india_roles": 2,
+      "cities": [
+        "Bengaluru"
+      ],
+      "amount": null,
+      "currency": null,
+      "round_letter": null,
+      "date": null,
+      "source_url": "https://www.forbes.com/companies/appsflyer/",
+      "qualified_by": "stage"
+    },
+    {
+      "name": "Arcadia",
+      "ats": "greenhouse",
+      "slug": "arcadiacareers",
+      "india_roles": 4,
+      "cities": [
+        "Chennai"
+      ],
+      "amount": null,
+      "currency": null,
+      "round_letter": null,
+      "date": null,
+      "source_url": "https://www.cbinsights.com/company/arcadia-power",
+      "qualified_by": "stage"
+    },
+    {
+      "name": "Armada",
+      "ats": "greenhouse",
+      "slug": "armada",
+      "india_roles": 6,
+      "cities": [
+        "Bengaluru",
+        "Thiruvananthapuram"
+      ],
+      "amount": null,
+      "currency": null,
+      "round_letter": null,
+      "date": null,
+      "source_url": "https://www.cbinsights.com/company/armada-6",
+      "qualified_by": "stage"
+    },
+    {
+      "name": "Aviatrix",
+      "ats": "greenhouse",
+      "slug": "aviatrix",
+      "india_roles": 5,
+      "cities": [
+        "Bengaluru"
+      ],
+      "amount": null,
+      "currency": null,
+      "round_letter": null,
+      "date": null,
+      "source_url": "https://www.cbinsights.com/company/aviatrix-systems",
+      "qualified_by": "stage"
+    },
+    {
+      "name": "Bitmovin",
+      "ats": "greenhouse",
+      "slug": "bitmovin",
+      "india_roles": 1,
+      "cities": [
+        "Chennai"
+      ],
+      "amount": null,
+      "currency": null,
+      "round_letter": null,
+      "date": null,
+      "source_url": "https://www.ycombinator.com/companies/bitmovin",
+      "qualified_by": "stage"
+    },
+    {
+      "name": "Cambridge Mobile Telematics",
+      "ats": "greenhouse",
+      "slug": "cambridgemobiletelematics",
+      "india_roles": 1,
+      "cities": [
+        "Chennai"
+      ],
+      "amount": null,
+      "currency": null,
+      "round_letter": null,
+      "date": null,
+      "source_url": "https://www.cbinsights.com/company/cambridge-mobile-telematics",
+      "qualified_by": "stage"
+    },
+    {
+      "name": "Celonis",
+      "ats": "greenhouse",
+      "slug": "celonis",
+      "india_roles": 35,
+      "cities": [
+        "Bengaluru"
+      ],
+      "amount": null,
+      "currency": null,
+      "round_letter": null,
+      "date": null,
+      "source_url": "https://www.forbes.com/companies/celonis/",
+      "qualified_by": "stage"
+    },
+    {
+      "name": "Cockroach Labs",
+      "ats": "greenhouse",
+      "slug": "cockroachlabs",
+      "india_roles": 5,
+      "cities": [
+        "Bengaluru"
+      ],
+      "amount": null,
+      "currency": null,
+      "round_letter": null,
+      "date": null,
+      "source_url": "https://www.cbinsights.com/company/cockroach-labs",
+      "qualified_by": "stage"
+    },
+    {
+      "name": "Cohere Health",
+      "ats": "greenhouse",
+      "slug": "coherehealth",
+      "india_roles": 35,
+      "cities": [
+        "Hyderabad"
+      ],
+      "amount": 89999876,
+      "currency": "USD",
+      "round_letter": null,
+      "date": "2025-05-07",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1851745/000185174525000001/0001851745-25-000001-index.htm",
+      "qualified_by": "amount"
+    },
+    {
+      "name": "Coinbase",
+      "ats": "greenhouse",
+      "slug": "coinbase",
+      "india_roles": 9,
+      "cities": [
+        "Bengaluru"
+      ],
+      "amount": null,
+      "currency": null,
+      "round_letter": null,
+      "date": null,
+      "source_url": "https://www.ycombinator.com/companies/coinbase",
+      "qualified_by": "stage"
+    },
+    {
+      "name": "Cresta",
+      "ats": "greenhouse",
+      "slug": "cresta",
+      "india_roles": 3,
+      "cities": [],
+      "amount": null,
+      "currency": null,
+      "round_letter": null,
+      "date": null,
+      "source_url": "https://www.cbinsights.com/company/cresta",
+      "qualified_by": "stage"
+    },
+    {
+      "name": "Databricks",
+      "ats": "greenhouse",
+      "slug": "databricks",
+      "india_roles": 75,
+      "cities": [
+        "Bengaluru",
+        "Delhi",
+        "Mumbai",
+        "Pune"
+      ],
+      "amount": 4082050250,
+      "currency": "USD",
+      "round_letter": null,
+      "date": "2025-12-16",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1587468/000158746825000010/0001587468-25-000010-index.htm",
+      "qualified_by": "amount"
+    },
+    {
+      "name": "Degreed",
+      "ats": "greenhouse",
+      "slug": "degreed",
+      "india_roles": 1,
+      "cities": [
+        "Bengaluru"
+      ],
+      "amount": null,
+      "currency": null,
+      "round_letter": null,
+      "date": null,
+      "source_url": "https://www.cbinsights.com/company/degreed",
+      "qualified_by": "stage"
+    },
+    {
+      "name": "DevRev",
+      "ats": "greenhouse",
+      "slug": "devrev",
+      "india_roles": 18,
+      "cities": [
+        "Bengaluru",
+        "Chennai",
+        "Mumbai"
+      ],
+      "amount": null,
+      "currency": null,
+      "round_letter": null,
+      "date": null,
+      "source_url": "https://www.cbinsights.com/company/devrev",
+      "qualified_by": "stage"
+    },
+    {
+      "name": "Dialpad",
+      "ats": "greenhouse",
+      "slug": "dialpad",
+      "india_roles": 5,
+      "cities": [
+        "Bengaluru"
+      ],
+      "amount": null,
+      "currency": null,
+      "round_letter": null,
+      "date": null,
+      "source_url": "https://www.forbes.com/companies/dialpad/",
+      "qualified_by": "stage"
+    },
+    {
+      "name": "DriveWealth",
+      "ats": "greenhouse",
+      "slug": "drivewealth",
+      "india_roles": 3,
+      "cities": [],
+      "amount": null,
+      "currency": null,
+      "round_letter": null,
+      "date": null,
+      "source_url": "https://www.cbinsights.com/company/mysolomeo-holdings",
+      "qualified_by": "stage"
+    },
+    {
+      "name": "Druva",
+      "ats": "greenhouse",
+      "slug": "druva",
+      "india_roles": 10,
+      "cities": [
+        "Pune"
+      ],
+      "amount": null,
+      "currency": null,
+      "round_letter": null,
+      "date": null,
+      "source_url": "https://www.cbinsights.com/company/druva",
+      "qualified_by": "stage"
+    },
+    {
+      "name": "EBANX",
+      "ats": "greenhouse",
+      "slug": "ebanx",
+      "india_roles": 1,
+      "cities": [
+        "Mumbai"
+      ],
+      "amount": null,
+      "currency": null,
+      "round_letter": null,
+      "date": null,
+      "source_url": "https://www.cbinsights.com/company/ebanx",
+      "qualified_by": "stage"
+    },
+    {
+      "name": "Fern",
+      "ats": "greenhouse",
+      "slug": "postman",
+      "india_roles": 11,
+      "cities": [
+        "Bengaluru"
+      ],
+      "amount": null,
+      "currency": null,
+      "round_letter": null,
+      "date": null,
+      "source_url": "https://www.ycombinator.com/companies/fern",
+      "qualified_by": "stage"
+    },
+    {
+      "name": "Fivetran",
+      "ats": "greenhouse",
+      "slug": "fivetran",
+      "india_roles": 13,
+      "cities": [
+        "Bengaluru"
+      ],
+      "amount": null,
+      "currency": null,
+      "round_letter": null,
+      "date": null,
+      "source_url": "https://www.ycombinator.com/companies/fivetran",
+      "qualified_by": "stage"
+    },
+    {
+      "name": "Flexport",
+      "ats": "greenhouse",
+      "slug": "flexport",
+      "india_roles": 5,
+      "cities": [
+        "Chennai",
+        "Delhi",
+        "Mumbai"
+      ],
+      "amount": null,
+      "currency": null,
+      "round_letter": null,
+      "date": null,
+      "source_url": "https://www.ycombinator.com/companies/flexport",
+      "qualified_by": "stage"
+    },
+    {
+      "name": "FourKites",
+      "ats": "greenhouse",
+      "slug": "fourkites",
+      "india_roles": 3,
+      "cities": [
+        "Chennai"
+      ],
+      "amount": null,
+      "currency": null,
+      "round_letter": null,
+      "date": null,
+      "source_url": "https://www.cbinsights.com/company/fourkites",
+      "qualified_by": "stage"
+    },
+    {
+      "name": "Gather AI",
+      "ats": "greenhouse",
+      "slug": "gatherai",
+      "india_roles": 3,
+      "cities": [
+        "Hyderabad"
+      ],
+      "amount": 39999958,
+      "currency": "USD",
+      "round_letter": null,
+      "date": "2025-12-30",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1764162/000176416226000004/0001764162-26-000004-index.htm",
+      "qualified_by": "amount"
+    },
+    {
+      "name": "GitLab",
+      "ats": "greenhouse",
+      "slug": "gitlab",
+      "india_roles": 31,
+      "cities": [
+        "Bengaluru"
+      ],
+      "amount": null,
+      "currency": null,
+      "round_letter": null,
+      "date": null,
+      "source_url": "https://www.ycombinator.com/companies/gitlab",
+      "qualified_by": "stage"
+    },
+    {
+      "name": "Glean",
+      "ats": "greenhouse",
+      "slug": "gleanwork",
+      "india_roles": 21,
+      "cities": [
+        "Bengaluru",
+        "Mumbai"
+      ],
+      "amount": null,
+      "currency": null,
+      "round_letter": null,
+      "date": null,
+      "source_url": "https://www.forbes.com/companies/glean/",
+      "qualified_by": "stage"
+    },
+    {
+      "name": "Groww",
+      "ats": "greenhouse",
+      "slug": "groww",
+      "india_roles": 10,
+      "cities": [
+        "Bengaluru",
+        "Mumbai"
+      ],
+      "amount": null,
+      "currency": null,
+      "round_letter": null,
+      "date": null,
+      "source_url": "https://www.ycombinator.com/companies/groww",
+      "qualified_by": "stage"
+    },
+    {
+      "name": "HackerRank",
+      "ats": "greenhouse",
+      "slug": "hackerrank",
+      "india_roles": 21,
+      "cities": [
+        "Bengaluru"
+      ],
+      "amount": null,
+      "currency": null,
+      "round_letter": null,
+      "date": null,
+      "source_url": "https://www.ycombinator.com/companies/hackerrank",
+      "qualified_by": "stage"
+    },
+    {
+      "name": "Harness",
+      "ats": "greenhouse",
+      "slug": "harnessinc",
+      "india_roles": 17,
+      "cities": [
+        "Bengaluru"
+      ],
+      "amount": null,
+      "currency": null,
+      "round_letter": null,
+      "date": null,
+      "source_url": "https://www.forbes.com/companies/harness/",
+      "qualified_by": "stage"
+    },
+    {
+      "name": "HighRadius",
+      "ats": "greenhouse",
+      "slug": "highradius",
+      "india_roles": 48,
+      "cities": [
+        "Hyderabad"
+      ],
+      "amount": null,
+      "currency": null,
+      "round_letter": null,
+      "date": null,
+      "source_url": "https://www.cbinsights.com/company/highradius",
+      "qualified_by": "stage"
+    },
+    {
+      "name": "Hightouch",
+      "ats": "greenhouse",
+      "slug": "hightouch",
+      "india_roles": 1,
+      "cities": [],
+      "amount": null,
+      "currency": null,
+      "round_letter": null,
+      "date": null,
+      "source_url": "https://www.ycombinator.com/companies/hightouch",
+      "qualified_by": "stage"
+    },
+    {
+      "name": "iCapital",
+      "ats": "greenhouse",
+      "slug": "icapitalnetwork",
+      "india_roles": 7,
+      "cities": [
+        "Jaipur"
+      ],
+      "amount": null,
+      "currency": null,
+      "round_letter": null,
+      "date": null,
+      "source_url": "https://www.cbinsights.com/company/icapital-network",
+      "qualified_by": "stage"
+    },
+    {
+      "name": "Imply Data",
+      "ats": "greenhouse",
+      "slug": "imply",
+      "india_roles": 1,
+      "cities": [
+        "Bengaluru"
+      ],
+      "amount": null,
+      "currency": null,
+      "round_letter": null,
+      "date": null,
+      "source_url": "https://www.cbinsights.com/company/imply-data",
+      "qualified_by": "stage"
+    },
+    {
+      "name": "InMobi",
+      "ats": "greenhouse",
+      "slug": "inmobi",
+      "india_roles": 45,
+      "cities": [
+        "Bengaluru",
+        "Lucknow"
+      ],
+      "amount": null,
+      "currency": null,
+      "round_letter": null,
+      "date": null,
+      "source_url": "https://www.cbinsights.com/company/inmobi",
+      "qualified_by": "stage"
+    },
+    {
+      "name": "Instabase",
+      "ats": "greenhouse",
+      "slug": "instabase",
+      "india_roles": 1,
+      "cities": [
+        "Bengaluru"
+      ],
+      "amount": null,
+      "currency": null,
+      "round_letter": null,
+      "date": null,
+      "source_url": "https://www.cbinsights.com/company/instabase",
+      "qualified_by": "stage"
+    },
+    {
+      "name": "Instawork",
+      "ats": "greenhouse",
+      "slug": "instawork",
+      "india_roles": 26,
+      "cities": [
+        "Bengaluru"
+      ],
+      "amount": null,
+      "currency": null,
+      "round_letter": null,
+      "date": null,
+      "source_url": "https://www.ycombinator.com/companies/instawork",
+      "qualified_by": "stage"
+    },
+    {
+      "name": "Instead",
+      "ats": "greenhouse",
+      "slug": "instead",
+      "india_roles": 4,
+      "cities": [
+        "Bengaluru",
+        "Hyderabad"
+      ],
+      "amount": 5000000,
+      "currency": "USD",
+      "round_letter": null,
+      "date": "2025-05-15",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/2072260/000207226025000001/0002072260-25-000001-index.htm",
+      "qualified_by": "amount"
+    },
+    {
+      "name": "Ivalua",
+      "ats": "greenhouse",
+      "slug": "ivalua",
+      "india_roles": 7,
+      "cities": [
+        "Pune"
+      ],
+      "amount": null,
+      "currency": null,
+      "round_letter": null,
+      "date": null,
+      "source_url": "https://www.cbinsights.com/company/ivalua",
+      "qualified_by": "stage"
+    },
+    {
+      "name": "Karat",
+      "ats": "greenhouse",
+      "slug": "karat",
+      "india_roles": 1,
+      "cities": [
+        "Bengaluru"
+      ],
+      "amount": null,
+      "currency": null,
+      "round_letter": null,
+      "date": null,
+      "source_url": "https://www.cbinsights.com/company/karat-1",
+      "qualified_by": "stage"
+    },
+    {
+      "name": "Kaseya",
+      "ats": "greenhouse",
+      "slug": "kaseya",
+      "india_roles": 16,
+      "cities": [
+        "Bengaluru",
+        "Pune"
+      ],
+      "amount": null,
+      "currency": null,
+      "round_letter": null,
+      "date": null,
+      "source_url": "https://www.cbinsights.com/company/kaseya",
+      "qualified_by": "stage"
+    },
+    {
+      "name": "Komodo Health",
+      "ats": "greenhouse",
+      "slug": "komodohealth",
+      "india_roles": 9,
+      "cities": [],
+      "amount": null,
+      "currency": null,
+      "round_letter": null,
+      "date": null,
+      "source_url": "https://www.forbes.com/companies/komodo-health/",
+      "qualified_by": "stage"
+    },
+    {
+      "name": "LaunchDarkly",
+      "ats": "greenhouse",
+      "slug": "launchdarkly",
+      "india_roles": 2,
+      "cities": [
+        "Bengaluru"
+      ],
+      "amount": null,
+      "currency": null,
+      "round_letter": null,
+      "date": null,
+      "source_url": "https://www.forbes.com/companies/launchdarkly/",
+      "qualified_by": "stage"
+    },
+    {
+      "name": "Lighthouse",
+      "ats": "greenhouse",
+      "slug": "lighthouse",
+      "india_roles": 1,
+      "cities": [
+        "Bengaluru",
+        "Delhi",
+        "Mumbai"
+      ],
+      "amount": null,
+      "currency": null,
+      "round_letter": null,
+      "date": null,
+      "source_url": "https://www.cbinsights.com/company/ota-insight",
+      "qualified_by": "stage"
+    },
+    {
+      "name": "MeltPlan",
+      "ats": "greenhouse",
+      "slug": "meltplan",
+      "india_roles": 5,
+      "cities": [
+        "Bengaluru"
+      ],
+      "amount": 17409999,
+      "currency": "USD",
+      "round_letter": null,
+      "date": "2026-02-18",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/2106586/000210658626000001/0002106586-26-000001-index.htm",
+      "qualified_by": "amount"
+    },
+    {
+      "name": "Minio",
+      "ats": "greenhouse",
+      "slug": "minio",
+      "india_roles": 2,
+      "cities": [
+        "Bengaluru"
+      ],
+      "amount": null,
+      "currency": null,
+      "round_letter": null,
+      "date": null,
+      "source_url": "https://www.cbinsights.com/company/minio",
+      "qualified_by": "stage"
+    },
+    {
+      "name": "Mixpanel",
+      "ats": "greenhouse",
+      "slug": "mixpanel",
+      "india_roles": 1,
+      "cities": [
+        "Bengaluru"
+      ],
+      "amount": null,
+      "currency": null,
+      "round_letter": null,
+      "date": null,
+      "source_url": "https://www.ycombinator.com/companies/mixpanel",
+      "qualified_by": "stage"
+    },
+    {
+      "name": "Moniepoint",
+      "ats": "greenhouse",
+      "slug": "moniepoint",
+      "india_roles": 15,
+      "cities": [
+        "Bengaluru"
+      ],
+      "amount": null,
+      "currency": null,
+      "round_letter": null,
+      "date": null,
+      "source_url": "https://www.cbinsights.com/company/teamapt",
+      "qualified_by": "stage"
+    },
+    {
+      "name": "NanoNets",
+      "ats": "greenhouse",
+      "slug": "nanonets",
+      "india_roles": 10,
+      "cities": [
+        "Bengaluru"
+      ],
+      "amount": null,
+      "currency": null,
+      "round_letter": null,
+      "date": null,
+      "source_url": "https://www.ycombinator.com/companies/nanonets",
+      "qualified_by": "stage"
+    },
+    {
+      "name": "Neo4j",
+      "ats": "greenhouse",
+      "slug": "neo4j",
+      "india_roles": 2,
+      "cities": [],
+      "amount": null,
+      "currency": null,
+      "round_letter": null,
+      "date": null,
+      "source_url": "https://www.cbinsights.com/company/neo-technology",
+      "qualified_by": "stage"
+    },
+    {
+      "name": "Netskope",
+      "ats": "greenhouse",
+      "slug": "netskope",
+      "india_roles": 15,
+      "cities": [
+        "Bengaluru"
+      ],
+      "amount": null,
+      "currency": null,
+      "round_letter": null,
+      "date": null,
+      "source_url": "https://www.forbes.com/companies/netskope/",
+      "qualified_by": "stage"
+    },
+    {
+      "name": "Nextiva",
+      "ats": "greenhouse",
+      "slug": "nextiva",
+      "india_roles": 2,
+      "cities": [
+        "Bengaluru"
+      ],
+      "amount": null,
+      "currency": null,
+      "round_letter": null,
+      "date": null,
+      "source_url": "https://www.cbinsights.com/company/nextiva",
+      "qualified_by": "stage"
+    },
+    {
+      "name": "Observe",
+      "ats": "greenhouse",
+      "slug": "observeai",
+      "india_roles": 7,
+      "cities": [
+        "Bengaluru"
+      ],
+      "amount": 124780453,
+      "currency": "USD",
+      "round_letter": null,
+      "date": "2025-05-22",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/2020535/000165349425000001/0001653494-25-000001-index.htm",
+      "qualified_by": "amount"
+    },
+    {
+      "name": "Observe.AI",
+      "ats": "greenhouse",
+      "slug": "observeai",
+      "india_roles": 7,
+      "cities": [
+        "Bengaluru"
+      ],
+      "amount": null,
+      "currency": null,
+      "round_letter": null,
+      "date": null,
+      "source_url": "https://www.ycombinator.com/companies/observe-ai",
+      "qualified_by": "stage"
+    },
+    {
+      "name": "OneTrust",
+      "ats": "greenhouse",
+      "slug": "onetrust",
+      "india_roles": 26,
+      "cities": [
+        "Bengaluru"
+      ],
+      "amount": null,
+      "currency": null,
+      "round_letter": null,
+      "date": null,
+      "source_url": "https://www.forbes.com/companies/onetrust/",
+      "qualified_by": "stage"
+    },
+    {
+      "name": "Postman",
+      "ats": "greenhouse",
+      "slug": "postman",
+      "india_roles": 11,
+      "cities": [
+        "Bengaluru"
+      ],
+      "amount": null,
+      "currency": null,
+      "round_letter": null,
+      "date": null,
+      "source_url": "https://www.forbes.com/companies/postman/",
+      "qualified_by": "stage"
+    },
+    {
+      "name": "Project44",
+      "ats": "greenhouse",
+      "slug": "project44",
+      "india_roles": 7,
+      "cities": [
+        "Bengaluru"
+      ],
+      "amount": null,
+      "currency": null,
+      "round_letter": null,
+      "date": null,
+      "source_url": "https://www.cbinsights.com/company/project44",
+      "qualified_by": "stage"
+    },
+    {
+      "name": "Pump",
+      "ats": "greenhouse",
+      "slug": "pumpcareers",
+      "india_roles": 3,
+      "cities": [
+        "Bengaluru",
+        "Delhi"
+      ],
+      "amount": null,
+      "currency": null,
+      "round_letter": null,
+      "date": null,
+      "source_url": "https://www.cbinsights.com/company/pump",
+      "qualified_by": "stage"
+    },
+    {
+      "name": "Quince",
+      "ats": "greenhouse",
+      "slug": "quince",
+      "india_roles": 13,
+      "cities": [
+        "Bengaluru",
+        "Delhi",
+        "Gurugram"
+      ],
+      "amount": null,
+      "currency": null,
+      "round_letter": null,
+      "date": null,
+      "source_url": "https://www.cbinsights.com/company/quince",
+      "qualified_by": "stage"
+    },
+    {
+      "name": "Razorpay",
+      "ats": "greenhouse",
+      "slug": "razorpaysoftwareprivatelimited",
+      "india_roles": 23,
+      "cities": [
+        "Bengaluru",
+        "Mumbai"
+      ],
+      "amount": null,
+      "currency": null,
+      "round_letter": null,
+      "date": null,
+      "source_url": "https://www.ycombinator.com/companies/razorpay",
+      "qualified_by": "stage"
+    },
+    {
+      "name": "SambaNova Systems",
+      "ats": "greenhouse",
+      "slug": "sambanovasystems",
+      "india_roles": 3,
+      "cities": [
+        "Bengaluru"
+      ],
+      "amount": null,
+      "currency": null,
+      "round_letter": null,
+      "date": null,
+      "source_url": "https://www.cbinsights.com/company/sambanova-systems",
+      "qualified_by": "stage"
+    },
+    {
+      "name": "Scale",
+      "ats": "greenhouse",
+      "slug": "scaleai",
+      "india_roles": 2,
+      "cities": [],
+      "amount": null,
+      "currency": null,
+      "round_letter": null,
+      "date": null,
+      "source_url": "https://www.cbinsights.com/company/scale-ai",
+      "qualified_by": "stage"
+    },
+    {
+      "name": "Scale AI",
+      "ats": "greenhouse",
+      "slug": "scaleai",
+      "india_roles": 2,
+      "cities": [],
+      "amount": null,
+      "currency": null,
+      "round_letter": null,
+      "date": null,
+      "source_url": "https://www.ycombinator.com/companies/scale-ai",
+      "qualified_by": "stage"
+    },
+    {
+      "name": "SeekOut",
+      "ats": "greenhouse",
+      "slug": "seekout",
+      "india_roles": 1,
+      "cities": [
+        "Bengaluru"
+      ],
+      "amount": null,
+      "currency": null,
+      "round_letter": null,
+      "date": null,
+      "source_url": "https://www.cbinsights.com/company/zipstorm",
+      "qualified_by": "stage"
+    },
+    {
+      "name": "SingleStore",
+      "ats": "greenhouse",
+      "slug": "singlestore",
+      "india_roles": 11,
+      "cities": [
+        "Bengaluru"
+      ],
+      "amount": null,
+      "currency": null,
+      "round_letter": null,
+      "date": null,
+      "source_url": "https://www.ycombinator.com/companies/singlestore",
+      "qualified_by": "stage"
+    },
+    {
+      "name": "SparkCognition",
+      "ats": "greenhouse",
+      "slug": "avathon",
+      "india_roles": 15,
+      "cities": [
+        "Bengaluru"
+      ],
+      "amount": null,
+      "currency": null,
+      "round_letter": null,
+      "date": null,
+      "source_url": "https://www.cbinsights.com/company/sparkcognition",
+      "qualified_by": "stage"
+    },
+    {
+      "name": "Starburst",
+      "ats": "greenhouse",
+      "slug": "starburst",
+      "india_roles": 3,
+      "cities": [],
+      "amount": null,
+      "currency": null,
+      "round_letter": null,
+      "date": null,
+      "source_url": "https://www.cbinsights.com/company/starburst",
+      "qualified_by": "stage"
+    },
+    {
+      "name": "Stripe",
+      "ats": "greenhouse",
+      "slug": "stripe",
+      "india_roles": 37,
+      "cities": [
+        "Bengaluru"
+      ],
+      "amount": null,
+      "currency": null,
+      "round_letter": null,
+      "date": null,
+      "source_url": "https://www.ycombinator.com/companies/stripe",
+      "qualified_by": "stage"
+    },
+    {
+      "name": "Talkdesk",
+      "ats": "greenhouse",
+      "slug": "talkdesk2",
+      "india_roles": 2,
+      "cities": [
+        "Bengaluru"
+      ],
+      "amount": null,
+      "currency": null,
+      "round_letter": null,
+      "date": null,
+      "source_url": "https://www.forbes.com/companies/talkdesk/",
+      "qualified_by": "stage"
+    },
+    {
+      "name": "Tamara",
+      "ats": "greenhouse",
+      "slug": "tamara",
+      "india_roles": 6,
+      "cities": [],
+      "amount": null,
+      "currency": null,
+      "round_letter": null,
+      "date": null,
+      "source_url": "https://www.cbinsights.com/company/tamara",
+      "qualified_by": "stage"
+    },
+    {
+      "name": "Temporal",
+      "ats": "greenhouse",
+      "slug": "temporaltechnologies",
+      "india_roles": 2,
+      "cities": [],
+      "amount": null,
+      "currency": null,
+      "round_letter": null,
+      "date": null,
+      "source_url": "https://www.cbinsights.com/company/temporal-technologies",
+      "qualified_by": "stage"
+    },
+    {
+      "name": "TensTorrent",
+      "ats": "greenhouse",
+      "slug": "tenstorrent",
+      "india_roles": 4,
+      "cities": [
+        "Bengaluru"
+      ],
+      "amount": null,
+      "currency": null,
+      "round_letter": null,
+      "date": null,
+      "source_url": "https://www.cbinsights.com/company/tenstorrent",
+      "qualified_by": "stage"
+    },
+    {
+      "name": "Tide",
+      "ats": "greenhouse",
+      "slug": "tide",
+      "india_roles": 42,
+      "cities": [
+        "Bengaluru",
+        "Delhi",
+        "Hyderabad"
+      ],
+      "amount": null,
+      "currency": null,
+      "round_letter": null,
+      "date": null,
+      "source_url": "https://www.cbinsights.com/company/tide",
+      "qualified_by": "stage"
+    },
+    {
+      "name": "Together AI",
+      "ats": "greenhouse",
+      "slug": "togetherai",
+      "india_roles": 3,
+      "cities": [
+        "Bengaluru"
+      ],
+      "amount": null,
+      "currency": null,
+      "round_letter": null,
+      "date": null,
+      "source_url": "https://www.forbes.com/companies/together-ai/",
+      "qualified_by": "stage"
+    },
+    {
+      "name": "Turing",
+      "ats": "greenhouse",
+      "slug": "turing",
+      "india_roles": 9,
+      "cities": [
+        "Bengaluru",
+        "Gurugram",
+        "Hyderabad"
+      ],
+      "amount": null,
+      "currency": null,
+      "round_letter": null,
+      "date": null,
+      "source_url": "https://www.cbinsights.com/company/turing",
+      "qualified_by": "stage"
+    },
+    {
+      "name": "Twin Health",
+      "ats": "greenhouse",
+      "slug": "twinhealth",
+      "india_roles": 11,
+      "cities": [
+        "Bengaluru",
+        "Chennai",
+        "Coimbatore",
+        "Delhi",
+        "Mumbai"
+      ],
+      "amount": 48838180,
+      "currency": "USD",
+      "round_letter": null,
+      "date": "2025-05-07",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1816525/000181652525000001/0001816525-25-000001-index.htm",
+      "qualified_by": "amount"
+    },
+    {
+      "name": "Vectra Networks",
+      "ats": "greenhouse",
+      "slug": "vectranetworks",
+      "india_roles": 5,
+      "cities": [
+        "Bengaluru"
+      ],
+      "amount": null,
+      "currency": null,
+      "round_letter": null,
+      "date": null,
+      "source_url": "https://www.cbinsights.com/company/vectra-networks",
+      "qualified_by": "stage"
+    },
+    {
+      "name": "Vercel",
+      "ats": "greenhouse",
+      "slug": "vercel",
+      "india_roles": 2,
+      "cities": [],
+      "amount": null,
+      "currency": null,
+      "round_letter": null,
+      "date": null,
+      "source_url": "https://www.forbes.com/companies/vercel/",
+      "qualified_by": "stage"
+    },
+    {
+      "name": "Workato",
+      "ats": "greenhouse",
+      "slug": "workato",
+      "india_roles": 14,
+      "cities": [
+        "Bengaluru",
+        "Hyderabad"
+      ],
+      "amount": null,
+      "currency": null,
+      "round_letter": null,
+      "date": null,
+      "source_url": "https://www.forbes.com/companies/workato/",
+      "qualified_by": "stage"
+    },
+    {
+      "name": "Xendit",
+      "ats": "greenhouse",
+      "slug": "xendit",
+      "india_roles": 1,
+      "cities": [],
+      "amount": null,
+      "currency": null,
+      "round_letter": null,
+      "date": null,
+      "source_url": "https://www.ycombinator.com/companies/xendit",
+      "qualified_by": "stage"
+    },
+    {
+      "name": "YipitData",
+      "ats": "greenhouse",
+      "slug": "yipitdata",
+      "india_roles": 9,
+      "cities": [],
+      "amount": null,
+      "currency": null,
+      "round_letter": null,
+      "date": null,
+      "source_url": "https://www.cbinsights.com/company/yipit",
+      "qualified_by": "stage"
+    },
+    {
+      "name": "YugaByte",
+      "ats": "greenhouse",
+      "slug": "yugabyte",
+      "india_roles": 9,
+      "cities": [],
+      "amount": null,
+      "currency": null,
+      "round_letter": null,
+      "date": null,
+      "source_url": "https://www.cbinsights.com/company/yugabyte",
+      "qualified_by": "stage"
+    }
+  ]
 }

@@ -88,7 +88,8 @@ def fill(companies: Iterable[Record], workers: int = 8) -> int:
     publisher that links what it covers. Returns how many were filled.
 
     ponytail: 8 workers. Most of these are CB Insights profile pages — one host,
-    so this is deliberately not the 16 that slug resolution runs at.
+    so this is deliberately not the 48 that slug resolution runs at, for the same
+    reason `slugs._GUESS_WORKERS` isn't.
     """
     wanted = [
         company

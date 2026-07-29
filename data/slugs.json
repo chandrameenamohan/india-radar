@@ -1,1 +1,3722 @@
-{}
+{
+  "1910": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "1910genetics"
+  },
+  "1Password": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "1password"
+  },
+  "6Sense": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "6sense"
+  },
+  "7AI": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "sevenai"
+  },
+  "9fin": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "9fin"
+  },
+  "A24 Films": {
+    "ats": "greenhouse",
+    "method": "override",
+    "slug": "a24"
+  },
+  "AON3D": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "aon3d"
+  },
+  "ARQ": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "arq"
+  },
+  "ASAPP": {
+    "ats": "lever",
+    "method": "careers-page",
+    "slug": "asapp-2"
+  },
+  "AXONIUS": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "axonius"
+  },
+  "Abacum": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "abacum"
+  },
+  "Abridge": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "abridge"
+  },
+  "AfterQuery": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "afterquery"
+  },
+  "Agentio": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "agentio"
+  },
+  "Agile Space Industries": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "agilespaceindustries"
+  },
+  "Airbnb": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "airbnb"
+  },
+  "Airtable": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "airtable"
+  },
+  "Akido Labs": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "akidolabs"
+  },
+  "Alaro": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "alaro"
+  },
+  "Albedo": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "albedo"
+  },
+  "Aleo": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "provable"
+  },
+  "Aleph": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "aleph"
+  },
+  "Algolia": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "algolia"
+  },
+  "Alloy": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "alloy"
+  },
+  "Alpaca": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "alpaca"
+  },
+  "AlphaSense": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "alphasense"
+  },
+  "Altruist": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "altruist"
+  },
+  "Ambience Healthcare": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "ambiencehealthcare"
+  },
+  "Ambient.ai": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "ambient.ai"
+  },
+  "Amperity": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "amperity"
+  },
+  "Amplitude": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "amplitude"
+  },
+  "Anchorage Digital": {
+    "ats": "lever",
+    "method": "careers-page",
+    "slug": "anchorage"
+  },
+  "Andela": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "andela"
+  },
+  "Angle Health": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "anglehealth"
+  },
+  "Anima": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "anima"
+  },
+  "Anthropic": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "anthropic"
+  },
+  "Anyscale": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "anyscale"
+  },
+  "Apiphani": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "apiphani"
+  },
+  "Apollo": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "apollo"
+  },
+  "Apollo.io": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "apolloio"
+  },
+  "AppDirect": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "appdirect"
+  },
+  "Applied Intuition": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "applied"
+  },
+  "AppsFlyer": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "appsflyer"
+  },
+  "Apptronik": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "apptronik"
+  },
+  "Aptible": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "aptible"
+  },
+  "Aptos": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "aptoslabs"
+  },
+  "Arcadia": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "arcadiacareers"
+  },
+  "Arketa": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "arketa"
+  },
+  "Armada": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "armada"
+  },
+  "Artie": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "artie"
+  },
+  "Assembled": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "assembledhq"
+  },
+  "AssemblyAI": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "assemblyai"
+  },
+  "AssetWatch": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "assetwatch"
+  },
+  "Assort Health": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "assorthealth"
+  },
+  "Assured": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "assured"
+  },
+  "Astranis": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "astranis"
+  },
+  "At-Bay": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "atbay"
+  },
+  "AtoB": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "atob"
+  },
+  "Atolio": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "atolio"
+  },
+  "Atropos Group": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "atropos"
+  },
+  "Attentive": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "attentive"
+  },
+  "Attotude": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "attotude"
+  },
+  "Augmodo": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "augmodo"
+  },
+  "Automattic": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "automatticjobs"
+  },
+  "Aviatrix": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "aviatrix"
+  },
+  "Awardco": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "awardco"
+  },
+  "Axle Health": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "axle-health"
+  },
+  "Azra Games": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "azragames"
+  },
+  "Barti Software": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "barti"
+  },
+  "Baseten": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "baseten"
+  },
+  "Baubap": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "baubap"
+  },
+  "Beacon": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "beaconsoftware"
+  },
+  "Benchling": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "benchling"
+  },
+  "Betterment": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "betterment"
+  },
+  "Beyond Identity": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "beyondidentity"
+  },
+  "BigID": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "bigid"
+  },
+  "BillionToOne": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "billiontoone"
+  },
+  "Bird": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "bird"
+  },
+  "BitPanda": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "bitpanda"
+  },
+  "Bitmovin": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "bitmovin"
+  },
+  "Bitso": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "bitso"
+  },
+  "Black Forest Labs": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "blackforestlabs"
+  },
+  "Bland AI": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "bland"
+  },
+  "BlastPoint": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "blastpoint"
+  },
+  "Blee": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "blee"
+  },
+  "Blockstream": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "blockstream"
+  },
+  "Blue Current": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "bluecurrent"
+  },
+  "Blueberry Pediatrics": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "blueberrypediatrics"
+  },
+  "Boosted": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "boostedai"
+  },
+  "Boostly": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "boostly"
+  },
+  "Branch": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "branch"
+  },
+  "Braze": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "braze"
+  },
+  "Bretton AI": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "brettonai"
+  },
+  "Brex": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "brex"
+  },
+  "Bright": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "brightai"
+  },
+  "BrightAI": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "brightai"
+  },
+  "Bringg": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "bringg"
+  },
+  "Built": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "getbuilt"
+  },
+  "C6 Bank": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "c6bank"
+  },
+  "CAIS": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "cais"
+  },
+  "CLERK": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "clerk"
+  },
+  "COLAB SOFTWARE": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "colabsoftware"
+  },
+  "Calendly": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "calendly"
+  },
+  "Cambio": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "cambio"
+  },
+  "Cambridge Mobile Telematics": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "cambridgemobiletelematics"
+  },
+  "Cameo": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "cameo"
+  },
+  "Campfire": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "campfire"
+  },
+  "Canary Technologies": {
+    "ats": "lever",
+    "method": "careers-page",
+    "slug": "canarytechnologies"
+  },
+  "Capi Money": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "capimoney"
+  },
+  "Capitalize": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "capitalize"
+  },
+  "Capitolis": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "capitolis"
+  },
+  "CarbonChain": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "carbonchain"
+  },
+  "Cardless": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "cardless"
+  },
+  "CareRev": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "carerev"
+  },
+  "Caribou": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "caribou"
+  },
+  "Carta": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "carta"
+  },
+  "Casca": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "casca"
+  },
+  "Catena Clearing": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "catenaclearing"
+  },
+  "Cato Networks": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "catonetworks"
+  },
+  "Celestia": {
+    "ats": "lever",
+    "method": "careers-page",
+    "slug": "celestia"
+  },
+  "Celonis": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "celonis"
+  },
+  "Chai Discovery": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "chaidiscovery"
+  },
+  "Chainguard": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "chainguard"
+  },
+  "Character.AI": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "character"
+  },
+  "Chariot Defense": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "chariotdefense"
+  },
+  "Charta Health": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "charta-health"
+  },
+  "Checkr": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "checkr"
+  },
+  "Chime": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "chime"
+  },
+  "Chowbus": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "chowbus"
+  },
+  "CircleCI": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "circleci"
+  },
+  "Clara": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "clara"
+  },
+  "Clear": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "clear"
+  },
+  "Clear Street": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "clearstreet"
+  },
+  "Clever": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "clever"
+  },
+  "ClickHouse": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "langfuse"
+  },
+  "Clipboard": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "clipboard"
+  },
+  "Cloaked": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "cloaked"
+  },
+  "Clubhouse": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "clubhouse"
+  },
+  "Coalition": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "coalition"
+  },
+  "Cockroach Labs": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "cockroachlabs"
+  },
+  "Code Metal": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "code-metal"
+  },
+  "Cognition": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "cognition"
+  },
+  "Cohere Health": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "coherehealth"
+  },
+  "Coinbase": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "coinbase"
+  },
+  "Collibra": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "collibra"
+  },
+  "Column": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "column"
+  },
+  "Compound Eye": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "compound-eye"
+  },
+  "ConductorOne": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "c1"
+  },
+  "Confido": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "confido"
+  },
+  "ConsenSys": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "consensys"
+  },
+  "ContentSquare": {
+    "ats": "lever",
+    "method": "careers-page",
+    "slug": "contentsquare"
+  },
+  "Contentful": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "contentful"
+  },
+  "Contrast Security": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "contrast-security"
+  },
+  "Conveo": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "conveo"
+  },
+  "Cortex": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "cortex"
+  },
+  "Corvus Robotics": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "corvus-robotics"
+  },
+  "Courtyard.io": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "courtyardinc"
+  },
+  "Cover": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "coverai"
+  },
+  "Cresta": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "cresta"
+  },
+  "Cribl": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "cribl"
+  },
+  "Critical Loop": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "criticalloop"
+  },
+  "Cross River Bank": {
+    "ats": "greenhouse",
+    "method": "override",
+    "slug": "crossriverbank"
+  },
+  "Culdesac": {
+    "ats": "lever",
+    "method": "careers-page",
+    "slug": "culdesac"
+  },
+  "Culture Amp": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "cultureamp"
+  },
+  "Culture Biosciences": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "culturebiosciences"
+  },
+  "Curative": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "curative"
+  },
+  "Current": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "current"
+  },
+  "Cursor": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "cursor"
+  },
+  "Cyberhaven": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "cyberhaven"
+  },
+  "Cypher Games": {
+    "ats": "lever",
+    "method": "careers-page",
+    "slug": "cypher-games"
+  },
+  "Databricks": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "databricks"
+  },
+  "Dataiku": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "dataiku"
+  },
+  "David AI": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "david-ai"
+  },
+  "Daybreak Health": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "daybreakhealth"
+  },
+  "Deel": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "deel"
+  },
+  "DeepL": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "deepl"
+  },
+  "Deepgram": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "deepgram"
+  },
+  "Degreed": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "degreed"
+  },
+  "Density": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "density"
+  },
+  "Depot": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "depot"
+  },
+  "DevRev": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "devrev"
+  },
+  "Dialpad": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "dialpad"
+  },
+  "Digital Currency Group": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "digitalcurrencygroup"
+  },
+  "DirectShifts": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "directshifts"
+  },
+  "Discord": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "discord"
+  },
+  "DistroKid": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "distrokid"
+  },
+  "Distyl AI": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "distyl"
+  },
+  "Doppel": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "doppel"
+  },
+  "Dots \ud83d\udcb8": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "dots"
+  },
+  "Dremio": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "dremio"
+  },
+  "DriveWealth": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "drivewealth"
+  },
+  "Dropbox": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "dropbox"
+  },
+  "Druva": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "druva"
+  },
+  "Duffel": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "duffel"
+  },
+  "EBANX": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "ebanx"
+  },
+  "EasyPost": {
+    "ats": "lever",
+    "method": "careers-page",
+    "slug": "easypost-2"
+  },
+  "Edison Scientific": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "edison"
+  },
+  "Eight Sleep": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "eightsleep"
+  },
+  "Ekho": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "ekho"
+  },
+  "Electric": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "electric"
+  },
+  "EliseAI": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "eliseai"
+  },
+  "Elyos AI": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "elyos"
+  },
+  "Emi Labs": {
+    "ats": "lever",
+    "method": "careers-page",
+    "slug": "emilabs"
+  },
+  "Enable": {
+    "ats": "lever",
+    "method": "careers-page",
+    "slug": "enable"
+  },
+  "Enode": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "enode"
+  },
+  "Enter": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "enter-ai"
+  },
+  "Envoy": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "envoy"
+  },
+  "Epic Games": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "epicgames"
+  },
+  "Epidemic Sound": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "epidemic-sound"
+  },
+  "Equatic": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "equatic"
+  },
+  "Escape": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "escape"
+  },
+  "Esusu": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "esusu"
+  },
+  "Eve": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "eve"
+  },
+  "Everlaw": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "everlaw"
+  },
+  "Evry Health": {
+    "ats": "lever",
+    "method": "careers-page",
+    "slug": "evry-health"
+  },
+  "Expel": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "expel"
+  },
+  "Extend": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "extend"
+  },
+  "FINSTER AI": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "finsterai"
+  },
+  "FOSSA": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "fossainc"
+  },
+  "Fable Security": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "fable"
+  },
+  "Faire": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "faire"
+  },
+  "FalconX": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "falconx"
+  },
+  "Feedzai": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "feedzai"
+  },
+  "Fern": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "postman"
+  },
+  "Fieldguide": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "fieldguide"
+  },
+  "Figment": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "figment"
+  },
+  "Filmhub": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "filmhub"
+  },
+  "Finni Health": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "finni-health"
+  },
+  "Fireblocks": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "fireblocks"
+  },
+  "Firecrawl": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "firecrawl"
+  },
+  "Fireworks": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "fireworksai"
+  },
+  "Fireworks AI": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "fireworksai"
+  },
+  "Fivetran": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "fivetran"
+  },
+  "Fleek": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "fleek"
+  },
+  "Flex": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "withflex"
+  },
+  "Flexport": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "flexport"
+  },
+  "Flipboard": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "flipboard"
+  },
+  "Focal Systems": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "focalsystems"
+  },
+  "Fortastra": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "fortastracorporation"
+  },
+  "Forter": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "forter"
+  },
+  "Found": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "found"
+  },
+  "FourKites": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "fourkites"
+  },
+  "Freshpaint": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "freshpaint"
+  },
+  "Front": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "frontcareers"
+  },
+  "Fundamental": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "fundamental"
+  },
+  "G2": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "g2crowd"
+  },
+  "GOAT Group": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "goatgroup"
+  },
+  "Gather AI": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "gatherai"
+  },
+  "Gauntlet Networks": {
+    "ats": "lever",
+    "method": "careers-page",
+    "slug": "gauntlet"
+  },
+  "Gecko Robotics": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "gecko-robotics"
+  },
+  "Genius": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "geniusjobs"
+  },
+  "Giga": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "gigaml"
+  },
+  "Gigs": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "gigs"
+  },
+  "Ginkgo Bioworks": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "ginkgobioworks"
+  },
+  "GitLab": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "gitlab"
+  },
+  "Glean": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "gleanwork"
+  },
+  "Glia": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "glia"
+  },
+  "Glide": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "glide"
+  },
+  "GlossGenius": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "glossgenius"
+  },
+  "Glydways": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "glydways"
+  },
+  "GoCardless": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "gocardless"
+  },
+  "GoPro": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "goprocareers"
+  },
+  "GoodLeap": {
+    "ats": "lever",
+    "method": "careers-page",
+    "slug": "goodleap"
+  },
+  "Goodfire": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "goodfire"
+  },
+  "GovDash": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "govdash"
+  },
+  "Govini": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "air"
+  },
+  "Grafana Labs": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "grafanalabs"
+  },
+  "Grammarly": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "grammarly"
+  },
+  "Great Question": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "greatquestion"
+  },
+  "Greenboard": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "greenboard"
+  },
+  "Gridware": {
+    "ats": "lever",
+    "method": "careers-page",
+    "slug": "gridware"
+  },
+  "Grin": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "grin"
+  },
+  "Grow Therapy": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "grow-therapy"
+  },
+  "Groww": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "groww"
+  },
+  "Guild": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "guild"
+  },
+  "Gusto": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "gusto"
+  },
+  "HackerRank": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "hackerrank"
+  },
+  "Halcyon": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "halcyon"
+  },
+  "Handshake": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "handshake"
+  },
+  "Happl": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "happl"
+  },
+  "HappyRobot": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "happyrobot.ai"
+  },
+  "Hark": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "hark"
+  },
+  "Harmonic": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "harmonic"
+  },
+  "Harness": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "harnessinc"
+  },
+  "Harper": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "harperinsure"
+  },
+  "Hatch": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "hatchcareers"
+  },
+  "Hauler Hero": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "hauler-hero"
+  },
+  "HawkEye 360": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "hawkeye360"
+  },
+  "Heidi Health": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "heidihealth.com.au"
+  },
+  "Helion Energy": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "helion"
+  },
+  "Helsing": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "helsing"
+  },
+  "HeyGen": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "heygen"
+  },
+  "Higgsfield": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "higgsfieldai"
+  },
+  "HighRadius": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "highradius"
+  },
+  "Highnote": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "highnote"
+  },
+  "Hightouch": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "hightouch"
+  },
+  "HitPay": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "hitpayapp.com"
+  },
+  "Hive": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "hive.co"
+  },
+  "HiveWatch": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "hivewatch"
+  },
+  "HockeyStack": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "hockeystack"
+  },
+  "HomeLight": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "homelight"
+  },
+  "Honeycomb Insurance": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "honeycombinsurance"
+  },
+  "Horizon 3 AI": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "horizon3ai"
+  },
+  "Hubble Network": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "hubblenetwork"
+  },
+  "Hudu": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "hudu"
+  },
+  "Humaans": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "humaans"
+  },
+  "Human Interest": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "humaninterest"
+  },
+  "Huntress": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "huntress"
+  },
+  "Hyperbound": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "hyperbound"
+  },
+  "Imbue": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "imbue"
+  },
+  "Immuta": {
+    "ats": "lever",
+    "method": "careers-page",
+    "slug": "immuta"
+  },
+  "Immutable": {
+    "ats": "lever",
+    "method": "careers-page",
+    "slug": "immutable"
+  },
+  "Imply Data": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "imply"
+  },
+  "InMobi": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "inmobi"
+  },
+  "Incode Technologies": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "incode"
+  },
+  "Infisical": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "infisical"
+  },
+  "Inflection AI": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "inflectionai"
+  },
+  "InfluxData": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "influxdata"
+  },
+  "Inngest": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "inngest"
+  },
+  "Insider": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "insider"
+  },
+  "Instabase": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "instabase"
+  },
+  "Instacart": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "instacart"
+  },
+  "Instawork": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "instawork"
+  },
+  "Instead": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "instead"
+  },
+  "Integrate": {
+    "ats": "lever",
+    "method": "careers-page",
+    "slug": "integrate"
+  },
+  "Intercom": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "intercom"
+  },
+  "Inversion Space": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "inversionspace"
+  },
+  "Invert": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "invert"
+  },
+  "Invoca": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "invoca"
+  },
+  "Ironclad": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "ironcladhq"
+  },
+  "Irregular": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "irregular"
+  },
+  "Isomorphic Labs": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "isomorphiclabs"
+  },
+  "Iterable": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "iterable"
+  },
+  "Ivalua": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "ivalua"
+  },
+  "Jasper": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "jasper"
+  },
+  "Jasper.ai": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "jasper"
+  },
+  "Junction": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "junction"
+  },
+  "Justworks": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "justworks"
+  },
+  "Kajabi": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "kajabi"
+  },
+  "Kalshi": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "kalshi"
+  },
+  "Karat": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "karat"
+  },
+  "Kaseya": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "kaseya"
+  },
+  "Keyrock": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "keyrock"
+  },
+  "Klarity": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "klarity-ai"
+  },
+  "Klir": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "klir"
+  },
+  "Known": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "known"
+  },
+  "Komodo Health": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "komodohealth"
+  },
+  "Kong": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "kong"
+  },
+  "Kpler": {
+    "ats": "lever",
+    "method": "careers-page",
+    "slug": "kpler"
+  },
+  "LMArena": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "arena"
+  },
+  "Lago": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "lago"
+  },
+  "Lambda Labs": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "lambda"
+  },
+  "LanceDB": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "lancedb"
+  },
+  "LangChain": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "langchain"
+  },
+  "Lattice": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "lattice"
+  },
+  "LaunchDarkly": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "launchdarkly"
+  },
+  "LayerZero Labs": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "layerzerolabs"
+  },
+  "Lighthouse": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "lighthouse"
+  },
+  "Lightmatter": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "lightmatter"
+  },
+  "Lightning AI": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "lightningai"
+  },
+  "Lightricks": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "lightricks"
+  },
+  "LineLeap": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "lineleap"
+  },
+  "Linear": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "linear"
+  },
+  "Lio": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "lio"
+  },
+  "Lio (formerly askLio)": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "lio"
+  },
+  "Liquid AI": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "liquid-ai"
+  },
+  "Listen Labs": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "listenlabs"
+  },
+  "LiveFlow": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "liveflow"
+  },
+  "Lob": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "lob"
+  },
+  "Long Term Stock Exchange": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "ltse"
+  },
+  "Lookout": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "lookout"
+  },
+  "Lovable": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "lovable"
+  },
+  "Lucid Bots": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "lucidbots"
+  },
+  "Lucid Software": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "lucidsoftware"
+  },
+  "Lucis": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "lucis"
+  },
+  "Luma AI": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "lumaai"
+  },
+  "Lumin Digital": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "lumin-digital"
+  },
+  "Luminai": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "luminai"
+  },
+  "Lydian Labs": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "lydian"
+  },
+  "MOLOCO": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "moloco"
+  },
+  "MUBI": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "mubi"
+  },
+  "MURAL": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "mural"
+  },
+  "Magic": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "magic"
+  },
+  "Magic Leap": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "magicleap"
+  },
+  "MaintainX": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "maintainx"
+  },
+  "MarqVision": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "marqvision"
+  },
+  "Marshmallow": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "marshmallow"
+  },
+  "Mashgin": {
+    "ats": "lever",
+    "method": "careers-page",
+    "slug": "mashgin"
+  },
+  "MasterClass": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "masterclass"
+  },
+  "MatX": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "matx"
+  },
+  "Material Security": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "materialsecurity"
+  },
+  "Matic Robots": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "maticrobots"
+  },
+  "Matillion": {
+    "ats": "lever",
+    "method": "careers-page",
+    "slug": "matillion"
+  },
+  "Mattermost": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "mattermost"
+  },
+  "May Mobility": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "maymobility"
+  },
+  "Maybern": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "maybern"
+  },
+  "MeltPlan": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "meltplan"
+  },
+  "Mem0": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "mem0"
+  },
+  "Mercor": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "mercor"
+  },
+  "Mercury": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "mercury"
+  },
+  "Meru Health": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "meruhealth"
+  },
+  "Method Financial": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "method"
+  },
+  "Meticulous": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "meticulous"
+  },
+  "Metriport": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "metriport"
+  },
+  "Middesk": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "middesk"
+  },
+  "MindTickle": {
+    "ats": "lever",
+    "method": "careers-page",
+    "slug": "mindtickle"
+  },
+  "Minio": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "minio"
+  },
+  "Mixpanel": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "mixpanel"
+  },
+  "Modern Health": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "modernhealth"
+  },
+  "Modern Treasury": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "moderntreasury"
+  },
+  "Momentic": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "momentic"
+  },
+  "Momentus": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "momentus"
+  },
+  "Monarch": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "monarchmoney"
+  },
+  "Moniepoint": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "moniepoint"
+  },
+  "Monte Carlo": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "montecarlodata"
+  },
+  "Monzo": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "monzo"
+  },
+  "MoonPay": {
+    "ats": "lever",
+    "method": "careers-page",
+    "slug": "moonpay"
+  },
+  "Moonvalley": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "moonvalley-ai"
+  },
+  "Morning Consult": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "morningconsult"
+  },
+  "Motive": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "motive"
+  },
+  "Mux": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "mux"
+  },
+  "Mysten Labs": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "mystenlabs"
+  },
+  "Mystery.org": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "mysteryorg"
+  },
+  "Mythical Games": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "mythicalgames"
+  },
+  "N26": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "n26"
+  },
+  "NIUM": {
+    "ats": "lever",
+    "method": "careers-page",
+    "slug": "nium"
+  },
+  "Nabis": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "nabis"
+  },
+  "NanoNets": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "nanonets"
+  },
+  "Nash": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "nash"
+  },
+  "Nayya": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "nayya"
+  },
+  "Nectar Social": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "nectar-social"
+  },
+  "Neo4j": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "neo4j"
+  },
+  "Netlify": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "netlify"
+  },
+  "Netskope": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "netskope"
+  },
+  "News Break": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "newsbreak"
+  },
+  "Newton Research": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "newtonresearch"
+  },
+  "Next Caller": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "pindropsecurity"
+  },
+  "Nextiva": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "nextiva"
+  },
+  "Niantic Spatial": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "niantic-spatial"
+  },
+  "Nitricity": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "nitricity"
+  },
+  "North Beam": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "northbeam"
+  },
+  "Notabene": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "notabene"
+  },
+  "Notion": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "notion"
+  },
+  "Nourish": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "usenourish"
+  },
+  "Nova Credit": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "novacredit"
+  },
+  "Novig": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "novig"
+  },
+  "Nuance Labs": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "nuancelabs"
+  },
+  "Numen": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "numenlabs"
+  },
+  "Numeral": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "numeral"
+  },
+  "OKX": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "okx"
+  },
+  "OXOS MEDICAL": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "oxosmedical"
+  },
+  "Observe": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "observeai"
+  },
+  "Observe.AI": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "observeai"
+  },
+  "Obviant": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "obviant"
+  },
+  "Odeko": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "odeko"
+  },
+  "Odyssey": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "odysseyml"
+  },
+  "OffDeal": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "offdeal"
+  },
+  "Offchain Labs": {
+    "ats": "lever",
+    "method": "careers-page",
+    "slug": "offchainlabs"
+  },
+  "Oklo": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "oklo"
+  },
+  "Oleria": {
+    "ats": "lever",
+    "method": "careers-page",
+    "slug": "oleria-security"
+  },
+  "Ollama": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "ollama"
+  },
+  "Omni": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "omnicareers"
+  },
+  "OneTrust": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "onetrust"
+  },
+  "Onebrief": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "onebrief"
+  },
+  "Onos Health": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "onoshealth"
+  },
+  "Onshore": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "onshore"
+  },
+  "Open": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "openwork"
+  },
+  "OpenWeb": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "openweb"
+  },
+  "Ophelia": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "ophelia"
+  },
+  "Optain Health": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "optainhealth"
+  },
+  "Optimal Dynamics": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "optimaldynamics"
+  },
+  "Orca Security": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "orcasecurity"
+  },
+  "Orchard": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "orchard"
+  },
+  "Ossium Health": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "ossiumhealth"
+  },
+  "Outschool": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "outschool"
+  },
+  "Oyster": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "oyster"
+  },
+  "PLACE": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "place"
+  },
+  "PPRO": {
+    "ats": "lever",
+    "method": "careers-page",
+    "slug": "ppro"
+  },
+  "Pacaso": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "pacaso"
+  },
+  "PagerDuty": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "pagerduty"
+  },
+  "Pair Team": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "pairteam"
+  },
+  "PandaDoc": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "pandadoc"
+  },
+  "Papa": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "papa"
+  },
+  "Parafin": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "parafin"
+  },
+  "Parallel": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "parallel"
+  },
+  "Parloa": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "parloa"
+  },
+  "PatSnap": {
+    "ats": "lever",
+    "method": "careers-page",
+    "slug": "patsnap"
+  },
+  "Paxos": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "paxos-technology-solutions"
+  },
+  "Paystand": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "paystand"
+  },
+  "Payward": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "kraken.com"
+  },
+  "Pelago": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "pelago"
+  },
+  "Pendo": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "pendo"
+  },
+  "Pennylane": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "pennylane"
+  },
+  "People.ai": {
+    "ats": "lever",
+    "method": "careers-page",
+    "slug": "people-ai"
+  },
+  "Peregrine": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "peregrinetechnologies"
+  },
+  "PermitFlow": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "permitflow"
+  },
+  "Permutive": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "permutive"
+  },
+  "Phantom": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "phantomai"
+  },
+  "Photoroom": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "photoroom"
+  },
+  "PhysicsX": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "physicsx"
+  },
+  "PickTrace": {
+    "ats": "lever",
+    "method": "careers-page",
+    "slug": "picktrace"
+  },
+  "PicnicAI": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "picnicai"
+  },
+  "PicsArt": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "picsart"
+  },
+  "Pigment": {
+    "ats": "lever",
+    "method": "careers-page",
+    "slug": "pigment"
+  },
+  "Pilot": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "pilothq"
+  },
+  "Pleo": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "pleo"
+  },
+  "Podium": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "podium81"
+  },
+  "Poll Everywhere": {
+    "ats": "lever",
+    "method": "careers-page",
+    "slug": "polleverywhere"
+  },
+  "Pomelo Care": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "pomelocare"
+  },
+  "Postman": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "postman"
+  },
+  "Postscript": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "postscript"
+  },
+  "Project44": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "project44"
+  },
+  "Promise": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "promise"
+  },
+  "Prove Identity": {
+    "ats": "greenhouse",
+    "method": "override",
+    "slug": "prove"
+  },
+  "PsiQuantum": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "psiquantum"
+  },
+  "Public": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "public"
+  },
+  "Pulley": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "pulley"
+  },
+  "Pulse": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "pulse"
+  },
+  "Pump": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "pumpcareers"
+  },
+  "Pyka": {
+    "ats": "lever",
+    "method": "careers-page",
+    "slug": "pyka"
+  },
+  "Qualia": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "qualia"
+  },
+  "Quantinuum": {
+    "ats": "lever",
+    "method": "careers-page",
+    "slug": "quantinuum"
+  },
+  "Quantstamp": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "quantstamp"
+  },
+  "Quantum Metric": {
+    "ats": "lever",
+    "method": "careers-page",
+    "slug": "quantummetric"
+  },
+  "Quicknode": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "quicknode"
+  },
+  "Quince": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "quince"
+  },
+  "Quindar": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "quindar"
+  },
+  "QuintoAndar": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "quintoandar"
+  },
+  "Qventus": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "qventus"
+  },
+  "Raintank": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "grafanalabs"
+  },
+  "Ramen VR": {
+    "ats": "lever",
+    "method": "careers-page",
+    "slug": "ramenvr"
+  },
+  "Ramp": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "ramp"
+  },
+  "Razorpay": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "razorpaysoftwareprivatelimited"
+  },
+  "Reach": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "reach"
+  },
+  "ReadMe": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "readme"
+  },
+  "Realm": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "realm"
+  },
+  "Recall.ai": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "recall"
+  },
+  "Red Ventures": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "redventures"
+  },
+  "Reflection AI": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "reflectionai"
+  },
+  "RegScale": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "regscale"
+  },
+  "Reka AI": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "reka"
+  },
+  "Relativity": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "relativity"
+  },
+  "Relativity Space": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "relativity"
+  },
+  "Rembrand": {
+    "ats": "lever",
+    "method": "careers-page",
+    "slug": "rembrand"
+  },
+  "Remi": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "remi"
+  },
+  "Remote": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "remote"
+  },
+  "Render": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "render"
+  },
+  "Replit": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "replit"
+  },
+  "Resolve AI": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "resolve"
+  },
+  "RevenueCat": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "revenuecat"
+  },
+  "Rhino Federated Computing": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "rhinofederatedcomputing"
+  },
+  "Ridwell": {
+    "ats": "lever",
+    "method": "careers-page",
+    "slug": "ridwell"
+  },
+  "Rigetti Computing": {
+    "ats": "lever",
+    "method": "careers-page",
+    "slug": "rigetti"
+  },
+  "Rillet": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "rillet"
+  },
+  "Ripple": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "ripple"
+  },
+  "Roadrunner": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "roadrunner"
+  },
+  "Roboflow": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "roboflow"
+  },
+  "Rogo": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "rogo"
+  },
+  "Rollstack": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "rollstack"
+  },
+  "Roofstock": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "roofstock"
+  },
+  "Route": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "route"
+  },
+  "Rutter": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "rutter"
+  },
+  "Rwazi": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "rwazi"
+  },
+  "SES": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "ses"
+  },
+  "SFOX": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "sfox"
+  },
+  "SOLIDROAD": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "solidroad"
+  },
+  "SafetyKit": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "safetykit"
+  },
+  "Saleswhale": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "saleswhale"
+  },
+  "Salt Security": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "saltsecurity"
+  },
+  "SambaNova Systems": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "sambanovasystems"
+  },
+  "Sandbox": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "sandboxjobs"
+  },
+  "SandboxAQ": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "sandboxaq"
+  },
+  "Sapiom": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "sapiom"
+  },
+  "Sarvam": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "sarvam"
+  },
+  "Scalapay": {
+    "ats": "lever",
+    "method": "careers-page",
+    "slug": "scalapay"
+  },
+  "Scale": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "scaleai"
+  },
+  "Scale AI": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "scaleai"
+  },
+  "Scandit": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "scandit"
+  },
+  "Scope AR": {
+    "ats": "lever",
+    "method": "careers-page",
+    "slug": "scopear"
+  },
+  "Scorability": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "scorability"
+  },
+  "SeatGeek": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "seatgeek"
+  },
+  "Securitize": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "securitize"
+  },
+  "SeekOut": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "seekout"
+  },
+  "Seekr": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "seekr"
+  },
+  "Semafor": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "semafor"
+  },
+  "Sendbird": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "sendbird"
+  },
+  "Sentry": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "sentry"
+  },
+  "Sequen": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "sequen-ai"
+  },
+  "Shape (ShapeScale)": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "shapescale"
+  },
+  "Shasqi": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "shasqi"
+  },
+  "Shield": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "shield"
+  },
+  "Shift": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "shifttechnology"
+  },
+  "ShopMy": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "shopmy"
+  },
+  "Short Story": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "shortstory"
+  },
+  "Sift": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "sift"
+  },
+  "Sigma Computing": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "sigmacomputing"
+  },
+  "SimplyInsured": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "si"
+  },
+  "SingleStore": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "singlestore"
+  },
+  "Sisense": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "sisense"
+  },
+  "Skyways": {
+    "ats": "lever",
+    "method": "careers-page",
+    "slug": "skyways"
+  },
+  "Slash": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "slash-financial"
+  },
+  "Slice": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "slice"
+  },
+  "SmartAsset": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "smartasset"
+  },
+  "Snapdocs": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "snapdocs"
+  },
+  "Snorkel AI": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "snorkelai"
+  },
+  "Socure": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "socure"
+  },
+  "Sola": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "sola"
+  },
+  "Sorcero": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "sorcero"
+  },
+  "Sorella Labs": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "sorellalabs"
+  },
+  "Sourcegraph": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "sourcegraph91"
+  },
+  "Spade": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "spade"
+  },
+  "SparkCognition": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "avathon"
+  },
+  "Speak": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "speak"
+  },
+  "Spellbrush": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "spellbrush"
+  },
+  "Spotter": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "spotter"
+  },
+  "Stability AI": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "stabilityai"
+  },
+  "StackAI": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "stack-ai"
+  },
+  "Staffbase": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "staffbase"
+  },
+  "Starburst": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "starburst"
+  },
+  "Stepful": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "stepful"
+  },
+  "Stilta": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "stilta"
+  },
+  "Stoke Space Technologies": {
+    "ats": "greenhouse",
+    "method": "override",
+    "slug": "stokespacetechnologies"
+  },
+  "Stripe": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "stripe"
+  },
+  "Striveworks": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "striveworks"
+  },
+  "Submittable": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "submittable"
+  },
+  "SumUp": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "sumup"
+  },
+  "Summer": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "summer"
+  },
+  "Suno": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "suno"
+  },
+  "Supabase": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "supabase"
+  },
+  "Super": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "super"
+  },
+  "Symphony": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "symphony"
+  },
+  "Tailscale": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "tailscale"
+  },
+  "Tala": {
+    "ats": "lever",
+    "method": "careers-page",
+    "slug": "tala"
+  },
+  "Talkdesk": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "talkdesk2"
+  },
+  "Tamara": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "tamara"
+  },
+  "Tanium": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "tanium"
+  },
+  "Tapcheck": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "tapcheck"
+  },
+  "Tavus": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "tavus"
+  },
+  "TaxBit": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "taxbit"
+  },
+  "TeamSense": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "teamsense"
+  },
+  "Teamworks": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "teamworks"
+  },
+  "Teleport": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "goteleport"
+  },
+  "Tempo": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "tempo"
+  },
+  "Temporal": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "temporaltechnologies"
+  },
+  "Tennr": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "tennr"
+  },
+  "TensTorrent": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "tenstorrent"
+  },
+  "TensorWave": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "tensorwave"
+  },
+  "Tesorio": {
+    "ats": "lever",
+    "method": "careers-page",
+    "slug": "tesorio"
+  },
+  "Teya": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "teya"
+  },
+  "The Athletic": {
+    "ats": "lever",
+    "method": "careers-page",
+    "slug": "theathletic"
+  },
+  "Thought Machine": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "thought-machine"
+  },
+  "ThreatLocker": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "threatlocker"
+  },
+  "Tide": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "tide"
+  },
+  "Tines": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "tines"
+  },
+  "Tipalti": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "tipaltisolutions"
+  },
+  "Titan": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "titan"
+  },
+  "Together AI": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "togetherai"
+  },
+  "Tomo Networks": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "tomo"
+  },
+  "Torch": {
+    "ats": "lever",
+    "method": "careers-page",
+    "slug": "torch"
+  },
+  "Torq": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "torq"
+  },
+  "Toss": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "tosscareers"
+  },
+  "Tovala": {
+    "ats": "lever",
+    "method": "careers-page",
+    "slug": "tovala"
+  },
+  "Tractable": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "tractable"
+  },
+  "Trade Republic": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "traderepublic"
+  },
+  "Transmit Security": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "transmitsecurity"
+  },
+  "Treasury Prime": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "treasuryprime"
+  },
+  "Trela": {
+    "ats": "lever",
+    "method": "careers-page",
+    "slug": "trela"
+  },
+  "Trigger.dev": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "triggerdev"
+  },
+  "Triomics": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "triomics"
+  },
+  "True Link": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "truelinkfinancial"
+  },
+  "TrueLayer": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "truelayer"
+  },
+  "TrueNorth": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "truenorth"
+  },
+  "Truepill": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "truepill"
+  },
+  "Trumid": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "trumid"
+  },
+  "Tulea Health": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "tuleahealth"
+  },
+  "Tulip": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "tulip"
+  },
+  "Turing": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "turing"
+  },
+  "Twin Health": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "twinhealth"
+  },
+  "Twitch": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "twitch"
+  },
+  "Typeface": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "typeface"
+  },
+  "Unqork": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "unqork"
+  },
+  "UpKeep": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "upkeep"
+  },
+  "Upgrade": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "upgrade"
+  },
+  "UserGems": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "usergems"
+  },
+  "VENTIVA": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "ventiva"
+  },
+  "VITL": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "vitl"
+  },
+  "VITLrx": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "vitl"
+  },
+  "VTS": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "vts"
+  },
+  "VULCAN ELEMENTS": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "vulcanelements"
+  },
+  "Vapi": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "vapi"
+  },
+  "Vectra Networks": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "vectranetworks"
+  },
+  "Vercel": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "vercel"
+  },
+  "Veriff": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "veriff"
+  },
+  "Verkada": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "verkada"
+  },
+  "Vest": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "vest81"
+  },
+  "Vestwell": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "vestwell"
+  },
+  "Vetcove": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "vetcove"
+  },
+  "VidMob": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "vidmob"
+  },
+  "VideoAmp": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "videoamp"
+  },
+  "Virtualitics": {
+    "ats": "lever",
+    "method": "careers-page",
+    "slug": "virtualitics"
+  },
+  "Vise": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "viseai"
+  },
+  "Vitable Health": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "vitable"
+  },
+  "Vitalize": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "vitalize"
+  },
+  "Vivodyne": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "vivodyne"
+  },
+  "Volta Labs, Inc.": {
+    "ats": "lever",
+    "method": "careers-page",
+    "slug": "voltalabs"
+  },
+  "Vori": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "vori"
+  },
+  "Vumedi": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "vumedi"
+  },
+  "Wasabi": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "wasabi"
+  },
+  "Watershed": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "watershed"
+  },
+  "Wayflyer": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "wayflyer"
+  },
+  "Wayve": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "wayve"
+  },
+  "Weave": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "weave"
+  },
+  "Webflow": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "webflow"
+  },
+  "Weekend (fmr. Volley)": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "weekend"
+  },
+  "Whop": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "whop"
+  },
+  "Wildlife Studios": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "wildlifestudios"
+  },
+  "Wisetack": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "wisetack"
+  },
+  "Wispr Flow": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "wispr-flow"
+  },
+  "WorkOS": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "workos"
+  },
+  "Workato": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "workato"
+  },
+  "World Labs": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "worldlabs"
+  },
+  "Worldcoin": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "tools"
+  },
+  "Wrapbook": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "wrapbook"
+  },
+  "Writer": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "writer"
+  },
+  "Xendit": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "xendit"
+  },
+  "YipitData": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "yipitdata"
+  },
+  "You.com": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "youcom"
+  },
+  "YugaByte": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "yugabyte"
+  },
+  "ZenBusiness": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "zenbusiness"
+  },
+  "Zerocater": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "zerocater"
+  },
+  "Zesty": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "zestyai"
+  },
+  "Ziina": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "ziina"
+  },
+  "Zip": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "zip"
+  },
+  "Zocks Communications": {
+    "ats": "lever",
+    "method": "careers-page",
+    "slug": "zocks"
+  },
+  "airSlate": {
+    "ats": "lever",
+    "method": "careers-page",
+    "slug": "airslate"
+  },
+  "authzed": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "authzed"
+  },
+  "commercetools": {
+    "ats": "greenhouse",
+    "method": "guess",
+    "slug": "commercetools"
+  },
+  "d-Matrix": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "d-matrix"
+  },
+  "firmus": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "firmus"
+  },
+  "garten": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "garten"
+  },
+  "humansand": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "humans-and"
+  },
+  "iCapital": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "icapitalnetwork"
+  },
+  "impact.com": {
+    "ats": "greenhouse",
+    "method": "careers-page",
+    "slug": "impact"
+  },
+  "verisoul": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "verisoul"
+  }
+}
