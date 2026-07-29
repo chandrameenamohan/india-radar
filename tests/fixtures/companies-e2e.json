@@ -1,5 +1,5 @@
 {
-  "schema_version": 4,
+  "schema_version": 5,
   "snapshot": "2026-07-28",
   "companies": [
     {
@@ -10,29 +10,39 @@
         {
           "title": "Staff Engineer, Platform",
           "url": "https://job-boards.greenhouse.io/acmecloud/jobs/4001",
-          "locations": ["Bengaluru, India"],
+          "locations": [
+            "Bengaluru, India"
+          ],
           "workplace": null
         },
         {
           "title": "Product Designer",
           "url": "https://job-boards.greenhouse.io/acmecloud/jobs/4002",
-          "locations": ["Pune, India"],
+          "locations": [
+            "Pune, India"
+          ],
           "workplace": "hybrid"
         },
         {
           "title": "Engineering Manager",
           "url": "https://job-boards.greenhouse.io/acmecloud/jobs/4003",
-          "locations": ["Bengaluru, India; Pune, India"],
+          "locations": [
+            "Bengaluru, India; Pune, India"
+          ],
           "workplace": null
         }
       ],
-      "cities": ["Bengaluru", "Pune"],
+      "cities": [
+        "Bengaluru",
+        "Pune"
+      ],
       "amount": 40000000,
       "currency": "USD",
       "round_letter": "B",
       "date": "2026-06-30",
       "source_url": "https://www.finsmes.com/2026/06/acme-cloud-raises-40m.html",
-      "qualified_by": "letter"
+      "qualified_by": "letter",
+      "salary": null
     },
     {
       "name": "Beta Logistics",
@@ -42,23 +52,30 @@
         {
           "title": "Warehouse Systems Engineer",
           "url": "https://job-boards.greenhouse.io/betalogistics/jobs/5001",
-          "locations": ["Pune, India"],
+          "locations": [
+            "Pune, India"
+          ],
           "workplace": "onsite"
         },
         {
           "title": "Data Analyst",
           "url": "https://job-boards.greenhouse.io/betalogistics/jobs/5002",
-          "locations": ["Pune, India"],
+          "locations": [
+            "Pune, India"
+          ],
           "workplace": null
         }
       ],
-      "cities": ["Pune"],
+      "cities": [
+        "Pune"
+      ],
       "amount": 6000000,
       "currency": "USD",
       "round_letter": "A",
       "date": "2026-07-20",
       "source_url": "https://www.finsmes.com/2026/07/beta-logistics-raises-6m.html",
-      "qualified_by": "letter"
+      "qualified_by": "letter",
+      "salary": null
     },
     {
       "name": "Gamma Health",
@@ -68,35 +85,53 @@
         {
           "title": "Senior Backend Engineer",
           "url": "https://job-boards.greenhouse.io/gammahealth/jobs/6001",
-          "locations": ["Bengaluru, India"],
+          "locations": [
+            "Bengaluru, India"
+          ],
           "workplace": null
         },
         {
           "title": "Clinical Data Lead",
           "url": "https://job-boards.greenhouse.io/gammahealth/jobs/6002",
-          "locations": ["Hyderabad, India"],
+          "locations": [
+            "Hyderabad, India"
+          ],
           "workplace": "onsite"
         },
         {
           "title": "Site Reliability Engineer",
           "url": "https://job-boards.greenhouse.io/gammahealth/jobs/6003",
-          "locations": ["Remote - Bangalore, India"],
+          "locations": [
+            "Remote - Bangalore, India"
+          ],
           "workplace": "remote"
         },
         {
           "title": "Engineering Manager, Platform",
           "url": "https://job-boards.greenhouse.io/gammahealth/jobs/6004",
-          "locations": ["Bengaluru, India", "Hyderabad, India"],
+          "locations": [
+            "Bengaluru, India",
+            "Hyderabad, India"
+          ],
           "workplace": "hybrid"
         }
       ],
-      "cities": ["Bengaluru", "Hyderabad"],
+      "cities": [
+        "Bengaluru",
+        "Hyderabad"
+      ],
       "amount": 120000000,
       "currency": "USD",
       "round_letter": "C",
       "date": "2025-02-14",
       "source_url": "https://www.finsmes.com/2025/02/gamma-health-raises-120m.html",
-      "qualified_by": "letter"
+      "qualified_by": "letter",
+      "salary": {
+        "avg_lpa": 24.6,
+        "reports": 1204,
+        "observed": "2026-07-21",
+        "source_url": "https://www.ambitionbox.com/salaries/gamma-health-salaries"
+      }
     },
     {
       "name": "Delta Remote",
@@ -106,7 +141,9 @@
         {
           "title": "Customer Support Lead",
           "url": "https://job-boards.greenhouse.io/deltaremote/jobs/7001",
-          "locations": ["Remote - India"],
+          "locations": [
+            "Remote - India"
+          ],
           "workplace": "remote"
         }
       ],
@@ -116,7 +153,13 @@
       "round_letter": null,
       "date": "2026-07-01",
       "source_url": "https://www.finsmes.com/2026/07/delta-remote-raises-9m.html",
-      "qualified_by": "amount"
+      "qualified_by": "amount",
+      "salary": {
+        "avg_lpa": 12.4,
+        "reports": 1,
+        "observed": "2025-10-14",
+        "source_url": "https://www.ambitionbox.com/salaries/delta-remote-salaries"
+      }
     },
     {
       "name": "Epsilon Directory",
@@ -126,23 +169,30 @@
         {
           "title": "Founding Engineer",
           "url": "https://job-boards.greenhouse.io/epsilondirectory/jobs/8001",
-          "locations": ["Bengaluru, India"],
+          "locations": [
+            "Bengaluru, India"
+          ],
           "workplace": null
         },
         {
           "title": "Growth Marketer",
           "url": "https://job-boards.greenhouse.io/epsilondirectory/jobs/8002",
-          "locations": ["Bengaluru, India"],
+          "locations": [
+            "Bengaluru, India"
+          ],
           "workplace": "hybrid"
         }
       ],
-      "cities": ["Bengaluru"],
+      "cities": [
+        "Bengaluru"
+      ],
       "amount": null,
       "currency": null,
       "round_letter": null,
       "date": null,
       "source_url": "https://www.ycombinator.com/companies/epsilon-directory",
-      "qualified_by": "stage"
+      "qualified_by": "stage",
+      "salary": null
     },
     {
       "name": "Zeta Placeless",
@@ -152,7 +202,9 @@
         {
           "title": "Solutions Consultant",
           "url": "https://job-boards.greenhouse.io/zetaplaceless/jobs/9001",
-          "locations": ["India"],
+          "locations": [
+            "India"
+          ],
           "workplace": null
         }
       ],
@@ -162,7 +214,8 @@
       "round_letter": "A",
       "date": "2026-05-05",
       "source_url": "https://www.finsmes.com/2026/05/zeta-placeless-raises-15m.html",
-      "qualified_by": "letter"
+      "qualified_by": "letter",
+      "salary": null
     }
   ]
 }

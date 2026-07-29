@@ -20,7 +20,7 @@ from datetime import date
 from pathlib import Path
 from typing import Any, NamedTuple
 
-from src import ashby, greenhouse, lever
+from src import ashby, greenhouse, lever, salary
 from src.greenhouse import Roles
 from src.india import WORKPLACES, cities, is_india, workplace
 from src.outcomes import Outcome, report, write_report
@@ -35,7 +35,9 @@ from src.slugs import Slug
 #: v4 replaced the `india_roles` count with the `roles` themselves (T4.1): a
 #: title, an apply URL, the places the board named and how it says the role is
 #: worked. The count is `len(roles)` — carrying both invites them to disagree.
-SCHEMA_VERSION = 4
+#: v5 added `salary` (T4.2), which is null for most rows and must be: it is the
+#: first field the site renders only when the enrichment found something.
+SCHEMA_VERSION = 5
 
 Probe = Callable[[str], Roles | Outcome]
 Row = dict[str, Any]
@@ -86,6 +88,7 @@ FIELDS: dict[str, type | tuple[type, ...]] = {
     "date": (str, type(None)),
     "source_url": str,
     "qualified_by": str,
+    "salary": (dict, type(None)),
 }
 
 #: Every ATS this corpus holds a slug for. With Lever in, no company is
@@ -103,6 +106,27 @@ PROBES: dict[str, Provider] = {
 #: is a provider changing its payload, and the build failing loudly is the alarm.
 ROLE_FIELDS = ("title", "url", "locations", "workplace")
 
+#: A benchmark's fields (T4.2). `observed` is required rather than optional, and
+#: that is SPEC feature 8's "renders the figure with its date" made deterministic:
+#: the source's figures were last recomputed anywhere from nine months ago to
+#: today, so a figure that arrives without its date is not publishable — it would
+#: read as a statement about now. Absence of the whole benchmark is fine; a
+#: benchmark that can't say when is not.
+SALARY_FIELDS = ("avg_lpa", "reports", "observed", "source_url")
+
+
+def _shape(found: Mapping[str, Any], names: Iterable[str]) -> list[str]:
+    """Fields the schema names and this mapping doesn't, and the reverse.
+
+    Unknown fields are a violation, not a courtesy: an enrichment that adds a
+    field without bumping the version is exactly how the site starts rendering
+    something the schema never promised.
+    """
+    problems = [f"missing {f!r}" for f in names if f not in found]
+    if extra := sorted(set(found) - set(names)):
+        problems.append(f"unknown field(s) {extra}")
+    return problems
+
 
 def role_errors(role: Any) -> list[str]:
     """Every way one role fails the schema. Empty means it may ship.
@@ -114,9 +138,7 @@ def role_errors(role: Any) -> list[str]:
     """
     if not isinstance(role, Mapping):
         return [f"is {type(role).__name__}, not a role"]
-    problems = [f"missing {f!r}" for f in ROLE_FIELDS if f not in role]
-    if extra := sorted(set(role) - set(ROLE_FIELDS)):
-        problems.append(f"unknown field(s) {extra}")
+    problems = _shape(role, ROLE_FIELDS)
     if not (isinstance(role.get("title"), str) and role.get("title", "").strip()):
         problems.append(f"title {role.get('title')!r} is not a non-empty string")
     # http(s) only: the site refuses to link anything else (a `javascript:` href
@@ -132,21 +154,42 @@ def role_errors(role: Any) -> list[str]:
     return problems
 
 
+def salary_errors(found: Any) -> list[str]:
+    """Every way one salary benchmark fails the schema. Empty means it may ship.
+
+    A row with no benchmark is normal — 51 of 116 measured — and `errors` never
+    calls this for one. What this refuses is a benchmark that is present but
+    can't be read honestly: no date, no sample size, or a figure the site would
+    render as "₹0.0L".
+    """
+    if not isinstance(found, Mapping):
+        return [f"is {type(found).__name__}, not a benchmark"]
+    problems = _shape(found, SALARY_FIELDS)
+    avg = found.get("avg_lpa")
+    if not (isinstance(avg, int | float) and not isinstance(avg, bool) and avg > 0):
+        problems.append(f"avg_lpa {avg!r} is not a positive number")
+    if not (isinstance(n := found.get("reports"), int) and not isinstance(n, bool) and n > 0):
+        problems.append(f"reports {n!r} is not a positive count")
+    # The date the SOURCE stated, not the build's — see SALARY_FIELDS.
+    if not salary.is_iso_date(found.get("observed")):
+        problems.append(f"observed {found.get('observed')!r} is not an ISO date")
+    if not (isinstance(url := found.get("source_url"), str) and url.startswith("https://")):
+        problems.append(f"source_url {url!r} is not an https URL")
+    return problems
+
+
 def errors(row: Mapping[str, Any]) -> list[str]:
     """Every way this row fails the current schema. Empty means it may ship.
 
-    Unknown fields are a violation, not a courtesy: an enrichment that adds a
-    field without bumping the version is exactly how the site starts rendering
-    something the schema never promised.
+    The fields it names are checked for type here; the value rules that carry
+    meaning follow, and the nested shapes are `role_errors` and `salary_errors`.
     """
-    problems = []
-    for field, types in FIELDS.items():
-        if field not in row:
-            problems.append(f"missing {field!r}")
-        elif not isinstance(row[field], types):
-            problems.append(f"{field!r} is {type(row[field]).__name__}, not {types}")
-    if extra := sorted(set(row) - set(FIELDS)):
-        problems.append(f"unknown field(s) {extra}")
+    problems = _shape(row, FIELDS)
+    problems += [
+        f"{field!r} is {type(row[field]).__name__}, not {types}"
+        for field, types in FIELDS.items()
+        if field in row and not isinstance(row[field], types)
+    ]
 
     # A listed company is one whose board we read and found India roles on. An
     # empty list here would be a row saying "listed, hiring nobody" — the
@@ -159,6 +202,10 @@ def errors(row: Mapping[str, Any]) -> list[str]:
     # inside it is not, because the site renders these straight into the filter.
     if isinstance(row.get("cities"), list) and not all(isinstance(c, str) for c in row["cities"]):
         problems.append(f"cities {row['cities']!r} is not a list of strings")
+    # Null is the common case and always legal. A benchmark that is *there* is
+    # held to the same bar as everything else the site renders.
+    if row.get("salary") is not None:
+        problems += [f"salary: {p}" for p in salary_errors(row["salary"])]
     # The three rules corpus._qualified_by can fire. A row qualified by anything
     # else was admitted by a rule the site has no wording for.
     if row.get("qualified_by") not in ("letter", "amount", "stage"):
@@ -255,6 +302,10 @@ def build(
                 "date": company["date"],
                 "source_url": company["source_url"],
                 "qualified_by": company["qualified_by"],
+                # The spine states the absence; `salary.attach` fills in what it
+                # can find afterwards. An enrichment inside the loop would put a
+                # third-party site between a company and being listed at all.
+                "salary": None,
             }
         )
 
@@ -337,6 +388,12 @@ def main(argv: list[str]) -> None:
         }
 
     rows, outcomes = build(corpus, slugs, probes)
+    if not smoke:
+        # Enrichment, after the spine and outside it: it runs on the listed rows
+        # only, it cannot change who is listed, and every failure inside it is an
+        # absent benchmark rather than a failed build. Skipped in smoke for the
+        # same reason the probes are — the smoke path touches no network.
+        salary.attach(rows)
     write(out, rows)
 
     built = report([c["name"] for c in corpus], outcomes)

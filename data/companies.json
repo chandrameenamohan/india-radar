@@ -1,5 +1,5 @@
 {
-  "schema_version": 4,
+  "schema_version": 5,
   "snapshot": "2026-07-29",
   "companies": [
     {
@@ -113,7 +113,13 @@
       "round_letter": null,
       "date": null,
       "source_url": "https://www.cbinsights.com/company/6sense-insights",
-      "qualified_by": "stage"
+      "qualified_by": "stage",
+      "salary": {
+        "avg_lpa": 29.6,
+        "reports": 660,
+        "observed": "2026-07-27",
+        "source_url": "https://www.ambitionbox.com/salaries/6sense-salaries"
+      }
     },
     {
       "name": "Airbnb",
@@ -202,7 +208,13 @@
       "round_letter": null,
       "date": null,
       "source_url": "https://www.ycombinator.com/companies/airbnb",
-      "qualified_by": "stage"
+      "qualified_by": "stage",
+      "salary": {
+        "avg_lpa": 18.9,
+        "reports": 1686,
+        "observed": "2026-07-29",
+        "source_url": "https://www.ambitionbox.com/salaries/airbnb-salaries"
+      }
     },
     {
       "name": "Alpaca",
@@ -224,7 +236,13 @@
       "round_letter": null,
       "date": null,
       "source_url": "https://www.ycombinator.com/companies/alpaca",
-      "qualified_by": "stage"
+      "qualified_by": "stage",
+      "salary": {
+        "avg_lpa": 38.6,
+        "reports": 2,
+        "observed": "2025-10-14",
+        "source_url": "https://www.ambitionbox.com/salaries/alpaca-salaries"
+      }
     },
     {
       "name": "AlphaSense",
@@ -635,7 +653,13 @@
       "round_letter": null,
       "date": null,
       "source_url": "https://www.forbes.com/companies/alphasense/",
-      "qualified_by": "stage"
+      "qualified_by": "stage",
+      "salary": {
+        "avg_lpa": 21.2,
+        "reports": 720,
+        "observed": "2026-07-27",
+        "source_url": "https://www.ambitionbox.com/salaries/alphasense-salaries"
+      }
     },
     {
       "name": "Ambient.ai",
@@ -691,7 +715,8 @@
       "round_letter": null,
       "date": null,
       "source_url": "https://www.ycombinator.com/companies/ambient-ai",
-      "qualified_by": "stage"
+      "qualified_by": "stage",
+      "salary": null
     },
     {
       "name": "Amplitude",
@@ -723,7 +748,13 @@
       "round_letter": null,
       "date": null,
       "source_url": "https://www.ycombinator.com/companies/amplitude",
-      "qualified_by": "stage"
+      "qualified_by": "stage",
+      "salary": {
+        "avg_lpa": 9.5,
+        "reports": 13,
+        "observed": "2026-04-25",
+        "source_url": "https://www.ambitionbox.com/salaries/amplitude-salaries"
+      }
     },
     {
       "name": "Anthropic",
@@ -763,7 +794,8 @@
       "round_letter": null,
       "date": null,
       "source_url": "https://www.forbes.com/companies/anthropic/",
-      "qualified_by": "stage"
+      "qualified_by": "stage",
+      "salary": null
     },
     {
       "name": "Anyscale",
@@ -811,7 +843,8 @@
       "round_letter": null,
       "date": null,
       "source_url": "https://www.cbinsights.com/company/anyscale",
-      "qualified_by": "stage"
+      "qualified_by": "stage",
+      "salary": null
     },
     {
       "name": "Apollo.io",
@@ -833,7 +866,8 @@
       "round_letter": null,
       "date": null,
       "source_url": "https://www.ycombinator.com/companies/apollo-io",
-      "qualified_by": "stage"
+      "qualified_by": "stage",
+      "salary": null
     },
     {
       "name": "AppDirect",
@@ -857,7 +891,13 @@
       "round_letter": null,
       "date": null,
       "source_url": "https://www.cbinsights.com/company/appdirect",
-      "qualified_by": "stage"
+      "qualified_by": "stage",
+      "salary": {
+        "avg_lpa": 19.1,
+        "reports": 636,
+        "observed": "2026-07-28",
+        "source_url": "https://www.ambitionbox.com/salaries/appdirect-salaries"
+      }
     },
     {
       "name": "Applied Intuition",
@@ -881,7 +921,13 @@
       "round_letter": null,
       "date": null,
       "source_url": "https://www.forbes.com/companies/applied-intuition/",
-      "qualified_by": "stage"
+      "qualified_by": "stage",
+      "salary": {
+        "avg_lpa": 15.7,
+        "reports": 12,
+        "observed": "2026-06-20",
+        "source_url": "https://www.ambitionbox.com/salaries/applied-intuition-salaries"
+      }
     },
     {
       "name": "AppsFlyer",
@@ -913,7 +959,13 @@
       "round_letter": null,
       "date": null,
       "source_url": "https://www.forbes.com/companies/appsflyer/",
-      "qualified_by": "stage"
+      "qualified_by": "stage",
+      "salary": {
+        "avg_lpa": 28.1,
+        "reports": 65,
+        "observed": "2026-05-22",
+        "source_url": "https://www.ambitionbox.com/salaries/appsflyer-salaries"
+      }
     },
     {
       "name": "Arcadia",
@@ -961,7 +1013,13 @@
       "round_letter": null,
       "date": null,
       "source_url": "https://www.cbinsights.com/company/arcadia-power",
-      "qualified_by": "stage"
+      "qualified_by": "stage",
+      "salary": {
+        "avg_lpa": 13.6,
+        "reports": 539,
+        "observed": "2026-07-26",
+        "source_url": "https://www.ambitionbox.com/salaries/arcadia-salaries"
+      }
     },
     {
       "name": "Armada",
@@ -1026,7 +1084,13 @@
       "round_letter": null,
       "date": null,
       "source_url": "https://www.cbinsights.com/company/armada-6",
-      "qualified_by": "stage"
+      "qualified_by": "stage",
+      "salary": {
+        "avg_lpa": 20.1,
+        "reports": 32,
+        "observed": "2026-07-13",
+        "source_url": "https://www.ambitionbox.com/salaries/armada-salaries"
+      }
     },
     {
       "name": "ASAPP",
@@ -1070,7 +1134,13 @@
       "round_letter": null,
       "date": null,
       "source_url": "https://www.cbinsights.com/company/getasapp",
-      "qualified_by": "stage"
+      "qualified_by": "stage",
+      "salary": {
+        "avg_lpa": 34.0,
+        "reports": 24,
+        "observed": "2026-07-22",
+        "source_url": "https://www.ambitionbox.com/salaries/asapp-salaries"
+      }
     },
     {
       "name": "AtoB",
@@ -1094,7 +1164,13 @@
       "round_letter": null,
       "date": null,
       "source_url": "https://www.ycombinator.com/companies/atob",
-      "qualified_by": "stage"
+      "qualified_by": "stage",
+      "salary": {
+        "avg_lpa": 12.4,
+        "reports": 1,
+        "observed": "2026-06-28",
+        "source_url": "https://www.ambitionbox.com/salaries/atob-salaries"
+      }
     },
     {
       "name": "Aviatrix",
@@ -1150,7 +1226,13 @@
       "round_letter": null,
       "date": null,
       "source_url": "https://www.cbinsights.com/company/aviatrix-systems",
-      "qualified_by": "stage"
+      "qualified_by": "stage",
+      "salary": {
+        "avg_lpa": 35.4,
+        "reports": 30,
+        "observed": "2026-07-19",
+        "source_url": "https://www.ambitionbox.com/salaries/aviatrix-salaries"
+      }
     },
     {
       "name": "Bitmovin",
@@ -1174,7 +1256,8 @@
       "round_letter": null,
       "date": null,
       "source_url": "https://www.ycombinator.com/companies/bitmovin",
-      "qualified_by": "stage"
+      "qualified_by": "stage",
+      "salary": null
     },
     {
       "name": "Cambridge Mobile Telematics",
@@ -1198,7 +1281,13 @@
       "round_letter": null,
       "date": null,
       "source_url": "https://www.cbinsights.com/company/cambridge-mobile-telematics",
-      "qualified_by": "stage"
+      "qualified_by": "stage",
+      "salary": {
+        "avg_lpa": 11.9,
+        "reports": 42,
+        "observed": "2026-07-09",
+        "source_url": "https://www.ambitionbox.com/salaries/cambridge-mobile-telematics-salaries"
+      }
     },
     {
       "name": "Celonis",
@@ -1486,7 +1575,13 @@
       "round_letter": null,
       "date": null,
       "source_url": "https://www.forbes.com/companies/celonis/",
-      "qualified_by": "stage"
+      "qualified_by": "stage",
+      "salary": {
+        "avg_lpa": 27.5,
+        "reports": 251,
+        "observed": "2026-07-27",
+        "source_url": "https://www.ambitionbox.com/salaries/celonis-salaries"
+      }
     },
     {
       "name": "Cockroach Labs",
@@ -1542,7 +1637,13 @@
       "round_letter": null,
       "date": null,
       "source_url": "https://www.cbinsights.com/company/cockroach-labs",
-      "qualified_by": "stage"
+      "qualified_by": "stage",
+      "salary": {
+        "avg_lpa": 46.8,
+        "reports": 31,
+        "observed": "2026-07-07",
+        "source_url": "https://www.ambitionbox.com/salaries/cockroach-labs-salaries"
+      }
     },
     {
       "name": "Cognition",
@@ -1580,7 +1681,8 @@
       "round_letter": null,
       "date": null,
       "source_url": "https://www.forbes.com/companies/cognition/",
-      "qualified_by": "stage"
+      "qualified_by": "stage",
+      "salary": null
     },
     {
       "name": "Cohere Health",
@@ -1740,14 +1842,6 @@
           "workplace": null
         },
         {
-          "title": "QA Automation Engineer",
-          "url": "https://job-boards.greenhouse.io/coherehealth/jobs/7703927003",
-          "locations": [
-            "Hyderabad, Telangana, India"
-          ],
-          "workplace": null
-        },
-        {
           "title": "SDET Engineer",
           "url": "https://job-boards.greenhouse.io/coherehealth/jobs/7691083003",
           "locations": [
@@ -1876,7 +1970,8 @@
       "round_letter": null,
       "date": "2025-05-07",
       "source_url": "https://www.sec.gov/Archives/edgar/data/1851745/000185174525000001/0001851745-25-000001-index.htm",
-      "qualified_by": "amount"
+      "qualified_by": "amount",
+      "salary": null
     },
     {
       "name": "Coinbase",
@@ -1964,7 +2059,13 @@
       "round_letter": null,
       "date": null,
       "source_url": "https://www.ycombinator.com/companies/coinbase",
-      "qualified_by": "stage"
+      "qualified_by": "stage",
+      "salary": {
+        "avg_lpa": 37.5,
+        "reports": 758,
+        "observed": "2026-07-28",
+        "source_url": "https://www.ambitionbox.com/salaries/coinbase-salaries"
+      }
     },
     {
       "name": "Cresta",
@@ -2002,7 +2103,8 @@
       "round_letter": null,
       "date": null,
       "source_url": "https://www.cbinsights.com/company/cresta",
-      "qualified_by": "stage"
+      "qualified_by": "stage",
+      "salary": null
     },
     {
       "name": "Cursor",
@@ -2032,7 +2134,13 @@
       "round_letter": null,
       "date": null,
       "source_url": "https://www.forbes.com/companies/cursor/",
-      "qualified_by": "stage"
+      "qualified_by": "stage",
+      "salary": {
+        "avg_lpa": 51.5,
+        "reports": 2,
+        "observed": "2026-07-13",
+        "source_url": "https://www.ambitionbox.com/salaries/cursor-salaries"
+      }
     },
     {
       "name": "Cyberhaven",
@@ -2080,7 +2188,13 @@
       "round_letter": null,
       "date": null,
       "source_url": "https://www.cbinsights.com/company/cyberhaven",
-      "qualified_by": "stage"
+      "qualified_by": "stage",
+      "salary": {
+        "avg_lpa": 43.7,
+        "reports": 5,
+        "observed": "2026-04-22",
+        "source_url": "https://www.ambitionbox.com/salaries/cyberhaven-salaries"
+      }
     },
     {
       "name": "Databricks",
@@ -2699,7 +2813,13 @@
       "round_letter": null,
       "date": "2025-12-16",
       "source_url": "https://www.sec.gov/Archives/edgar/data/1587468/000158746825000010/0001587468-25-000010-index.htm",
-      "qualified_by": "amount"
+      "qualified_by": "amount",
+      "salary": {
+        "avg_lpa": 35.7,
+        "reports": 573,
+        "observed": "2026-07-27",
+        "source_url": "https://www.ambitionbox.com/salaries/databricks-salaries"
+      }
     },
     {
       "name": "Deepgram",
@@ -2721,7 +2841,8 @@
       "round_letter": null,
       "date": null,
       "source_url": "https://www.ycombinator.com/companies/deepgram",
-      "qualified_by": "stage"
+      "qualified_by": "stage",
+      "salary": null
     },
     {
       "name": "Degreed",
@@ -2745,7 +2866,13 @@
       "round_letter": null,
       "date": null,
       "source_url": "https://www.cbinsights.com/company/degreed",
-      "qualified_by": "stage"
+      "qualified_by": "stage",
+      "salary": {
+        "avg_lpa": 35.6,
+        "reports": 58,
+        "observed": "2026-07-15",
+        "source_url": "https://www.ambitionbox.com/salaries/degreed-salaries"
+      }
     },
     {
       "name": "DevRev",
@@ -2907,7 +3034,8 @@
       "round_letter": null,
       "date": null,
       "source_url": "https://www.cbinsights.com/company/devrev",
-      "qualified_by": "stage"
+      "qualified_by": "stage",
+      "salary": null
     },
     {
       "name": "Dialpad",
@@ -2963,7 +3091,13 @@
       "round_letter": null,
       "date": null,
       "source_url": "https://www.forbes.com/companies/dialpad/",
-      "qualified_by": "stage"
+      "qualified_by": "stage",
+      "salary": {
+        "avg_lpa": 22.5,
+        "reports": 185,
+        "observed": "2026-07-05",
+        "source_url": "https://www.ambitionbox.com/salaries/dialpad-salaries"
+      }
     },
     {
       "name": "d-Matrix",
@@ -2995,7 +3129,13 @@
       "round_letter": null,
       "date": null,
       "source_url": "https://www.cbinsights.com/company/d-matrix",
-      "qualified_by": "stage"
+      "qualified_by": "stage",
+      "salary": {
+        "avg_lpa": 63.9,
+        "reports": 6,
+        "observed": "2026-03-16",
+        "source_url": "https://www.ambitionbox.com/salaries/d-matrix-salaries"
+      }
     },
     {
       "name": "DriveWealth",
@@ -3033,7 +3173,8 @@
       "round_letter": null,
       "date": null,
       "source_url": "https://www.cbinsights.com/company/mysolomeo-holdings",
-      "qualified_by": "stage"
+      "qualified_by": "stage",
+      "salary": null
     },
     {
       "name": "Druva",
@@ -3129,7 +3270,13 @@
       "round_letter": null,
       "date": null,
       "source_url": "https://www.cbinsights.com/company/druva",
-      "qualified_by": "stage"
+      "qualified_by": "stage",
+      "salary": {
+        "avg_lpa": 28.6,
+        "reports": 1047,
+        "observed": "2026-07-29",
+        "source_url": "https://www.ambitionbox.com/salaries/druva-salaries"
+      }
     },
     {
       "name": "EBANX",
@@ -3153,7 +3300,8 @@
       "round_letter": null,
       "date": null,
       "source_url": "https://www.cbinsights.com/company/ebanx",
-      "qualified_by": "stage"
+      "qualified_by": "stage",
+      "salary": null
     },
     {
       "name": "Fern",
@@ -3257,7 +3405,8 @@
       "round_letter": null,
       "date": null,
       "source_url": "https://www.ycombinator.com/companies/fern",
-      "qualified_by": "stage"
+      "qualified_by": "stage",
+      "salary": null
     },
     {
       "name": "Fivetran",
@@ -3385,7 +3534,13 @@
       "round_letter": null,
       "date": null,
       "source_url": "https://www.ycombinator.com/companies/fivetran",
-      "qualified_by": "stage"
+      "qualified_by": "stage",
+      "salary": {
+        "avg_lpa": 36.9,
+        "reports": 306,
+        "observed": "2026-07-27",
+        "source_url": "https://www.ambitionbox.com/salaries/fivetran-salaries"
+      }
     },
     {
       "name": "Flexport",
@@ -3443,7 +3598,13 @@
       "round_letter": null,
       "date": null,
       "source_url": "https://www.ycombinator.com/companies/flexport",
-      "qualified_by": "stage"
+      "qualified_by": "stage",
+      "salary": {
+        "avg_lpa": 35.3,
+        "reports": 42,
+        "observed": "2026-07-19",
+        "source_url": "https://www.ambitionbox.com/salaries/flexport-salaries"
+      }
     },
     {
       "name": "FourKites",
@@ -3483,7 +3644,13 @@
       "round_letter": null,
       "date": null,
       "source_url": "https://www.cbinsights.com/company/fourkites",
-      "qualified_by": "stage"
+      "qualified_by": "stage",
+      "salary": {
+        "avg_lpa": 22.7,
+        "reports": 593,
+        "observed": "2026-07-26",
+        "source_url": "https://www.ambitionbox.com/salaries/fourkites-salaries"
+      }
     },
     {
       "name": "Gather AI",
@@ -3523,7 +3690,13 @@
       "round_letter": null,
       "date": "2025-12-30",
       "source_url": "https://www.sec.gov/Archives/edgar/data/1764162/000176416226000004/0001764162-26-000004-index.htm",
-      "qualified_by": "amount"
+      "qualified_by": "amount",
+      "salary": {
+        "avg_lpa": 51.0,
+        "reports": 7,
+        "observed": "2026-07-26",
+        "source_url": "https://www.ambitionbox.com/salaries/gather-ai-salaries"
+      }
     },
     {
       "name": "GitLab",
@@ -3787,7 +3960,13 @@
       "round_letter": null,
       "date": null,
       "source_url": "https://www.ycombinator.com/companies/gitlab",
-      "qualified_by": "stage"
+      "qualified_by": "stage",
+      "salary": {
+        "avg_lpa": 42.2,
+        "reports": 146,
+        "observed": "2026-07-26",
+        "source_url": "https://www.ambitionbox.com/salaries/gitlab-salaries"
+      }
     },
     {
       "name": "Glean",
@@ -3972,7 +4151,13 @@
       "round_letter": null,
       "date": null,
       "source_url": "https://www.forbes.com/companies/glean/",
-      "qualified_by": "stage"
+      "qualified_by": "stage",
+      "salary": {
+        "avg_lpa": 30.0,
+        "reports": 93,
+        "observed": "2026-07-28",
+        "source_url": "https://www.ambitionbox.com/salaries/glean-salaries"
+      }
     },
     {
       "name": "Groww",
@@ -4069,7 +4254,13 @@
       "round_letter": null,
       "date": null,
       "source_url": "https://www.ycombinator.com/companies/groww",
-      "qualified_by": "stage"
+      "qualified_by": "stage",
+      "salary": {
+        "avg_lpa": 17.2,
+        "reports": 2629,
+        "observed": "2026-07-28",
+        "source_url": "https://www.ambitionbox.com/salaries/groww-salaries"
+      }
     },
     {
       "name": "HackerRank",
@@ -4253,7 +4444,13 @@
       "round_letter": null,
       "date": null,
       "source_url": "https://www.ycombinator.com/companies/hackerrank",
-      "qualified_by": "stage"
+      "qualified_by": "stage",
+      "salary": {
+        "avg_lpa": 26.4,
+        "reports": 362,
+        "observed": "2026-07-21",
+        "source_url": "https://www.ambitionbox.com/salaries/hackerrank-salaries"
+      }
     },
     {
       "name": "Handshake",
@@ -4339,7 +4536,13 @@
       "round_letter": null,
       "date": null,
       "source_url": "https://www.cbinsights.com/company/handshake",
-      "qualified_by": "stage"
+      "qualified_by": "stage",
+      "salary": {
+        "avg_lpa": 45.9,
+        "reports": 6,
+        "observed": "2026-06-08",
+        "source_url": "https://www.ambitionbox.com/salaries/handshake-salaries"
+      }
     },
     {
       "name": "HappyRobot",
@@ -4361,7 +4564,8 @@
       "round_letter": null,
       "date": null,
       "source_url": "https://www.ycombinator.com/companies/happyrobot",
-      "qualified_by": "stage"
+      "qualified_by": "stage",
+      "salary": null
     },
     {
       "name": "Harness",
@@ -4513,7 +4717,13 @@
       "round_letter": null,
       "date": null,
       "source_url": "https://www.forbes.com/companies/harness/",
-      "qualified_by": "stage"
+      "qualified_by": "stage",
+      "salary": {
+        "avg_lpa": 33.1,
+        "reports": 399,
+        "observed": "2026-07-28",
+        "source_url": "https://www.ambitionbox.com/salaries/harness-salaries"
+      }
     },
     {
       "name": "HighRadius",
@@ -4913,7 +5123,13 @@
       "round_letter": null,
       "date": null,
       "source_url": "https://www.cbinsights.com/company/highradius",
-      "qualified_by": "stage"
+      "qualified_by": "stage",
+      "salary": {
+        "avg_lpa": 16.3,
+        "reports": 9502,
+        "observed": "2026-07-27",
+        "source_url": "https://www.ambitionbox.com/salaries/highradius-salaries"
+      }
     },
     {
       "name": "Hightouch",
@@ -4935,13 +5151,27 @@
       "round_letter": null,
       "date": null,
       "source_url": "https://www.ycombinator.com/companies/hightouch",
-      "qualified_by": "stage"
+      "qualified_by": "stage",
+      "salary": {
+        "avg_lpa": 10.2,
+        "reports": 5,
+        "observed": "2026-01-18",
+        "source_url": "https://www.ambitionbox.com/salaries/hightouch-salaries"
+      }
     },
     {
       "name": "iCapital",
       "ats": "greenhouse",
       "slug": "icapitalnetwork",
       "roles": [
+        {
+          "title": "Actuarial Software Engineer II",
+          "url": "https://job-boards.greenhouse.io/icapitalnetwork/jobs/8593625002",
+          "locations": [
+            "IN - Jaipur"
+          ],
+          "workplace": null
+        },
         {
           "title": "Agentic AI Engineer - Assistant Vice President / Vice President",
           "url": "https://job-boards.greenhouse.io/icapitalnetwork/jobs/8559595002",
@@ -5007,7 +5237,8 @@
       "round_letter": null,
       "date": null,
       "source_url": "https://www.cbinsights.com/company/icapital-network",
-      "qualified_by": "stage"
+      "qualified_by": "stage",
+      "salary": null
     },
     {
       "name": "Imply Data",
@@ -5031,7 +5262,13 @@
       "round_letter": null,
       "date": null,
       "source_url": "https://www.cbinsights.com/company/imply-data",
-      "qualified_by": "stage"
+      "qualified_by": "stage",
+      "salary": {
+        "avg_lpa": 62.3,
+        "reports": 1,
+        "observed": "2026-03-27",
+        "source_url": "https://www.ambitionbox.com/salaries/imply-data-salaries"
+      }
     },
     {
       "name": "Infisical",
@@ -5061,7 +5298,8 @@
       "round_letter": null,
       "date": null,
       "source_url": "https://www.ycombinator.com/companies/infisical",
-      "qualified_by": "stage"
+      "qualified_by": "stage",
+      "salary": null
     },
     {
       "name": "InMobi",
@@ -5438,7 +5676,13 @@
       "round_letter": null,
       "date": null,
       "source_url": "https://www.cbinsights.com/company/inmobi",
-      "qualified_by": "stage"
+      "qualified_by": "stage",
+      "salary": {
+        "avg_lpa": 28.3,
+        "reports": 2001,
+        "observed": "2026-07-29",
+        "source_url": "https://www.ambitionbox.com/salaries/inmobi-salaries"
+      }
     },
     {
       "name": "Instabase",
@@ -5462,7 +5706,13 @@
       "round_letter": null,
       "date": null,
       "source_url": "https://www.cbinsights.com/company/instabase",
-      "qualified_by": "stage"
+      "qualified_by": "stage",
+      "salary": {
+        "avg_lpa": 34.0,
+        "reports": 74,
+        "observed": "2026-07-25",
+        "source_url": "https://www.ambitionbox.com/salaries/instabase-salaries"
+      }
     },
     {
       "name": "Instawork",
@@ -5686,7 +5936,8 @@
       "round_letter": null,
       "date": null,
       "source_url": "https://www.ycombinator.com/companies/instawork",
-      "qualified_by": "stage"
+      "qualified_by": "stage",
+      "salary": null
     },
     {
       "name": "Instead",
@@ -5735,7 +5986,13 @@
       "round_letter": null,
       "date": "2025-05-15",
       "source_url": "https://www.sec.gov/Archives/edgar/data/2072260/000207226025000001/0002072260-25-000001-index.htm",
-      "qualified_by": "amount"
+      "qualified_by": "amount",
+      "salary": {
+        "avg_lpa": 11.9,
+        "reports": 29,
+        "observed": "2026-07-26",
+        "source_url": "https://www.ambitionbox.com/salaries/instead-salaries"
+      }
     },
     {
       "name": "Ivalua",
@@ -5783,7 +6040,13 @@
       "round_letter": null,
       "date": null,
       "source_url": "https://www.cbinsights.com/company/ivalua",
-      "qualified_by": "stage"
+      "qualified_by": "stage",
+      "salary": {
+        "avg_lpa": 16.7,
+        "reports": 305,
+        "observed": "2026-07-26",
+        "source_url": "https://www.ambitionbox.com/salaries/ivalua-salaries"
+      }
     },
     {
       "name": "Karat",
@@ -5807,7 +6070,13 @@
       "round_letter": null,
       "date": null,
       "source_url": "https://www.cbinsights.com/company/karat-1",
-      "qualified_by": "stage"
+      "qualified_by": "stage",
+      "salary": {
+        "avg_lpa": 44.8,
+        "reports": 1,
+        "observed": "2026-05-02",
+        "source_url": "https://www.ambitionbox.com/salaries/karat-salaries"
+      }
     },
     {
       "name": "Kaseya",
@@ -5904,14 +6173,6 @@
         },
         {
           "title": "Technical Support Engineer",
-          "url": "https://www.kaseya.com/careers/jobs/id/5994206004/?gh_jid=5994206004",
-          "locations": [
-            "Bangalore, India"
-          ],
-          "workplace": null
-        },
-        {
-          "title": "Technical Support Engineer",
           "url": "https://www.kaseya.com/careers/jobs/id/6092235004/?gh_jid=6092235004",
           "locations": [
             "Bangalore, India"
@@ -5921,6 +6182,14 @@
         {
           "title": "Technical Support Engineer",
           "url": "https://www.kaseya.com/careers/jobs/id/6018550004/?gh_jid=6018550004",
+          "locations": [
+            "Bangalore, India"
+          ],
+          "workplace": null
+        },
+        {
+          "title": "Technical Support Engineer",
+          "url": "https://www.kaseya.com/careers/jobs/id/5994206004/?gh_jid=5994206004",
           "locations": [
             "Bangalore, India"
           ],
@@ -5936,7 +6205,13 @@
       "round_letter": null,
       "date": null,
       "source_url": "https://www.cbinsights.com/company/kaseya",
-      "qualified_by": "stage"
+      "qualified_by": "stage",
+      "salary": {
+        "avg_lpa": 14.7,
+        "reports": 1468,
+        "observed": "2026-07-28",
+        "source_url": "https://www.ambitionbox.com/salaries/kaseya-salaries"
+      }
     },
     {
       "name": "Komodo Health",
@@ -6022,7 +6297,13 @@
       "round_letter": null,
       "date": null,
       "source_url": "https://www.forbes.com/companies/komodo-health/",
-      "qualified_by": "stage"
+      "qualified_by": "stage",
+      "salary": {
+        "avg_lpa": 21.0,
+        "reports": 41,
+        "observed": "2026-07-05",
+        "source_url": "https://www.ambitionbox.com/salaries/komodo-health-salaries"
+      }
     },
     {
       "name": "Kong",
@@ -6169,7 +6450,13 @@
       "round_letter": null,
       "date": null,
       "source_url": "https://www.cbinsights.com/company/mashape",
-      "qualified_by": "stage"
+      "qualified_by": "stage",
+      "salary": {
+        "avg_lpa": 31.8,
+        "reports": 19,
+        "observed": "2026-07-15",
+        "source_url": "https://www.ambitionbox.com/salaries/kong-salaries"
+      }
     },
     {
       "name": "Lambda Labs",
@@ -6201,7 +6488,8 @@
       "round_letter": null,
       "date": null,
       "source_url": "https://www.cbinsights.com/company/Lambda Labs",
-      "qualified_by": "stage"
+      "qualified_by": "stage",
+      "salary": null
     },
     {
       "name": "LaunchDarkly",
@@ -6233,7 +6521,8 @@
       "round_letter": null,
       "date": null,
       "source_url": "https://www.forbes.com/companies/launchdarkly/",
-      "qualified_by": "stage"
+      "qualified_by": "stage",
+      "salary": null
     },
     {
       "name": "Lighthouse",
@@ -6259,7 +6548,13 @@
       "round_letter": null,
       "date": null,
       "source_url": "https://www.cbinsights.com/company/ota-insight",
-      "qualified_by": "stage"
+      "qualified_by": "stage",
+      "salary": {
+        "avg_lpa": 12.9,
+        "reports": 249,
+        "observed": "2026-07-19",
+        "source_url": "https://www.ambitionbox.com/salaries/lighthouse-salaries"
+      }
     },
     {
       "name": "MeltPlan",
@@ -6315,7 +6610,8 @@
       "round_letter": null,
       "date": "2026-02-18",
       "source_url": "https://www.sec.gov/Archives/edgar/data/2106586/000210658626000001/0002106586-26-000001-index.htm",
-      "qualified_by": "amount"
+      "qualified_by": "amount",
+      "salary": null
     },
     {
       "name": "MindTickle",
@@ -6488,7 +6784,13 @@
       "round_letter": null,
       "date": null,
       "source_url": "https://www.cbinsights.com/company/mindtickle",
-      "qualified_by": "stage"
+      "qualified_by": "stage",
+      "salary": {
+        "avg_lpa": 26.6,
+        "reports": 854,
+        "observed": "2026-07-25",
+        "source_url": "https://www.ambitionbox.com/salaries/mindtickle-salaries"
+      }
     },
     {
       "name": "Minio",
@@ -6520,7 +6822,13 @@
       "round_letter": null,
       "date": null,
       "source_url": "https://www.cbinsights.com/company/minio",
-      "qualified_by": "stage"
+      "qualified_by": "stage",
+      "salary": {
+        "avg_lpa": 37.0,
+        "reports": 4,
+        "observed": "2025-10-15",
+        "source_url": "https://www.ambitionbox.com/salaries/minio-salaries"
+      }
     },
     {
       "name": "Mixpanel",
@@ -6544,7 +6852,13 @@
       "round_letter": null,
       "date": null,
       "source_url": "https://www.ycombinator.com/companies/mixpanel",
-      "qualified_by": "stage"
+      "qualified_by": "stage",
+      "salary": {
+        "avg_lpa": 36.0,
+        "reports": 3,
+        "observed": "2025-10-15",
+        "source_url": "https://www.ambitionbox.com/salaries/mixpanel-salaries"
+      }
     },
     {
       "name": "Moniepoint",
@@ -6680,7 +6994,13 @@
       "round_letter": null,
       "date": null,
       "source_url": "https://www.cbinsights.com/company/teamapt",
-      "qualified_by": "stage"
+      "qualified_by": "stage",
+      "salary": {
+        "avg_lpa": 60.0,
+        "reports": 71,
+        "observed": "2026-07-26",
+        "source_url": "https://www.ambitionbox.com/salaries/moniepoint-salaries"
+      }
     },
     {
       "name": "MoonPay",
@@ -6702,7 +7022,13 @@
       "round_letter": null,
       "date": null,
       "source_url": "https://www.cbinsights.com/company/moonpay",
-      "qualified_by": "stage"
+      "qualified_by": "stage",
+      "salary": {
+        "avg_lpa": 3.4,
+        "reports": 9,
+        "observed": "2025-10-12",
+        "source_url": "https://www.ambitionbox.com/salaries/moonpay-salaries"
+      }
     },
     {
       "name": "NanoNets",
@@ -6798,7 +7124,13 @@
       "round_letter": null,
       "date": null,
       "source_url": "https://www.ycombinator.com/companies/nanonets",
-      "qualified_by": "stage"
+      "qualified_by": "stage",
+      "salary": {
+        "avg_lpa": 36.9,
+        "reports": 104,
+        "observed": "2026-07-28",
+        "source_url": "https://www.ambitionbox.com/salaries/nanonets-salaries"
+      }
     },
     {
       "name": "Neo4j",
@@ -6828,7 +7160,13 @@
       "round_letter": null,
       "date": null,
       "source_url": "https://www.cbinsights.com/company/neo-technology",
-      "qualified_by": "stage"
+      "qualified_by": "stage",
+      "salary": {
+        "avg_lpa": 36.1,
+        "reports": 24,
+        "observed": "2026-05-23",
+        "source_url": "https://www.ambitionbox.com/salaries/neo4j-salaries"
+      }
     },
     {
       "name": "Netskope",
@@ -6964,7 +7302,13 @@
       "round_letter": null,
       "date": null,
       "source_url": "https://www.forbes.com/companies/netskope/",
-      "qualified_by": "stage"
+      "qualified_by": "stage",
+      "salary": {
+        "avg_lpa": 35.9,
+        "reports": 380,
+        "observed": "2026-07-27",
+        "source_url": "https://www.ambitionbox.com/salaries/netskope-salaries"
+      }
     },
     {
       "name": "Nextiva",
@@ -6996,7 +7340,13 @@
       "round_letter": null,
       "date": null,
       "source_url": "https://www.cbinsights.com/company/nextiva",
-      "qualified_by": "stage"
+      "qualified_by": "stage",
+      "salary": {
+        "avg_lpa": 21.9,
+        "reports": 223,
+        "observed": "2026-07-25",
+        "source_url": "https://www.ambitionbox.com/salaries/nextiva-salaries"
+      }
     },
     {
       "name": "NIUM",
@@ -7119,7 +7469,13 @@
       "round_letter": null,
       "date": null,
       "source_url": "https://www.cbinsights.com/company/instarem",
-      "qualified_by": "stage"
+      "qualified_by": "stage",
+      "salary": {
+        "avg_lpa": 22.8,
+        "reports": 1316,
+        "observed": "2026-07-28",
+        "source_url": "https://www.ambitionbox.com/salaries/nium-salaries"
+      }
     },
     {
       "name": "Notion",
@@ -7175,7 +7531,13 @@
       "round_letter": null,
       "date": null,
       "source_url": "https://www.forbes.com/companies/notion/",
-      "qualified_by": "stage"
+      "qualified_by": "stage",
+      "salary": {
+        "avg_lpa": 14.4,
+        "reports": 25,
+        "observed": "2026-07-08",
+        "source_url": "https://www.ambitionbox.com/salaries/notion-salaries"
+      }
     },
     {
       "name": "Observe",
@@ -7247,7 +7609,8 @@
       "round_letter": null,
       "date": "2025-05-22",
       "source_url": "https://www.sec.gov/Archives/edgar/data/2020535/000165349425000001/0001653494-25-000001-index.htm",
-      "qualified_by": "amount"
+      "qualified_by": "amount",
+      "salary": null
     },
     {
       "name": "Observe.AI",
@@ -7319,7 +7682,8 @@
       "round_letter": null,
       "date": null,
       "source_url": "https://www.ycombinator.com/companies/observe-ai",
-      "qualified_by": "stage"
+      "qualified_by": "stage",
+      "salary": null
     },
     {
       "name": "Oleria",
@@ -7343,7 +7707,13 @@
       "round_letter": null,
       "date": "2025-10-23",
       "source_url": "https://www.sec.gov/Archives/edgar/data/1960598/000196059825000003/0001960598-25-000003-index.htm",
-      "qualified_by": "amount"
+      "qualified_by": "amount",
+      "salary": {
+        "avg_lpa": 36.9,
+        "reports": 12,
+        "observed": "2026-05-18",
+        "source_url": "https://www.ambitionbox.com/salaries/oleria-salaries"
+      }
     },
     {
       "name": "OneTrust",
@@ -7567,7 +7937,8 @@
       "round_letter": null,
       "date": null,
       "source_url": "https://www.forbes.com/companies/onetrust/",
-      "qualified_by": "stage"
+      "qualified_by": "stage",
+      "salary": null
     },
     {
       "name": "Oyster",
@@ -7597,7 +7968,13 @@
       "round_letter": null,
       "date": null,
       "source_url": "https://www.cbinsights.com/company/oyster-1",
-      "qualified_by": "stage"
+      "qualified_by": "stage",
+      "salary": {
+        "avg_lpa": 8.0,
+        "reports": 56,
+        "observed": "2026-07-27",
+        "source_url": "https://www.ambitionbox.com/salaries/oyster-salaries"
+      }
     },
     {
       "name": "PermitFlow",
@@ -7619,7 +7996,8 @@
       "round_letter": null,
       "date": null,
       "source_url": "https://www.ycombinator.com/companies/permitflow",
-      "qualified_by": "stage"
+      "qualified_by": "stage",
+      "salary": null
     },
     {
       "name": "Postman",
@@ -7723,7 +8101,13 @@
       "round_letter": null,
       "date": null,
       "source_url": "https://www.forbes.com/companies/postman/",
-      "qualified_by": "stage"
+      "qualified_by": "stage",
+      "salary": {
+        "avg_lpa": 31.7,
+        "reports": 527,
+        "observed": "2026-07-28",
+        "source_url": "https://www.ambitionbox.com/salaries/postman-salaries"
+      }
     },
     {
       "name": "Project44",
@@ -7803,7 +8187,13 @@
       "round_letter": null,
       "date": null,
       "source_url": "https://www.cbinsights.com/company/project44",
-      "qualified_by": "stage"
+      "qualified_by": "stage",
+      "salary": {
+        "avg_lpa": 30.9,
+        "reports": 236,
+        "observed": "2026-07-27",
+        "source_url": "https://www.ambitionbox.com/salaries/project44-salaries"
+      }
     },
     {
       "name": "Pump",
@@ -7844,7 +8234,8 @@
       "round_letter": null,
       "date": null,
       "source_url": "https://www.cbinsights.com/company/pump",
-      "qualified_by": "stage"
+      "qualified_by": "stage",
+      "salary": null
     },
     {
       "name": "Quince",
@@ -7966,7 +8357,13 @@
       "round_letter": null,
       "date": null,
       "source_url": "https://www.cbinsights.com/company/quince",
-      "qualified_by": "stage"
+      "qualified_by": "stage",
+      "salary": {
+        "avg_lpa": 38.6,
+        "reports": 244,
+        "observed": "2026-07-26",
+        "source_url": "https://www.ambitionbox.com/salaries/quince-salaries"
+      }
     },
     {
       "name": "Razorpay",
@@ -8159,7 +8556,13 @@
       "round_letter": null,
       "date": null,
       "source_url": "https://www.ycombinator.com/companies/razorpay",
-      "qualified_by": "stage"
+      "qualified_by": "stage",
+      "salary": {
+        "avg_lpa": 21.2,
+        "reports": 7060,
+        "observed": "2026-07-28",
+        "source_url": "https://www.ambitionbox.com/salaries/razorpay-salaries"
+      }
     },
     {
       "name": "Rigetti Computing",
@@ -8183,7 +8586,8 @@
       "round_letter": null,
       "date": null,
       "source_url": "https://www.ycombinator.com/companies/rigetti-computing",
-      "qualified_by": "stage"
+      "qualified_by": "stage",
+      "salary": null
     },
     {
       "name": "SambaNova Systems",
@@ -8223,7 +8627,13 @@
       "round_letter": null,
       "date": null,
       "source_url": "https://www.cbinsights.com/company/sambanova-systems",
-      "qualified_by": "stage"
+      "qualified_by": "stage",
+      "salary": {
+        "avg_lpa": 53.0,
+        "reports": 23,
+        "observed": "2026-05-03",
+        "source_url": "https://www.ambitionbox.com/salaries/sambanova-systems-salaries"
+      }
     },
     {
       "name": "Sarvam",
@@ -8749,7 +9159,13 @@
       "round_letter": null,
       "date": null,
       "source_url": "https://www.cbinsights.com/company/sarvam-ai",
-      "qualified_by": "stage"
+      "qualified_by": "stage",
+      "salary": {
+        "avg_lpa": 32.3,
+        "reports": 35,
+        "observed": "2026-06-23",
+        "source_url": "https://www.ambitionbox.com/salaries/sarvam-salaries"
+      }
     },
     {
       "name": "Scale",
@@ -8779,7 +9195,8 @@
       "round_letter": null,
       "date": null,
       "source_url": "https://www.cbinsights.com/company/scale-ai",
-      "qualified_by": "stage"
+      "qualified_by": "stage",
+      "salary": null
     },
     {
       "name": "Scale AI",
@@ -8809,7 +9226,13 @@
       "round_letter": null,
       "date": null,
       "source_url": "https://www.ycombinator.com/companies/scale-ai",
-      "qualified_by": "stage"
+      "qualified_by": "stage",
+      "salary": {
+        "avg_lpa": 15.9,
+        "reports": 88,
+        "observed": "2026-07-19",
+        "source_url": "https://www.ambitionbox.com/salaries/scale-ai-salaries"
+      }
     },
     {
       "name": "SeekOut",
@@ -8833,7 +9256,8 @@
       "round_letter": null,
       "date": null,
       "source_url": "https://www.cbinsights.com/company/zipstorm",
-      "qualified_by": "stage"
+      "qualified_by": "stage",
+      "salary": null
     },
     {
       "name": "SingleStore",
@@ -8850,7 +9274,7 @@
         },
         {
           "title": "Senior Software Engineer",
-          "url": "https://job-boards.greenhouse.io/singlestore/jobs/8002944",
+          "url": "https://job-boards.greenhouse.io/singlestore/jobs/8029429",
           "locations": [
             "India"
           ],
@@ -8858,7 +9282,7 @@
         },
         {
           "title": "Senior Software Engineer",
-          "url": "https://job-boards.greenhouse.io/singlestore/jobs/8029429",
+          "url": "https://job-boards.greenhouse.io/singlestore/jobs/8002944",
           "locations": [
             "India"
           ],
@@ -8887,14 +9311,6 @@
             "India"
           ],
           "workplace": null
-        },
-        {
-          "title": "Software Engineer | Cloud Foundations",
-          "url": "https://job-boards.greenhouse.io/singlestore/jobs/7790325",
-          "locations": [
-            "India (Remote)"
-          ],
-          "workplace": "remote"
         },
         {
           "title": "Software Engineer | Database Engine",
@@ -8937,7 +9353,13 @@
       "round_letter": null,
       "date": null,
       "source_url": "https://www.ycombinator.com/companies/singlestore",
-      "qualified_by": "stage"
+      "qualified_by": "stage",
+      "salary": {
+        "avg_lpa": 33.3,
+        "reports": 116,
+        "observed": "2026-07-15",
+        "source_url": "https://www.ambitionbox.com/salaries/singlestore-salaries"
+      }
     },
     {
       "name": "Socure",
@@ -8983,7 +9405,8 @@
       "round_letter": null,
       "date": null,
       "source_url": "https://www.forbes.com/companies/socure/",
-      "qualified_by": "stage"
+      "qualified_by": "stage",
+      "salary": null
     },
     {
       "name": "SparkCognition",
@@ -9119,7 +9542,13 @@
       "round_letter": null,
       "date": null,
       "source_url": "https://www.cbinsights.com/company/sparkcognition",
-      "qualified_by": "stage"
+      "qualified_by": "stage",
+      "salary": {
+        "avg_lpa": 14.9,
+        "reports": 143,
+        "observed": "2026-07-18",
+        "source_url": "https://www.ambitionbox.com/salaries/sparkcognition-salaries"
+      }
     },
     {
       "name": "Starburst",
@@ -9157,7 +9586,13 @@
       "round_letter": null,
       "date": null,
       "source_url": "https://www.cbinsights.com/company/starburst",
-      "qualified_by": "stage"
+      "qualified_by": "stage",
+      "salary": {
+        "avg_lpa": 15.7,
+        "reports": 3,
+        "observed": "2025-10-15",
+        "source_url": "https://www.ambitionbox.com/salaries/starburst-salaries"
+      }
     },
     {
       "name": "Stripe",
@@ -9469,7 +9904,13 @@
       "round_letter": null,
       "date": null,
       "source_url": "https://www.ycombinator.com/companies/stripe",
-      "qualified_by": "stage"
+      "qualified_by": "stage",
+      "salary": {
+        "avg_lpa": 28.1,
+        "reports": 982,
+        "observed": "2026-07-27",
+        "source_url": "https://www.ambitionbox.com/salaries/stripe-salaries"
+      }
     },
     {
       "name": "Talkdesk",
@@ -9501,7 +9942,13 @@
       "round_letter": null,
       "date": null,
       "source_url": "https://www.forbes.com/companies/talkdesk/",
-      "qualified_by": "stage"
+      "qualified_by": "stage",
+      "salary": {
+        "avg_lpa": 30.9,
+        "reports": 68,
+        "observed": "2026-07-05",
+        "source_url": "https://www.ambitionbox.com/salaries/talkdesk-salaries"
+      }
     },
     {
       "name": "Tamara",
@@ -9563,37 +10010,13 @@
       "round_letter": null,
       "date": null,
       "source_url": "https://www.cbinsights.com/company/tamara",
-      "qualified_by": "stage"
-    },
-    {
-      "name": "Temporal",
-      "ats": "greenhouse",
-      "slug": "temporaltechnologies",
-      "roles": [
-        {
-          "title": "Events & Field Marketing Manager - India",
-          "url": "https://job-boards.greenhouse.io/temporaltechnologies/jobs/5177991007",
-          "locations": [
-            "India"
-          ],
-          "workplace": null
-        },
-        {
-          "title": "Staff Solutions Architect, Banking - India",
-          "url": "https://job-boards.greenhouse.io/temporaltechnologies/jobs/5182398007",
-          "locations": [
-            "India"
-          ],
-          "workplace": null
-        }
-      ],
-      "cities": [],
-      "amount": null,
-      "currency": null,
-      "round_letter": null,
-      "date": null,
-      "source_url": "https://www.cbinsights.com/company/temporal-technologies",
-      "qualified_by": "stage"
+      "qualified_by": "stage",
+      "salary": {
+        "avg_lpa": 33.6,
+        "reports": 43,
+        "observed": "2026-07-21",
+        "source_url": "https://www.ambitionbox.com/salaries/tamara-salaries"
+      }
     },
     {
       "name": "TensTorrent",
@@ -9641,7 +10064,13 @@
       "round_letter": null,
       "date": null,
       "source_url": "https://www.cbinsights.com/company/tenstorrent",
-      "qualified_by": "stage"
+      "qualified_by": "stage",
+      "salary": {
+        "avg_lpa": 49.6,
+        "reports": 12,
+        "observed": "2026-07-26",
+        "source_url": "https://www.ambitionbox.com/salaries/tenstorrent-salaries"
+      }
     },
     {
       "name": "Tide",
@@ -9714,17 +10143,17 @@
         },
         {
           "title": "Engineering Manager",
-          "url": "https://job-boards.greenhouse.io/tide/jobs/6643197003",
+          "url": "https://job-boards.greenhouse.io/tide/jobs/6643188003",
           "locations": [
-            "India, Delhi NCR"
+            "India, Hyderabad"
           ],
           "workplace": null
         },
         {
           "title": "Engineering Manager",
-          "url": "https://job-boards.greenhouse.io/tide/jobs/6643188003",
+          "url": "https://job-boards.greenhouse.io/tide/jobs/6643197003",
           "locations": [
-            "India, Hyderabad"
+            "India, Delhi NCR"
           ],
           "workplace": null
         },
@@ -9849,6 +10278,30 @@
           "workplace": null
         },
         {
+          "title": "Remediation Operations Manager - 3",
+          "url": "https://job-boards.greenhouse.io/tide/jobs/7820212003",
+          "locations": [
+            "India, Delhi NCR"
+          ],
+          "workplace": null
+        },
+        {
+          "title": "Remediation Operations Manager - 3",
+          "url": "https://job-boards.greenhouse.io/tide/jobs/7812620003",
+          "locations": [
+            "India, Hyderabad"
+          ],
+          "workplace": null
+        },
+        {
+          "title": "Remediation Operations Manager - 3",
+          "url": "https://job-boards.greenhouse.io/tide/jobs/7820211003",
+          "locations": [
+            "India, Bengaluru"
+          ],
+          "workplace": null
+        },
+        {
           "title": "Senior Business Development Representative (Partner Credit Services - Funding Options)",
           "url": "https://job-boards.greenhouse.io/tide/jobs/7718232003",
           "locations": [
@@ -9890,14 +10343,6 @@
         },
         {
           "title": "Senior Software Engineer, Flutter",
-          "url": "https://job-boards.greenhouse.io/tide/jobs/7766790003",
-          "locations": [
-            "India, Hyderabad"
-          ],
-          "workplace": null
-        },
-        {
-          "title": "Senior Software Engineer, Flutter",
           "url": "https://job-boards.greenhouse.io/tide/jobs/7815729003",
           "locations": [
             "India, Delhi NCR"
@@ -9906,9 +10351,25 @@
         },
         {
           "title": "Senior Software Engineer, Flutter",
+          "url": "https://job-boards.greenhouse.io/tide/jobs/7766790003",
+          "locations": [
+            "India, Hyderabad"
+          ],
+          "workplace": null
+        },
+        {
+          "title": "Senior Software Engineer, Flutter",
           "url": "https://job-boards.greenhouse.io/tide/jobs/7815727003",
           "locations": [
             "India, Bengaluru"
+          ],
+          "workplace": null
+        },
+        {
+          "title": "Senior Staff Software Engineer, Agentic Platform",
+          "url": "https://job-boards.greenhouse.io/tide/jobs/7703992003",
+          "locations": [
+            "Berlin, Germany; Bulgaria; India, Bengaluru; India, Delhi NCR; India, Hyderabad; Lithuania; Serbia; United Kingdom"
           ],
           "workplace": null
         },
@@ -9925,14 +10386,6 @@
           "url": "https://job-boards.greenhouse.io/tide/jobs/7702561003",
           "locations": [
             "India, Bengaluru"
-          ],
-          "workplace": null
-        },
-        {
-          "title": "Senior Staff Software Engineer, Agentic Platform",
-          "url": "https://job-boards.greenhouse.io/tide/jobs/7703992003",
-          "locations": [
-            "Berlin, Germany; Bulgaria; India, Bengaluru; India, Delhi NCR; India, Hyderabad; Lithuania; Serbia; United Kingdom"
           ],
           "workplace": null
         },
@@ -9995,7 +10448,13 @@
       "round_letter": null,
       "date": null,
       "source_url": "https://www.cbinsights.com/company/tide",
-      "qualified_by": "stage"
+      "qualified_by": "stage",
+      "salary": {
+        "avg_lpa": 21.9,
+        "reports": 1556,
+        "observed": "2026-07-27",
+        "source_url": "https://www.ambitionbox.com/salaries/tide-salaries"
+      }
     },
     {
       "name": "Together AI",
@@ -10035,7 +10494,8 @@
       "round_letter": null,
       "date": null,
       "source_url": "https://www.forbes.com/companies/together-ai/",
-      "qualified_by": "stage"
+      "qualified_by": "stage",
+      "salary": null
     },
     {
       "name": "Triomics",
@@ -10081,7 +10541,13 @@
       "round_letter": null,
       "date": "2026-05-27",
       "source_url": "https://techcrunch.com/2026/05/27/triomics-nabs-22m-to-bring-oncology-specific-ai-to-cancer-centers/",
-      "qualified_by": "amount"
+      "qualified_by": "amount",
+      "salary": {
+        "avg_lpa": 19.1,
+        "reports": 49,
+        "observed": "2026-07-14",
+        "source_url": "https://www.ambitionbox.com/salaries/triomics-salaries"
+      }
     },
     {
       "name": "Turing",
@@ -10171,7 +10637,13 @@
       "round_letter": null,
       "date": null,
       "source_url": "https://www.cbinsights.com/company/turing",
-      "qualified_by": "stage"
+      "qualified_by": "stage",
+      "salary": {
+        "avg_lpa": 19.0,
+        "reports": 1776,
+        "observed": "2026-07-27",
+        "source_url": "https://www.ambitionbox.com/salaries/turing-salaries"
+      }
     },
     {
       "name": "Twin Health",
@@ -10279,7 +10751,13 @@
       "round_letter": null,
       "date": "2025-05-07",
       "source_url": "https://www.sec.gov/Archives/edgar/data/1816525/000181652525000001/0001816525-25-000001-index.htm",
-      "qualified_by": "amount"
+      "qualified_by": "amount",
+      "salary": {
+        "avg_lpa": 12.2,
+        "reports": 564,
+        "observed": "2026-07-28",
+        "source_url": "https://www.ambitionbox.com/salaries/twin-health-salaries"
+      }
     },
     {
       "name": "Vectra Networks",
@@ -10335,7 +10813,8 @@
       "round_letter": null,
       "date": null,
       "source_url": "https://www.cbinsights.com/company/vectra-networks",
-      "qualified_by": "stage"
+      "qualified_by": "stage",
+      "salary": null
     },
     {
       "name": "Vercel",
@@ -10365,7 +10844,8 @@
       "round_letter": null,
       "date": null,
       "source_url": "https://www.forbes.com/companies/vercel/",
-      "qualified_by": "stage"
+      "qualified_by": "stage",
+      "salary": null
     },
     {
       "name": "Wispr Flow",
@@ -10397,7 +10877,8 @@
       "round_letter": null,
       "date": "2025-06-24",
       "source_url": "https://techcrunch.com/2025/06/24/wispr-flow-raises-30m-from-menlo-ventures-for-its-ai-powered-dictation-app/",
-      "qualified_by": "amount"
+      "qualified_by": "amount",
+      "salary": null
     },
     {
       "name": "Workato",
@@ -10534,7 +11015,13 @@
       "round_letter": null,
       "date": null,
       "source_url": "https://www.forbes.com/companies/workato/",
-      "qualified_by": "stage"
+      "qualified_by": "stage",
+      "salary": {
+        "avg_lpa": 40.7,
+        "reports": 144,
+        "observed": "2026-07-22",
+        "source_url": "https://www.ambitionbox.com/salaries/workato-salaries"
+      }
     },
     {
       "name": "Xendit",
@@ -10556,7 +11043,13 @@
       "round_letter": null,
       "date": null,
       "source_url": "https://www.ycombinator.com/companies/xendit",
-      "qualified_by": "stage"
+      "qualified_by": "stage",
+      "salary": {
+        "avg_lpa": 42.4,
+        "reports": 9,
+        "observed": "2026-07-18",
+        "source_url": "https://www.ambitionbox.com/salaries/xendit-salaries"
+      }
     },
     {
       "name": "YipitData",
@@ -10642,7 +11135,13 @@
       "round_letter": null,
       "date": null,
       "source_url": "https://www.cbinsights.com/company/yipit",
-      "qualified_by": "stage"
+      "qualified_by": "stage",
+      "salary": {
+        "avg_lpa": 21.9,
+        "reports": 143,
+        "observed": "2026-07-27",
+        "source_url": "https://www.ambitionbox.com/salaries/yipitdata-salaries"
+      }
     },
     {
       "name": "YugaByte",
@@ -10728,7 +11227,13 @@
       "round_letter": null,
       "date": null,
       "source_url": "https://www.cbinsights.com/company/yugabyte",
-      "qualified_by": "stage"
+      "qualified_by": "stage",
+      "salary": {
+        "avg_lpa": 40.0,
+        "reports": 91,
+        "observed": "2026-06-28",
+        "source_url": "https://www.ambitionbox.com/salaries/yugabyte-salaries"
+      }
     },
     {
       "name": "Zip",
@@ -10750,7 +11255,13 @@
       "round_letter": null,
       "date": null,
       "source_url": "https://www.ycombinator.com/companies/zip",
-      "qualified_by": "stage"
+      "qualified_by": "stage",
+      "salary": {
+        "avg_lpa": 21.7,
+        "reports": 28,
+        "observed": "2026-06-07",
+        "source_url": "https://www.ambitionbox.com/salaries/zip-salaries"
+      }
     }
   ]
 }

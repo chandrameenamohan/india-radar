@@ -201,6 +201,37 @@ check "a company whose board states only \"India\" says so, rather than nothing"
   "$(val '[...document.querySelectorAll(".row")].find((r)=>
        r.querySelector(".name").textContent === "Zeta Placeless").querySelector(".where").textContent')"
 
+# T4.2. The benchmark renders as one line carrying all three things that make it
+# readable -- the figure, the sample it averages, and the date the SOURCE last
+# recomputed it. The date is the load-bearing one: live figures range from
+# today's to nine months old, so a bare number would read as a claim about now.
+check "a salary benchmark renders with its sample size and its observation date" \
+  "$($PY -c "
+import json
+c = json.load(open('tests/fixtures/companies-e2e.json'))['companies']
+first = sorted(c, key=lambda r: (-len(r['roles']), r['name']))[0]
+s = first['salary']
+print(s['avg_lpa'], s['reports'], s['observed'], s['source_url'])")" \
+  "$(val '(() => { const p = document.querySelector(".row[open] .salary"), t = p.textContent;
+       // Read the three facts back out of the rendered line rather than
+       // rebuilding it here: the grouping is the browser`s (en-IN groups by
+       // lakh), and a check that hardcodes that is testing Intl, not the site.
+       return [t.match(/₹([\d.]+)L/)[1],
+               t.match(/([\d,]+) reports?\b/)[1].replace(/,/g, ""),
+               t.match(/as of (\d{4}-\d{2}-\d{2})\b/)[1],
+               p.querySelector("a").href].join(" ") })()')"
+
+# The degraded row, across the whole dataset: absence renders as NOTHING, not as
+# "salary unknown". 51 of 116 listed companies have no benchmark, so a row that
+# announced its own gap would put that line on half the site.
+check "a company with no benchmark renders no salary line at all" \
+  "$($PY -c "
+import json
+c = json.load(open('tests/fixtures/companies-e2e.json'))['companies']
+print(sum(1 for r in c if r['salary']), 'of', len(c))")" \
+  "$(val '`${document.querySelectorAll(".salary").length} of `
+       + document.querySelectorAll(".row").length')"
+
 # SPEC feature 10's remote-only filter, now that a row carries the field. A
 # company hiring only on-site in Pune must vanish from it.
 $B select '#remote' 'remote' >/dev/null 2>&1
@@ -240,7 +271,7 @@ console_clean "after interaction"
 echo "-- a dataset this page doesn't know how to read"
 open_page "$ROOT?data=../data/build-report.json"
 check "an unknown schema is refused, not rendered" "refused 0 rows" \
-  "$(val '(document.querySelector("#status").textContent.startsWith("This page reads schema v4")
+  "$(val '(document.querySelector("#status").textContent.startsWith("This page reads schema v5")
        ? "refused " : "rendered ") + document.querySelectorAll(".row").length + " rows"')"
 console_clean "unknown schema"
 

@@ -89,6 +89,10 @@ def test_listed_row_carries_the_corpus_and_the_board():
             "date": "2026-07-28",
             "source_url": "https://www.finsmes.com/2026/07/acme-raises-21m.html",
             "qualified_by": "letter",
+            # The spine states the absence and the enrichment fills it in after
+            # (T4.2), so a row leaves `build` carrying the field and no figure.
+            # A build that never reaches AmbitionBox is complete, not broken.
+            "salary": None,
         }
     ]
     assert errors(rows[0]) == []

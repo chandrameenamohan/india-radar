@@ -50,6 +50,7 @@
   .detail p { margin: .35rem 0; }
   .roles { margin: .45rem 0; padding-left: 1.15rem; }
   .roles li { margin: .2rem 0; }
+  .salary .ctc { color: var(--text); font-variant-numeric: tabular-nums; font-weight: 600; }
   .tag { margin-left: .5rem; padding: .05rem .45rem; border: 1px solid var(--line);
          border-radius: 999px; font-size: .72rem; letter-spacing: .06em;
          text-transform: uppercase; }
@@ -111,7 +112,7 @@
 // The site is a renderer and nothing else: it reads the JSON the build wrote and
 // never recomputes a fact. The snapshot date in particular ships with the data,
 // because a date taken at render time would claim a freshness the JSON lacks.
-const SCHEMA = 4;                                  // src/build.py SCHEMA_VERSION
+const SCHEMA = 5;                                  // src/build.py SCHEMA_VERSION
 const DEFAULT_SRC = '../data/companies.json';
 
 // Test seam: e2e drives this same page over a fixture dataset (data/companies.json
@@ -172,6 +173,26 @@ const where = (c) => c.cities.length ? c.cities.join(' · ')
 // raised (schema v3). That is an absent fact, so it reads as one -- and it can
 // never satisfy "funded in the last 90 days", which would be a claim.
 const when = (c) => c.date || 'date not stated';
+
+// The India CTC benchmark, when one was found (65 of 116 measured). Absence is
+// the common case and renders as nothing at all -- no "salary unknown" line,
+// because a row saying that for half the site is noise, not information.
+//
+// The date and the sample size are not footnotes to the figure, they are what
+// make it readable: the source recomputes each company on its own schedule
+// (measured: nine months apart at the extremes), and averages one salary as
+// readily as nine thousand. So the row states both and links the source, rather
+// than presenting a bare number as a fact about today.
+function salaryLine(s) {
+  const line = el('p', 'salary');
+  line.append(
+    el('span', 'ctc', `₹${s.avg_lpa.toFixed(1)}L`),
+    el('span', null, ` average India CTC · ${s.reports.toLocaleString('en-IN')} `
+      + `${s.reports === 1 ? 'report' : 'reports'} · as of ${s.observed} · `),
+    link(s.source_url, 'AmbitionBox'),
+  );
+  return line;
+}
 const days = (from, to) => (Date.parse(to) - Date.parse(from)) / 86400000;
 
 const brackets = {
@@ -225,8 +246,9 @@ function row(c) {
 
   const roles = el('ul', 'roles');
   roles.append(...c.roles.map(roleItem));
-  body.append(board, roles, funding,
-    el('p', null, `Qualified as Series A or later by ${RULES[c.qualified_by]}.`));
+  body.append(board, roles, funding);
+  if (c.salary) body.append(salaryLine(c.salary));
+  body.append(el('p', null, `Qualified as Series A or later by ${RULES[c.qualified_by]}.`));
 
   details.append(summary, body);
   return details;

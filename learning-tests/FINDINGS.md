@@ -1620,3 +1620,85 @@ roles state nothing, so that mutation invents the most common answer for the
 largest provider and prints it as though the company had said it. It is the
 ambiguous zero wearing a badge, and nothing in the suite objected until
 `a role whose board stated no workplace shows no badge` existed.
+
+---
+
+# Salary benchmark — measured during T4.2 (2026-07-29)
+
+## AmbitionBox publishes the figure, the sample AND its own recompute date
+
+`https://www.ambitionbox.com/salaries/<hyphenated-name>-salaries` is
+server-rendered Next.js, so the numbers are in the hydration payload as JSON
+rather than in formatted markup a redesign moves:
+
+```
+props.pageProps.salaryData.data = {
+  "totalSalaryAverage":   "21.2",                    # lakhs per annum, India CTC
+  "totalSalaryDataPoints": "7060",                   # self-reported salaries behind it
+  "lastUpdated":          "2026-07-28 08:26:01.0",   # when the SOURCE recomputed it
+}
+props.pageProps.companyHeaderData.companyName = "Razorpay"   # whose page this is
+```
+
+`lastUpdated` is why this feature is publishable at all. Across the 82 companies
+that carry a figure, it ranges from **today back to 2025-10-12** — so "₹21.2L"
+without its date is a nine-month-old sample presented as a statement about now.
+SPEC feature 8 asks for the date; the data turns out to insist on it.
+
+## Coverage: 82 of 115 listed, and the 33 absences are three different things
+
+| outcome | n | what it is |
+|---|---|---|
+| figure | 82 | published |
+| 404 | ~46 of a 116-company sweep | no page: nobody has reported a salary there |
+| 200, all fields null | 5 | page exists, company matches, no figure yet |
+
+All three are absences and none is an error. A single pass found **65 of 116**;
+the same work with backoff found **82 of 115**. The difference is entirely the
+rate limit below.
+
+## The rate limit counts requests over a window, and going slower does not help
+
+Measured in this order, all against the same 116-company listed set:
+
+| run | workers | result |
+|---|---|---|
+| 1 (30 companies) | 8 | clean |
+| 2 (116) | 8 | clean, 65 figures |
+| 3 (116) | 8 | **86 of 116 blocked** |
+| 4 (116) | 8 | **116 of 116 blocked** |
+| single call, seconds later | 1 | 200, full page |
+| 5 (32) | 4 | clean |
+| 6 (32) | 2 | clean |
+| 7 (32) | 1 | **19 of 32 blocked** |
+
+Run 7 is the one that settles it: one worker was the *worst* result, because by
+then it was the third sweep inside a minute. It is cumulative request volume
+over a rolling window, not concurrency, so lowering the worker count is not the
+fix and backoff is. A rested burst at 8 workers is clean.
+
+**The block is a 403 and a genuine absence is a 404.** That distinction is the
+whole recovery: retrying the 404s would triple the run to re-learn that 46
+companies still aren't listed, and not retrying the 403s empties the feature.
+Same shape as Ashby's 404-is-final rule in T3.2, for a different reason.
+
+## A wrong slug 404s, so the identity risk is narrow — but it is not zero
+
+Nonsense slugs and real-but-unlisted companies (Anthropic, Anyscale, Deepgram)
+all 404 cleanly. What remains is a *different real company* sharing a normalised
+name, and `slugs.states_company` is the same rule T2.2 measured on job boards,
+reused unchanged.
+
+**The loose direction of that rule is load-bearing here, which was not obvious.**
+Two of the 82 pages state a name LONGER than the corpus name — `Kaseya` →
+`Kaseya Software`, `Tide` → `Tide - Business Management Platform` — so an
+exact-match rule would silently drop them. Zero name mismatches were observed
+across the listed set.
+
+## Build cost: 5m12s -> 10m41s, and the enrichment is now the slow half
+
+The full build with the enrichment in is **10m41s**, against ~5m before. The
+added time is almost entirely backoff waiting out 403s, not fetching. Still far
+inside any workflow cap, but **T6.2/T6.3 should tier on this number rather than
+on the probe latencies alone** — the slowest thing in a build is no longer an
+ATS.

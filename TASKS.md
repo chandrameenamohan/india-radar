@@ -700,7 +700,47 @@ Checks:
 Out of scope: role deduplication across boards.
 ```
 
-### T4.2 — Salary benchmark `in-progress` · *Phase 2* · after T5.1 · parallel
+### T4.2 — Salary benchmark `done` · *Phase 2* · after T5.1 · parallel
+> **82 of 115 listed companies now carry an India CTC figure with the date the
+> source recomputed it and a link to check it.** Schema v5. The listed set is
+> unchanged by the enrichment, which is the point: it runs after the spine, on
+> the rows the spine produced, and cannot decide who is on the site.
+>
+> **The observation date is not a footnote, and the data is what says so.** The
+> 82 figures were last recomputed anywhere between today and **2025-10-12**, so a
+> bare "₹21.2L" is a nine-month-old sample presented as a fact about now.
+> AmbitionBox states `lastUpdated` per company, so the honest date was available
+> for free — and `salary_errors` refuses a figure that arrives without one, which
+> is `test_date_always_shown` in its deterministic form. A mutation that stamped
+> the build date instead of the source's turns two checks red.
+>
+> **The sample size ships beside the figure** because the live ones run from 1
+> self-reported salary to 9,502. An average of one is a real sourced figure and a
+> poor benchmark; SPEC's out-of-scope line forbids imputing, so the fix is to show
+> the reader the sample rather than to invent a cutoff. A figure with no stated
+> sample is refused outright — the gap that mutation testing found, since the
+> first version passed a fabricated `1` unnoticed.
+>
+> **The source rate-limits on cumulative volume and says 403; a genuine absence
+> says 404.** Two sweeps ran clean, the third came back 86-of-116 blocked and the
+> fourth 116-of-116, while a single call seconds later answered normally. Going
+> slower does not help — the worst run measured was the ONE-worker one, being the
+> third sweep in a minute. Retrying the 403s and never the 404s is worth **65 →
+> 82** companies. Same 404-is-final rule as T3.2, reached from the other side.
+>
+> **`slugs.states_company` was reused unchanged, and its loose direction turned
+> out to be load-bearing** — `Kaseya` → `Kaseya Software` and `Tide` → `Tide -
+> Business Management Platform` both state MORE than the corpus name, so an
+> exact-match rule would drop them. Zero name mismatches across the listed set.
+>
+> **Absence renders as nothing at all**, not as "salary unknown": 33 of 115 rows
+> have no figure, and a line announcing the gap would put it on a third of the
+> site. An e2e check counts salary lines against rows, and a mutation that made
+> the row announce its own gap turns it red.
+>
+> **Cost:** a full build is now **10m41s**, up from ~5m, almost entirely backoff.
+> **T6.2/T6.3 should tier on that** — the slowest thing in a build is no longer
+> an ATS probe. See FINDINGS.
 ```
 Acceptance (observable):
   Where present, renders the figure with its observation date and a working source
