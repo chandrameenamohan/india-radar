@@ -1088,7 +1088,7 @@ Checks:
 Out of scope: sub-daily refresh.
 ```
 
-### T6.4 — Fail-safe publish `todo` · *Phase 3* · after T6.2, T6.3
+### T6.4 — Fail-safe publish `in-progress` · *Phase 3* · after T6.2, T6.3
 ```
 Acceptance (observable):
   A failed or partial run leaves the previously published JSON INTACT. Deliberately
