@@ -1039,7 +1039,7 @@ Out of scope: a per-company diagnostic view.
 
 ## E6 · Automation
 
-### T6.2 — Greenhouse nightly workflow `todo` · *Phase 3* · after T3.1, T6.1
+### T6.2 — Greenhouse nightly workflow `in-progress` · *Phase 3* · after T3.1, T6.1
 ### T6.3 — Ashby weekly workflow `todo` · *Phase 3* · after T3.2, T6.1
 > **Re-measure before building this.** T3.2 measured Ashby at ~2s/company, not
 > the ~151s the weekly tier was chosen for — the whole Ashby corpus is ~35s, and
