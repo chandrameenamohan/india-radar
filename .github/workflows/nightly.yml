@@ -1,0 +1,55 @@
+# The nightly refresh — T6.2.
+#
+# ONE job builds every provider, because the measurement says the split this
+# task was named for has no cost left to justify it. Re-measured 2026-07-29
+# against the live corpus:
+#
+#   Greenhouse  429 slugs, sequential, 1.2s each      ~8.6 min
+#   Ashby       264 slugs, concurrent                 ~35s   (T3.2 re-measure)
+#   Lever        51 slugs, sequential                 ~1 min
+#   salary      enrichment over the 116 listed rows   ~1 min
+#                                                    ---------
+#   whole build, wall                                 11m26s, 3% of the 6h cap
+#
+# FINDINGS §1 sized the whole refresh budget on Ashby at ~151s/company — 11 hours
+# for this corpus — and that is where "Ashby weekly" came from. Ashby now answers
+# in ~2s and the slow provider is Greenhouse's 429 sequential calls. Splitting
+# tiers would mean republishing one provider's rows from yesterday's file while
+# stamping today's snapshot on them, which is the kind of quiet lie this project
+# has invariants against. So: one nightly, everything fresh, 14 minutes.
+name: nightly
+
+on:
+  schedule:
+    # 20:00 UTC = 01:30 IST. The site is about Indian roles; refresh overnight
+    # for its readers, not for ours.
+    - cron: "0 20 * * *"
+  workflow_dispatch:
+
+# The whole point of the job: it writes back to the repo.
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Identify the committer
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      # ponytail: no actions/setup-python and no install step — the build has
+      # zero third-party dependencies (stdlib + curl, both on the runner).
+      # Ceiling: a runner python older than 3.10 would break the `X | Y`
+      # annotations. Upgrade path: add setup-python with an explicit version if
+      # that ever happens.
+      - name: Build and commit
+        run: NIGHTLY_BUILD="python3 -m src.build" scripts/nightly.sh
+
+      # Outside the script deliberately: a hand run of scripts/nightly.sh must
+      # not publish. No-op when the build changed nothing.
+      - name: Publish
+        run: git push

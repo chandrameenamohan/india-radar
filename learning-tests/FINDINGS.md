@@ -1899,3 +1899,70 @@ A schema bump now costs a full live rebuild, because the page refuses the
 published file the moment `SCHEMA_VERSION` moves. That is the correct failure —
 it is the stale-data trap from T1.2 caught by design instead of by luck — but it
 means **a schema change is an ~11-minute task, not a one-line one.**
+
+---
+
+# The nightly workflow — measured during T6.2 (2026-07-29)
+
+## Greenhouse is no longer 0.35s. It is 1.2s, and it is now the slow provider.
+
+Re-measured over 25 random live slugs from the real corpus: **1.20s each**,
+against FINDINGS §1's 0.35s median. At 429 slugs sequentially that is ~8.6
+minutes — and it is the largest single line in the build.
+
+Full build, wall, end to end: **11m26s** (`time .venv/bin/python -m src.build`,
+logs/t62-full-run.txt), at **3% CPU**. This job is network wait, not compute, so
+a bigger runner buys nothing and concurrency is the only lever that would.
+
+```
+Greenhouse  429 slugs, sequential, 1.2s      ~8.6 min
+Ashby       264 slugs, concurrent            ~35s    (T3.2's re-measure, held)
+Lever        51 slugs, sequential            ~1 min
+salary      116 listed rows, with backoff    ~1 min
+                                             --------
+                                              11m26s = 3% of GitHub's 6h cap
+```
+
+## So the Greenhouse/Ashby tiering has no cost left to justify it
+
+FINDINGS §1 sized the whole refresh budget on Ashby at ~151s/company — eleven
+hours for this corpus — and that is the entire reason T6.2/T6.3 were split into a
+nightly tier and a weekly one. Ashby now answers in ~2s. The ordering has
+inverted: **the expensive provider is Greenhouse, and it is 8.6 minutes.**
+
+A split would now mean republishing one provider's rows from yesterday's file
+while stamping today's snapshot date on them. That is the same class of lie as
+rendering an unchecked company as "not hiring". One nightly, everything fresh.
+
+## Two runs three hours apart: the spine is byte-stable, the enrichment is not
+
+116 rows both times, and **zero non-salary differences between any pair of rows**
+— which is what makes a nightly diff readable as real hiring movement rather than
+scrape noise, and what T7.1 will depend on.
+
+All 116 changed lines were `salary`: **11 figures lost, 11 gained, 1 changed.**
+That is AmbitionBox's rolling request window (§T4.2) sampling differently, not
+companies changing what they pay. Consequences worth knowing before T6.4:
+
+- **The "no change, no commit" path will essentially never fire.** Salary churns
+  every run, so every night commits.
+- **A throttled night publishes a coverage regression**, because the enrichment
+  overwrites a real figure with `null` rather than keeping the last known one.
+  Nothing here is wrong — a null is an honest absence and the build cannot tell a
+  403 from a company nobody has reported — but the *site* oscillates between 82
+  and 71 salaries for no real-world reason. Making enrichment sticky (never
+  replace a figure with an absence) is the obvious fix and belongs to whoever
+  takes T6.4, not to the workflow.
+
+One figure's `observed` date moved **backwards**, 2026-07-29 to 2026-07-27
+(Celonis). It is AmbitionBox's own recompute field and the row links its source,
+so it is reported, not invented — but do not assume that date is monotonic.
+
+## `timeout` is the bound, and it is a hard dependency
+
+`scripts/nightly.sh` wraps the build in coreutils `timeout` rather than trusting
+GitHub's 6h job cap, so a hand run is bounded too and the dry-run test can prove
+the bound bites (exit 124, nothing committed) instead of hoping. `timeout` ships
+on ubuntu-latest and came from homebrew here; a bare macOS without coreutils has
+no `timeout` and the script will fail loudly on the first line rather than run
+unbounded, which is the right failure.

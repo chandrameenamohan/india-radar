@@ -1039,13 +1039,19 @@ Out of scope: a per-company diagnostic view.
 
 ## E6 · Automation
 
-### T6.2 — Greenhouse nightly workflow `in-progress` · *Phase 3* · after T3.1, T6.1
+### T6.2 — Greenhouse nightly workflow `done` · *Phase 3* · after T3.1, T6.1
 ### T6.3 — Ashby weekly workflow `todo` · *Phase 3* · after T3.2, T6.1
 > **Re-measure before building this.** T3.2 measured Ashby at ~2s/company, not
 > the ~151s the weekly tier was chosen for — the whole Ashby corpus is ~35s, and
 > the slow provider in a real build is now Greenhouse's 429 sequential calls.
 > Weekly may still be right (politeness, and the throttling was real once), but
 > it needs a reason that is true today.
+>
+> **T6.2 measured it and did not split** (FINDINGS "The nightly workflow"): the
+> whole build, every provider, is **11m26s** — 3% of the 6h cap — so
+> `.github/workflows/nightly.yml` already refreshes Ashby nightly. A separate
+> weekly tier would have to *reduce* Ashby's freshness to earn its keep. Decide
+> that on the measurement; do not build a second workflow by default.
 
 ```
 Acceptance (observable) [each]:
