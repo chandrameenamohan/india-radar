@@ -20,7 +20,7 @@ from datetime import date
 from pathlib import Path
 from typing import Any, NamedTuple
 
-from src import ashby, greenhouse, lever, salary
+from src import ashby, greenhouse, lever, mca, salary
 from src.greenhouse import Roles
 from src.india import WORKPLACES, cities, is_india, workplace
 from src.outcomes import Outcome, report, write_report
@@ -398,6 +398,11 @@ def main(argv: list[str]) -> None:
 
     built = report([c["name"] for c in corpus], outcomes)
     built["websites"] = website_counts(corpus, outcomes)
+    # Off the disk, never off the API: data.gov.in 502s under sustained load, and
+    # a nightly build that called it inline would be a site that goes down when
+    # somebody else's Elasticsearch does. `src/mca.py` refreshes the cache by
+    # hand; this only ever reads it, and reads nothing as zero.
+    built["mca"] = mca.counts()
     if not smoke:
         write_report("data/build-report.json", built)
 
@@ -407,6 +412,8 @@ def main(argv: list[str]) -> None:
             print(f"  {count:4d}  {outcome}")
     for label, count in built["websites"].items():
         print(f"  {count:4d}  {label}")
+    print(f"  {built['mca']['records']:4d}  MCA foreign subsidiaries cached "
+          f"(pulled {built['mca']['pulled'] or 'never'})")
 
 
 if __name__ == "__main__":

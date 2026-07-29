@@ -775,7 +775,57 @@ Checks:
 Out of scope: imputing salaries. We show sourced figures or nothing.
 ```
 
-### T4.3 — MCA snapshot pull `in-progress` · *Phase 2* · after T5.1 · parallel
+### T4.3 — MCA snapshot pull `done` · *Phase 2* · after T5.1 · parallel
+> **24,102 records cached in 3 calls and 17.9s — exactly the predicted universe,
+> 100% of it, with zero blank fields across all 24,102 rows.** `data/mca.json` is
+> 5.8MB; the build reads it and never calls the API.
+>
+> **The "502 after ~20 calls" constraint is real and this pull never reaches it.**
+> It still shaped the module — a nightly build that called data.gov.in inline
+> would be a site that goes down when someone else's Elasticsearch does — but the
+> honest measurement is that a three-call pull is nowhere near the wall. Retries
+> and backoff stayed regardless, for the same reason T3.2 kept Ashby's: the
+> throttling was real when it was measured and costs nothing when it is absent.
+>
+> **The refusal is against the EXPECTED 24,102, not against the API's own total,
+> and that distinction is the whole check.** When the filter was spelled
+> `Subsidiary of Foreign Company` the API returned `total=0` — so a pull
+> validating itself against the reported total would have cached an empty
+> universe and called it agreement. That spelling *still* returns 0 today, pinned
+> beside the right one in `learning-tests/mca_live.py` §2. A pull under 90% of
+> either figure raises and the previous snapshot survives, the same rule
+> `build.write` keeps for a non-conforming row.
+>
+> **The dataset is more current than FINDINGS recorded** — newest incorporation
+> 2026-06-01, against the 2026-03-31 measured in July. The 37 state-wise datasets
+> are still frozen at 2021-03-31; the gap is now five years and three months.
+>
+> **T4.4's ceiling is measured, and it is not a matching problem.** The
+> foreign-subsidiary filter excludes Indian-origin companies *by construction*:
+> `STRIPE INDIA PRIVATE LIMITED` is in the slice and `RAZORPAY SOFTWARE PRIVATE
+> LIMITED` cannot be, because Razorpay is not a subsidiary of a company
+> incorporated outside India. A crude three-suffix name join hits **32 of 115
+> listed companies**. Lifting that means the unfiltered 3.67M-row table (367
+> calls, where the 502 wall stops being theoretical) and is a decision about what
+> the badge *means* — a mark only foreign subsidiaries can earn will read as a
+> mark against Indian startups unless T5.3 says what it is. See FINDINGS.
+>
+> **The address is kept whole rather than parsed to a city.** SPEC feature 9 wants
+> a registered city and it is `rsplit(",")[-4]` on the rows inspected — but that
+> is unvalidated over 24,102, so T4.4 owns proving it. Trimming here would have
+> cost a re-pull against the flaky API to undo.
+>
+> **Not done here, deliberately:** no full rebuild. `build-report.json` gains its
+> `mca` block on the next real build (~11 min, and it would churn every row with
+> today's live boards for a change that adds one report field). The hookup is
+> proven by the offline smoke build, which prints
+> `24102  MCA foreign subsidiaries cached (pulled 2026-07-29)`.
+>
+> Six mutations were run against the new checks and all six bit: `counts` calling
+> the API, `load` letting a corrupt snapshot raise, `pull` dropping the CIN dedup,
+> dropping the expected-universe floor, returning a partial walk, and caching the
+> corrupt `CompanyIndian/Foreign Company` column.
+
 Resource `4dbe5667-7b6b-41d7-82af-211562424d9a`, page size 10,000, filter
 `CompanySubCategory = "subsidiary of company incorporated outside India"`
 → **24,102 companies**.

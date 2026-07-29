@@ -1702,3 +1702,57 @@ added time is almost entirely backoff waiting out 403s, not fetching. Still far
 inside any workflow cap, but **T6.2/T6.3 should tier on this number rather than
 on the probe latencies alone** — the slowest thing in a build is no longer an
 ATS.
+
+---
+
+# MCA snapshot — measured during T4.3 (2026-07-29)
+
+## The whole enrichment universe is three calls and 18 seconds
+
+`filters[CompanySubCategory]=subsidiary of company incorporated outside India`
+at `limit=10000` returns **24,102 records in 3 calls, 17.9s**, exact — the count
+FINDINGS predicted, unchanged. Every record carried all five kept fields:
+**zero blank CINs, names, dates, addresses or statuses across 24,102 rows.**
+
+**The "502 after ~20 calls" constraint is real and this pull never reaches it.**
+It shaped the design anyway — the cost of a wrong assumption here is a nightly
+build that goes down when someone else's Elasticsearch does — but the pull
+itself is nowhere near the wall. Two full pulls minutes apart both ran clean.
+
+**The dataset is more current than FINDINGS recorded.** Newest incorporation in
+the slice is **2026-06-01**, not the 2026-03-31 measured in July's sample. The
+37 state-wise datasets are still frozen at 2021-03-31; nothing about that
+changed, and the gap between the two is now five years and three months.
+
+**The wrong filter spelling still returns `total=0` today**, pinned beside the
+right one in `learning-tests/mca_live.py` §2. That is why `pull` refuses an
+answer under 90% of the *expected* 24,102 and not merely under the API's own
+reported total: when the filter stops matching, the API's total agrees with the
+empty answer, so only the measured figure catches it.
+
+## The foreign-subsidiary filter excludes Indian-origin companies BY CONSTRUCTION
+
+This is T4.4's real ceiling and it is not a matching problem.
+`STRIPE INDIA PRIVATE LIMITED` is in the slice; **`RAZORPAY SOFTWARE PRIVATE
+LIMITED` is not, and no amount of name matching will find it** — Razorpay is an
+Indian company, so it is not a subsidiary of one incorporated outside India. The
+same holds for every India-founded company the corpus carries.
+
+Measured with a crude three-suffix name join against `data/companies.json`:
+**32 of 115 listed companies hit the table.** That is T4.4's approximate ceiling
+on this slice. Lifting it means pulling the unfiltered 3.67M-row table (367
+calls, and the 502 wall becomes a real constraint rather than a theoretical one)
+— which buys Indian-origin companies a badge, and is a decision about what the
+badge *means*, not an optimisation. A badge that only foreign subsidiaries can
+earn will read on the site as a mark against Indian startups unless T5.3 says
+what it is.
+
+## The registered address is comma-separated, city fourth from the right
+
+    201 Creative Industrial Estate 12 N M Joshi Marg,Mumbai,Mumbai City,Maharashtra,400018-India
+                                                     ^city ^district      ^state    ^pin-country
+
+SPEC feature 9 wants a registered city, and that is `rsplit(",")[-4]` — on the
+rows inspected. It is **not** validated over all 24,102, so T4.4 owns proving it.
+The snapshot keeps the address WHOLE for exactly that reason: a lossy trim here
+would cost a re-pull against the flaky API to undo.
