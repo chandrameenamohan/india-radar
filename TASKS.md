@@ -984,7 +984,7 @@ Checks:
 Out of scope: accounts, saved searches, applying in-app.
 ```
 
-### T5.3 — Integrity footer `todo` · *Phase 3* · after T6.1, T5.2
+### T5.3 — Integrity footer `in-progress` · *Phase 3* · after T6.1, T5.2
 ```
 Acceptance (observable):
   Footer shows how many companies were checked and how many could not be, and the
