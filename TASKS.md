@@ -500,7 +500,7 @@ Checks:
 Out of scope: Ashby and Lever.
 ```
 
-### T3.2 — Ashby probe `todo` · *Phase 1* · after T3.1
+### T3.2 — Ashby probe `in-progress` · *Phase 1* · after T3.1
 ~151s fixed latency, payload- and concurrency-independent; 16.8s/company at
 concurrency 12; 3/12 failed at that concurrency; latency grew 50s→151s across
 repeat runs (progressive throttling).
