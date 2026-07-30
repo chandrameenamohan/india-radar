@@ -1,7 +1,7 @@
-# SPEC — INDIA·RADAR
+# SPEC — ROLE·ATLAS
 
-*(v1 working title. Chosen launch name: **ROLE·ATLAS** — see the Expansion
-section; the rename ships with task T8.6.)*
+*(Shipped as INDIA·RADAR through v1, when the radar was one country wide. T8.6
+renamed it for the fifteen-country reality — see the Expansion section.)*
 
 ## Thesis
 

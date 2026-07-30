@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>INDIA·RADAR — funded companies hiring in India</title>
+<title>ROLE·ATLAS — funded companies hiring, proven by their own job board</title>
 <!-- A missing favicon is a 404, and a 404 is a failed network request, which the
      gate counts. One data: URI is cheaper than an icon file. -->
 <link rel="icon" href="data:,">
@@ -84,7 +84,7 @@
 </head>
 <body>
 <header>
-  <h1>INDIA·RADAR</h1>
+  <h1>ROLE·ATLAS</h1>
   <!-- T8.4 widened the data from India to fifteen countries, so the wording that
        said "India role" everywhere now says "role". The country tabs and the
        openness badges are T8.5's; this is only the page not claiming that a
@@ -531,7 +531,8 @@ function load(data) {
     `Checked ${count(counted.checked)} of the ${count(counted.corpus_size)} funded companies in `
     + `our corpus. The other ${count(counted.unchecked)} could not be checked — no job board we `
     + `could find, or one we could not read — so they are left off rather than shown as not `
-    + `hiring. This is not every funded company hiring in India; it is every one we could prove.`;
+    + `hiring. This is not every funded company hiring across the fifteen countries we watch; it `
+    + `is every one we could prove.`;
   $('#city').append(...[...new Set(companies.flatMap((c) => c.cities))].sort()
     .map((city) => el('option', null, city)));
   // Built here rather than in the markup because a tab states its count, and the

@@ -1,4 +1,4 @@
-# TASKS — INDIA·RADAR
+# TASKS — ROLE·ATLAS
 
 Decomposition of `SPEC.md`. Markdown, not beads (bd is broken for this project).
 
@@ -1351,7 +1351,7 @@ Checks:
 Out of scope: the rename (T8.6).
 ```
 
-### T8.6 — Rename to ROLE·ATLAS `todo` · *Phase 5* · after T8.5
+### T8.6 — Rename to ROLE·ATLAS `done` · *Phase 5* · after T8.5
 ```
 Acceptance (observable):
   Site title/header, README, SPEC title, and integrity footer say ROLE·ATLAS.

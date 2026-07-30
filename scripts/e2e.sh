@@ -31,10 +31,10 @@ $PY -m http.server "$PORT" --bind 127.0.0.1 >/dev/null 2>&1 &
 srv=$!
 trap 'kill $srv 2>/dev/null' EXIT
 for _ in $(seq 40); do
-  curl -s "$ROOT" 2>/dev/null | grep -q 'INDIA·RADAR' && break
+  curl -s "$ROOT" 2>/dev/null | grep -q 'ROLE·ATLAS' && break
   sleep 0.1
 done
-if ! curl -s "$ROOT" 2>/dev/null | grep -q 'INDIA·RADAR'; then
+if ! curl -s "$ROOT" 2>/dev/null | grep -q 'ROLE·ATLAS'; then
   echo "FAIL: could not serve the site on port $PORT"
   exit 1
 fi
@@ -199,7 +199,7 @@ check "clicking a row reveals its board and its funding source" "open shown boar
 # T4.1. Every India role is named and linked -- the row is the site's answer to
 # "who is hiring, for what, and where do I apply", and a count alone answers only
 # the first third. Derived from the dataset, so it stays true as the data grows.
-check "an opened row lists every India role, each linked to its own posting" \
+check "an opened row lists every role, each linked to its own posting" \
   "$($PY -c "
 import json
 c = json.load(open('tests/fixtures/companies-e2e.json'))['companies']
