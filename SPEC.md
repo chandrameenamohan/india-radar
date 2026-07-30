@@ -1,6 +1,7 @@
 # SPEC — INDIA·RADAR
 
-*(working title, placeholder — rename before launch)*
+*(v1 working title. Chosen launch name: **ROLE·ATLAS** — see the Expansion
+section; the rename ships with task T8.6.)*
 
 ## Thesis
 
@@ -244,3 +245,77 @@ If all eight hold, the site is telling the truth.
 | Foreign subsidiaries on MCA | **24,102** | the enrichment universe |
 | `CompanyIndian/Foreign Company` | ~670k rows contain `91` | field corrupt, unusable |
 | MCA API under load | 502s after ~20 calls | cache the snapshot, degrade gracefully |
+
+---
+
+# Expansion — ROLE·ATLAS (v2, decided 2026-07-30)
+
+**Compression:** The radar widens from one destination country to fifteen — same
+stateless pipeline, same proof standard (a role on the company's own board, not
+a claim) — with each kept role now tagged by the country it's in and, where the
+posting says so, whether the company will hire from abroad (visa sponsorship or
+remote-from-anywhere). The openness signal is the keystone: "funded companies in
+Japan" is a list; "funded companies in Japan that will sponsor you" is a reason
+to visit. It is also the hard part: no ATS has a structured field for it, so it
+is a keyword heuristic over posting text with an honest `unknown` — and the
+phrase list is frozen only after learning tests measure how often the phrases
+actually occur in the wild. If they effectively don't, that finding kills or
+reshapes feature 15 before anything is built on it. The site becomes
+**ROLE·ATLAS**.
+
+**Target countries (15):** India · United Kingdom · Ireland · Germany ·
+Netherlands · France · Spain · Sweden · Denmark · Norway · Finland · Japan ·
+Singapore · Australia · New Zealand.
+"Europe" means these major hubs by decision, not all of the EEA — add a country
+when probe data shows real volume there, not before.
+
+**What stays India-only, deliberately:** the salary benchmark (feature 8,
+AmbitionBox) and the MCA badge (feature 9). Per-country equivalents (Companies
+House, Glassdoor-by-country, …) are six new integrations for a badge — out of
+scope.
+
+### 14. Multi-country role filter
+Keep a company when ≥1 open role matches **any** target country; each kept role
+carries the country it matched. Location matching follows the india.py doctrine:
+word-boundary lists measured against real boards, no cleverness.
+
+**Acceptance:** a fixture of real location strings across all 15 countries
+classifies with zero false positives, including the cross-country traps:
+`Cambridge, MA` is not the UK, `Perth, Scotland` is not Australia, a bare
+`Newcastle` or `Nice` or `Reading` classifies as *no country* rather than a
+guess. The existing India fixture passes unchanged.
+
+### 15. Openness signal — hire-from-abroad / visa
+Per role, from posting description text: `visa` and `hire_from_abroad`, each
+`yes | no | unknown`. Explicit negatives ("we are unable to sponsor") are a real
+`no` and worth as much as a yes. Silence is `unknown`, rendered as unknown —
+**never** as "no".
+
+**Acceptance:** a fixture of real posting excerpts (positive, explicit-negative,
+and silent) classifies correctly; the phrase list cites measured frequencies
+from `learning-tests/FINDINGS.md`; the site can filter to "open to foreign
+hires" (`visa: yes` OR `hire_from_abroad: yes`).
+
+### 16. Country navigation
+One site, one `companies.json`. Country tabs (grouping is the site's choice —
+e.g. a single Europe tab with a country filter inside it); India-only
+enrichments render only where they apply.
+
+**Acceptance:** selecting a country shows only companies with ≥1 role in that
+country; per-tab counts are consistent with `build-report.json`; the India view
+preserves all current behavior (city filter, salary, MCA badge); zero console
+errors.
+
+### Outcome vocabulary change
+`no-india-roles` generalizes to `no-target-roles`. Build report gains per-country
+listed counts. Everything else in feature 12 stands.
+
+### v2 non-goals
+- No per-country corporate registries or salary benchmarks.
+- No translation: non-English postings (likely some in Japan) get `unknown`
+  openness, honestly, rather than a guessed classification.
+- No LLM classification of postings — it would add the first runtime dependency
+  and a nightly cost to a zero-dependency build. Revisit only if the measured
+  heuristic recall is unacceptably low.
+- No country-specific job-quality scoring, cost-of-living data, or visa-law
+  guidance. We report what the posting says, nothing more.
