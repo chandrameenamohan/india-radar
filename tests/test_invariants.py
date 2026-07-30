@@ -1,7 +1,15 @@
 """The six project-specific invariants from VERIFICATION.md.
 
-All are expected to FAIL until their owning task lands. Red is the correct
-initial state: a gate that passes an empty project teaches nothing.
+An invariant is expected to FAIL until its owning task lands — red is the correct
+initial state, because a gate that passes an empty project teaches nothing. Five
+have landed and assert for real; invariant 4 is still a `strict=True` xfail
+because T7.1 is blocked on a human push.
+
+Invariant 3 (`test_empty_array_is_unverified_not_zero`) lives in `test_lever.py`,
+beside the probe it constrains and the fixtures it needs. VERIFICATION.md names
+invariants by TEST NAME, not by file, so that satisfies it. This file carried a
+placeholder of the same name until T3.3 landed; it was deleted rather than left
+declaring "T3.3 not implemented" next to a task marked done.
 """
 import pytest
 
@@ -33,11 +41,6 @@ def test_location_fixture_exact():
     # would come back green while the bug it was written for is back.
     assert {"In-Office", "Hybrid; In-Office"} <= set(NOT_INDIA)
     assert "IN-Pune" in INDIA and "Bengaluru, India; Mumbai, India" in INDIA
-
-
-@pytest.mark.xfail(reason="T3.3 not implemented", strict=True)
-def test_empty_array_is_unverified_not_zero():
-    raise AssertionError("T3.3: Lever probe not implemented")
 
 
 @pytest.mark.xfail(reason="T7.1 not implemented", strict=True)
