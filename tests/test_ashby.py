@@ -9,7 +9,7 @@ import json
 
 import pytest
 
-from src.ashby import ATTEMPTS, BACKOFF, locations, parse, probe, probe_all
+from src.ashby import ATTEMPTS, BACKOFF, locations, parse, probe, probe_all, text
 from src.outcomes import Outcome
 
 
@@ -165,3 +165,19 @@ def test_probe_all_resolves_every_slug(monkeypatch):
     assert isinstance(results["good"], list) and len(results["good"]) == 1
     assert results["gone"] == Outcome.SLUG_UNRESOLVED
     assert results["flaky"] == Outcome.PROBE_FAILED
+
+
+def test_text_is_the_prose_ashby_was_already_sending():
+    """T8.1: `descriptionPlain` and `descriptionHtml` ship unconditionally, with
+    no way to decline them — so this module has been paying for descriptions
+    since T3.2 and throwing them away. There is no second call to make."""
+    assert text({"descriptionPlain": "We sponsor visas.\n\nApply here."}) == (
+        "We sponsor visas. Apply here."
+    )
+    # The HTML is the fallback, for a posting that ships only that shape. The
+    # `&nbsp;` becomes an ordinary space rather than a U+00A0 the phrase list
+    # would then fail to match across.
+    assert text({"descriptionHtml": "<p>We sponsor&nbsp;visas.</p>"}) == "We sponsor visas."
+    assert text({"descriptionPlain": "   ", "descriptionHtml": "<p>Real text.</p>"}) == "Real text."
+    # No description at all is silence, not a crash — and silence is `unknown`.
+    assert text({"title": "Staff Engineer"}) == ""

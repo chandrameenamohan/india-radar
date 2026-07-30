@@ -82,7 +82,8 @@ T4.2/T4.3.
 A single shared vocabulary for why a company did or didn't make the site, and a
 `build-report.json` that counts every company under exactly one outcome.
 
-Outcomes: `listed` · `no-india-roles` · `slug-unresolved` · `probe-failed` ·
+Outcomes: `listed` · `no-target-roles` (`no-india-roles` until T8.4 widened the
+radar to fifteen countries) · `slug-unresolved` · `probe-failed` ·
 `empty-board-unverified` (the Lever 200-with-empty-array trap) · `not-qualified`.
 
 ```
@@ -1320,7 +1321,7 @@ Checks:
 Out of scope: LLM classification; translation; fetching (that's T8.4's wiring).
 ```
 
-### T8.4 — Build integration and outcome vocabulary `todo` · *Phase 5* · after T8.2, T8.3
+### T8.4 — Build integration and outcome vocabulary `done` · *Phase 5* · after T8.2, T8.3
 ```
 Acceptance (observable):
   companies.json roles carry `country` and openness fields; companies carry the

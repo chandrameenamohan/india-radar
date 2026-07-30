@@ -3,7 +3,14 @@
 A zero is never ambiguous. Every company in the corpus leaves a build under
 exactly one outcome, and only a company whose board we successfully read can be
 listed. Absence of knowledge ("we never got an answer") and a finding ("they
-have no India roles") are different outcomes and must never collapse into one.
+have no roles in any country we cover") are different outcomes and must never
+collapse into one.
+
+`no-india-roles` became `no-target-roles` in T8.4, when the radar widened from
+India to fifteen countries (SPEC "Expansion — ROLE·ATLAS"). The meaning is
+unchanged and so is its place in `CHECKED`: we read the whole board and none of
+it was anywhere we cover. Only the name got wider, because the old one would now
+say "no India roles" about a company excluded for having no Berlin role either.
 """
 from __future__ import annotations
 
@@ -16,7 +23,7 @@ from typing import Any
 
 class Outcome(StrEnum):
     LISTED = "listed"
-    NO_INDIA_ROLES = "no-india-roles"
+    NO_TARGET_ROLES = "no-target-roles"
     SLUG_UNRESOLVED = "slug-unresolved"
     PROBE_FAILED = "probe-failed"
     EMPTY_BOARD_UNVERIFIED = "empty-board-unverified"  # Lever's 200-with-empty-array
@@ -26,7 +33,7 @@ class Outcome(StrEnum):
 #: The only outcomes that mean we actually read the company's board. Everything
 #: else is an absence of knowledge, and the site must say so rather than imply
 #: the company isn't hiring.
-CHECKED = frozenset({Outcome.LISTED, Outcome.NO_INDIA_ROLES})
+CHECKED = frozenset({Outcome.LISTED, Outcome.NO_TARGET_ROLES})
 
 
 def report(corpus: Iterable[str], outcomes: Mapping[str, Outcome]) -> dict[str, Any]:

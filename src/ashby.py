@@ -41,6 +41,7 @@ from time import sleep
 from typing import Any
 
 from src.net import get
+from src.openness import plain
 from src.outcomes import Outcome
 
 #: Unauthenticated, one call, whole board. There is no `content=false` here —
@@ -134,3 +135,16 @@ def locations(role: Mapping[str, Any]) -> list[str]:
         for entry in role.get("secondaryLocations") or ()
     )
     return [place for place in (role.get("location"), *secondary) if isinstance(place, str)]
+
+
+def text(role: Mapping[str, Any]) -> str:
+    """This posting's prose (T8.4). It is already in the payload and always was.
+
+    Ashby ships `descriptionPlain` *and* `descriptionHtml` unconditionally — there
+    is no `content=false` to pass and no second call to make, so the 2MB this
+    module's docstring mentions has been mostly prose we discarded since T3.2. The
+    plain form is one field and whole, unlike Lever's four; the HTML is the
+    fallback for a posting that ships only that shape.
+    """
+    flat = role.get("descriptionPlain")
+    return plain(flat if isinstance(flat, str) and flat.strip() else role.get("descriptionHtml"))

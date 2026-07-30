@@ -217,7 +217,7 @@ The single scenario that proves the whole thing works:
 3. Pick any company in it. It has ≥1 open India role, and that role's apply URL
    returns 200 on the company's real posting.
 4. Pick a company NOT in it that has a resolved slug. `build-report.json` states
-   why — `no-india-roles`, not `unchecked`.
+   why — `no-target-roles`, not `unchecked`.
 5. Open the site. Zero console errors, zero failed requests.
 6. Filter to "Bengaluru". Every result has a Bengaluru role; none has only, say,
    a Warsaw role.

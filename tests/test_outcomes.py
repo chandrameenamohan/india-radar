@@ -20,7 +20,7 @@ def test_outcomes_are_exhaustive():
     """
     assert {o.value for o in Outcome} == {
         "listed",
-        "no-india-roles",
+        "no-target-roles",
         "slug-unresolved",
         "probe-failed",
         "empty-board-unverified",
@@ -34,7 +34,7 @@ def test_counts_sum_to_corpus():
         CORPUS,
         {
             "Acme": Outcome.LISTED,
-            "Bolt": Outcome.NO_INDIA_ROLES,
+            "Bolt": Outcome.NO_TARGET_ROLES,
             "Cog": Outcome.NOT_QUALIFIED,
         },
     )

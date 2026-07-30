@@ -332,7 +332,7 @@ console_clean "after interaction"
 echo "-- a dataset this page doesn't know how to read"
 open_page "$ROOT?data=../data/build-report.json"
 check "an unknown schema is refused, not rendered" "refused 0 rows" \
-  "$(val '(document.querySelector("#status").textContent.startsWith("This page reads schema v7")
+  "$(val '(document.querySelector("#status").textContent.startsWith("This page reads schema v8")
        ? "refused " : "rendered ") + document.querySelectorAll(".row").length + " rows"')"
 # And the footer goes with it. A count left over from the last dataset, sitting
 # under a refusal to render this one, is the site stating a coverage figure for a

@@ -14,7 +14,7 @@ so a future reader adding one back has to argue with the measurement.
 """
 import pytest
 
-from src.openness import SILENT, Openness, classify
+from src.openness import SILENT, Openness, classify, plain
 
 # --- the corpus quotes -------------------------------------------------------
 # (text, visa, hire_from_abroad). Lowercased because that is the shape T8.1
@@ -184,3 +184,35 @@ def test_post_phrase_negation_is_a_known_miss():
     routinely followed by equal-opportunity boilerplate full of `not`. Measure
     before changing this, and change this test with it."""
     assert classify("visa sponsorship is not available for this role.").visa == "yes"
+
+
+# --- plain: the markup every provider hands this module through (T8.4) --------
+
+
+def test_plain_unescapes_twice_because_greenhouse_escapes_twice():
+    """`&amp;lt;p&amp;gt;` is what a Greenhouse description literally contains.
+    One unescape leaves `&lt;p&gt;` sitting in the text as visible characters —
+    and a phrase the window is reading can hide behind them."""
+    assert plain("&amp;lt;p&amp;gt;We do sponsor visas.&amp;lt;/p&amp;gt;") == (
+        "We do sponsor visas."
+    )
+    # Text with no entities is left alone, so the second unescape costs Ashby and
+    # Lever nothing.
+    assert plain("We do sponsor visas.") == "We do sponsor visas."
+
+
+def test_plain_makes_a_tag_a_space_not_nothing():
+    """A list of places glued into one word hides both. The classifier then reads
+    `IndiaUnited` and matches neither."""
+    assert plain("<li>Bengaluru</li><li>India</li>") == "Bengaluru India"
+    assert plain("<p>We do sponsor visas.</p>\n\n<p>Apply here.</p>") == (
+        "We do sponsor visas. Apply here."
+    )
+
+
+def test_plain_reads_an_absent_description_as_silence():
+    """The cheap Greenhouse pass carries no `content` key at all, and silence is
+    what `classify` turns into `unknown` — the honest answer for a posting whose
+    text we never fetched."""
+    assert plain(None) == "" and plain("") == ""
+    assert classify(plain(None)) == SILENT

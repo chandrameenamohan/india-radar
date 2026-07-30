@@ -22,8 +22,10 @@ from pathlib import Path
 from typing import Any, NamedTuple
 
 from src import ashby, greenhouse, lever, mca, salary
+from src.countries import COUNTRIES, countries
 from src.greenhouse import Roles
-from src.india import WORKPLACES, cities, is_india, workplace
+from src.india import WORKPLACES, cities, workplace
+from src.openness import VERDICTS, classify
 from src.outcomes import Outcome, report, write_report
 from src.slugs import Slug
 
@@ -46,7 +48,12 @@ from src.slugs import Slug
 #: many it could not. It is the only field that describes the companies NOT in
 #: the file, and the site cannot derive it: a renderer counting its own rows can
 #: only ever report "116 of 116".
-SCHEMA_VERSION = 7
+#: v8 widened the radar from India to fifteen countries (T8.4): a role states the
+#: `countries` it matched and what its posting said about hiring from abroad
+#: (`visa`, `hire_from_abroad`), and a company states the set its roles add up to.
+#: The India-only fields stay exactly what they were — `cities`, `salary` and
+#: `mca` describe India roles and nothing else, by decision (SPEC v2).
+SCHEMA_VERSION = 8
 
 Probe = Callable[[str], Roles | Outcome]
 Row = dict[str, Any]
@@ -71,6 +78,10 @@ class Provider(NamedTuple):
 
     probe: Probe
     locations: Callable[[Mapping[str, Any]], list[str]]
+    #: The posting's prose, flattened, for `openness.classify` (T8.4). A function
+    #: for the same reason `locations` is: Ashby holds it in one field, Lever
+    #: splits it across four, and Greenhouse only sends it when asked.
+    text: Callable[[Mapping[str, Any]], str]
     title: str
     #: The posting's own page — the one a human opens to read the role and
     #: apply. Ashby and Lever also expose a deep link straight to the form
@@ -78,6 +89,10 @@ class Provider(NamedTuple):
     #: is the link all three can give, and it carries the apply button anyway.
     url: str
     workplace: str | None
+    #: Fetch the same board again, with the descriptions in it. None for the two
+    #: providers that ship prose whether we want it or not — only Greenhouse
+    #: charges for it, and only in bytes (T8.1). See `described`.
+    describe: Probe | None = None
 
 
 #: A row: what the corpus knew about the funding, plus what the board proved
@@ -90,6 +105,12 @@ FIELDS: dict[str, type | tuple[type, ...]] = {
     "ats": str,
     "slug": str,
     "roles": list,
+    #: The countries this company's kept roles are in (T8.4) — derived from the
+    #: roles, never stated separately, so the site's country tabs and the roles
+    #: they reveal cannot disagree. `errors` enforces the derivation.
+    "countries": list,
+    #: India cities, and only India's — this field feeds the India view's city
+    #: filter, and SPEC v2 keeps the per-country enrichments out of scope.
     "cities": list,
     "amount": (int, type(None)),
     "currency": (str, type(None)),
@@ -105,16 +126,40 @@ FIELDS: dict[str, type | tuple[type, ...]] = {
 #: `probe-failed` for want of a probe — the outcome now means only what it says,
 #: that we tried and could not read the board.
 PROBES: dict[str, Provider] = {
-    "greenhouse": Provider(greenhouse.probe, greenhouse.locations, "title", "absolute_url", None),
-    "ashby": Provider(ashby.probe, ashby.locations, "title", "jobUrl", "workplaceType"),
-    "lever": Provider(lever.probe, lever.locations, "text", "hostedUrl", "workplaceType"),
+    "greenhouse": Provider(
+        probe=greenhouse.probe,
+        locations=greenhouse.locations,
+        text=greenhouse.text,
+        title="title",
+        url="absolute_url",
+        workplace=None,
+        describe=greenhouse.describe,
+    ),
+    "ashby": Provider(
+        probe=ashby.probe,
+        locations=ashby.locations,
+        text=ashby.text,
+        title="title",
+        url="jobUrl",
+        workplace="workplaceType",
+    ),
+    "lever": Provider(
+        probe=lever.probe,
+        locations=lever.locations,
+        text=lever.text,
+        title="text",
+        url="hostedUrl",
+        workplace="workplaceType",
+    ),
 }
 
 #: A role's fields, and the same refusal as the row's: the site renders these
 #: straight into a link, so a role that can't state a title and a URL is not a
 #: role this can publish. Measured 1,112/1,112 carry both — so a violation here
 #: is a provider changing its payload, and the build failing loudly is the alarm.
-ROLE_FIELDS = ("title", "url", "locations", "workplace")
+#: T8.4 added `countries` (which of the fifteen this role is in) and the two
+#: openness verdicts, which are `unknown` far more often than not and must be.
+ROLE_FIELDS = ("title", "url", "locations", "countries", "workplace", "visa", "hire_from_abroad")
 
 #: A benchmark's fields (T4.2). `observed` is required rather than optional, and
 #: that is SPEC feature 8's "renders the figure with its date" made deterministic:
@@ -182,8 +227,15 @@ def role_errors(role: Any) -> list[str]:
 
     The location list is required to be non-empty, and that is the deterministic
     form of SPEC feature 7's "no company displays an empty location": a role
-    became an India role by naming a place in India, so a role here with nothing
-    to render its location from is a contradiction, not a gap.
+    became a kept role by naming a place in a target country, so a role here with
+    nothing to render its location from is a contradiction, not a gap. `countries`
+    is refused empty for the same reason and one step further along — it is what
+    put the role here.
+
+    The two openness verdicts are refused unless they are one of the three words
+    `openness` emits. A role that reached the site carrying `null` or `""` there
+    would render as an absence the site cannot tell from `unknown` — and the whole
+    of SPEC feature 15 is that silence renders as unknown rather than as "no".
     """
     if not isinstance(role, Mapping):
         return [f"is {type(role).__name__}, not a role"]
@@ -198,8 +250,16 @@ def role_errors(role: Any) -> list[str]:
     places = role.get("locations")
     if not (isinstance(places, list) and places and all(isinstance(p, str) and p for p in places)):
         problems.append(f"locations {places!r} is not a non-empty list of place names")
+    where = role.get("countries")
+    if not (isinstance(where, list) and where and all(c in COUNTRIES for c in where)):
+        problems.append(f"countries {where!r} is not a non-empty list of target countries")
     if role.get("workplace") not in (*WORKPLACES, None):
         problems.append(f"workplace {role.get('workplace')!r} is not one of {WORKPLACES} or None")
+    problems += [
+        f"{field} {role.get(field)!r} is not one of {VERDICTS}"
+        for field in ("visa", "hire_from_abroad")
+        if role.get(field) not in VERDICTS
+    ]
     return problems
 
 
@@ -298,13 +358,25 @@ def errors(row: Mapping[str, Any]) -> list[str]:
         if field in row and not isinstance(row[field], types)
     ]
 
-    # A listed company is one whose board we read and found India roles on. An
-    # empty list here would be a row saying "listed, hiring nobody" — the
+    # A listed company is one whose board we read and found target-country roles
+    # on. An empty list here would be a row saying "listed, hiring nobody" — the
     # ambiguous zero this project exists to refuse.
     if isinstance(roles := row.get("roles"), list):
         if not roles:
-            problems.append("roles is empty: a listed company has at least one India role")
+            problems.append("roles is empty: a listed company has at least one target-country role")
         problems += [f"roles[{i}]: {p}" for i, role in enumerate(roles) for p in role_errors(role)]
+        # The country set is derived, so the only thing to check is that it is
+        # still the derivation. A row whose tabs and roles disagree would put a
+        # company under a country tab that none of its roles is in — the site's
+        # version of the ambiguous zero.
+        stated = [
+            role["countries"]
+            for role in roles
+            if isinstance(role, Mapping) and isinstance(role.get("countries"), list)
+        ]
+        derived = [c for c in COUNTRIES if any(c in where for where in stated)]
+        if row.get("countries") != derived:
+            problems.append(f"countries {row.get('countries')!r} is not its roles' {derived}")
     # An empty city list is legal (a role can be "Remote - India"); a non-string
     # inside it is not, because the site renders these straight into the filter.
     if isinstance(row.get("cities"), list) and not all(isinstance(c, str) for c in row["cities"]):
@@ -324,13 +396,77 @@ def errors(row: Mapping[str, Any]) -> list[str]:
     return problems
 
 
-def posting(role: Mapping[str, Any], provider: Provider, places: list[str]) -> Row:
-    """One India role as the site renders it: what it's called, where to apply,
-    the places it names in India, and how it says it's worked.
+def matched(role: Mapping[str, Any], provider: Provider) -> tuple[list[str], list[str]]:
+    """The places this role names in a target country, and the countries they name.
 
-    `places` is India-only, like the row's `cities`: this is a site about India
-    roles, and a Bengaluru-and-Warsaw posting listed under "also Warsaw" would
-    be answering a question nobody came here with.
+    Both lists are empty for a role we do not keep, so `if matched(...)[0]` is the
+    filter. A role can genuinely be in two of the fifteen — "London, UK; Sydney,
+    Australia" is one posting — and both countries come back, in COUNTRIES order.
+
+    The places a role names OUTSIDE the fifteen are dropped here and never reach
+    the row, which is T4.1's rule widened rather than changed: a Bengaluru-and-
+    Warsaw posting is listed for its Bengaluru half, because "also Warsaw" answers
+    a question nobody came here with. Poland is not on the map; it is not a place
+    this site has anything to say about.
+
+    Called twice per kept role — once to decide whether to keep it, once to build
+    it — because a pure function called twice reads better here than its result
+    threaded through the spine's loop. It is a regex over a handful of short
+    strings, and the roles it runs on twice are the few that reach a row.
+    """
+    found = [(place, countries(place)) for place in provider.locations(role)]
+    keep = [(place, where) for place, where in found if where]
+    return (
+        [place for place, _ in keep],
+        [c for c in COUNTRIES if any(c in where for _, where in keep)],
+    )
+
+
+def described(provider: Provider, slug: str, roles: Roles) -> Roles:
+    """The same roles, with their description text in them (T8.4).
+
+    Two of the three providers ship prose whether we ask or not, so for them this
+    is the identity and the whole function is one branch. Greenhouse charges for
+    it — 13.7x-35.3x the bytes, under 2x the latency, on the same single call —
+    so it is fetched here, AFTER the country filter has proved the board can
+    contribute a row. T8.1 measured that ordering: 259 of 422 Greenhouse boards
+    have no posting in any target country, and paying the multiplier on those is
+    the whole avoidable cost.
+
+    Roles are re-identified by their apply URL, which every one of 1,112 measured
+    roles carries and which is unique per posting. A role the second pass does not
+    return keeps the cheap version and classifies as `unknown` — a board that
+    changed between two calls seconds apart costs us the openness of one posting,
+    never the posting itself. A second pass that fails entirely costs the same,
+    for every role on the board: `probe-failed` is for a company we could not
+    read, and we did read this one.
+
+    ponytail: sequential, one extra call per contributing board, inside the
+    provider loop. Measured ceiling — the whole corpus, both passes, is 1m55s and
+    270MB at 10 concurrent callers (T8.1) against a 90-minute nightly timeout;
+    sequentially the second pass adds roughly the first pass's Greenhouse time
+    again, on 163 of 422 boards. Upgrade path when that stops fitting:
+    `ashby.probe_all` is the concurrent version of exactly this loop.
+    """
+    if provider.describe is None:
+        return list(roles)
+    rich = provider.describe(slug)
+    if isinstance(rich, Outcome):
+        return list(roles)
+    prose = {role.get(provider.url): role for role in rich}
+    return [prose.get(role.get(provider.url), role) for role in roles]
+
+
+def posting(role: Mapping[str, Any], provider: Provider) -> Row:
+    """One kept role as the site renders it: what it's called, where to apply, the
+    places it names in countries we cover, how it says it's worked, and what its
+    description says about hiring someone who is not already there.
+
+    The openness pair is `unknown`/`unknown` for the large majority of roles and
+    that is the measured normal case (92.32% of 4,311 postings say nothing at
+    all), not a gap. It is also what a role gets when the description never
+    arrived — `openness.classify` reads "" as silence, which is exactly what we
+    know about a posting we did not fetch the text of.
 
     Where the board states a workplace it is believed over the location string,
     because it is the field that exists to answer this question — Ashby's
@@ -339,6 +475,7 @@ def posting(role: Mapping[str, Any], provider: Provider, places: list[str]) -> R
     `India - Remote` stating `OnSite`), which is the company contradicting
     itself; the string carries the other 939, where Greenhouse states nothing.
     """
+    places, where = matched(role, provider)
     stated = role.get(provider.workplace) if provider.workplace else None
     title = role.get(provider.title)
     return {
@@ -348,7 +485,9 @@ def posting(role: Mapping[str, Any], provider: Provider, places: list[str]) -> R
         "title": title.strip() if isinstance(title, str) else title,
         "url": role.get(provider.url),
         "locations": places,
+        "countries": where,
         "workplace": stated.lower() if isinstance(stated, str) else workplace("; ".join(places)),
+        **classify(provider.text(role))._asdict(),
     }
 
 
@@ -357,7 +496,7 @@ def build(
     slugs: Mapping[str, Slug],
     probes: Mapping[str, Provider] = PROBES,
 ) -> tuple[list[Row], dict[str, Outcome]]:
-    """The spine: corpus → slug → board → India filter → rows.
+    """The spine: corpus → slug → board → country filter → descriptions → rows.
 
     Returns the listed rows and one outcome per company. Every `continue` below
     is a company leaving with a reason attached; none of them can fall through
@@ -386,24 +525,28 @@ def build(
         # A role, not a location string: one Ashby posting open in Bengaluru and
         # Mumbai is one role in two cities, and counting the strings would
         # report it as two jobs.
-        india = [
-            posting(role, provider, places)
-            for role in result
-            if (places := [p for p in provider.locations(role) if is_india(p)])
-        ]
-        if not india:
-            outcomes[name] = Outcome.NO_INDIA_ROLES
+        kept = [role for role in result if matched(role, provider)[0]]
+        if not kept:
+            outcomes[name] = Outcome.NO_TARGET_ROLES
             continue
 
+        # The descriptions are fetched only now, for a board that has already
+        # proved it contributes a row (T8.4). Nothing below can change who is
+        # listed — a role's openness is a fact about the posting, never a filter.
+        roles = [posting(role, provider) for role in described(provider, slug["slug"], kept)]
         outcomes[name] = Outcome.LISTED
         rows.append(
             {
                 "name": name,
                 "ats": slug["ats"],
                 "slug": slug["slug"],
-                "roles": india,
+                "roles": roles,
+                "countries": [c for c in COUNTRIES if any(c in r["countries"] for r in roles)],
+                # India cities only, because `india.cities` names only India's:
+                # a London role contributes nothing here and the site's city
+                # filter stays the India view's, exactly as it was.
                 "cities": sorted(
-                    {c for role in india for p in role["locations"] for c in cities(p)}
+                    {c for role in roles for p in role["locations"] for c in cities(p)}
                 ),
                 "amount": company["amount"],
                 "currency": company["currency"],
@@ -420,6 +563,25 @@ def build(
         )
 
     return rows, outcomes
+
+
+def country_counts(rows: Iterable[Row]) -> dict[str, int]:
+    """How many listed companies have at least one role in each target country.
+
+    All fifteen are present, zeros included, because a zero here is a finding
+    like every other zero in this project: we read the boards and none of them
+    was hiring in Norway. A country left out of the mapping would read as one we
+    never looked at, and the site's tabs would have no way to tell the two apart.
+
+    Companies, not roles, and a company in two countries is counted in both — so
+    these do NOT sum to the number listed. That is the honest shape: a role in
+    London and Sydney is one job you can take in either place.
+    """
+    listed = list(rows)
+    return {
+        country: sum(1 for row in listed if country in row["countries"])
+        for country in COUNTRIES
+    }
 
 
 def website_counts(
@@ -567,7 +729,15 @@ def main(argv: list[str]) -> None:
         corpus = corpus[:1]
         slugs = {c["name"]: Slug(ats="greenhouse", slug="smoke", method="smoke") for c in corpus}
         board = greenhouse.parse(SMOKE_BOARD.read_text())
-        probes = {"greenhouse": PROBES["greenhouse"]._replace(probe=lambda _: board)}
+        # Both passes answer with the same fixture, which is what Greenhouse does
+        # too: `content=true` is the same board with the prose in it. The fixture
+        # carries `content`, so the smoke run proves the openness wiring offline
+        # rather than only the shape of the fields.
+        probes = {
+            "greenhouse": PROBES["greenhouse"]._replace(
+                probe=lambda _: board, describe=lambda _: board
+            )
+        }
         out = SMOKE_OUT
     else:
         # Ashby's cost is a server-side delay, not throughput, so its boards are
@@ -589,12 +759,20 @@ def main(argv: list[str]) -> None:
     # the same reason the probes are — the smoke path touches no network. The
     # MCA match reads a local file, so it runs there too and init.sh proves the
     # whole enrichment offline rather than only the report line.
+    #
+    # Both enrichments are India's and stay India's (SPEC v2): an AmbitionBox
+    # figure is an India CTC, and the MCA register slice is India subsidiaries of
+    # foreign parents. A Berlin-only company is not a company they know nothing
+    # about — it is a company they are not about, and rendering "average India
+    # CTC" on its row would be this site inventing a fact. So they run on the rows
+    # with an India role, and the rest carry the absence the schema already allows.
+    local = [row for row in rows if "India" in row["countries"]]
     carried = 0
     if not smoke:
-        salary.attach(rows)
+        salary.attach(local)
         # Before the write, off the file the write is about to replace.
-        carried = carry_salary(rows, out)
-    held = mca.attach(rows)
+        carried = carry_salary(local, out)
+    held = mca.attach(local)
 
     # The report comes first now: the site's footer counts what this build could
     # not check (T5.3), and those numbers are the report's, copied rather than
@@ -603,6 +781,11 @@ def main(argv: list[str]) -> None:
     write(out, rows, built)
 
     built["websites"] = website_counts(corpus, outcomes)
+    # Per-country listed counts (T8.4), for the site's country tabs to agree with.
+    # In the report rather than in companies.json because it is a fact about the
+    # build, like every other count here — the site can already count the rows it
+    # was given.
+    built["countries"] = country_counts(rows)
     # Off the disk, never off the API: data.gov.in 502s under sustained load, and
     # a nightly build that called it inline would be a site that goes down when
     # somebody else's Elasticsearch does. `src/mca.py` refreshes the cache by
@@ -625,6 +808,15 @@ def main(argv: list[str]) -> None:
             print(f"  {count:4d}  {outcome}")
     for label, count in built["websites"].items():
         print(f"  {count:4d}  {label}")
+    # Only the countries with something in them, the same rule the outcome counts
+    # above print by. The zeros are in the report, where the site reads them.
+    for country, count in built["countries"].items():
+        if count:
+            print(f"  {count:4d}  listed with a role in {country}")
+    posted = sum(len(row["roles"]) for row in rows)
+    for field in ("visa", "hire_from_abroad"):
+        said = sum(1 for row in rows for role in row["roles"] if role[field] != "unknown")
+        print(f"  {said:4d}  of {posted} roles state {field}")
     print(f"  {built['mca']['records']:4d}  MCA foreign subsidiaries cached "
           f"(pulled {built['mca']['pulled'] or 'never'})")
     print(f"  {built['mca']['matched']:4d}  matched to a CIN, "

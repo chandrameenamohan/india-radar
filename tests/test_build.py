@@ -14,12 +14,14 @@ from src.build import (
     SCHEMA_VERSION,
     build,
     carry_salary,
+    country_counts,
     errors,
     integrity_errors,
     published,
     website_counts,
     write,
 )
+from src.countries import COUNTRIES
 from src.outcomes import Outcome, report
 from src.slugs import Slug
 from tests.test_ashby import board as ashby_board
@@ -61,11 +63,20 @@ COUNTED = {"corpus_size": 2, "checked": 2, "unchecked": 0}
 def answering(ats="greenhouse", **boards):
     """A probe map answering with the given roles-or-outcome per slug.
 
-    The real Provider with only its probe swapped: the field names it reads a
+    The real Provider with only its fetching swapped: the field names it reads a
     title, a URL and a workplace from are part of what these tests are checking,
     so a hand-built stand-in would test a table nothing ships.
+
+    Greenhouse's description pass is swapped too, and it answers with the same
+    board — which is what the live API does, `content=true` being the same board
+    with the prose in it. Without this a unit test would go to the network for
+    every listed company.
     """
-    return {ats: PROBES[ats]._replace(probe=lambda slug: boards[slug])}
+    def answer(slug):
+        return boards[slug]
+
+    provider = PROBES[ats]._replace(probe=answer)
+    return {ats: provider._replace(describe=answer) if provider.describe else provider}
 
 
 def test_listed_row_carries_the_corpus_and_the_board():
@@ -87,15 +98,28 @@ def test_listed_row_carries_the_corpus_and_the_board():
                     "title": "Senior Software Engineer, Platform",
                     "url": "https://job-boards.greenhouse.io/acme/jobs/5988684004",
                     "locations": ["Bengaluru, India"],
+                    "countries": ["India"],
                     "workplace": None,
+                    # T8.4/T8.3: the fixture's own description says "we do sponsor
+                    # visas! However, we aren't able to..." — the both-polarity
+                    # shape that is 76 real postings, and it reads as a yes. It
+                    # says nothing about relocating anyone, so that stays unknown.
+                    "visa": "yes",
+                    "hire_from_abroad": "unknown",
                 },
                 {
                     "title": "Staff Engineer, Data",
                     "url": "https://job-boards.greenhouse.io/acme/jobs/5988684006",
                     "locations": ["Bengaluru, India; Mumbai, India"],
+                    "countries": ["India"],
                     "workplace": None,
+                    # "You must have the right to work in India" — one sentence
+                    # refusing the visa and the relocation together.
+                    "visa": "no",
+                    "hire_from_abroad": "no",
                 },
             ],
+            "countries": ["India"],  # what the site's country tabs offer
             "cities": ["Bengaluru", "Mumbai"],  # what the site's city filter offers
             "amount": 21000000,
             "currency": "USD",
@@ -190,14 +214,17 @@ ROLE = {
     "title": "Staff Engineer",
     "url": "https://job-boards.greenhouse.io/acme/jobs/1",
     "locations": ["Bengaluru, India"],
+    "countries": ["India"],
     "workplace": None,
+    "visa": "unknown",
+    "hire_from_abroad": "unknown",
 }
 
 
 @pytest.mark.parametrize(
     ("field", "value", "because"),
     [
-        ("roles", [], "at least one India role"),  # the ambiguous zero
+        ("roles", [], "at least one target-country role"),  # the ambiguous zero
         ("roles", "two", "not"),
         ("name", None, "not"),
         ("qualified_by", "vibes", "qualified_by"),
@@ -214,6 +241,24 @@ ROLE = {
         ("roles", [{k: v for k, v in ROLE.items() if k != "url"}], "missing 'url'"),
         ("roles", [{**ROLE, "salary": "20 LPA"}], "unknown field"),
         ("roles", ["Staff Engineer"], "not a role"),
+        # T8.4's own. A role's countries are what put it here, so an empty list
+        # is the same contradiction an empty location list is — and a country
+        # outside the fifteen is a matcher this site has no tab for.
+        ("roles", [{**ROLE, "countries": []}], "not a non-empty list of target countries"),
+        ("roles", [{**ROLE, "countries": ["Poland"]}], "not a non-empty list of target countries"),
+        ("roles", [{**ROLE, "countries": "India"}], "not a non-empty list of target countries"),
+        # SPEC feature 15: silence is `unknown`, and `unknown` is a word. A null
+        # or a blank here would render as an absence the site cannot tell from
+        # "we read the posting and it said nothing".
+        ("roles", [{**ROLE, "visa": None}], "visa None is not one of"),
+        ("roles", [{**ROLE, "visa": "maybe"}], "visa 'maybe' is not one of"),
+        ("roles", [{**ROLE, "hire_from_abroad": ""}], "hire_from_abroad '' is not one of"),
+        ("roles", [{k: v for k, v in ROLE.items() if k != "visa"}], "missing 'visa'"),
+        # The company's country set is derived from its roles, so a row that
+        # states a country none of its roles is in would put itself under a tab
+        # that reveals nothing.
+        ("countries", ["India", "Japan"], "is not its roles'"),
+        ("countries", [], "is not its roles'"),
     ],
 )
 def test_schema_validation_rejects_bad_row(field, value, because):
@@ -378,6 +423,158 @@ def test_the_e2e_dataset_is_a_file_this_build_could_have_written():
         not row["cities"] and not any(role["workplace"] == "remote" for role in row["roles"])
         for row in shipped["companies"]
     ), "no placeless-and-not-remote case"
+    # T8.4's three, for the country tabs and the openness badge T8.5 builds on.
+    # A dataset of India-only companies would let a broken tab pass, and one
+    # where every verdict is the same would let "unknown" render as "no".
+    listed_countries = {c for row in shipped["companies"] for c in row["countries"]}
+    assert len(listed_countries) > 1, "no country-tab case: every company is in one country"
+    assert any(
+        "India" not in row["countries"] for row in shipped["companies"]
+    ), "no company outside India, so the India-only enrichments prove nothing"
+    assert any(len(row["countries"]) > 1 for row in shipped["companies"]), "no two-country company"
+    for field in ("visa", "hire_from_abroad"):
+        assert {role[field] for role in roles} == {"yes", "no", "unknown"}, f"{field} lacks a case"
+    # The India-only enrichments must be absent wherever India is (SPEC v2), or
+    # the fixture would assert a shape the build cannot produce.
+    assert not [
+        row
+        for row in shipped["companies"]
+        if "India" not in row["countries"] and (row["salary"] or row["mca"])
+    ], "an India enrichment on a company with no India role"
+
+
+# --- T8.4, the description pass -----------------------------------------------
+
+#: The cheap Greenhouse pass: the same board with `content` gone, which is
+#: literally what `content=false` returns. Derived rather than committed as a
+#: second fixture, so the two passes cannot drift apart in the fixtures.
+CHEAP = [{k: v for k, v in role.items() if k != "content"} for role in BOARD]
+
+
+def two_pass(cheap=CHEAP, rich=BOARD):
+    """A Greenhouse that answers one board cheaply and another with the prose,
+    recording which pass was asked for."""
+    calls: list[str] = []
+
+    def probe(slug):
+        calls.append("probe")
+        return cheap
+
+    def describe(slug):
+        calls.append("describe")
+        return rich
+
+    return {"greenhouse": PROBES["greenhouse"]._replace(probe=probe, describe=describe)}, calls
+
+
+def test_the_description_pass_runs_only_for_a_board_that_matched():
+    """T8.1's affordable strategy, which is an ordering: 259 of 422 Greenhouse
+    boards have no posting in any target country, and the 13.7x-35.3x payload
+    multiplier must not be paid on them. So the country filter runs on the cheap
+    board, and only a board that will contribute a row is fetched again."""
+    probes, calls = two_pass()
+    build(CORPUS[:1], {"Acme": GREENHOUSE}, probes)
+    assert calls == ["probe", "describe"]
+
+    nowhere = json.loads(board("Warsaw, Poland"))["jobs"]
+    probes, calls = two_pass(cheap=nowhere)
+    rows, outcomes = build(CORPUS[:1], {"Acme": GREENHOUSE}, probes)
+
+    assert outcomes == {"Acme": Outcome.NO_TARGET_ROLES}
+    assert calls == ["probe"], "a board with nothing for us was fetched a second time"
+    assert rows == []
+
+
+def test_openness_comes_from_the_second_pass_not_the_first():
+    """The cheap pass carries no prose at all, so a role read off it is `unknown`
+    on both fields — which is the honest answer for a posting whose text we never
+    fetched, and exactly what the site must not render as "no"."""
+    probes, _ = two_pass()
+    rows, _ = build(CORPUS[:1], {"Acme": GREENHOUSE}, probes)
+    assert [(r["visa"], r["hire_from_abroad"]) for r in rows[0]["roles"]] == [
+        ("yes", "unknown"),
+        ("no", "no"),
+    ]
+
+    # The same build with the second pass returning the cheap board: same rows,
+    # same roles, no verdicts.
+    probes, _ = two_pass(rich=CHEAP)
+    silent, _ = build(CORPUS[:1], {"Acme": GREENHOUSE}, probes)
+    assert [(r["visa"], r["hire_from_abroad"]) for r in silent[0]["roles"]] == [
+        ("unknown", "unknown"),
+        ("unknown", "unknown"),
+    ]
+
+
+@pytest.mark.parametrize(
+    "rich, because",
+    [
+        (Outcome.PROBE_FAILED, "the second call failed outright"),
+        ([], "the second call answered with a board that lost the role"),
+    ],
+)
+def test_a_failed_description_pass_costs_the_openness_never_the_company(rich, because):
+    """We DID read this board — the company is listed and its roles are whole. A
+    description pass that fails afterwards is a fact we could not learn about a
+    posting, not a company we could not check, and collapsing the two would put
+    `probe-failed` on a company whose board we are holding."""
+    probes, _ = two_pass(rich=rich)
+
+    rows, outcomes = build(CORPUS[:1], {"Acme": GREENHOUSE}, probes)
+
+    assert outcomes == {"Acme": Outcome.LISTED}, because
+    assert len(rows[0]["roles"]) == 2
+    assert all(role["visa"] == "unknown" for role in rows[0]["roles"])
+    assert errors(rows[0]) == []
+
+
+def test_a_provider_that_ships_its_prose_is_never_asked_twice():
+    """Ashby and Lever send the descriptions whether we want them or not (T8.1),
+    so there is no second pass to make — and `describe` being None is what says
+    so. A wrapper that "unified" the three would be a call this build cannot
+    afford, made 315 times a night for nothing."""
+    assert PROBES["ashby"].describe is None
+    assert PROBES["lever"].describe is None
+    assert PROBES["greenhouse"].describe is not None
+
+
+def test_ashby_and_lever_openness_is_read_off_the_board_we_already_fetched():
+    """The other half: prose that arrived unasked still has to reach the role.
+    Lever's is the one that needs care — the sponsorship boilerplate lives in
+    `additional`, which a `descriptionPlain`-only reader never sees."""
+    postings = json.loads(ashby_board(("Bengaluru, India",)))["jobs"]
+    postings[0]["descriptionPlain"] = "We are unable to offer visa sponsorship for this role."
+    rows, _ = build(
+        CORPUS[:1], {"Acme": Slug(ats="ashby", slug="acme", method="guess")},
+        answering("ashby", acme=postings),
+    )
+    assert rows[0]["roles"][0]["visa"] == "no"
+
+    postings = json.loads(lever_board(("Bengaluru, Karnataka",)))
+    postings[0]["descriptionPlain"] = "Join us."
+    postings[0]["additional"] = "<p>We do sponsor visas for this role.</p>"
+    rows, _ = build(
+        CORPUS[:1], {"Acme": Slug(ats="lever", slug="acme", method="careers-page")},
+        answering("lever", acme=postings),
+    )
+    assert rows[0]["roles"][0]["visa"] == "yes"
+
+
+def test_country_counts_name_every_country_including_the_empty_ones():
+    """A zero is never ambiguous, in the build report as everywhere else: "no
+    company listed with a role in Norway" is a finding, and a country missing
+    from the mapping would read as one nobody looked for."""
+    abroad = json.loads(board("London, United Kingdom", "Bengaluru, India"))["jobs"]
+    rows, _ = build(CORPUS[:1], {"Acme": GREENHOUSE}, answering(acme=abroad))
+
+    counted = country_counts(rows)
+
+    assert set(counted) == set(COUNTRIES)
+    assert counted["India"] == 1 and counted["United Kingdom"] == 1
+    assert counted["Norway"] == 0
+    # Companies, not roles, and a company in two countries is in both counts — so
+    # these deliberately do not sum to the number listed.
+    assert sum(counted.values()) == 2 and len(rows) == 1
 
 
 def test_the_two_halves_of_slug_unresolved_are_counted_apart():
@@ -401,15 +598,62 @@ def test_the_two_halves_of_slug_unresolved_are_counted_apart():
     }
 
 
-def test_no_india_roles_is_a_finding_not_a_gap():
-    """The one honest exclusion: we read their whole board and none of it was
-    India. Note what that board contains — `In-Office` must not rescue it."""
-    empty = json.loads(board("Warsaw, Poland", "In-Office", "Indianapolis, Indiana"))["jobs"]
+def test_no_target_roles_is_a_finding_not_a_gap():
+    """The one honest exclusion: we read their whole board and none of it was in
+    a country we cover. Note what that board contains — `In-Office` must not
+    rescue it, and neither must a place that merely sounds like one of ours
+    (`Cambridge, MA` is not the UK, `Perth` is not Australia)."""
+    empty = json.loads(
+        board("Warsaw, Poland", "In-Office", "Indianapolis, Indiana", "Cambridge, MA", "Perth")
+    )["jobs"]
 
     rows, outcomes = build(CORPUS[:1], {"Acme": GREENHOUSE}, answering(acme=empty))
 
-    assert outcomes == {"Acme": Outcome.NO_INDIA_ROLES}
+    assert outcomes == {"Acme": Outcome.NO_TARGET_ROLES}
     assert rows == []
+
+
+def test_a_company_hiring_only_outside_india_is_now_listed():
+    """T8.4 is the widening, and this is what widened: a board with no India role
+    on it at all used to leave as a finding, and now leaves as a row. The India
+    behaviour is preserved as one country of fifteen rather than re-litigated —
+    `no-target-roles` still means we read the whole board and found nothing."""
+    abroad = json.loads(board("London, United Kingdom", "Tokyo, Japan", "Warsaw, Poland"))["jobs"]
+
+    rows, outcomes = build(CORPUS[:1], {"Acme": GREENHOUSE}, answering(acme=abroad))
+
+    assert outcomes == {"Acme": Outcome.LISTED}
+    assert rows[0]["countries"] == ["United Kingdom", "Japan"]  # COUNTRIES order, not board order
+    assert [role["locations"] for role in rows[0]["roles"]] == [
+        ["London, United Kingdom"],
+        ["Tokyo, Japan"],
+    ], "the Warsaw role is not a role this site has anything to say about"
+    # The India-only fields degrade to absence rather than to a guess: there are
+    # no India cities to filter on, and the enrichments never run (SPEC v2 keeps
+    # AmbitionBox and the MCA register India's).
+    assert rows[0]["cities"] == []
+    assert rows[0]["salary"] is None and rows[0]["mca"] is None
+    assert errors(rows[0]) == []
+
+
+def test_one_posting_open_in_two_countries_is_one_role_in_both():
+    """The multi-country posting, which is real: "London, UK; Sydney, Australia"
+    is one job you can take in either place. It is one role, it carries both
+    countries, and the company shows up under both tabs."""
+    postings = json.loads(
+        ashby_board(("London, United Kingdom", "Sydney, Australia"), ("Bengaluru, India",))
+    )["jobs"]
+
+    rows, _ = build(
+        CORPUS[:1], {"Acme": Slug(ats="ashby", slug="acme", method="guess")},
+        answering("ashby", acme=postings),
+    )
+
+    assert len(rows[0]["roles"]) == 2
+    assert rows[0]["roles"][0]["countries"] == ["United Kingdom", "Australia"]
+    assert rows[0]["countries"] == ["India", "United Kingdom", "Australia"]
+    assert rows[0]["cities"] == ["Bengaluru"], "London and Sydney are not India cities"
+    assert errors(rows[0]) == []
 
 
 # --- T6.4, fail-safe publish --------------------------------------------------
@@ -448,7 +692,9 @@ def dark_after(answers=EVERY):
         seen.append(slug)
         return BOARD if len(seen) <= answers else Outcome.PROBE_FAILED
 
-    return {"greenhouse": PROBES["greenhouse"]._replace(probe=probe)}
+    # The description pass answers whatever the cheap one did, which is what
+    # Greenhouse does: a board that is dark is dark for both calls.
+    return {"greenhouse": PROBES["greenhouse"]._replace(probe=probe, describe=lambda _: BOARD)}
 
 
 def publish(path, probes, corpus=PARTIAL, slugs=SLUGS):

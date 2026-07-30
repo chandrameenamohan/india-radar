@@ -19,11 +19,19 @@ from collections.abc import Mapping
 from typing import Any
 
 from src.net import get
+from src.openness import plain
 from src.outcomes import Outcome
 
-#: content=false drops the job descriptions — we need locations, not prose, and
-#: the full payload is orders of magnitude larger for no gain.
+#: content=false drops the job descriptions. It is the pass every board gets: 259
+#: of 422 Greenhouse boards have no posting in any target country (T8.1), and
+#: those boards never need the prose.
 API = "https://boards-api.greenhouse.io/v1/boards/{slug}/jobs?content=false"
+
+#: The same endpoint, with the descriptions in it — what T8.4 fetches for a board
+#: that turned out to have a target-country posting. Measured (T8.1): 13.7x-35.3x
+#: the bytes and under 2x the latency, on the same single call. Every role on all
+#: three sampled boards carried non-empty content (803/803, 374/374, 128/128).
+RICH = "https://boards-api.greenhouse.io/v1/boards/{slug}/jobs?content=true"
 
 #: The board itself, rather than its jobs — the one place Greenhouse states
 #: *whose* board a slug belongs to. The jobs payload never says, so a guessed
@@ -53,6 +61,16 @@ def parse(payload: str) -> Roles | Outcome:
     return roles
 
 
+def _board(url: str, timeout: int) -> Roles | Outcome:
+    """One board fetch, with the status rules both passes keep."""
+    status, body = get(url, timeout)
+    if status == 404:
+        return Outcome.SLUG_UNRESOLVED
+    if status != 200:
+        return Outcome.PROBE_FAILED
+    return parse(body)
+
+
 def probe(slug: str, timeout: int = 30) -> Roles | Outcome:
     """Every open role on a Greenhouse board, or the outcome that says why not.
 
@@ -62,12 +80,23 @@ def probe(slug: str, timeout: int = 30) -> Roles | Outcome:
     an order of magnitude, wrap the loop in the ThreadPoolExecutor
     slugs.resolve_all already uses. Ashby (T3.2) is the one that needs it.
     """
-    status, body = get(API.format(slug=slug), timeout)
-    if status == 404:
-        return Outcome.SLUG_UNRESOLVED
-    if status != 200:
-        return Outcome.PROBE_FAILED
-    return parse(body)
+    return _board(API.format(slug=slug), timeout)
+
+
+def describe(slug: str, timeout: int = 60) -> Roles | Outcome:
+    """The same board again, with each role's description text in it (T8.4).
+
+    Greenhouse is the only provider that charges for prose, and it charges in
+    bytes rather than in calls — so this is the second half of the two-pass T8.1
+    measured as affordable: the cheap `probe` over all 422 boards, this over the
+    163 that turned out to have a target-country posting. Whole corpus, both
+    passes: 1m55s and 270MB at 10 concurrent callers.
+
+    The timeout is double `probe`'s because the payload is: a 803-role board goes
+    0.69MB → 9.40MB. The latency multiplier stayed under 2x throughout, so 60s is
+    slack rather than an expected wait.
+    """
+    return _board(RICH.format(slug=slug), timeout)
 
 
 def locations(role: Mapping[str, Any]) -> list[str]:
@@ -80,6 +109,17 @@ def locations(role: Mapping[str, Any]) -> list[str]:
     """
     name = (role.get("location") or {}).get("name")
     return [name] if isinstance(name, str) else []
+
+
+def text(role: Mapping[str, Any]) -> str:
+    """This role's description as readable prose, or "" if we never asked for it.
+
+    Empty is the answer for every role that came off the cheap pass, and it is an
+    honest one: `openness.classify("")` is `unknown`, which is what we know about
+    a posting whose text we did not fetch. `content` is doubly HTML-escaped here,
+    which `openness.plain` handles.
+    """
+    return plain(role.get("content"))
 
 
 def board_name(slug: str, timeout: int = 20) -> str | None:

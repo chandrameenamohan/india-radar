@@ -9,7 +9,7 @@ import json
 
 import pytest
 
-from src.lever import API, locations, parse, probe
+from src.lever import API, locations, parse, probe, text
 from src.outcomes import CHECKED, Outcome
 
 #: What Lever answers for a slug that is not a board. Measured against ten wrong
@@ -54,7 +54,7 @@ def test_empty_array_is_unverified_not_zero(monkeypatch):
 
     Lever's empty array is the one answer we cannot read: an abandoned board, a
     renamed company and a firm that isn't hiring all produce it, and Lever has
-    no name lookup to ask a second question of. `no-india-roles` would claim we
+    no name lookup to ask a second question of. `no-target-roles` would claim we
     checked — it counts as CHECKED and would let the site imply "not hiring".
     """
     fake_get, calls = answering(200, "[]")
@@ -133,3 +133,35 @@ def test_a_posting_with_no_stated_place_is_not_an_error():
     assert locations({"categories": {"location": None, "allLocations": []}}) == []
     assert locations({"categories": {"location": "Pune, Maharashtra"}}) == ["Pune, Maharashtra"]
     assert locations({}) == []
+
+
+def test_text_glues_all_four_fields_because_the_boilerplate_is_in_the_last_one():
+    """The measured trap (T8.1): `descriptionPlain` is the OPENING paragraphs
+    only, and a reader that stops there misses 62% (pigment), 77% (kpler), 66%
+    (patsnap) of the posting — including `additional`, which is exactly where "we
+    are unable to sponsor" sits. So all four fields are glued before classifying.
+    """
+    posting = {
+        "descriptionPlain": "Build the ingest pipeline.",
+        "description": "<p>Build the ingest pipeline.</p>",
+        "lists": [{"text": "Requirements", "content": "<li>Eight years of Python.</li>"}],
+        "additional": "<p>We are unable to sponsor visas for this role.</p>",
+    }
+
+    whole = text(posting)
+
+    assert whole.startswith("Build the ingest pipeline.")
+    assert "Eight years of Python." in whole
+    assert "unable to sponsor visas" in whole, "the boilerplate field is the one that matters"
+    # Fields are separated, not concatenated: the last word of one and the first
+    # of the next must not become one token.
+    assert "pipeline.Eight" not in whole
+
+
+def test_text_survives_the_fields_a_posting_does_not_have():
+    """Every field here is optional on a real board, and a posting with none of
+    them is silence — which `openness` reads as `unknown`, the honest answer."""
+    assert text({"description": "<p>Join us.</p>"}) == "Join us."
+    assert text({"additionalPlain": "No sponsorship available."}) == "No sponsorship available."
+    assert text({"lists": None, "categories": {}}) == ""
+    assert text({}) == ""

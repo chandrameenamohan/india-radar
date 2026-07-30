@@ -4,25 +4,29 @@
       "id": 5988684004,
       "title": "Senior Software Engineer, Platform",
       "location": { "name": "Bengaluru, India" },
-      "absolute_url": "https://job-boards.greenhouse.io/acme/jobs/5988684004"
+      "absolute_url": "https://job-boards.greenhouse.io/acme/jobs/5988684004",
+      "content": "&amp;lt;p&amp;gt;Visa sponsorship: we do sponsor visas! However, we aren&amp;#39;t able to successfully sponsor visas for every role and every candidate.&amp;lt;/p&amp;gt;"
     },
     {
       "id": 5988684005,
       "title": "Account Executive",
       "location": { "name": "Warsaw, Poland" },
-      "absolute_url": "https://job-boards.greenhouse.io/acme/jobs/5988684005"
+      "absolute_url": "https://job-boards.greenhouse.io/acme/jobs/5988684005",
+      "content": "&amp;lt;p&amp;gt;Sell the platform across EMEA.&amp;lt;/p&amp;gt;"
     },
     {
       "id": 5988684006,
       "title": "Staff Engineer, Data",
       "location": { "name": "Bengaluru, India; Mumbai, India" },
-      "absolute_url": "https://job-boards.greenhouse.io/acme/jobs/5988684006"
+      "absolute_url": "https://job-boards.greenhouse.io/acme/jobs/5988684006",
+      "content": "&amp;lt;ul&amp;gt;&amp;lt;li&amp;gt;You must have the right to work in India.&amp;lt;/li&amp;gt;&amp;lt;li&amp;gt;Eight years building data platforms.&amp;lt;/li&amp;gt;&amp;lt;/ul&amp;gt;"
     },
     {
       "id": 5988684007,
       "title": "Recruiter",
       "location": { "name": "In-Office" },
-      "absolute_url": "https://job-boards.greenhouse.io/acme/jobs/5988684007"
+      "absolute_url": "https://job-boards.greenhouse.io/acme/jobs/5988684007",
+      "content": "&amp;lt;p&amp;gt;Own hiring end to end. The executive sponsor for this search is our COO.&amp;lt;/p&amp;gt;"
     }
   ],
   "meta": { "total": 4 }

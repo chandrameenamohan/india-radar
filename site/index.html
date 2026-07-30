@@ -68,20 +68,26 @@
 <body>
 <header>
   <h1>INDIA·RADAR</h1>
-  <p class="thesis">Funded software companies with an open India role on their own job board —
+  <!-- T8.4 widened the data from India to fifteen countries, so the wording that
+       said "India role" everywhere now says "role". The country tabs and the
+       openness badges are T8.5's; this is only the page not claiming that a
+       Berlin posting is in India. -->
+  <p class="thesis">Funded software companies with an open role on their own job board —
     proven by the board, not by a claim.</p>
   <p class="snapshot">Snapshot <time id="snapshot">—</time></p>
 </header>
 
 <div id="controls">
   <label>Search<input id="q" type="search" placeholder="company name" autocomplete="off"></label>
-  <label>Hiring city<select id="city"><option value="any">Anywhere in India</option></select></label>
+  <!-- India cities, and only India's: the city filter is the India view's, and
+       SPEC v2 keeps the per-country enrichments out of scope. -->
+  <label>Hiring city<select id="city"><option value="any">Any city</option></select></label>
   <!-- SPEC feature 10's remote-only filter. T5.2 left it out deliberately: it
        filters on a field no row carried until T4.1, and a control that can only
        return nothing is worse than no control. -->
   <label>Workplace<select id="remote">
     <option value="any">Any</option>
-    <option value="remote">Remote India roles</option>
+    <option value="remote">Remote roles</option>
   </select></label>
   <!-- SPEC feature 10's MCA-verified filter, now that a row can carry a CIN.
        Labelled by what the register actually holds rather than as a quality
@@ -103,7 +109,7 @@
     <option value="365">Last 12 months</option>
   </select></label>
   <label>Sort by<select id="sort">
-    <option value="reqs">India roles</option>
+    <option value="reqs">Open roles</option>
     <option value="raised">Amount raised</option>
     <option value="date">Most recently funded</option>
     <option value="name">Name</option>
@@ -118,8 +124,9 @@
        until a dataset loads and stays empty for one this page refuses to read —
        a count with no build behind it would be the exact claim this says. -->
   <p id="integrity"></p>
-  <p>Every company here showed at least one open India role on its own job board on the snapshot
-    date. A company we could not check is excluded rather than shown as "not hiring".</p>
+  <p>Every company here showed at least one open role, in one of the countries this radar covers,
+    on its own job board on the snapshot date. A company we could not check is excluded
+    rather than shown as "not hiring".</p>
   <p>The MCA data we hold lists companies registered in India as subsidiaries of a parent
     incorporated abroad. An India-founded company cannot appear in it at all, so a missing CIN
     says nothing about a company — and a present one is a registration, not an endorsement.</p>
@@ -131,7 +138,7 @@
 // The site is a renderer and nothing else: it reads the JSON the build wrote and
 // never recomputes a fact. The snapshot date in particular ships with the data,
 // because a date taken at render time would claim a freshness the JSON lacks.
-const SCHEMA = 7;                                  // src/build.py SCHEMA_VERSION
+const SCHEMA = 8;                                  // src/build.py SCHEMA_VERSION
 const DEFAULT_SRC = '../data/companies.json';
 
 // Test seam: e2e drives this same page over a fixture dataset (data/companies.json
@@ -188,7 +195,7 @@ const isRemote = (c) => c.roles.some((r) => r.workplace === 'remote');
 // board literally said. `locations` is schema-guaranteed non-empty, so there is
 // no fourth case.
 const where = (c) => c.cities.length ? c.cities.join(' · ')
-  : isRemote(c) ? 'Remote — India'
+  : isRemote(c) ? `Remote — ${c.countries.join(' · ')}`
   : [...new Set(c.roles.flatMap((r) => r.locations))].join(' · ');
 // A directory source knows a company is past Series A without knowing when it
 // raised (schema v3). That is an absent fact, so it reads as one -- and it can
@@ -267,7 +274,7 @@ function row(c) {
   const summary = el('summary');
   summary.append(
     el('span', 'name', c.name),
-    el('span', 'reqs', `${reqs} India ${reqs === 1 ? 'role' : 'roles'}`),
+    el('span', 'reqs', `${reqs} ${reqs === 1 ? 'role' : 'roles'}`),
     el('span', 'raised', money(c)),
     el('span', 'where', where(c)),
   );
@@ -275,7 +282,7 @@ function row(c) {
   const body = el('div', 'detail');
   const funding = el('p', null, `Raised ${money(c)} · ${round(c)} · announced ${when(c)} · `);
   funding.append(link(c.source_url, 'funding source'));
-  const board = el('p', null, `${reqs} open India ${reqs === 1 ? 'role' : 'roles'} in ${
+  const board = el('p', null, `${reqs} open ${reqs === 1 ? 'role' : 'roles'} in ${
     where(c)} · `);
   board.append(BOARDS[c.ats]
     ? link(BOARDS[c.ats] + c.slug, `${c.ats}/${c.slug}`)

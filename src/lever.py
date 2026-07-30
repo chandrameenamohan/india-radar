@@ -33,6 +33,7 @@ from collections.abc import Mapping
 from typing import Any
 
 from src.net import get
+from src.openness import plain
 from src.outcomes import Outcome
 
 #: `mode=json` is the documented public feed; without it the same URL 404s the
@@ -90,3 +91,31 @@ def locations(role: Mapping[str, Any]) -> list[str]:
     categories = role.get("categories") or {}
     places = categories.get("allLocations") or [categories.get("location")]
     return [place for place in places if isinstance(place, str)]
+
+
+def text(role: Mapping[str, Any]) -> str:
+    """This posting's whole prose (T8.4) — and "whole" is the point of the function.
+
+    Lever splits one posting across four fields, and a `descriptionPlain`-only
+    reader never sees **62% (pigment), 77% (kpler), 66% (patsnap)** of it (T8.1).
+    The opening paragraphs are `description`; the requirements and benefits are
+    `lists[].content`; the legal boilerplate is `additional` — and the boilerplate
+    is exactly where "we are unable to sponsor" sits. So all four are glued, the
+    plain form preferred where Lever offers both, and the HTML stripped where it
+    does not.
+
+    Joined with a newline rather than concatenated, so the last word of one field
+    and the first word of the next do not become one token. It is a separator and
+    not a barrier: `openness` flattens whitespace and then reads a fixed window of
+    characters, so a negation can still be read across a field boundary. That is
+    the same risk it already carries across a sentence boundary, and the alternative
+    — classifying each field alone — would hide the postings whose sponsorship
+    statement is in `additional` and whose visa word is in the requirements list.
+    """
+    lists = role.get("lists")
+    parts = [
+        role.get("descriptionPlain") or role.get("description"),
+        *(item.get("content") for item in lists or () if isinstance(item, Mapping)),
+        role.get("additionalPlain") or role.get("additional"),
+    ]
+    return "\n".join(found for part in parts if (found := plain(part)))

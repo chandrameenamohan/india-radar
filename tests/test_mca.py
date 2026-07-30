@@ -421,11 +421,15 @@ _CORPUS = [
     }
 ]
 _SLUGS = {"Acme": {"ats": "greenhouse", "slug": "acme", "method": "careers-page"}}
-_PROBES = {
-    "greenhouse": build.PROBES["greenhouse"]._replace(
-        probe=lambda slug: [
-            {"title": "Engineer", "absolute_url": "https://x.test/1",
-             "location": {"name": "Bengaluru, India"}}
-        ]
-    )
-}
+def _board(slug):
+    return [
+        {"title": "Engineer", "absolute_url": "https://x.test/1",
+         "location": {"name": "Bengaluru, India"}}
+    ]
+
+
+#: Both Greenhouse passes answer the same board, as the live API does. Left
+#: unstubbed the description pass would be a live call from a unit test —
+#: conftest refuses those, which is how this stub got written rather than
+#: forgotten.
+_PROBES = {"greenhouse": build.PROBES["greenhouse"]._replace(probe=_board, describe=_board)}

@@ -43,6 +43,7 @@ countries across 277 live boards — the whole of data/slugs.json, not a sample.
 """
 from __future__ import annotations
 
+import html
 import re
 from typing import NamedTuple
 
@@ -58,6 +59,11 @@ class Openness(NamedTuple):
     visa: str
     hire_from_abroad: str
 
+
+#: Every answer either field can carry. Named here so that a schema checking a
+#: role (src/build.py) checks against the vocabulary this module emits rather
+#: than against a second copy of it that can drift.
+VERDICTS = ("yes", "no", "unknown")
 
 #: The answer for silence, for empty text, and for text we cannot read. One
 #: object because it is one meaning: this module has nothing to say.
@@ -119,6 +125,34 @@ _NON_ASCII_LIMIT = 0.10
 
 _SPACE = re.compile(r"\s+")
 
+#: Markup, minimally. A tag becomes a space rather than nothing, because
+#: `<li>Bengaluru</li><li>India</li>` glued into one word would hide both.
+_TAG = re.compile(r"<[^>]+>")
+
+
+def plain(markup: str | None) -> str:
+    """The readable text inside a posting's markup — tags out, entities in.
+
+    Lives here rather than in each provider because all three need it and none of
+    them owns it: Greenhouse's `content` is escaped HTML, Lever's `lists[].content`
+    is HTML, and Ashby's `descriptionPlain` is already flat but its
+    `descriptionHtml` is not. `learning-tests/openness_live.py:plain` is the shape
+    every measurement in this module's docstring was taken with, and this is it.
+
+    **Greenhouse double-escapes**, so `&amp;lt;p&amp;gt;` needs two unescapes to
+    become a tag and then be stripped. One unescape leaves `&lt;p&gt;` sitting in
+    the text as literal angle brackets — visible junk that a phrase can hide
+    inside. `html.unescape` on text with no entities is a no-op, so the second
+    call costs the other two providers nothing.
+
+    stdlib only: `html.unescape` and one regex. An HTML parser here would be a
+    dependency bought to delete `<p>` — and `html.parser` in the stdlib would be
+    thirty lines of subclass for the same result.
+    """
+    if not markup:
+        return ""
+    return _SPACE.sub(" ", _TAG.sub(" ", html.unescape(html.unescape(markup)))).strip()
+
 
 def _readable(text: str) -> bool:
     """Is this text in a language whose phrases were measured, i.e. English?"""
@@ -161,10 +195,10 @@ def classify(text: str | None) -> Openness:
     `lists[].content` and `additional`, and the sponsorship boilerplate sits in
     `additional` — a `descriptionPlain`-only reader misses 62-77% of the text
     (measured, three boards). Greenhouse needs `?content=true`; Ashby already
-    ships `descriptionPlain`. Tags and HTML entities are the caller's problem too
-    (`learning-tests/openness_live.py:plain` is the reference shape); whitespace
-    and curly apostrophes are normalised here because the measurements were taken
-    on flattened, straight-quoted text.
+    ships `descriptionPlain`. Tags and HTML entities are the caller's problem too,
+    and `plain` above is the tool for it; whitespace and curly apostrophes are
+    normalised here because the measurements were taken on flattened,
+    straight-quoted text.
 
     **The tie-break, chosen deliberately and not by first match:** when a posting
     carries both polarities, the answer is `yes`. An unnegated sponsorship

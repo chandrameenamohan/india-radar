@@ -7,7 +7,7 @@ import json
 
 import pytest
 
-from src.greenhouse import parse, probe
+from src.greenhouse import describe, parse, probe, text
 from src.outcomes import Outcome
 
 
@@ -69,7 +69,7 @@ def test_short_or_malformed_response_is_probe_failed(payload):
 def test_404_maps_to_outcome(monkeypatch, status, outcome):
     """A 404 is a slug problem and a 502 is a reachability problem — they route a
     company to different fixes. Neither is an empty success: an empty role list
-    renders as "checked, no India roles", which is a claim we haven't earned."""
+    renders as "checked, no target-country roles", a claim we haven't earned."""
     monkeypatch.setattr("src.greenhouse.get", lambda url, timeout=30: (status, ""))
 
     assert probe("acme") == outcome
@@ -90,3 +90,42 @@ def test_probe_returns_roles_on_a_clean_board(monkeypatch):
     assert isinstance(roles, list) and len(roles) == 1
     assert roles[0]["absolute_url"].startswith("https://job-boards.greenhouse.io/")
     assert called == ["https://boards-api.greenhouse.io/v1/boards/figma/jobs?content=false"]
+
+
+def test_describe_asks_the_same_endpoint_with_the_prose_in_it(monkeypatch):
+    """T8.4's second pass. It is the SAME call with one parameter flipped — no
+    per-role fetch, which is what makes reading 4,311 descriptions affordable
+    (T8.1: 13.7x-35.3x the bytes, under 2x the latency)."""
+    called = []
+
+    def fake_get(url, timeout=60):
+        called.append(url)
+        return 200, board("Bengaluru, India")
+
+    monkeypatch.setattr("src.greenhouse.get", fake_get)
+
+    assert isinstance(describe("figma"), list)
+    assert called == ["https://boards-api.greenhouse.io/v1/boards/figma/jobs?content=true"]
+
+
+def test_describe_keeps_the_status_rules_probe_keeps(monkeypatch):
+    """A board that 404s on the second pass is the same slug problem it would be
+    on the first. `build.described` treats every outcome here as "no prose", but
+    the module must still say which one it was rather than inventing an empty
+    board."""
+    monkeypatch.setattr("src.greenhouse.get", lambda url, timeout=60: (404, ""))
+    assert describe("acme") == Outcome.SLUG_UNRESOLVED
+    monkeypatch.setattr("src.greenhouse.get", lambda url, timeout=60: (503, ""))
+    assert describe("acme") == Outcome.PROBE_FAILED
+
+
+def test_text_reads_the_doubly_escaped_description():
+    """Greenhouse escapes its HTML twice, so one `html.unescape` leaves `&lt;p&gt;`
+    sitting in the text as literal characters — a phrase can hide inside that.
+    Measured on live boards; the fixture below is the shape they arrive in."""
+    role = {"content": "&amp;lt;p&amp;gt;We do sponsor visas &amp;amp; relocate.&amp;lt;/p&amp;gt;"}
+
+    assert text(role) == "We do sponsor visas & relocate."
+    # The cheap pass carries no `content` at all, and that is an honest silence
+    # rather than a missing field: `openness.classify("")` is `unknown`.
+    assert text({"title": "Staff Engineer"}) == ""
