@@ -2384,3 +2384,53 @@ openness rather than a guess — costs about 20 postings, not the Japan column.
 - Treat `no` as first-class: it is 3.43% against positives' 2.48%.
 - The 1.76% carrying both polarities need a rule, and `unknown` is a defensible
   one — but choose it deliberately rather than by first-match-wins.
+
+## Bonus: T8.2's city lists, measured (`learning-tests/locations_live.py`)
+
+`src/countries.py` landed while T8.1 was running, and its docstring says of the
+term lists: *"none of this is measured yet … when FINDINGS.md gains real location
+strings from the new countries, entries earn their place there or get deleted
+there."* This is that measurement — 26,880 location strings, 3,419 distinct, from
+every board in `data/slugs.json`. It changes no code.
+
+**The zero-false-positive claim holds.** Not one of the 3,419 distinct strings
+classifies to a country it is not in. Every trap the docstring names behaves as
+designed: `Cambridge, MA` (16 postings) → none, `Perth` → none, `Nice` → none,
+`Victoria, British Columbia, Canada` → none, `Richmond, CA` → none,
+`Kitchener-Waterloo, ON` → none, `Hamilton, NJ` → none. The 58 postings naming
+both a target country and the US/Canada are genuinely multi-located — `London, UK;
+New York, NY` — which is what feature 14 wants.
+
+Postings per country by that matcher, across all 734 boards:
+
+| | | | |
+|---|---|---|---|
+| United Kingdom 1694 | India 1100 | Germany 671 | Singapore 450 |
+| Spain 444 | France 377 | Australia 305 | Japan 255 |
+| Ireland 189 | Netherlands 180 | Sweden 107 | Denmark 46 |
+| Finland 21 | New Zealand 5 | Norway 3 | |
+
+**The Dublin exclusion is the one the data contradicts.** It was excluded because
+"Dublin CA (Bay Area) and Dublin OH are both live tech-posting addresses". In this
+corpus, **zero** strings name Dublin CA or Dublin OH. Meanwhile bare `Dublin`
+spellings are 51 postings and `Dublin, IE` another 8 — **59 postings, 24% of
+Ireland's volume, classifying as no country**. The collision it guards against does
+not occur here; the cost does. `Dublin, IE` is not even the bare-city case: it
+names its country in ISO form and nothing reads it.
+
+**The other exclusions are vindicated and cost nothing.** `Cambridge` is 17
+postings of which 16 are Cambridge MA. `Perth`, `Nice` and `Newcastle` are 1-2
+postings each. Excluding them is free — the docstring guessed right, and now it is
+measured rather than guessed.
+
+**53 of the 124 terms never fire on any real string.** Every Norwegian city but
+Oslo; every NZ city but Auckland; six of Japan's nine (kyoto, yokohama, fukuoka,
+sapporo, kobe, shibuya); most of Spain's and Sweden's; and every native-language
+country name except `deutschland` (`great britain`, `españa`, `sverige`,
+`danmark`, `norge`, `suomi`, `aotearoa` — all zero). Harmless padding, but it is
+padding, and the docstring asked for exactly this list.
+
+**New Zealand is 5 postings and Norway is 3.** SPEC says to add a country "when
+probe data shows real volume there, not before". Those two do not clear that bar
+in today's corpus. Not a bug in the matcher — a question for whoever owns the
+country list.
