@@ -21,8 +21,9 @@ from pathlib import Path
 from typing import NamedTuple
 
 from src import cbinsights, edgar, forbes, software, techcrunch, websites, yc
-from src.finsmes import BASE, Record, parse
+from src.finsmes import BASE, parse
 from src.net import fetch
+from src.record import Record
 
 #: SPEC feature 2's proxy: with no stated letter, a disclosed round this size
 #: stands in for "Series A or more".

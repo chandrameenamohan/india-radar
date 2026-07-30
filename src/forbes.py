@@ -24,8 +24,8 @@ import json
 from datetime import date
 from typing import Any
 
-from src.finsmes import Record
 from src.net import fetch
+from src.record import Record
 from src.websites import site
 
 API = "https://www.forbes.com/forbesapi/org/{name}/{year}/position/true.json?limit=200"

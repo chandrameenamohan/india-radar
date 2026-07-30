@@ -18,7 +18,7 @@ from __future__ import annotations
 
 import json
 
-from src.finsmes import Record
+from src.record import Record
 from src.websites import site
 
 #: One GET, ~10MB, the whole directory. There is no per-stage bucket to fetch a

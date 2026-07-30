@@ -27,8 +27,9 @@ import json
 import re
 from html import unescape
 
-from src.finsmes import AMOUNT, CURRENCY, SERIES, Record, to_units
+from src.finsmes import AMOUNT, CURRENCY, SERIES, to_units
 from src.net import fetch
+from src.record import Record
 
 API = "https://techcrunch.com/wp-json/wp/v2/posts"
 

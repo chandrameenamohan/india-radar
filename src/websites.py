@@ -28,8 +28,8 @@ import re
 from collections.abc import Iterable
 from concurrent.futures import ThreadPoolExecutor
 
-from src.finsmes import Record
 from src.net import fetch
+from src.record import Record
 from src.slugs import key
 
 #: Publishers measured to link the company they write about. Deliberately a list

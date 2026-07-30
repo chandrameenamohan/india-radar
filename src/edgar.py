@@ -24,8 +24,8 @@ import re
 import zipfile
 from datetime import date
 
-from src.finsmes import Record
 from src.net import get_bytes
+from src.record import Record
 
 #: The DERA quarterly data set. Note `structureddata`, not `dera` — the latter
 #: path 404s for these files.

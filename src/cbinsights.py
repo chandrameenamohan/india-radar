@@ -22,7 +22,7 @@ from __future__ import annotations
 import re
 from html import unescape
 
-from src.finsmes import Record
+from src.record import Record
 
 UNICORNS = "https://www.cbinsights.com/research-unicorn-companies"
 
