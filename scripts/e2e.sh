@@ -110,6 +110,21 @@ check "the footer's counts are the build report's" \
 check "the footer accounts for every company in the corpus" \
   "$(report "d['corpus_size']")" "$(( ${checked:-0} + ${unchecked:-0} ))"
 
+# T8.5's tabs against the OTHER artifact, the same shape as the footer check
+# above: the site counts the rows it was given, build.py's country_counts counted
+# them at the build, and per country the two must be the same number. Every one
+# of the fifteen, zeros included -- a country the site left out of its list would
+# read as one nobody looked for, which is the one thing a zero must never be
+# confusable with.
+check "the country counts are the build report's, zeros included" \
+  "$($PY -c "
+import json
+from src.countries import COUNTRIES
+listed = json.load(open('data/build-report.json'))['countries']
+print('|'.join(f'{c} ({listed[c]})' for c in COUNTRIES))")" \
+  "$(val '[...document.querySelectorAll("#country option")].slice(1)
+       .map((o) => o.textContent.replace(/,/g, "")).join("|")')"
+
 check "the empty snapshot says so instead of implying nothing is hiring" \
   "$($PY -c '
 import json
@@ -196,7 +211,9 @@ print('|'.join(f\"{r['title']} {r['url']}\" for r in first['roles']))")" \
 # The ambiguous zero, in badge form. 822 of the 1,112 published India roles state
 # no workplace at all -- Greenhouse states one nowhere -- so a site that defaulted
 # the blank to "on-site" would be inventing the most common answer for the
-# largest provider and showing it as though the company had said it.
+# largest provider and showing it as though the company had said it. Counts the
+# workplace badges specifically: T8.5 put the openness badges in the same row and
+# a bare `.tag` count would stop being about workplace at all.
 check "a role whose board stated no workplace shows no badge" \
   "$($PY -c "
 import json
@@ -204,7 +221,8 @@ c = json.load(open('tests/fixtures/companies-e2e.json'))['companies']
 first = sorted(c, key=lambda r: (-len(r['roles']), r['name']))[0]
 print(sum(1 for r in first['roles'] if r['workplace']), 'of', len(first['roles']))")" \
   "$(val '(() => { const ul = document.querySelector(".row[open] .roles");
-       return `${ul.querySelectorAll(".tag").length} of ${ul.querySelectorAll("li").length}` })()')"
+       return `${ul.querySelectorAll(".tag.workplace").length} of `
+            + ul.querySelectorAll("li").length })()')"
 
 # No listed company renders an empty location. The dataset holds all three ways
 # of being placeless: cities named, "Remote - India" (remote, no city), and a
@@ -307,10 +325,171 @@ check "an absent fact never renders as null" "0" \
   "$(val '[...document.querySelectorAll(".row")]
        .filter(n=>/\bnull\b|\bundefined\b|\bNaN\b/.test(n.textContent)).length')"
 
+echo "-- country tabs and openness badges (T8.5)"
+# expect_in <countries, | separated, empty for all fifteen> [filter over `r` and
+# its in-scope `roles`] -> the names the site should show under that country
+# scope, in the order it should show them. A country view counts and sorts on the
+# roles it is SHOWING, so the expectation has to as well: a company with four
+# roles and one of them in the UK is a one-role row under the UK tab, and sorts
+# as one.
+#
+# The countries arrive as a string and become a set HERE rather than being
+# written as a python set literal in the call: bash brace-expands `{'a','b'}`
+# straight through the quotes of a command substitution, which turned this check
+# into eight failed subprocesses whose empty output matched an empty expectation.
+# A vacuous green check is the failure mode worth naming.
+expect_in() { $PY -c "
+import json
+from src.countries import COUNTRIES
+named = '''$1'''
+scope = set(named.split('|')) if named else set(COUNTRIES)
+keep = []
+for r in json.load(open('tests/fixtures/companies-e2e.json'))['companies']:
+    roles = [role for role in r['roles'] if scope & set(role['countries'])]
+    if roles and (${2:-True}):
+        keep.append((r, roles))
+print('|'.join(r['name'] for r, _ in sorted(keep, key=lambda k: (-len(k[1]), k[0]['name']))))"; }
+tab() { $B click "#tabs button[data-group=$1]" >/dev/null 2>&1; }
+visibility() { val "(() => { const c = document.querySelector('$1')
+     .checkVisibility({contentVisibilityAuto: true, visibilityProperty: true});
+     return c ? 'shown' : 'hidden' })()"; }
+
+# Every tab, in one pass: the count on a tab is a claim about the rows behind it,
+# and a tab that says 6 and shows 4 is the site disagreeing with itself in public.
+check "each country tab shows as many companies as its count claims" "" \
+  "$(val '(() => {
+       const bad = [];
+       for (const t of document.querySelectorAll("#tabs button")) {
+         t.click();
+         const rows = document.querySelectorAll(".row").length;
+         const says = +t.querySelector(".count").textContent.replace(/,/g, "");
+         if (rows !== says) bad.push(`${t.dataset.group} says ${says}, shows ${rows}`);
+       }
+       document.querySelector("#tabs button").click();   // back to All countries
+       return bad.join("; ");
+     })()')"
+
+tab india
+check "a country tab shows only companies with a role in that country" \
+  "$(expect_in India)" "$(rows)"
+# The signature invariant of the wider radar, in the form SPEC feature 16 states
+# it: a company hiring only in Berlin is not a company hiring in Japan, and the
+# Japan tab is where that is provable.
+tab japan
+check "a company with only a Berlin role never appears under Japan" \
+  "$(expect_in Japan)" "$(rows)"
+# And the empty tab says WHICH country was empty. "No company matches these
+# filters" would be the ambiguous zero: it reads as a filter to clear rather than
+# as what it is -- we read the boards and none of them was hiring there.
+check "an empty country says which country was empty" \
+  "No company we could check had an open role in Japan on this snapshot." \
+  "$(val 'document.querySelector("#status").textContent')"
+
+tab europe
+check "the Europe tab groups the countries it says it does" \
+  "$(expect_in 'Germany|Netherlands|France|Spain|Sweden|Denmark|Norway|Finland')" \
+  "$(rows)"
+$B select '#country' 'Germany' >/dev/null 2>&1
+check "the country filter inside a tab narrows to that one country" \
+  "$(expect_in Germany)" "$(rows)"
+
+# The India-only enrichments and the filters over them, off India (SPEC v2). An
+# average India CTC beside a list of London roles is the site inventing a fact,
+# and a city filter still holding "Bengaluru" while invisible is a tab that shows
+# nothing for a reason the reader cannot see.
+tab uk-ie
+check "the India-only filters are hidden where India is not in view" "hidden hidden" \
+  "$(visibility '#city') $(visibility '#mca')"
+check "no India enrichment renders on a country view without India in it" "0 salary 0 mca" \
+  "$(val '`${document.querySelectorAll(".salary").length} salary `
+       + `${document.querySelectorAll(".mca").length} mca`')"
+# ...and the same company under a view that does include India keeps both, so the
+# check above is about the view and not about a company with nothing to render.
+tab india
+check "the same company renders its India enrichments where India is in view" "1 salary 1 mca" \
+  "$(val '(() => { const r = [...document.querySelectorAll(".row")].find((n) =>
+         n.querySelector(".name").textContent === "Theta Global");
+       return `${r.querySelectorAll(".salary").length} salary `
+            + `${r.querySelectorAll(".mca").length} mca` })()')"
+
+# Why this row is here, visibly: under a country view the row counts, locates and
+# lists the roles in that country. A UK row that said "2 roles" and "Bengaluru"
+# would be the site answering a question nobody asked.
+tab uk-ie
+check "a country view counts and locates a company by the roles it is showing" \
+  "$($PY -c "
+import json
+rows = json.load(open('tests/fixtures/companies-e2e.json'))['companies']
+row = [r for r in rows if 'United Kingdom' in r['countries']][0]
+roles = [x for x in row['roles'] if 'United Kingdom' in x['countries']]
+where = list(dict.fromkeys(place for x in roles for place in x['locations']))
+print('|'.join([row['name'], f\"{len(roles)} {'role' if len(roles) == 1 else 'roles'}\",
+                ' · '.join(where)]))")" \
+  "$(val '(() => { const r = document.querySelector(".row");
+       return [".name", ".reqs", ".where"].map((s) => r.querySelector(s).textContent).join("|") })()')"
+$B click '.row:first-of-type summary' >/dev/null 2>&1
+check "a country view says how many of the board's roles it is showing" \
+  "$($PY -c "
+import json
+rows = json.load(open('tests/fixtures/companies-e2e.json'))['companies']
+row = [r for r in rows if 'United Kingdom' in r['countries']][0]
+print(sum(1 for x in row['roles'] if 'United Kingdom' in x['countries']), len(row['roles']))")" \
+  "$(val '(() => { const t = document.querySelector(".row[open] .detail p").textContent;
+       return [t.match(/(\d+) open roles?\b/)[1],
+               t.match(/of (\d+) on this board\b/)[1]].join(" ") })()')"
+
+tab all
+# The openness badges, counted across the whole dataset: exactly as many badges
+# as there are stated verdicts, in each direction. This is where "unknown is
+# never rendered as no" is provable rather than asserted -- a silence rendered as
+# a badge of either colour breaks one of these two numbers, and the fixture holds
+# all three verdicts for both fields.
+check "a badge renders for every stated verdict and for no silence" \
+  "$($PY -c "
+import json
+roles = [x for r in json.load(open('tests/fixtures/companies-e2e.json'))['companies']
+         for x in r['roles']]
+said = lambda verdict: sum(1 for x in roles for f in ('visa', 'hire_from_abroad')
+                           if x[f] == verdict)
+print(f\"{said('yes')} open {said('no')} closed\")")" \
+  "$(val '`${document.querySelectorAll(".tag.open").length} open `
+       + `${document.querySelectorAll(".tag.closed").length} closed`')"
+# And the site says what a missing badge means, for the same reason it says what
+# a missing CIN means: 92% of postings state nothing, so silence is the majority
+# case and a reader who reads it as "no" reads the site wrong.
+check "the site explains that a missing openness badge is not a no" "1" \
+  "$(val '[...document.querySelectorAll("footer p")]
+       .filter((p) => /did not say/.test(p.textContent)).length')"
+
+# SPEC feature 15's filter: visa yes OR hire_from_abroad yes.
+$B select '#openness' 'open' >/dev/null 2>&1
+check "the open-to-foreign-hires filter returns only companies whose postings said yes" \
+  "$(expect_in '' "any(x['visa'] == 'yes' or x['hire_from_abroad'] == 'yes' for x in roles)")" \
+  "$(rows)"
+# Per country, like everything else in a country view: a company that sponsors in
+# London has said nothing about its Bengaluru role, and must not appear under the
+# India tab as though it had.
+tab india
+check "openness is read off the roles in view, not off the whole company" \
+  "$(expect_in India "any(x['visa'] == 'yes' or x['hire_from_abroad'] == 'yes' for x in roles)")" \
+  "$(rows)"
+tab all
+$B select '#openness' 'any' >/dev/null 2>&1
+check "clearing the open-to-foreign-hires filter restores every company" "$(expect True)" "$(rows)"
+
 # 4d accessibility basics: every control reachable and named. Not an audit.
 check "every control has an accessible name" "" \
   "$(val '[...document.querySelectorAll("input,select")].filter(c=>!c.labels.length
        && !c.getAttribute("aria-label")).map(c=>c.id).join(",")')"
+# The tabs are <button>s, so they are keyboard-reachable by construction; what
+# has to be checked is that the number beside a label has not eaten the name, and
+# that the pressed state a sighted reader sees is the one a screen reader gets.
+check "every country tab has an accessible name" "" \
+  "$(val '[...document.querySelectorAll("#tabs button")]
+       .filter((b) => !(b.getAttribute("aria-label") || b.textContent).trim())
+       .map((b) => b.dataset.group).join(",")')"
+check "exactly one country tab is pressed" "1" \
+  "$(val 'document.querySelectorAll("#tabs button[aria-pressed=true]").length')"
 check "rows are native disclosures, so keyboard-reachable without JS" \
   "$(expect True | awk -F'|' '{print NF}')" \
   "$(val 'document.querySelectorAll(".row > summary").length')"

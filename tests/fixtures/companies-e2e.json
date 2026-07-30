@@ -370,8 +370,20 @@
       "date": "2026-07-10",
       "source_url": "https://www.finsmes.com/2026/07/theta-global-raises-30m.html",
       "qualified_by": "letter",
-      "salary": null,
-      "mca": null
+      "salary": {
+        "avg_lpa": 19.2,
+        "reports": 318,
+        "observed": "2026-06-30",
+        "source_url": "https://www.ambitionbox.com/salaries/theta-global-salaries"
+      },
+      "mca": {
+        "cin": "U72900MH2019FTC330045",
+        "name": "THETA GLOBAL INDIA PRIVATE LIMITED",
+        "incorporated": "2019-11-08",
+        "city": "Mumbai",
+        "status": "Active",
+        "confidence": "exact"
+      }
     },
     {
       "name": "Iota Europe",

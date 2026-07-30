@@ -11,23 +11,38 @@
   :root {
     --bg: #10131a; --panel: #171b24; --line: #262c38;
     --text: #e5e9f0; --muted: #98a2b3; --accent: #7ee2b8;
+    /* A stated "no" is information, not an error, so it is warm rather than red. */
+    --stated-no: #e8b17a;
   }
   * { box-sizing: border-box; }
   body {
     margin: 0; padding: 2rem 1.25rem 4rem; background: var(--bg); color: var(--text);
     font: 16px/1.55 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
   }
-  main, header, footer, #controls, #status { max-width: 62rem; margin-inline: auto; }
+  main, header, footer, #tabs, #controls, #status { max-width: 62rem; margin-inline: auto; }
   h1 { margin: 0; font-size: 1.5rem; letter-spacing: .18em; font-weight: 650; }
   .thesis { margin: .5rem 0 0; color: var(--muted); max-width: 46rem; }
   .snapshot { margin: .75rem 0 1.5rem; font-size: .85rem; color: var(--muted); }
   .snapshot time { color: var(--text); font-variant-numeric: tabular-nums; }
+
+  #tabs { display: flex; flex-wrap: wrap; gap: .4rem; margin-bottom: 1rem; }
+  #tabs button { display: flex; gap: .5rem; align-items: baseline; cursor: pointer;
+                 background: var(--panel); color: var(--muted); border: 1px solid var(--line);
+                 border-radius: 999px; padding: .35rem .85rem; font: inherit; font-size: .85rem; }
+  #tabs button:hover { color: var(--text); }
+  #tabs button[aria-pressed="true"] { background: var(--accent); border-color: var(--accent);
+                                      color: var(--bg); }
+  #tabs button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  #tabs .count { font-variant-numeric: tabular-nums; opacity: .8; }
 
   #controls { display: flex; flex-wrap: wrap; gap: .75rem 1rem; align-items: end;
               padding-bottom: 1rem; border-bottom: 1px solid var(--line); }
   #controls label { display: flex; flex-direction: column; gap: .3rem;
                     font-size: .75rem; letter-spacing: .06em; text-transform: uppercase;
                     color: var(--muted); }
+  /* `hidden` alone loses to the rule above, so a hidden control would still be
+     laid out -- and a filter nobody can see is a filter nobody can clear. */
+  #controls label[hidden] { display: none; }
   input, select { background: var(--panel); color: var(--text); border: 1px solid var(--line);
                   border-radius: 6px; padding: .45rem .55rem; font-size: .95rem; }
   input { min-width: 14rem; }
@@ -57,7 +72,9 @@
               font-size: .88em; user-select: all; }
   .tag { margin-left: .5rem; padding: .05rem .45rem; border: 1px solid var(--line);
          border-radius: 999px; font-size: .72rem; letter-spacing: .06em;
-         text-transform: uppercase; }
+         text-transform: uppercase; white-space: nowrap; }
+  .tag.open { border-color: var(--accent); color: var(--accent); }
+  .tag.closed { border-color: var(--stated-no); color: var(--stated-no); }
   a { color: var(--accent); }
   footer { margin-top: 2.5rem; padding-top: 1.25rem; border-top: 1px solid var(--line);
            font-size: .8rem; color: var(--muted); }
@@ -77,11 +94,23 @@
   <p class="snapshot">Snapshot <time id="snapshot">—</time></p>
 </header>
 
+<!-- The country tabs (T8.5, SPEC feature 16), built from the data in load().
+     Buttons rather than role="tab": an ARIA tablist promises arrow-key movement
+     between sibling panels, and there is one panel here — the list below every
+     tab. A named group of pressed/unpressed buttons is what this actually is,
+     and it is keyboard-reachable without a keydown handler to get wrong. -->
+<nav id="tabs" aria-label="Country"></nav>
+
 <div id="controls">
+  <!-- The inner country filter for tabs that group more than one country (SPEC
+       feature 16's Europe example). One mechanism for every such tab rather than
+       a special case for Europe; hidden on the tabs that are one country. -->
+  <label id="country-filter" hidden>Country<select id="country"></select></label>
   <label>Search<input id="q" type="search" placeholder="company name" autocomplete="off"></label>
   <!-- India cities, and only India's: the city filter is the India view's, and
-       SPEC v2 keeps the per-country enrichments out of scope. -->
-  <label>Hiring city<select id="city"><option value="any">Any city</option></select></label>
+       SPEC v2 keeps the per-country enrichments out of scope. So it renders on
+       the tabs whose scope contains India and nowhere else (T8.5). -->
+  <label class="india-only">Hiring city<select id="city"><option value="any">Any city</option></select></label>
   <!-- SPEC feature 10's remote-only filter. T5.2 left it out deliberately: it
        filters on a field no row carried until T4.1, and a control that can only
        return nothing is worse than no control. -->
@@ -89,11 +118,19 @@
     <option value="any">Any</option>
     <option value="remote">Remote roles</option>
   </select></label>
+  <!-- SPEC feature 15's filter: a company with a role whose posting said yes to
+       either question. It is an OR and not an AND — the two facts are read
+       independently (src/openness.py), and a company that will relocate you
+       without sponsoring is still one that will hire you from abroad. -->
+  <label>Foreign hires<select id="openness">
+    <option value="any">Any</option>
+    <option value="open">Open to foreign hires</option>
+  </select></label>
   <!-- SPEC feature 10's MCA-verified filter, now that a row can carry a CIN.
        Labelled by what the register actually holds rather than as a quality
        mark: the slice covers subsidiaries of foreign-incorporated parents, so
        an India-founded company can never appear in it (footer). -->
-  <label>MCA register<select id="mca">
+  <label class="india-only">MCA register<select id="mca">
     <option value="any">Any</option>
     <option value="matched">Has an India registration</option>
   </select></label>
@@ -127,6 +164,10 @@
   <p>Every company here showed at least one open role, in one of the countries this radar covers,
     on its own job board on the snapshot date. A company we could not check is excluded
     rather than shown as "not hiring".</p>
+  <p>The visa and hiring-from-abroad badges are read from what a posting says, and most
+    postings say nothing at all — 92% of the ones we measured. A role with no badge is one
+    whose posting did not say, which is not the same as a no; where a posting does say no,
+    the role says so.</p>
   <p>The MCA data we hold lists companies registered in India as subsidiaries of a parent
     incorporated abroad. An India-founded company cannot appear in it at all, so a missing CIN
     says nothing about a company — and a present one is a registration, not an endorsement.</p>
@@ -177,6 +218,50 @@ const RULES = {
   stage: "its funding directory's growth-stage label",
 };
 
+// The fifteen countries this radar covers, in src/countries.py COUNTRIES order.
+// Mirrored rather than derived from the data on purpose: a country with nobody
+// hiring in it is a finding -- we read the boards and none of them was hiring
+// there -- and tabs built from the rows would silently drop it, which reads as a
+// country nobody looked at. tests/test_countries.py holds this list to the
+// module's, so a sixteenth country cannot reach the data without reaching here.
+const COUNTRIES = [
+  'India', 'United Kingdom', 'Ireland', 'Germany', 'Netherlands', 'France',
+  'Spain', 'Sweden', 'Denmark', 'Norway', 'Finland', 'Japan', 'Singapore',
+  'Australia', 'New Zealand',
+];
+
+// The tabs. Grouping is the site's choice (SPEC feature 16), and it is by
+// destination rather than by geography: the UK and Ireland get their own tab
+// because that is where the non-India volume is and where the postings are in
+// English, so "Europe" here means the continental hubs. `prose` is the name for
+// a sentence rather than a tab -- an empty tab has to be able to say which place
+// nobody was hiring in.
+const GROUPS = [
+  { id: 'all', label: 'All countries', prose: 'any of the fifteen countries we cover',
+    countries: COUNTRIES },
+  { id: 'india', label: 'India', prose: 'India', countries: ['India'] },
+  { id: 'uk-ie', label: 'UK & Ireland', prose: 'the UK or Ireland',
+    countries: ['United Kingdom', 'Ireland'] },
+  { id: 'europe', label: 'Europe', prose: 'Europe',
+    countries: ['Germany', 'Netherlands', 'France', 'Spain', 'Sweden', 'Denmark',
+                'Norway', 'Finland'] },
+  { id: 'japan', label: 'Japan', prose: 'Japan', countries: ['Japan'] },
+  { id: 'singapore', label: 'Singapore', prose: 'Singapore', countries: ['Singapore'] },
+  { id: 'anz', label: 'Australia & NZ', prose: 'Australia or New Zealand',
+    countries: ['Australia', 'New Zealand'] },
+];
+
+// What a posting said about hiring someone who is not already there (T8.3).
+// `unknown` is absent from both maps and so renders as NOTHING: 92% of measured
+// postings say nothing at all, and a badge on every one of them would be noise
+// that also reads, at a glance, like a refusal. An explicit `no` is a fact the
+// company stated and renders as one.
+const OPENNESS = {
+  visa: { yes: ['open', 'visa sponsorship'], no: ['closed', 'no visa sponsorship'] },
+  hire_from_abroad: { yes: ['open', 'hires from abroad'],
+                      no: ['closed', 'right to work required'] },
+};
+
 // Grouped the way a reader here groups them (en-IN: 24,102 but 2,41,02,000).
 const count = (n) => n.toLocaleString('en-IN');
 const money = (c) => c.amount == null
@@ -186,6 +271,11 @@ const round = (c) => c.round_letter ? `Series ${c.round_letter}` : 'round letter
 // How a role is worked, in the site's words rather than the board's.
 const WORKPLACE = { remote: 'remote', hybrid: 'hybrid', onsite: 'on-site' };
 const isRemote = (c) => c.roles.some((r) => r.workplace === 'remote');
+// SPEC feature 15's filter, exactly as the spec words it: either field saying
+// yes. Both are read off the roles the current country view is showing, so a
+// company open in London is not open under the India tab.
+const opensToForeignHires = (c) =>
+  c.roles.some((r) => r.visa === 'yes' || r.hire_from_abroad === 'yes');
 
 // No city named on any India role is a real state, not missing data, so it never
 // renders as an empty cell -- but the three ways of being placeless are NOT the
@@ -254,17 +344,97 @@ const sorts = {
 
 let companies = [];
 let snapshot = '';
+let group = GROUPS[0];
 
-// One India role: what it's called, where it is, and how it's worked. The title
-// IS the apply link -- a separate "apply" button beside it would be two controls
-// for one destination.
+// The one country picked inside the tab, or null for the whole tab. Null before
+// the first render too: the select has no options until a dataset loads.
+const picked = () => {
+  const chosen = $('#country').value;
+  return chosen && chosen !== 'any' ? chosen : null;
+};
+// The countries the current view covers, and what to call them in a sentence.
+const scope = () => (picked() ? [picked()] : group.countries);
+const scopeName = () => picked() || group.prose;
+
+// A company as one country view shows it: the roles in that scope, and every
+// derived fact recomputed off THOSE roles. A row under the UK tab that counted
+// its Bengaluru roles and printed a Bengaluru location would be answering a
+// question nobody asked. The India enrichments go the same way -- an average
+// India CTC or an India registration beside a list of London roles is this site
+// inventing a fact, which is why the build attaches them to India rows only
+// (SPEC v2). Returns null for a company with nothing in this scope.
+function inScope(c, covers) {
+  const roles = c.roles.filter((r) => r.countries.some((x) => covers.includes(x)));
+  if (!roles.length) return null;
+  const india = covers.includes('India');
+  return {
+    ...c,
+    roles,
+    total: c.roles.length,                       // what the board holds, for the row to say so
+    countries: c.countries.filter((x) => covers.includes(x)),
+    cities: india ? c.cities : [],               // `cities` is India's, from the build
+    salary: india ? c.salary : null,
+    mca: india ? c.mca : null,
+  };
+}
+
+// How many listed companies have a role in these countries -- the same rule as
+// build.py's country_counts (a company in two of them is counted in both), so a
+// tab and build-report.json cannot disagree. It counts the listed set and never
+// the filtered one: a number that moved with the search box would stop being the
+// build's number.
+const listedIn = (covers) =>
+  companies.filter((c) => c.countries.some((x) => covers.includes(x))).length;
+
+function tabs() {
+  $('#tabs').replaceChildren(...GROUPS.map((g) => {
+    const n = listedIn(g.countries);
+    const button = el('button');
+    button.type = 'button';
+    button.dataset.group = g.id;
+    button.append(el('span', null, g.label), el('span', 'count', count(n)));
+    // Read aloud, "India 6" is not a sentence. The label says what the number is.
+    button.setAttribute('aria-label',
+      `${g.label} — ${count(n)} ${n === 1 ? 'company' : 'companies'}`);
+    button.addEventListener('click', () => select(g));
+    return button;
+  }));
+}
+
+function select(g) {
+  group = g;
+  for (const button of $('#tabs').children) {
+    button.setAttribute('aria-pressed', String(button.dataset.group === g.id));
+  }
+  // Rebuilt per tab, and every country in the tab is listed even at zero: a
+  // country missing from this list would read as one we never looked at, which
+  // is the one thing a zero here must not be confusable with.
+  const any = el('option', null, 'Any country');
+  any.value = 'any';
+  $('#country').replaceChildren(any, ...g.countries.map((c) => {
+    const option = el('option', null, `${c} (${count(listedIn([c]))})`);
+    option.value = c;
+    return option;
+  }));
+  $('#country-filter').hidden = g.countries.length < 2;
+  render();
+}
+
+// One role: what it's called, where it is, how it's worked, and what its posting
+// said about hiring from abroad. The title IS the apply link -- a separate
+// "apply" button beside it would be two controls for one destination.
 function roleItem(r) {
   const item = el('li');
   item.append(link(r.url, r.title), el('span', null, ` — ${r.locations.join(' · ')}`));
   // Absent is absent: 822 of 1,112 published India roles state no workplace at
   // all (Greenhouse never does), so a missing badge means "not stated", not
-  // "on-site".
-  if (WORKPLACE[r.workplace]) item.append(el('span', 'tag', WORKPLACE[r.workplace]));
+  // "on-site". The openness badges below follow the same rule, for the same
+  // reason and at ten times the scale.
+  if (WORKPLACE[r.workplace]) item.append(el('span', 'tag workplace', WORKPLACE[r.workplace]));
+  for (const field of ['visa', 'hire_from_abroad']) {
+    const said = OPENNESS[field][r[field]];        // undefined where it said nothing
+    if (said) item.append(el('span', `tag ${said[0]}`, said[1]));
+  }
   return item;
 }
 
@@ -282,8 +452,11 @@ function row(c) {
   const body = el('div', 'detail');
   const funding = el('p', null, `Raised ${money(c)} · ${round(c)} · announced ${when(c)} · `);
   funding.append(link(c.source_url, 'funding source'));
-  const board = el('p', null, `${reqs} open ${reqs === 1 ? 'role' : 'roles'} in ${
-    where(c)} · `);
+  // Under a country view the row shows that country's roles, so it says so
+  // rather than letting the reader find the other twelve on the board and
+  // conclude the site cannot count.
+  const board = el('p', null, `${reqs} open ${reqs === 1 ? 'role' : 'roles'} in ${where(c)}`
+    + `${c.total > reqs ? `, of ${c.total} on this board` : ''} · `);
   board.append(BOARDS[c.ats]
     ? link(BOARDS[c.ats] + c.slug, `${c.ats}/${c.slug}`)
     : el('span', null, `${c.ats}/${c.slug}`));
@@ -300,24 +473,41 @@ function row(c) {
 }
 
 function render() {
+  const covers = scope();
+  // The India-only filters follow the India-only enrichments: on a tab with no
+  // India in it they are hidden AND cleared here, because a city filter holding
+  // "Bengaluru" while invisible is a Japan tab that silently shows nothing and
+  // gives the reader no control to blame.
+  for (const label of document.querySelectorAll('#controls .india-only')) {
+    label.hidden = !covers.includes('India');
+    if (label.hidden) label.querySelector('select').value = 'any';
+  }
+
   const q = $('#q').value.trim().toLowerCase();
   const city = $('#city').value;
   const recency = $('#recency').value;
-  const shown = companies
+  const here = companies.map((c) => inScope(c, covers)).filter(Boolean);
+  const shown = here
     .filter((c) => c.name.toLowerCase().includes(q))
     .filter((c) => city === 'any' || c.cities.includes(city))
     .filter((c) => $('#remote').value === 'any' || isRemote(c))
+    .filter((c) => $('#openness').value === 'any' || opensToForeignHires(c))
     .filter((c) => $('#mca').value === 'any' || c.mca != null)
     .filter(brackets[$('#bracket').value])
     .filter((c) => recency === 'any' || (c.date != null && days(c.date, snapshot) <= +recency))
     .sort(sorts[$('#sort').value]);
 
   $('#list').replaceChildren(...shown.map(row));
+  // Three ways to show nothing, and they are three different facts: a build that
+  // listed nobody, a country nobody was hiring in, and filters that met in an
+  // empty corner. One sentence for all three would be the ambiguous zero.
   $('#status').textContent = shown.length
     ? `${shown.length} of ${companies.length} companies`
-    : companies.length
-      ? 'No company matches these filters.'
-      : 'This snapshot listed no companies. The build report says why for each one.';
+    : !companies.length
+      ? 'This snapshot listed no companies. The build report says why for each one.'
+      : !here.length
+        ? `No company we could check had an open role in ${scopeName()} on this snapshot.`
+        : 'No company matches these filters.';
 }
 
 function load(data) {
@@ -344,7 +534,12 @@ function load(data) {
     + `hiring. This is not every funded company hiring in India; it is every one we could prove.`;
   $('#city').append(...[...new Set(companies.flatMap((c) => c.cities))].sort()
     .map((city) => el('option', null, city)));
-  render();
+  // Built here rather than in the markup because a tab states its count, and the
+  // count is a fact about the data -- a tab strip that rendered before the fetch
+  // would show seven zeros it has no build behind, the same claim the integrity
+  // footer refuses to make. `select` renders the list.
+  tabs();
+  select(GROUPS[0]);
 }
 
 $('#controls').addEventListener('input', render);

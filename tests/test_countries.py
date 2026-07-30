@@ -11,6 +11,9 @@ knows where the job is. So NO_COUNTRY is longer than the positive fixture, and
 every entry in it is a string a matcher with one more "helpful" city in its list
 would get wrong.
 """
+import re
+from pathlib import Path
+
 import pytest
 
 from src.countries import COUNTRIES, countries
@@ -229,3 +232,41 @@ def test_india_fixture_classifies_identically_through_this_module():
 
     assert [loc for loc in INDIA if "India" not in countries(loc)] == [], "false negatives"
     assert [loc for loc in NOT_INDIA if "India" in countries(loc)] == [], "false positives"
+
+
+# --- T8.5, the copy of this list the site has to keep --------------------------
+
+#: The site is a static page with no build step, so it cannot import this module:
+#: it mirrors the list in JavaScript. These two tests are the mirror's frame.
+SITE = Path("site/index.html").read_text()
+
+
+def _quoted(js: str) -> list[str]:
+    return re.findall(r"'([^']+)'", js)
+
+
+def test_the_site_mirrors_this_module_s_countries_in_order():
+    """A country the pipeline collects and the site does not list is a country
+    whose roles are in the data and reachable from no tab. Order matters too: the
+    site renders its country list in this one, and a build and a page that
+    disagree about it are two orders a reader has to reconcile."""
+    listed = re.search(r"const COUNTRIES = \[(.*?)\];", SITE, re.S)
+    assert listed, "site/index.html has no COUNTRIES list"
+    assert _quoted(listed.group(1)) == SPEC_COUNTRIES == list(COUNTRIES)
+
+
+def test_every_country_sits_under_exactly_one_site_tab():
+    """The tabs are the site's own grouping (SPEC feature 16), so this asserts
+    nothing about which tab a country is under — only that it is under one, and
+    one only. A country in no tab is unreachable however much data it has; a
+    country in two is counted twice in a strip whose whole job is a count."""
+    groups = re.search(r"const GROUPS = \[(.*?)\n\];", SITE, re.S)
+    assert groups, "site/index.html has no GROUPS list"
+    # The "all countries" tab is `countries: COUNTRIES` and contributes nothing
+    # here: it is the whole list by construction, and cannot leave one out.
+    tabbed = [
+        country
+        for block in re.findall(r"countries: \[(.*?)\]", groups.group(1), re.S)
+        for country in _quoted(block)
+    ]
+    assert sorted(tabbed) == sorted(SPEC_COUNTRIES)

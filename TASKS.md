@@ -1337,7 +1337,7 @@ Out of scope: the site (T8.5); description-fetch tiering beyond what T8.1
   naming the ceiling, not a new scheduler.
 ```
 
-### T8.5 — Country tabs and openness badges `todo` · *Phase 5* · after T8.4
+### T8.5 — Country tabs and openness badges `done` · *Phase 5* · after T8.4
 ```
 Acceptance (observable):
   Country navigation on the site (grouping is the site's choice — e.g. one

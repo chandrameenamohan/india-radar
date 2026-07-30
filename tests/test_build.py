@@ -441,6 +441,15 @@ def test_the_e2e_dataset_is_a_file_this_build_could_have_written():
         for row in shipped["companies"]
         if "India" not in row["countries"] and (row["salary"] or row["mca"])
     ], "an India enrichment on a company with no India role"
+    # And T8.5's other half: the site renders those enrichments under the country
+    # views that contain India and hides them under the ones that don't. Only a
+    # company that HAS one and also hires outside India can prove that — without
+    # it the e2e's "no India enrichment here" comes back green off a row that had
+    # nothing to render in the first place.
+    assert any(
+        (row["salary"] or row["mca"]) and set(row["countries"]) - {"India"}
+        for row in shipped["companies"]
+    ), "no India-enriched company with a role outside India"
 
 
 # --- T8.4, the description pass -----------------------------------------------
