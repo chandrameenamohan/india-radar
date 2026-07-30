@@ -2185,3 +2185,202 @@ matches — the same shape of gap as T1.7's `grep -i software` finding nothing w
 SPEC named software companies. T6.4's DoD reasons about what "the live site still
 serves the last good data"; there is no live site to serve it. One human action
 (push + enable Pages) resolves this and the T7.1 blocker together.
+
+---
+
+# Description text and openness phrases — measured 2026-07-30 (T8.1)
+
+Two scripts, both against every board in `data/slugs.json`:
+`learning-tests/descriptions_live.py` (does prose cost extra calls, and what does
+it cost) and `learning-tests/openness_live.py` (how often the phrases occur, and
+whether Japan is in English). Neither is in `make check` — they are network tests,
+for the reason VERIFICATION.md gives.
+
+## Nobody charges an extra call for the description. All three already have it
+
+I expected at least one provider to make posting prose a per-role fetch — the
+difference between a nightly that grows by a factor and one that grows by 4,311
+extra requests. Wrong on all three:
+
+| Provider | How prose arrives | Cost of turning it on |
+|---|---|---|
+| Greenhouse | `?content=true` on the **same** jobs endpoint | 13.7x-35.3x bytes, under 2x latency |
+| Ashby | `descriptionHtml` *and* `descriptionPlain`, unconditionally | **zero — we already pay it** |
+| Lever | `description` + `lists[].content` + `additional`, unconditionally | zero |
+
+Greenhouse measured: databricks/803 roles 0.69MB & 0.71s → 9.40MB & 1.23s;
+sumup/374 → 16.8x; helsing/128 → 35.3x. The byte multiplier rises as the board
+shrinks (the non-description fields amortise worse on a small board), and the
+latency multiplier stays under 2x throughout — the extra megabytes disappear into
+the round trip. Every role on all three boards had non-empty content: 803/803,
+374/374, 128/128.
+
+**Ashby has been shipping us descriptions since T3.2 and we have been discarding
+them.** There is no `content=false` to pass. `src/ashby.py`'s docstring already
+says the payload is ~2MB for a 120-role board; that 2MB is mostly the prose.
+
+**The Lever trap: `descriptionPlain` is the opening paragraphs only.** The
+requirements, the benefits and the legal boilerplate live in `lists[].content` and
+`additional` — and the legal boilerplate is exactly where "we are unable to
+sponsor" sits. A `descriptionPlain`-only reader never sees **62% (pigment), 77%
+(kpler), 66% (patsnap)** of the posting. `src/lever.py`'s `locations()` reads
+`categories`; an openness reader must glue four fields.
+
+**So T8.4's cost is payload, never call count.** The one lever worth pulling is
+Greenhouse's: 163 of 422 Greenhouse boards have a posting in any target country,
+so a cheap `content=false` pass first, then `content=true` on only those, avoids
+the 13-35x multiplier on 259 boards that cannot contribute a row. Whole-corpus
+fetch with that two-pass in place: **1m55s and 270MB** at 10 concurrent callers,
+against a 90-minute nightly timeout. (I guessed ~220MB before instrumenting it;
+the cheap Greenhouse pass over all 422 boards is the missing 50MB, so the two-pass
+saving is real but smaller than the 13-35x headline suggests.)
+
+## The kill criterion did not fire — 11.85% against a ~2% threshold
+
+4,311 postings in the 15 target countries, across 277 live boards (12 boards
+would not answer and were dropped, not counted as silent). By country:
+UK 1676 · DE 657 · SG 450 · ES 433 · FR 359 · AU 286 · IE 262 · JP 255 · NL 172 ·
+SE 107 · DK 46 · FI 21 · NZ 5 · NO 3. By ATS: Greenhouse 3096, Ashby 1034,
+Lever 181.
+
+Postings containing each handed phrase (postings, not raw matches; board counts
+beside them because they turn out to matter more):
+
+| phrase | postings | % | boards | % |
+|---|---|---|---|---|
+| *positive* | | | | |
+| `visa sponsorship` | 132 | 3.06% | 15 | 5.42% |
+| `sponsorship available` | **0** | 0.00% | 0 | 0.00% |
+| `work from anywhere` | 74 | 1.72% | 9 | 3.25% |
+| `remote worldwide` | **0** | 0.00% | 0 | 0.00% |
+| `relocation support` | 170 | 3.94% | 11 | 3.97% |
+| `relocation package` | 63 | 1.46% | 2 | 0.72% |
+| `we sponsor` | 58 | 1.35% | 2 | 0.72% |
+| *negative* | | | | |
+| `unable to sponsor` | 16 | 0.37% | 3 | 1.08% |
+| `cannot sponsor` | 5 | 0.12% | 1 | 0.36% |
+| `no visa sponsorship` | **0** | 0.00% | 0 | 0.00% |
+| `must have the right to work` | 2 | 0.05% | 2 | 0.72% |
+| `authorized to work in` | 21 | 0.49% | 7 | 2.53% |
+| **any positive** | 481 | 11.16% | 35 | 12.64% |
+| **any negative** | 37 | 0.86% | 12 | 4.33% |
+| **either — the kill criterion** | **511** | **11.85%** | 44 | 15.88% |
+| both polarities in one posting | 7 | 0.16% | 3 | 1.08% |
+
+**T8.3 proceeds.** Every stricter recount below still clears 2% with room. But the
+phrase list it was going to be built on is wrong in five separate ways.
+
+## Three of the seven positives are junk, and one is not a polarity at all
+
+**`work from anywhere` is a holiday policy.** 74 postings, and **42** of them are
+the time-boxed perk: "4 weeks work from anywhere per year" (heidihealth 28,
+marshmallow 14, duffel 7). Wired in as a positive, T8.3 would report those
+companies as hiring from abroad on the strength of their PTO. Only oyster's "no
+borders or hq" is the thing feature 15 means.
+
+**`we sponsor` is 2 boards, and 27 of its 58 postings are a charity.** physicsx:
+"to help make a change, we sponsor bright women from disadvantaged backgrounds
+through their university degrees". The other 31 are reflectionai, and genuine.
+
+**A bare `sponsor` stem is unusable in the other direction too.** 48 postings say
+"executive sponsor" or "customer sponsor" — sales vocabulary in postings that say
+nothing about immigration.
+
+**`visa sponsorship` is polarity-blind, and it is the single most common phrase.**
+132 postings; anthropic is 71 of them and pleo 19:
+
+> anthropic: "visa sponsorship: we do sponsor visas! however, we aren't able to
+> successfully sponsor visas for every role and every candidate."
+> pleo: "we are unable to offer visa sponsorship for this role in any of the
+> listed locations."
+
+The same 16 characters are a qualified yes and a flat no. **The words before it
+decide, not the phrase.** 37 of the 132 have a negation cue within 70 characters.
+
+**Two positives and one negative match nothing at all.** `sponsorship available`
+scores zero because the company that means it writes "visa sponsorship**s are**
+available" (spellbrush, 6 postings). `remote worldwide` and `no visa sponsorship`
+never appear. A frozen phrase list is this brittle.
+
+## The negative list has almost no recall, and `no` is the more common answer
+
+The five handed negatives find 37 postings between them. Read out of the corpus
+instead of guessed at, the negatives that are really there:
+
+| phrasing | postings | boards |
+|---|---|---|
+| `right to work in` | 117 | 15 |
+| `do not require` (okx: "…and do not require okx's sponsorship of a visa") | 119 | 4 |
+| `aren't able to successfully sponsor` | 71 | 1 |
+| `unable to offer visa sponsor` | 21 | 3 |
+| `not able to provide visa sponsor` | 7 | 1 |
+| `not currently able to sponsor` | 6 | 1 |
+
+`right to work in` finds 117 postings where `must have the right to work` found 2.
+
+Counted by **visa-context proximity** rather than fixed phrase — every `sponsor*`
+sitting near visa/immigration/work-permit vocabulary, classified by whether the 60
+characters before it negate:
+
+| | postings | % |
+|---|---|---|
+| silent | 3980 | 92.32% |
+| **negative only** | **148** | **3.43%** |
+| positive only | 107 | 2.48% |
+| both in one posting | 76 | 1.76% |
+
+**Negatives outnumber positives.** SPEC already says an explicit negative is "worth
+as much as a yes"; the measurement says it is worth more, because it is what
+companies more often bother to write down. The 76 postings carrying both are
+anthropic's shape — a yes and a caveat in one paragraph — and they are 1.76% of
+the corpus, so `unknown` is not a good enough answer for them.
+
+## The signal is a company attribute wearing a role's clothes
+
+`relocation support`: 170 postings, **113 of them helsing**. `relocation package`:
+63 postings, **61 of them n26**. `visa sponsorship`: **54% anthropic**. `we
+sponsor`: 2 boards.
+
+It is boilerplate stamped on every posting a company publishes. Consequences:
+
+- A per-role field is honest but will show a company's entire board flipping
+  together, which is what the data actually is.
+- **The board number is the headline, not the posting number.** 44 of 277 boards
+  (15.88%) say anything; 511 of 4,311 postings (11.85%) do. Quoting the posting
+  figure as "1 in 8 roles tells you" overstates how many *companies* tell you.
+- One large board changing its boilerplate moves the site's openness counts more
+  than a real shift in the market would. Worth remembering when T8.4's build
+  report grows per-country counts.
+
+## Japan is mostly in English, and the non-ASCII ratio separates cleanly
+
+255 JP postings across 54 boards. Median non-ASCII density 0.002 — the same as the
+UK control.
+
+| threshold | Japan | UK control (n=1676) |
+|---|---|---|
+| >0.05 | 24 (9.4%) | 0 (0.0%) |
+| >0.10 | 20 (7.8%) | 0 (0.0%) |
+| >0.20 | 14 (5.5%) | 0 (0.0%) |
+| >0.50 | 5 (2.0%) | 0 (0.0%) |
+
+**Nothing English-language scores above 0.05**, so any threshold in that range is
+safe; ~7.8% of Japan postings are meaningfully non-English, spread over 12 boards
+(marqvision 3, databricks 3, tenstorrent 2, braze 2, flexport 2, shifttechnology 2,
+and six with one each). SPEC's v2 non-goal — non-English postings get `unknown`
+openness rather than a guess — costs about 20 postings, not the Japan column.
+
+26 of the 255 JP postings match a handed phrase, so Japan is not a phrase desert.
+
+## What T8.3 should be built on
+
+- Read the ~60 characters before a `sponsor*` for a negation cue instead of
+  treating a phrase as a polarity. That single change is the difference between
+  reading anthropic and pleo correctly and reading them identically.
+- Drop `work from anywhere` (42/74 a holiday perk) and `we sponsor` (27/58 a
+  charity). Never match a bare `sponsor` stem (48 "executive sponsor").
+- Add `right to work in` (117 postings vs 2 for the handed variant) and the
+  "do not require … sponsorship" shape (119).
+- Treat `no` as first-class: it is 3.43% against positives' 2.48%.
+- The 1.76% carrying both polarities need a rule, and `unknown` is a defensible
+  one — but choose it deliberately rather than by first-match-wins.

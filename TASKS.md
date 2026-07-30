@@ -1273,7 +1273,7 @@ Out of scope: trend charts beyond the sparkline.
 > The openness signal is the load-bearing bet — T8.1 exists to price it before
 > anything is built on it.
 
-### T8.1 — Learning tests: description text and openness phrases `in-progress` · *Phase 5*
+### T8.1 — Learning tests: description text and openness phrases `done` · *Phase 5*
 > Feature 15 needs posting *description* text the probes may not fetch today.
 > Measure before designing, like T0 did for the probes themselves.
 ```
