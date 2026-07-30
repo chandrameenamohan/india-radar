@@ -1307,7 +1307,7 @@ Checks:
 Out of scope: descriptions, openness, UI, outcome vocabulary.
 ```
 
-### T8.3 — Openness heuristic `todo` · *Phase 5* · after T8.1
+### T8.3 — Openness heuristic `done` · *Phase 5* · after T8.1
 ```
 Acceptance (observable):
   Per role: visa and hire_from_abroad, each yes|no|unknown, derived from
