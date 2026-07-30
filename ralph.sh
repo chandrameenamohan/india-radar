@@ -40,8 +40,11 @@ banner() { echo "" | tee -a "$LOG"; echo "===== $* =====" | tee -a "$LOG"; }
 # Deliberately excludes `blocked` and `needs-review`: those are not actionable by
 # the loop and are reported separately, so a fully-blocked backlog does not look
 # like a finished one.
-remaining()   { grep -cE '^### T[0-9].*`(todo|in-progress)`' TASKS.md 2>/dev/null || echo 0; }
-parked()      { grep -cE '^### T[0-9].*`(blocked|needs-review)`' TASKS.md 2>/dev/null || echo 0; }
+# NOTE: `grep -c ... || echo 0` is a trap -- grep -c exits 1 when it matches
+# nothing, so it prints its own "0" AND the fallback "0", yielding "0\n0". That
+# broke `[ "$REM_BEFORE" -eq 0 ]` and spun this loop ~10 iterations past done.
+remaining()   { grep -cE '^### T[0-9].*`(todo|in-progress)`' TASKS.md 2>/dev/null | head -1; }
+parked()      { grep -cE '^### T[0-9].*`(blocked|needs-review)`' TASKS.md 2>/dev/null | head -1; }
 
 banner "RALPH START $(date)  mode=$([ $AUTO = 1 ] && echo auto || echo attended)  log=$LOG"
 echo "tasks remaining: $(remaining)" | tee -a "$LOG"

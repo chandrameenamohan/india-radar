@@ -1177,11 +1177,20 @@ Out of scope: rollback UI.
 > gh api repos/.../pages                                  -> 404 Not Found
 > ```
 >
-> **Re-verified 2026-07-31: all four unchanged.** No nightly on the remote, no run
-> ever, Pages still 404. The ahead-count is written `N` above because it GROWS by
-> one every iteration that commits anything (14 when first measured, 15 the next
-> day) — a rising number here is the loop working, not progress toward unblocking.
-> The only figure that matters is whether `origin/main` has moved off `ad70f38`.
+> **Re-verified twice on 2026-07-30: all four unchanged.** No nightly on the
+> remote, no run ever, Pages still 404. The ahead-count is written `N` above
+> because it GROWS by one every iteration that commits anything (14, then 15,
+> now 16) — a rising number here is the loop working, not progress toward
+> unblocking. The only figure that matters is whether `origin/main` has moved off
+> `ad70f38`.
+>
+> **The second of those re-verifications exists only because the first misdated
+> itself `2026-07-31`** — a day ahead of the commit that carried it. That is worth
+> more than the typo: this note's entire job is "do not start this task on the
+> strength of a re-read", and a note stamped with tomorrow's date is read tomorrow
+> as already-checked-today, which is exactly the skip it was written to prevent.
+> **Date these re-checks from `date -u`, not from an assumption about which day the
+> loop is on.**
 >
 > **`origin/main` still sits at `ad70f38`** — the human's T3.3/T4.1 ruling. Every
 > task from T1.6 to T6.4,
