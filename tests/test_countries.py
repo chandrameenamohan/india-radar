@@ -41,8 +41,13 @@ LOCATIONS = [
     ("Belfast, Northern Ireland", ["United Kingdom"]),  # UK, and NOT Ireland
     ("Manchester", ["United Kingdom"]),
     ("Leeds, England", ["United Kingdom"]),
-    # Ireland
+    # Ireland. Bare "Dublin" is 51 real postings and "Dublin, IE" another 8 —
+    # 24% of Ireland's volume, which the first cut of this module dropped on a
+    # collision (Dublin CA / Dublin OH) that occurs zero times in 26,880 real
+    # strings. FINDINGS, "Bonus: T8.2's city lists, measured".
     ("Dublin, Ireland", ["Ireland"]),
+    ("Dublin", ["Ireland"]),
+    ("Dublin, IE", ["Ireland"]),
     ("Remote - Ireland", ["Ireland"]),
     ("Galway, Republic of Ireland", ["Ireland"]),
     # Germany
@@ -122,7 +127,10 @@ NO_COUNTRY = [
     "Richmond",                   # UK, Australia, Virginia
     "Waterloo",                   # Belgium, Canada, Australia, London station
     "Dublin, CA",                 # Bay Area, not Ireland
+    "Dublin, CA, USA",
+    "Dublin, California",
     "Dublin, OH",
+    "Dublin, Ohio",
     "New England",                # the US north-east, not England
     "Remote - New England",
     "Birmingham, AL",             # a comparable hub in both countries
@@ -190,6 +198,27 @@ def test_the_same_city_follows_whatever_country_the_string_names(location):
         "Perth, Australia": ["Australia"],
         "Perth": [],
     }[location]
+    assert countries(location) == expected
+
+
+@pytest.mark.parametrize(
+    ("location", "expected"),
+    [
+        ("Dublin", ["Ireland"]),
+        ("Dublin, IE", ["Ireland"]),
+        ("Dublin, Ireland", ["Ireland"]),
+        ("Dublin, CA", []),
+        ("Dublin, CA, USA", []),
+        ("Dublin, Ohio", []),
+    ],
+)
+def test_dublin_is_irish_unless_it_names_a_us_state(location, expected):
+    """The one term in this module that is guarded rather than absent, and the
+    only one the measurement forced. Excluding Dublin outright cost 24% of
+    Ireland's postings to a collision that never occurred in 26,880 strings;
+    including it outright would call the Bay Area Irish. So the guard is the
+    exact shape of the trap — the US Dublins name their state, and nothing else
+    called Dublin does."""
     assert countries(location) == expected
 
 

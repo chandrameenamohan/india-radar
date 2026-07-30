@@ -7,34 +7,51 @@ fixture must keep passing untouched. Duplicating it would give this repo two
 answers to "is this India?".
 
 What makes the wider list honest is what is *missing* from it. A bare
-"Cambridge", "Newcastle", "Perth", "Reading", "Nice", "Richmond", "Waterloo",
-"Hamilton" or "Dublin" names a real hiring city in two or three of these
-countries and in the US besides, so none of them appears in any list and a
-string carrying only one of them classifies as **no country at all**. That is a
-real answer, not a gap. The alternative is deciding that "Cambridge, MA" is
-British, which is exactly the quiet wrongness this pipeline exists not to ship.
-When such a string also names its country — "Perth, Scotland", "Perth,
-Australia", "Cambridge, MA, USA" — the country term is what classifies it, and
-nothing here reads the city at all. So there is no US-marker rule, no state-code
-table, no geo parser: the ambiguity is handled by an absence.
+"Cambridge", "Newcastle", "Perth", "Reading", "Nice", "Richmond", "Waterloo" or
+"Hamilton" names a real hiring city in two or three of these countries and in
+the US besides, so none of them appears in any list and a string carrying only
+one of them classifies as **no country at all**. That is a real answer, not a
+gap. The alternative is deciding that "Cambridge, MA" is British, which is
+exactly the quiet wrongness this pipeline exists not to ship. When such a string
+also names its country — "Perth, Scotland", "Perth, Australia", "Cambridge, MA,
+USA" — the country term is what classifies it, and nothing here reads the city
+at all. So there is no US-marker rule, no state-code table, no geo parser: the
+ambiguity is handled by an absence.
 
-The line between an included city and an excluded one: exclude when the
-collision is with a comparable hiring hub (Cambridge MA vs UK, Perth Scotland vs
-Australia, Newcastle UK vs AU, Dublin CA vs Ireland) or with an ordinary English
-word ("nice", "reading"). Include when the namesake is a small town that does
-not post software roles at volume — accepted on purpose: London (Ontario), Paris
-(Texas), Berlin (Connecticut), Manchester (New Hampshire), Melbourne (Florida),
-Hamburg (New York), Wellington (Florida). Add to that the US towns named after
-whole countries, Denmark WI and Norway ME, which any country-name list accepts
-and india.py already does. Those are the known false positives of this module,
-priced and named here rather than discovered later.
+These lists are measured now (FINDINGS "Bonus: T8.2's city lists, measured",
+`learning-tests/locations_live.py`): 26,880 real location strings, 3,419
+distinct, from every board in slugs.json. **Zero false positives** — not one
+distinct string classified to a country it is not in — and every named trap
+behaved as designed, including the 16 real "Cambridge, MA" postings. The
+exclusions are cheap: "Cambridge" is 17 postings of which 16 are Massachusetts,
+and "Perth", "Nice" and "Newcastle" are 1-2 postings each.
 
-The city lists are flagship hubs, not gazetteers. A missing city costs nothing
-on a string that names its country, which most real location strings do; the
-lists only decide the bare-city strings. And unlike india.py, **none of this is
-measured yet** — the T8.1 probes have not sampled non-India boards. This is a
-starting list; when FINDINGS.md gains real location strings from the new
-countries, entries earn their place there or get deleted there.
+**Dublin is the one exclusion the data killed.** It was excluded here fearing
+Dublin CA and Dublin OH; the corpus contains zero strings naming either, while
+bare "Dublin" is 51 postings and "Dublin, IE" another 8 — 59 postings, 24% of
+Ireland's volume, classifying as no country. So it is a city term now, carrying
+the only lookahead in this module: a Dublin that names a US state is still
+nothing. The collision is guarded where it would occur rather than paid for
+everywhere, which is why the no-US-marker-rule paragraph above still holds.
+
+The remaining namesake risks are named rather than guarded — London (Ontario),
+Paris (Texas), Berlin (Connecticut), Manchester (New Hampshire), Melbourne
+(Florida), Hamburg (New York), Wellington (Florida), and the US towns named
+after whole countries, Denmark WI and Norway ME, which any country-name list
+accepts and india.py already does. The measurement found **none of them** in
+26,880 strings. They stay documented risks rather than observed failures, and a
+guard each would be regex spent on strings that do not exist.
+
+The city lists are flagship hubs, not gazetteers: 53 of the 124 terms measured
+never fired on any real string (every Norwegian city but Oslo, every NZ city but
+Auckland, six of Japan's nine, every native-language country name except
+"deutschland"). "dublin" is the 125th, added after that count.
+They are kept deliberately — they cost zero measured false positives, a board we
+have not sampled may use them tomorrow, and deleting them is churn against a
+list that is already right. Two counts are worth knowing rather than acting on:
+New Zealand is 5 postings and Norway 3, which is under SPEC's "add a country
+when probe data shows real volume" bar. Both stay because the country list is a
+product decision, not this module's.
 """
 from __future__ import annotations
 
@@ -48,7 +65,8 @@ from src.india import is_india
 #: "Northern Ireland" is the UK and not Ireland, "New South Wales" is Australia
 #: and not Wales, and "New England" is neither — it is the US north-east. Those
 #: three are the only cross-country substring traps in these 15; `\b` alone
-#: cannot see them, because the words really are separate words.
+#: cannot see them, because the words really are separate words. One term also
+#: carries a negative lookahead, for a different reason — see Ireland.
 _TERMS: dict[str, tuple[str, ...]] = {
     "United Kingdom": (
         "united kingdom", r"u\.k\.?", "uk", "great britain",
@@ -56,10 +74,17 @@ _TERMS: dict[str, tuple[str, ...]] = {
         "northern ireland",
         "london", "manchester", "edinburgh", "glasgow", "leeds", "belfast",
     ),
-    # Dublin is deliberately absent: Dublin CA (Bay Area) and Dublin OH are both
-    # live tech-posting addresses, so a bare "Dublin" is a coin flip. Real Irish
-    # postings say "Dublin, Ireland".
-    "Ireland": (r"(?<!northern )ireland",),
+    # "dublin" carries the only lookahead here, and it is the shape of the trap
+    # rather than a general rule: a Dublin that names a US state is a US Dublin,
+    # and everything else is Irish. Measured — zero US-Dublin strings in 26,880,
+    # against 59 postings (24% of Ireland's volume) that the exclusion was
+    # dropping. "Dublin, IE" needs nothing further: this term matches it, so the
+    # ISO form comes free rather than as a second rule. It guards the two US
+    # Dublins that get named (CA, OH); "Dublin, GA" would still read as Irish.
+    # Extending it state by state is the general marker rule in disguise, and
+    # that rule would change how the other 123 measured terms behave — so this
+    # stops where the evidence does.
+    "Ireland": (r"(?<!northern )ireland", r"dublin(?!,\s*(?:ca|california|oh|ohio)\b)"),
     "Germany": (
         "germany", "deutschland",
         "berlin", "munich", "münchen", "munchen", "hamburg", "frankfurt",
