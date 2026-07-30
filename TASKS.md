@@ -1156,9 +1156,50 @@ Out of scope: rollback UI.
 ## E7 · Velocity  *(SPEC feature 13)*
 
 ### T7.1 — Trend from git history `blocked` · *Phase 4*
+> **NEEDS INPUT: a `git push` of this branch, plus GitHub Pages enabled.** Until a
+> human does both, this task cannot ever unblock — and the reason is not the one
+> the note below spent two iterations asserting.
+>
 > **Blocked on T6.1 AND ~30 days of accumulated T6.2 snapshots.** History accrues
 > from the first nightly commit whether or not this ships — so the cost of waiting
 > is zero, and shipping early means shipping an empty or lying feature.
+>
+> **Corrected 2026-07-30. Waiting is not sufficient, because ZERO snapshots are
+> accruing and none will.** The previous note said the unblocking condition was
+> "calendar time with `nightly.yml` firing (`cron: "0 20 * * *"`, verified present
+> and scheduled)". It verified the file was present **locally**. GitHub schedules a
+> workflow from the copy on the remote's default branch, and there isn't one:
+>
+> ```
+> git ls-tree -r --name-only origin/main | grep nightly   -> (nothing)
+> gh run list --limit 10                                  -> (no runs, ever)
+> git rev-list --left-right --count origin/main...HEAD    -> 0   14
+> gh api repos/.../pages                                  -> 404 Not Found
+> ```
+>
+> **This branch is 14 commits ahead of `origin/main`, which still sits at
+> `ad70f38`** — the human's T3.3/T4.1 ruling. Every task from T1.6 to T6.4,
+> `nightly.yml` included, exists only on this machine. So the cron has never fired,
+> `data/companies.json` has exactly the 2 dates it had yesterday, and it will still
+> have 2 in late August. "Earliest plausible start: late August 2026" was wrong:
+> the correct answer is **never, absent a push**.
+>
+> **Two human-gated things, one action each, and the second is a SPEC gap nobody
+> tracked.** SPEC.md:12 says the site is "published on GitHub Pages"; Pages is not
+> enabled (404 above) and no task in this file ever covered turning it on. T6.4's
+> DoD talks about what "the live site still serves" — there is no live site.
+>
+> **One caveat I could not settle without doing the outward-facing thing.** The
+> active `gh` token carries scopes `gist, read:org, repo` — no `workflow` — and
+> GitHub refuses an OAuth push that creates or updates `.github/workflows/*`
+> without it. So the push may be rejected on `nightly.yml` specifically and need a
+> re-auth (`gh auth refresh -s workflow`). `git push --dry-run` returned success,
+> but a dry run never sends the pack, so it does not exercise that check and is
+> **not** evidence either way. I did not push to find out: pushing 14 commits of
+> someone's project is not this loop's call to make.
+>
+> Do not start this task on the strength of a re-read. Re-run the four commands
+> above; if `gh run list` is still empty, nothing has changed.
 
 ```
 Acceptance (observable):

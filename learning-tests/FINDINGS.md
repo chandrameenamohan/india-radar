@@ -2123,3 +2123,65 @@ the seven also turn invariant 6 red.
 The `COLLAPSE = 1.0` mutation is the one to keep in mind: it is the shape a
 future iteration would reach for to make this "safer", and it holds the site at
 its high-water mark forever.
+
+---
+
+# Nothing has ever been published — measured 2026-07-30
+
+## The nightly has never run, and `cron` was verified against the wrong copy
+
+T6.2 shipped `.github/workflows/nightly.yml`, T6.3 pinned "exactly one schedule"
+with a test, T6.4 made the publish fail-safe. All three reasoned about a nightly
+that has **never executed once**:
+
+```
+gh run list --limit 10                                  -> (no runs, ever)
+git ls-tree -r --name-only origin/main | grep nightly   -> (nothing)
+git rev-list --left-right --count origin/main...HEAD    -> 0   14
+gh api repos/chandrameenamohan/india-radar/pages        -> 404 Not Found
+```
+
+`origin/main` is still at `ad70f38`, the human's T3.3/T4.1 ruling commit. Every
+task from T1.6 through T6.4 exists only on this machine.
+
+**GitHub schedules a workflow from the copy on the remote's default branch.** A
+local `nightly.yml` with a valid `cron:` is inert — there is no daemon on this
+laptop reading it. T7.1's blocker note said the unblocking condition was
+"calendar time with `nightly.yml` firing (verified present and scheduled)"; the
+verification was `ls` on a working tree. Two iterations then re-read that note,
+re-confirmed the file was present, and re-derived "wait until late August".
+
+The generalisable trap: **`tests/test_nightly.py` asserts things about a YAML
+file, and a YAML file asserts nothing about a scheduler.** The two tests T6.3
+left behind (every provider probed, exactly one schedule) are good tests of a
+decision and cannot detect that the decision was never deployed. A green gate
+here means the file says what we meant, not that anything runs.
+
+## Corollary: `data/companies.json`'s git history is 12 build commits, not snapshots
+
+T7.1 computes trend from `git log -- data/companies.json`. The 12 commits there
+span 2 distinct dates and every one is a task's rebuild — T5.1's first emit,
+T1.6's 88 rows, T3.2's 110, T3.3's 116, T6.2's measurement run. A snapshot series
+requires one commit per night from one actor; this is a series of code changes
+that happened to touch the output. Even after a push, day one of usable history
+is the first `github-actions[bot]` commit, not the first entry in that log.
+
+## `git push --dry-run` does not exercise the workflow-scope check
+
+The active token's scopes are `gist, read:org, repo` — no `workflow`. GitHub
+refuses an OAuth push that creates or updates `.github/workflows/*` without it,
+so the push that would start the nightly may be rejected on `nightly.yml`
+specifically (`gh auth refresh -s workflow` is the fix).
+
+`git push --dry-run origin main` returned success and `ad70f38..d462380`. That is
+not evidence the real push succeeds: `--dry-run` negotiates refs and never sends
+the pack, so the server-side rule never runs. Recorded because the dry run is the
+obvious way to check this without pushing, and it gives a false green.
+
+## SPEC.md:12 says "published on GitHub Pages" and no task ever covered it
+
+Pages is not enabled. `grep -i 'pages\|deploy' TASKS.md` finds only careers-page
+matches — the same shape of gap as T1.7's `grep -i software` finding nothing while
+SPEC named software companies. T6.4's DoD reasons about what "the live site still
+serves the last good data"; there is no live site to serve it. One human action
+(push + enable Pages) resolves this and the T7.1 blocker together.
