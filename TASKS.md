@@ -1173,12 +1173,18 @@ Out of scope: rollback UI.
 > ```
 > git ls-tree -r --name-only origin/main | grep nightly   -> (nothing)
 > gh run list --limit 10                                  -> (no runs, ever)
-> git rev-list --left-right --count origin/main...HEAD    -> 0   14
+> git rev-list --left-right --count origin/main...HEAD    -> 0   N
 > gh api repos/.../pages                                  -> 404 Not Found
 > ```
 >
-> **This branch is 14 commits ahead of `origin/main`, which still sits at
-> `ad70f38`** — the human's T3.3/T4.1 ruling. Every task from T1.6 to T6.4,
+> **Re-verified 2026-07-31: all four unchanged.** No nightly on the remote, no run
+> ever, Pages still 404. The ahead-count is written `N` above because it GROWS by
+> one every iteration that commits anything (14 when first measured, 15 the next
+> day) — a rising number here is the loop working, not progress toward unblocking.
+> The only figure that matters is whether `origin/main` has moved off `ad70f38`.
+>
+> **`origin/main` still sits at `ad70f38`** — the human's T3.3/T4.1 ruling. Every
+> task from T1.6 to T6.4,
 > `nightly.yml` included, exists only on this machine. So the cron has never fired,
 > `data/companies.json` has exactly the 2 dates it had yesterday, and it will still
 > have 2 in late August. "Earliest plausible start: late August 2026" was wrong:
@@ -1195,11 +1201,19 @@ Out of scope: rollback UI.
 > without it. So the push may be rejected on `nightly.yml` specifically and need a
 > re-auth (`gh auth refresh -s workflow`). `git push --dry-run` returned success,
 > but a dry run never sends the pack, so it does not exercise that check and is
-> **not** evidence either way. I did not push to find out: pushing 14 commits of
+> **not** evidence either way. I did not push to find out: pushing a fortnight of
 > someone's project is not this loop's call to make.
 >
 > Do not start this task on the strength of a re-read. Re-run the four commands
 > above; if `gh run list` is still empty, nothing has changed.
+>
+> **The backlog is otherwise EXHAUSTED — 25 done, T7.1 and T7.2 blocked behind
+> this one human action.** An iteration arriving here has nothing else to claim,
+> so the loop's remaining job is to re-run the four commands and stop. That is the
+> correct behaviour, not a stall: it is the only way the loop notices the push
+> when it happens. Do not manufacture work to fill the iteration, and do not
+> unblock T7.1 by weakening it — even the instant a push lands, trend needs ~30
+> days of real snapshots that will not exist until late August at the earliest.
 
 ```
 Acceptance (observable):
