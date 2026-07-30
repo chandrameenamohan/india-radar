@@ -1,10 +1,10 @@
 {
   "schema_version": 7,
-  "snapshot": "2026-07-29",
+  "snapshot": "2026-07-30",
   "integrity": {
     "corpus_size": 2915,
-    "checked": 711,
-    "unchecked": 2204
+    "checked": 710,
+    "unchecked": 2205
   },
   "companies": [
     {
@@ -38,17 +38,17 @@
         },
         {
           "title": "Sr. Product Manager",
-          "url": "https://boards.greenhouse.io/6sense/jobs/8049017?gh_jid=8049017",
+          "url": "https://boards.greenhouse.io/6sense/jobs/7811972?gh_jid=7811972",
           "locations": [
             "Bengaluru, Karnataka, India"
           ],
           "workplace": null
         },
         {
-          "title": "Sr. Security Engineer - GRC",
-          "url": "https://boards.greenhouse.io/6sense/jobs/7984436?gh_jid=7984436",
+          "title": "Sr. Product Manager",
+          "url": "https://boards.greenhouse.io/6sense/jobs/8049017?gh_jid=8049017",
           "locations": [
-            "Pune, Maharashtra, India"
+            "Bengaluru, Karnataka, India"
           ],
           "workplace": null
         },
@@ -281,6 +281,30 @@
           "workplace": null
         },
         {
+          "title": "Client Due Dilligence Analyst (DDQ)",
+          "url": "https://job-boards.greenhouse.io/alphasense/jobs/8658278002",
+          "locations": [
+            "Bengaluru"
+          ],
+          "workplace": null
+        },
+        {
+          "title": "Client Due Dilligence Analyst (DDQ)",
+          "url": "https://job-boards.greenhouse.io/alphasense/jobs/8658275002",
+          "locations": [
+            "Pune"
+          ],
+          "workplace": null
+        },
+        {
+          "title": "Client Due Dilligence Analyst (DDQ)",
+          "url": "https://job-boards.greenhouse.io/alphasense/jobs/8658276002",
+          "locations": [
+            "Delhi"
+          ],
+          "workplace": null
+        },
+        {
           "title": "Cloud Reliability & Recovery Engineer",
           "url": "https://job-boards.greenhouse.io/alphasense/jobs/8535619002",
           "locations": [
@@ -290,17 +314,17 @@
         },
         {
           "title": "Cloud Support Engineer",
-          "url": "https://job-boards.greenhouse.io/alphasense/jobs/8556018002",
+          "url": "https://job-boards.greenhouse.io/alphasense/jobs/8556009002",
           "locations": [
-            "Bengaluru"
+            "Pune"
           ],
           "workplace": null
         },
         {
           "title": "Cloud Support Engineer",
-          "url": "https://job-boards.greenhouse.io/alphasense/jobs/8556009002",
+          "url": "https://job-boards.greenhouse.io/alphasense/jobs/8556018002",
           "locations": [
-            "Pune"
+            "Bengaluru"
           ],
           "workplace": null
         },
@@ -314,17 +338,17 @@
         },
         {
           "title": "Compliance Analyst",
-          "url": "https://job-boards.greenhouse.io/alphasense/jobs/8630660002",
+          "url": "https://job-boards.greenhouse.io/alphasense/jobs/8630663002",
           "locations": [
-            "Pune"
+            "Bengaluru"
           ],
           "workplace": null
         },
         {
           "title": "Compliance Analyst",
-          "url": "https://job-boards.greenhouse.io/alphasense/jobs/8630663002",
+          "url": "https://job-boards.greenhouse.io/alphasense/jobs/8630660002",
           "locations": [
-            "Bengaluru"
+            "Pune"
           ],
           "workplace": null
         },
@@ -354,17 +378,17 @@
         },
         {
           "title": "Content Analyst",
-          "url": "https://job-boards.greenhouse.io/alphasense/jobs/8025882002",
+          "url": "https://job-boards.greenhouse.io/alphasense/jobs/8025893002",
           "locations": [
-            "Delhi"
+            "Mumbai"
           ],
           "workplace": null
         },
         {
           "title": "Content Analyst",
-          "url": "https://job-boards.greenhouse.io/alphasense/jobs/8025893002",
+          "url": "https://job-boards.greenhouse.io/alphasense/jobs/8025882002",
           "locations": [
-            "Mumbai"
+            "Delhi"
           ],
           "workplace": null
         },
@@ -386,9 +410,9 @@
         },
         {
           "title": "Engineer II - Information Engineer",
-          "url": "https://job-boards.greenhouse.io/alphasense/jobs/8576243002",
+          "url": "https://job-boards.greenhouse.io/alphasense/jobs/8576239002",
           "locations": [
-            "Delhi"
+            "Pune"
           ],
           "workplace": null
         },
@@ -402,23 +426,15 @@
         },
         {
           "title": "Engineer II - Information Engineer",
-          "url": "https://job-boards.greenhouse.io/alphasense/jobs/8576239002",
+          "url": "https://job-boards.greenhouse.io/alphasense/jobs/8576243002",
           "locations": [
-            "Pune"
+            "Delhi"
           ],
           "workplace": null
         },
         {
           "title": "Engineer II - Information Engineer",
           "url": "https://job-boards.greenhouse.io/alphasense/jobs/8576244002",
-          "locations": [
-            "Bengaluru"
-          ],
-          "workplace": null
-        },
-        {
-          "title": "Join AlphaSense India Talent Community",
-          "url": "https://job-boards.greenhouse.io/alphasense/jobs/7119393002",
           "locations": [
             "Bengaluru"
           ],
@@ -434,9 +450,9 @@
         },
         {
           "title": "Join AlphaSense India Talent Community",
-          "url": "https://job-boards.greenhouse.io/alphasense/jobs/7119400002",
+          "url": "https://job-boards.greenhouse.io/alphasense/jobs/7119393002",
           "locations": [
-            "Pune"
+            "Bengaluru"
           ],
           "workplace": null
         },
@@ -445,6 +461,14 @@
           "url": "https://job-boards.greenhouse.io/alphasense/jobs/7119398002",
           "locations": [
             "Delhi"
+          ],
+          "workplace": null
+        },
+        {
+          "title": "Join AlphaSense India Talent Community",
+          "url": "https://job-boards.greenhouse.io/alphasense/jobs/7119400002",
+          "locations": [
+            "Pune"
           ],
           "workplace": null
         },
@@ -466,14 +490,6 @@
         },
         {
           "title": "Product Manager I",
-          "url": "https://job-boards.greenhouse.io/alphasense/jobs/8598288002",
-          "locations": [
-            "Pune"
-          ],
-          "workplace": null
-        },
-        {
-          "title": "Product Manager I",
           "url": "https://job-boards.greenhouse.io/alphasense/jobs/8598282002",
           "locations": [
             "Remote - India"
@@ -481,10 +497,18 @@
           "workplace": "remote"
         },
         {
-          "title": "Security Automation Engineer",
-          "url": "https://job-boards.greenhouse.io/alphasense/jobs/8644556002",
+          "title": "Product Manager I",
+          "url": "https://job-boards.greenhouse.io/alphasense/jobs/8598288002",
           "locations": [
-            "Bengaluru"
+            "Pune"
+          ],
+          "workplace": null
+        },
+        {
+          "title": "Security Automation Engineer",
+          "url": "https://job-boards.greenhouse.io/alphasense/jobs/8644545002",
+          "locations": [
+            "Pune"
           ],
           "workplace": null
         },
@@ -498,9 +522,9 @@
         },
         {
           "title": "Security Automation Engineer",
-          "url": "https://job-boards.greenhouse.io/alphasense/jobs/8644545002",
+          "url": "https://job-boards.greenhouse.io/alphasense/jobs/8644556002",
           "locations": [
-            "Pune"
+            "Bengaluru"
           ],
           "workplace": null
         },
@@ -538,17 +562,17 @@
         },
         {
           "title": "Senior Enterprise Security Architect",
-          "url": "https://job-boards.greenhouse.io/alphasense/jobs/8634070002",
+          "url": "https://job-boards.greenhouse.io/alphasense/jobs/8634073002",
           "locations": [
-            "Delhi"
+            "Bengaluru"
           ],
           "workplace": null
         },
         {
           "title": "Senior Enterprise Security Architect",
-          "url": "https://job-boards.greenhouse.io/alphasense/jobs/8634073002",
+          "url": "https://job-boards.greenhouse.io/alphasense/jobs/8634070002",
           "locations": [
-            "Bengaluru"
+            "Delhi"
           ],
           "workplace": null
         },
@@ -610,14 +634,6 @@
         },
         {
           "title": "Staff Site Reliability Engineer",
-          "url": "https://job-boards.greenhouse.io/alphasense/jobs/8358707002",
-          "locations": [
-            "Pune"
-          ],
-          "workplace": null
-        },
-        {
-          "title": "Staff Site Reliability Engineer",
           "url": "https://job-boards.greenhouse.io/alphasense/jobs/8547394002",
           "locations": [
             "Remote - India"
@@ -626,17 +642,25 @@
         },
         {
           "title": "Staff Site Reliability Engineer",
-          "url": "https://job-boards.greenhouse.io/alphasense/jobs/8358705002",
+          "url": "https://job-boards.greenhouse.io/alphasense/jobs/8358708002",
           "locations": [
-            "Bengaluru"
+            "Delhi"
           ],
           "workplace": null
         },
         {
           "title": "Staff Site Reliability Engineer",
-          "url": "https://job-boards.greenhouse.io/alphasense/jobs/8358708002",
+          "url": "https://job-boards.greenhouse.io/alphasense/jobs/8358707002",
           "locations": [
-            "Delhi"
+            "Pune"
+          ],
+          "workplace": null
+        },
+        {
+          "title": "Staff Site Reliability Engineer",
+          "url": "https://job-boards.greenhouse.io/alphasense/jobs/8358705002",
+          "locations": [
+            "Bengaluru"
           ],
           "workplace": null
         },
@@ -750,14 +774,6 @@
         {
           "title": "Emerging Account Executive (India)",
           "url": "https://job-boards.greenhouse.io/amplitude/jobs/8651132002",
-          "locations": [
-            "Bangalore, India"
-          ],
-          "workplace": null
-        },
-        {
-          "title": "Senior Customer Success Architect",
-          "url": "https://job-boards.greenhouse.io/amplitude/jobs/8618776002",
           "locations": [
             "Bangalore, India"
           ],
@@ -903,12 +919,14 @@
           "title": "Senior Backend Engineer",
           "url": "https://job-boards.greenhouse.io/apolloio/jobs/6116404004",
           "locations": [
-            "Remote, India"
+            "Hybrid, Bangalore; Remote, India"
           ],
-          "workplace": "remote"
+          "workplace": "hybrid"
         }
       ],
-      "cities": [],
+      "cities": [
+        "Bengaluru"
+      ],
       "amount": null,
       "currency": null,
       "round_letter": null,
@@ -924,8 +942,8 @@
       "slug": "appdirect",
       "roles": [
         {
-          "title": "Senior Product Designer",
-          "url": "https://job-boards.greenhouse.io/appdirect/jobs/8614667002",
+          "title": "Staff Cloud Information Security Engineer",
+          "url": "https://job-boards.greenhouse.io/appdirect/jobs/8586630002",
           "locations": [
             "Pune, India"
           ],
@@ -1001,8 +1019,8 @@
           "workplace": null
         },
         {
-          "title": "Senior Support Engineer, India",
-          "url": "https://careers.appsflyer.com/jobs/position/8654217002?gh_jid=8654217002",
+          "title": "Technical Content Specialist-  Bangalore",
+          "url": "https://careers.appsflyer.com/jobs/position/8630736002?gh_jid=8630736002",
           "locations": [
             "Bangalore"
           ],
@@ -1384,6 +1402,14 @@
           "workplace": null
         },
         {
+          "title": "Applied Value Engineer- CPGR/CMT-NAM",
+          "url": "https://job-boards.greenhouse.io/celonis/jobs/7635190003?gh_jid=7635190003",
+          "locations": [
+            "Bangalore, India"
+          ],
+          "workplace": null
+        },
+        {
           "title": "Applied Value Engineer - EAM-EMEA",
           "url": "https://job-boards.greenhouse.io/celonis/jobs/7788423003?gh_jid=7788423003",
           "locations": [
@@ -1448,22 +1474,6 @@
           "workplace": null
         },
         {
-          "title": "Lead Applied Value Engineer | Healthcare & Lifesciences | DACH",
-          "url": "https://job-boards.greenhouse.io/celonis/jobs/7635114003?gh_jid=7635114003",
-          "locations": [
-            "Bangalore, India"
-          ],
-          "workplace": null
-        },
-        {
-          "title": "Lead Applied Value Engineer - UKI | Healthcare & Lifesciences",
-          "url": "https://job-boards.greenhouse.io/celonis/jobs/7635246003?gh_jid=7635246003",
-          "locations": [
-            "Bangalore, India"
-          ],
-          "workplace": null
-        },
-        {
           "title": "Manager, Value Engineering",
           "url": "https://job-boards.greenhouse.io/celonis/jobs/7635358003?gh_jid=7635358003",
           "locations": [
@@ -1489,7 +1499,7 @@
         },
         {
           "title": "Senior Applied Value Engineer",
-          "url": "https://job-boards.greenhouse.io/celonis/jobs/7635142003?gh_jid=7635142003",
+          "url": "https://job-boards.greenhouse.io/celonis/jobs/6318670003?gh_jid=6318670003",
           "locations": [
             "Bangalore, India"
           ],
@@ -1497,7 +1507,7 @@
         },
         {
           "title": "Senior Applied Value Engineer",
-          "url": "https://job-boards.greenhouse.io/celonis/jobs/6318670003?gh_jid=6318670003",
+          "url": "https://job-boards.greenhouse.io/celonis/jobs/7635142003?gh_jid=7635142003",
           "locations": [
             "Bangalore, India"
           ],
@@ -1506,14 +1516,6 @@
         {
           "title": "Senior Applied Value Engineer -CPGR / CMT - NAM",
           "url": "https://job-boards.greenhouse.io/celonis/jobs/7635342003?gh_jid=7635342003",
-          "locations": [
-            "Bangalore, India"
-          ],
-          "workplace": null
-        },
-        {
-          "title": "Senior Applied Value Engineer- CPGR/CMT-NAM",
-          "url": "https://job-boards.greenhouse.io/celonis/jobs/7635190003?gh_jid=7635190003",
           "locations": [
             "Bangalore, India"
           ],
@@ -1544,6 +1546,14 @@
           "workplace": null
         },
         {
+          "title": "Senior Applied Value Engineer | Healthcare & Lifesciences | DACH",
+          "url": "https://job-boards.greenhouse.io/celonis/jobs/7635114003?gh_jid=7635114003",
+          "locations": [
+            "Bangalore, India"
+          ],
+          "workplace": null
+        },
+        {
           "title": "Senior Applied Value Engineer | Healthcare & Lifesciences - NAM",
           "url": "https://job-boards.greenhouse.io/celonis/jobs/7630970003?gh_jid=7630970003",
           "locations": [
@@ -1554,6 +1564,14 @@
         {
           "title": "Senior Applied Value Engineer | UKI | CPG",
           "url": "https://job-boards.greenhouse.io/celonis/jobs/7614493003?gh_jid=7614493003",
+          "locations": [
+            "Bangalore, India"
+          ],
+          "workplace": null
+        },
+        {
+          "title": "Senior Applied Value Engineer - UKI | HLS",
+          "url": "https://job-boards.greenhouse.io/celonis/jobs/7635246003?gh_jid=7635246003",
           "locations": [
             "Bangalore, India"
           ],
@@ -1672,6 +1690,14 @@
         {
           "title": "Member of Technical Staff",
           "url": "https://www.cockroachlabs.com/careers/job/?gh_jid=8055417",
+          "locations": [
+            "Bangalore, India"
+          ],
+          "workplace": null
+        },
+        {
+          "title": "Member of Technical Staff (Senior - Specialized Indexing)",
+          "url": "https://www.cockroachlabs.com/careers/job/?gh_jid=7422578",
           "locations": [
             "Bangalore, India"
           ],
@@ -1821,14 +1847,6 @@
           "workplace": null
         },
         {
-          "title": "Financial Analyst",
-          "url": "https://job-boards.greenhouse.io/coherehealth/jobs/7793378003",
-          "locations": [
-            "Hyderabad, Telangana, India"
-          ],
-          "workplace": null
-        },
-        {
           "title": "Information System Specialist II",
           "url": "https://job-boards.greenhouse.io/coherehealth/jobs/7517448003",
           "locations": [
@@ -1917,6 +1935,14 @@
           "workplace": null
         },
         {
+          "title": "Pricing Analyst",
+          "url": "https://job-boards.greenhouse.io/coherehealth/jobs/7793378003",
+          "locations": [
+            "Hyderabad, Telangana, India"
+          ],
+          "workplace": null
+        },
+        {
           "title": "Provider Outreach Specialist- Voice",
           "url": "https://job-boards.greenhouse.io/coherehealth/jobs/7623240003",
           "locations": [
@@ -1941,24 +1967,8 @@
           "workplace": null
         },
         {
-          "title": "Sr. Application Security",
-          "url": "https://job-boards.greenhouse.io/coherehealth/jobs/7750876003",
-          "locations": [
-            "Hyderabad, Telangana, India"
-          ],
-          "workplace": null
-        },
-        {
           "title": "Sr Business Intelligence Engineer",
           "url": "https://job-boards.greenhouse.io/coherehealth/jobs/7663856003",
-          "locations": [
-            "Hyderabad, Telangana, India"
-          ],
-          "workplace": null
-        },
-        {
-          "title": "Sr. Compliance Analyst",
-          "url": "https://job-boards.greenhouse.io/coherehealth/jobs/7552998003",
           "locations": [
             "Hyderabad, Telangana, India"
           ],
@@ -1990,7 +2000,7 @@
         },
         {
           "title": "Sr. SDET Engineer",
-          "url": "https://job-boards.greenhouse.io/coherehealth/jobs/7805761003",
+          "url": "https://job-boards.greenhouse.io/coherehealth/jobs/7719450003",
           "locations": [
             "Hyderabad, Telangana, India"
           ],
@@ -1998,7 +2008,7 @@
         },
         {
           "title": "Sr. SDET Engineer",
-          "url": "https://job-boards.greenhouse.io/coherehealth/jobs/7719450003",
+          "url": "https://job-boards.greenhouse.io/coherehealth/jobs/7805761003",
           "locations": [
             "Hyderabad, Telangana, India"
           ],
@@ -2031,6 +2041,14 @@
         {
           "title": "Staff Data Scientist",
           "url": "https://job-boards.greenhouse.io/coherehealth/jobs/7693289003",
+          "locations": [
+            "Hyderabad, Telangana, India"
+          ],
+          "workplace": null
+        },
+        {
+          "title": "Staff Software Engineer",
+          "url": "https://job-boards.greenhouse.io/coherehealth/jobs/7797493003",
           "locations": [
             "Hyderabad, Telangana, India"
           ],
@@ -2094,7 +2112,15 @@
           "workplace": "remote"
         },
         {
-          "title": "Senior IT Support Engineer",
+          "title": "Machine Learning Engineer",
+          "url": "https://www.coinbase.com/careers/positions/7985187?gh_jid=7985187",
+          "locations": [
+            "Remote - India"
+          ],
+          "workplace": "remote"
+        },
+        {
+          "title": "Senior IT Automation Engineer",
           "url": "https://www.coinbase.com/careers/positions/8054055?gh_jid=8054055",
           "locations": [
             "Remote - India"
@@ -2335,6 +2361,14 @@
           "workplace": null
         },
         {
+          "title": "Deployment Strategist",
+          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8637736002",
+          "locations": [
+            "Remote - India"
+          ],
+          "workplace": "remote"
+        },
+        {
           "title": "Director, Lakebase Sales Specialists",
           "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8569627002",
           "locations": [
@@ -2395,6 +2429,14 @@
           "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8438954002",
           "locations": [
             "Mumbai, India"
+          ],
+          "workplace": null
+        },
+        {
+          "title": "Full Stack Developer (AI Agents)",
+          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8632126002",
+          "locations": [
+            "Bengaluru, India"
           ],
           "workplace": null
         },
@@ -2576,7 +2618,7 @@
         },
         {
           "title": "Senior Staff Software Engineer (Backend)",
-          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=7651345002",
+          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=7651326002",
           "locations": [
             "Bengaluru, India"
           ],
@@ -2584,7 +2626,7 @@
         },
         {
           "title": "Senior Staff Software Engineer (Backend)",
-          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=7651326002",
+          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=7651345002",
           "locations": [
             "Bengaluru, India"
           ],
@@ -2608,14 +2650,6 @@
         },
         {
           "title": "Solutions Architect",
-          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8438777002",
-          "locations": [
-            "Mumbai, India"
-          ],
-          "workplace": null
-        },
-        {
-          "title": "Solutions Architect",
           "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8641892002",
           "locations": [
             "Pune, India"
@@ -2627,6 +2661,14 @@
           "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8637783002",
           "locations": [
             "Delhi, India"
+          ],
+          "workplace": null
+        },
+        {
+          "title": "Solutions Architect",
+          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8438777002",
+          "locations": [
+            "Mumbai, India"
           ],
           "workplace": null
         },
@@ -2648,17 +2690,17 @@
         },
         {
           "title": "Specialist Solutions Architect - AI/ML",
-          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8585164002",
+          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8593505002",
           "locations": [
-            "Bengaluru, India"
+            "Mumbai, India"
           ],
           "workplace": null
         },
         {
           "title": "Specialist Solutions Architect - AI/ML",
-          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8593505002",
+          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8585164002",
           "locations": [
-            "Mumbai, India"
+            "Bengaluru, India"
           ],
           "workplace": null
         },
@@ -2672,7 +2714,7 @@
         },
         {
           "title": "Sr. Delivery Solutions Architect",
-          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8105504002",
+          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8549058002",
           "locations": [
             "Bengaluru, India"
           ],
@@ -2680,7 +2722,7 @@
         },
         {
           "title": "Sr. Delivery Solutions Architect",
-          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8549058002",
+          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8105504002",
           "locations": [
             "Bengaluru, India"
           ],
@@ -2944,12 +2986,20 @@
       "slug": "deepgram",
       "roles": [
         {
+          "title": "Senior Pre-Sales Solutions Engineer - India",
+          "url": "https://jobs.ashbyhq.com/deepgram/1278975c-e0d8-45be-82dd-8d0d1f2774e5",
+          "locations": [
+            "India"
+          ],
+          "workplace": "remote"
+        },
+        {
           "title": "Sales Country Leader (India)",
           "url": "https://jobs.ashbyhq.com/deepgram/da0ec864-10e8-4b1b-abd3-b6c15b3b111c",
           "locations": [
             "India"
           ],
-          "workplace": null
+          "workplace": "remote"
         }
       ],
       "cities": [],
@@ -3000,17 +3050,17 @@
       "roles": [
         {
           "title": "Account Executive \u2013 Field Sales",
-          "url": "https://job-boards.greenhouse.io/devrev/jobs/5722397004",
+          "url": "https://job-boards.greenhouse.io/devrev/jobs/5578063004",
           "locations": [
-            "Bangalore, India"
+            "Mumbai, India"
           ],
           "workplace": null
         },
         {
           "title": "Account Executive \u2013 Field Sales",
-          "url": "https://job-boards.greenhouse.io/devrev/jobs/5578063004",
+          "url": "https://job-boards.greenhouse.io/devrev/jobs/5722397004",
           "locations": [
-            "Mumbai, India"
+            "Bangalore, India"
           ],
           "workplace": null
         },
@@ -3181,14 +3231,6 @@
         {
           "title": "Salesforce Administrator",
           "url": "https://job-boards.greenhouse.io/dialpad/jobs/8496643002",
-          "locations": [
-            "Bengaluru, India"
-          ],
-          "workplace": null
-        },
-        {
-          "title": "Security Engineer",
-          "url": "https://job-boards.greenhouse.io/dialpad/jobs/8561223002",
           "locations": [
             "Bengaluru, India"
           ],
@@ -3449,14 +3491,6 @@
           "workplace": null
         },
         {
-          "title": "Data Engineer",
-          "url": "https://job-boards.greenhouse.io/postman/jobs/7777990003",
-          "locations": [
-            "Bengaluru, Karnataka, India"
-          ],
-          "workplace": null
-        },
-        {
           "title": "Engineering Manager, Postman AI",
           "url": "https://job-boards.greenhouse.io/postman/jobs/7599978003",
           "locations": [
@@ -3505,6 +3539,14 @@
           "workplace": null
         },
         {
+          "title": "Senior Engineer, IAM",
+          "url": "https://job-boards.greenhouse.io/postman/jobs/7820052003",
+          "locations": [
+            "Hyderabad, Telangana, India"
+          ],
+          "workplace": null
+        },
+        {
           "title": "Senior Engineer, Messaging Platform",
           "url": "https://job-boards.greenhouse.io/postman/jobs/7774448003",
           "locations": [
@@ -3530,7 +3572,8 @@
         }
       ],
       "cities": [
-        "Bengaluru"
+        "Bengaluru",
+        "Hyderabad"
       ],
       "amount": null,
       "currency": null,
@@ -3572,14 +3615,6 @@
         },
         {
           "title": "Senior Software Engineer",
-          "url": "https://www.fivetran.com/careers/job?gh_jid=7687229003",
-          "locations": [
-            "Bengaluru, Karnataka, India, APAC"
-          ],
-          "workplace": null
-        },
-        {
-          "title": "Senior Software Engineer",
           "url": "https://www.fivetran.com/careers/job?gh_jid=7747138003",
           "locations": [
             "Bengaluru, Karnataka, India, APAC"
@@ -3589,6 +3624,14 @@
         {
           "title": "Senior Software Engineer",
           "url": "https://www.fivetran.com/careers/job?gh_jid=7780075003",
+          "locations": [
+            "Bengaluru, Karnataka, India, APAC"
+          ],
+          "workplace": null
+        },
+        {
+          "title": "Senior Software Engineer",
+          "url": "https://www.fivetran.com/careers/job?gh_jid=7687229003",
           "locations": [
             "Bengaluru, Karnataka, India, APAC"
           ],
@@ -4080,7 +4123,7 @@
         },
         {
           "title": "Staff Fullstack Engineer - Data Products",
-          "url": "https://job-boards.greenhouse.io/gitlab/jobs/8613165002",
+          "url": "https://job-boards.greenhouse.io/gitlab/jobs/8623763002",
           "locations": [
             "Bangalore, India"
           ],
@@ -4088,7 +4131,7 @@
         },
         {
           "title": "Staff Fullstack Engineer - Data Products",
-          "url": "https://job-boards.greenhouse.io/gitlab/jobs/8623763002",
+          "url": "https://job-boards.greenhouse.io/gitlab/jobs/8613165002",
           "locations": [
             "Bangalore, India"
           ],
@@ -4359,6 +4402,14 @@
         {
           "title": "Graphic Designer - Intern",
           "url": "https://job-boards.eu.greenhouse.io/groww/jobs/4774342101",
+          "locations": [
+            "Bengaluru-VTP, India"
+          ],
+          "workplace": null
+        },
+        {
+          "title": "Industrial Trainee - Controllership",
+          "url": "https://job-boards.eu.greenhouse.io/groww/jobs/4941406101",
           "locations": [
             "Bengaluru-VTP, India"
           ],
@@ -4904,14 +4955,6 @@
           "workplace": null
         },
         {
-          "title": "AI Developer",
-          "url": "https://www.highradius.com/about/careers-list/?gh_jid=7687204003",
-          "locations": [
-            "Hyderabad, Telangana, India"
-          ],
-          "workplace": null
-        },
-        {
           "title": "Analyst \u2013 Strategic Alliances",
           "url": "https://www.highradius.com/about/careers-list/?gh_jid=7701514003",
           "locations": [
@@ -5097,7 +5140,7 @@
         },
         {
           "title": "Java Architect",
-          "url": "https://www.highradius.com/about/careers-list/?gh_jid=7676819003",
+          "url": "https://www.highradius.com/about/careers-list/?gh_jid=7490280003",
           "locations": [
             "Hyderabad, Telangana, India"
           ],
@@ -5105,7 +5148,7 @@
         },
         {
           "title": "Java Architect",
-          "url": "https://www.highradius.com/about/careers-list/?gh_jid=7490280003",
+          "url": "https://www.highradius.com/about/careers-list/?gh_jid=7676819003",
           "locations": [
             "Hyderabad, Telangana, India"
           ],
@@ -5356,14 +5399,6 @@
           "workplace": null
         },
         {
-          "title": "Facilities Manager - Associate",
-          "url": "https://job-boards.greenhouse.io/icapitalnetwork/jobs/8609879002",
-          "locations": [
-            "IN - Jaipur"
-          ],
-          "workplace": null
-        },
-        {
           "title": "Python Developer - Associate",
           "url": "https://job-boards.greenhouse.io/icapitalnetwork/jobs/8646951002",
           "locations": [
@@ -5486,14 +5521,6 @@
         {
           "title": "Associate Product Manager - Central Data Repository",
           "url": "https://job-boards.greenhouse.io/inmobi/jobs/7998854",
-          "locations": [
-            "Bangalore"
-          ],
-          "workplace": null
-        },
-        {
-          "title": "Consultant - Product Analyst",
-          "url": "https://job-boards.greenhouse.io/inmobi/jobs/7756915",
           "locations": [
             "Bangalore"
           ],
@@ -5922,14 +5949,6 @@
           "workplace": null
         },
         {
-          "title": "Contractual ||  Office Coordinator",
-          "url": "https://job-boards.greenhouse.io/instawork/jobs/4684058006",
-          "locations": [
-            "Bengaluru, Karnataka, India"
-          ],
-          "workplace": null
-        },
-        {
           "title": "Contractual ||  Senior Recruiter",
           "url": "https://job-boards.greenhouse.io/instawork/jobs/4659349006",
           "locations": [
@@ -5962,8 +5981,8 @@
           "workplace": null
         },
         {
-          "title": "Field Engineering Technician",
-          "url": "https://job-boards.greenhouse.io/instawork/jobs/4676145006",
+          "title": "Field Operations Executive",
+          "url": "https://job-boards.greenhouse.io/instawork/jobs/4701137006",
           "locations": [
             "Bengaluru, Karnataka, India"
           ],
@@ -6034,14 +6053,6 @@
           "workplace": null
         },
         {
-          "title": "Product Operations Analyst",
-          "url": "https://job-boards.greenhouse.io/instawork/jobs/4350762006",
-          "locations": [
-            "Bengaluru, Karnataka, India"
-          ],
-          "workplace": null
-        },
-        {
           "title": "QA Interns || Robotics",
           "url": "https://job-boards.greenhouse.io/instawork/jobs/4590775006",
           "locations": [
@@ -6058,14 +6069,6 @@
           "workplace": null
         },
         {
-          "title": "Senior Software Engineer - E3",
-          "url": "https://job-boards.greenhouse.io/instawork/jobs/4669236006",
-          "locations": [
-            "Bengaluru, Karnataka, India"
-          ],
-          "workplace": null
-        },
-        {
           "title": "Senior Software Engineer - E3 - Instawork Robotics",
           "url": "https://job-boards.greenhouse.io/instawork/jobs/4658887006",
           "locations": [
@@ -6074,24 +6077,8 @@
           "workplace": null
         },
         {
-          "title": "Senior Software Engineer - E4 - Instawork Robotics",
-          "url": "https://job-boards.greenhouse.io/instawork/jobs/4673831006",
-          "locations": [
-            "Bengaluru, Karnataka, India"
-          ],
-          "workplace": null
-        },
-        {
           "title": "Shift Supervisor",
           "url": "https://job-boards.greenhouse.io/instawork/jobs/4689263006",
-          "locations": [
-            "Bengaluru, Karnataka, India"
-          ],
-          "workplace": null
-        },
-        {
-          "title": "Staff Software Engineer - Instawork Robotics",
-          "url": "https://job-boards.greenhouse.io/instawork/jobs/4658858006",
           "locations": [
             "Bengaluru, Karnataka, India"
           ],
@@ -6171,6 +6158,14 @@
       "ats": "greenhouse",
       "slug": "ivalua",
       "roles": [
+        {
+          "title": "Accountant",
+          "url": "https://boards.greenhouse.io/ivalua/jobs/7882595?gh_jid=7882595",
+          "locations": [
+            "Pune"
+          ],
+          "workplace": null
+        },
         {
           "title": "Associate Customer Application Engineer (Asp.net, C# & SQL)",
           "url": "https://boards.greenhouse.io/ivalua/jobs/8076602?gh_jid=8076602",
@@ -6273,14 +6268,6 @@
           "workplace": "remote"
         },
         {
-          "title": "Operations Manager, NOC Services - 260708-6",
-          "url": "https://www.kaseya.com/careers/jobs/id/6111544004/?gh_jid=6111544004",
-          "locations": [
-            "Bangalore, India"
-          ],
-          "workplace": null
-        },
-        {
           "title": "Principal Software Engineer",
           "url": "https://www.kaseya.com/careers/jobs/id/6112336004/?gh_jid=6112336004",
           "locations": [
@@ -6293,6 +6280,14 @@
           "url": "https://www.kaseya.com/careers/jobs/id/5824675004/?gh_jid=5824675004",
           "locations": [
             "Pune, India"
+          ],
+          "workplace": null
+        },
+        {
+          "title": "Project Coordinator",
+          "url": "https://www.kaseya.com/careers/jobs/id/6109598004/?gh_jid=6109598004",
+          "locations": [
+            "Bangalore, India"
           ],
           "workplace": null
         },
@@ -6354,7 +6349,7 @@
         },
         {
           "title": "Technical Support Engineer",
-          "url": "https://www.kaseya.com/careers/jobs/id/6092235004/?gh_jid=6092235004",
+          "url": "https://www.kaseya.com/careers/jobs/id/5994206004/?gh_jid=5994206004",
           "locations": [
             "Bangalore, India"
           ],
@@ -6370,7 +6365,7 @@
         },
         {
           "title": "Technical Support Engineer",
-          "url": "https://www.kaseya.com/careers/jobs/id/5994206004/?gh_jid=5994206004",
+          "url": "https://www.kaseya.com/careers/jobs/id/6092235004/?gh_jid=6092235004",
           "locations": [
             "Bangalore, India"
           ],
@@ -6638,7 +6633,7 @@
       "slug": "lambda",
       "roles": [
         {
-          "title": "Senior Finance Systems Analyst (Bangalore)",
+          "title": "Senior Finance Systems Architect (Bangalore)",
           "url": "https://jobs.ashbyhq.com/lambda/698f2617-e44c-4b3a-a8cd-9b7e38923932",
           "locations": [
             "Bangalore, India"
@@ -6974,10 +6969,10 @@
       "slug": "minio",
       "roles": [
         {
-          "title": "Enterprise Account Executive - India",
+          "title": "Enterprise Account Executive - India (Bengaluru)",
           "url": "https://job-boards.greenhouse.io/minio/jobs/5371688008",
           "locations": [
-            "Remote - India"
+            "Remote - Bengaluru"
           ],
           "workplace": "remote"
         },
@@ -7054,14 +7049,6 @@
           "workplace": "remote"
         },
         {
-          "title": "Data Scientist (Fraud)",
-          "url": "https://job-boards.eu.greenhouse.io/moniepoint/jobs/4921127101",
-          "locations": [
-            "Remote, India"
-          ],
-          "workplace": "remote"
-        },
-        {
           "title": "Engineering Manager",
           "url": "https://job-boards.eu.greenhouse.io/moniepoint/jobs/4792180101",
           "locations": [
@@ -7074,6 +7061,14 @@
           "url": "https://job-boards.eu.greenhouse.io/moniepoint/jobs/4939598101",
           "locations": [
             "Remote, India"
+          ],
+          "workplace": "remote"
+        },
+        {
+          "title": "Head of Business Analytics",
+          "url": "https://job-boards.eu.greenhouse.io/moniepoint/jobs/4941416101",
+          "locations": [
+            "Remote, Bangalore"
           ],
           "workplace": "remote"
         },
@@ -7102,14 +7097,6 @@
           "workplace": "remote"
         },
         {
-          "title": "Payroll Specialist",
-          "url": "https://job-boards.eu.greenhouse.io/moniepoint/jobs/4866549101",
-          "locations": [
-            "Remote, India"
-          ],
-          "workplace": "remote"
-        },
-        {
           "title": "Senior Associate  - Test Automation & Tools Development Engineer",
           "url": "https://job-boards.eu.greenhouse.io/moniepoint/jobs/4924934101",
           "locations": [
@@ -7134,14 +7121,6 @@
           "workplace": "remote"
         },
         {
-          "title": "Senior Data Analyst",
-          "url": "https://job-boards.eu.greenhouse.io/moniepoint/jobs/4763337101",
-          "locations": [
-            "Remote, Bangalore"
-          ],
-          "workplace": "remote"
-        },
-        {
           "title": "Senior Data Scientist (Credit)",
           "url": "https://job-boards.eu.greenhouse.io/moniepoint/jobs/4737166101",
           "locations": [
@@ -7160,6 +7139,22 @@
         {
           "title": "Senior Mobile Engineer",
           "url": "https://job-boards.eu.greenhouse.io/moniepoint/jobs/4791661101",
+          "locations": [
+            "Remote, Bangalore"
+          ],
+          "workplace": "remote"
+        },
+        {
+          "title": "Senior POS Mobile Engineer",
+          "url": "https://job-boards.eu.greenhouse.io/moniepoint/jobs/4780660101",
+          "locations": [
+            "Remote, Bangalore"
+          ],
+          "workplace": "remote"
+        },
+        {
+          "title": "Senior Quality Assurance Engineer",
+          "url": "https://job-boards.eu.greenhouse.io/moniepoint/jobs/4941088101",
           "locations": [
             "Remote, Bangalore"
           ],
@@ -7392,6 +7387,14 @@
           "workplace": null
         },
         {
+          "title": "Solutions Engineer",
+          "url": "https://www.netskope.com/company/careers/open-positions/?gh_jid=8041115",
+          "locations": [
+            "India"
+          ],
+          "workplace": null
+        },
+        {
           "title": "Sr. Manager, Engineering, DSPM",
           "url": "https://www.netskope.com/company/careers/open-positions/?gh_jid=7957558",
           "locations": [
@@ -7410,6 +7413,14 @@
         {
           "title": "Sr. Manager, Information Security \u2013 Application Security & Red Team",
           "url": "https://www.netskope.com/company/careers/open-positions/?gh_jid=7982600",
+          "locations": [
+            "Bengaluru, Karnataka, India"
+          ],
+          "workplace": null
+        },
+        {
+          "title": "Sr. Software Development Engineer in Test , Performance QE",
+          "url": "https://www.netskope.com/company/careers/open-positions/?gh_jid=8088812",
           "locations": [
             "Bengaluru, Karnataka, India"
           ],
@@ -7508,6 +7519,14 @@
         {
           "title": "Senior Accountant",
           "url": "https://www.nextiva.com/company/careers-listing?gh_jid=8519670002",
+          "locations": [
+            "Bengaluru, Onsite"
+          ],
+          "workplace": "onsite"
+        },
+        {
+          "title": "Staff Engineer - Site Reliability",
+          "url": "https://www.nextiva.com/company/careers-listing?gh_jid=8560357002",
           "locations": [
             "Bengaluru, Onsite"
           ],
@@ -7929,14 +7948,6 @@
         },
         {
           "title": "Principal Software Engineer",
-          "url": "https://job-boards.greenhouse.io/onetrust/jobs/7657002",
-          "locations": [
-            "Bengaluru, India"
-          ],
-          "workplace": null
-        },
-        {
-          "title": "Principal Software Engineer",
           "url": "https://job-boards.greenhouse.io/onetrust/jobs/7749623",
           "locations": [
             "Bengaluru, India"
@@ -7946,6 +7957,14 @@
         {
           "title": "Principal Software Engineer",
           "url": "https://job-boards.greenhouse.io/onetrust/jobs/7825611",
+          "locations": [
+            "Bengaluru, India"
+          ],
+          "workplace": null
+        },
+        {
+          "title": "Principal Software Engineer",
+          "url": "https://job-boards.greenhouse.io/onetrust/jobs/7657002",
           "locations": [
             "Bengaluru, India"
           ],
@@ -7969,6 +7988,14 @@
         },
         {
           "title": "Senior Customer Success Manager, Scaled Accounts",
+          "url": "https://job-boards.greenhouse.io/onetrust/jobs/8077876",
+          "locations": [
+            "Bengaluru, India"
+          ],
+          "workplace": null
+        },
+        {
+          "title": "Senior Customer Success Manager, Scaled Accounts",
           "url": "https://job-boards.greenhouse.io/onetrust/jobs/8077882",
           "locations": [
             "Bengaluru, India"
@@ -7978,14 +8005,6 @@
         {
           "title": "Senior Customer Success Manager, Scaled Accounts",
           "url": "https://job-boards.greenhouse.io/onetrust/jobs/8077862",
-          "locations": [
-            "Bengaluru, India"
-          ],
-          "workplace": null
-        },
-        {
-          "title": "Senior Customer Success Manager, Scaled Accounts",
-          "url": "https://job-boards.greenhouse.io/onetrust/jobs/8077876",
           "locations": [
             "Bengaluru, India"
           ],
@@ -8018,6 +8037,14 @@
         {
           "title": "Senior Site Reliability Engineer (AI)",
           "url": "https://job-boards.greenhouse.io/onetrust/jobs/7954029",
+          "locations": [
+            "Bengaluru, India"
+          ],
+          "workplace": null
+        },
+        {
+          "title": "Senior Staff Software Engineer",
+          "url": "https://job-boards.greenhouse.io/onetrust/jobs/8067469",
           "locations": [
             "Bengaluru, India"
           ],
@@ -8191,14 +8218,6 @@
           "workplace": null
         },
         {
-          "title": "Data Engineer",
-          "url": "https://job-boards.greenhouse.io/postman/jobs/7777990003",
-          "locations": [
-            "Bengaluru, Karnataka, India"
-          ],
-          "workplace": null
-        },
-        {
           "title": "Engineering Manager, Postman AI",
           "url": "https://job-boards.greenhouse.io/postman/jobs/7599978003",
           "locations": [
@@ -8247,6 +8266,14 @@
           "workplace": null
         },
         {
+          "title": "Senior Engineer, IAM",
+          "url": "https://job-boards.greenhouse.io/postman/jobs/7820052003",
+          "locations": [
+            "Hyderabad, Telangana, India"
+          ],
+          "workplace": null
+        },
+        {
           "title": "Senior Engineer, Messaging Platform",
           "url": "https://job-boards.greenhouse.io/postman/jobs/7774448003",
           "locations": [
@@ -8272,7 +8299,8 @@
         }
       ],
       "cities": [
-        "Bengaluru"
+        "Bengaluru",
+        "Hyderabad"
       ],
       "amount": null,
       "currency": null,
@@ -8569,24 +8597,16 @@
           "workplace": null
         },
         {
+          "title": "Associate Manager, Solutions Engineering",
+          "url": "https://job-boards.greenhouse.io/razorpaysoftwareprivatelimited/jobs/4718628005",
+          "locations": [
+            "Bengaluru"
+          ],
+          "workplace": null
+        },
+        {
           "title": "Engineering Manager",
           "url": "https://job-boards.greenhouse.io/razorpaysoftwareprivatelimited/jobs/4684254005",
-          "locations": [
-            "Bengaluru"
-          ],
-          "workplace": null
-        },
-        {
-          "title": "Engineering Manager",
-          "url": "https://job-boards.greenhouse.io/razorpaysoftwareprivatelimited/jobs/4712147005",
-          "locations": [
-            "Bengaluru"
-          ],
-          "workplace": null
-        },
-        {
-          "title": "Full Stack Builder",
-          "url": "https://job-boards.greenhouse.io/razorpaysoftwareprivatelimited/jobs/4712960005",
           "locations": [
             "Bengaluru"
           ],
@@ -8634,7 +8654,7 @@
         },
         {
           "title": "Manager, Enterprise Partnerships",
-          "url": "https://job-boards.greenhouse.io/razorpaysoftwareprivatelimited/jobs/4713401005",
+          "url": "https://job-boards.greenhouse.io/razorpaysoftwareprivatelimited/jobs/4708904005",
           "locations": [
             "Bengaluru"
           ],
@@ -8642,7 +8662,7 @@
         },
         {
           "title": "Manager, Enterprise Partnerships",
-          "url": "https://job-boards.greenhouse.io/razorpaysoftwareprivatelimited/jobs/4708904005",
+          "url": "https://job-boards.greenhouse.io/razorpaysoftwareprivatelimited/jobs/4713401005",
           "locations": [
             "Bengaluru"
           ],
@@ -8657,16 +8677,16 @@
           "workplace": null
         },
         {
-          "title": "Manager, Retention and Growth",
-          "url": "https://job-boards.greenhouse.io/razorpaysoftwareprivatelimited/jobs/4715755005",
+          "title": "Product Manager II",
+          "url": "https://job-boards.greenhouse.io/razorpaysoftwareprivatelimited/jobs/4712108005",
           "locations": [
-            "Mumbai"
+            "Bengaluru"
           ],
           "workplace": null
         },
         {
-          "title": "Product Manager II",
-          "url": "https://job-boards.greenhouse.io/razorpaysoftwareprivatelimited/jobs/4712108005",
+          "title": "Senior Analyst, Business Operations",
+          "url": "https://job-boards.greenhouse.io/razorpaysoftwareprivatelimited/jobs/4719358005",
           "locations": [
             "Bengaluru"
           ],
@@ -8691,14 +8711,6 @@
         {
           "title": "Senior Associate, Legal",
           "url": "https://job-boards.greenhouse.io/razorpaysoftwareprivatelimited/jobs/4717790005",
-          "locations": [
-            "Bengaluru"
-          ],
-          "workplace": null
-        },
-        {
-          "title": "Senior Product Manager",
-          "url": "https://job-boards.greenhouse.io/razorpaysoftwareprivatelimited/jobs/4716555005",
           "locations": [
             "Bengaluru"
           ],
@@ -8738,8 +8750,7 @@
         }
       ],
       "cities": [
-        "Bengaluru",
-        "Mumbai"
+        "Bengaluru"
       ],
       "amount": null,
       "currency": null,
@@ -8753,6 +8764,30 @@
         "observed": "2026-07-28",
         "source_url": "https://www.ambitionbox.com/salaries/razorpay-salaries"
       },
+      "mca": null
+    },
+    {
+      "name": "Replit",
+      "ats": "ashby",
+      "slug": "replit",
+      "roles": [
+        {
+          "title": "Account Executive (India)",
+          "url": "https://jobs.ashbyhq.com/replit/910691ab-8f9a-4859-b4ad-786c63ed51e2",
+          "locations": [
+            "India"
+          ],
+          "workplace": "remote"
+        }
+      ],
+      "cities": [],
+      "amount": null,
+      "currency": null,
+      "round_letter": null,
+      "date": null,
+      "source_url": "https://www.ycombinator.com/companies/replit",
+      "qualified_by": "stage",
+      "salary": null,
       "mca": null
     },
     {
@@ -9501,14 +9536,6 @@
           "workplace": null
         },
         {
-          "title": "Site Reliability Engineer",
-          "url": "https://job-boards.greenhouse.io/singlestore/jobs/7533846",
-          "locations": [
-            "India"
-          ],
-          "workplace": null
-        },
-        {
           "title": "Software Engineer | AI Platforms",
           "url": "https://job-boards.greenhouse.io/singlestore/jobs/7573638",
           "locations": [
@@ -9909,6 +9936,14 @@
           "workplace": null
         },
         {
+          "title": "Fraud Operations Associate (Mandarin Speaking)",
+          "url": "https://stripe.com/jobs/search?gh_jid=8076652",
+          "locations": [
+            "Bengaluru"
+          ],
+          "workplace": null
+        },
+        {
           "title": "Fraud Operations Manager",
           "url": "https://stripe.com/jobs/search?gh_jid=7608396",
           "locations": [
@@ -10063,6 +10098,14 @@
         {
           "title": "Software Engineer, Internal Systems",
           "url": "https://stripe.com/jobs/search?gh_jid=7543868",
+          "locations": [
+            "Bengaluru, India"
+          ],
+          "workplace": null
+        },
+        {
+          "title": "Staff Engineer, Core Infrastructure",
+          "url": "https://stripe.com/jobs/search?gh_jid=8070949",
           "locations": [
             "Bengaluru, India"
           ],
@@ -10270,14 +10313,6 @@
       "slug": "temporaltechnologies",
       "roles": [
         {
-          "title": "Events & Field Marketing Manager - India",
-          "url": "https://job-boards.greenhouse.io/temporaltechnologies/jobs/5177991007",
-          "locations": [
-            "India"
-          ],
-          "workplace": null
-        },
-        {
           "title": "Staff Solutions Architect, Banking - India",
           "url": "https://job-boards.greenhouse.io/temporaltechnologies/jobs/5182398007",
           "locations": [
@@ -10306,14 +10341,6 @@
           "url": "https://job-boards.greenhouse.io/tenstorrent/jobs/5098104007",
           "locations": [
             "India"
-          ],
-          "workplace": null
-        },
-        {
-          "title": "Sr. Engineer/Staff Engineer, Design Verification,System IP",
-          "url": "https://job-boards.greenhouse.io/tenstorrent/jobs/5145059007",
-          "locations": [
-            "Bengaluru, Karnataka, India"
           ],
           "workplace": null
         },
@@ -10356,14 +10383,6 @@
       "slug": "tide",
       "roles": [
         {
-          "title": "Analyst, Level 1 (Member Interactions), Continuous KYX, UK",
-          "url": "https://job-boards.greenhouse.io/tide/jobs/7773036003",
-          "locations": [
-            "India, Hyderabad"
-          ],
-          "workplace": null
-        },
-        {
           "title": "Area Sales Specialist (Business Finance Specialist) - Cards (Ludhiana)",
           "url": "https://job-boards.greenhouse.io/tide/jobs/7718241003",
           "locations": [
@@ -10404,6 +10423,14 @@
           "workplace": null
         },
         {
+          "title": "Customer Support Associate (KYC Analyst)",
+          "url": "https://job-boards.greenhouse.io/tide/jobs/7773036003",
+          "locations": [
+            "India, Hyderabad"
+          ],
+          "workplace": null
+        },
+        {
           "title": "Customer Support Specialist (Paid Plans)",
           "url": "https://job-boards.greenhouse.io/tide/jobs/5943791003",
           "locations": [
@@ -10421,6 +10448,14 @@
         },
         {
           "title": "Engineering Manager",
+          "url": "https://job-boards.greenhouse.io/tide/jobs/6643198003",
+          "locations": [
+            "India, Bengaluru"
+          ],
+          "workplace": null
+        },
+        {
+          "title": "Engineering Manager",
           "url": "https://job-boards.greenhouse.io/tide/jobs/6643188003",
           "locations": [
             "India, Hyderabad"
@@ -10432,14 +10467,6 @@
           "url": "https://job-boards.greenhouse.io/tide/jobs/6643197003",
           "locations": [
             "India, Delhi NCR"
-          ],
-          "workplace": null
-        },
-        {
-          "title": "Engineering Manager",
-          "url": "https://job-boards.greenhouse.io/tide/jobs/6643198003",
-          "locations": [
-            "India, Bengaluru"
           ],
           "workplace": null
         },
@@ -10556,15 +10583,7 @@
           "workplace": null
         },
         {
-          "title": "Remediation Operations Manager - 3",
-          "url": "https://job-boards.greenhouse.io/tide/jobs/7820212003",
-          "locations": [
-            "India, Delhi NCR"
-          ],
-          "workplace": null
-        },
-        {
-          "title": "Remediation Operations Manager - 3",
+          "title": "Security Engineer 3 - Vulnerability Management",
           "url": "https://job-boards.greenhouse.io/tide/jobs/7812620003",
           "locations": [
             "India, Hyderabad"
@@ -10572,7 +10591,15 @@
           "workplace": null
         },
         {
-          "title": "Remediation Operations Manager - 3",
+          "title": "Security Engineer 3 - Vulnerability Management",
+          "url": "https://job-boards.greenhouse.io/tide/jobs/7820212003",
+          "locations": [
+            "India, Delhi NCR"
+          ],
+          "workplace": null
+        },
+        {
+          "title": "Security Engineer 3 - Vulnerability Management",
           "url": "https://job-boards.greenhouse.io/tide/jobs/7820211003",
           "locations": [
             "India, Bengaluru"
@@ -10616,30 +10643,6 @@
           "url": "https://job-boards.greenhouse.io/tide/jobs/7799403003",
           "locations": [
             "India, Delhi NCR"
-          ],
-          "workplace": null
-        },
-        {
-          "title": "Senior Software Engineer, Flutter",
-          "url": "https://job-boards.greenhouse.io/tide/jobs/7815729003",
-          "locations": [
-            "India, Delhi NCR"
-          ],
-          "workplace": null
-        },
-        {
-          "title": "Senior Software Engineer, Flutter",
-          "url": "https://job-boards.greenhouse.io/tide/jobs/7766790003",
-          "locations": [
-            "India, Hyderabad"
-          ],
-          "workplace": null
-        },
-        {
-          "title": "Senior Software Engineer, Flutter",
-          "url": "https://job-boards.greenhouse.io/tide/jobs/7815727003",
-          "locations": [
-            "India, Bengaluru"
           ],
           "workplace": null
         },
@@ -10693,17 +10696,17 @@
         },
         {
           "title": "Staff Software Engineer, Agentic Platform",
-          "url": "https://job-boards.greenhouse.io/tide/jobs/7703826003",
+          "url": "https://job-boards.greenhouse.io/tide/jobs/7703991003",
           "locations": [
-            "India, Bengaluru"
+            "Berlin, Germany; Bulgaria; India, Bengaluru; India, Delhi NCR; India, Hyderabad; Lithuania; Serbia; United Kingdom"
           ],
           "workplace": null
         },
         {
           "title": "Staff Software Engineer, Agentic Platform",
-          "url": "https://job-boards.greenhouse.io/tide/jobs/7703991003",
+          "url": "https://job-boards.greenhouse.io/tide/jobs/7703826003",
           "locations": [
-            "Berlin, Germany; Bulgaria; India, Bengaluru; India, Delhi NCR; India, Hyderabad; Lithuania; Serbia; United Kingdom"
+            "India, Bengaluru"
           ],
           "workplace": null
         },
@@ -11048,14 +11051,6 @@
       "slug": "vectranetworks",
       "roles": [
         {
-          "title": "Associate MDR Operations Specialist",
-          "url": "https://www.vectra.ai/about/jobs?gh_jid=8040895",
-          "locations": [
-            "Bengaluru, Karnataka, India"
-          ],
-          "workplace": null
-        },
-        {
           "title": "Commissions Analyst",
           "url": "https://www.vectra.ai/about/jobs?gh_jid=8022896",
           "locations": [
@@ -11068,14 +11063,6 @@
           "url": "https://www.vectra.ai/about/jobs?gh_jid=8042976",
           "locations": [
             "Bangalore, Karnataka, India"
-          ],
-          "workplace": null
-        },
-        {
-          "title": "Infrastructure & DevOps Engineer (Technical Marketing)",
-          "url": "https://www.vectra.ai/about/jobs?gh_jid=6889453",
-          "locations": [
-            "Bengaluru, Karnataka, India"
           ],
           "workplace": null
         },
@@ -11181,14 +11168,6 @@
         },
         {
           "title": "Forward Deployed Engineer",
-          "url": "https://www.workato.com/careers?gh_jid=8440865002#open-roles",
-          "locations": [
-            "Hyderabad, India"
-          ],
-          "workplace": null
-        },
-        {
-          "title": "Forward Deployed Engineer",
           "url": "https://www.workato.com/careers?gh_jid=8437639002#open-roles",
           "locations": [
             "Hyderabad, India"
@@ -11197,15 +11176,7 @@
         },
         {
           "title": "Forward Deployed Engineer",
-          "url": "https://www.workato.com/careers?gh_jid=8437661002#open-roles",
-          "locations": [
-            "Hyderabad, India"
-          ],
-          "workplace": null
-        },
-        {
-          "title": "Forward Deployed Engineer",
-          "url": "https://www.workato.com/careers?gh_jid=8437665002#open-roles",
+          "url": "https://www.workato.com/careers?gh_jid=8440865002#open-roles",
           "locations": [
             "Hyderabad, India"
           ],
@@ -11222,6 +11193,22 @@
         {
           "title": "Forward Deployed Engineer",
           "url": "https://www.workato.com/careers?gh_jid=8526757002#open-roles",
+          "locations": [
+            "Hyderabad, India"
+          ],
+          "workplace": null
+        },
+        {
+          "title": "Forward Deployed Engineer",
+          "url": "https://www.workato.com/careers?gh_jid=8437661002#open-roles",
+          "locations": [
+            "Hyderabad, India"
+          ],
+          "workplace": null
+        },
+        {
+          "title": "Forward Deployed Engineer",
+          "url": "https://www.workato.com/careers?gh_jid=8437665002#open-roles",
           "locations": [
             "Hyderabad, India"
           ],
@@ -11262,14 +11249,6 @@
         {
           "title": "Senior Automation Engineer",
           "url": "https://www.workato.com/careers?gh_jid=8616532002#open-roles",
-          "locations": [
-            "Hyderabad, India"
-          ],
-          "workplace": null
-        },
-        {
-          "title": "Senior Software Engineer (Voice Backend)",
-          "url": "https://www.workato.com/careers?gh_jid=8579783002#open-roles",
           "locations": [
             "Hyderabad, India"
           ],
@@ -11384,14 +11363,6 @@
           "workplace": "remote"
         },
         {
-          "title": "Senior Engineering Manager",
-          "url": "https://job-boards.greenhouse.io/yipitdata/jobs/7307811",
-          "locations": [
-            "India Remote"
-          ],
-          "workplace": "remote"
-        },
-        {
           "title": "Senior SDET",
           "url": "https://job-boards.greenhouse.io/yipitdata/jobs/6743082",
           "locations": [
@@ -11451,14 +11422,6 @@
       "ats": "greenhouse",
       "slug": "yugabyte",
       "roles": [
-        {
-          "title": "Marketing Coordinator",
-          "url": "https://job-boards.greenhouse.io/yugabyte/jobs/4678583006",
-          "locations": [
-            "India"
-          ],
-          "workplace": null
-        },
         {
           "title": "Partner Account Executive",
           "url": "https://job-boards.greenhouse.io/yugabyte/jobs/4668552006",
