@@ -18,7 +18,7 @@ Decomposition of `SPEC.md`. Markdown, not beads (bd is broken for this project).
 
 ## The shape of it
 
-Seven epics, 27 tasks. That is more than fits in one head at a glance — so the
+Eight epics, 33 tasks. That is more than fits in one head at a glance — so the
 sequencing below is deliberately **thin-slice first**: Phase 0 builds one narrow
 end-to-end path (one funding source → Greenhouse only → live site). Everything
 after widens a working system rather than assembling an unproven one.
@@ -55,6 +55,14 @@ PHASE 3 — automation + honesty
 PHASE 4 — velocity (needs real history to exist first)
   T7.1 trend from git log ──→ T7.2 sparkline + ramping filter
        ↑ hard-blocked on T6.1 AND ~30 days of T6.2 snapshots
+
+PHASE 5 — ROLE·ATLAS (multi-country + openness, SPEC "Expansion" section)
+  T8.1 learning tests ──→ T8.3 openness heuristic ──┐
+  T8.2 country matcher ─────────────────────────────┼─→ T8.4 build integration
+                                                    │
+                    T8.5 tabs + badges ←────────────┘
+                          │
+                          └─→ T8.6 rename to ROLE·ATLAS
 ```
 
 **Critical path:** T6.1 → T1.1 → T1.5 → T2.1 → T3.1 → T3.4 → T5.1 → T5.2.
@@ -1254,4 +1262,102 @@ Checks:
   lint -> e2e:ramping_filter_returns_only_ramping
        -> e2e:insufficient_history_renders_no_sparkline
 Out of scope: trend charts beyond the sparkline.
+```
+
+---
+
+## E8 · ROLE·ATLAS expansion
+
+> SPEC "Expansion — ROLE·ATLAS" section (features 14–16). Same doctrine as v1:
+> measure before building, absence stays absence, a zero is never ambiguous.
+> The openness signal is the load-bearing bet — T8.1 exists to price it before
+> anything is built on it.
+
+### T8.1 — Learning tests: description text and openness phrases `in-progress` · *Phase 5*
+> Feature 15 needs posting *description* text the probes may not fetch today.
+> Measure before designing, like T0 did for the probes themselves.
+```
+Acceptance (observable):
+  learning-tests/ gains scripts and FINDINGS sections recording, per ATS
+  (Greenhouse, Ashby, Lever): whether description text arrives in the existing
+  list call or costs extra calls; the latency/volume impact of fetching it; and
+  the measured frequency of visa/remote-abroad phrases (positive AND negative
+  forms) over ≥500 real postings in the new target countries. Also: how often
+  Japan-based postings are non-English.
+  KILL CRITERION: if openness phrases appear in <~2% of postings, do not
+  proceed to T8.3 — mark it blocked with `NEEDS REVIEW:` and the numbers, so a
+  human re-decides feature 15 with evidence.
+Checks:
+  scripts run against live APIs; each findings comment matches observed output
+  (network-marked, not part of `make check`).
+Out of scope: the heuristic itself (T8.3); any pipeline change.
+```
+
+### T8.2 — Country matcher `done` · *Phase 5*
+```
+Acceptance (observable):
+  A location string classifies to zero or more of the 15 target countries.
+  Fixture of REAL location strings covers all 15, including the cross-country
+  traps: "Cambridge, MA" is not the UK; "Perth, Scotland" is not Australia; bare
+  "Newcastle" / "Nice" / "Reading" classify as NO country, never a guess.
+  Zero false positives on the fixture. The existing India fixture passes
+  unchanged — india.py behavior is preserved, not re-litigated.
+Checks:
+  lint -> typecheck -> unit:test_countries -> unit:test_india (unchanged)
+Out of scope: descriptions, openness, UI, outcome vocabulary.
+```
+
+### T8.3 — Openness heuristic `todo` · *Phase 5* · after T8.1
+```
+Acceptance (observable):
+  Per role: visa and hire_from_abroad, each yes|no|unknown, derived from
+  description text. Explicit negatives ("unable to sponsor") classify as no.
+  Silence classifies as unknown — NEVER as no. Phrase list cites the T8.1
+  measured frequencies in FINDINGS.md. Fixture of real posting excerpts
+  (positive / explicit-negative / silent / non-English) classifies correctly.
+Checks:
+  lint -> typecheck -> unit:test_openness
+Out of scope: LLM classification; translation; fetching (that's T8.4's wiring).
+```
+
+### T8.4 — Build integration and outcome vocabulary `todo` · *Phase 5* · after T8.2, T8.3
+```
+Acceptance (observable):
+  companies.json roles carry `country` and openness fields; companies carry the
+  derived country set. Probes keep roles matching ANY target country. Outcome
+  `no-india-roles` renamed `no-target-roles` everywhere (build report, tests,
+  footer contract); build-report.json gains per-country listed counts.
+  `python -m src.build --smoke` emits schema-valid output with the new fields.
+  Existing invariants are UPDATED to the new vocabulary, never weakened.
+Checks:
+  lint -> typecheck -> unit -> e2e (full gate)
+Out of scope: the site (T8.5); description-fetch tiering beyond what T8.1
+  measured as affordable — if nightly cost balloons, that's a ponytail comment
+  naming the ceiling, not a new scheduler.
+```
+
+### T8.5 — Country tabs and openness badges `todo` · *Phase 5* · after T8.4
+```
+Acceptance (observable):
+  Country navigation on the site (grouping is the site's choice — e.g. one
+  Europe tab with an inner country filter). Selecting a country shows only
+  companies with ≥1 role there; per-tab counts consistent with the build report.
+  Openness badge on roles; an "open to foreign hires" filter (visa yes OR
+  hire_from_abroad yes); unknown renders as unknown, never as no.
+  India view keeps all current behavior; salary + MCA render only there.
+Checks:
+  lint -> e2e:country_tabs -> e2e:openness_filter -> e2e:console-clean
+Out of scope: the rename (T8.6).
+```
+
+### T8.6 — Rename to ROLE·ATLAS `todo` · *Phase 5* · after T8.5
+```
+Acceptance (observable):
+  Site title/header, README, SPEC title, and integrity footer say ROLE·ATLAS.
+  `grep -ri "india.radar"` finds no user-visible occurrence (historical notes
+  in TASKS.md / FINDINGS.md may stand). Renaming the GitHub repo / Pages URL is
+  a HUMAN action — leave a one-line note in README, do not attempt it.
+Checks:
+  lint -> e2e:console-clean -> the grep above, shown in output
+Out of scope: renaming the repo directory or remote (human).
 ```
