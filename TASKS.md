@@ -1165,14 +1165,35 @@ Out of scope: rollback UI.
 ## E7 · Velocity  *(SPEC feature 13)*
 
 ### T7.1 — Trend from git history `blocked` · *Phase 4*
-> **NEEDS INPUT: a `git push` of this branch, plus GitHub Pages enabled.** Until a
-> human does both, this task cannot ever unblock — and the reason is not the one
-> the note below spent two iterations asserting.
+> **Corrected 2026-07-31. The human action happened; the block is now calendar
+> time and nothing else.** Someone pushed. `origin/main` has moved off `ad70f38`,
+> `nightly.yml` is on the remote default branch, and the schedule has fired for
+> real: run `30582371396`, trigger `schedule`, `success`, 9m42s, 2026-07-30T21:11Z,
+> which committed `d835fb3` "nightly refresh 2026-07-30" touching
+> `data/build-report.json` and `data/companies.json`. **Snapshots are accruing, one
+> per night, from 2026-07-30.** GitHub Pages is enabled and `built` — source `main`
+> at root, serving https://chandrameenamohan.github.io/india-radar/ — which closes
+> the SPEC.md:12 gap recorded below. The `gh` token now carries `workflow`, so the
+> OAuth caveat below is settled too.
 >
-> **Blocked on T6.1 AND ~30 days of accumulated T6.2 snapshots.** History accrues
-> from the first nightly commit whether or not this ships — so the cost of waiting
-> is zero, and shipping early means shipping an empty or lying feature.
+> **Blocked on ~30 days of accumulated T6.2 snapshots — and now only that.**
+> History accrues whether or not this ships, so the cost of waiting is still zero
+> and shipping early still means shipping an empty or lying feature. One snapshot
+> exists. **Earliest plausible start: around 2026-08-29.** That date is a floor,
+> not a promise: it assumes ~30 consecutive nightlies land, and a run that fails or
+> is skipped pushes it out day for day.
 >
+> **Caveat worth acting on: the 9 local T8 commits are not pushed.** `git rev-list
+> --left-right --count origin/main...HEAD` is `0 9`. The nightly therefore runs
+> PRE-T8 code every night, and its snapshots carry the old schema and the
+> India-only radar. Snapshot history accrues either way and T7.1 is not blocked on
+> this — but the longer it stands, the more of the 30-day window is spent
+> snapshotting a radar the site no longer is. A human should push the T8 work.
+> (Local `main` was rebased onto `d835fb3` on 2026-07-31; the nightly's old-schema
+> data files were superseded by the local 15-country versions, full gate green —
+> 457 unit passed, 57 e2e checks ok.)
+>
+> **Superseded 2026-07-31 — kept for the date-discipline lesson at its end.**
 > **Corrected 2026-07-30. Waiting is not sufficient, because ZERO snapshots are
 > accruing and none will.** The previous note said the unblocking condition was
 > "calendar time with `nightly.yml` firing (`cron: "0 20 * * *"`, verified present
@@ -1222,16 +1243,31 @@ Out of scope: rollback UI.
 > **not** evidence either way. I did not push to find out: pushing a fortnight of
 > someone's project is not this loop's call to make.
 >
-> Do not start this task on the strength of a re-read. Re-run the four commands
-> above; if `gh run list` is still empty, nothing has changed.
+> *(End of the superseded 2026-07-30 correction.)*
+>
+> **Do not start this task on the strength of a re-read.** The four commands still
+> apply; what they show has changed, so check the count, not the presence:
+>
+> ```
+> git ls-tree -r --name-only origin/main | grep nightly   -> .github/workflows/nightly.yml
+> gh run list --workflow nightly.yml                      -> 1 success, 2026-07-30
+> git rev-list --left-right --count origin/main...HEAD    -> 0   9   (T8 unpushed)
+> gh api repos/.../pages                                  -> status: built
+> ```
+>
+> The figure that gates T7.1 is now **how many nightly snapshot commits exist** —
+> `git log --format=%ad --date=short -- data/companies.json` — not whether any do.
+> One is not thirty. Below the minimum the acceptance block sets, trend is
+> `insufficient-history`, and that is the honest answer through most of August.
 >
 > **The backlog is otherwise EXHAUSTED — 25 done, T7.1 and T7.2 blocked behind
-> this one human action.** An iteration arriving here has nothing else to claim,
-> so the loop's remaining job is to re-run the four commands and stop. That is the
-> correct behaviour, not a stall: it is the only way the loop notices the push
-> when it happens. Do not manufacture work to fill the iteration, and do not
-> unblock T7.1 by weakening it — even the instant a push lands, trend needs ~30
-> days of real snapshots that will not exist until late August at the earliest.
+> calendar time.** An iteration arriving here has nothing else to claim, so the
+> loop's remaining job is to count snapshots and stop. That is the correct
+> behaviour, not a stall. Do not manufacture work to fill the iteration, and do
+> not unblock T7.1 by weakening it: a first nightly is not a month of them, and
+> the acceptance checks below — a probe-failed snapshot contributing no point,
+> `insufficient-history` below the minimum — are exactly what stops one green run
+> from being read as a trend.
 
 ```
 Acceptance (observable):
