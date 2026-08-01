@@ -996,11 +996,11 @@
        countries no such field exists, so the list is read off the plate's own
        location strings — conservatively, and said aloud in note 06. -->
   <label><span class="lbl">Hiring city</span><select id="city"><option value="any">Any city</option></select></label>
-  <!-- T5.4. Not a field any board publishes: the department is derived from the
-       title, so the options carry their live counts, a title we cannot place
-       stays reachable as Unclassified rather than being guessed into a bucket,
-       and the apparatus note under the bank states the provenance while the
-       filter is set. -->
+  <!-- T5.4, T9.2. Read off the title first — a derivation — and off the board's
+       own word only where the title places nothing. The options carry their live
+       counts; a role neither can place stays reachable as Unclassified rather
+       than being guessed into a bucket; and the apparatus note under the bank
+       splits the two provenances while the filter is set. -->
   <label><span class="lbl">Department</span><select id="dept"><option value="any">Any department</option></select></label>
   <!-- SPEC feature 10's remote-only filter. T5.2 left it out deliberately: it
        filters on a field no row carried until T4.1, and a control that can only
@@ -1095,10 +1095,12 @@
     <p>The MCA data we hold lists companies registered in India as subsidiaries of a parent
       incorporated abroad. An India-founded company cannot appear in it at all, so a missing CIN
       says nothing about a company — and a present one is a registration, not an endorsement.</p>
-    <p>Two of the filters read facts no board publishes. A role's <b>department</b> is derived
-      from its title by keyword — 86% of the 5,580 roles at this snapshot carry a title we could
-      place, and
-      the rest stay Unclassified rather than being guessed into a bucket. A plate's <b>hiring
+    <p>A role's <b>department</b> is read two ways, and the filter says which while it is set.
+      First from the title by keyword, which places 86% of the roles at this snapshot. Where the
+      title says nothing we can place, we take the board's own word for it — boards state one on
+      99.6% of postings, though what they state is an internal org chart rather than a craft, so
+      it fills the gap and never overrules a title we could read. Where neither places a role it
+      stays Unclassified rather than being guessed into a bucket. A plate's <b>hiring
       city</b> list is India's from the build, and elsewhere is parsed off the location strings:
       a place is taken only where the board named its country beside it, so a posting that says
       "Remote — Germany", or lists five cities at once, contributes no city at all.</p>
@@ -1117,7 +1119,7 @@
 // The site is a renderer and nothing else: it reads the JSON the build wrote and
 // never recomputes a fact. The snapshot date in particular ships with the data,
 // because a date taken at render time would claim a freshness the JSON lacks.
-const SCHEMA = 8;                                  // src/build.py SCHEMA_VERSION
+const SCHEMA = 9;                                  // src/build.py SCHEMA_VERSION
 const DEFAULT_SRC = '../data/companies.json';
 
 // Test seam: e2e drives this same page over a fixture dataset (data/companies.json
@@ -1481,15 +1483,26 @@ const uniqCased = (list) => {
   return [...seen.values()];
 };
 
-// --------------------------- departments (T5.4) -----------------------------
-// No board publishes a department, so this reads the title — a derivation, and
-// the page says so where it is used (the apparatus note) and where it is
-// explained (note 06). The map was built by measuring: every one of the 5,580
-// published role titles was classified, the buckets read by hand, and each rule
-// tightened until nothing absurd remained. It places 4,817 of them — 86.3% —
-// and the 763 it cannot are UNCLASSIFIED, an option of their own rather than a
-// silence, because a filter that quietly dropped a seventh of the register
-// would be the ambiguous zero in a new costume.
+// --------------------------- departments (T5.4, T9.2) -----------------------
+// The title is read first — a derivation, and the page says so where it is used
+// (the apparatus note) and where it is explained (note 06). The map was built by
+// measuring: every one of the 5,580 published role titles was classified, the
+// buckets read by hand, and each rule tightened until nothing absurd remained.
+// It places 86.3% of them, and what it cannot place is UNCLASSIFIED, an option
+// of its own rather than a silence — a filter that quietly dropped a seventh of
+// the register would be the ambiguous zero in a new costume.
+//
+// T9.2 measured the claim this comment used to open with ("no board publishes a
+// department") and it was wrong: 99.6% of 5,409 postings state one, free in
+// calls the build already makes. But the boards state an ORG CHART — 696
+// distinct values on Greenhouse alone, 302 said once, `All Cost Center` among
+// them — and where both speak they agree only 74% of the time, because a
+// reporting line answers a different question from a craft (a Business
+// Development Representative filed under Marketing, a Sales Engineer under Field
+// Engineering). So the board's word FILLS THE GAP and never overrules: it is
+// read only for a title this map places nothing on, through this same table, so
+// one vocabulary decides every label on the page. A board word this table cannot
+// place leaves the role Unclassified rather than inventing a fourteenth bucket.
 //
 // FIRST MATCH WINS, and the order is the precedence: the more specialised craft
 // takes a title that names two. So a Product Designer is Design, not Product; a
@@ -1515,16 +1528,30 @@ const DEPTS = [
   ['Engineering', /engineer|developer|\bdevops\b|\bsre\b|site reliability|architect|programmer|technical lead|\bcto\b|full.?stack|front.?end|back.?end|\bqa\b|quality assurance|firmware|embedded|\bandroid\b|\bios\b|platform/i],
   ['Operations', /operations|\bops\b|program manager|project manager|chief of staff|strategy|procurement|office manager|executive assistant/i],
 ];
-// Remembered per title string, for the same reason the cities are.
+// Remembered per string, for the same reason the cities are — and the strings
+// are now of two kinds (a title, a board's department), which share the memo
+// because they share the table.
 const DEPTMEMO = new Map();
-function deptOf(title) {
-  if (DEPTMEMO.has(title)) return DEPTMEMO.get(title);
-  let found = UNCLASSIFIED;
+function bucketOf(text) {
+  if (!text) return null;
+  if (DEPTMEMO.has(text)) return DEPTMEMO.get(text);
+  let found = null;
   for (const [name, pattern] of DEPTS) {
-    if (pattern.test(title)) { found = name; break; }
+    if (pattern.test(text)) { found = name; break; }
   }
-  DEPTMEMO.set(title, found);
+  DEPTMEMO.set(text, found);
   return found;
+}
+// The title, then the board, then neither. `deptSource` is the same decision
+// said out loud, for the apparatus note: what a reader is looking at is either
+// our reading of the title or the board's own word, and the page has to be able
+// to say which without recomputing the answer differently.
+function deptOf(role) {
+  return bucketOf(role.title) || bucketOf(role.department) || UNCLASSIFIED;
+}
+function deptSource(role) {
+  if (bucketOf(role.title)) return 'title';
+  return bucketOf(role.department) ? 'board' : 'neither';
 }
 
 // The India CTC benchmark, when one was found (65 of 116 measured). Absence is
@@ -2307,10 +2334,16 @@ function render() {
   // is this — with Unclassified last, always present when it has anything in
   // it, so the derivation's limits are a line on the page rather than a gap.
   const deptN = new Map();
+  // Counted beside the options, because the note under the bank has to say how
+  // many of these labels are our reading of a title and how many are the board's
+  // own word (T9.2). Two passes over the same roles would be two chances to
+  // disagree with the list they are describing.
+  const deptFrom = { title: 0, board: 0, neither: 0 };
   for (const c of here) {
     for (const r of c.roles) {
-      const d = deptOf(r.title);
+      const d = deptOf(r);
       deptN.set(d, (deptN.get(d) || 0) + 1);
+      deptFrom[deptSource(r)] += 1;
     }
   }
   const deptOpts = [...deptN].filter(([d]) => d !== UNCLASSIFIED)
@@ -2383,11 +2416,11 @@ function render() {
   // the two numbers say how much of this plate it could place.
   if (dept !== 'any') {
     const all = here.reduce((n, c) => n + c.roles.length, 0);
-    const placed = all - (deptN.get(UNCLASSIFIED) || 0);
-    notes.push('Department is derived from the role title, not stated by the '
-      + `board: ${count(placed)} of ${count(all)} roles on this plate carry a `
-      + 'title we could place, and the rest are reachable as Unclassified '
-      + '(note 06).');
+    notes.push('Department is read off the role title where we can place it, and '
+      + 'taken from the board\'s own word where we cannot: of '
+      + `${count(all)} roles on this plate, ${count(deptFrom.title)} are our `
+      + `reading of the title and ${count(deptFrom.board)} are what the board `
+      + 'calls them; the rest are reachable as Unclassified (note 06).');
   }
   fchip.replaceChildren(...notes.map((t) => el('p', 'fnote', t)));
   fchip.hidden = !notes.length;
@@ -2397,7 +2430,7 @@ function render() {
   // row, the entry and every count then speak about those roles alone — the
   // same rule a country plate follows (inScope), applied to a second axis.
   const listed = dept === 'any' ? here : here.map((c) => {
-    const roles = c.roles.filter((r) => deptOf(r.title) === dept);
+    const roles = c.roles.filter((r) => deptOf(r) === dept);
     return roles.length ? { ...c, roles } : null;
   }).filter(Boolean);
   // T5.4: the search reads role titles as well as company names. `hits` is how

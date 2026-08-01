@@ -8,7 +8,7 @@ from pathlib import Path
 
 import pytest
 
-from src import lever
+from src import greenhouse, lever
 from src.build import (
     PROBES,
     SCHEMA_VERSION,
@@ -18,6 +18,7 @@ from src.build import (
     errors,
     integrity_errors,
     published,
+    role_errors,
     shared_boards,
     website_counts,
     write,
@@ -101,6 +102,10 @@ def test_listed_row_carries_the_corpus_and_the_board():
                     "locations": ["Bengaluru, India"],
                     "countries": ["India"],
                     "workplace": None,
+                    # T9.2: the board's own word, carried verbatim. The fixture
+                    # states a department and its parent, as the live payload
+                    # does, and the specific one is the one that ships.
+                    "department": "R&D: Platform",
                     # T8.4/T8.3: the fixture's own description says "we do sponsor
                     # visas! However, we aren't able to..." — the both-polarity
                     # shape that is 76 real postings, and it reads as a yes. It
@@ -114,6 +119,7 @@ def test_listed_row_carries_the_corpus_and_the_board():
                     "locations": ["Bengaluru, India; Mumbai, India"],
                     "countries": ["India"],
                     "workplace": None,
+                    "department": "Data Platform",
                     # "You must have the right to work in India" — one sentence
                     # refusing the visa and the relocation together.
                     "visa": "no",
@@ -664,6 +670,85 @@ def test_one_posting_open_in_two_countries_is_one_role_in_both():
     assert rows[0]["countries"] == ["India", "United Kingdom", "Australia"]
     assert rows[0]["cities"] == ["Bengaluru"], "London and Sydney are not India cities"
     assert errors(rows[0]) == []
+
+
+# --- T9.2, the board's own department -----------------------------------------
+
+
+def test_the_board_department_is_carried_verbatim_and_never_mapped():
+    """The build states what the board said; the site owns the vocabulary. A
+    build that pre-mapped this would be two classifiers disagreeing in two
+    languages — and the raw words are what a human reads when the table misses."""
+    rows, _ = build(CORPUS[:1], {"Acme": GREENHOUSE}, answering(acme=BOARD))
+
+    # The fixture states a department and its parent, the way the live payload
+    # does. The specific one ships; `R&D` is the parent and says less.
+    assert [role["department"] for role in rows[0]["roles"]] == ["R&D: Platform", "Data Platform"]
+
+
+@pytest.mark.parametrize(
+    "stated, carried, because",
+    [
+        ([{"name": "R&D: Platform"}, {"name": "R&D"}], "R&D: Platform", "the specific one leads"),
+        ([], None, "a board that files a job under nothing states nothing"),
+        ([{"name": "   "}], None, "blank is silence, not a department"),
+        ([{"id": 1}], None, "a department with no name is not a department"),
+        ("Engineering", None, "the field is a list here, whatever else arrives in it"),
+    ],
+)
+def test_greenhouse_department_shapes(stated, carried, because):
+    assert greenhouse.department({"departments": stated}) == carried, because
+
+
+def test_a_role_off_the_cheap_pass_states_no_department():
+    """`departments` rides with `content=true` — 0 of 142 jobs carry it on the
+    cheap call. So a board whose second pass failed loses the department for
+    every role on it, exactly as it loses the openness, and never claims the
+    board files its jobs under nothing."""
+    cheap = json.loads(board("Bengaluru, India"))["jobs"]
+    provider = PROBES["greenhouse"]._replace(
+        probe=lambda _: cheap, describe=lambda _: Outcome.PROBE_FAILED
+    )
+
+    rows, _ = build(CORPUS[:1], {"Acme": GREENHOUSE}, {"greenhouse": provider})
+
+    assert rows[0]["roles"][0]["department"] is None
+    assert errors(rows[0]) == []
+
+
+def test_ashby_and_lever_state_their_own_department():
+    """Both carry it in the one call the build already makes — Ashby flat, Lever
+    under `categories`."""
+    postings = json.loads(ashby_board(("Bengaluru, India",)))["jobs"]
+    postings[0]["department"] = "Engineering"
+    ashby_rows, _ = build(
+        CORPUS[:1], {"Acme": Slug(ats="ashby", slug="acme", method="guess")},
+        answering("ashby", acme=postings),
+    )
+    lever_rows, _ = build(
+        CORPUS[:1], {"Acme": Slug(ats="lever", slug="acme", method="guess")},
+        answering("lever", acme=json.loads(lever_board(("Bengaluru, India",)))),
+    )
+
+    assert ashby_rows[0]["roles"][0]["department"] == "Engineering"
+    assert lever_rows[0]["roles"][0]["department"] == "Engineering"
+
+
+@pytest.mark.parametrize(
+    "said, because",
+    [
+        ("", "an empty department would render as a word nobody typed"),
+        ("   ", "and so would a blank one"),
+        (0, "a number is not what any of the three providers state"),
+    ],
+)
+def test_a_department_that_is_not_a_word_fails_the_schema(said, because):
+    role = {
+        "title": "Staff Engineer", "url": "https://job-boards.greenhouse.io/acme/1",
+        "locations": ["Bengaluru, India"], "countries": ["India"], "workplace": None,
+        "visa": "unknown", "hire_from_abroad": "unknown", "department": said,
+    }
+    assert any("department" in problem for problem in role_errors(role)), because
 
 
 # --- T10.1, one board one company ---------------------------------------------

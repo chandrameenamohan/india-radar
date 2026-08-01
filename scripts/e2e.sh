@@ -669,6 +669,51 @@ check "Unclassified is reachable and delivers every role it claims" "yes same" \
 $B select '#dept' 'any' >/dev/null 2>&1
 check "clearing the department filter restores every company" "$(expect True)" "$(rows)"
 
+# T9.2. The board states a department for 99.6% of postings, and the site reads it
+# ONLY where the title map places nothing — measured, the two disagree 26% of the
+# time, over a difference of question rather than of fact. Both halves of that
+# rule are asserted here, and the dataset carries the three cases by hand:
+# `Clinical Data Lead` (board: Data Science) is the fill, `Clinical Trials
+# Coordinator` (board: All Cost Center) is what neither can place, and `Product
+# Designer` (board: Engineering) is the one the board must not move.
+#
+# The fill is asserted through a company the title map alone cannot put here:
+# Gamma Health has no data-titled role, so its only way into Department=Data is
+# the board's own word.
+$B select '#dept' 'Data' >/dev/null 2>&1
+check "a board's department fills a title the map cannot place" \
+  "$($PY -c "
+import json
+rows = json.load(open('tests/fixtures/companies-e2e.json'))['companies']
+named = sorted(r['name'] for r in rows
+               if any(x['department'] == 'Data Science' for x in r['roles']))
+print(' '.join(named))")" \
+  "$(val '[...document.querySelectorAll(".irow .iname")]
+       .map((n) => n.firstChild.textContent)
+       .filter((n) => n === "Gamma Health").join(" ")')"
+
+# And the other direction, which is the whole narrowing: every ENGINEERING role in
+# view is one the TITLE says is engineering. The dataset holds a Product Designer
+# whose board files it under Engineering; if the board's word overruled a placed
+# title, this sum would be one too many and the Design option one too few.
+$B select '#dept' 'Engineering' >/dev/null 2>&1
+check "a stated department never moves a title the map placed" \
+  "$($PY -c "
+import json
+rows = json.load(open('tests/fixtures/companies-e2e.json'))['companies']
+print(sum(1 for r in rows for x in r['roles'] if $eng), 'roles')")" \
+  "$(val '[...document.querySelectorAll(".irow")]
+       .reduce((n, r) => n + +r.dataset.reqs, 0) + " roles"')"
+$B select '#dept' 'Design' >/dev/null 2>&1
+check "the designer the board calls an engineer is still under Design" \
+  "$($PY -c "
+import json
+rows = json.load(open('tests/fixtures/companies-e2e.json'))['companies']
+print(sum(1 for r in rows for x in r['roles'] if 'designer' in x['title'].lower()), 'roles')")" \
+  "$(val '[...document.querySelectorAll(".irow")]
+       .reduce((n, r) => n + +r.dataset.reqs, 0) + " roles"')"
+$B select '#dept' 'any' >/dev/null 2>&1
+
 # The sparse filters state their own coverage while they are set. RAISED and
 # FUNDED read fields most of the register does not carry, so a reader who sets
 # one watches most of the page leave with no way to know it left over a silence.
@@ -806,7 +851,7 @@ console_clean "after interaction"
 echo "-- a dataset this page doesn't know how to read"
 open_page "$ROOT?data=../data/build-report.json"
 check "an unknown schema is refused, not rendered" "refused 0 rows" \
-  "$(val '(document.querySelector("#status").textContent.startsWith("This page reads schema v8")
+  "$(val '(document.querySelector("#status").textContent.startsWith("This page reads schema v9")
        ? "refused " : "rendered ") + document.querySelectorAll(".irow").length + " rows"')"
 # And the footer goes with it. A count left over from the last dataset, sitting
 # under a refusal to render this one, is the site stating a coverage figure for a

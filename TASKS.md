@@ -1548,7 +1548,7 @@ Out of scope:
     T4.4's DIN exclusion
 ```
 
-### T9.2 — Board-stated departments `phase 1 done` · *Phase 6*
+### T9.2 — Board-stated departments `done` · *Phase 6*
 > **PHASE 1 MEASURED 2026-08-02** — `learning-tests/departments_live.py`, 5,409
 > postings on 317 live boards, FINDINGS §"Board-stated departments". Headline: the
 > "no board publishes one" note was wrong — **99.6% state one**, and the field is
@@ -1568,6 +1568,20 @@ Out of scope:
 >
 > So: the board fills the gap, and never overrules a title the derivation placed.
 > Phase 2's acceptance below is rewritten to that shape.
+>
+> **PHASE 2 SHIPPED 2026-08-02** to exactly that shape. Schema v9 carries the
+> board's word per role, verbatim and unmapped — the site owns the vocabulary, and
+> a build that pre-mapped it would be two classifiers disagreeing in two
+> languages. The site reads title first, board second, through the SAME table, so
+> one vocabulary decides every label; a board word the table cannot place
+> (`All Cost Center`) leaves the role Unclassified rather than inventing a
+> fourteenth bucket. The apparatus note now splits the two provenances with live
+> counts instead of claiming the whole column is derived.
+>
+> No per-role badge: T5.4 never rendered a department on a role — it is a filter —
+> so the provenance is said where the filter is used, which is where a reader can
+> act on it. A badge on 5,400 rows would be decoration for a fact nobody asked
+> each role for.
 
 T5.4 shipped a DEPARTMENT filter derived from role titles by keyword map: **4,817
 of 5,580 roles — 86.3%** placed, **763** UNCLASSIFIED, labelled on the page as

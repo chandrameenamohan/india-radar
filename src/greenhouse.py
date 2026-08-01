@@ -122,6 +122,23 @@ def text(role: Mapping[str, Any]) -> str:
     return plain(role.get("content"))
 
 
+def department(role: Mapping[str, Any]) -> str | None:
+    """The board's own word for where this role sits, or None (T9.2).
+
+    A LIST here, unlike Ashby's and Lever's single string: Greenhouse hangs a job
+    off a department and, often, that department's parent ("R&D: Platform" under
+    "R&D"). The first is the specific one and the one the board leads with.
+
+    None for every role off the cheap pass, and that is the same honest absence
+    `text` returns: `departments` arrives only with `content=true` — measured
+    0 of 142 jobs on `content=false`, 142 of 142 on `content=true` — so a board
+    whose second pass failed says nothing here rather than saying nothing exists.
+    """
+    first = next(iter(role.get("departments") or []), None)
+    name = first.get("name") if isinstance(first, Mapping) else None
+    return name.strip() or None if isinstance(name, str) else None
+
+
 def board_name(slug: str, timeout: int = 20) -> str | None:
     """The company name this board states it belongs to, or None if there is no
     such board.

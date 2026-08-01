@@ -1,5 +1,5 @@
 {
-  "schema_version": 8,
+  "schema_version": 9,
   "snapshot": "2026-07-28",
   "integrity": {
     "corpus_size": 30,
@@ -23,7 +23,8 @@
           ],
           "workplace": null,
           "visa": "yes",
-          "hire_from_abroad": "unknown"
+          "hire_from_abroad": "unknown",
+          "department": "R&D: Platform"
         },
         {
           "title": "Product Designer",
@@ -36,7 +37,8 @@
           ],
           "workplace": "hybrid",
           "visa": "unknown",
-          "hire_from_abroad": "unknown"
+          "hire_from_abroad": "unknown",
+          "department": "Engineering"
         },
         {
           "title": "Engineering Manager",
@@ -49,7 +51,8 @@
           ],
           "workplace": null,
           "visa": "unknown",
-          "hire_from_abroad": "unknown"
+          "hire_from_abroad": "unknown",
+          "department": "R&D"
         }
       ],
       "countries": [
@@ -84,7 +87,8 @@
           ],
           "workplace": "onsite",
           "visa": "no",
-          "hire_from_abroad": "no"
+          "hire_from_abroad": "no",
+          "department": "Operations"
         },
         {
           "title": "Data Analyst",
@@ -97,7 +101,8 @@
           ],
           "workplace": null,
           "visa": "unknown",
-          "hire_from_abroad": "unknown"
+          "hire_from_abroad": "unknown",
+          "department": null
         }
       ],
       "countries": [
@@ -138,7 +143,8 @@
           ],
           "workplace": null,
           "visa": "unknown",
-          "hire_from_abroad": "yes"
+          "hire_from_abroad": "yes",
+          "department": "Engineering"
         },
         {
           "title": "Clinical Data Lead",
@@ -151,7 +157,8 @@
           ],
           "workplace": "onsite",
           "visa": "unknown",
-          "hire_from_abroad": "unknown"
+          "hire_from_abroad": "unknown",
+          "department": "Data Science"
         },
         {
           "title": "Site Reliability Engineer",
@@ -164,7 +171,8 @@
           ],
           "workplace": "remote",
           "visa": "unknown",
-          "hire_from_abroad": "unknown"
+          "hire_from_abroad": "unknown",
+          "department": null
         },
         {
           "title": "Engineering Manager, Platform",
@@ -178,7 +186,22 @@
           ],
           "workplace": "hybrid",
           "visa": "unknown",
-          "hire_from_abroad": "unknown"
+          "hire_from_abroad": "unknown",
+          "department": "Engineering"
+        },
+        {
+          "title": "Clinical Trials Coordinator",
+          "url": "https://job-boards.greenhouse.io/gammahealth/jobs/9001",
+          "locations": [
+            "Hyderabad, India"
+          ],
+          "countries": [
+            "India"
+          ],
+          "workplace": "onsite",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown",
+          "department": "All Cost Center"
         }
       ],
       "countries": [
@@ -225,7 +248,8 @@
           ],
           "workplace": "remote",
           "visa": "unknown",
-          "hire_from_abroad": "unknown"
+          "hire_from_abroad": "unknown",
+          "department": "Customer Experience"
         }
       ],
       "countries": [
@@ -262,7 +286,8 @@
           ],
           "workplace": null,
           "visa": "unknown",
-          "hire_from_abroad": "unknown"
+          "hire_from_abroad": "unknown",
+          "department": null
         },
         {
           "title": "Growth Marketer",
@@ -275,7 +300,8 @@
           ],
           "workplace": "hybrid",
           "visa": "unknown",
-          "hire_from_abroad": "unknown"
+          "hire_from_abroad": "unknown",
+          "department": "GTM"
         }
       ],
       "countries": [
@@ -309,7 +335,8 @@
           ],
           "workplace": null,
           "visa": "unknown",
-          "hire_from_abroad": "unknown"
+          "hire_from_abroad": "unknown",
+          "department": "Commercial"
         }
       ],
       "countries": [
@@ -341,7 +368,8 @@
           ],
           "workplace": null,
           "visa": "yes",
-          "hire_from_abroad": "yes"
+          "hire_from_abroad": "yes",
+          "department": "Engineering"
         },
         {
           "title": "Support Engineer",
@@ -354,7 +382,8 @@
           ],
           "workplace": "hybrid",
           "visa": "unknown",
-          "hire_from_abroad": "unknown"
+          "hire_from_abroad": "unknown",
+          "department": "Engineering"
         }
       ],
       "countries": [
@@ -401,7 +430,8 @@
           ],
           "workplace": "onsite",
           "visa": "no",
-          "hire_from_abroad": "unknown"
+          "hire_from_abroad": "unknown",
+          "department": null
         }
       ],
       "countries": [

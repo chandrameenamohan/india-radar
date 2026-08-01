@@ -53,7 +53,13 @@ from src.slugs import Slug, key, states_company
 #: (`visa`, `hire_from_abroad`), and a company states the set its roles add up to.
 #: The India-only fields stay exactly what they were — `cities`, `salary` and
 #: `mca` describe India roles and nothing else, by decision (SPEC v2).
-SCHEMA_VERSION = 8
+#: v9 added `department` to a role (T9.2) — the board's OWN word for where the
+#: role sits, or null. Not the site's label and not a derivation: the site keeps
+#: reading the title first (86.1% of roles, and the two disagree 26% of the time
+#: over a difference of question, not of fact), and reads this only where the title
+#: places nothing. Free to carry: it rides in payloads all three probes already
+#: fetch — Greenhouse's `content=true` second pass, Ashby's and Lever's only call.
+SCHEMA_VERSION = 9
 
 Probe = Callable[[str], Roles | Outcome]
 Row = dict[str, Any]
@@ -93,6 +99,12 @@ class Provider(NamedTuple):
     #: providers that ship prose whether we want it or not — only Greenhouse
     #: charges for it, and only in bytes (T8.1). See `described`.
     describe: Probe | None = None
+    #: The board's own word for where this role sits (T9.2), or None. A function
+    #: because the three disagree on shape as well as spelling: Greenhouse nests a
+    #: LIST (a job can hang off a department and its parent), Ashby and Lever
+    #: state one string each. Defaulted so a provider that states nothing needs no
+    #: entry — and measured, all three state something, on 99.6% of postings.
+    department: Callable[[Mapping[str, Any]], str | None] = lambda _: None
 
 
 #: A row: what the corpus knew about the funding, plus what the board proved
@@ -122,6 +134,16 @@ FIELDS: dict[str, type | tuple[type, ...]] = {
     "mca": (dict, type(None)),
 }
 
+def stated(value: Any) -> str | None:
+    """A board's word for something, or None where it said nothing usable.
+
+    Blank is silence, not a department: Lever states `categories.department` on
+    94.4% of postings and omits it on the rest, and an empty string reaching the
+    site would render as a department nobody can read (T9.2).
+    """
+    return value.strip() or None if isinstance(value, str) else None
+
+
 #: Every ATS this corpus holds a slug for. With Lever in, no company is
 #: `probe-failed` for want of a probe — the outcome now means only what it says,
 #: that we tried and could not read the board.
@@ -134,6 +156,7 @@ PROBES: dict[str, Provider] = {
         url="absolute_url",
         workplace=None,
         describe=greenhouse.describe,
+        department=greenhouse.department,
     ),
     "ashby": Provider(
         probe=ashby.probe,
@@ -142,6 +165,7 @@ PROBES: dict[str, Provider] = {
         title="title",
         url="jobUrl",
         workplace="workplaceType",
+        department=lambda role: stated(role.get("department")),
     ),
     "lever": Provider(
         probe=lever.probe,
@@ -150,6 +174,7 @@ PROBES: dict[str, Provider] = {
         title="text",
         url="hostedUrl",
         workplace="workplaceType",
+        department=lambda role: stated((role.get("categories") or {}).get("department")),
     ),
 }
 
@@ -159,7 +184,13 @@ PROBES: dict[str, Provider] = {
 #: is a provider changing its payload, and the build failing loudly is the alarm.
 #: T8.4 added `countries` (which of the fifteen this role is in) and the two
 #: openness verdicts, which are `unknown` far more often than not and must be.
-ROLE_FIELDS = ("title", "url", "locations", "countries", "workplace", "visa", "hire_from_abroad")
+#: T9.2 added `department` — the board's own word, or null. Null is legal and
+#: common (the whole reason the site keeps deriving from the title); what is
+#: refused is the empty string, which would render as a department nobody typed.
+ROLE_FIELDS = (
+    "title", "url", "locations", "countries", "workplace", "visa", "hire_from_abroad",
+    "department",
+)
 
 #: A benchmark's fields (T4.2). `observed` is required rather than optional, and
 #: that is SPEC feature 8's "renders the figure with its date" made deterministic:
@@ -255,6 +286,9 @@ def role_errors(role: Any) -> list[str]:
         problems.append(f"countries {where!r} is not a non-empty list of target countries")
     if role.get("workplace") not in (*WORKPLACES, None):
         problems.append(f"workplace {role.get('workplace')!r} is not one of {WORKPLACES} or None")
+    said = role.get("department")
+    if not (said is None or (isinstance(said, str) and said.strip())):
+        problems.append(f"department {said!r} is neither a non-empty string nor absent")
     problems += [
         f"{field} {role.get(field)!r} is not one of {VERDICTS}"
         for field in ("visa", "hire_from_abroad")
@@ -476,7 +510,7 @@ def posting(role: Mapping[str, Any], provider: Provider) -> Row:
     itself; the string carries the other 939, where Greenhouse states nothing.
     """
     places, where = matched(role, provider)
-    stated = role.get(provider.workplace) if provider.workplace else None
+    said = role.get(provider.workplace) if provider.workplace else None
     title = role.get(provider.title)
     return {
         # Real titles arrive padded (` Software Engineer `, live on two boards).
@@ -486,7 +520,12 @@ def posting(role: Mapping[str, Any], provider: Provider) -> Row:
         "url": role.get(provider.url),
         "locations": places,
         "countries": where,
-        "workplace": stated.lower() if isinstance(stated, str) else workplace("; ".join(places)),
+        "workplace": said.lower() if isinstance(said, str) else workplace("; ".join(places)),
+        # The board's word, carried verbatim and never mapped here (T9.2). The
+        # site owns the department vocabulary — it derives one from the title for
+        # 86.1% of roles — and a build that pre-mapped this would be two
+        # classifiers disagreeing in two languages.
+        "department": provider.department(role),
         **classify(provider.text(role))._asdict(),
     }
 
@@ -903,6 +942,11 @@ def main(argv: list[str]) -> None:
     for field in ("visa", "hire_from_abroad"):
         said = sum(1 for row in rows for role in row["roles"] if role[field] != "unknown")
         print(f"  {said:4d}  of {posted} roles state {field}")
+    # T9.2 measured 99.6% on the whole corpus. Printed every run because the one
+    # way this quietly dies is Greenhouse's second pass failing wholesale — the
+    # department rides with the descriptions, so this number falls with them.
+    filed = sum(1 for row in rows for role in row["roles"] if role["department"])
+    print(f"  {filed:4d}  of {posted} roles state a department on their board")
     print(f"  {built['mca']['records']:4d}  MCA foreign subsidiaries cached "
           f"(pulled {built['mca']['pulled'] or 'never'})")
     print(f"  {built['mca']['matched']:4d}  matched to a CIN, "

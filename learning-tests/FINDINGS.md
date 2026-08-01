@@ -2518,7 +2518,10 @@ claimed.
 
 ## Consequence for Phase 2
 
-Proceed, NARROWED. The build fetches the field (free), a role carries it, and the
+SHIPPED 2026-08-02, and the live numbers landed exactly where this predicted:
+**5,410 roles, 4,656 placed from the title (86.1%), 419 filled from the board →
+93.8%**, and 5,389 of 5,410 roles (99.6%) carry a stated department. The rule as
+built: the build fetches the field (free), a role carries it, and the
 site uses it **only where the derivation gives up** — the derivation keeps every
 title it already places, and its label keeps T5.4's mark. That is the whole of the
 measured win and none of the measured harm. `Unclassified` stays reachable for what
