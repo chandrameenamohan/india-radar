@@ -25,9 +25,9 @@ as nothing, a derivation says it is derived.
   Push goes to `main`; nightly commits may land remotely — rebase, and for
   `data/*.json` conflicts prefer whichever side matches the CURRENT schema.
 
-## State as of 2026-08-01 night
+## State as of 2026-08-02
 
-- **35 tasks done.** Live site has: the Swiss-atlas redesign (16 plates,
+- **36 tasks done.** Live site has: the Swiss-atlas redesign (16 plates,
   world-map-as-navigation, per-company VERIFIED·BOARD READ stamp), 316 listed
   companies (UK 220 is the largest plate; India 115), WHAT/FOR WHOM/WHY THEM
   descriptions (`data/descriptions.json`, marked
@@ -48,9 +48,13 @@ as nothing, a derivation says it is derived.
   human registering a free API key at
   developer.company-information.service.gov.uk and adding it as a repo secret
   + local env.
-- **T9.2 (board-stated departments): specced, deferred** — Phase 1 is a
-  T8.1-style learning test with a kill criterion; can run anytime, no key
-  needed.
+- **T9.2 (board-stated departments) done 2026-08-02, both phases.** Phase 1
+  measured 5,409 postings on 317 live boards: "no board publishes one" was wrong
+  (99.6% state one, free in calls the build already makes), but the vocabulary is
+  an org chart and where both speak they agree only 74% of the time. So Phase 2
+  shipped narrowed — schema v9 carries the board's word per role, and the site
+  reads the title first and the board ONLY where the title places nothing,
+  through the same table. Live: 86.1% -> 93.8% placed, 335 still Unclassified.
 - **T10.1 (one board, one company) done 2026-08-01.** 11 names left the site:
   10 pairs that read one board (the site was publishing Grafana Labs' 75 roles
   twice, under `Raintank` as well) and Next Caller, whose careers page links
@@ -72,25 +76,21 @@ as nothing, a derivation says it is derived.
 
 ## NEXT (in order)
 
-1. **T9.2 Phase 1 measurement** (no input needed): run the learning test in
-   the T9.2 spec (TASKS.md ~line 1551) against real Greenhouse/Ashby/Lever
-   boards; record in learning-tests/ + FINDINGS; apply the kill criterion;
-   update T9.2's status/note with the numbers.
-2. **T9.1 build** — only after the human supplies the Companies House API key.
-3. **Descriptions nightly delta** — newly listed companies get no description
+1. **T9.1 build** — only after the human supplies the Companies House API key.
+2. **Descriptions nightly delta** — newly listed companies get no description
    until regenerated; wiring the delta into the nightly needs an
    ANTHROPIC_API_KEY repo secret (human step). Until then, a manual
    regeneration pass (6 parallel writer agents, website-verified, omit when
    unverifiable) is the pattern — see `data/descriptions.json` provenance.
    The 316-company set has churned since the last pass — new names carry no
    description, and 11 collapsed names (T10.1) now carry one nothing reads.
-4. **Corpus rebuild, when something wants one** — `python -m src.corpus` is a
+3. **Corpus rebuild, when something wants one** — `python -m src.corpus` is a
    manual step the nightly never runs, and it is what makes T10.1's two website
    corrections bite. Nothing is wrong on the site while it waits (both companies
    already resolve to their own boards); a rebuild also picks up companies the
    sources have added since 2026-07-29, which then need `python -m src.slugs`
    (~2.5h) before they can be checked.
-5. Late August: re-check T7.1's unblock condition (snapshot count).
+4. Late August: re-check T7.1's unblock condition (snapshot count).
 
 ## Billing context (2026-08-01)
 
