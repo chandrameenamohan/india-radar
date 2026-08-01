@@ -1488,7 +1488,7 @@ Out of scope: renaming the repo directory or remote (human).
 
 ---
 
-## E9 · Registry expansion
+## E9 · Registry and provenance expansion
 
 > India carries a registration badge (T4.3, T4.4) because the site was India-only
 > when that badge was built. It no longer is: the UK plate is now the largest at
@@ -1496,6 +1496,9 @@ Out of scope: renaming the repo directory or remote (human).
 > badge to the registers covering the larger plates, one country at a time, on
 > T4.4's rules. Later candidates, in rough order of how cheaply they are reached:
 > France (Sirene), Japan (corporate number), Australia (ABN). None of them is T9.1.
+> The second strand is the same question one scale down: where the site prints a
+> fact it DERIVED, is there a source that STATES it — and does the stated one
+> actually read better than the derivation (T9.2).
 
 ### T9.1 — UK Companies House registration badge `todo` · *Phase 6*
 > **Deferred: not scheduled until a human registers an API key.** Companies House
@@ -1543,4 +1546,55 @@ Out of scope:
     Australia ABN are the next candidates, and are NOT this task
   - directors and PSC data — personal data, helps nobody here, same rule as
     T4.4's DIN exclusion
+```
+
+### T9.2 — Board-stated departments `todo` · *Phase 6*
+> **Deferred: not scheduled.** Nothing rots while this waits — T5.4's map says on
+> the page that it derived the department, so no reader is misled by the delay.
+
+T5.4 shipped a DEPARTMENT filter derived from role titles by keyword map: **4,817
+of 5,580 roles — 86.3%** placed, **763** UNCLASSIFIED, labelled on the page as
+derived from the title, not stated by the board. Its note adds that "no board
+publishes one". That is true of what our probes FETCH, and only that. Greenhouse
+carries departments on the job — our probe asks for `?content=false` — and offers a
+departments endpoint besides; Ashby's postings carry a department field; Lever's
+carry `categories.team`. Whether those fields are POPULATED, and with what words,
+was never measured. The claim was read off our own request strings.
+
+So this task measures first and decides second, the way T8.1 priced openness before
+anything was built on it.
+```
+Acceptance (observable):
+  PHASE 1 — the learning test, cheap, and done alone:
+  learning-tests/ gains a script and FINDINGS records covering, per ATS
+  (Greenhouse, Ashby, Lever) over a handful of REAL boards each: whether a
+  department arrives in the existing list call or costs extra calls and latency;
+  COVERAGE — what fraction of postings state one at all; and VOCABULARY — free
+  text a team typed ("Money", "Growth Pod") or anything canonical.
+  KILL CRITERION, on T8.1's rule: if the measured coverage and vocabulary would
+  not beat 86.3% WHERE IT MATTERS — the 763 unclassified, and the titles the map
+  places wrongly — stop, record the numbers, and leave the heuristic standing.
+  It is honest about itself already; a thinner fact stated by a board is still
+  thinner.
+  PHASE 2 — only on numbers that clear that criterion:
+  probes fetch the field, schema bump, and a role prefers board-stated over
+  derived while carrying WHICH IT IS. Board-stated shows plainly; derived keeps
+  T5.4's mark. The two never collapse into one unmarked label.
+  Board free text maps into the site's department vocabulary through a table a
+  human can read; an unmappable name is shown verbatim or held, never guessed
+  into the nearest bucket.
+  A build carrying no department data renders exactly as today.
+Checks:
+  phase 1: script runs against live APIs; each findings figure matches observed
+           output (network-marked, not part of `make check`)
+  phase 2: lint -> typecheck -> unit
+        -> e2e: T5.4's department suite, unweakened
+        -> e2e:stated_and_derived_are_marked_apart
+        -> the listed set is unchanged before and after, company for company
+           (E4: enrichment never moves who is listed)
+Out of scope:
+  - reconciling three providers' free text into one taxonomy by classifier —
+    the mapping is a table, or the name is shown as typed
+  - running probe changes inline on the nightly: a full rebuild is ~11 minutes,
+    so this lands on a schedule, never in a hot path
 ```
