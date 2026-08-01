@@ -25,6 +25,7 @@ def test_outcomes_are_exhaustive():
         "probe-failed",
         "empty-board-unverified",
         "not-qualified",
+        "another-companys-board",
     }
     assert CHECKED < set(Outcome)
 

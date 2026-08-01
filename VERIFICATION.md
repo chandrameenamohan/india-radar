@@ -133,6 +133,12 @@ registration is a real-world error, not a cosmetic one.
 **6. A failed run never clobbers good data.**
 `test_partial_run_leaves_published_json_intact`.
 
+**7. One board, one company.**
+`test_two_rows_on_one_board_never_reach_the_disk` — two names resolving to one
+`<ats>/<slug>` publish that board's roles twice and count one employer twice. The
+corpus cannot see it (EDGAR files Grafana Labs under `Raintank Inc`), so the write
+refuses it whatever upstream believed.
+
 ---
 
 ## init.sh
@@ -153,7 +159,7 @@ Boots the dev environment and runs a smoke test:
 
 ## Deterministic vs LLM evaluator
 
-**Deterministic (everything above).** All six invariants, all four e2e layers,
+**Deterministic (everything above).** All seven invariants, all four e2e layers,
 all code-quality signals. This is the overwhelming majority and it is where effort
 belongs.
 

@@ -28,6 +28,11 @@ class Outcome(StrEnum):
     PROBE_FAILED = "probe-failed"
     EMPTY_BOARD_UNVERIFIED = "empty-board-unverified"  # Lever's 200-with-empty-array
     NOT_QUALIFIED = "not-qualified"
+    #: The board we found for this name is another company's, so its roles are
+    #: already listed under the company that owns it — or belong to a company
+    #: that isn't in the corpus at all (T10.1). NOT `checked`: we read a board,
+    #: but not this company's, so we still know nothing about whether it hires.
+    ANOTHER_COMPANYS_BOARD = "another-companys-board"
 
 
 #: The only outcomes that mean we actually read the company's board. Everything

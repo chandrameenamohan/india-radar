@@ -1598,3 +1598,63 @@ Out of scope:
   - running probe changes inline on the nightly: a full rebuild is ~11 minutes,
     so this lands on a schedule, never in a hot path
 ```
+
+---
+
+## E10 · What the sources got wrong
+
+> The description pass (T8.7) put a human in front of 322 company websites for the
+> first time, and it found things no source contradicts and therefore nothing in
+> the pipeline can see: an address that belongs to a trade publication, a name a
+> company left behind in 2016, an acquisition. It also exposed a duplicate the
+> corpus cannot see by construction — two names, one board. This epic is where
+> both kinds land: the derivable one as a rule the build re-derives every night,
+> the un-derivable one as a human's answer in a file that says why.
+
+### T10.1 — One board one company, and the corrections file `done` · *Phase 6*
+
+Two corpus rows can be one employer. EDGAR files Grafana Labs' $250M round under
+`Raintank Inc`, its legal name, so the corpus holds both — and both careers pages
+lead to `greenhouse/grafanalabs`. The site listed both, publishing one board's **75
+roles twice** under two names. Measured across the 708 resolved slugs: **10 boards
+shared by exactly 2 names each** (Scale/Scale AI, Observe/Observe.AI, Fern/Postman,
+Bright/BrightAI, Relativity/Relativity Space, Jasper/Jasper.ai, Fireworks/Fireworks
+AI, Lio/Lio (formerly askLio), VITL/VITLrx, Grafana Labs/Raintank).
+
+The board settles it, so the fix is derived rather than listed: two names reading
+one board are one employer, and the name that survives is the one the board itself
+states (`states_company`, T2.2's rule) — longest confirmed name wins, and where the
+board names nobody (Ashby and Lever publish no company name; one Greenhouse board
+answered `null`) the first alphabetically does.
+
+The rest is what no run can observe, and it goes in `data/corrections.yaml` beside
+`overrides.yaml`, one line each with the reason: Cresta's corpus website was
+analyticsinsight.net (a trade publication that wrote about them), Monzo's was
+mondo.com (the name they dropped in 2016), and Next Caller was acquired by Pindrop
+in 2021 — its careers page links Pindrop's board, so the single UK role listed under
+its name was Pindrop's.
+```
+Acceptance (observable):
+  No two rows in companies.json share an `<ats>/<slug>` — refused at the write,
+  like every other claim the site renders, whatever upstream believed.
+  A collapsed name leaves under a new outcome `another-companys-board`, NOT
+  `checked`: we read a board, but not that company's. build-report.json names
+  every pair (`shared_boards`), because a count nobody can check is not a claim.
+  data/corrections.yaml carries `website` and `board` directives, is parsed
+  strictly (an unreadable line stops the run), and a correction for a company
+  that has left the corpus stops the run rather than sitting there looking
+  maintained — `overrides.yaml`'s dead-slug rule, for its reason.
+  A corrected website beats every source, since none of them contradicts it.
+Checks:
+  lint -> typecheck -> unit -> e2e (full gate)
+  + a real rebuild, whose report shows the 10 pairs and 311 listed
+Out of scope:
+  - the corpus rebuild that makes the two website corrections bite: they are
+    read by `src.corpus`, which the nightly does NOT run (it builds companies.json
+    only). Both companies already resolve to their right boards by guess, so
+    nothing on the site is wrong while it waits.
+  - generalising "the board must state this company's name" to careers-page
+    discovery, which is how Next Caller reached Pindrop's board in the first
+    place. That is a rule over all 708 resolved slugs and needs the measurement
+    T2.2 got before it, not a fourth hand-written line.
+```

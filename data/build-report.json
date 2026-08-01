@@ -1,14 +1,15 @@
 {
   "corpus_size": 2915,
-  "checked": 708,
-  "unchecked": 2207,
+  "checked": 698,
+  "unchecked": 2217,
   "counts": {
-    "listed": 322,
-    "no-target-roles": 386,
-    "slug-unresolved": 2203,
+    "listed": 316,
+    "no-target-roles": 382,
+    "slug-unresolved": 2202,
     "probe-failed": 0,
     "empty-board-unverified": 4,
-    "not-qualified": 0
+    "not-qualified": 0,
+    "another-companys-board": 11
   },
   "listed": [
     "1Password",
@@ -108,7 +109,6 @@
     "Faire",
     "FalconX",
     "Feedzai",
-    "Fern",
     "Fieldguide",
     "Fireblocks",
     "Fivetran",
@@ -176,7 +176,6 @@
     "Lightricks",
     "Linear",
     "Lio",
-    "Lio (formerly askLio)",
     "Liquid AI",
     "Lucid Software",
     "Lucis",
@@ -208,14 +207,12 @@
     "Nash",
     "Neo4j",
     "Netskope",
-    "Next Caller",
     "Nextiva",
     "Niantic Spatial",
     "Notabene",
     "Notion",
     "Numeral",
     "OKX",
-    "Observe",
     "Observe.AI",
     "Odyssey",
     "Oklo",
@@ -250,7 +247,6 @@
     "Quantum Metric",
     "Quicknode",
     "Quince",
-    "Raintank",
     "Ramp",
     "Razorpay",
     "Reflection AI",
@@ -262,7 +258,6 @@
     "SOLIDROAD",
     "SambaNova Systems",
     "Sarvam",
-    "Scale",
     "Scale AI",
     "Scandit",
     "SeekOut",
@@ -707,7 +702,7 @@
     "Bretton AI": "no-target-roles",
     "Brex": "no-target-roles",
     "Brico": "slug-unresolved",
-    "Bright": "no-target-roles",
+    "Bright": "another-companys-board",
     "Bright Harbor Recovery": "slug-unresolved",
     "BrightAI": "no-target-roles",
     "Brightwheel": "slug-unresolved",
@@ -1243,7 +1238,7 @@
     "Feedzai": "listed",
     "Felicity AI": "slug-unresolved",
     "Felix Technologies": "slug-unresolved",
-    "Fern": "listed",
+    "Fern": "another-companys-board",
     "Fictions": "slug-unresolved",
     "FidoCure\u00ae": "slug-unresolved",
     "FieldAI": "slug-unresolved",
@@ -1270,7 +1265,7 @@
     "Firecrawl": "no-target-roles",
     "Firestorm Labs": "slug-unresolved",
     "Fireworks": "slug-unresolved",
-    "Fireworks AI": "slug-unresolved",
+    "Fireworks AI": "another-companys-board",
     "FirmPilot AI": "slug-unresolved",
     "First Due Holdings": "slug-unresolved",
     "FirstShift": "slug-unresolved",
@@ -1625,7 +1620,7 @@
     "Iterable": "listed",
     "Ivalua": "listed",
     "Jasper": "slug-unresolved",
-    "Jasper.ai": "slug-unresolved",
+    "Jasper.ai": "another-companys-board",
     "Jeeva AI": "slug-unresolved",
     "Jeeves": "slug-unresolved",
     "Jeevy Fabrication": "slug-unresolved",
@@ -1779,7 +1774,7 @@
     "LinkTree": "slug-unresolved",
     "Linq App": "slug-unresolved",
     "Lio": "listed",
-    "Lio (formerly askLio)": "listed",
+    "Lio (formerly askLio)": "another-companys-board",
     "Liquid AI": "listed",
     "Liquidity": "slug-unresolved",
     "Listen Labs": "no-target-roles",
@@ -2038,7 +2033,7 @@
     "News Break": "no-target-roles",
     "Newton Research": "no-target-roles",
     "NexTravel": "slug-unresolved",
-    "Next Caller": "listed",
+    "Next Caller": "another-companys-board",
     "Next Insurance": "slug-unresolved",
     "Next Silicon": "slug-unresolved",
     "Nexthop": "slug-unresolved",
@@ -2104,7 +2099,7 @@
     "OakNorth Bank": "slug-unresolved",
     "Obie": "slug-unresolved",
     "Oblong": "slug-unresolved",
-    "Observe": "listed",
+    "Observe": "another-companys-board",
     "Observe.AI": "listed",
     "Obviant": "no-target-roles",
     "Ochre Bio": "slug-unresolved",
@@ -2423,7 +2418,7 @@
     "Radix Labs": "slug-unresolved",
     "Rain": "slug-unresolved",
     "Rainforest": "slug-unresolved",
-    "Raintank": "listed",
+    "Raintank": "another-companys-board",
     "Raise Financial Services": "slug-unresolved",
     "Rally HQ": "slug-unresolved",
     "Ramen VR": "empty-board-unverified",
@@ -2438,7 +2433,7 @@
     "Raven Tech": "slug-unresolved",
     "Raycast": "slug-unresolved",
     "Razorpay": "listed",
-    "Reach": "no-target-roles",
+    "Reach": "slug-unresolved",
     "ReadMe": "no-target-roles",
     "Readily": "slug-unresolved",
     "Ready Education": "slug-unresolved",
@@ -2468,7 +2463,7 @@
     "RegScale": "no-target-roles",
     "Regology": "slug-unresolved",
     "Reka AI": "listed",
-    "Relativity": "no-target-roles",
+    "Relativity": "another-companys-board",
     "Relativity Space": "no-target-roles",
     "Relay": "slug-unresolved",
     "Release": "slug-unresolved",
@@ -2586,7 +2581,7 @@
     "Scala.ai": "slug-unresolved",
     "Scalable Capital": "slug-unresolved",
     "Scalapay": "slug-unresolved",
-    "Scale": "listed",
+    "Scale": "another-companys-board",
     "Scale AI": "listed",
     "Scale Computing Holdings": "slug-unresolved",
     "Scamnetic": "slug-unresolved",
@@ -3001,7 +2996,7 @@
     "VI1": "slug-unresolved",
     "VILLAGE PLATFORMS": "slug-unresolved",
     "VITL": "no-target-roles",
-    "VITLrx": "no-target-roles",
+    "VITLrx": "another-companys-board",
     "VKL Research": "slug-unresolved",
     "VTS": "no-target-roles",
     "VULCAN ELEMENTS": "no-target-roles",
@@ -3254,23 +3249,36 @@
   "websites": {
     "with_website": 1815,
     "slug_unresolved_with_website": 1252,
-    "slug_unresolved_without_website": 951
+    "slug_unresolved_without_website": 950
+  },
+  "shared_boards": {
+    "Bright": "BrightAI",
+    "Fern": "Postman",
+    "Fireworks AI": "Fireworks",
+    "Raintank": "Grafana Labs",
+    "Jasper.ai": "Jasper",
+    "Lio (formerly askLio)": "Lio",
+    "Observe": "Observe.AI",
+    "Relativity": "Relativity Space",
+    "Scale": "Scale AI",
+    "VITLrx": "VITL",
+    "Next Caller": "Pindrop"
   },
   "countries": {
-    "India": 118,
-    "United Kingdom": 224,
-    "Ireland": 43,
-    "Germany": 96,
-    "Netherlands": 43,
-    "France": 53,
-    "Spain": 56,
-    "Sweden": 28,
-    "Denmark": 12,
+    "India": 115,
+    "United Kingdom": 220,
+    "Ireland": 42,
+    "Germany": 93,
+    "Netherlands": 42,
+    "France": 51,
+    "Spain": 54,
+    "Sweden": 27,
+    "Denmark": 11,
     "Norway": 3,
     "Finland": 5,
-    "Japan": 56,
+    "Japan": 54,
     "Singapore": 69,
-    "Australia": 71,
+    "Australia": 70,
     "New Zealand": 2
   },
   "mca": {
@@ -3404,19 +3412,6 @@
             "name": "FALCONX ECHO PRIVATE LIMITED",
             "incorporated": "2022-01-31",
             "address": "KAVERI BUILDING,OPP.MAX FASHION,,14th MAIN HSR LAYOUT SECTOR-7,Bangalore South,Bangalore,Karnataka,560102-India",
-            "status": "Active"
-          }
-        ]
-      },
-      {
-        "name": "Fern",
-        "confidence": "prefix",
-        "candidates": [
-          {
-            "cin": "U74999TN2022FTC152237",
-            "name": "FERN & ADE INDIA PRIVATE LIMITED",
-            "incorporated": "2022-05-17",
-            "address": "Gate No.2, No. 57,Adam Nagar Road Nagalkeni, Chrompet,,Sriperumbudur,Kanchipuram,Tamil Nadu,600044-India",
             "status": "Active"
           }
         ]
@@ -3599,26 +3594,6 @@
             "name": "RAZORPAY TECHNOLOGIES PRIVATE LIMITED",
             "incorporated": "2015-08-28",
             "address": "1st Floor, SJR Cyber   22, Laskar Hosur Road, Adugodi,Bangalore,Bangalore,Karnataka,560030-India",
-            "status": "Active"
-          }
-        ]
-      },
-      {
-        "name": "Scale",
-        "confidence": "prefix",
-        "candidates": [
-          {
-            "cin": "U62099KA2026FTC215467",
-            "name": "SCALE AI INDIA PRIVATE LIMITED",
-            "incorporated": "2026-02-06",
-            "address": "33/1, 1st Flr, 32nd Cross, Jayanagar 7th Block,Jayanagar West, Bangalore South,Bangalore South,Bangalore,Karnataka,560070-India",
-            "status": "Active"
-          },
-          {
-            "cin": "U31100KA2022FTC164964",
-            "name": "SCALE FACILITATION PARTNERS INDIA PRIVATE LIMITED",
-            "incorporated": "2022-08-17",
-            "address": "No. 55, SV Complex,,K R Road, Basavanagudi,Bangalore North,Bangalore,Karnataka,560002-India",
             "status": "Active"
           }
         ]

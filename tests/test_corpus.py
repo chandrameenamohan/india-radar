@@ -104,6 +104,25 @@ def test_adding_a_source_grows_the_corpus_and_demotes_nobody(source, fixture):
     assert {c["name"] for c in before.companies} <= {c["name"] for c in after.companies}
 
 
+def test_a_corrected_website_wins_over_every_source():
+    """T10.1: CB Insights states a trade publication as Cresta's address, and no
+    other source contradicts it — so nothing in the pipeline can find it and the
+    human's answer has to win outright, not merely break a tie."""
+    corpus = merge(
+        [
+            _record("Cresta", stage="growth", website="https://www.analyticsinsight.net"),
+            _record("Acme", amount=9_000_000, website="https://acme.example"),
+            _record("Blank", amount=9_000_000),
+        ],
+        corrected={"Cresta": "https://cresta.com", "Blank": "https://blank.example"},
+    )
+
+    sites = {c["name"]: c["website"] for c in corpus.companies}
+    assert sites["Cresta"] == "https://cresta.com"
+    assert sites["Blank"] == "https://blank.example"  # an address no source stated
+    assert sites["Acme"] == "https://acme.example"  # uncorrected, so untouched
+
+
 def test_unqualifiable_counted_not_dropped():
     """A round with neither letter nor amount is judged on nothing, so it is
     excluded — but it must still be named. Silent shrinkage looks exactly like a

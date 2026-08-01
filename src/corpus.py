@@ -15,12 +15,12 @@ from __future__ import annotations
 
 import json
 import re
-from collections.abc import Iterable
+from collections.abc import Iterable, Mapping
 from itertools import chain
 from pathlib import Path
 from typing import NamedTuple
 
-from src import cbinsights, edgar, forbes, software, techcrunch, websites, yc
+from src import cbinsights, corrections, edgar, forbes, software, techcrunch, websites, yc
 from src.finsmes import BASE, parse
 from src.net import fetch
 from src.record import Record
@@ -53,12 +53,18 @@ class Corpus(NamedTuple):
     ambiguous: dict[str, str]  # kept, but flagged for a human — name -> the evidence
 
 
-def merge(*sources: Iterable[Record]) -> Corpus:
+def merge(*sources: Iterable[Record], corrected: Mapping[str, str] | None = None) -> Corpus:
     """Collapse funding records into one qualified row per distinct company.
 
     Deterministic in both directions: the surviving record for a company is the
     maximum under `_strength`, and the output is sorted, so shuffling the sources
     (or the records within them) yields an identical corpus.
+
+    `corrected` is `corrections.load().websites` — the addresses a human found
+    the sources stating wrongly. It wins over every source, because it is the
+    only one of them that looked at the company's own site. Nothing else about a
+    record is correctable here: the funding a source states is that source's
+    claim, and the site renders it as one.
     """
     best: dict[str, Record] = {}
     addresses: dict[str, str] = {}
@@ -80,7 +86,7 @@ def merge(*sources: Iterable[Record]) -> Corpus:
     ambiguous: dict[str, str] = {}
     for key in sorted(best):
         record = best[key].copy()
-        record["website"] = addresses.get(key)
+        record["website"] = (corrected or {}).get(record["name"]) or addresses.get(key)
         # Sector before funding, because it is the more fundamental question: a
         # biotech's Series B is a real round we would still never list, so
         # judging its funding first would file it under the wrong reason. Both
@@ -194,6 +200,7 @@ def main() -> None:
         raise SystemExit(f"{dead} unreachable — corpus.json left as it was, never truncated")
 
     records, unparsed = parse(page)
+    fixed = corrections.load().websites
     corpus = merge(
         records,
         yc.parse(directory),
@@ -201,7 +208,9 @@ def main() -> None:
         *(edgar.parse(quarter) for quarter in quarters),
         *(techcrunch.parse(article) for article in articles),
         *(forbes.parse(payload) for payload in lists),
+        corrected=fixed,
     )
+    corrections.check([c["name"] for c in corpus.companies], fixed, "website")
     # After the merge, not before: only ~3,000 companies survive dedup, and the
     # article read is a fetch each. Doing it per record would pay for every
     # duplicate round and every company no rule qualifies.
@@ -218,7 +227,8 @@ def main() -> None:
     )
     print(
         f"  websites: {stated + found} of {len(corpus.companies)} "
-        f"({stated} stated by a source, {found} read off an article)"
+        f"({stated} stated by a source, {found} read off an article; "
+        f"{len(fixed)} of the stated ones corrected by hand)"
     )
 
 

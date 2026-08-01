@@ -21,13 +21,13 @@ from datetime import date
 from pathlib import Path
 from typing import Any, NamedTuple
 
-from src import ashby, greenhouse, lever, mca, salary
+from src import ashby, corrections, greenhouse, lever, mca, salary
 from src.countries import COUNTRIES, countries
 from src.greenhouse import Roles
 from src.india import WORKPLACES, cities, workplace
 from src.openness import VERDICTS, classify
 from src.outcomes import Outcome, report, write_report
-from src.slugs import Slug
+from src.slugs import Slug, key, states_company
 
 #: Bump when a row's shape changes. The site reads this and refuses a version it
 #: doesn't know, rather than silently rendering fields that moved.
@@ -491,22 +491,73 @@ def posting(role: Mapping[str, Any], provider: Provider) -> Row:
     }
 
 
+def shared_boards(
+    slugs: Mapping[str, Slug], stated: Callable[[str], str | None] = greenhouse.board_name
+) -> dict[str, str]:
+    """Names that must not be listed because the board they resolved to is
+    another corpus company's, each mapped to the company whose board it is (T10.1).
+
+    Two corpus rows can be one employer, and the corpus cannot see it: EDGAR
+    files Grafana Labs' round under `Raintank Inc`, its legal name, so the corpus
+    holds both — and both careers pages lead to `greenhouse/grafanalabs`. Listed
+    as two, they publish one board's 75 roles twice and count one company twice.
+    The board is what settles it: two names reading one board are one employer,
+    whatever the sources call them. Measured over the 708 resolved slugs, 10
+    boards were shared by exactly 2 names each.
+
+    Which name survives is the board's answer, not ours: it states one (Greenhouse
+    does; `states_company` is T2.2's rule for whether it is this company's), and
+    the longest corpus name that board confirms wins — "Scale AI" over "Scale"
+    for a board called `Scale AI`, "Grafana Labs" over "Raintank" for one called
+    `Grafana Labs`. Where the board names nobody — Ashby and Lever publish no
+    company name at all, and one Greenhouse board answered `null` — the first
+    name alphabetically wins, which is arbitrary but identical every run.
+    ponytail: no second source consulted for those. Ceiling: 3 of the 10 pick a
+    name a human might spell differently ("Fireworks" for "Fireworks AI"); both
+    names are the same employer either way, which is the wrong this fixes.
+    """
+    by_board: dict[tuple[str, str], list[str]] = {}
+    for name, slug in sorted(slugs.items()):
+        by_board.setdefault((slug["ats"], slug["slug"]), []).append(name)
+
+    shared: dict[str, str] = {}
+    for (ats, slug_), names in by_board.items():
+        if len(names) == 1:
+            continue
+        board = stated(slug_) if ats == "greenhouse" else None
+        confirmed = [name for name in names if states_company(board, name)]
+        owner = max(confirmed, key=lambda name: len(key(name))) if confirmed else names[0]
+        shared.update({name: owner for name in names if name != owner})
+    return shared
+
+
 def build(
     corpus: Iterable[Mapping[str, Any]],
     slugs: Mapping[str, Slug],
     probes: Mapping[str, Provider] = PROBES,
+    shared: Mapping[str, str] | None = None,
 ) -> tuple[list[Row], dict[str, Outcome]]:
     """The spine: corpus → slug → board → country filter → descriptions → rows.
 
     Returns the listed rows and one outcome per company. Every `continue` below
     is a company leaving with a reason attached; none of them can fall through
     into the site, and none of them becomes an empty role list.
+
+    `shared` is `shared_boards` plus the corrections file's `board` lines — the
+    names whose board belongs to somebody else. They leave first, before the
+    board is read at all: a name that cannot be listed under any outcome should
+    not spend a fetch to find that out.
     """
     rows: list[Row] = []
     outcomes: dict[str, Outcome] = {}
+    shared = shared or {}
 
     for company in corpus:
         name = company["name"]
+        if name in shared:
+            outcomes[name] = Outcome.ANOTHER_COMPANYS_BOARD
+            continue
+
         slug = slugs.get(name)
         if slug is None:
             outcomes[name] = Outcome.SLUG_UNRESOLVED
@@ -654,6 +705,17 @@ def carry_salary(rows: list[Row], path: str | Path) -> int:
     return len(carried)
 
 
+def _by_board(rows: Iterable[Row]) -> dict[str, list[str]]:
+    """The companies each `<ats>/<slug>` board is listed under. More than one is
+    the violation `write` refuses."""
+    boards: dict[str, list[str]] = {}
+    for row in rows:
+        # A row that can't say what it is called fails `errors` anyway; this only
+        # has to not crash on the way there.
+        boards.setdefault(f"{row.get('ats')}/{row.get('slug')}", []).append(str(row.get("name")))
+    return boards
+
+
 def write(
     path: str | Path,
     rows: list[Row],
@@ -679,6 +741,13 @@ def write(
     bad = {row.get("name"): problems for row in rows if (problems := errors(row))}
     if problems := integrity_errors(counted, len(rows)):
         bad["integrity"] = problems
+    # One board, one company (T10.1) — enforced here rather than trusted upstream,
+    # for the reason every other rule is: two rows reading one board publish its
+    # roles twice under two names, and on a static site that outlives the build
+    # that made it. `shared_boards` is what prevents it; this is what proves it.
+    for board, names in sorted(_by_board(rows).items()):
+        if len(names) > 1:
+            bad[board] = [f"one board, {len(names)} companies: {names}"]
     if bad:
         raise ValueError(f"schema v{SCHEMA_VERSION} violations, nothing written: {bad}")
 
@@ -725,6 +794,8 @@ def main(argv: list[str]) -> None:
     slugs: dict[str, Slug] = json.loads(Path("data/slugs.json").read_text())
     out = "data/companies.json"
 
+    shared: dict[str, str] = {}
+
     if smoke := ("--smoke" in argv):
         corpus = corpus[:1]
         slugs = {c["name"]: Slug(ats="greenhouse", slug="smoke", method="smoke") for c in corpus}
@@ -740,6 +811,16 @@ def main(argv: list[str]) -> None:
         }
         out = SMOKE_OUT
     else:
+        # The names that cannot be listed under themselves: the ones whose board
+        # already belongs to another corpus company (derived, every run), and the
+        # ones a human found belong to an acquirer that is not in the corpus at
+        # all (T10.1). The human's answer is merged second because it is the one
+        # nothing here can re-derive. Skipped in smoke, which touches no network:
+        # `shared_boards` asks Greenhouse whose board a shared slug is.
+        fixed = corrections.load().boards
+        corrections.check([c["name"] for c in corpus], fixed, "board")
+        shared = shared_boards(slugs) | fixed
+
         # Ashby's cost is a server-side delay, not throughput, so its boards are
         # fetched together up front and the spine reads the answers. Sequentially
         # this is the one provider that could put a real run outside the nightly
@@ -752,7 +833,7 @@ def main(argv: list[str]) -> None:
             ),
         }
 
-    rows, outcomes = build(corpus, slugs, probes)
+    rows, outcomes = build(corpus, slugs, probes, shared)
     # Enrichment, after the spine and outside it: it runs on the listed rows
     # only, it cannot change who is listed, and every failure inside it is an
     # absent field rather than a failed build. `salary` is skipped in smoke for
@@ -781,6 +862,9 @@ def main(argv: list[str]) -> None:
     write(out, rows, built)
 
     built["websites"] = website_counts(corpus, outcomes)
+    # Named, not just counted (T10.1): "10 companies read somebody else's board"
+    # is a number nobody can check, and the pair it collapsed is the whole claim.
+    built["shared_boards"] = shared
     # Per-country listed counts (T8.4), for the site's country tabs to agree with.
     # In the report rather than in companies.json because it is a fact about the
     # build, like every other count here — the site can already count the rows it
@@ -808,6 +892,8 @@ def main(argv: list[str]) -> None:
             print(f"  {count:4d}  {outcome}")
     for label, count in built["websites"].items():
         print(f"  {count:4d}  {label}")
+    collapsed = ", ".join(f"{name} -> {owner}" for name, owner in sorted(shared.items()))
+    print(f"  {len(shared):4d}  names reading another company's board [{collapsed}]")
     # Only the countries with something in them, the same rule the outcome counts
     # above print by. The zeros are in the report, where the site reads them.
     for country, count in built["countries"].items():

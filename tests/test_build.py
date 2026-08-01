@@ -18,6 +18,7 @@ from src.build import (
     errors,
     integrity_errors,
     published,
+    shared_boards,
     website_counts,
     write,
 )
@@ -663,6 +664,92 @@ def test_one_posting_open_in_two_countries_is_one_role_in_both():
     assert rows[0]["countries"] == ["India", "United Kingdom", "Australia"]
     assert rows[0]["cities"] == ["Bengaluru"], "London and Sydney are not India cities"
     assert errors(rows[0]) == []
+
+
+# --- T10.1, one board one company ---------------------------------------------
+
+#: The real pair: EDGAR files Grafana Labs' round under its legal name, so the
+#: corpus holds both, and both careers pages lead to `greenhouse/grafanalabs`.
+TWO_NAMES = [{**CORPUS[0], "name": "Grafana Labs"}, {**CORPUS[1], "name": "Raintank"}]
+ONE_BOARD = {
+    name["name"]: Slug(ats="greenhouse", slug="grafanalabs", method="careers-page")
+    for name in TWO_NAMES
+}
+
+
+def test_two_names_reading_one_board_are_one_company():
+    """Listed as two, they publish one board's roles twice under two names and
+    count one employer twice. The loser leaves with a reason, never silently."""
+    rows, outcomes = build(
+        TWO_NAMES, ONE_BOARD, answering(grafanalabs=BOARD), {"Raintank": "Grafana Labs"}
+    )
+
+    assert [row["name"] for row in rows] == ["Grafana Labs"]
+    assert outcomes == {
+        "Grafana Labs": Outcome.LISTED,
+        "Raintank": Outcome.ANOTHER_COMPANYS_BOARD,
+    }
+    # Not `checked`: we read a board, but not this company's, so we still know
+    # nothing about whether Raintank-as-itself hires anybody.
+    assert report([c["name"] for c in TWO_NAMES], outcomes)["checked"] == 1
+
+
+def test_a_name_whose_board_is_not_its_own_spends_no_fetch():
+    """The collapse happens before the probe. A name that cannot be listed under
+    any outcome should not pay for a board read to find that out."""
+    read = []
+
+    def counting(slug):
+        read.append(slug)
+        return BOARD
+
+    probes = {"greenhouse": PROBES["greenhouse"]._replace(probe=counting, describe=counting)}
+    build(TWO_NAMES, ONE_BOARD, probes, {"Raintank": "Grafana Labs"})
+
+    assert read == ["grafanalabs", "grafanalabs"], "one board, read once and described once"
+
+
+@pytest.mark.parametrize(
+    "states, owner, because",
+    [
+        ("Grafana Labs", "Grafana Labs", "the board names one of them outright"),
+        ("Scale AI", "Scale AI", "and the longest name it confirms wins the containment"),
+        (None, "Grafana Labs", "a board naming nobody falls back to the first alphabetically"),
+        ("Pindrop", "Grafana Labs", "a board naming neither is no evidence about either"),
+    ],
+)
+def test_the_board_says_which_of_its_names_survives(states, owner, because):
+    """T2.2's rule, reused: the board states a name, and a corpus name it does
+    not CONTAIN is a different company. Here that decides which of two names the
+    site publishes — the board's own answer rather than ours."""
+    names = {**ONE_BOARD, "Scale AI": ONE_BOARD["Raintank"], "Scale": ONE_BOARD["Raintank"]}
+
+    shared = shared_boards(names, stated=lambda _: states)
+
+    assert set(shared) == set(names) - {owner}, because
+    assert set(shared.values()) == {owner}
+
+
+def test_a_board_nobody_else_reads_is_never_collapsed():
+    """The rule is about a SHARED board. One company on its own board is the
+    normal case and must survive it untouched — including the 698 of 708 that
+    never reach the question."""
+    alone = {"Acme": GREENHOUSE, "Beta": Slug(ats="ashby", slug="beta", method="guess")}
+
+    assert shared_boards(alone, stated=lambda _: "Somebody Else") == {}
+
+
+def test_two_rows_on_one_board_never_reach_the_disk(tmp_path):
+    """Enforced at the write like every other claim the site renders: whatever
+    upstream believed, a file with one board under two names double-counts an
+    employer, and it outlives the build that made it."""
+    rows, _ = build(TWO_NAMES, ONE_BOARD, answering(grafanalabs=BOARD))
+    path = tmp_path / "companies.json"
+
+    assert [row["name"] for row in rows] == ["Grafana Labs", "Raintank"]
+    with pytest.raises(ValueError, match="one board, 2 companies"):
+        write(path, rows, {"corpus_size": 2, "checked": 2, "unchecked": 0})
+    assert not path.exists()
 
 
 # --- T6.4, fail-safe publish --------------------------------------------------

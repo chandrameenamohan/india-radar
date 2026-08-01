@@ -25,13 +25,14 @@ as nothing, a derivation says it is derived.
   Push goes to `main`; nightly commits may land remotely — rebase, and for
   `data/*.json` conflicts prefer whichever side matches the CURRENT schema.
 
-## State as of 2026-08-01 evening (all pushed through commit `14cbfdb`)
+## State as of 2026-08-01 night
 
-- **34 tasks done.** Live site has: the Swiss-atlas redesign (16 plates,
-  world-map-as-navigation, per-company VERIFIED·BOARD READ stamp), 322 listed
-  companies (UK 224 is the largest plate; India 118), WHAT/FOR WHOM/WHY THEM
-  descriptions for 319 of 322 (`data/descriptions.json`, marked
-  AI-SUMMARIZED; 3 honest omissions: Raintank, Insider, Fundamental), and
+- **35 tasks done.** Live site has: the Swiss-atlas redesign (16 plates,
+  world-map-as-navigation, per-company VERIFIED·BOARD READ stamp), 316 listed
+  companies (UK 220 is the largest plate; India 115), WHAT/FOR WHOM/WHY THEM
+  descriptions (`data/descriptions.json`, marked
+  AI-SUMMARIZED; 2 honest omissions now that Raintank has collapsed into
+  Grafana Labs: Insider and Fundamental), and
   T5.4's filter upgrades (role-title search with "MATCHES N ROLES", computed
   coverage notes on sparse RAISED/FUNDED filters, per-plate city filter,
   title-derived DEPARTMENT filter — 86.3% classified, 763 UNCLASSIFIED
@@ -50,6 +51,13 @@ as nothing, a derivation says it is derived.
 - **T9.2 (board-stated departments): specced, deferred** — Phase 1 is a
   T8.1-style learning test with a kill criterion; can run anytime, no key
   needed.
+- **T10.1 (one board, one company) done 2026-08-01.** 11 names left the site:
+  10 pairs that read one board (the site was publishing Grafana Labs' 75 roles
+  twice, under `Raintank` as well) and Next Caller, whose careers page links
+  Pindrop's board since the 2021 acquisition. The collapse is derived every
+  build (`build.shared_boards`, the board's own stated name picks the survivor)
+  and refused again at the write; what no run can observe lives in
+  `data/corrections.yaml` with its reason. 322 -> 316 listed.
 
 ## Hard-won lessons (do not relearn these)
 
@@ -64,22 +72,24 @@ as nothing, a derivation says it is derived.
 
 ## NEXT (in order)
 
-1. **Corpus data-bug cleanup** (no input needed): description writers found —
-   Cresta's corpus website points at analyticsinsight.net (not theirs),
-   Monzo's at pre-2016 mondo.com, Raintank duplicates Grafana Labs (rename),
-   Next Caller acquired by Pindrop (may not be an independent employer).
-   Fix in the pipeline/corpus the honest way (counted, not silently dropped),
-   gate, push.
-2. **T9.2 Phase 1 measurement** (no input needed): run the learning test in
+1. **T9.2 Phase 1 measurement** (no input needed): run the learning test in
    the T9.2 spec (TASKS.md ~line 1551) against real Greenhouse/Ashby/Lever
    boards; record in learning-tests/ + FINDINGS; apply the kill criterion;
    update T9.2's status/note with the numbers.
-3. **T9.1 build** — only after the human supplies the Companies House API key.
-4. **Descriptions nightly delta** — newly listed companies get no description
+2. **T9.1 build** — only after the human supplies the Companies House API key.
+3. **Descriptions nightly delta** — newly listed companies get no description
    until regenerated; wiring the delta into the nightly needs an
    ANTHROPIC_API_KEY repo secret (human step). Until then, a manual
    regeneration pass (6 parallel writer agents, website-verified, omit when
    unverifiable) is the pattern — see `data/descriptions.json` provenance.
+   The 316-company set has churned since the last pass — new names carry no
+   description, and 11 collapsed names (T10.1) now carry one nothing reads.
+4. **Corpus rebuild, when something wants one** — `python -m src.corpus` is a
+   manual step the nightly never runs, and it is what makes T10.1's two website
+   corrections bite. Nothing is wrong on the site while it waits (both companies
+   already resolve to their own boards); a rebuild also picks up companies the
+   sources have added since 2026-07-29, which then need `python -m src.slugs`
+   (~2.5h) before they can be checked.
 5. Late August: re-check T7.1's unblock condition (snapshot count).
 
 ## Billing context (2026-08-01)

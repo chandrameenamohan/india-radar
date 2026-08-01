@@ -1,0 +1,36 @@
+# What a human knows and a source states wrongly — T10.1.
+#
+# Two directives, one per line:
+#
+#   <name, spelled exactly as the corpus spells it>: website <url>
+#       The address the corpus carries is not this company's. The corrected one
+#       is what slug discovery reads, so a wrong entry here is a wrong board.
+#
+#   <name>: board <the company whose board it is>
+#       The board this company's careers page links belongs to somebody else —
+#       an acquirer, a parent. Nothing is listed under this name: the roles on
+#       that board are the other company's, and publishing them here would
+#       attribute somebody's jobs to a company that may no longer employ anyone.
+#
+# `#` starts a comment. Say WHY, always: a correction nobody can justify is a
+# correction nobody later dares delete.
+#
+# Every name here must still be in the corpus each time this file is read. A
+# correction for a company the sources have dropped stops the run rather than
+# sitting here looking effective — this file is hand-maintained, so its errors
+# are the kind that rot silently unless something shouts.
+#
+# All four below came from the description pass (T8.7), where a human reading
+# each company's own site found what the corpus said about it and couldn't be.
+
+# CB Insights' profile for Cresta links analyticsinsight.net — a trade
+# publication that wrote about them, not their address.
+Cresta: website https://cresta.com
+# CB Insights files Monzo under `mondo`, the name they left behind in 2016, and
+# links the domain that went with it.
+Monzo: website https://monzo.com
+
+# Acquired by Pindrop in 2021. nextcaller.com links Pindrop's board, so the one
+# role listed under "Next Caller" was Pindrop's, and no evidence here says Next
+# Caller employs anybody as itself any more.
+Next Caller: board Pindrop
