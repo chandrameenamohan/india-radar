@@ -1,0 +1,242 @@
+{
+  "Stripe": {
+    "what": "Payment processing for internet businesses",
+    "for_whom": "Any business that takes money online",
+    "why_them": "The default payments layer of the internet",
+    "ai": true
+  },
+  "Scale": {
+    "what": "Labels and evaluates data for AI models",
+    "for_whom": "AI labs and enterprises training models",
+    "why_them": "The data backbone behind frontier AI labs",
+    "ai": true
+  },
+  "Scale AI": {
+    "what": "Labels and evaluates data for AI models",
+    "for_whom": "AI labs and enterprises training models",
+    "why_them": "The data backbone behind frontier AI labs",
+    "ai": true
+  },
+  "Postman": {
+    "what": "A workspace for building and testing APIs",
+    "for_whom": "Developers who work with APIs daily",
+    "why_them": "Tens of millions of developers already use it",
+    "ai": true
+  },
+  "Glean": {
+    "what": "AI search across all your work apps",
+    "for_whom": "Employees drowning in scattered company knowledge",
+    "why_them": "Enterprise search that actually finds the answer",
+    "ai": true
+  },
+  "Databricks": {
+    "what": "One platform for data and AI workloads",
+    "for_whom": "Companies with big data and AI ambitions",
+    "why_them": "Created Spark, now a data-platform giant",
+    "ai": true
+  },
+  "Anthropic": {
+    "what": "Builds Claude, a frontier AI assistant",
+    "for_whom": "People and businesses putting AI to work",
+    "why_them": "Frontier AI lab built around safety",
+    "ai": true
+  },
+  "Airbnb": {
+    "what": "Marketplace for stays and travel experiences",
+    "for_whom": "Travelers who want more than hotels",
+    "why_them": "The brand that defined home sharing",
+    "ai": true
+  },
+  "Coinbase": {
+    "what": "Buy, sell, and store cryptocurrency simply",
+    "for_whom": "Retail and institutional investors entering crypto",
+    "why_them": "The most trusted US crypto exchange",
+    "ai": true
+  },
+  "Notion": {
+    "what": "One workspace for notes, docs, projects",
+    "for_whom": "Teams tired of ten scattered tools",
+    "why_them": "The connected workspace millions organize in",
+    "ai": true
+  },
+  "Cursor": {
+    "what": "A code editor with AI built in",
+    "for_whom": "Developers who want to ship faster",
+    "why_them": "The fastest-growing AI coding tool anywhere",
+    "ai": true
+  },
+  "Cognition": {
+    "what": "Makes Devin, an autonomous AI engineer",
+    "for_whom": "Engineering teams with more work than people",
+    "why_them": "Built the first credible AI engineer",
+    "ai": true
+  },
+  "GitLab": {
+    "what": "One platform for the whole software lifecycle",
+    "for_whom": "Teams shipping code from plan to deploy",
+    "why_them": "The all-remote pioneer of DevOps platforms",
+    "ai": true
+  },
+  "Vercel": {
+    "what": "Hosting and tooling for frontend developers",
+    "for_whom": "Teams building fast websites and apps",
+    "why_them": "They make Next.js, the web's favorite framework",
+    "ai": true
+  },
+  "Fivetran": {
+    "what": "Moves data from apps into warehouses automatically",
+    "for_whom": "Data teams sick of maintaining pipelines",
+    "why_them": "The standard for zero-maintenance data pipelines",
+    "ai": true
+  },
+  "Flexport": {
+    "what": "Freight forwarding run on modern software",
+    "for_whom": "Companies shipping goods across borders",
+    "why_them": "Rebuilt global logistics around software and visibility",
+    "ai": true
+  },
+  "Kong": {
+    "what": "Manages and secures APIs at scale",
+    "for_whom": "Platform teams running many services",
+    "why_them": "The most widely adopted open-source API gateway",
+    "ai": true
+  },
+  "LaunchDarkly": {
+    "what": "Feature flags for safe software releases",
+    "for_whom": "Teams that ship code every day",
+    "why_them": "They made feature flags a product category",
+    "ai": true
+  },
+  "Neo4j": {
+    "what": "A database built around relationships between things",
+    "for_whom": "Teams whose data is a network",
+    "why_them": "The leading graph database for two decades",
+    "ai": true
+  },
+  "Mixpanel": {
+    "what": "Analytics that show what users actually do",
+    "for_whom": "Product teams making decisions from guesses",
+    "why_them": "Product analytics pioneer trusted by thousands",
+    "ai": true
+  },
+  "Amplitude": {
+    "what": "Analytics for understanding user behavior in products",
+    "for_whom": "Product teams optimizing activation and retention",
+    "why_them": "Public company, the enterprise product-analytics leader",
+    "ai": true
+  },
+  "Razorpay": {
+    "what": "Payments infrastructure for businesses in India",
+    "for_whom": "Indian companies accepting money online",
+    "why_them": "India's leading full-stack payments platform",
+    "ai": true
+  },
+  "Groww": {
+    "what": "An app for investing in stocks and funds",
+    "for_whom": "Everyday Indians investing for the first time",
+    "why_them": "India's largest retail broking app",
+    "ai": true
+  },
+  "InMobi": {
+    "what": "Mobile advertising and app monetization platform",
+    "for_whom": "App publishers and brand advertisers worldwide",
+    "why_them": "India's first unicorn, global ad-tech scale",
+    "ai": true
+  },
+  "HackerRank": {
+    "what": "Coding tests for hiring software engineers",
+    "for_whom": "Companies screening technical candidates at scale",
+    "why_them": "The default technical-screening tool in hiring",
+    "ai": true
+  },
+  "Harness": {
+    "what": "Automates software delivery from commit to production",
+    "for_whom": "Engineering teams tired of slow releases",
+    "why_them": "CI/CD platform from the AppDynamics founder",
+    "ai": true
+  },
+  "Druva": {
+    "what": "Backs up and protects company data in cloud",
+    "for_whom": "IT teams guarding against loss and ransomware",
+    "why_them": "SaaS data-protection leader, born in Pune",
+    "ai": true
+  },
+  "Minio": {
+    "what": "High-performance object storage you run anywhere",
+    "for_whom": "Teams building AI and data infrastructure",
+    "why_them": "The most deployed open-source object store",
+    "ai": true
+  },
+  "Temporal": {
+    "what": "Makes long-running code reliable by default",
+    "for_whom": "Developers building workflows that must not fail",
+    "why_them": "Invented durable execution, runs huge production systems",
+    "ai": true
+  },
+  "SingleStore": {
+    "what": "A fast database for transactions and analytics",
+    "for_whom": "Teams needing real-time answers on live data",
+    "why_them": "One engine where others need two",
+    "ai": true
+  },
+  "Cockroach Labs": {
+    "what": "A SQL database that survives failures",
+    "for_whom": "Companies that cannot afford database downtime",
+    "why_them": "Resilient distributed SQL, built by ex-Googlers",
+    "ai": true
+  },
+  "Starburst": {
+    "what": "Query all your data where it lives",
+    "for_whom": "Data teams with data in many places",
+    "why_them": "The company behind the Trino query engine",
+    "ai": true
+  },
+  "Together AI": {
+    "what": "Cloud for training and running open models",
+    "for_whom": "Teams building on open-source AI",
+    "why_them": "Serious research chops, fast open-model inference",
+    "ai": true
+  },
+  "Lambda Labs": {
+    "what": "GPU cloud for training AI models",
+    "for_whom": "AI teams that need serious compute",
+    "why_them": "The GPU cloud AI researchers actually prefer",
+    "ai": true
+  },
+  "SambaNova Systems": {
+    "what": "Builds chips and systems for AI",
+    "for_whom": "Enterprises running AI outside big clouds",
+    "why_them": "Full-stack AI hardware from Stanford veterans",
+    "ai": true
+  },
+  "TensTorrent": {
+    "what": "Designs AI chips and open hardware",
+    "for_whom": "Companies wanting alternatives to Nvidia",
+    "why_them": "Led by legendary chip designer Jim Keller",
+    "ai": true
+  },
+  "Turing": {
+    "what": "Matches companies with remote software engineers",
+    "for_whom": "Companies hiring vetted global engineering talent",
+    "why_them": "Huge vetted talent pool, now powering AI training",
+    "ai": true
+  },
+  "Observe.AI": {
+    "what": "AI that analyzes contact-center conversations",
+    "for_whom": "Support teams coaching agents at scale",
+    "why_them": "Conversation intelligence leader for contact centers",
+    "ai": true
+  },
+  "Tide": {
+    "what": "Business banking built for small companies",
+    "for_whom": "Small businesses and freelancers in the UK",
+    "why_them": "One of the UK's biggest SME banking platforms",
+    "ai": true
+  },
+  "Sarvam": {
+    "what": "Builds AI models for Indian languages",
+    "for_whom": "India-first products needing voice and language AI",
+    "why_them": "India's flagship sovereign AI-model effort",
+    "ai": true
+  }
+}

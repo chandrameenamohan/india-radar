@@ -30,11 +30,22 @@ FIXTURE="$ROOT?data=../tests/fixtures/companies-e2e.json"
 $PY -m http.server "$PORT" --bind 127.0.0.1 >/dev/null 2>&1 &
 srv=$!
 trap 'kill $srv 2>/dev/null' EXIT
+# The readiness probe holds the whole page in a variable rather than piping it
+# into `grep -q`, and that is measured rather than stylistic: `grep -q` exits the
+# instant it matches, curl takes a SIGPIPE for the rest of the body, and under
+# `set -o pipefail` the pipeline reports curl's death as the probe's answer. It
+# only bites once the page outgrows curl's write buffer -- so the site's redesign
+# tripped a probe that had been wrong since it was written, and the symptom was
+# "could not serve the site" against a server that was serving it perfectly.
+served() {
+  case "$(curl -s "$ROOT" 2>/dev/null)" in *'ROLE·ATLAS'*) return 0;; esac
+  return 1
+}
 for _ in $(seq 40); do
-  curl -s "$ROOT" 2>/dev/null | grep -q 'ROLE·ATLAS' && break
+  served && break
   sleep 0.1
 done
-if ! curl -s "$ROOT" 2>/dev/null | grep -q 'ROLE·ATLAS'; then
+if ! served; then
   echo "FAIL: could not serve the site on port $PORT"
   exit 1
 fi
@@ -110,32 +121,74 @@ check "the footer's counts are the build report's" \
 check "the footer accounts for every company in the corpus" \
   "$(report "d['corpus_size']")" "$(( ${checked:-0} + ${unchecked:-0} ))"
 
-# T8.5's tabs against the OTHER artifact, the same shape as the footer check
-# above: the site counts the rows it was given, build.py's country_counts counted
-# them at the build, and per country the two must be the same number. Every one
-# of the fifteen, zeros included -- a country the site left out of its list would
-# read as one nobody looked for, which is the one thing a zero must never be
-# confusable with.
+# T8.5's per-country counts against the OTHER artifact, the same shape as the
+# footer check above: the site counts the rows it was given, build.py's
+# country_counts counted them at the build, and per country the two must be the
+# same number. Every one of the fifteen, zeros included -- a country the site
+# left out of its list would read as one nobody looked for, which is the one
+# thing a zero must never be confusable with.
+# The plate index is where the fifteen are listed now (the country <select> went
+# with the tab bar): one line per country plate, each stating its count. Both
+# sides are sorted because the index is set in the atlas's plate order and
+# src.countries lists them in the build's -- the assertion is the SET of fifteen
+# names and their counts, which no ordering changes.
 check "the country counts are the build report's, zeros included" \
   "$($PY -c "
 import json
 from src.countries import COUNTRIES
 listed = json.load(open('data/build-report.json'))['countries']
-print('|'.join(f'{c} ({listed[c]})' for c in COUNTRIES))")" \
-  "$(val '[...document.querySelectorAll("#country option")].slice(1)
-       .map((o) => o.textContent.replace(/,/g, "")).join("|")')"
+print('|'.join(sorted(f'{c} ({listed[c]})' for c in COUNTRIES)))")" \
+  "$(val '[...document.querySelectorAll("#pindex .pirow")]
+       .map((b) => `${b.querySelector(".pinm").textContent} `
+                 + `(${b.querySelector(".pict").textContent.replace(/,/g, "")})`)
+       .sort().join("|")')"
 
+# The tally sits inside the status line`s plate stamp now, so it is read off the
+# tally itself rather than off the whole line -- which also carries the plate
+# number, the index control and the folio mark.
 check "the empty snapshot says so instead of implying nothing is hiring" \
   "$($PY -c '
 import json
 n = len(json.load(open("data/companies.json"))["companies"])
 print(f"{n} of {n} companies" if n else
       "This snapshot listed no companies. The build report says why for each one.")')" \
-  "$(val 'document.querySelector("#status").textContent')"
+  "$(val '(() => { const scope = document.querySelector("#status .pscope");
+       return scope ? scope.nextElementSibling.textContent
+                    : document.querySelector("#status > span").textContent })()')"
 
 echo "-- behaviour, over the committed dataset"
 open_page "$FIXTURE"
-rows() { val '[...document.querySelectorAll(".name")].map(n=>n.textContent).join("|")'; }
+# A register line is `.irow`, and a long register continues in the spread below
+# the board, so the rows are both together in document order. `.iname` carries
+# the company name as its own text node with the places nested after it -- the
+# first child is the name, and nothing else is.
+rows() { val '[...document.querySelectorAll("#index .irow, #spreadrows .irow")]
+     .map((n) => n.querySelector(".iname").firstChild.textContent).join("|")'; }
+
+# The register renders ONE worked entry at a time (the index is the master, the
+# gazetteer sheet the detail), so a claim about absence ACROSS the dataset has to
+# walk it: open every entry in turn and count what each one renders. render() is
+# synchronous, so the whole walk is one page's work. Returns:
+#   <entries with a salary line> <with a registration> <badges: open, closed>
+#   <entries rendering a null> <entries walked>
+walk() { val '(() => {
+     const n = document.querySelectorAll(".irow").length;
+     let salary = 0, mca = 0, said = 0, denied = 0, nulls = 0;
+     for (let i = 0; i < n; i++) {
+       document.querySelectorAll(".irow")[i].click();
+       const sheet = document.querySelector("#sheet");
+       salary += sheet.querySelectorAll(".salary").length;
+       mca += sheet.querySelectorAll(".mca").length;
+       said += sheet.querySelectorAll(".tag.open").length;
+       denied += sheet.querySelectorAll(".tag.closed").length;
+       if (/\bnull\b|\bundefined\b|\bNaN\b/.test(sheet.textContent)) nulls++;
+     }
+     // Put the sheet back on the first entry, the way every filter check puts
+     // its own control back: a walk that left the last entry open would silently
+     // re-aim the checks after it at whichever company sorted last.
+     if (n) document.querySelectorAll(".irow")[0].click();
+     return `${salary} ${mca} ${said} ${denied} ${nulls} ${n}`;
+   })()'; }
 # expect <python-row-filter> [python-sort-key] -> the names the site should show,
 # in the order it should show them. Default order is the site's: India roles
 # descending, ties by name. Every expectation below is derived from the dataset,
@@ -151,6 +204,31 @@ keep = [r for r in rows if $1]
 print('|'.join(r['name'] for r in sorted(keep, key=lambda r: ${2:-(-len(r['roles']), r['name'])})))"; }
 
 check "every company renders" "$(expect True)" "$(rows)"
+
+# Row detail. The disclosure is gone: the register is an index, and one worked
+# gazetteer entry is filed on the sheet beside it. So the assertion is no longer
+# "a row starts closed" -- nothing is collapsed -- but the same fact one level
+# up: the entry on the sheet is the entry for the row the reader picked, and it
+# carries the board we read and the funding source we cite. It is still about
+# what is *visible*: checkVisibility(), not a querySelector.
+sheeted() { val '(() => {
+     const body = document.querySelector("#sheet .detail");
+     if (!body) return "no entry";
+     const shown = body.checkVisibility({contentVisibilityAuto: true, visibilityProperty: true});
+     const hrefs = [...body.querySelectorAll("a")].map((a) => a.href).join(" ");
+     return `${document.querySelector("#sheet h2").textContent} `
+          + `${shown ? "shown" : "hidden"} `
+          + (hrefs.includes("job-boards.greenhouse.io") ? "board" : "no-board")
+          + (hrefs.includes("finsmes.com") ? "+source" : "+no-source");
+   })()'; }
+# On LOAD, and only here: a gazetteer never opens to a blank plate, so the sheet
+# starts on the register's first entry. It is deliberately not re-checked after
+# the filters below -- the sheet keeps the reader's PICK while that company is
+# still on the board, so "the first entry" stops being the claim the moment a
+# reader has chosen one, and a check that demanded it anyway would be demanding
+# the page forget where the reader was.
+check "the sheet opens on the register's first entry" \
+  "$(expect True | cut -d'|' -f1) shown board+source" "$(sheeted)"
 
 # The signature invariant, in the one form this schema can express it: a company
 # hiring only in Pune must vanish under Bengaluru. (SPEC's Warsaw example can't
@@ -181,31 +259,26 @@ check "an undated company is not claimed as recently funded" \
   "$(expect "age(r) is not None and age(r) <= 90")" "$(rows)"
 $B select '#recency' 'any' >/dev/null 2>&1
 
-# Row detail. A closed row's children are in the DOM, so the assertion has to be
-# about what is *visible* -- checkVisibility() sees through the collapse, a
-# height or a querySelector does not.
-detail() { val '(() => {
-     const row = document.querySelector(".row"), body = row.querySelector(".detail");
-     const shown = body.checkVisibility({contentVisibilityAuto: true, visibilityProperty: true});
-     const hrefs = [...body.querySelectorAll("a")].map((a) => a.href).join(" ");
-     return `${row.open ? "open" : "closed"} ${shown ? "shown" : "hidden"} `
-          + (hrefs.includes("job-boards.greenhouse.io") ? "board" : "no-board")
-          + (hrefs.includes("finsmes.com") ? "+source" : "+no-source");
-   })()'; }
-check "a row starts closed" "closed hidden board+source" "$(detail)"
-$B click '.row:first-of-type summary' >/dev/null 2>&1
-check "clicking a row reveals its board and its funding source" "open shown board+source" "$(detail)"
+# A click moves the sheet. Third line rather than first, so a sheet that never
+# moved could not pass by standing still.
+$B js '(() => document.querySelectorAll(".irow")[2].click())()' >/dev/null 2>&1
+check "clicking a row reveals that company's board and its funding source" \
+  "$(expect True | cut -d'|' -f3) shown board+source" "$(sheeted)"
+$B js '(() => document.querySelectorAll(".irow")[0].click())()' >/dev/null 2>&1
 
-# T4.1. Every India role is named and linked -- the row is the site's answer to
+# T4.1. Every role is named and linked -- the entry is the site's answer to
 # "who is hiring, for what, and where do I apply", and a count alone answers only
 # the first third. Derived from the dataset, so it stays true as the data grows.
-check "an opened row lists every role, each linked to its own posting" \
+# A long board folds its tail behind a "+n more roles" button; the fold is
+# pressed first, so this asserts every role is SHOWN and not merely present.
+$B click '#sheet .morebtn' >/dev/null 2>&1
+check "an opened entry lists every role, each linked to its own posting" \
   "$($PY -c "
 import json
 c = json.load(open('tests/fixtures/companies-e2e.json'))['companies']
 first = sorted(c, key=lambda r: (-len(r['roles']), r['name']))[0]
 print('|'.join(f\"{r['title']} {r['url']}\" for r in first['roles']))")" \
-  "$(val '[...document.querySelector(".row[open] .roles").querySelectorAll("li")]
+  "$(val '[...document.querySelectorAll("#sheet .roles li:not(.more)")]
        .map((li)=>`${li.querySelector("a").textContent} ${li.querySelector("a").href}`).join("|")')"
 
 # The ambiguous zero, in badge form. 822 of the 1,112 published India roles state
@@ -220,20 +293,26 @@ import json
 c = json.load(open('tests/fixtures/companies-e2e.json'))['companies']
 first = sorted(c, key=lambda r: (-len(r['roles']), r['name']))[0]
 print(sum(1 for r in first['roles'] if r['workplace']), 'of', len(first['roles']))")" \
-  "$(val '(() => { const ul = document.querySelector(".row[open] .roles");
+  "$(val '(() => { const ul = document.querySelector("#sheet .roles");
        return `${ul.querySelectorAll(".tag.workplace").length} of `
-            + ul.querySelectorAll("li").length })()')"
+            + ul.querySelectorAll("li:not(.more)").length })()')"
 
 # No listed company renders an empty location. The dataset holds all three ways
 # of being placeless: cities named, "Remote - India" (remote, no city), and a
 # board stating only "India" -- which is neither a city nor a remote claim, and
 # must still read as a place rather than as a blank cell.
+# Counted over the ROWS rather than over the place cells: the register omits the
+# cell entirely for a row with nothing to put in it, so counting empty cells
+# would score that row as a pass by leaving it out of the count.
 check "no listed company renders an empty location" "0" \
-  "$(val '[...document.querySelectorAll(".where")].filter(n=>!n.textContent.trim()).length')"
+  "$(val '[...document.querySelectorAll(".irow")]
+       .filter((r) => !(r.querySelector(".iwhere") || {textContent: ""})
+                        .textContent.trim()).length')"
 check "a company whose board states only \"India\" says so, rather than nothing" \
   "India" \
-  "$(val '[...document.querySelectorAll(".row")].find((r)=>
-       r.querySelector(".name").textContent === "Zeta Placeless").querySelector(".where").textContent')"
+  "$(val '[...document.querySelectorAll(".irow")].find((r)=>
+       r.querySelector(".iname").firstChild.textContent === "Zeta Placeless")
+         .querySelector(".iwhere").textContent')"
 
 # T4.2. The benchmark renders as one line carrying all three things that make it
 # readable -- the figure, the sample it averages, and the date the SOURCE last
@@ -246,7 +325,7 @@ c = json.load(open('tests/fixtures/companies-e2e.json'))['companies']
 first = sorted(c, key=lambda r: (-len(r['roles']), r['name']))[0]
 s = first['salary']
 print(s['avg_lpa'], s['reports'], s['observed'], s['source_url'])")" \
-  "$(val '(() => { const p = document.querySelector(".row[open] .salary"), t = p.textContent;
+  "$(val '(() => { const p = document.querySelector("#sheet .salary"), t = p.textContent;
        // Read the three facts back out of the rendered line rather than
        // rebuilding it here: the grouping is the browser`s (en-IN groups by
        // lakh), and a check that hardcodes that is testing Intl, not the site.
@@ -258,13 +337,16 @@ print(s['avg_lpa'], s['reports'], s['observed'], s['source_url'])")" \
 # The degraded row, across the whole dataset: absence renders as NOTHING, not as
 # "salary unknown". 51 of 116 listed companies have no benchmark, so a row that
 # announced its own gap would put that line on half the site.
+# One walk of every entry answers this, the registration below, and the null
+# check after it -- the sheet shows one entry at a time, so "across the dataset"
+# means across the dataset's entries, opened one by one.
+read -r wsalary wmca wsaid wdenied wnulls wrows <<<"$(walk)"
 check "a company with no benchmark renders no salary line at all" \
   "$($PY -c "
 import json
 c = json.load(open('tests/fixtures/companies-e2e.json'))['companies']
 print(sum(1 for r in c if r['salary']), 'of', len(c))")" \
-  "$(val '`${document.querySelectorAll(".salary").length} of `
-       + document.querySelectorAll(".row").length')"
+  "$wsalary of $wrows"
 
 # T4.4. The registration renders the CIN and the name it was matched to, because
 # the name IS the claim: a reader who can see "GAMMA HEALTH INDIA PRIVATE
@@ -277,7 +359,7 @@ c = json.load(open('tests/fixtures/companies-e2e.json'))['companies']
 first = sorted(c, key=lambda r: (-len(r['roles']), r['name']))[0]
 m = first['mca']
 print(m['cin'], m['name'], m['incorporated'][:4], m['city'], m['status'])")" \
-  "$(val '(() => { const p = document.querySelector(".row[open] .mca"), t = p.textContent;
+  "$(val '(() => { const p = document.querySelector("#sheet .mca"), t = p.textContent;
        return [p.querySelector(".cin").textContent,
                t.match(/· (.+?) · incorporated/)[1],
                t.match(/incorporated (\d{4})/)[1],
@@ -293,8 +375,7 @@ check "a company with no MCA registration renders no registration line at all" \
 import json
 c = json.load(open('tests/fixtures/companies-e2e.json'))['companies']
 print(sum(1 for r in c if r['mca']), 'of', len(c))")" \
-  "$(val '`${document.querySelectorAll(".mca").length} of `
-       + document.querySelectorAll(".row").length')"
+  "$wmca of $wrows"
 
 # SPEC feature 10's MCA filter, now that a row can carry a CIN.
 $B select '#mca' 'matched' >/dev/null 2>&1
@@ -321,11 +402,14 @@ check "clearing the remote filter restores every company" "$(expect True)" "$(ro
 # The absences a directory source ships with (no amount, no letter, no date) must
 # read as English. A row that renders "announced null" is the degraded case
 # looking broken rather than deliberate.
-check "an absent fact never renders as null" "0" \
-  "$(val '[...document.querySelectorAll(".row")]
+# Both halves of the split sheet: the register lines here, and every gazetteer
+# entry from the walk above ($wnulls).
+check "an absent fact never renders as null in the register" "0" \
+  "$(val '[...document.querySelectorAll(".irow")]
        .filter(n=>/\bnull\b|\bundefined\b|\bNaN\b/.test(n.textContent)).length')"
+check "an absent fact never renders as null in an entry" "0" "$wnulls"
 
-echo "-- country tabs and openness badges (T8.5)"
+echo "-- country plates and openness badges (T8.5)"
 # expect_in <countries, | separated, empty for all fifteen> [filter over `r` and
 # its in-scope `roles`] -> the names the site should show under that country
 # scope, in the order it should show them. A country view counts and sorts on the
@@ -349,96 +433,142 @@ for r in json.load(open('tests/fixtures/companies-e2e.json'))['companies']:
     if roles and (${2:-True}):
         keep.append((r, roles))
 print('|'.join(r['name'] for r, _ in sorted(keep, key=lambda k: (-len(k[1]), k[0]['name']))))"; }
-tab() { $B click "#tabs button[data-group=$1]" >/dev/null 2>&1; }
+# The tab strip is gone: the atlas binds sixteen plates, and the chart's own
+# country chips are the whole navigation. `plate <Country>` turns to a country's
+# plate, `plate` alone returns to Plate 01 -- the whole atlas, what the "All
+# countries" tab used to be. The return trip is taken first every time because a
+# chip is a TOGGLE: clicking the open plate's chip turns back to Plate 01, so a
+# helper that only clicked the chip would flip rather than turn on every second
+# call. Plate 01's strip clears the plate unconditionally, which is what makes
+# the sequence deterministic.
+plate() {
+  $B click '#p01' >/dev/null 2>&1
+  [ $# -eq 0 ] || $B click "#plate .mk[data-country=\"$1\"]" >/dev/null 2>&1
+}
 visibility() { val "(() => { const c = document.querySelector('$1')
      .checkVisibility({contentVisibilityAuto: true, visibilityProperty: true});
      return c ? 'shown' : 'hidden' })()"; }
 
-# Every tab, in one pass: the count on a tab is a claim about the rows behind it,
-# and a tab that says 6 and shows 4 is the site disagreeing with itself in public.
-check "each country tab shows as many companies as its count claims" "" \
+# Every plate, in one pass: the count on a chip is a claim about the rows behind
+# it, and a chip that says 6 and shows 4 is the site disagreeing with itself in
+# public. All fifteen, zeros included.
+# The pass states how many plates it walked rather than reporting an empty list
+# of disagreements: a selector that matched nothing would produce that same empty
+# list and read as green, which is the vacuous check this file names elsewhere.
+check "each country plate shows as many companies as its chip claims" \
+  "$($PY -c 'from src.countries import COUNTRIES; print(len(COUNTRIES), "plates agree")')" \
   "$(val '(() => {
+       const chips = [...document.querySelectorAll("#plate .mk")];
        const bad = [];
-       for (const t of document.querySelectorAll("#tabs button")) {
-         t.click();
-         const rows = document.querySelectorAll(".row").length;
-         const says = +t.querySelector(".count").textContent.replace(/,/g, "");
-         if (rows !== says) bad.push(`${t.dataset.group} says ${says}, shows ${rows}`);
+       for (const chip of chips) {
+         chip.click();
+         const rows = document.querySelectorAll(".irow").length;
+         const says = +chip.querySelector("b").textContent.replace(/,/g, "");
+         if (rows !== says) bad.push(`${chip.dataset.country} says ${says}, shows ${rows}`);
        }
-       document.querySelector("#tabs button").click();   // back to All countries
-       return bad.join("; ");
+       document.querySelector("#p01").click();          // back to Plate 01
+       return bad.length ? bad.join("; ") : `${chips.length} plates agree`;
      })()')"
 
-tab india
-check "a country tab shows only companies with a role in that country" \
+plate India
+check "a country plate shows only companies with a role in that country" \
   "$(expect_in India)" "$(rows)"
 # The signature invariant of the wider radar, in the form SPEC feature 16 states
 # it: a company hiring only in Berlin is not a company hiring in Japan, and the
-# Japan tab is where that is provable.
-tab japan
+# Japan plate is where that is provable.
+plate Japan
 check "a company with only a Berlin role never appears under Japan" \
   "$(expect_in Japan)" "$(rows)"
-# And the empty tab says WHICH country was empty. "No company matches these
+# And the empty plate says WHICH country was empty. "No company matches these
 # filters" would be the ambiguous zero: it reads as a filter to clear rather than
-# as what it is -- we read the boards and none of them was hiring there.
+# as what it is -- we read the boards and none of them was hiring there. The
+# bearing that follows ("Most of the register sits on Plate NN") is the plate's
+# way onward and is checked below on its own.
 check "an empty country says which country was empty" \
-  "No company we could check had an open role in Japan on this snapshot." \
-  "$(val 'document.querySelector("#status").textContent')"
+  "No company we could check had an open role in Japan on this snapshot — a plate we read, with nobody hiring." \
+  "$(val 'document.querySelector("#status > span").textContent
+       .split(" Most of the register")[0]')"
+# The bearing itself: an empty plate points at where the register's mass actually
+# is, and it must be the register's own biggest country and its own count -- a
+# hardcoded "India" would stop being true the day the data moves.
+check "an empty plate gives a bearing to where the register is" \
+  "$($PY -c "
+import json
+from collections import Counter
+rows = json.load(open('tests/fixtures/companies-e2e.json'))['companies']
+seen = Counter(x for r in rows for x in r['countries'])
+name, n = seen.most_common(1)[0]
+print(f'{name} — {n} of its {len(rows)} companies.')")" \
+  "$(val '(() => { const t = document.querySelector("#status > span").textContent;
+       const m = t.match(/Most of the register sits on Plate \d+ · (.+)$/);
+       return m ? m[1] : t })()')"
 
-tab europe
-check "the Europe tab groups the countries it says it does" \
-  "$(expect_in 'Germany|Netherlands|France|Spain|Sweden|Denmark|Norway|Finland')" \
-  "$(rows)"
-$B select '#country' 'Germany' >/dev/null 2>&1
-check "the country filter inside a tab narrows to that one country" \
+# A European plate. There is no Europe GROUP any more -- the atlas binds one
+# plate per country and Plate 01 for all fifteen -- so the grouping check becomes
+# what the group was there to prove in the first place: a plate shows exactly the
+# companies with a role in its own country, for a country in the inset as much as
+# for one on the band.
+plate Germany
+check "a European plate shows only companies with a role in that country" \
   "$(expect_in Germany)" "$(rows)"
 
 # The India-only enrichments and the filters over them, off India (SPEC v2). An
 # average India CTC beside a list of London roles is the site inventing a fact,
 # and a city filter still holding "Bengaluru" while invisible is a tab that shows
 # nothing for a reason the reader cannot see.
-tab uk-ie
+plate "United Kingdom"
 check "the India-only filters are hidden where India is not in view" "hidden hidden" \
   "$(visibility '#city') $(visibility '#mca')"
+# Every entry on the plate, not just the one on the sheet: an enrichment that
+# only stayed away from the first company would still be the site inventing a
+# fact about the second.
+read -r ukwsalary ukwmca _ _ _ _ <<<"$(walk)"
 check "no India enrichment renders on a country view without India in it" "0 salary 0 mca" \
-  "$(val '`${document.querySelectorAll(".salary").length} salary `
-       + `${document.querySelectorAll(".mca").length} mca`')"
+  "$ukwsalary salary $ukwmca mca"
 # ...and the same company under a view that does include India keeps both, so the
 # check above is about the view and not about a company with nothing to render.
-tab india
+plate India
 check "the same company renders its India enrichments where India is in view" "1 salary 1 mca" \
-  "$(val '(() => { const r = [...document.querySelectorAll(".row")].find((n) =>
-         n.querySelector(".name").textContent === "Theta Global");
-       return `${r.querySelectorAll(".salary").length} salary `
-            + `${r.querySelectorAll(".mca").length} mca` })()')"
+  "$(val '(() => { [...document.querySelectorAll(".irow")].find((n) =>
+         n.querySelector(".iname").firstChild.textContent === "Theta Global").click();
+       const sheet = document.querySelector("#sheet");
+       return `${sheet.querySelectorAll(".salary").length} salary `
+            + `${sheet.querySelectorAll(".mca").length} mca` })()')"
 
 # Why this row is here, visibly: under a country view the row counts, locates and
 # lists the roles in that country. A UK row that said "2 roles" and "Bengaluru"
 # would be the site answering a question nobody asked.
-tab uk-ie
+# The register line names places the way a register does -- "London", not
+# "London, United Kingdom" -- and the gazetteer entry below prints them in full,
+# so the expectation is shortened here the same way the line is.
+plate "United Kingdom"
 check "a country view counts and locates a company by the roles it is showing" \
   "$($PY -c "
 import json
 rows = json.load(open('tests/fixtures/companies-e2e.json'))['companies']
 row = [r for r in rows if 'United Kingdom' in r['countries']][0]
 roles = [x for x in row['roles'] if 'United Kingdom' in x['countries']]
-where = list(dict.fromkeys(place for x in roles for place in x['locations']))
+short = lambda p: p if '—' in p else p.split(',')[0].strip()
+where = list(dict.fromkeys(short(place) for x in roles for place in x['locations']))
 print('|'.join([row['name'], f\"{len(roles)} {'role' if len(roles) == 1 else 'roles'}\",
                 ' · '.join(where)]))")" \
-  "$(val '(() => { const r = document.querySelector(".row");
-       return [".name", ".reqs", ".where"].map((s) => r.querySelector(s).textContent).join("|") })()')"
-$B click '.row:first-of-type summary' >/dev/null 2>&1
+  "$(val '(() => { const r = document.querySelector(".irow");
+       return [r.querySelector(".iname").firstChild.textContent,
+               r.querySelector(".ireqs").textContent,
+               r.querySelector(".iwhere").textContent].join("|") })()')"
+$B js '(() => document.querySelectorAll(".irow")[0].click())()' >/dev/null 2>&1
 check "a country view says how many of the board's roles it is showing" \
   "$($PY -c "
 import json
 rows = json.load(open('tests/fixtures/companies-e2e.json'))['companies']
 row = [r for r in rows if 'United Kingdom' in r['countries']][0]
 print(sum(1 for x in row['roles'] if 'United Kingdom' in x['countries']), len(row['roles']))")" \
-  "$(val '(() => { const t = document.querySelector(".row[open] .detail p").textContent;
+  "$(val '(() => { const t = [...document.querySelectorAll("#sheet .detail p")]
+         .find((p) => /open roles?\b/.test(p.textContent)).textContent;
        return [t.match(/(\d+) open roles?\b/)[1],
                t.match(/of (\d+) on this board\b/)[1]].join(" ") })()')"
 
-tab all
+plate
 # The openness badges, counted across the whole dataset: exactly as many badges
 # as there are stated verdicts, in each direction. This is where "unknown is
 # never rendered as no" is provable rather than asserted -- a silence rendered as
@@ -452,8 +582,7 @@ roles = [x for r in json.load(open('tests/fixtures/companies-e2e.json'))['compan
 said = lambda verdict: sum(1 for x in roles for f in ('visa', 'hire_from_abroad')
                            if x[f] == verdict)
 print(f\"{said('yes')} open {said('no')} closed\")")" \
-  "$(val '`${document.querySelectorAll(".tag.open").length} open `
-       + `${document.querySelectorAll(".tag.closed").length} closed`')"
+  "$(read -r _ _ said denied _ _ <<<"$(walk)"; echo "$said open $denied closed")"
 # And the site says what a missing badge means, for the same reason it says what
 # a missing CIN means: 92% of postings state nothing, so silence is the majority
 # case and a reader who reads it as "no" reads the site wrong.
@@ -468,12 +597,12 @@ check "the open-to-foreign-hires filter returns only companies whose postings sa
   "$(rows)"
 # Per country, like everything else in a country view: a company that sponsors in
 # London has said nothing about its Bengaluru role, and must not appear under the
-# India tab as though it had.
-tab india
+# India plate as though it had.
+plate India
 check "openness is read off the roles in view, not off the whole company" \
   "$(expect_in India "any(x['visa'] == 'yes' or x['hire_from_abroad'] == 'yes' for x in roles)")" \
   "$(rows)"
-tab all
+plate
 $B select '#openness' 'any' >/dev/null 2>&1
 check "clearing the open-to-foreign-hires filter restores every company" "$(expect True)" "$(rows)"
 
@@ -481,18 +610,40 @@ check "clearing the open-to-foreign-hires filter restores every company" "$(expe
 check "every control has an accessible name" "" \
   "$(val '[...document.querySelectorAll("input,select")].filter(c=>!c.labels.length
        && !c.getAttribute("aria-label")).map(c=>c.id).join(",")')"
-# The tabs are <button>s, so they are keyboard-reachable by construction; what
-# has to be checked is that the number beside a label has not eaten the name, and
-# that the pressed state a sighted reader sees is the one a screen reader gets.
-check "every country tab has an accessible name" "" \
-  "$(val '[...document.querySelectorAll("#tabs button")]
-       .filter((b) => !(b.getAttribute("aria-label") || b.textContent).trim())
-       .map((b) => b.dataset.group).join(",")')"
-check "exactly one country tab is pressed" "1" \
-  "$(val 'document.querySelectorAll("#tabs button[aria-pressed=true]").length')"
-check "rows are native disclosures, so keyboard-reachable without JS" \
-  "$(expect True | awk -F'|' '{print NF}')" \
-  "$(val 'document.querySelectorAll(".row > summary").length')"
+# The plate chips and the plate index rows are <button>s, so they are
+# keyboard-reachable by construction; what has to be checked is that a chip whose
+# visible label is a dot and a count still NAMES its country, and that the
+# pressed state a sighted reader sees is the one a screen reader gets. Both
+# navigations are checked, because either one alone is a way to every plate.
+# Named the same way: the count is stated, so a mistyped selector cannot pass by
+# finding no controls to fault. Two ways to every plate, fifteen plates each.
+check "every plate control has an accessible name" \
+  "$($PY -c 'from src.countries import COUNTRIES; print(2 * len(COUNTRIES), "named")')" \
+  "$(val '(() => { const c = [...document.querySelectorAll("#plate .mk, #pindex .pirow")];
+       const unnamed = c.filter((b) => !(b.getAttribute("aria-label") || b.textContent).trim());
+       return unnamed.length
+         ? unnamed.map((b) => b.dataset.country || b.textContent).join(",")
+         : `${c.length} named` })()')"
+# One plate is open at a time and the chart says which: on a country plate its
+# chip is pressed, on Plate 01 the index strip is. Never both, never neither --
+# the red chip is the whole navigation's only state, and a reader who cannot see
+# red must still be told which page the atlas is open at.
+check "exactly one plate control is pressed on Plate 01" "1" \
+  "$(val 'document.querySelectorAll("#plate [aria-pressed=true]").length')"
+plate Japan
+check "exactly one plate control is pressed on a country plate" "1 Japan" \
+  "$(val '(() => { const on = document.querySelectorAll("#plate [aria-pressed=true]");
+       return `${on.length} ${on.length === 1 ? on[0].dataset.country : ""}` })()')"
+plate
+# The disclosure rows are gone with the tab strip: the register is an index of
+# <button>s into the gazetteer sheet. Buttons are focusable by construction, so
+# what this holds is that EVERY listed company has one -- a register line that
+# rendered as a plain div would be a company no keyboard could reach.
+check "every register line is a keyboard-reachable button" \
+  "$(expect True | awk -F'|' '{print NF}') buttons" \
+  "$(val '(() => { const rows = [...document.querySelectorAll(".irow")];
+       return `${rows.filter((r) => r.tagName === "BUTTON" && !r.disabled).length} `
+            + "buttons" })()')"
 
 # Search runs last of the interactions: `browse fill` cannot pass an empty value,
 # so a page load is the only way back from "matches nothing" -- and a reload here
@@ -501,7 +652,7 @@ $B fill '#q' 'beta' >/dev/null 2>&1
 check "search narrows by name" "$(expect "'beta' in r['name'].lower()")" "$(rows)"
 $B fill '#q' 'no-such-company' >/dev/null 2>&1
 check "a filter that matches nothing says so" "No company matches these filters." \
-  "$(val 'document.querySelector("#status").textContent')"
+  "$(val 'document.querySelector("#status > span").textContent')"
 
 console_clean "after interaction"
 
@@ -512,7 +663,7 @@ echo "-- a dataset this page doesn't know how to read"
 open_page "$ROOT?data=../data/build-report.json"
 check "an unknown schema is refused, not rendered" "refused 0 rows" \
   "$(val '(document.querySelector("#status").textContent.startsWith("This page reads schema v8")
-       ? "refused " : "rendered ") + document.querySelectorAll(".row").length + " rows"')"
+       ? "refused " : "rendered ") + document.querySelectorAll(".irow").length + " rows"')"
 # And the footer goes with it. A count left over from the last dataset, sitting
 # under a refusal to render this one, is the site stating a coverage figure for a
 # build it just declined to read.

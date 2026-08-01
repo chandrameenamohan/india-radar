@@ -247,26 +247,24 @@ def _quoted(js: str) -> list[str]:
 
 def test_the_site_mirrors_this_module_s_countries_in_order():
     """A country the pipeline collects and the site does not list is a country
-    whose roles are in the data and reachable from no tab. Order matters too: the
-    site renders its country list in this one, and a build and a page that
+    whose roles are in the data and reachable from no plate. Order matters too:
+    the site renders its country list in this one, and a build and a page that
     disagree about it are two orders a reader has to reconcile."""
     listed = re.search(r"const COUNTRIES = \[(.*?)\];", SITE, re.S)
     assert listed, "site/index.html has no COUNTRIES list"
     assert _quoted(listed.group(1)) == SPEC_COUNTRIES == list(COUNTRIES)
 
 
-def test_every_country_sits_under_exactly_one_site_tab():
-    """The tabs are the site's own grouping (SPEC feature 16), so this asserts
-    nothing about which tab a country is under — only that it is under one, and
-    one only. A country in no tab is unreachable however much data it has; a
-    country in two is counted twice in a strip whose whole job is a count."""
-    groups = re.search(r"const GROUPS = \[(.*?)\n\];", SITE, re.S)
-    assert groups, "site/index.html has no GROUPS list"
-    # The "all countries" tab is `countries: COUNTRIES` and contributes nothing
-    # here: it is the whole list by construction, and cannot leave one out.
-    tabbed = [
-        country
-        for block in re.findall(r"countries: \[(.*?)\]", groups.group(1), re.S)
-        for country in _quoted(block)
-    ]
-    assert sorted(tabbed) == sorted(SPEC_COUNTRIES)
+def test_every_country_has_exactly_one_site_plate():
+    """The atlas binds one plate per country (SPEC feature 16), so this asserts
+    nothing about where a plate sits on the chart — only that every country has
+    one, and one only. A country with no plate is unreachable however much data
+    it has; a country with two is counted twice on a chart whose chips are the
+    whole navigation."""
+    plates = re.search(r"const PLATE = \[(.*?)\n\];", SITE, re.S)
+    assert plates, "site/index.html has no PLATE list"
+    # One row per plate: ['Ireland', 'IE', 53.35, -6.26, true, 'w']. The country
+    # name is the row's first quoted field; the rest are its code and the chart's
+    # own typesetting, which this says nothing about.
+    named = [_quoted(row)[0] for row in re.findall(r"\[(.*?)\]", plates.group(1)) if _quoted(row)]
+    assert sorted(named) == sorted(SPEC_COUNTRIES)

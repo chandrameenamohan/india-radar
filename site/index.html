@@ -7,114 +7,970 @@
 <!-- A missing favicon is a 404, and a 404 is a failed network request, which the
      gate counts. One data: URI is cheaper than an icon file. -->
 <link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
+  /* Variant A — Swiss / International Typographic.
+     One grid of twelve, hairline rules, one red. The page is a printed
+     departure board: the type does the work and nothing decorates. */
   :root {
-    --bg: #10131a; --panel: #171b24; --line: #262c38;
-    --text: #e5e9f0; --muted: #98a2b3; --accent: #7ee2b8;
-    /* A stated "no" is information, not an error, so it is warm rather than red. */
-    --stated-no: #e8b17a;
+    --paper:   #ffffff;
+    --ink:     #111111;
+    --ink-2:   #4a4a4a;   /* secondary prose */
+    --ink-3:   #8a8a8a;   /* micro-labels, absent-ish things */
+    --rule:    #d5d5d5;   /* hairline */
+    --rule-2:  #111111;   /* structural rule */
+    --wash:    #f4f4f4;   /* the only fill on the page */
+    --red:     #E30613;   /* active tab, counts. Nowhere else. */
+    --gut:     2rem;
+    --ref2:    4.6rem;    /* the merged index+coordinate gutter, e.g. 001·B3 */
+    --col: repeat(12, minmax(0, 1fr));
   }
-  * { box-sizing: border-box; }
+  * { box-sizing: border-box; min-width: 0; }  /* no grid/flex item may out-shrink its track */
+  html { -webkit-text-size-adjust: 100%; overflow-x: clip; }
   body {
-    margin: 0; padding: 2rem 1.25rem 4rem; background: var(--bg); color: var(--text);
-    font: 16px/1.55 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    margin: 0; padding: 0 0 6rem; background: var(--paper); color: var(--ink);
+    position: relative;   /* the graticule's ticks live in document space */
+    overflow-x: clip;   /* the sheet is one column wide; nothing scrolls sideways */
+    font-family: Inter, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 15px; line-height: 1.45;
+    font-variant-numeric: tabular-nums;      /* every count is a column, not a word */
+    font-feature-settings: "tnum" 1, "cv05" 1, "ss01" 1;
+    letter-spacing: -0.006em;
+    -webkit-font-smoothing: antialiased;
   }
-  main, header, footer, #tabs, #controls, #status { max-width: 62rem; margin-inline: auto; }
-  h1 { margin: 0; font-size: 1.5rem; letter-spacing: .18em; font-weight: 650; }
-  .thesis { margin: .5rem 0 0; color: var(--muted); max-width: 46rem; }
-  .snapshot { margin: .75rem 0 1.5rem; font-size: .85rem; color: var(--muted); }
-  .snapshot time { color: var(--text); font-variant-numeric: tabular-nums; }
+  header, footer, #controls, #status, #pindex, main {
+    max-width: 78rem; margin-inline: auto; padding-inline: var(--gut);
+  }
 
-  #tabs { display: flex; flex-wrap: wrap; gap: .4rem; margin-bottom: 1rem; }
-  #tabs button { display: flex; gap: .5rem; align-items: baseline; cursor: pointer;
-                 background: var(--panel); color: var(--muted); border: 1px solid var(--line);
-                 border-radius: 999px; padding: .35rem .85rem; font: inherit; font-size: .85rem; }
-  #tabs button:hover { color: var(--text); }
-  #tabs button[aria-pressed="true"] { background: var(--accent); border-color: var(--accent);
-                                      color: var(--bg); }
-  #tabs button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-  #tabs .count { font-variant-numeric: tabular-nums; opacity: .8; }
+  /* ---- micro-label: 11px, uppercase, wide. The page's smallest voice. ---- */
+  .micro, #controls label > .lbl, #indexhead span, #status,
+  .snapshot .k, .tag {
+    font-size: 11px; line-height: 1.1; text-transform: uppercase;
+    letter-spacing: 0.11em; font-weight: 600;
+  }
 
-  #controls { display: flex; flex-wrap: wrap; gap: .75rem 1rem; align-items: end;
-              padding-bottom: 1rem; border-bottom: 1px solid var(--line); }
-  #controls label { display: flex; flex-direction: column; gap: .3rem;
-                    font-size: .75rem; letter-spacing: .06em; text-transform: uppercase;
-                    color: var(--muted); }
+  /* ------------------------------ registration marks ----------------------- */
+  /* The sheet corners. An atlas plate is a printed thing, and printed things
+     carry crop marks: four hairline corners registering the sheet, set in the
+     mid gray so they read as apparatus, never as content. */
+  header, footer { position: relative; }
+  header::before, header::after, footer::before, footer::after {
+    content: ""; position: absolute; width: .7rem; height: .7rem;
+    border: 0 solid var(--ink-3); pointer-events: none;
+  }
+  header::before { top: .8rem; left: .55rem; border-left-width: 1px; border-top-width: 1px; }
+  header::after  { top: .8rem; right: .55rem; border-right-width: 1px; border-top-width: 1px; }
+  footer::before { bottom: -2.4rem; left: .55rem; border-left-width: 1px; border-bottom-width: 1px; }
+  footer::after  { bottom: -2.4rem; right: .55rem; border-right-width: 1px; border-bottom-width: 1px; }
+
+  /* ---------------------------------- masthead ---------------------------- */
+  header { padding-top: 2.25rem; }
+  .masthead {
+    display: grid; grid-template-columns: var(--col); gap: 0 1.25rem;
+    align-items: end; padding-bottom: .7rem;
+  }
+  h1 {
+    grid-column: 1 / 8; margin: 0;
+    font-size: clamp(2.5rem, 7.2vw, 5.25rem); font-weight: 800;
+    letter-spacing: -0.045em; line-height: .88; text-transform: uppercase;
+  }
+  h1 .mid { color: var(--red); }
+  .aside {
+    grid-column: 8 / -1; display: flex; flex-direction: column;
+    align-items: flex-end; gap: .6rem; min-width: 0;
+  }
+  .snapshot { margin: 0; display: flex; flex-direction: column; gap: .2rem;
+              text-align: right; align-items: flex-end; }
+  .snapshot .k { color: var(--ink-3); }
+  .snapshot time { font-size: 1.05rem; font-weight: 600; letter-spacing: -0.01em; }
+  /* The restamp: the open plate's designation struck in the masthead, the way
+     an atlas sheet carries its number in the top corner. render() restrikes it
+     on every page turn — PLATE 01 · WORLD, PLATE 03 · UNITED KINGDOM. */
+  .platestamp { border: 1.5px solid var(--red); padding: .5rem .75rem .45rem;
+                display: flex; flex-direction: column; gap: .18rem;
+                align-items: flex-end; text-align: right; }
+  .platestamp .pnum { color: var(--red); font-weight: 800; font-size: 1.35rem;
+                      line-height: 1; letter-spacing: -0.02em;
+                      text-transform: uppercase; white-space: nowrap; }
+  .platestamp .pname { font-size: 10px; text-transform: uppercase;
+                       letter-spacing: .12em; font-weight: 600;
+                       color: var(--ink); }
+
+  /* ------------------------------- the chart ------------------------------ */
+  /* Round 10: the plate becomes a map. The schematic 5×3 grid is replaced by a
+     true equirectangular graticule band, latitude compressed the way a printed
+     band compresses it (the graticule states the scale, so the compression is
+     legible, never hidden). One marker per covered country at its real anchor
+     coordinate, each still a door into that country's view; one dot per LISTED
+     COMPANY fanned at its country's anchor, so the density of the dataset is
+     drawn, not described — the build's mass visibly sits at Bengaluru.
+     Round 11 crops the window to 0°…180°E: the old −15°…182° band spent its
+     left margin on empty Atlantic, and every country this radar covers sits
+     east of the meridian bar the three European capitals the inset enlarges.
+     Europe is a cluster at this scale, so it gets what an atlas gives a
+     cluster — an enlarged inset, now berthed over the band's own quiet water
+     rather than floating across the Pacific. Everything is absolutely
+     positioned inside an overflow-hidden band, so the chart can never set the
+     page width. */
+  #plate { position: relative; border-top: 2px solid var(--rule-2);
+           border-bottom: 1px solid var(--rule-2); }
+  #plate:empty { display: none; border: 0; }   /* no chart before a dataset loads */
+  /* Candidate 1: the plate-index IS the instrument. The tab strip is deleted;
+     this band is the sole navigation, so it grows to a working scale and every
+     marker becomes a framed, labelled plate-chip — a button that looks like
+     one. Cursor discipline says the rest: the water is crosshair, the chips
+     are pointers. */
+  /* Round 2: the band earns its height. Plate 01 is an index — thirteen of
+     its markers say zero — so it prints compressed; a turned country plate,
+     where the crosshair and the enlarged state do real work, gets the full
+     band back. No transition: a page turns, it does not slide. */
+  .chartmain { position: relative; height: clamp(10.5rem, 15vw, 13.5rem);
+               overflow: hidden; cursor: crosshair; }
+  #plate.turned .chartmain { height: clamp(13rem, 20vw, 17rem); }
+  /* The index strip above the band: Plate 01 (the whole atlas) as a working
+     button, and the band's own instruction — the two-second answer to "is
+     this map clickable". */
+  .p01 { appearance: none; font: inherit; cursor: pointer; margin: 0;
+         display: flex; flex-wrap: wrap; align-items: baseline;
+         justify-content: space-between; gap: .3rem 1.2rem; width: 100%;
+         background: var(--paper); color: var(--ink); border: 0;
+         border-bottom: 1px solid var(--rule); border-radius: 0;
+         padding: .55rem 0 .5rem; text-align: left; }
+  .p01 .lft { font-size: 11px; text-transform: uppercase; letter-spacing: .11em;
+              font-weight: 700; white-space: nowrap; }
+  .p01 .lft .no { color: var(--red); }
+  .p01 .hint { font-size: 10px; text-transform: uppercase; letter-spacing: .12em;
+               font-weight: 600; color: var(--ink-3); }
+  .p01:hover .lft { color: var(--red); }
+  .p01[aria-pressed="true"] .lft .no { background: var(--red); color: #fff;
+                                       padding: .1rem .3rem .06rem; }
+  .p01:focus-visible { outline: 2px solid var(--red); outline-offset: -2px; }
+  /* The crosshair: two red hairlines the full span of the band (or of the
+     inset, for a European plate), crossing at the open plate's anchor. */
+  .xh { position: absolute; background: var(--red); pointer-events: none;
+        z-index: 3; }
+  .xh.h { left: 0; right: 0; height: 1px; }
+  .xh.v { top: 0; bottom: 0; width: 1px; }
+  .mer { position: absolute; top: 0; bottom: 0; width: 1px; background: var(--rule); }
+  .par { position: absolute; left: 0; right: 0; height: 1px; background: var(--rule); }
+  .par.eq { background: var(--ink-3); opacity: .55; }   /* the equator holds a heavier line */
+  .gl { position: absolute; font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+        font-size: 8px; letter-spacing: .06em; color: var(--ink-3); line-height: 1;
+        padding: 2px 3px; background: var(--paper); }
+  /* One dot per listed company at its country's anchor, deterministically
+     fanned. Apparatus — the markers say the counts aloud. Round 11 thins them:
+     at 3px and half opacity a hundred and sixteen dots fused into a blot that
+     read as noise, so the cloud is finer and paler and the density reads as
+     density rather than as a smudge. */
+  .cdot { position: absolute; width: 2px; height: 2px; margin: -1px 0 0 -1px;
+          background: var(--ink-3); opacity: .34; pointer-events: none; }
+  /* Round 11: the Europe source frame is gone. Its markers live in the inset,
+     so the frame drew an EMPTY rectangle on the band's dead left corner — an
+     apparatus mark pointing at nothing. The inset now states its own window
+     in its label, which is what the frame was there to say. */
+  /* The inset is positioned against #plate, whose first row is the Plate 01
+     strip — so its top is set past the strip's own height, never through it. */
+  .inset { position: absolute; left: 3%; top: calc(2.5rem + 1.5%);
+           width: 38%; height: calc(76% - 2.5rem);
+           background: var(--paper); border: 1px solid var(--rule-2); z-index: 2; }
+  .inset .ilabel { position: absolute; top: -1px; left: -1px; z-index: 1;
+                   background: var(--ink); color: #fff; padding: 2px 5px 1px;
+                   font-size: 8px; font-weight: 600; text-transform: uppercase;
+                   letter-spacing: .1em; line-height: 1.2; }
+  /* The marker, promoted to a plate-chip: a square ink dot at the true
+     coordinate, and beside it (side hand-set per country so chips never
+     collide) a hairline-FRAMED label carrying plate number, name, and count —
+     a thing that reads as a button at arm's length, because it is one.
+     [data-on] is the open plate, .lit the row-hover preview, .sel the open
+     entry's held ring; red marks ONLY those states — at rest the chart is ink. */
+  /* --dsz is the dot's side, --r the label's stand-off from the marker box's
+     own edge (these rules offset from the box, and a scaled marker's box is
+     its dot): marker() scales both by the country's count (sqrt — the AREA
+     carries the number), so India's dot dominates the band and its label
+     steps clear of it rather than being printed over. */
+  .mk { position: absolute; transform: translate(-50%, -50%);
+        --r: 6px;
+        width: max(1.1rem, var(--dsz, 8px));
+        height: max(1.1rem, var(--dsz, 8px)); margin: 0; padding: 0;
+        appearance: none; background: none; border: 0; border-radius: 0;
+        cursor: pointer; }
+  .mdot { position: absolute; left: 50%; top: 50%;
+          width: var(--dsz, 8px); height: var(--dsz, 8px);
+          transform: translate(-50%, -50%); background: var(--ink); }
+  .mlb { position: absolute; white-space: nowrap; line-height: 1;
+         display: flex; align-items: baseline; gap: .38rem;
+         border: 1px solid var(--rule-2); background: var(--paper);
+         padding: .3rem .45rem .26rem; color: var(--ink); }
+  .mlb .mno { font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+              font-size: 9px; font-weight: 500; letter-spacing: .05em;
+              color: var(--ink-3); }
+  .mlb .mnm { font-size: 10px; font-weight: 700; letter-spacing: .09em;
+              text-transform: uppercase; }
+  .mlb .mcd { font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+              font-size: 10px; font-weight: 700; letter-spacing: .06em; }
+  .mlb b { font-weight: 700; font-size: 11px; letter-spacing: 0; }
+  .mlb b.nil { color: var(--ink-3); font-weight: 500; }  /* a zero is a finding, in gray */
+  .chartmain > .mk .mcd { display: none; }   /* the wide band has room for names */
+  .inset .mnm { display: none; }             /* the inset speaks in codes */
+  .inset .mlb { gap: .28rem; padding: .2rem .32rem .16rem; }
+  .lb-e .mlb { left: calc(var(--r) + .5rem); top: 50%; transform: translateY(-50%); }
+  .lb-w .mlb { right: calc(var(--r) + .5rem); top: 50%; transform: translateY(-50%); }
+  .lb-n .mlb { bottom: calc(var(--r) + .45rem); left: 50%; transform: translateX(-50%); }
+  .lb-s .mlb { top: calc(var(--r) + .45rem); left: 50%; transform: translateX(-50%); }
+  /* Below-left: hangs under the dot with its right edge at the dot's center —
+     for a marker (GB) whose east and centre lanes are both taken. */
+  .lb-sw .mlb { top: calc(var(--r) + .45rem); right: .55rem; }
+  .mk:hover .mlb { border-color: var(--red); color: var(--red); }
+  .mk:hover .mlb .mno { color: var(--red); }
+  .mk:hover .mdot { background: var(--red); }
+  .mk:focus-visible { outline: 2px solid var(--red); outline-offset: 2px; }
+  .mk[data-on] .mdot { background: var(--red); }
+  .mk[data-on] .mlb { border-color: var(--red); border-width: 1.5px;
+                      color: var(--red); }
+  .mk[data-on] .mlb .mno { color: var(--red); }
+  .mk.lit:not([data-on]) .mlb { border-color: var(--red); color: var(--red); }
+  .mk.lit:not([data-on]) .mdot { background: var(--red); }
+  /* The held ring: the open ENTRY's marker keeps a red ring for as long as
+     the entry is open — a ring is held, a fill is chosen. */
+  .mk.sel .mdot { box-shadow: 0 0 0 2px var(--paper), 0 0 0 3px var(--red); }
+  /* A zero plate is a finding, but thirteen findings must not shout down two
+     results: empty plates print in the recessive state — hollow dot, hairline
+     frame, margin gray. Still buttons, still counted; the eye lands where the
+     register's mass actually is. */
+  .mk.nil .mdot { width: 6px; height: 6px; background: var(--paper);
+                  border: 1px solid var(--ink-3); }
+  .mk.nil .mlb { border-color: var(--rule); color: var(--ink-3); }
+  .mk.nil .mlb .mno { color: #c6c6c6; }
+  .mk.nil:hover .mdot, .mk.nil[data-on] .mdot {
+    background: var(--paper); border-color: var(--red); }
+  .mk.nil:hover .mlb, .mk.nil[data-on] .mlb {
+    border-color: var(--red); color: var(--red); }
+  .mk.nil:hover .mlb .mno, .mk.nil[data-on] .mlb .mno { color: var(--red); }
+  .thesis {
+    display: grid; grid-template-columns: var(--col); gap: 0 1.25rem;
+    margin: 0; padding: .6rem 0 1.2rem;
+  }
+  .thesis span { grid-column: 1 / 7; font-size: 1.0625rem; line-height: 1.35;
+                 letter-spacing: -0.017em; font-weight: 500; max-width: 30rem; }
+  @media (max-width: 56rem) {
+    h1 { grid-column: 1 / -1; }
+    .aside { grid-column: 1 / -1; align-items: flex-start; margin-top: .9rem; }
+    .snapshot { align-items: flex-start; text-align: left; }
+    .thesis span { grid-column: 1 / -1; }
+  }
+
+  /* ------------------------------ (no tab bar) ----------------------------- */
+  /* Candidate 1 deletes the plates-index strip. The atlas band above is the
+     sole navigation: sixteen plates — the world, and fifteen countries — each
+     a framed chip on the chart itself. */
+
+  /* ---------------------------------- controls ---------------------------- */
+  /* auto-fit rather than fixed spans: the visible set varies by plate (the
+     India-only controls come and go), and a fixed grid leaves whichever
+     control is last orphaned on a row of its own. Round 2 tightens the
+     minimum so the full bank of EIGHT — seven filters and the sort — sits on
+     one baseline at the 78rem measure: 8 × 7.5rem + 7 × 1rem = 67rem ≤ 74rem.
+     "Sort by" rides the same rule as the filters, never a row of its own. */
+  #controls {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(7.5rem, 1fr));
+    gap: 1.1rem 1rem;
+    padding-top: 1.35rem; padding-bottom: 1.5rem;
+    border-bottom: 2px solid var(--rule-2);
+  }
+  #controls label { display: flex; flex-direction: column; gap: .4rem; }
   /* `hidden` alone loses to the rule above, so a hidden control would still be
      laid out -- and a filter nobody can see is a filter nobody can clear. */
   #controls label[hidden] { display: none; }
-  input, select { background: var(--panel); color: var(--text); border: 1px solid var(--line);
-                  border-radius: 6px; padding: .45rem .55rem; font-size: .95rem; }
-  input { min-width: 14rem; }
-  input:focus-visible, select:focus-visible, summary:focus-visible {
-    outline: 2px solid var(--accent); outline-offset: 2px;
+  #controls label > .lbl { color: var(--ink-3); }
+  /* The fold: at a hand's width the filter bank is a long walk between the
+     plate and the register, so it closes to one line — search stays out (it
+     is the walk's usual reason), the rest open on demand, and a red tally
+     says how many are set while the bank is shut. Desktop never sees it. */
+  #ffold { display: none; }
+  @media (max-width: 52rem) {
+    #ffold { display: flex; grid-column: 1 / -1; align-items: baseline;
+             gap: .8rem; appearance: none; background: none; border: 0;
+             border-radius: 0; border-bottom: 1px solid var(--rule-2);
+             margin: 0; padding: .1rem 0 .5rem; font: inherit;
+             cursor: pointer; text-align: left; color: var(--ink); }
+    #ffold:focus-visible { outline: 2px solid var(--red); outline-offset: 3px; }
+    #ffold #fcount { margin-left: auto; color: var(--red); }
+    #ffold .chev { color: var(--ink-3); font-size: 10px; }
+    #controls.folded label:not(.q-always) { display: none; }
   }
-  #status { padding: 1rem 0 .5rem; font-size: .85rem; color: var(--muted); }
+  input, select {
+    appearance: none; -webkit-appearance: none; font: inherit; font-size: .9375rem;
+    font-weight: 500; letter-spacing: -0.012em; color: var(--ink);
+    background: transparent; border: 0; border-bottom: 1px solid var(--rule-2);
+    border-radius: 0; padding: .3rem 0 .35rem; width: 100%; min-width: 0;
+  }
+  /* The dropdown affordance, drawn to the page's own line weight: a hairline
+     chevron, not the OS's filled delta. It turns red with the focused rule, so
+     the whole control answers as one mark. */
+  select {
+    padding-right: 1.2rem;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='7'%3E%3Cpath d='M1 1l4.5 4.5L10 1' fill='none' stroke='%238a8a8a' stroke-width='1.25'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: right .1rem center;
+  }
+  select:hover {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='7'%3E%3Cpath d='M1 1l4.5 4.5L10 1' fill='none' stroke='%23111111' stroke-width='1.25'/%3E%3C/svg%3E");
+  }
+  select:focus {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='7'%3E%3Cpath d='M1 1l4.5 4.5L10 1' fill='none' stroke='%23E30613' stroke-width='1.25'/%3E%3C/svg%3E");
+  }
+  input::placeholder { color: var(--ink-3); font-weight: 400; }
+  input[type="search"]::-webkit-search-cancel-button { -webkit-appearance: none; }
+  input:focus-visible, select:focus-visible, summary:focus-visible {
+    outline: 2px solid var(--red); outline-offset: 3px;
+  }
+  input:focus, select:focus { border-bottom-color: var(--red); }
+  /* A departed filter is visible from across the page: the moment a control
+     leaves "Any" its value prints in red — the page's live-state colour —
+     and returns to ink when cleared. Sort always has a value and stays ink. */
+  #controls .set { color: var(--red); border-bottom-color: var(--red); }
+  #controls select.set {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='7'%3E%3Cpath d='M1 1l4.5 4.5L10 1' fill='none' stroke='%23E30613' stroke-width='1.25'/%3E%3C/svg%3E");
+  }
+  /* Round 5: a select whose only choice would empty the page is not a control,
+     and round 4's answer — leaving it disabled in the prime filter row — was
+     honest furniture. At zero yield the openness control now leaves the row
+     entirely and its fact prints here: one apparatus line under the bank,
+     spanning it, in the page's smallest voice. */
+  #fchip { grid-column: 1 / -1; margin: -.2rem 0 0; color: var(--ink-3);
+           font-size: .75rem; line-height: 1.5; overflow-wrap: anywhere; }
+  #fchip[hidden] { display: none; }
+  @media (max-width: 52rem) {
+    /* The folded bank shows only search; the withdrawn-filter note folds too. */
+    #controls.folded #fchip { display: none; }
+  }
 
-  .row { border-bottom: 1px solid var(--line); }
-  .row:last-child { border-bottom: 0; }   /* else it doubles up with the footer rule */
-  .row summary { display: grid; gap: .35rem 1rem; padding: .8rem .25rem; cursor: pointer;
-                 grid-template-columns: minmax(9rem, 1fr) 8rem 6rem minmax(9rem, 1.1fr); }
-  .row summary:hover { background: var(--panel); }
-  .row[open] summary { background: var(--panel); }
-  .name { font-weight: 600; }
-  .reqs { color: var(--accent); font-variant-numeric: tabular-nums; }
-  .raised { font-variant-numeric: tabular-nums; }
-  .where { color: var(--muted); }
-  .detail { padding: .25rem .25rem 1.1rem; font-size: .92rem; color: var(--muted); }
-  .detail p { margin: .35rem 0; }
-  .roles { margin: .45rem 0; padding-left: 1.15rem; }
-  .roles li { margin: .2rem 0; }
-  .salary .ctc { color: var(--text); font-variant-numeric: tabular-nums; font-weight: 600; }
+  /* ------------------------------- status line ---------------------------- */
+  /* Flex with wrap so a narrow screen breaks between the stamp, the sheet
+     range, and the count — never mid-word, never past the viewport. */
+  #status { display: flex; flex-wrap: wrap; align-items: baseline;
+            gap: .35rem .65rem;
+            padding-top: 1rem; padding-bottom: .9rem; color: var(--ink);
+            letter-spacing: 0.11em; overflow-wrap: anywhere; }
+  #status > * { min-width: 0; }
+  /* The plate stamp: the sheet designation struck in a hairline red frame,
+     the way an atlas plate carries its number in the margin. The empty
+     states stay plain sentences — a stamp certifies a sheet that exists. */
+  #status .pstamp { display: inline-block; border: 1.5px solid var(--red);
+                    color: var(--red); font-weight: 800;
+                    padding: .16rem .45rem .12rem; white-space: nowrap; }
+  #status .psheet { color: var(--ink-3); white-space: nowrap; }
+  /* Round 3: "Plates 02–16" stops being a dead span dressed like its working
+     neighbours. It is the door it looked like — a control that opens the
+     sixteen-plate index — and it dresses as one: hairline underline, chevron,
+     red under the hand. */
+  #status .pib { appearance: none; background: none; border: 0; border-radius: 0;
+                 margin: 0; padding: 0 0 .1rem; font: inherit; cursor: pointer;
+                 color: var(--ink); border-bottom: 1px solid var(--ink-3); }
+  #status .pib:hover { color: var(--red); border-bottom-color: var(--red); }
+  #status .pib:focus-visible { outline: 2px solid var(--red); outline-offset: 3px; }
+  #status .pib .pchev { color: var(--ink-3); font-size: 9px; }
+  #status .pib:hover .pchev { color: var(--red); }
+  /* The status line's separators: real characters, not flex gap alone, so
+     the line's TEXT carries its own punctuation — "Plate 01 · Plates 02–16"
+     is what a screen reader hears, never one concatenated word. */
+  #status .psep { color: var(--ink-3); }
+  /* Round 4: the folio corner. The open plate's number as a dog-eared page
+     mark at the register's top right — "03 / 16" — with its halves stepping
+     to the previous/next NON-EMPTY plate. The plate numbering stops being a
+     caption and becomes a mechanism; arrow keys drive it too. */
+  #status #folio { margin-left: auto; display: inline-flex; align-items: center;
+                   gap: .4rem; letter-spacing: 0; }
+  #folio .fstep { appearance: none; background: none; border: 0; border-radius: 0;
+                  margin: 0; padding: 0 .15rem; font: inherit; font-size: 1.05rem;
+                  line-height: 1; color: var(--ink-2); cursor: pointer; }
+  #folio .fstep:hover { color: var(--red); }
+  #folio .fstep:focus-visible { outline: 2px solid var(--red); outline-offset: 2px; }
+  #folio .fno { position: relative; white-space: nowrap;
+                font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+                font-size: 10px; font-weight: 700; letter-spacing: .06em;
+                border: 1px solid var(--rule-2); padding: .24rem .5rem .2rem;
+                clip-path: polygon(0 0, calc(100% - .45rem) 0, 100% .45rem,
+                                   100% 100%, 0 100%); }
+  /* The dog-ear itself: a gray square in the cut corner — the parent's
+     clip-path slices it into the fold triangle. */
+  #folio .fno::after { content: ""; position: absolute; top: 0; right: 0;
+                       width: .45rem; height: .45rem; background: var(--ink-3); }
+  /* Round 6: at a hand's width the header states the count, and the plate's
+     designation is the masthead stamp's job alone. So the stamp and the scope
+     name step off this line — they were the third, fourth and fifth telling of
+     "Plate 01 · all countries" above the first company row — and the stepper,
+     no longer needing a caption to fill a line of its own, rides the count's
+     line at its right end. The wide sheet has the room and keeps both. */
+  @media (max-width: 52rem) {
+    /* The stamp's own interpunct leaves with it. seps() would only make it
+       invisible, and an invisible separator still holds its width — the line
+       would open on a 33px indent of nothing. */
+    #status .pstamp, #status .pstamp + .psep, #status .pscope { display: none; }
+  }
+  /* The page-turn made visible: one red rule wiping left-to-right across the
+     register in 150ms whenever the plate changes. Presentation only. */
+  main { position: relative; }
+  .sweep { position: absolute; top: 0; left: var(--gut); right: var(--gut);
+           height: 2px; background: var(--red); transform-origin: left center;
+           animation: sweep .15s linear both; pointer-events: none; z-index: 5; }
+  @keyframes sweep { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+  @media (prefers-reduced-motion: reduce) { .sweep { display: none; } }
+  /* The plate index: the drop sheet that control opens — all fifteen country
+     plates as one typographic index, each line a door. The same navigation
+     the chart's chips carry, restated as type. */
+  #pindex { border-bottom: 2px solid var(--rule-2); padding-bottom: .35rem; }
+  /* Round 4: fifteen full-measure lines made the eye walk ~900px of rule from
+     a country name to its count. Past the register's measure the index folds
+     to two columns of eight, ruled down the middle like the spread below. */
+  @media (min-width: 62rem) {
+    #pindex { column-count: 2; column-gap: 3.5rem;
+              column-rule: 1px solid var(--rule); }
+    #pindex .pirow { break-inside: avoid; }
+  }
+  .pirow { display: grid; grid-template-columns: 2.6rem 2.1rem minmax(0, 1fr) auto 3.6rem;
+           gap: 0 1rem; align-items: baseline; width: 100%;
+           appearance: none; background: none; border: 0; border-radius: 0;
+           border-top: 1px solid var(--rule); margin: 0; padding: .4rem 0 .38rem;
+           font: inherit; text-align: left; cursor: pointer; color: var(--ink); }
+  /* Every line keeps its top rule (no :first-child trim): under the two-column
+     fold each column then opens on the same hairline, so the columns match. */
+  .pirow .pino, .pirow .picd {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 10px; letter-spacing: .05em; color: var(--ink-3); }
+  .pirow .pico { font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+                 font-size: 11px; font-weight: 700; letter-spacing: .05em; }
+  .pirow .pinm { font-size: 11px; text-transform: uppercase; letter-spacing: .1em;
+                 font-weight: 600; min-width: 0; overflow-wrap: anywhere; }
+  .pirow .picd { text-align: right; }
+  .pirow .pict { text-align: right; font-weight: 700; font-size: .8125rem; }
+  .pirow.nil .pico, .pirow.nil .pinm, .pirow.nil .pict {
+    color: var(--ink-3); font-weight: 500; }
+  .pirow:hover, .pirow:hover .pino, .pirow:hover .pico, .pirow:hover .pinm,
+  .pirow:hover .picd, .pirow:hover .pict { color: var(--red); }
+  .pirow:focus-visible { outline: 2px solid var(--red); outline-offset: -2px; }
+
+  /* --------------------------------- the board ---------------------------- */
+  /* Round 6: the gazetteer becomes a split sheet, the way an atlas actually
+     binds one — index in the back matter, plates up front. Left, a dense
+     typographic index of every company: one line each, merged reference
+     (001·B3), name with its places beneath, count in red. Right, ONE
+     gazetteer entry at a time on a sticky sheet, opened from its index line
+     and headed by an inset locator map — the masthead plate reprinted at
+     thumbnail size with this company's cell(s) flooded red, the same
+     coordinate system at two scales. On narrow screens the sheet leaves its
+     column and files itself directly under the selected index line. */
+  #board { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+           align-items: start; }
+  /* `display: grid` beats plain `hidden`, and an empty board under the status
+     line would be two rules claiming a table is there. */
+  #board[hidden] { display: none; }
+  /* Round 11: each column closes at its OWN content. The board used to carry
+     one bottom rule across both, drawn at the taller column's foot — so a
+     gazetteer entry that ended at its MCA line left a tall block of white
+     paper hanging under it inside a frame that claimed the sheet went on. A
+     ragged foot is what a spread of two unequal columns actually has, and
+     saying so is cheaper than pretending the shorter one is full. */
+  #indexcol { min-width: 0; border-right: 1px solid var(--rule-2);
+              border-bottom: 2px solid var(--rule-2); }
+  #indexhead {
+    display: grid; grid-template-columns: var(--ref2) minmax(0, 1fr) auto;
+    gap: 0 1rem; padding: .1rem 1.1rem .4rem .45rem; color: var(--ink-3);
+    border-bottom: 1px solid var(--rule-2);
+  }
+  .irow {
+    appearance: none; font: inherit; text-align: left; cursor: pointer;
+    display: grid; grid-template-columns: var(--ref2) minmax(0, 1fr) auto;
+    gap: 0 1rem; align-items: baseline; width: 100%; min-width: 0;
+    /* The .45rem at the head is the selection spine's clearance: the open
+       row's left border is a 2px red rule, and with no padding the reference's
+       first glyph was set hard against it and read as clipped. Every row
+       carries the same inset (and the head strip above matches), so the
+       column does not shift when a row is chosen. */
+    margin: 0; padding: .56rem 1.1rem .58rem .45rem; border: 0; border-radius: 0;
+    border-bottom: 1px solid var(--rule); border-left: 2px solid transparent;
+    background: var(--paper); color: var(--ink);
+  }
+  #index .irow:last-child { border-bottom: 0; }  /* else it doubles the board rule */
+  .irow:hover { background: var(--wash); }
+  .irow:focus-visible { outline: 2px solid var(--red); outline-offset: -2px; }
+  .irow[aria-current="true"] { background: var(--wash);
+                               border-left-color: var(--red); }
+  /* The merged reference: row index and plate coordinate as one mono mark —
+     rounds 4–5 spent a whole column on a coordinate that read B3 a hundred
+     times. The coordinate still steps back to pale gray where it repeats the
+     line above and prints in ink where the plate turns, so the index reads
+     as change-points, never as missing values. */
+  .iref { font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+          font-size: 11px; font-weight: 500; letter-spacing: .05em;
+          color: var(--ink-3); white-space: nowrap; align-self: center; }
+  .iref .igr.same { color: #c6c6c6; }
+  .irow:hover .iref .igr.same { color: var(--ink-3); }
+  .irow[aria-current="true"] .iref,
+  .irow[aria-current="true"] .iref .igr.same { color: var(--red); }
+  /* Live citations (round 3): each country code in the gutter is a
+     cross-reference that RESOLVES — clicking ·GB turns the page to Plate 03
+     with this entry held. Underline on its own hover says so. */
+  .iref .igc { cursor: pointer; }
+  .irow .igc:hover { color: var(--red); text-decoration: underline;
+                     text-underline-offset: 2px; }
+  .iname { font-weight: 600; letter-spacing: -0.018em; font-size: .9375rem;
+           min-width: 0; overflow-wrap: anywhere; }
+  /* Round 11: one register line, one anatomy. The places always take the
+     second line — the old long-tail variant ran them in beside the name, so
+     the register changed shape halfway down and the columns of a three-column
+     spread no longer scanned as columns.
+     They are set as a registry entry, not as prose: the place list holds ONE
+     line and elides, and the "+N" that says how many more is a separate,
+     unshrinkable cell — so a company hiring in six cities reads
+     "Bengaluru · Chennai · Coimb… +2" rather than wrapping to three lines,
+     and the count can never be the thing the ellipsis eats. */
+  .iwhere { display: flex; gap: 0 .32rem; font-weight: 400; font-size: .75rem;
+            color: var(--ink-3); letter-spacing: 0; }
+  .iwhere .ipl { min-width: 0; overflow: hidden;
+                 text-overflow: ellipsis; white-space: nowrap; }
+  .iwhere .ipn { flex: none; }
+  /* Round 10 red discipline: at rest a count is ink — a hundred red counts
+     had turned the accent into texture. Red marks the LIVE line only: the
+     open entry, the pointed-at row, the plate preview's held rows. */
+  .ireqs { color: var(--ink); font-weight: 600; font-size: .8125rem;
+           white-space: nowrap; }
+  .irow:hover .ireqs, .irow[aria-current="true"] .ireqs,
+  .irow.held .ireqs { color: var(--red); }
+  /* The plate's question, answered by the index: pointing at a masthead cell
+     ghosts every row with no role in that country and turns the matching
+     rows' coordinates red. A preview, never a filter — nothing fires until
+     the click. */
+  .irow { transition: opacity .12s linear; }
+  .irow.ghost { opacity: .22; }
+  .irow.held .iref,
+  .irow.held .iref .igr.same { color: var(--red); }
+
+  /* --------------------------------- the sheet ---------------------------- */
+  /* overflow-wrap on the whole sheet: every value cell inherits it, so a long
+     slug, URL, or place list wraps inside the column and can never set the
+     page width — the body must not scroll sideways at any measure. */
+  #sheet { min-width: 0; padding: 0 0 1.4rem 1.5rem; overflow-wrap: anywhere; }
+  #sheet:empty { display: none; }
+  @media (min-width: 62.001rem) {
+    /* The sheet holds its place while the index scrolls; a long entry scrolls
+       inside its own frame rather than stretching the page. Its own closing
+       rule sits directly under its last line (see #board above), so the entry
+       ends where the entry ends. */
+    #board > #sheet { position: sticky; top: 0; max-height: 100vh;
+                      overflow-y: auto;
+                      border-bottom: 2px solid var(--rule-2); }
+  }
+  /* The entry's head strip, set to the index head's line so the two columns
+     read as one table opened to one entry. */
+  .entrymeta { display: flex; flex-wrap: wrap; justify-content: space-between;
+               gap: .2rem 1rem; margin: 0 0 .9rem; padding: .1rem 0 .4rem;
+               border-bottom: 1px solid var(--rule-2); color: var(--ink-3);
+               overflow-wrap: anywhere; }
+  .entrymeta > * { min-width: 0; }
+  .plateline { display: flex; flex-wrap: wrap; gap: .6rem 1.4rem;
+               align-items: flex-start; margin: 0 0 .9rem; }
+  /* The inset locator map: the masthead chart at thumbnail scale — the same
+     projection, this company's country dot(s) in red. Apparatus, never
+     content — the coordinate and country names beside it say the fact aloud. */
+  .locator { position: relative; flex: none; width: 10.5rem; height: 3.4rem;
+             border: 1px solid var(--rule-2); overflow: hidden; }
+  .locator .leq, .locator .lpar { position: absolute; left: 0; right: 0;
+             height: 1px; background: var(--rule); }
+  .locator .lmer { position: absolute; top: 0; bottom: 0; width: 1px;
+                   background: var(--rule); }
+  .locator .ld { position: absolute; width: 3px; height: 3px;
+                 margin: -1.5px 0 0 -1.5px; background: var(--rule-2);
+                 opacity: .45; }
+  .locator .ld.on { width: 7px; height: 7px; margin: -3.5px 0 0 -3.5px;
+                    background: var(--red); opacity: 1; }
+  .sheetref { min-width: 0; }
+  .sheetref .sc { display: block; color: var(--red);
+                  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+                  font-size: 2rem; line-height: 1; letter-spacing: .01em; }
+  /* The coordinate stamp: the chart anchor of the entry's country, in the
+     chart's own mono voice. An anchor places a marker, never an office. */
+  .sheetref .scoord { display: block; margin-top: .35rem;
+                      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+                      font-size: 11px; letter-spacing: .05em; color: var(--ink-2); }
+  .sheetref .sn { display: block; margin-top: .35rem; font-size: 10px;
+                  text-transform: uppercase; letter-spacing: .12em;
+                  font-weight: 600; color: var(--ink-3); }
+  /* The reciprocal citation: the plates a multi-country entry is filed
+     under, as working cross-references. The current plate holds ink and
+     goes nowhere; the others turn the page. */
+  .filed { margin: .45rem 0 0; display: flex; flex-wrap: wrap; gap: .3rem;
+           align-items: baseline; }
+  .filed .fk { color: var(--ink-3); }
+  .fplate { appearance: none; background: none; border: 1px solid var(--rule);
+            border-radius: 0; margin: 0; padding: .16rem .38rem .12rem;
+            font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+            font-size: 10px; letter-spacing: .06em; color: var(--ink-2);
+            cursor: pointer; white-space: nowrap; }
+  .fplate:hover { border-color: var(--red); color: var(--red); }
+  .fplate.here { border-color: var(--ink); color: var(--ink); }
+  .fplate:focus-visible { outline: 2px solid var(--red); outline-offset: 2px; }
+  /* Round 5: the verification receipt. The page's one strong claim — "proven
+     by the board, not by a claim" — had no per-entry evidence, and the
+     gazetteer's right half was its one dead zone. The receipt fills it: a
+     customs-stamp block in the hairline grammar the page already owns, red
+     rule on the struck edge, tilted the degree a hand-stamp tilts. Every
+     line is a fact the build wrote; nothing (fetch time, HTTP code) is
+     invented — honest absence, applied to ourselves. */
+  .receipt { margin-left: auto; align-self: flex-start; flex: 0 1 auto;
+             width: 15.5rem; max-width: 100%; min-width: 0;
+             border: 1px solid var(--rule-2); border-left: 3px solid var(--red);
+             padding: .5rem .65rem .45rem;
+             font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+             font-size: 10px; line-height: 1.35; letter-spacing: .03em;
+             color: var(--ink); }
+  /* The hand-stamp tilt belongs to the wide sheet, where the receipt floats
+     in the entry's right half. Berthed inline at a hand's width, the tilt's
+     bounding box bled 3px past the column — measured, not eyeballed — so
+     there the stamp sits square. */
+  /* The .25rem inline margins are the tilt's own clearance — the rotated
+     bounding box is ~4px wider than the layout box, and without the slack it
+     put a 2px horizontal scroll on the sticky sheet. */
+  @media (min-width: 62.001rem) {
+    .receipt { transform: rotate(-1.5deg); margin: 3px .25rem 3px auto; }
+  }
+  .receipt .rhead { display: flex; justify-content: space-between; gap: .6rem;
+                    margin: 0 0 .28rem; padding-bottom: .3rem;
+                    border-bottom: 1px solid var(--rule-2);
+                    font-size: 8.5px; font-weight: 700; letter-spacing: .16em;
+                    text-transform: uppercase; }
+  .receipt .rhead .rno { color: var(--red); }
+  .receipt .rrow { display: grid; grid-template-columns: 3rem minmax(0, 1fr);
+                   gap: 0 .55rem; margin: 0; padding: .17rem 0 .14rem; }
+  .receipt .rrow + .rrow { border-top: 1px solid var(--rule); }
+  .receipt .rk { font-size: 8.5px; font-weight: 600; letter-spacing: .12em;
+                 text-transform: uppercase; color: var(--ink-3); padding-top: 1px; }
+  .receipt .rv { overflow-wrap: anywhere; }
+  #sheet h2 { margin: 0 0 .55rem; font-size: 1.6rem; font-weight: 800;
+              letter-spacing: -0.032em; line-height: 1.02;
+              overflow-wrap: anywhere; }
+  .detail { font-size: .8125rem; color: var(--ink-2); line-height: 1.5;
+            max-width: 100%; overflow-wrap: anywhere; }
+  .detail p { margin: .3rem 0; }
+  .detail p:last-child { margin-bottom: 0; }
+  @media (max-width: 62rem) {
+    #board { grid-template-columns: minmax(0, 1fr); }
+    #indexcol { border-right: 0; }
+    /* The script berths the sheet directly under the selected index line;
+       its own rules bound it so it reads as an inset entry, not a new page. */
+    #sheet { padding: .9rem 0 1.1rem 1rem; border-left: 2px solid var(--red);
+             border-bottom: 1px solid var(--rule); }
+  }
+
+  /* --------------------------------- the spread ---------------------------- */
+  /* Round 9: the register no longer hugs the left edge above four thousand
+     pixels of dead paper. The split board keeps the first sixteen entries
+     beside the sticky sheet; everything past them turns the page into a true
+     gazetteer spread — the remaining entries run in hairline-ruled columns
+     across the full measure, numbering continuous. Selecting a spread entry
+     berths the sheet INSIDE the spread, spanning every column, so the entry
+     opens where the reader is rather than back at the top. */
+  #spread[hidden] { display: none; }
+  #spread { border-bottom: 2px solid var(--rule-2); padding-bottom: 1rem; }
+  #spreadhead { display: flex; flex-wrap: wrap; justify-content: space-between;
+                gap: .2rem 1rem; padding: 1.5rem 0 .4rem; color: var(--ink-3);
+                border-bottom: 1px solid var(--rule-2);
+                overflow-wrap: anywhere; }
+  #spreadhead > * { min-width: 0; }
+  #spreadrows { column-width: 21rem; column-gap: 2.5rem;
+                column-rule: 1px solid var(--rule); padding-top: .1rem; }
+  #spreadrows .irow { break-inside: avoid; }
+  #spreadrows .irow[hidden] { display: none; }   /* the hand-fold hides real rows */
+  /* Round 5: the spread's scale bands. Where the open-roles count drops a
+     tier (10+ / 2–9 / 1) a small mono threshold rule prints, the way an
+     atlas separates scale bands — a foothold in what was a gray wall.
+     tierRules() draws them only under the canonical sort. */
+  #spreadrows .trule { break-inside: avoid; break-after: avoid;
+    margin: 0; padding: .95rem 0 .3rem;
+    border-bottom: 2px solid var(--rule-2);
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 9px; font-weight: 700; letter-spacing: .14em;
+    text-transform: uppercase; color: var(--ink-3); }
+  /* The hand-fold's rule (round 3): on a phone the register folds past the
+     first two-score entries behind its own continuation line — a count in
+     red, one press to print the rest. Nothing is dropped, only folded. */
+  .spreadfold { appearance: none; display: block; width: 100%; margin: 0;
+                padding: .7rem 0 .2rem; background: none; border: 0;
+                border-top: 1px solid var(--rule); border-radius: 0;
+                font: inherit; font-size: 11px; text-transform: uppercase;
+                letter-spacing: .11em; font-weight: 700; color: var(--red);
+                text-align: left; cursor: pointer; }
+  .spreadfold:hover { text-decoration: underline; }
+  .spreadfold:focus-visible { outline: 2px solid var(--red); outline-offset: 3px; }
+  #spread #sheet { position: static; max-height: none; overflow: visible;
+                   column-span: all; margin: .2rem 0 .6rem;
+                   padding: .9rem 0 1.1rem 1.2rem;
+                   border-left: 2px solid var(--red);
+                   border-bottom: 1px solid var(--rule); }
+  /* With the sheet berthed in the spread, the board's right column would be
+     sixteen rows of dead paper — so the board closes to one full column. */
+  @media (min-width: 62.001rem) {
+    #board.nosheet { grid-template-columns: minmax(0, 1fr); }
+    #board.nosheet #indexcol { border-right: 0; }
+  }
+
+  /* ----------------------------- description slot ------------------------- */
+  /* Three lines an AI wrote about the company, labelled in the page's smallest
+     voice and marked as machine prose. A company with no entry renders nothing
+     at all -- no placeholder, no "description unavailable" -- the same
+     absent-is-absent rule as every badge on the page. */
+  .desc { margin: .15rem 0 .95rem; }
+  .desc .dline {
+    display: grid; grid-template-columns: 6.2rem minmax(0, 1fr);
+    gap: 0 1.1rem; align-items: baseline; margin: 0; padding: .34rem 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .desc .dline:first-child { border-top: 1px solid var(--rule); }
+  .desc .dk { color: var(--ink-3); }
+  .desc .dv { font-size: .875rem; font-weight: 500; color: var(--ink);
+              letter-spacing: -0.012em; }
+  .desc .prov { margin: .35rem 0 0; text-align: right; font-size: 9px;
+                text-transform: uppercase; letter-spacing: .12em;
+                font-weight: 600; color: var(--ink-3); }
+  @media (max-width: 52rem) { .desc .dline { grid-template-columns: 4.8rem minmax(0, 1fr); } }
+
+  /* ---------------------------------- roles ------------------------------- */
+  .roles { list-style: none; margin: .7rem 0 .9rem; padding: 0;
+           counter-reset: role; border-top: 1px solid var(--rule); }
+  .roles li {
+    counter-increment: role; margin: 0; padding: .42rem 0 .42rem 2.35rem;
+    position: relative; border-bottom: 1px solid var(--rule);
+    overflow-wrap: anywhere;   /* a 90-character title wraps under its number */
+  }
+  .roles li::before {
+    content: counter(role, decimal-leading-zero);
+    position: absolute; left: 0; top: .48rem;
+    font-size: 10px; font-weight: 600; letter-spacing: .06em; color: var(--ink-3);
+  }
+  /* Seventy-five underlined lines is a dump, not an index: at rest the title's
+     weight is the link and the location steps back to gray; the underline is
+     the hover state's, in red. */
+  .roles li a { font-weight: 600; color: var(--ink); border-bottom-color: transparent; }
+  .roles li a:hover { color: var(--red); border-bottom-color: var(--red); }
+  /* The apply affordance, visible at rest: every role title carries a terminal
+     departure arrow in the margin gray, red under the hand. A list where only
+     hover reveals the links is a list that reads as prose. */
+  .roles li a::after { content: "\00a0↗"; font-size: .8em; color: var(--ink-3); }
+  .roles li a:hover::after { color: var(--red); }
+  .roles .loc { color: var(--ink-3); font-weight: 400; }
+  .roles li.more { counter-increment: none; }
+  .roles li.more::before { content: none; }
+  .roles .morebtn {
+    appearance: none; border: 0; background: none; margin: 0; padding: 0;
+    cursor: pointer; font-family: inherit; color: var(--red);
+    font-size: 11px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: .11em; border-radius: 0;
+  }
+  .roles .morebtn:hover { text-decoration: underline; }
+  .roles .morebtn:focus-visible { outline: 2px solid var(--red); outline-offset: 2px; }
+
+  a { color: var(--ink); text-decoration: none;
+      border-bottom: 1px solid var(--ink-3); }
+  a:hover { color: var(--red); border-bottom-color: var(--red); }
+  a:focus-visible { outline: 2px solid var(--red); outline-offset: 2px; }
+
+  /* ---------------------------------- tags -------------------------------- */
+  /* Square, hairline, uppercase. `open` is the one that gets the red; a stated
+     `no` is a fact and gets the ink, not a warning colour. */
+  .tag { display: inline-block; margin-left: .45rem; padding: .12rem .34rem .1rem;
+         border: 1px solid var(--rule); color: var(--ink-3);
+         font-size: 9.5px; letter-spacing: .1em; white-space: nowrap;
+         vertical-align: .06em; border-radius: 0; }
+  .tag.open   { border-color: var(--red); color: var(--red); }
+  .tag.closed { border-color: var(--ink); color: var(--ink); }
+
+  .salary .ctc { color: var(--ink); font-weight: 700; }
   /* A CIN is 21 characters a reader may retype into the MCA portal, so it is
      set to be copied rather than skimmed. */
-  .mca .cin { color: var(--text); font-family: ui-monospace, SFMono-Regular, monospace;
-              font-size: .88em; user-select: all; }
-  .tag { margin-left: .5rem; padding: .05rem .45rem; border: 1px solid var(--line);
-         border-radius: 999px; font-size: .72rem; letter-spacing: .06em;
-         text-transform: uppercase; white-space: nowrap; }
-  .tag.open { border-color: var(--accent); color: var(--accent); }
-  .tag.closed { border-color: var(--stated-no); color: var(--stated-no); }
-  a { color: var(--accent); }
-  footer { margin-top: 2.5rem; padding-top: 1.25rem; border-top: 1px solid var(--line);
-           font-size: .8rem; color: var(--muted); }
-  footer p { margin: .4rem 0; max-width: 46rem; }
-  @media (max-width: 40rem) { .row summary { grid-template-columns: 1fr; } }
+  .mca .cin { color: var(--ink); font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+              font-size: .92em; letter-spacing: 0; user-select: all;
+              background: var(--wash); padding: .05rem .3rem;
+              overflow-wrap: anywhere; }  /* 21 unbroken chars must never set the page width */
+
+  /* -------------------------------- graticule ----------------------------- */
+  /* Round 6 (r2) strikes the left ref-ruler. Rounds 8–10 spent themselves
+     making it honest — ticks in document space, so tick 060 sat beside row
+     060 — and it was honest, about an eighth of the page. The rail can only
+     index the single-column register at the top of the board; past it the
+     continuation spread runs in columns, where a left-edge tick has nothing
+     to align with. So on a 4,100px sheet it drew fifteen ticks over eight
+     hundred pixels and printed two numbers, then left the remaining hundred
+     and one entries unindexed in a 170px margin of its own. A ruler that
+     measures the first eighth of a page is ornament in an instrument's
+     clothes, and this page's rule is that apparatus earns its ink. The
+     margin is now what it was before round 8: paper. */
+
+  /* --------------------------------- footer ------------------------------- */
+  footer { margin-top: 3rem; padding-top: 1.1rem; border-top: 1px solid var(--rule-2); }
+  .notes { counter-reset: note; display: grid; grid-template-columns: var(--col);
+           gap: 1rem 1.25rem; }
+  .notes p {
+    grid-column: span 6; position: relative; margin: 0; padding-left: 2.1rem;
+    font-size: .75rem; line-height: 1.5; color: var(--ink-2);
+    min-width: 0; overflow-wrap: anywhere;
+  }
+  .notes p:empty { display: none; }          /* no note number without a note */
+  .notes p::before {
+    counter-increment: note; content: counter(note, decimal-leading-zero);
+    position: absolute; left: 0; top: .12rem;
+    font-size: 10px; font-weight: 700; letter-spacing: .08em; color: var(--red);
+  }
+  .sources { margin: 1.6rem 0 0; padding-top: .8rem; border-top: 1px solid var(--rule);
+             font-size: 11px; text-transform: uppercase; letter-spacing: .11em;
+             font-weight: 600; color: var(--ink-3); overflow-wrap: anywhere; }
+  .sources a { color: var(--ink); }
+  @media (max-width: 56rem) { .notes p { grid-column: span 12; } }
+
+  /* ------------------------------- narrow board --------------------------- */
+  /* At phone widths the index keeps its one-line-per-company system in a
+     tighter gutter. Every track is minmax(0,·) or auto with short content,
+     so nothing can push past the viewport — the page body never scrolls
+     sideways. */
+  @media (max-width: 52rem) {
+    /* --ref2 is a FIXED grid track holding a nowrap mono reference, so it has
+       to fit the longest one the data can produce: "006·IN·GB+" measures 72px,
+       and the 4.2rem (67px) this used to be sliced the "+" off the only rows
+       that carry one — the multi-country entries, where the reference is the
+       whole point. Measured at 390px, not eyeballed. */
+    :root { --gut: 1.1rem; --ref2: 4.7rem; }
+    #indexhead { display: none; }
+    header::before, header::after, footer::before, footer::after { display: none; }
+    /* The filter bank collapses to an explicit two-across, every track allowed
+       to shrink to zero, so no control can push past the viewport. */
+    #controls { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem 1.1rem; }
+    .irow { gap: 0 .7rem; padding-right: .4rem; }
+    /* The chart at phone width: a shorter band, chips speak in codes rather
+       than names (the frames still say "button"), and the Europe inset leaves
+       the chart's interior to run as its own full-width band beneath — an
+       inset has no room to float where the chart is a hand's width.
+       Everything stays absolutely positioned inside its own band, so the
+       page body still never scrolls sideways. */
+    .chartmain { height: 8.5rem; }
+    #plate.turned .chartmain { height: 10rem; }
+    .chartmain > .mk .mcd { display: inline; }   /* codes, not names */
+    .chartmain > .mk .mnm { display: none; }
+    .mlb { gap: .26rem; padding: .18rem .3rem .14rem; }
+    .mlb .mcd { font-size: 9px; }
+    .mlb b { font-size: 10px; }
+    .lb-e .mlb { left: calc(var(--r) + .4rem); }
+    .lb-w .mlb { right: calc(var(--r) + .4rem); }
+    .lb-n .mlb { bottom: calc(var(--r) + .35rem); }
+    .lb-s .mlb { top: calc(var(--r) + .35rem); }
+    .lb-sw .mlb { top: calc(var(--r) + .35rem); right: .5rem; }
+    /* Wellington sits a hair from the band's neat line: at a hand's width its
+       chip would be sliced by the frame, so it prints west of its dot. */
+    .mk[data-country="New Zealand"] .mlb {
+      left: auto; right: calc(var(--r) + .4rem); bottom: auto; top: 50%;
+      transform: translateY(-50%); }
+    /* And Australia's chip steps north: west of its dot it met New Zealand's
+       westbound box corner-to-corner at a hand's width. */
+    .mk[data-country="Australia"] .mlb {
+      right: auto; top: auto; left: 50%; bottom: calc(var(--r) + .35rem);
+      transform: translateX(-50%); }
+    /* Singapore's chip drops a row: eastbound it collided with India's — the
+       two anchors sit thirteen pixels apart on a hand-wide band, and India's
+       count-scaled dot now owns that lane. Below its own dot it is clear of
+       both the IN chip and the halo. */
+    .mk[data-country="Singapore"] .mlb {
+      left: 50%; right: auto; top: calc(var(--r) + .35rem);
+      transform: translateX(-50%); }
+    /* And India's chip steps north of its own centre line. Berthed due east it
+       cleared India's dot but hung across the lane Singapore's dot occupies
+       eleven pixels below — the SG dot printed 2px inside the IN chip's bottom
+       rule (measured at 390). Above the centre line the chip is clear of the
+       dot beside it and the dot below it both. */
+    .mk[data-country="India"] .mlb {
+      top: auto; bottom: calc(50% + .15rem); transform: none; }
+    /* Round 5: the Europe cluster leaves the compressed band. At 390 the
+       GB/DE company dots at their band anchors were unexplained specks a
+       finger-width from the frame; the inset below — a full-width panel at
+       this measure — repeats those companies at legible scale, so the band
+       stops printing them twice. Wide screens keep both: there the dots
+       read, and the inset floats beside them as an enlargement, not a
+       replacement. */
+    .chartmain .cdot.eu { display: none; }
+    /* Round 4: the inset KEEPS its frame at a hand's width. Frameless, its
+       eleven chips floated in white void between the band and the next rule —
+       an inset is a framed window or it is nothing. The margin stands the
+       frame clear of the plate's own closing rule. */
+    .inset { position: relative; left: auto; top: auto; width: auto;
+             height: 9rem; margin: .5rem 0 .55rem; }
+    .p01 { padding: .5rem 0 .45rem; }
+    .platestamp { padding: .4rem .6rem .35rem; align-items: flex-start;
+                  text-align: left; }
+    .platestamp .pnum { font-size: 1.1rem; }
+    .locator { width: 8.5rem; height: 2.8rem; }
+    /* The plate index at a hand's width: the anchor coordinate is the column
+       a phone cannot afford, and the chips already carry it in their titles. */
+    .pirow { grid-template-columns: 2.2rem 2rem minmax(0, 1fr) 3rem;
+             gap: 0 .7rem; }
+    .pirow .picd { display: none; }
+  }
+  /* Phone: one filter per line, tighter plate cells, and the description
+     grid stacks label over value — a 4.8rem label track beside a 200px value
+     column clips prose that this layout lets breathe. */
+  @media (max-width: 30rem) {
+    #controls { grid-template-columns: minmax(0, 1fr); }
+    .chartmain { height: 8rem; }
+    #plate.turned .chartmain { height: 9rem; }
+    .desc .dline { grid-template-columns: minmax(0, 1fr); gap: .14rem 0;
+                   padding: .4rem 0; }
+  }
 </style>
 </head>
 <body>
 <header>
-  <h1>ROLE·ATLAS</h1>
   <!-- T8.4 widened the data from India to fifteen countries, so the wording that
        said "India role" everywhere now says "role". The country tabs and the
        openness badges are T8.5's; this is only the page not claiming that a
        Berlin posting is in India. -->
-  <p class="thesis">Funded software companies with an open role on their own job board —
-    proven by the board, not by a claim.</p>
-  <p class="snapshot">Snapshot <time id="snapshot">—</time></p>
+  <div class="masthead">
+    <h1>Role<span class="mid">·</span>Atlas</h1>
+    <div class="aside">
+      <p class="snapshot"><span class="k">Snapshot</span><time id="snapshot">—</time></p>
+      <!-- Candidate 1: the restamp. The open plate's designation, struck where
+           an atlas sheet strikes its number. render() re-stamps it on every
+           page turn, so the header always says which plate is open. -->
+      <div class="platestamp" id="platestamp" aria-live="polite">
+        <span class="pnum" id="pnum">Plate 01</span>
+        <span class="pname" id="pname">World — all countries</span>
+      </div>
+    </div>
+  </div>
+  <p class="thesis"><span>Funded software companies with an open role on their own job board —
+    proven by the board, not by a claim.</span></p>
+  <!-- Round 10: the index map is a real one. Built in load() from the data,
+       because the dots are the dataset and every marker states the build's
+       count — a chart rendered before the fetch would be an empty world. -->
+  <!-- Candidate 1: the plate-index is the instrument. The tab strip is gone;
+       this band is the sole navigation. Sixteen plates — the world, and each
+       of the fifteen countries — every one a framed chip on the chart. -->
+  <nav id="plate" aria-label="Plates — click a country to turn the page to its plate"></nav>
 </header>
 
-<!-- The country tabs (T8.5, SPEC feature 16), built from the data in load().
-     Buttons rather than role="tab": an ARIA tablist promises arrow-key movement
-     between sibling panels, and there is one panel here — the list below every
-     tab. A named group of pressed/unpressed buttons is what this actually is,
-     and it is keyboard-reachable without a keydown handler to get wrong. -->
-<nav id="tabs" aria-label="Country"></nav>
-
 <div id="controls">
-  <!-- The inner country filter for tabs that group more than one country (SPEC
-       feature 16's Europe example). One mechanism for every such tab rather than
-       a special case for Europe; hidden on the tabs that are one country. -->
-  <label id="country-filter" hidden>Country<select id="country"></select></label>
-  <label>Search<input id="q" type="search" placeholder="company name" autocomplete="off"></label>
+  <!-- Round 1 (candidate 1): the mobile fold. Presentation only — folding
+       hides controls, never clears them, and the tally says what is set. -->
+  <button id="ffold" type="button" aria-expanded="true">
+    <span class="micro">Filters &amp; sort</span>
+    <span class="micro" id="fcount"></span>
+    <span class="chev" aria-hidden="true">▴</span>
+  </button>
+  <label class="q-always"><span class="lbl">Search</span><input id="q" type="search" placeholder="company name" autocomplete="off"></label>
   <!-- India cities, and only India's: the city filter is the India view's, and
        SPEC v2 keeps the per-country enrichments out of scope. So it renders on
        the tabs whose scope contains India and nowhere else (T8.5). -->
-  <label class="india-only">Hiring city<select id="city"><option value="any">Any city</option></select></label>
+  <label class="india-only"><span class="lbl">Hiring city</span><select id="city"><option value="any">Any city</option></select></label>
   <!-- SPEC feature 10's remote-only filter. T5.2 left it out deliberately: it
        filters on a field no row carried until T4.1, and a control that can only
        return nothing is worse than no control. -->
-  <label>Workplace<select id="remote">
+  <label><span class="lbl">Workplace</span><select id="remote">
     <option value="any">Any</option>
     <option value="remote">Remote roles</option>
   </select></label>
@@ -122,7 +978,7 @@
        either question. It is an OR and not an AND — the two facts are read
        independently (src/openness.py), and a company that will relocate you
        without sponsoring is still one that will hire you from abroad. -->
-  <label>Foreign hires<select id="openness">
+  <label><span class="lbl">Foreign hires</span><select id="openness">
     <option value="any">Any</option>
     <option value="open">Open to foreign hires</option>
   </select></label>
@@ -130,48 +986,87 @@
        Labelled by what the register actually holds rather than as a quality
        mark: the slice covers subsidiaries of foreign-incorporated parents, so
        an India-founded company can never appear in it (footer). -->
-  <label class="india-only">MCA register<select id="mca">
+  <label class="india-only"><span class="lbl">MCA register</span><select id="mca">
     <option value="any">Any</option>
     <option value="matched">Has an India registration</option>
   </select></label>
-  <label>Raised<select id="bracket">
+  <label><span class="lbl">Raised</span><select id="bracket">
     <option value="any">Any amount</option>
     <option value="small">Under $10M</option>
     <option value="mid">$10M – $50M</option>
     <option value="large">$50M and up</option>
   </select></label>
-  <label>Funded<select id="recency">
+  <label><span class="lbl">Funded</span><select id="recency">
     <option value="any">Any time</option>
     <option value="90">Last 90 days</option>
     <option value="365">Last 12 months</option>
   </select></label>
-  <label>Sort by<select id="sort">
+  <label><span class="lbl">Sort by</span><select id="sort">
     <option value="reqs">Open roles</option>
     <option value="raised">Amount raised</option>
     <option value="date">Most recently funded</option>
     <option value="name">Name</option>
   </select></label>
+  <!-- Round 5: where the foreign-hires filter has nothing to offer it leaves
+       the row (a permanently disabled select is furniture, not honesty) and
+       its fact prints here instead — an apparatus note, filled by render(). -->
+  <p id="fchip" hidden></p>
 </div>
 
 <p id="status" role="status">Loading…</p>
-<main id="list"></main>
+
+<!-- The plate index: the drop sheet the status line's "Plates 02–16" control
+     opens — fifteen country plates as one typographic index, built from the
+     data in plate() because every line states a count. -->
+<div id="pindex" hidden aria-label="Plate index — one line per country plate"></div>
+
+<!-- The split sheet: the index of companies on the left, one gazetteer entry
+     at a time on the right. The head strip is decoration only — the lines
+     carry their own meaning — so it is aria-hidden. -->
+<main>
+  <div id="board" hidden>
+    <div id="indexcol">
+      <div id="indexhead" aria-hidden="true">
+        <span>Ref</span><span>Company</span><span>Roles</span>
+      </div>
+      <div id="index"></div>
+    </div>
+    <aside id="sheet" aria-label="Gazetteer entry"></aside>
+  </div>
+  <!-- Round 9: the continuation spread. The split board holds the first
+       sixteen entries beside the sticky sheet; the rest of the register runs
+       here in full-width hairline columns, numbering continuous — a gazetteer
+       spread, not a left-edge tail with dead paper beside it. -->
+  <section id="spread" hidden aria-label="Register, continued">
+    <div id="spreadhead"><span class="micro" id="spreadlabel"></span></div>
+    <div id="spreadrows"></div>
+  </section>
+</main>
 
 <footer>
-  <!-- T5.3. Filled from the data file's own `integrity` block, so it is empty
-       until a dataset loads and stays empty for one this page refuses to read —
-       a count with no build behind it would be the exact claim this says. -->
-  <p id="integrity"></p>
-  <p>Every company here showed at least one open role, in one of the countries this radar covers,
-    on its own job board on the snapshot date. A company we could not check is excluded
-    rather than shown as "not hiring".</p>
-  <p>The visa and hiring-from-abroad badges are read from what a posting says, and most
-    postings say nothing at all — 92% of the ones we measured. A role with no badge is one
-    whose posting did not say, which is not the same as a no; where a posting does say no,
-    the role says so.</p>
-  <p>The MCA data we hold lists companies registered in India as subsidiaries of a parent
-    incorporated abroad. An India-founded company cannot appear in it at all, so a missing CIN
-    says nothing about a company — and a present one is a registration, not an endorsement.</p>
-  <p><a href="../data/build-report.json">build report</a> ·
+  <div class="notes">
+    <!-- T5.3. Filled from the data file's own `integrity` block, so it is empty
+         until a dataset loads and stays empty for one this page refuses to read —
+         a count with no build behind it would be the exact claim this says. -->
+    <p id="integrity"></p>
+    <p>Every company here showed at least one open role, in one of the countries this radar covers,
+      on its own job board on the snapshot date. A company we could not check is excluded
+      rather than shown as "not hiring".</p>
+    <p>The visa and hiring-from-abroad badges are read from what a posting says, and most
+      postings say nothing at all — 92% of the ones we measured. A role with no badge is one
+      whose posting did not say, which is not the same as a no; where a posting does say no,
+      the role says so.</p>
+    <p>The MCA data we hold lists companies registered in India as subsidiaries of a parent
+      incorporated abroad. An India-founded company cannot appear in it at all, so a missing CIN
+      says nothing about a company — and a present one is a registration, not an endorsement.</p>
+    <p>The plates and their coordinates are this page's own apparatus. Every marker sits at one
+      fixed anchor point per country — the capital, except India's, which is Bengaluru — so a
+      coordinate here places a country's marker, never a company's office. Each small dot is one
+      listed company, drawn at its country's anchor. The longitude scale is not constant — it
+      tightens where the plate is empty, 30°E to 90°E most of all — and the graticule prints
+      each change of pitch, so the band spends its paper where the register is.</p>
+  </div>
+  <p class="sources"><a href="../data/build-report.json">build report</a> ·
      <a href="../data/companies.json">the data</a></p>
 </footer>
 
@@ -230,26 +1125,98 @@ const COUNTRIES = [
   'Australia', 'New Zealand',
 ];
 
-// The tabs. Grouping is the site's choice (SPEC feature 16), and it is by
-// destination rather than by geography: the UK and Ireland get their own tab
-// because that is where the non-India volume is and where the postings are in
-// English, so "Europe" here means the continental hubs. `prose` is the name for
-// a sentence rather than a tab -- an empty tab has to be able to say which place
-// nobody was hiring in.
-const GROUPS = [
-  { id: 'all', label: 'All countries', prose: 'any of the fifteen countries we cover',
-    countries: COUNTRIES },
-  { id: 'india', label: 'India', prose: 'India', countries: ['India'] },
-  { id: 'uk-ie', label: 'UK & Ireland', prose: 'the UK or Ireland',
-    countries: ['United Kingdom', 'Ireland'] },
-  { id: 'europe', label: 'Europe', prose: 'Europe',
-    countries: ['Germany', 'Netherlands', 'France', 'Spain', 'Sweden', 'Denmark',
-                'Norway', 'Finland'] },
-  { id: 'japan', label: 'Japan', prose: 'Japan', countries: ['Japan'] },
-  { id: 'singapore', label: 'Singapore', prose: 'Singapore', countries: ['Singapore'] },
-  { id: 'anz', label: 'Australia & NZ', prose: 'Australia or New Zealand',
-    countries: ['Australia', 'New Zealand'] },
+// The chart: fifteen countries, each at one fixed anchor coordinate — its
+// capital, except India, whose anchor is Bengaluru, where this dataset's mass
+// actually sits. Anchors are the page's own apparatus (like the ref column):
+// a coordinate here places a country's marker on the chart, never a company's
+// office. Fields: name, ISO code, lat, lon, europe-inset?, label side (hand-
+// set so labels never collide — cartography places its type by hand; a
+// European side places the INSET label, since those markers live only there,
+// and the rest place the band's. Round 1 re-set them against the projected
+// positions: GB hangs below its dot instead of floating between IE and NL,
+// ES prints east instead of clipping the inset foot, NL/NO step north out of
+// the FR/DK lanes, FI south off the top rule, AU west out of NZ's box.)
+const PLATE = [
+  ['Ireland',        'IE',  53.35,   -6.26, true,  'w'],
+  ['United Kingdom', 'GB',  51.51,   -0.13, true,  'sw'],
+  ['France',         'FR',  48.86,    2.35, true,  'e'],
+  ['Spain',          'ES',  40.42,   -3.70, true,  'e'],
+  ['Netherlands',    'NL',  52.37,    4.90, true,  'n'],
+  ['Germany',        'DE',  52.52,   13.40, true,  's'],
+  ['Denmark',        'DK',  55.68,   12.57, true,  'e'],
+  ['Norway',         'NO',  59.91,   10.75, true,  'n'],
+  ['Sweden',         'SE',  59.33,   18.07, true,  'n'],
+  ['Finland',        'FI',  60.17,   24.94, true,  's'],
+  ['India',          'IN',  12.97,   77.59, false, 'e'],
+  ['Singapore',      'SG',   1.35,  103.82, false, 'e'],
+  ['Japan',          'JP',  35.68,  139.69, false, 'e'],
+  ['Australia',      'AU', -33.87,  151.21, false, 'w'],
+  ['New Zealand',    'NZ', -41.29,  174.78, false, 'n'],
 ];
+const CODE = Object.fromEntries(PLATE.map(([name, code]) => [name, code]));
+const COORD = Object.fromEntries(PLATE.map(([name, , lat, lon]) => [name, [lat, lon]]));
+// The projection: equirectangular in longitude, band-compressed in latitude.
+// Round 11 crops the window east of the meridian — 0°…180°E, 66°N…46°S. The
+// old −15°…182° band spent its whole left margin on empty Atlantic, and the
+// only anchors west of Greenwich are three European capitals whose markers are
+// in the inset anyway. MARGIN keeps the extremes off the neat line: 180°E is
+// drawn at 96% rather than hard against the frame, so Wellington's marker and
+// the 180°E graticule label print whole instead of being sliced by the band's
+// own clip. The map stays linear through the margin, so the few European
+// company dots at 6°W…0° still land at their true position just inside it —
+// cropped is the window, not the arithmetic.
+const LON = [0, 180], LAT = [66, -46];
+const MARGIN = 4;
+// Round 4: the band spends its paper where the register is, in three stated
+// pieces. Round 3's single break at 90°E still left 35°E…85°E as a hole —
+// sixty degrees of ocean with not one anchor in them. The longitude scale now
+// runs in stops: 0°…30°E generous (the European dots and the inset's window),
+// 30°…90°E tightest (the empty middle), 90°…180°E between. The graticule
+// prints every change of pitch, so the compression is stated on the sheet
+// itself, never hidden — the plate is this page's own apparatus (note 05),
+// and an apparatus may choose its scale out loud.
+const STOPS = [[0, 0], [30, 0.26], [90, 0.52], [180, 1]];
+const lx = (lon) => {
+  for (let i = 1; i < STOPS.length; i++) {
+    const [a, fa] = STOPS[i - 1], [b, fb] = STOPS[i];
+    if (lon <= b) return fa + (lon - a) / (b - a) * (fb - fa);
+  }
+  return 1;
+};
+// The low clamp guards the handful of European company dots west of Greenwich
+// (Dublin at 6°W): the first stop's pitch extrapolates them a hair past the
+// frame, and a clipped dot would be a listed company the chart silently ate.
+const px = (lon) => Math.max(0.4, MARGIN + lx(lon) * (100 - 2 * MARGIN));
+// The same margin south: the meridian labels are set along the foot of the
+// band, and Wellington at 41°S landed on top of the 180°E one. The plotting
+// area stops above the label strip so the two never share a row.
+const py = (lat) => 3 + (LAT[0] - lat) / (LAT[0] - LAT[1]) * 85;
+// The Europe inset's own window (−12°…27°, 63°N…38°N), mapped into the inset
+// box with margins so no marker sits on the frame.
+const EULON = [-12, 27], EULAT = [63, 38];
+const ex = (lon) => 7 + (lon - EULON[0]) / (EULON[1] - EULON[0]) * 86;
+const ey = (lat) => 22 + (EULAT[0] - lat) / (EULAT[0] - EULAT[1]) * 70;
+// A coordinate, set the way a chart margin sets one: degrees and minutes.
+const dms = (lat, lon) => {
+  const f = (v, pos, neg) => {
+    const a = Math.abs(v), d = Math.floor(a), m = Math.round((a - d) * 60);
+    return `${d}°${String(m).padStart(2, '0')}′${v >= 0 ? pos : neg}`;
+  };
+  return `${f(lat, 'N', 'S')} ${f(lon, 'E', 'W')}`;
+};
+// A row's reference(s): the ISO codes of the countries its in-scope roles are
+// in. Two at most, then a "+" — a count of more, never a claim about where.
+const gridref = (countries) => {
+  const refs = countries.map((x) => CODE[x]).filter(Boolean);
+  return refs.length > 2 ? `${refs[0]}·${refs[1]}+` : refs.join('·');
+};
+
+// Candidate 1: the tab groups are gone. The atlas binds sixteen plates —
+// Plate 01, the world index, and Plates 02–16, one per country in PLATE
+// order — and the chart's own chips are the whole navigation. The plate
+// number is the page-turning designation the masthead restamps.
+const plateNo = (name) =>
+  String(name ? PLATE.findIndex((p) => p[0] === name) + 2 : 1).padStart(2, '0');
 
 // What a posting said about hiring someone who is not already there (T8.3).
 // `unknown` is absent from both maps and so renders as NOTHING: 92% of measured
@@ -264,9 +1231,53 @@ const OPENNESS = {
 
 // Grouped the way a reader here groups them (en-IN: 24,102 but 2,41,02,000).
 const count = (n) => n.toLocaleString('en-IN');
+// Money set like an editor, not a spreadsheet: $4.1B, never $4082.05M. Two
+// significant moves only — pick the unit, round to one decimal — so the figure
+// stays the build's figure, shortened rather than restated.
+const fmtAmt = (n) => {
+  const big = n >= 1e9;
+  const v = big ? n / 1e9 : n / 1e6;
+  const s = v >= 100 ? String(Math.round(v)) : String(Math.round(v * 10) / 10);
+  return s + (big ? 'B' : 'M');
+};
 const money = (c) => c.amount == null
   ? 'undisclosed'
-  : `${c.currency === 'USD' ? '$' : (c.currency || '') + ' '}${+(c.amount / 1e6).toFixed(2)}M`;
+  : `${c.currency === 'USD' ? '$' : (c.currency || '') + ' '}${fmtAmt(c.amount)}`;
+
+// Location strings arrive as fifteen countries' boards typed them: "india"
+// beside "India", "India - Remote" beside "Remote — India", "Hybrid - India",
+// one board's semicolon dump of five cities. This is typesetting, never
+// invention — split the board's own separators, hold every mode word (Remote,
+// Hybrid) to ONE idiom ("Mode — Place": cased word, em dash), dedupe
+// case-insensitively keeping the cased form, and name no place a board did not.
+const MODE = /^(remote|hybrid)$/i;
+const canonPlaces = (list) => {
+  const seen = new Map();
+  for (const raw of list.flatMap((s) => String(s).split(/\s*;\s*/))) {
+    let t = raw.trim().replace(/\s+/g, ' ');
+    if (!t) continue;
+    const m = t.match(/^(.+?)\s*[-–—]\s*(.+)$/);
+    if (m && (MODE.test(m[1]) || MODE.test(m[2]))) {
+      const mode = MODE.test(m[1]) ? m[1] : m[2];
+      const place = MODE.test(m[1]) ? m[2] : m[1];
+      t = `${mode[0].toUpperCase()}${mode.slice(1).toLowerCase()} — ${place}`;
+    }
+    // Typesetting, not invention: intra-word hyphens become non-breaking
+    // hyphens (same glyph), so "GIFT Tec-City" can never break after its
+    // hyphen mid-name. Long tokens still wrap by overflow-wrap when they must.
+    t = t.replace(/(\S)-(\S)/g, '$1‑$2');
+    const key = t.toLowerCase();
+    if (!seen.has(key) || seen.get(key) === key) seen.set(key, t);
+  }
+  return [...seen.values()];
+};
+// The composed line: at most `max` places, then "+n" — a count, not a claim.
+const placeLine = (list, max = 3) => {
+  const all = canonPlaces(list);
+  return (all.length > max
+    ? [...all.slice(0, max), `+${all.length - max}`]
+    : all).join(' · ');
+};
 const round = (c) => c.round_letter ? `Series ${c.round_letter}` : 'round letter not stated';
 // How a role is worked, in the site's words rather than the board's.
 const WORKPLACE = { remote: 'remote', hybrid: 'hybrid', onsite: 'on-site' };
@@ -284,9 +1295,19 @@ const opensToForeignHires = (c) =>
 // would be this site's own kind of lie. So the last fallback shows what the
 // board literally said. `locations` is schema-guaranteed non-empty, so there is
 // no fourth case.
-const where = (c) => c.cities.length ? c.cities.join(' · ')
-  : isRemote(c) ? `Remote — ${c.countries.join(' · ')}`
-  : [...new Set(c.roles.flatMap((r) => r.locations))].join(' · ');
+// The places, as a list, before anything decides how many of them fit. The
+// register line and the gazetteer entry want the same facts set two different
+// ways -- one elided to a single line with its remainder counted off to the
+// side, one run as a sentence -- so they share the list and part company at
+// the typesetting.
+const wherePieces = (c) => c.cities.length ? canonPlaces(c.cities)
+  : isRemote(c) ? [`Remote — ${c.countries.join(' · ')}`]
+  : canonPlaces(c.roles.flatMap((r) => r.locations));
+const where = (c, max = 3) => {
+  const all = wherePieces(c);
+  return (all.length > max ? [...all.slice(0, max), `+${all.length - max}`] : all)
+    .join(' · ');
+};
 // A directory source knows a company is past Series A without knowing when it
 // raised (schema v3). That is an absent fact, so it reads as one -- and it can
 // never satisfy "funded in the last 90 days", which would be a claim.
@@ -344,17 +1365,74 @@ const sorts = {
 
 let companies = [];
 let snapshot = '';
-let group = GROUPS[0];
+// Round 2: the reference is a citation, not a row counter. Refs are struck
+// ONCE per snapshot, in the register's canonical order (open roles, name to
+// break ties — the default sort), and never renumber: sort by name and
+// Databricks keeps the ref it carried a second ago, because a ref that moves
+// under sort is a row counter wearing a mono font. The row ORDER changes
+// around the numbers; the numbers never change under the rows.
+let REFS = {};
+// The open plate: one country's name, or null for Plate 01 — the whole atlas.
+let activeCountry = null;
+// The sheet's one entry, remembered by name so a re-render (a filter, a sort)
+// keeps the reader's place while the company is still on the board.
+let selectedName = null;
+// True for exactly one render after a row CLICK: the one case where the page
+// may move to meet the berthed sheet. Filters and sorts never scroll.
+let wantScroll = false;
+// The plate index (the "Plates 02–16" drop sheet) and the hand-fold. Both
+// presentation: turning a page closes the index, and opening the fold is a
+// one-way door for the session — a reader who asked for the whole register
+// keeps it through filter changes.
+let indexOpen = false;
+let spreadOpen = false;
+// The last plate rendered, for the page-turn sweep: the sweep runs only when
+// this changes, so filters and sorts never fire it. '01' is the load state.
+let lastTurn = '01';
+// Held as a node, not a query: on narrow screens the sheet berths inside the
+// index, where the next render's replaceChildren would detach it — the
+// reference is what lets placeSheet() put it back.
+const SHEET = document.getElementById('sheet');
 
-// The one country picked inside the tab, or null for the whole tab. Null before
-// the first render too: the select has no options until a dataset loads.
-const picked = () => {
-  const chosen = $('#country').value;
-  return chosen && chosen !== 'any' ? chosen : null;
-};
-// The countries the current view covers, and what to call them in a sentence.
-const scope = () => (picked() ? [picked()] : group.countries);
-const scopeName = () => picked() || group.prose;
+// The three-line company descriptions, keyed by company name. AI-written and
+// marked as such on the page. The file is allowed to be missing and a company
+// is allowed to have no entry; both render as no block at all, because a
+// placeholder saying "no description" would be the page inventing a state.
+let DESCRIPTIONS = {};
+const descriptionsReady = fetch('../data/descriptions.json', { cache: 'no-cache' })
+  .then((r) => (r.ok ? r.json() : {}))
+  .catch(() => ({}));
+
+// The build report, for the verification receipt (round 5): the ledger the
+// footer already cites, read so each entry can print its own line from it —
+// the build's verdict on this company, and the corpus arithmetic behind it.
+// Enrichment, never a dependency: a missing report costs the receipt its
+// verdict and corpus rows, and the receipt says nothing in their place.
+let BUILDREP = null;
+const buildReady = fetch('../data/build-report.json', { cache: 'no-cache' })
+  .then((r) => (r.ok ? r.json() : null))
+  .catch(() => null);
+
+// What we can say about a company, said in the page's smallest voice: three
+// labelled lines and a provenance mark stating a machine wrote them.
+function descBlock(d) {
+  const block = el('div', 'desc');
+  for (const [k, v] of [['What', d.what], ['For whom', d.for_whom],
+                        ['Why them', d.why_them]]) {
+    if (typeof v !== 'string' || !v.trim()) continue;   // a missing line is no line
+    const line = el('p', 'dline');
+    line.append(el('span', 'dk micro', k), el('span', 'dv', v));
+    block.append(line);
+  }
+  if (!block.children.length) return null;
+  if (d.ai) block.append(el('p', 'prov', 'AI-summarized'));
+  return block;
+}
+
+// The countries the open plate covers, and what to call them in a sentence.
+const scope = () => (activeCountry ? [activeCountry] : COUNTRIES);
+const scopeName = () =>
+  activeCountry || 'any of the fifteen countries we cover';
 
 // A company as one country view shows it: the roles in that scope, and every
 // derived fact recomputed off THOSE roles. A row under the UK tab that counted
@@ -386,37 +1464,188 @@ function inScope(c, covers) {
 const listedIn = (covers) =>
   companies.filter((c) => c.countries.some((x) => covers.includes(x))).length;
 
-function tabs() {
-  $('#tabs').replaceChildren(...GROUPS.map((g) => {
-    const n = listedIn(g.countries);
-    const button = el('button');
-    button.type = 'button';
-    button.dataset.group = g.id;
-    button.append(el('span', null, g.label), el('span', 'count', count(n)));
-    // Read aloud, "India 6" is not a sentence. The label says what the number is.
-    button.setAttribute('aria-label',
-      `${g.label} — ${count(n)} ${n === 1 ? 'company' : 'companies'}`);
-    button.addEventListener('click', () => select(g));
-    return button;
+// One plate-chip: a square dot at the true anchor, and beside it a framed
+// label — plate number, name (code where the box is small), count — that
+// reads as the button it is. Zeros included — a marker at zero is a country
+// we read and found nobody hiring in, which is a finding, and a chart missing
+// the marker would read as a country nobody looked at.
+function marker([name, code, lat, lon, , side], X, Y) {
+  const n = listedIn([name]);
+  const mk = el('button', `mk lb-${side}${n ? '' : ' nil'}`);
+  mk.type = 'button';
+  mk.dataset.country = name;
+  // A chip is a toggle into its plate, and render() turns exactly one of them
+  // (or the Plate 01 strip) on. The red chip a sighted reader sees is stated
+  // here too, so a screen reader is told which plate is open rather than left
+  // to infer it from a colour.
+  mk.setAttribute('aria-pressed', 'false');
+  mk.style.left = X.toFixed(2) + '%';
+  mk.style.top = Y.toFixed(2) + '%';
+  // Round 2: the dot is scaled by the count — area, so sqrt — and the label
+  // steps out past its own dot's radius. A register that is 97% one country
+  // now LOOKS like one: India's marker dominates the band the way its 116
+  // companies dominate the data, and thirteen zeros stay small and hollow.
+  if (n) {
+    const sz = Math.round(7 + 1.6 * Math.sqrt(n));
+    mk.style.setProperty('--dsz', sz + 'px');
+    // Round 6: the stand-off is measured from the button's EDGE, not its
+    // centre — the .lb-* rules offset the label from the box, and a scaled
+    // marker's box IS its dot. At sz/2 + 2 the offset was swallowed by the
+    // dot's own radius, so India's 24px dot printed 3px over the left border
+    // of its own label at 390px (measured). One dot-width of stand-off puts
+    // the frame clear of the dot at every count.
+    mk.style.setProperty('--r', (sz + 2) + 'px');
+  }
+  mk.title = `Plate ${plateNo(name)} · ${name} — ${dms(lat, lon)}`;
+  const lb = el('span', 'mlb');
+  lb.append(el('span', 'mno', plateNo(name)),
+            el('span', 'mcd', code),
+            el('span', 'mnm', name),
+            el('b', n ? null : 'nil', count(n)));
+  mk.append(el('span', 'mdot'), lb);
+  mk.setAttribute('aria-label',
+    `Plate ${plateNo(name)} — ${name} — ${count(n)} `
+    + `${n === 1 ? 'company' : 'companies'} — turn to this plate`);
+  mk.addEventListener('click', () => goCountry(name));
+  // The reverse of the index→chart light: pointing at a marker asks the index
+  // "who is here?", and the index answers by ghosting everyone else.
+  mk.addEventListener('mouseenter', () => preview(name, true));
+  mk.addEventListener('mouseleave', () => preview(name, false));
+  return mk;
+}
+
+// The chart itself: graticule, company dots, the framed Europe region, its
+// enlarged inset, and one marker per country. Built from the data in load()
+// because the dots ARE the dataset — one per listed company, fanned in a
+// deterministic sunflower spiral at its country's anchor, so 116 companies in
+// India print as the blot they are and a chart drawn before the fetch would
+// be an empty world claiming nobody anywhere.
+function plate() {
+  const main = el('div', 'chartmain');
+  // Meridians every 30° labelled at the foot; parallels every 30°, the
+  // equator in the heavier line — the graticule states the band's scale.
+  for (const lon of [0, 30, 60, 90, 120, 150, 180]) {
+    const m = el('span', 'mer');
+    m.style.left = px(lon).toFixed(2) + '%';
+    const l = el('span', 'gl', lon === 0 ? '0°' : `${lon}°E`);
+    // 180° sits a hair from the band's edge; right-anchored it stays whole.
+    if (lon === 180) l.style.right = '0';
+    else l.style.left = px(lon).toFixed(2) + '%';
+    l.style.bottom = '0';
+    main.append(m, l);
+  }
+  for (const lat of [60, 30, 0, -30]) {
+    const p = el('span', lat === 0 ? 'par eq' : 'par');
+    p.style.top = py(lat).toFixed(2) + '%';
+    const l = el('span', 'gl', lat === 0 ? '0°' : `${Math.abs(lat)}°${lat > 0 ? 'N' : 'S'}`);
+    l.style.top = `calc(${py(lat).toFixed(2)}% - 10px)`;
+    l.style.left = '0';
+    main.append(p, l);
+  }
+  // The dots: one per listed company, at its country's anchor. The spiral is
+  // tighter and the dots smaller than round 10's — at 0.17rem and 3px the 116
+  // India dots fused into one grey blot that read as a printing fault. Thinned,
+  // the same 116 dots read as what they are: a dense cluster with countable
+  // edges. Still exactly one dot per listed company; nothing is sampled away.
+  for (const [name, , lat, lon, eu] of PLATE) {
+    const n = listedIn([name]);
+    for (let k = 0; k < n; k++) {
+      // European dots carry their window's class: at a hand's width the band
+      // is too compressed for them to read as anything but specks, and the
+      // inset — its own full-width panel there — restates the same companies
+      // at legible scale, so the CSS drops them from the band alone (52rem).
+      const d = el('span', 'cdot' + (eu ? ' eu' : ''));
+      const r = 0.125 * Math.sqrt(k), a = k * 2.39996;
+      d.style.left = `calc(${px(lon).toFixed(2)}% + ${(r * Math.cos(a)).toFixed(2)}rem)`;
+      d.style.top = `calc(${py(lat).toFixed(2)}% + ${(r * Math.sin(a)).toFixed(2)}rem)`;
+      main.append(d);
+    }
+  }
+  // Europe, enlarged in the inset. Round 10 also framed the source region on
+  // the main band; with every European marker living in the inset that frame
+  // enclosed nothing but graticule — an empty rectangle in the band's top-left
+  // corner, apparatus pointing at no content. It is gone, and the inset says
+  // in its own label which window it enlarges, which is all the frame said.
+  const inset = el('div', 'inset');
+  inset.append(el('span', 'ilabel', 'Europe — enlarged · 12°W–27°E'));
+  // Round 4: the inset draws the graticule it claims. A framed box titled
+  // 12°W–27°E holding floating chips was cartography by assertion; two
+  // meridians and two parallels, labelled in the band's own voice, make
+  // every position inside checkable against the frame.
+  for (const lon of [0, 15]) {
+    const m = el('span', 'mer');
+    m.style.left = ex(lon).toFixed(2) + '%';
+    const l = el('span', 'gl', lon === 0 ? '0°' : `${lon}°E`);
+    l.style.left = ex(lon).toFixed(2) + '%';
+    l.style.bottom = '0';
+    inset.append(m, l);
+  }
+  for (const lat of [60, 45]) {
+    const p = el('span', 'par');
+    p.style.top = ey(lat).toFixed(2) + '%';
+    const l = el('span', 'gl', `${lat}°N`);
+    l.style.top = `calc(${ey(lat).toFixed(2)}% - 10px)`;
+    l.style.right = '2px';
+    inset.append(p, l);
+  }
+  for (const c of PLATE) {
+    const [, , lat, lon, eu] = c;
+    (eu ? inset : main).append(
+      marker(c, eu ? ex(lon) : px(lon), eu ? ey(lat) : py(lat)));
+  }
+  // The index strip: Plate 01 — the whole atlas — as a working button, and
+  // beside it the band's own instruction. This is the two-second answer to
+  // "is the map clickable": a strip that says so, over chips framed like
+  // the buttons they are.
+  const strip = el('button', 'p01');
+  strip.id = 'p01';
+  strip.type = 'button';
+  strip.append(el('span', 'lft'), el('span', 'hint'));
+  strip.addEventListener('click', () => {
+    activeCountry = null;
+    render();
+  });
+  $('#plate').replaceChildren(strip, main, inset);
+  // The sixteen-plate index the status control opens: one line per country
+  // plate — number · code · name · anchor · count — every line a door. The
+  // same navigation the chart's chips carry, restated as type, for the
+  // reader who wants the list rather than the map.
+  $('#pindex').replaceChildren(...PLATE.map(([name, code, lat, lon]) => {
+    const n = listedIn([name]);
+    const b = el('button', 'pirow' + (n ? '' : ' nil'));
+    b.type = 'button';
+    b.append(el('span', 'pino', plateNo(name)),
+             el('span', 'pico', code),
+             el('span', 'pinm', name),
+             el('span', 'picd', dms(lat, lon)),
+             el('span', 'pict', count(n)));
+    b.setAttribute('aria-label',
+      `Plate ${plateNo(name)} — ${name} — ${count(n)} `
+      + `${n === 1 ? 'company' : 'companies'} — turn to this plate`);
+    b.addEventListener('click', () => goCountry(name));
+    return b;
   }));
 }
 
-function select(g) {
-  group = g;
-  for (const button of $('#tabs').children) {
-    button.setAttribute('aria-pressed', String(button.dataset.group === g.id));
+// Every country marker on the chart, wherever it lives (main band or inset).
+const markers = () => document.querySelectorAll('#plate .mk');
+
+// The plate preview (styles above). Presentation only — it reads the rendered
+// rows and touches no filter state, so wandering the plate can never change
+// what a click would have shown.
+function preview(name, on) {
+  for (const row of document.querySelectorAll('#index .irow, #spread .irow')) {
+    const here = (row.dataset.countries || '').split('|').includes(name);
+    row.classList.toggle('ghost', on && !here);
+    row.classList.toggle('held', on && here);
   }
-  // Rebuilt per tab, and every country in the tab is listed even at zero: a
-  // country missing from this list would read as one we never looked at, which
-  // is the one thing a zero here must not be confusable with.
-  const any = el('option', null, 'Any country');
-  any.value = 'any';
-  $('#country').replaceChildren(any, ...g.countries.map((c) => {
-    const option = el('option', null, `${c} (${count(listedIn([c]))})`);
-    option.value = c;
-    return option;
-  }));
-  $('#country-filter').hidden = g.countries.length < 2;
+}
+
+// Turning the page: a chip is a door into its country's plate, and the open
+// chip is a toggle — clicking the plate already open turns back to Plate 01,
+// so the chart alone can walk everywhere. There is no other navigation.
+function goCountry(name) {
+  activeCountry = activeCountry === name ? null : name;
   render();
 }
 
@@ -425,7 +1654,7 @@ function select(g) {
 // "apply" button beside it would be two controls for one destination.
 function roleItem(r) {
   const item = el('li');
-  item.append(link(r.url, r.title), el('span', null, ` — ${r.locations.join(' · ')}`));
+  item.append(link(r.url, r.title), el('span', 'loc', ` — ${placeLine(r.locations, 4)}`));
   // Absent is absent: 822 of 1,112 published India roles state no workplace at
   // all (Greenhouse never does), so a missing badge means "not stated", not
   // "on-site". The openness badges below follow the same rule, for the same
@@ -438,19 +1667,238 @@ function roleItem(r) {
   return item;
 }
 
-function row(c) {
+// One index line: merged reference (row index · plate coordinate), the name
+// with its places beneath, and the count in red. The line is a button into
+// the sheet — the index is the master, the gazetteer entry the detail.
+function indexRow(c, repeated) {
   const reqs = c.roles.length;
-  const details = el('details', 'row');
-  const summary = el('summary');
-  summary.append(
-    el('span', 'name', c.name),
-    el('span', 'reqs', `${reqs} ${reqs === 1 ? 'role' : 'roles'}`),
-    el('span', 'raised', money(c)),
-    el('span', 'where', where(c)),
-  );
+  const ref = REFS[c.name] || '—';
+  // Round 11: one anatomy for every line. Round 10 ran entries under five
+  // roles in on a single line and stacked the rest, so the register changed
+  // shape partway down and the continuation spread's three columns stopped
+  // scanning as columns. A register whose rows are not the same shape is not
+  // a register.
+  const button = el('button', 'irow');
+  button.type = 'button';
+  button.dataset.countries = c.countries.join('|');   // the plate preview reads this
+  button.dataset.ref = ref;                           // the row's own citation
+  // Atlas index discipline (render() computes `repeated`): the coordinate's
+  // ink prints only where the reference CHANGES from the line above — B3 a
+  // hundred times is wallpaper — but the value stays in the markup on every
+  // line for hover, selection, and the pointer's title.
+  const iref = el('span', 'iref', ref + '·');
+  // Round 3: the citation resolves, like a real atlas index. Each country
+  // code in the gutter is a live cross-reference — clicking ·GB turns the
+  // page to Plate 03 with this company held — so the apparatus stops being
+  // decoration the moment a reader tests it.
+  const igr = el('span', repeated ? 'igr same' : 'igr');
+  const pairs = c.countries.map((x) => [x, CODE[x]]).filter(([, cd]) => cd);
+  pairs.slice(0, 2).forEach(([nation, cd], i) => {
+    if (i) igr.append('·');
+    const cite = el('span', 'igc', cd);
+    cite.dataset.country = nation;
+    cite.title = `Turn to Plate ${plateNo(nation)} — ${nation}`;
+    igr.append(cite);
+  });
+  if (pairs.length > 2) igr.append('+');
+  iref.append(igr);
+  iref.title = c.countries.join(' · ');
+  const namecell = el('span', 'iname', c.name);
+  // The places, set as a registry entry rather than as prose: the list holds
+  // one line and elides where it must, and the "+N" saying how many more is
+  // its own cell so the ellipsis can never eat the count. A company hiring in
+  // six places used to wrap three lines deep in the index; nothing is dropped
+  // here either -- the entry opens with all of them.
+  // Round 3: the index line speaks in city names — "Jakarta", never
+  // "Jakarta, Ind…". An ellipsis and a "+N" both saying "there's more" was
+  // the row double-signalling; short tokens let +N carry the count alone.
+  // The gazetteer entry keeps every place in full.
+  // Round 4: ONE truncation grammar. The register used to speak two — "+N"
+  // in the wide index, a CSS ellipsis in the narrow spread columns — so
+  // fitPlaces() now measures each line where it actually sits and drops
+  // whole places into the +N count until what remains fits. The full list
+  // rides in the dataset; the gazetteer entry still prints every place.
+  const places = [...new Set(wherePieces(c)
+    .map((p) => p.includes('—') ? p : p.split(',')[0].trim()))];
+  if (places.length) {
+    const cell = el('span', 'iwhere');
+    cell.dataset.places = places.join('|');
+    cell.append(el('span', 'ipl', places.join(' · ')), el('span', 'ipn', ''));
+    namecell.append(cell);
+  }
+  button.append(iref, namecell,
+    el('span', 'ireqs', `${reqs} ${reqs === 1 ? 'role' : 'roles'}`));
+  button.setAttribute('aria-label',
+    `${c.name} — ${reqs} ${reqs === 1 ? 'role' : 'roles'} — open entry`);
+  // Live cartography: pointing at an index line lights its cell(s) on the
+  // masthead plate, so the static index up top answers the line under the
+  // cursor. Presentation only — no filter state changes on hover.
+  const light = (on) => {
+    for (const cell of markers()) {
+      if (c.countries.includes(cell.dataset.country)) cell.classList.toggle('lit', on);
+    }
+  };
+  button.addEventListener('mouseenter', () => light(true));
+  button.addEventListener('mouseleave', () => light(false));
+  button.addEventListener('click', (ev) => {
+    selectedName = c.name;
+    wantScroll = true;
+    // A click on a gutter citation turns the page as well as opening the
+    // entry; anywhere else on the line only opens the entry.
+    const cite = ev.target.closest('.igc');
+    if (cite) activeCountry = cite.dataset.country;
+    render();
+  });
+  return button;
+}
+
+// The inset locator map: the masthead chart reprinted at thumbnail size —
+// the same projection, every anchor a faint dot, this company's country
+// dot(s) in red. Apparatus, never content — it is aria-hidden and the
+// coordinate stamp beside it states the fact aloud.
+function locator(countries) {
+  const map = el('span', 'locator');
+  map.setAttribute('aria-hidden', 'true');
+  const eq = el('span', 'leq');
+  eq.style.top = py(0).toFixed(2) + '%';
+  map.append(eq);
+  for (const lon of [0, 60, 120, 180]) {
+    const m = el('span', 'lmer');
+    m.style.left = px(lon).toFixed(2) + '%';
+    map.append(m);
+  }
+  for (const [name, , lat, lon] of PLATE) {
+    const d = el('span', countries.includes(name) ? 'ld on' : 'ld');
+    d.style.left = px(lon).toFixed(2) + '%';
+    d.style.top = py(lat).toFixed(2) + '%';
+    map.append(d);
+  }
+  return map;
+}
+
+// The sheet's berth: its own column on wide screens; directly under the
+// selected index line on narrow ones, where a second column cannot exist —
+// and directly under a selected SPREAD line at any width, spanning the
+// spread's columns, so the entry opens where the reader is.
+const narrow = matchMedia('(max-width: 62rem)');
+function placeSheet(rowEl) {
+  const inSpread = !!(rowEl && rowEl.closest('#spread'));
+  if (rowEl && (narrow.matches || inSpread)) rowEl.after(SHEET);
+  else $('#board').append(SHEET);
+  // With the sheet berthed in the spread, the board's right column would be
+  // sixteen rows of dead paper — the board closes to one full-measure column.
+  $('#board').classList.toggle('nosheet', inSpread && !narrow.matches);
+}
+// Crossing the fold's own breakpoint re-renders: the sheet re-berths and the
+// hand-fold appears or unfolds at the measure the reader is actually at.
+narrow.addEventListener('change', () => render());
+
+// One gazetteer entry, filed on the sheet. The same facts and the same
+// honest-absence rules as every round: an absent description, salary, or
+// registration renders nothing at all.
+function entry(c) {
+  const reqs = c.roles.length;
+
+  const meta = el('p', 'entrymeta');
+  // The entry cites its STABLE register ref — the number the index line
+  // carries under every sort — never its position in today's ordering.
+  meta.append(
+    el('span', 'micro',
+      `Gazetteer entry ${REFS[c.name] || '—'} of ${count(companies.length)}`),
+    el('span', 'micro', `Ref ${gridref(c.countries)}`));
+
+  const head = el('div', 'plateline');
+  const refbox = el('div', 'sheetref');
+  refbox.append(el('span', 'sc', gridref(c.countries)));
+  // The coordinate stamp: the country's chart anchor, in degrees and minutes.
+  // An anchor places a marker on the chart, never an office — the footer says
+  // so — and a second country prints as "+", a count, not a claim.
+  const cd = COORD[c.countries[0]];
+  if (cd) {
+    refbox.append(el('span', 'scoord',
+      dms(cd[0], cd[1]) + (c.countries.length > 1 ? ' +' : '')));
+  }
+  refbox.append(el('span', 'sn', c.countries.join(' · ')));
+  // The reciprocal citation (round 3): the index's ·GB resolves to this
+  // sheet, so the sheet answers back — every plate the company is filed
+  // under, as working cross-references. Only multi-plate entries carry the
+  // line; a single country is already said above. The full country list
+  // comes from the unscoped register — a UK view must still cite India.
+  const filedIn = (companies.find((x) => x.name === c.name) || c).countries;
+  if (filedIn.length > 1) {
+    const fu = el('p', 'filed');
+    fu.append(el('span', 'fk micro', 'Filed under'));
+    for (const nation of filedIn) {
+      const b = el('button', 'fplate' + (activeCountry === nation ? ' here' : ''));
+      b.type = 'button';
+      b.textContent = `Plate ${plateNo(nation)} · ${CODE[nation] || nation}`;
+      b.title = activeCountry === nation
+        ? `${nation} — this plate`
+        : `Turn to Plate ${plateNo(nation)} — ${nation}`;
+      b.addEventListener('click', () => {
+        selectedName = c.name; activeCountry = nation; wantScroll = true; render();
+      });
+      fu.append(b);
+    }
+    refbox.append(fu);
+  }
+  // The verification receipt (round 5): the sheet's right half was the page's
+  // one dead zone, sitting under its strongest claim — "proven by the board,
+  // not by a claim" — with no per-entry evidence. The receipt is that
+  // evidence, struck like a customs stamp: the board we read, the snapshot we
+  // read it on, the build report's verdict, the roles we counted, and the
+  // corpus arithmetic that admitted the company. Every line is a fact the
+  // build wrote; the lines it did not write (fetch time, HTTP code) do not
+  // print at all — honest absence, applied to ourselves.
+  const rcpt = el('aside', 'receipt');
+  rcpt.setAttribute('aria-label', 'Verification receipt');
+  const rhead = el('p', 'rhead');
+  rhead.append(el('span', null, 'Verified · board read'),
+               el('span', 'rno', `№ ${REFS[c.name] || '—'}`));
+  rcpt.append(rhead);
+  const rrow = (k, v) => {
+    const p = el('p', 'rrow');
+    const val = el('span', 'rv');
+    if (typeof v === 'string') val.textContent = v; else val.append(v);
+    p.append(el('span', 'rk', k), val);
+    rcpt.append(p);
+  };
+  // The board address breaks before its slug, never inside a word — a
+  // receipt that prints "datab / ricks" reads as a typo, not a fact.
+  const bhost = BOARDS[c.ats]
+    ? BOARDS[c.ats].replace(/^https?:\/\//, '').replace(/\/$/, '') : c.ats;
+  const bval = el('span');
+  bval.append(el('span', null, bhost), document.createElement('wbr'),
+              el('span', null, '/' + c.slug));
+  rrow('Board', bval);
+  rrow('Read', snapshot || '—');
+  // The build's own verdict on this company, from the report — absent report,
+  // absent line.
+  const verdict = BUILDREP && BUILDREP.companies
+    ? BUILDREP.companies[c.name] : null;
+  if (verdict) rrow('Verdict', verdict === 'listed'
+    ? 'listed — open roles seen' : verdict);
+  rrow('Roles', `${count(c.total || reqs)} on the board`
+    + (c.total > reqs ? ` · ${count(reqs)} in this scope` : ''));
+  if (BUILDREP && BUILDREP.checked != null && BUILDREP.corpus_size != null) {
+    rrow('Corpus', `checked ${count(BUILDREP.checked)} of `
+      + `${count(BUILDREP.corpus_size)}`
+      + (BUILDREP.counts && BUILDREP.counts.listed != null
+         ? ` · listed ${count(BUILDREP.counts.listed)}` : ''));
+  }
+  const ledger = el('a', null, 'build report ↗');
+  ledger.href = '../data/build-report.json';
+  rrow('Ledger', ledger);
+  head.append(locator(c.countries), refbox, rcpt);
 
   const body = el('div', 'detail');
-  const funding = el('p', null, `Raised ${money(c)} · ${round(c)} · announced ${when(c)} · `);
+  // Three absences in one line ("undisclosed · not stated · not stated") is
+  // honest but reads as noise, so the fully-dark case collapses to one clause.
+  // Any single known fact brings back the full line, absences said per-field.
+  const dark = c.amount == null && !c.round_letter && !c.date;
+  const funding = el('p', null, dark
+    ? 'Funded — amount, round, and date all undisclosed · '
+    : `Raised ${money(c)} · ${round(c)} · announced ${when(c)} · `);
   funding.append(link(c.source_url, 'funding source'));
   // Under a country view the row shows that country's roles, so it says so
   // rather than letting the reader find the other twelve on the board and
@@ -461,19 +1909,107 @@ function row(c) {
     ? link(BOARDS[c.ats] + c.slug, `${c.ats}/${c.slug}`)
     : el('span', null, `${c.ats}/${c.slug}`));
 
+  // A 75-role board must not bury the atlas: the list opens at eight and states
+  // the remainder as a count in red. One click shows every role — nothing is
+  // withheld, only folded — and short lists never grow the extra control.
   const roles = el('ul', 'roles');
-  roles.append(...c.roles.map(roleItem));
+  const items = c.roles.map(roleItem);
+  const CAP = 8;
+  if (items.length > CAP + 2) {
+    for (const li of items.slice(CAP)) li.hidden = true;
+    const fold = el('li', 'more');
+    const btn = el('button', 'morebtn',
+      `+ ${count(items.length - CAP)} more roles`);
+    btn.type = 'button';
+    btn.addEventListener('click', () => {
+      for (const li of items) li.hidden = false;
+      fold.remove();
+    });
+    fold.append(btn);
+    roles.append(...items, fold);
+  } else {
+    roles.append(...items);
+  }
+  // The description leads the detail -- what the company is, before where it
+  // hires. Only for companies with an entry; the rest start at the board line.
+  const said = DESCRIPTIONS[c.name];
+  const desc = said ? descBlock(said) : null;
+  if (desc) body.append(desc);
   body.append(board, roles, funding);
   if (c.salary) body.append(salaryLine(c.salary));
   if (c.mca) body.append(registrationLine(c.mca));
   body.append(el('p', null, `Qualified as Series A or later by ${RULES[c.qualified_by]}.`));
 
-  details.append(summary, body);
-  return details;
+  SHEET.replaceChildren(meta, head, el('h2', null, c.name), body);
 }
 
 function render() {
   const covers = scope();
+  // Round 4: turning a page is FELT. Whenever the open plate changes, one red
+  // rule wipes left-to-right across the register in 150ms — the folio's
+  // page-turn, drawn in the page's own hairline voice. Presentation only;
+  // reduced-motion readers get an instant turn (CSS).
+  const pn = plateNo(activeCountry);
+  if (pn !== lastTurn) {
+    lastTurn = pn;
+    document.querySelector('.sweep')?.remove();
+    const s = el('span', 'sweep');
+    s.addEventListener('animationend', () => s.remove());
+    document.querySelector('main').append(s);
+  }
+  // The plate index closes when a page turns: an index is Plate 01's margin,
+  // and a turned plate already states where it is.
+  if (activeCountry) indexOpen = false;
+  $('#pindex').hidden = !indexOpen;
+  // The chart states the open plate: the open chip turns red, and a red
+  // crosshair spans the band (or the inset, for a European plate) through
+  // its anchor. Under Plate 01 no chip lights and no crosshair is drawn —
+  // a chart entirely on would be a highlight meaning nothing.
+  // The band's height states the page: Plate 01 compressed (an index of
+  // mostly-zero markers earns no more), a turned plate at full working scale.
+  $('#plate').classList.toggle('turned', !!activeCountry);
+  for (const cell of markers()) {
+    const on = activeCountry != null && covers.includes(cell.dataset.country);
+    cell.toggleAttribute('data-on', on);
+    cell.setAttribute('aria-pressed', String(on));
+  }
+  for (const arm of document.querySelectorAll('#plate .xh')) arm.remove();
+  if (activeCountry) {
+    const p = PLATE.find((x) => x[0] === activeCountry);
+    if (p) {
+      const [, , lat, lon, eu] = p;
+      const box = document.querySelector(eu ? '#plate .inset' : '#plate .chartmain');
+      const h = el('span', 'xh h'), v = el('span', 'xh v');
+      h.style.top = (eu ? ey(lat) : py(lat)).toFixed(2) + '%';
+      v.style.left = (eu ? ex(lon) : px(lon)).toFixed(2) + '%';
+      box.append(h, v);
+    }
+  }
+  // The header restamps, the way an atlas page carries its number: the strip
+  // and the masthead stamp both say which plate is open.
+  $('#pnum').textContent = `Plate ${plateNo(activeCountry)}`;
+  $('#pname').textContent = activeCountry
+    ? `${activeCountry} — ${CODE[activeCountry]}`
+    : 'World — all countries';
+  const strip = $('#p01');
+  if (strip) {
+    strip.setAttribute('aria-pressed', String(!activeCountry));
+    const lft = strip.querySelector('.lft'), hint = strip.querySelector('.hint');
+    lft.replaceChildren();
+    if (activeCountry) {
+      lft.append(el('span', null, '↩ Return to '),
+                 el('span', 'no', 'Plate 01'),
+                 el('span', null, ' · all countries'));
+      hint.textContent = `Open — plate ${plateNo(activeCountry)} `
+        + `· ${activeCountry}`;
+    } else {
+      lft.append(el('span', 'no', 'Plate 01'),
+                 el('span', null, ' · Index — all countries'));
+      hint.textContent = '16 plates · click a country to turn the page';
+    }
+    strip.setAttribute('aria-label', activeCountry
+      ? 'Return to Plate 01 — all countries' : 'Plate 01 — all countries, open');
+  }
   // The India-only filters follow the India-only enrichments: on a tab with no
   // India in it they are hidden AND cleared here, because a city filter holding
   // "Bengaluru" while invisible is a Japan tab that silently shows nothing and
@@ -483,10 +2019,47 @@ function render() {
     if (label.hidden) label.querySelector('select').value = 'any';
   }
 
+  // The fold's tally: how many filters are set while the bank is shut. Sort
+  // and search are excluded — one always has a value, the other stays visible.
+  const set = ['city', 'remote', 'openness', 'mca', 'bracket', 'recency']
+    .filter((id) => { const n = document.getElementById(id);
+                      return !n.closest('label').hidden && n.value !== 'any'; })
+    .length;
+  $('#fcount').textContent = set ? `${set} set` : '';
+  // A departed filter shows its state on the control itself: red until
+  // cleared. Sort always has a value and never reddens.
+  for (const n of document.querySelectorAll('#controls select')) {
+    n.classList.toggle('set', n.id !== 'sort' && n.value !== 'any');
+  }
+  $('#q').classList.toggle('set', !!$('#q').value.trim());
+
   const q = $('#q').value.trim().toLowerCase();
   const city = $('#city').value;
   const recency = $('#recency').value;
   const here = companies.map((c) => inScope(c, covers)).filter(Boolean);
+  // The openness control's one non-default option states its own yield for
+  // the open plate, before the click: 92% of postings say nothing (note 03),
+  // so zero is this filter's common answer. Round 5: at zero the control
+  // LEAVES THE ROW — round 4's disabled select was honest but spent a prime
+  // filter slot on permanent furniture. Its fact now prints as a one-line
+  // apparatus note under the bank, and the control returns the moment a
+  // plate has a nonzero bucket. The count ignores the other filters — it is
+  // what this option ALONE would show here.
+  const openN = here.filter(opensToForeignHires).length;
+  const openSel = $('#openness');
+  openSel.options[1].textContent = `Open to foreign hires — ${count(openN)}`;
+  const fchip = $('#fchip');
+  if (!openN) {
+    if (openSel.value !== 'any') openSel.value = 'any';
+    openSel.closest('label').hidden = true;
+    fchip.hidden = false;
+    fchip.textContent = 'Foreign-hires filter withdrawn: no posting in '
+      + `${scopeName()} said yes to visa sponsorship or hiring from abroad on `
+      + 'this snapshot — and silence is not a no (note 03).';
+  } else {
+    openSel.closest('label').hidden = false;
+    fchip.hidden = true;
+  }
   const shown = here
     .filter((c) => c.name.toLowerCase().includes(q))
     .filter((c) => city === 'any' || c.cities.includes(city))
@@ -497,17 +2070,291 @@ function render() {
     .filter((c) => recency === 'any' || (c.date != null && days(c.date, snapshot) <= +recency))
     .sort(sorts[$('#sort').value]);
 
-  $('#list').replaceChildren(...shown.map(row));
+  // `prev` feeds the atlas index discipline: indexRow() suppresses the
+  // coordinate ink on a line whose reference equals the line above, so the
+  // gutter reads as an index (quiet until the plate turns), not wallpaper.
+  let prev = null;
+  const rows = shown.map((c) => {
+    const r = gridref(c.countries);
+    const node = indexRow(c, r === prev);
+    node.dataset.reqs = c.roles.length;   // the tier rules below read this
+    prev = r;
+    return node;
+  });
+  // Round 9: the split. The board keeps the first entries beside the sticky
+  // sheet; a register long enough to outrun any sheet continues in the
+  // full-width spread below, refs unbroken. Short registers stay whole —
+  // a spread of four lines is a caption, not a spread.
+  const CAPB = 16;
+  const split = shown.length > CAPB * 2;
+  // Unhidden BEFORE the balance pass below measures it: a hidden board
+  // measures zero high, and a balance struck against zero keeps nothing.
+  $('#board').hidden = !shown.length;
+  $('#index').replaceChildren(...(split ? rows.slice(0, CAPB) : rows));
+  $('#spreadrows').replaceChildren(...(split ? rows.slice(CAPB) : []));
+  $('#spread').hidden = !split;
+  // The sheet always shows one worked entry — the reader's pick while it is
+  // still on the board, else the first line — so a gazetteer never opens to a
+  // blank plate, and the honest-absence rules are visible without a click.
+  const at = shown.length
+    ? Math.max(0, shown.findIndex((c) => c.name === selectedName)) : -1;
+  // The crosshair's map arm: the open entry's marker(s) hold a red ring,
+  // cleared first so yesterday's selection never lingers on the chart.
+  for (const cell of markers()) cell.classList.remove('sel');
+  if (at >= 0) {
+    selectedName = shown[at].name;
+    rows[at].setAttribute('aria-current', 'true');
+    entry(shown[at]);
+    for (const cell of markers()) {
+      if (shown[at].countries.includes(cell.dataset.country)) cell.classList.add('sel');
+    }
+  } else {
+    selectedName = null;
+    SHEET.replaceChildren();
+  }
+  placeSheet(rows[at] || null);
+  // Round 2: the board balances to the entry. A short gazetteer entry used to
+  // leave several hundred pixels of bare paper under its closing rule while
+  // sixteen index rows ran on beside it. Now the top register keeps only as
+  // many rows as the open entry's height covers (six at least, and the spread
+  // keeps substance), so the two columns close together. A selected row that
+  // falls past the cut takes its entry with it: the sheet re-berths beside it
+  // in the spread, which is where the reader's eye already is. Measured, not
+  // guessed — the sheet is in the document by now.
+  if (split && at >= 0 && !narrow.matches
+      && SHEET.parentElement === $('#board')) {
+    const rowH = rows[0].offsetHeight || 1;
+    const keep = Math.max(6, Math.min(rows.length - 5, 28,
+      Math.round(SHEET.offsetHeight / rowH)));
+    if (keep !== CAPB) {
+      $('#index').replaceChildren(...rows.slice(0, keep));
+      $('#spreadrows').replaceChildren(...rows.slice(keep));
+      if (at >= keep) placeSheet(rows[at]);
+    }
+  }
+  if (split) {
+    // The continuation states a count, never a ref range: refs are citations
+    // struck in canonical order, so under any other sort a range would lie.
+    const more = $('#spreadrows').querySelectorAll('.irow').length;
+    $('#spreadlabel').textContent =
+      `Register · continued — ${count(more)} further of ${count(shown.length)} entries`;
+    $('#spread').hidden = !more;
+  }
+  // Round 3: the hand-fold. On a phone the full register printed a 9,400px
+  // page; past the first two-score entries the spread now folds behind its
+  // own continuation rule, stated as a count. Nothing is dropped — one press
+  // prints the rest — and the open entry can never fold: the cut steps past
+  // it, so the berthed sheet always sits beside a printed line.
+  $('#spread .spreadfold')?.remove();
+  if (split && narrow.matches && !spreadOpen) {
+    const tail = [...$('#spreadrows').querySelectorAll('.irow')];
+    const cut = Math.max(40 - CAPB, at + 1 - CAPB);
+    if (tail.length > cut + 8) {
+      for (const r of tail.slice(cut)) r.hidden = true;
+      const fold = el('button', 'spreadfold',
+        `Register continued — show ${count(tail.length - cut)} more entries`);
+      fold.type = 'button';
+      fold.addEventListener('click', () => { spreadOpen = true; render(); });
+      $('#spread').append(fold);
+    }
+  }
+  tierRules();
+  // The berthed sheet arrives where the reader is, smoothly: only after a row
+  // CLICK, and only where the sheet files inline (narrow screens, the spread)
+  // — a filter change or a desktop split selection never moves the page.
+  if (wantScroll && at >= 0 && SHEET.parentElement !== $('#board')) {
+    const row = rows[at];
+    requestAnimationFrame(() =>
+      row.scrollIntoView({ behavior: 'smooth', block: 'start' }));
+  }
+  wantScroll = false;
   // Three ways to show nothing, and they are three different facts: a build that
   // listed nobody, a country nobody was hiring in, and filters that met in an
   // empty corner. One sentence for all three would be the ambiguous zero.
-  $('#status').textContent = shown.length
-    ? `${shown.length} of ${companies.length} companies`
-    : !companies.length
+  // A shown plate states its designation the way an atlas sheet does — the
+  // number struck as a stamp, then the sheet range its scope covers on the
+  // masthead grid, then the count. The empty states stay plain sentences:
+  // a stamp certifies a sheet that exists.
+  if (shown.length) {
+    // One vocabulary (round 1): the atlas binds PLATES, the index prints
+    // REFS — "chart" said the same thing in a third register and is gone.
+    // A country plate states its ref and anchor; Plate 01 states its range.
+    const chs = PLATE.filter(([n]) => covers.includes(n));
+    let sheetEl;
+    if (chs.length === 1) {
+      sheetEl = el('span', 'psheet', `${chs[0][1]} · ${dms(chs[0][2], chs[0][3])}`);
+    } else {
+      // Round 3: "Plates 02–16" was the page's one broken promise — a span
+      // dressed like its working neighbours that did nothing. It is now the
+      // door it looked like: the control that opens the plate index.
+      sheetEl = el('button', 'psheet pib');
+      sheetEl.type = 'button';
+      sheetEl.setAttribute('aria-controls', 'pindex');
+      sheetEl.setAttribute('aria-expanded', String(indexOpen));
+      const chev = el('span', 'pchev', indexOpen ? '▴' : '▾');
+      sheetEl.append(el('span', null, 'Plates 02–16 · index '), chev);
+      sheetEl.addEventListener('click', () => {
+        indexOpen = !indexOpen;
+        $('#pindex').hidden = !indexOpen;
+        sheetEl.setAttribute('aria-expanded', String(indexOpen));
+        chev.textContent = indexOpen ? '▴' : '▾';
+      });
+    }
+    // Round 6: at a hand's width the register header carries the COUNT and
+    // nothing else. "Plate 01 · all countries" was struck five times before the
+    // first company row — masthead stamp, index strip, this line's stamp, this
+    // line's scope name, and again beside the stepper — so the reader walked
+    // four restatements to reach the register. The scope name is nested rather
+    // than hidden as a sibling, so the interpunct beside it never dangles; the
+    // wide sheet, which has the room, keeps both.
+    const tally = el('span');
+    tally.append(el('span', 'pscope', `${activeCountry || 'All countries'} — `),
+                 el('span', null, `${shown.length} of ${companies.length} companies`));
+    $('#status').replaceChildren(
+      el('span', 'pstamp', `Plate ${plateNo(activeCountry)}`),
+      el('span', 'psep', '·'),
+      sheetEl,
+      el('span', 'psep', '·'),
+      tally,
+      folioMark());
+  } else {
+    // Four empty states, four different facts: an empty build; a plate we
+    // read with nobody hiring — said with a bearing toward where the
+    // register's mass is, so an empty plate is a finding with a way onward,
+    // not a dead end; the openness filter meeting the 92%-silent field
+    // (note 03); and filters meeting in an empty corner.
+    const tops = PLATE.map(([n]) => [n, listedIn([n])])
+      .filter(([, n]) => n).sort((a, b) => b[1] - a[1]);
+    // The folio rides the empty states too: an empty plate is a finding, and
+    // the corner mark is its way onward to the next plate with something on it.
+    $('#status').replaceChildren(el('span', null, !companies.length
       ? 'This snapshot listed no companies. The build report says why for each one.'
       : !here.length
-        ? `No company we could check had an open role in ${scopeName()} on this snapshot.`
-        : 'No company matches these filters.';
+        ? `No company we could check had an open role in ${scopeName()} on this `
+          + `snapshot — a plate we read, with nobody hiring.`
+          + (tops.length
+             ? ` Most of the register sits on Plate ${plateNo(tops[0][0])} · `
+               + `${tops[0][0]} — ${count(tops[0][1])} of its `
+               + `${count(companies.length)} companies.`
+             : '')
+        : $('#openness').value !== 'any' && !openN
+          ? `No posting in ${scopeName()} said yes to visa sponsorship or `
+            + `hiring from abroad. 92% of the postings we measured say nothing `
+            + `at all, and a posting that says nothing is not a no — note 03.`
+          : 'No company matches these filters.'),
+      folioMark());
+  }
+  seps();
+  // The board is a table of rows that exist; with nothing to list, showing
+  // its rules and head strip would claim a table is there. (Hidden/unhidden
+  // where the rows are placed, above — before the balance pass measures.)
+  fitPlaces();
+}
+
+// Round 5, the spread's scale bands: 103 continued entries in three identical
+// columns were a gray wall with no foothold. Under the register's canonical
+// sort the count runs monotonically, so the spread now prints a small mono
+// threshold rule where the tier drops — 10+ / 2–9 / 1 open roles — the way an
+// atlas separates its scale bands. Only under the open-roles sort: under any
+// other order the tiers are not bands, and a rule would lie. The walk starts
+// from the board's last printed line, so a band that began up in the split
+// register never restates itself at the spread's top.
+function tierRules() {
+  for (const t of document.querySelectorAll('#spreadrows .trule')) t.remove();
+  if ($('#sort').value !== 'reqs' || $('#spread').hidden) return;
+  const tier = (n) => (n >= 10 ? '10+' : n >= 2 ? '2–9' : '1');
+  const last = [...document.querySelectorAll('#index .irow')].pop();
+  let prev = last ? tier(+last.dataset.reqs || 0) : null;
+  for (const r of document.querySelectorAll('#spreadrows .irow:not([hidden])')) {
+    const t = tier(+r.dataset.reqs || 0);
+    if (t !== prev) {
+      r.before(el('div', 'trule',
+        `${t} ${t === '1' ? 'open role' : 'open roles'}`));
+    }
+    prev = t;
+  }
+}
+
+// Round 4, one truncation grammar: every register line elides places by
+// dropping WHOLE names into its +N count, measured where the line actually
+// sits — the wide index and the narrow spread columns speak identically.
+// A lone place too long even alone wraps whole rather than slicing; the
+// CSS ellipsis remains only as a safety net this pass keeps from firing.
+function fitPlaces() {
+  for (const cell of document.querySelectorAll('.iwhere')) {
+    const all = (cell.dataset.places || '').split('|').filter(Boolean);
+    if (!all.length || !cell.clientWidth) continue;   // a folded row measures zero
+    const ipl = cell.querySelector('.ipl'), ipn = cell.querySelector('.ipn');
+    ipl.style.whiteSpace = '';
+    let k = all.length;
+    for (; k >= 1; k--) {
+      ipl.textContent = all.slice(0, k).join(' · ');
+      ipn.textContent = k < all.length ? `+${all.length - k}` : '';
+      if (ipl.scrollWidth <= ipl.clientWidth + 1) break;
+    }
+    if (k < 1) {
+      ipl.textContent = all[0];
+      ipn.textContent = all.length > 1 ? `+${all.length - 1}` : '';
+      ipl.style.whiteSpace = 'normal';
+    }
+  }
+}
+
+// The status line's punctuation, made wrap-aware: an interpunct exists to
+// separate two segments on ONE line, so a separator whose neighbours have
+// parted onto different lines hides — no dot may dangle at a line's end or
+// open a line. Re-run on every status build and on resize.
+function seps() {
+  for (const sep of document.querySelectorAll('#status .psep')) {
+    sep.style.visibility = '';
+    const prev = sep.previousElementSibling, next = sep.nextElementSibling;
+    const s = sep.getBoundingClientRect();
+    if ((prev && s.top >= prev.getBoundingClientRect().bottom - 1)
+     || (next && next.getBoundingClientRect().top >= s.bottom - 1)) {
+      sep.style.visibility = 'hidden';
+    }
+  }
+}
+
+// The folio's mechanism: plates step in atlas order, every one of them, and
+// the walk wraps at either end. Round 6: the stepper used to skip the empty
+// plates while the counter beside it read "01 / 16" — so the next arrow from
+// Plate 01 jumped to Plate 03 and the mark said the page had turned once. Of
+// sixteen plates only four carry companies; a stepper that visits four of them
+// and counts to sixteen is a counter that lies. It now visits all sixteen, and
+// an empty plate prints the finding it already had — a plate we read, with
+// nobody hiring, and a bearing to where the register's mass is (render()).
+function plateStep(d) {
+  if (!companies.length) return;
+  const seq = [null, ...PLATE.map(([n]) => n)];
+  const i = Math.max(0, seq.indexOf(activeCountry));
+  activeCountry = seq[(i + d + seq.length) % seq.length];
+  render();
+}
+
+// The folio corner: the open plate's number as a dog-eared page mark —
+// "03 / 16" — its halves stepping to the previous and next plate of the
+// sixteen the mark counts. Built fresh per render because the number is
+// the render's.
+function folioMark() {
+  const f = el('span');
+  f.id = 'folio';
+  const step = (d, glyph, lbl) => {
+    const b = el('button', 'fstep', glyph);
+    b.type = 'button';
+    b.title = lbl;
+    b.setAttribute('aria-label', lbl);
+    b.addEventListener('click', () => plateStep(d));
+    return b;
+  };
+  // Round 6: the stepper's caption is gone. It restated the plate name the
+  // masthead stamp had already struck, and it existed only to fill the line
+  // the folio took for itself at a hand's width; the folio now rides the
+  // count's line, so there is no empty half to fill.
+  f.append(step(-1, '‹', 'Previous plate'),
+           el('span', 'fno', `${plateNo(activeCountry)} / 16`),
+           step(1, '›', 'Next plate'));
+  return f;
 }
 
 function load(data) {
@@ -519,6 +2366,9 @@ function load(data) {
   }
   companies = data.companies;
   snapshot = data.snapshot;
+  // The citation register: canonical order, struck once (see REFS above).
+  REFS = Object.fromEntries([...companies].sort(sorts.reqs)
+    .map((c, i) => [c.name, String(i + 1).padStart(3, '0')]));
   $('#snapshot').textContent = snapshot;
   $('#snapshot').dateTime = snapshot;
   // The integrity footer (T5.3, SPEC feature 12). The rows can only say how many
@@ -533,18 +2383,48 @@ function load(data) {
     + `could find, or one we could not read — so they are left off rather than shown as not `
     + `hiring. This is not every funded company hiring across the fifteen countries we watch; it `
     + `is every one we could prove.`;
+  // The footer closes the loop the masthead opens: the same snapshot date,
+  // stated where the integrity claims are made. From the data, never Date.now.
+  $('.sources').append(el('span', null, ` · snapshot ${snapshot}`));
   $('#city').append(...[...new Set(companies.flatMap((c) => c.cities))].sort()
     .map((city) => el('option', null, city)));
-  // Built here rather than in the markup because a tab states its count, and the
-  // count is a fact about the data -- a tab strip that rendered before the fetch
-  // would show seven zeros it has no build behind, the same claim the integrity
-  // footer refuses to make. `select` renders the list.
-  tabs();
-  select(GROUPS[0]);
+  // Built here rather than in the markup because a chip states its count, and
+  // the count is a fact about the data -- a chart rendered before the fetch
+  // would show sixteen zeros it has no build behind, the same claim the
+  // integrity footer refuses to make.
+  plate();
+  render();
 }
 
 $('#controls').addEventListener('input', render);
 $('#controls').addEventListener('change', render);   // some agents/browsers fire only this
+
+// The fold's hinge (the CSS shows the button only under 52rem). Folding is
+// presentation: values persist, and render()'s tally says what is set.
+const ffold = $('#ffold');
+const setFold = (folded) => {
+  $('#controls').classList.toggle('folded', folded);
+  ffold.setAttribute('aria-expanded', String(!folded));
+  ffold.querySelector('.chev').textContent = folded ? '▾' : '▴';
+};
+ffold.addEventListener('click',
+  () => setFold(!$('#controls').classList.contains('folded')));
+const handMQ = matchMedia('(max-width: 52rem)');
+setFold(handMQ.matches);   // a phone opens with the bank shut, a desk never does
+handMQ.addEventListener('change', (e) => setFold(e.matches));
+
+// A resize re-measures the two things that are measured rather than declared:
+// the register lines' place lists, and the status line's punctuation. Both are
+// presentation; no filter state is touched.
+window.addEventListener('resize', () => { fitPlaces(); seps(); });
+
+// Sequential access the map alone cannot give: the arrow keys drive the
+// folio's page-turn, unless the reader is typing in a control.
+document.addEventListener('keydown', (e) => {
+  if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+  if (e.target.closest?.('input, select, textarea')) return;
+  plateStep(e.key === 'ArrowRight' ? 1 : -1);
+});
 
 // no-cache, not no-store: revalidate every load, but let a 304 keep the bytes.
 // Neither the JSON nor this page carries Cache-Control, so a browser is free to
@@ -553,7 +2433,17 @@ $('#controls').addEventListener('change', render);   // some agents/browsers fir
 // a site whose whole claim is "as of the snapshot date", that is the bug.
 fetch(src, { cache: 'no-cache' })
   .then((r) => r.ok ? r.json() : Promise.reject(new Error(`HTTP ${r.status}`)))
-  .then(load)
+  .then(async (data) => {
+    // The descriptions are enrichment, never a dependency: their fetch has
+    // already resolved to {} on any failure, so a missing file costs nothing
+    // but the blocks. Awaited before load() so the first render is the full one.
+    const found = await descriptionsReady;
+    DESCRIPTIONS = found && typeof found === 'object' && !Array.isArray(found)
+      ? found : {};
+    const rep = await buildReady;
+    BUILDREP = rep && typeof rep === 'object' && !Array.isArray(rep) ? rep : null;
+    load(data);
+  })
   .catch((e) => { $('#status').textContent = `Could not load ${src}: ${e.message}`; });
 </script>
 </body>
