@@ -1398,3 +1398,62 @@ Checks:
   lint -> e2e:console-clean -> the grep above, shown in output
 Out of scope: renaming the repo directory or remote (human).
 ```
+
+---
+
+## E9 · Registry expansion
+
+> India carries a registration badge (T4.3, T4.4) because the site was India-only
+> when that badge was built. It no longer is: the UK plate is now the largest at
+> **224 of 322 listed companies**, against India's 118. This epic carries the
+> badge to the registers covering the larger plates, one country at a time, on
+> T4.4's rules. Later candidates, in rough order of how cheaply they are reached:
+> France (Sirene), Japan (corporate number), Australia (ABN). None of them is T9.1.
+
+### T9.1 — UK Companies House registration badge `todo` · *Phase 6*
+> **Deferred: not scheduled until a human registers an API key.** Companies House
+> issues free keys at developer.company-information.service.gov.uk. The key has to
+> reach the repo as a secret *and* the local environment, or the pull cannot be run
+> here at all. Nothing in this task starts before that.
+
+Companies House is the UK register: a free official REST API returning JSON over
+all ~5M UK companies, live rather than a frozen extract, with a search endpoint
+and a 600-requests-per-5-minutes limit.
+
+Two of T4.4's rules carry over unchanged: **the register may JOIN a company's
+words but never SPLIT one**, and the tier reaching a name that says more than the
+company's own plus a legal form is held for review rather than published. What is
+new per country is the legal-form vocabulary — `Ltd`, `Limited`, `PLC`, `LLP` —
+and that UK registered names do not behave like Indian ones: there is no `INDIA`
+infix to expect, `(UK)` turns up mid-name, and a trading name is routinely not the
+registered name.
+
+The badge can say plainly **"Registered in the UK"**. T4.4's careful wording
+existed because MCA's slice was foreign subsidiaries only, so a missing CIN said
+nothing about a company; Companies House covers everyone, so the plain claim is
+the honest one. The badge links to the public
+find-and-update.company-information.service.gov.uk page for the company number, so
+a reader can check it — proven, not claimed.
+```
+Acceptance (observable):
+  A matched company displays a company number that resolves on the public
+  Companies House page, linked from the badge. Match confidence is recorded;
+  anything below threshold is held for review and appears NOWHERE on the site —
+  a wrong company number on a public site is worse than none.
+  Zero false positives on a hand-labelled pair set.
+  Company status is displayed verbatim from the register: a dissolved or
+  in-liquidation company never renders a badge that implies "Active".
+  The nightly READS A CACHED SNAPSHOT and never calls the API inline. A missing
+  key, a dead upstream, or a rate-limited pull degrades to "no badge" and never
+  fails the build (E4 doctrine).
+Checks:
+  lint -> typecheck -> unit:test_hand_labelled_pairs_zero_false_positives,
+          test_below_threshold_held_for_review, test_dissolved_status_verbatim,
+          test_build_reads_cache_not_api, test_absent_key_degrades
+       -> integration:pull respects the 600/5min limit with backoff
+Out of scope:
+  - other countries' registers — France Sirene, Japan corporate number and
+    Australia ABN are the next candidates, and are NOT this task
+  - directors and PSC data — personal data, helps nobody here, same rule as
+    T4.4's DIN exclusion
+```
