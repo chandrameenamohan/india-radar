@@ -268,13 +268,16 @@
 
   /* ---------------------------------- controls ---------------------------- */
   /* auto-fit rather than fixed spans: the visible set varies by plate (the
-     India-only controls come and go), and a fixed grid leaves whichever
-     control is last orphaned on a row of its own. Round 2 tightens the
-     minimum so the full bank of EIGHT — seven filters and the sort — sits on
-     one baseline at the 78rem measure: 8 × 7.5rem + 7 × 1rem = 67rem ≤ 74rem.
-     "Sort by" rides the same rule as the filters, never a row of its own. */
+     India-only control comes and goes), and a fixed grid leaves whichever
+     control is last orphaned on a row of its own. Round 2 tightened the
+     minimum so the whole bank sits on one baseline at the 78rem measure;
+     T5.4 adds DEPARTMENT and re-measures it: 9 × 6.6rem + 8 × 1rem = 67.4rem
+     ≤ 74rem, so nine controls — eight filters and the sort — still print on
+     one line. "Sort by" rides the same rule as the filters, never a row of
+     its own. A closed select clips its longest option label at this measure;
+     the open list does not, which is where the label is read. */
   #controls {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(7.5rem, 1fr));
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(6.6rem, 1fr));
     gap: 1.1rem 1rem;
     padding-top: 1.35rem; padding-bottom: 1.5rem;
     border-bottom: 2px solid var(--rule-2);
@@ -338,8 +341,14 @@
      honest furniture. At zero yield the openness control now leaves the row
      entirely and its fact prints here: one apparatus line under the bank,
      spanning it, in the page's smallest voice. */
+  /* T5.4: the note became notes. RAISED and FUNDED filter on fields only a
+     ninth of the register states, and DEPARTMENT is read off a title rather
+     than published — each states its own coverage here while it is set, in
+     the same voice and the same place as the withdrawn-filter line. */
   #fchip { grid-column: 1 / -1; margin: -.2rem 0 0; color: var(--ink-3);
            font-size: .75rem; line-height: 1.5; overflow-wrap: anywhere; }
+  #fchip .fnote { margin: 0; }
+  #fchip .fnote + .fnote { margin-top: .3rem; }
   #fchip[hidden] { display: none; }
   @media (max-width: 52rem) {
     /* The folded bank shows only search; the withdrawn-filter note folds too. */
@@ -535,9 +544,19 @@
      had turned the accent into texture. Red marks the LIVE line only: the
      open entry, the pointed-at row, the plate preview's held rows. */
   .ireqs { color: var(--ink); font-weight: 600; font-size: .8125rem;
-           white-space: nowrap; }
+           white-space: nowrap; text-align: right; }
   .irow:hover .ireqs, .irow[aria-current="true"] .ireqs,
   .irow.held .ireqs { color: var(--red); }
+  /* T5.4: why this row surfaced. The search reads role titles as well as
+     company names, so a company can now appear with nothing in its NAME to
+     show for it — "matches 2 roles" under the count is the answer to "why is
+     this here", struck in red because a search hit is live state, and printed
+     only while a term is in the box. The entry says the same thing at the
+     other scale: the matching titles themselves print red. */
+  .ireqs .ihit { display: block; margin-top: .14rem; color: var(--red);
+                 font-size: 9.5px; font-weight: 700; letter-spacing: .09em;
+                 text-transform: uppercase; }
+  .irow[aria-current="true"] .ireqs .ihit { color: var(--red); }
   /* The plate's question, answered by the index: pointing at a masthead cell
      ghosts every row with no role in that country and turns the matching
      rows' coordinates red. A preview, never a filter — nothing fires until
@@ -758,6 +777,10 @@
      hover reveals the links is a list that reads as prose. */
   .roles li a::after { content: "\00a0↗"; font-size: .8em; color: var(--ink-3); }
   .roles li a:hover::after { color: var(--red); }
+  /* The searched-for title, in the entry: the same red the register's mark
+     uses, so the row's "matches 2 roles" and the two lines it means are one
+     statement read at two scales. */
+  .roles li.hit a, .roles li.hit a::after { color: var(--red); }
   .roles .loc { color: var(--ink-3); font-weight: 400; }
   .roles li.more { counter-increment: none; }
   .roles li.more::before { content: none; }
@@ -962,11 +985,23 @@
     <span class="micro" id="fcount"></span>
     <span class="chev" aria-hidden="true">▴</span>
   </button>
-  <label class="q-always"><span class="lbl">Search</span><input id="q" type="search" placeholder="company name" autocomplete="off"></label>
-  <!-- India cities, and only India's: the city filter is the India view's, and
-       SPEC v2 keeps the per-country enrichments out of scope. So it renders on
-       the tabs whose scope contains India and nowhere else (T8.5). -->
-  <label class="india-only"><span class="lbl">Hiring city</span><select id="city"><option value="any">Any city</option></select></label>
+  <!-- T5.4: the box reads role titles too. A company matches on its own name OR
+       on any title it is hiring for, and the register says which — a name match
+       is visible in the name, a title match prints its count under the row's
+       roles. So the placeholder states both, because a search box that silently
+       widened would just look like it had started returning strangers. -->
+  <label class="q-always"><span class="lbl">Search</span><input id="q" type="search" placeholder="company or role title" autocomplete="off"></label>
+  <!-- T5.4: the city filter is every plate's now. India's cities ship with the
+       build (src/india.py canonicalises the spellings); for the other fourteen
+       countries no such field exists, so the list is read off the plate's own
+       location strings — conservatively, and said aloud in note 06. -->
+  <label><span class="lbl">Hiring city</span><select id="city"><option value="any">Any city</option></select></label>
+  <!-- T5.4. Not a field any board publishes: the department is derived from the
+       title, so the options carry their live counts, a title we cannot place
+       stays reachable as Unclassified rather than being guessed into a bucket,
+       and the apparatus note under the bank states the provenance while the
+       filter is set. -->
+  <label><span class="lbl">Department</span><select id="dept"><option value="any">Any department</option></select></label>
   <!-- SPEC feature 10's remote-only filter. T5.2 left it out deliberately: it
        filters on a field no row carried until T4.1, and a control that can only
        return nothing is worse than no control. -->
@@ -1009,8 +1044,9 @@
   </select></label>
   <!-- Round 5: where the foreign-hires filter has nothing to offer it leaves
        the row (a permanently disabled select is furniture, not honesty) and
-       its fact prints here instead — an apparatus note, filled by render(). -->
-  <p id="fchip" hidden></p>
+       its fact prints here instead — an apparatus note, filled by render().
+       T5.4 files the coverage notes here too, one line per set filter. -->
+  <div id="fchip" hidden></div>
 </div>
 
 <p id="status" role="status">Loading…</p>
@@ -1059,6 +1095,13 @@
     <p>The MCA data we hold lists companies registered in India as subsidiaries of a parent
       incorporated abroad. An India-founded company cannot appear in it at all, so a missing CIN
       says nothing about a company — and a present one is a registration, not an endorsement.</p>
+    <p>Two of the filters read facts no board publishes. A role's <b>department</b> is derived
+      from its title by keyword — 86% of the 5,580 roles at this snapshot carry a title we could
+      place, and
+      the rest stay Unclassified rather than being guessed into a bucket. A plate's <b>hiring
+      city</b> list is India's from the build, and elsewhere is parsed off the location strings:
+      a place is taken only where the board named its country beside it, so a posting that says
+      "Remote — Germany", or lists five cities at once, contributes no city at all.</p>
     <p>The plates and their coordinates are this page's own apparatus. Every marker sits at one
       fixed anchor point per country — the capital, except India's, which is Bengaluru — so a
       coordinate here places a country's marker, never a company's office. Each small dot is one
@@ -1312,6 +1355,177 @@ const where = (c, max = 3) => {
 // raised (schema v3). That is an absent fact, so it reads as one -- and it can
 // never satisfy "funded in the last 90 days", which would be a claim.
 const when = (c) => c.date || 'date not stated';
+
+// ---------------------------- the city parser (T5.4) ------------------------
+// The one place this renderer derives a fact instead of printing one, and the
+// footer says so (note 06). `cities` ships with the build for India alone
+// (src/india.py, which also canonicalises Bangalore/Bengaluru); the other
+// fourteen countries have no such field, so a plate's city list is read off the
+// location strings its own roles carry.
+//
+// Conservative by construction, because a wrong city is worse than no city: a
+// piece yields a place only where the board itself put the country beside it
+// ("London, UK", "Agde, Hérault, France", "Sydney, New South Wales, Australia")
+// or where the whole string is one bare place ("Munich"). A semicolon dump of
+// five cities, "Remote — India", "Spain (Remote)", a bare country, a piece whose
+// tail is some other country — all contribute nothing.
+//
+// Measured over the published 5,580 roles: 2,734 of the 4,490 non-India roles
+// yield at least one city, the fifteen plates come out at 121 places once the
+// spellings are folded, and no place is filed under two countries. What residue
+// there is is what the boards themselves typed:
+// "Tallinn, Spain (Remote)" puts Tallinn on the Spain plate, because that is
+// what the posting says.
+const words = (s) => new Set(s.split('|'));
+// What each covered country calls itself on a board, ISO codes included. Only
+// ever tested against a whole trailing segment, so `in` and `no` cannot match
+// inside a word.
+const CWORDS = {
+  'India': words('india|ind|in'),
+  'United Kingdom': words('united kingdom|uk|u.k.|gb|england|scotland|wales|northern ireland|great britain|britain'),
+  'Ireland': words('ireland|republic of ireland|ie'),
+  'Germany': words('germany|deutschland|ger|de'),
+  'Netherlands': words('netherlands|the netherlands|holland|nl'),
+  'France': words('france|fr'),
+  'Spain': words('spain|espana|españa|es'),
+  'Sweden': words('sweden|sverige|se'),
+  'Denmark': words('denmark|danmark|dk'),
+  'Norway': words('norway|norge|norvegia|no'),
+  'Finland': words('finland|suomi|fi'),
+  'Japan': words('japan|jp'),
+  'Singapore': words('singapore|sg'),
+  'Australia': words('australia|aus|au'),
+  'New Zealand': words('new zealand|nz'),
+};
+const ANYCTRY = new Set(Object.values(CWORDS).flatMap((s) => [...s]));
+// Everything else a board writes where a city would go: countries outside the
+// fifteen plates, continents, trading regions, and the administrative units
+// that sit between a city and its country. Measured from the 722 distinct
+// location strings this dataset holds — not a gazetteer, a stop-list.
+const NOTACITY = words(
+  'canada|united states|united states of america|us|usa|u.s.|israel|nigeria|poland|portugal|'
+  + 'italy|croatia|austria|switzerland|belgium|bulgaria|romania|serbia|czech republic|lithuania|'
+  + 'estonia|georgia|turkey|hong kong|hong kong sar|china|taiwan|malaysia|indonesia|philippines|'
+  + 'korea|south korea|qatar|uae|dubai|mexico|brazil|europe|european union|emea|apac|apj|americas|'
+  + 'north america|asia|middle east|africa|any location|anywhere|worldwide|global|international|'
+  + 'ile-de-france|karnataka|maharashtra|telangana|tamil nadu|uttar pradesh|haryana|kerala|'
+  + 'new south wales|victoria|queensland|tasmania|western australia|australian capital territory|'
+  + 'bavaria|bayern|hesse|sachsen|brandenburg|capital region of denmark|central|uusimaa|'
+  + 'north holland|south holland|new delhi');
+// A leading mode word ("Remote - ", "Hybrid in ") and a trailing one, plus the
+// office furniture a board suffixes ("Munich Office", "Stockholm HQ").
+const MODEHEAD = /^(remote|remotely|hybrid|onsite|on-?site|anywhere|all)\b[\s:,–—-]*(in\s+(the\s+)?)?/i;
+const PLACETAIL = /\s+(remote|hybrid|onsite|on-?site|offices?|hq|area|region|prefecture)$/i;
+const SEGSPLIT = /[,\/|]|\s+or\s+|\s+l\s+|\s*[-–—]\s+|\s+[-–—]\s*/i;
+// The two spellings the build folds for India are folded here too, plus the two
+// endonyms these boards print beside their English names.
+const CITYALIAS = { 'münchen': 'Munich', 'københavn': 'Copenhagen', 'bangalore': 'Bengaluru' };
+function cityOf(piece, country, alone) {
+  const segs = String(piece).replace(/\([^)]*\)/g, ' ').split(SEGSPLIT)
+    .map((s) => {
+      let t = s.replace(MODEHEAD, '').trim();
+      t = t.replace(PLACETAIL, '').trim().replace(PLACETAIL, '').trim();
+      return t.replace(/\s+/g, ' ').replace(/^[.\s–—-]+|[.\s–—-]+$/g, '');
+    })
+    .filter(Boolean);
+  if (!segs.length) return null;
+  if (CWORDS[country].has(segs[segs.length - 1].toLowerCase())) {
+    // "City, Region, Country" is the boards' one reliable three-part address.
+    // A third part we cannot name as a region — and that is not the city said
+    // twice, which Greenhouse does ("Berlin, Berlin, Germany") — is a LIST of
+    // places, and taking its first would put Los Angeles on the Singapore
+    // plate (measured: it did).
+    if (segs.length > 3) return null;
+    const mid = segs.length === 3 ? segs[1].toLowerCase() : null;
+    if (mid && !NOTACITY.has(mid) && !ANYCTRY.has(mid) && mid !== segs[0].toLowerCase()) return null;
+  } else if (!(alone && segs.length === 1)) {
+    // No country beside it: only a string that is nothing but one place is
+    // safe, because the role's own country came from that same string.
+    return null;
+  }
+  const head = segs[0], key = head.toLowerCase();
+  if (NOTACITY.has(key) || ANYCTRY.has(key) || key.startsWith('greater ')
+      || /\d/.test(head) || head.split(' ').length > 3 || head.length < 2) return null;
+  return CITYALIAS[key] || head;
+}
+// The cities one role names, parsed once per role and remembered: render() runs
+// on every keystroke, and 5,580 roles re-parsed per stroke is a filter box that
+// stutters.
+const CITYMEMO = new WeakMap();
+function roleCities(r) {
+  let found = CITYMEMO.get(r);
+  if (found) return found;
+  found = [];
+  // A role posted in two of the countries we cover has not said which of them
+  // its city belongs to, so it names none; India's cities are the build's.
+  if (r.countries.length === 1 && r.countries[0] !== 'India') {
+    for (const loc of r.locations) {
+      const pieces = String(loc).split(';');
+      for (const piece of pieces) {
+        const city = cityOf(piece, r.countries[0], pieces.length === 1);
+        if (city && !found.includes(city)) found.push(city);
+      }
+    }
+  }
+  CITYMEMO.set(r, found);
+  return found;
+}
+// One case-insensitive pass over a list of places, keeping the cased spelling —
+// a board that typed "london " must not put a second London in the select.
+const uniqCased = (list) => {
+  const seen = new Map();
+  for (const x of list) {
+    const k = x.toLowerCase();
+    if (!seen.has(k) || seen.get(k) === k) seen.set(k, x);
+  }
+  return [...seen.values()];
+};
+
+// --------------------------- departments (T5.4) -----------------------------
+// No board publishes a department, so this reads the title — a derivation, and
+// the page says so where it is used (the apparatus note) and where it is
+// explained (note 06). The map was built by measuring: every one of the 5,580
+// published role titles was classified, the buckets read by hand, and each rule
+// tightened until nothing absurd remained. It places 4,817 of them — 86.3% —
+// and the 763 it cannot are UNCLASSIFIED, an option of their own rather than a
+// silence, because a filter that quietly dropped a seventh of the register
+// would be the ambiguous zero in a new costume.
+//
+// FIRST MATCH WINS, and the order is the precedence: the more specialised craft
+// takes a title that names two. So a Product Designer is Design, not Product; a
+// Security Engineer is Security, not Engineering; a Technical Support Engineer
+// is Support; a Product Marketing Manager is Marketing. Go-to-market sits above
+// Engineering deliberately — a Sales Engineer and a Solutions Architect carry a
+// quota, and the title's sales verb is the load-bearing word. Operations is
+// last: it is where the general words (strategy, program, project) land once no
+// craft has claimed the title, never a bucket anything is guessed into.
+const UNCLASSIFIED = 'Unclassified';
+const DEPTS = [
+  ['Legal', /\blegal\b|counsel\b|paralegal|attorney|\bcompliance\b|regulatory affairs|contracts? manager/i],
+  ['Security', /security|infosec|appsec|cyber|penetration test|red team/i],
+  ['Data', /data scien|data analy|data engineer|analytics|machine learning|\bml (engineer|scientist|ops)|\bmlops\b|deep learning|research scientist|applied scientist|\bnlp\b|statistic|econometric/i],
+  ['Design', /designer|design (engineer|system|lead|manager|technologist)|product design|\bux\b|ui\/ux|user experience|user research|creative director/i],
+  ['Customer Success & Support', /customer success|customer support|customer experience|customer care|client success|support engineer|technical support|\bsupport\b|helpdesk|help desk|onboarding specialist|implementation|renewals?\b|professional services/i],
+  ['Marketing', /marketing|marketer|\bseo\b|\bsem\b|demand gen|content writer|copywriter|\bcommunications\b|\bbrand\b|social media|community manager|events? manager/i],
+  ['Sales', /\bsales\b|account (executive|manager|director|lead|partner|associate|representative|development)|\baccounts\b|business development|\bbdr\b|\bsdr\b|pre-?sales|solutions? (engineer|architect|consultant)|commercial|revenue|partnerships?\b|channel manager/i],
+  ['People/HR', /recruit|talent|\bpeople\b|human resources|\bhr\b|sourcer|compensation|benefits|payroll|learning and development/i],
+  ['IT', /\bit\b|information technology|systems administrator|sysadmin|desktop support|network administrator/i],
+  ['Finance', /financ|accounting|accountant|controller|treasur|\bfp&a\b|\btax\b|audit|billing/i],
+  ['Product', /product manager|product owner|product (lead|director|analyst|operations)|head of product|technical product|\bproduct\b/i],
+  ['Engineering', /engineer|developer|\bdevops\b|\bsre\b|site reliability|architect|programmer|technical lead|\bcto\b|full.?stack|front.?end|back.?end|\bqa\b|quality assurance|firmware|embedded|\bandroid\b|\bios\b|platform/i],
+  ['Operations', /operations|\bops\b|program manager|project manager|chief of staff|strategy|procurement|office manager|executive assistant/i],
+];
+// Remembered per title string, for the same reason the cities are.
+const DEPTMEMO = new Map();
+function deptOf(title) {
+  if (DEPTMEMO.has(title)) return DEPTMEMO.get(title);
+  let found = UNCLASSIFIED;
+  for (const [name, pattern] of DEPTS) {
+    if (pattern.test(title)) { found = name; break; }
+  }
+  DEPTMEMO.set(title, found);
+  return found;
+}
 
 // The India CTC benchmark, when one was found (65 of 116 measured). Absence is
 // the common case and renders as nothing at all -- no "salary unknown" line,
@@ -1652,8 +1866,10 @@ function goCountry(name) {
 // One role: what it's called, where it is, how it's worked, and what its posting
 // said about hiring from abroad. The title IS the apply link -- a separate
 // "apply" button beside it would be two controls for one destination.
-function roleItem(r) {
-  const item = el('li');
+function roleItem(r, q) {
+  // The searched-for title prints red — the register line's "matches 2 roles"
+  // and the two lines it counts, said at both scales (T5.4).
+  const item = el('li', q && r.title.toLowerCase().includes(q) ? 'hit' : null);
   item.append(link(r.url, r.title), el('span', 'loc', ` — ${placeLine(r.locations, 4)}`));
   // Absent is absent: 822 of 1,112 published India roles state no workplace at
   // all (Greenhouse never does), so a missing badge means "not stated", not
@@ -1670,7 +1886,7 @@ function roleItem(r) {
 // One index line: merged reference (row index · plate coordinate), the name
 // with its places beneath, and the count in red. The line is a button into
 // the sheet — the index is the master, the gazetteer entry the detail.
-function indexRow(c, repeated) {
+function indexRow(c, repeated, hits) {
   const reqs = c.roles.length;
   const ref = REFS[c.name] || '—';
   // Round 11: one anatomy for every line. Round 10 ran entries under five
@@ -1726,10 +1942,16 @@ function indexRow(c, repeated) {
     cell.append(el('span', 'ipl', places.join(' · ')), el('span', 'ipn', ''));
     namecell.append(cell);
   }
-  button.append(iref, namecell,
-    el('span', 'ireqs', `${reqs} ${reqs === 1 ? 'role' : 'roles'}`));
+  // T5.4: the search's receipt. A term that matched role titles rather than
+  // the company name leaves the row otherwise unexplained, so the count cell
+  // says how many titles it is in — printed only while a term is in the box.
+  const reqcell = el('span', 'ireqs', `${reqs} ${reqs === 1 ? 'role' : 'roles'}`);
+  const said = hits ? `matches ${count(hits)} ${hits === 1 ? 'role' : 'roles'}` : '';
+  if (said) reqcell.append(el('span', 'ihit', said));
+  button.append(iref, namecell, reqcell);
   button.setAttribute('aria-label',
-    `${c.name} — ${reqs} ${reqs === 1 ? 'role' : 'roles'} — open entry`);
+    `${c.name} — ${reqs} ${reqs === 1 ? 'role' : 'roles'}`
+    + `${said ? ` — ${said} by title` : ''} — open entry`);
   // Live cartography: pointing at an index line lights its cell(s) on the
   // masthead plate, so the static index up top answers the line under the
   // cursor. Presentation only — no filter state changes on hover.
@@ -1796,7 +2018,7 @@ narrow.addEventListener('change', () => render());
 // One gazetteer entry, filed on the sheet. The same facts and the same
 // honest-absence rules as every round: an absent description, salary, or
 // registration renders nothing at all.
-function entry(c) {
+function entry(c, q) {
   const reqs = c.roles.length;
 
   const meta = el('p', 'entrymeta');
@@ -1913,7 +2135,16 @@ function entry(c) {
   // the remainder as a count in red. One click shows every role — nothing is
   // withheld, only folded — and short lists never grow the extra control.
   const roles = el('ul', 'roles');
-  const items = c.roles.map(roleItem);
+  // Under a search the matching titles lead the list. The list folds at eight,
+  // and a company with a 236-role board can easily hold its ten matches past
+  // the fold — so a mark nobody scrolls to is a mark that does not explain
+  // anything. Ordering, not filtering: every role is still here, and the list
+  // returns to the board's own order the moment the box is empty.
+  const shownRoles = q
+    ? [...c.roles].sort((a, b) => Number(b.title.toLowerCase().includes(q))
+                                - Number(a.title.toLowerCase().includes(q)))
+    : c.roles;
+  const items = shownRoles.map((r) => roleItem(r, q));
   const CAP = 8;
   if (items.length > CAP + 2) {
     for (const li of items.slice(CAP)) li.hidden = true;
@@ -2010,18 +2241,92 @@ function render() {
     strip.setAttribute('aria-label', activeCountry
       ? 'Return to Plate 01 — all countries' : 'Plate 01 — all countries, open');
   }
-  // The India-only filters follow the India-only enrichments: on a tab with no
-  // India in it they are hidden AND cleared here, because a city filter holding
-  // "Bengaluru" while invisible is a Japan tab that silently shows nothing and
-  // gives the reader no control to blame.
+  // The MCA filter follows the India-only enrichment it reads: on a plate with
+  // no India in it, it is hidden AND cleared here, because a filter holding a
+  // value while invisible is a plate that silently shows nothing and gives the
+  // reader no control to blame. (The city filter left this class in T5.4 — it
+  // is every plate's now, rebuilt from the plate's own roles below.)
   for (const label of document.querySelectorAll('#controls .india-only')) {
     label.hidden = !covers.includes('India');
     if (label.hidden) label.querySelector('select').value = 'any';
   }
 
+  const q = $('#q').value.trim().toLowerCase();
+  const recency = $('#recency').value;
+  const here = companies.map((c) => inScope(c, covers)).filter(Boolean);
+
+  // ---- the two derived selects, rebuilt for the open plate ----
+  // Both are built from `here` and not from the filtered set: a list of options
+  // that shrank as you used the other filters would be a control describing
+  // itself rather than the plate. Both keep the reader's value where the new
+  // plate still offers it, and clear it where it does not — an invisible filter
+  // is one nobody can clear (the same rule the MCA control follows above).
+  const fill = (sel, opts, head) => {
+    // The signature carries the LABELS, not just the values: a department
+    // option states a count, and two plates can hold the same departments at
+    // different counts — signed on values alone, the second plate would print
+    // the first one's numbers.
+    const sig = opts.map((o) => o.join(' ')).join('|');
+    if (sel.dataset.sig === sig) return;
+    const was = sel.value;
+    sel.replaceChildren(el('option', null, head), ...opts.map(([v, label]) => {
+      const o = el('option', null, label);
+      o.value = v;
+      return o;
+    }));
+    sel.options[0].value = 'any';
+    sel.value = opts.some(([v]) => v === was) ? was : 'any';
+    sel.dataset.sig = sig;
+  };
+  // The city list. India's cities are the build's; every other plate's are
+  // parsed off its own roles (see cityOf). Under Plate 01 the list runs across
+  // all fifteen, so each place carries the plate code it was read from — 121
+  // bare city names spanning a continent would be a list, not an index.
+  const cityHome = new Map();
+  for (const c of here) {
+    for (const place of c.cities) if (!cityHome.has(place)) cityHome.set(place, 'India');
+    for (const r of c.roles) {
+      for (const place of roleCities(r)) {
+        if (!cityHome.has(place)) cityHome.set(place, r.countries[0]);
+      }
+    }
+  }
+  const cityOpts = uniqCased([...cityHome.keys()]).sort((a, b) => a.localeCompare(b))
+    .map((place) => [place, activeCountry || !CODE[cityHome.get(place)]
+      ? place : `${place} · ${CODE[cityHome.get(place)]}`]);
+  fill($('#city'), cityOpts, 'Any city');
+  // A plate whose postings never name a city leaves the row, the way the
+  // openness control does at zero yield: Singapore's boards say "Singapore,
+  // Singapore" and nothing finer, and a select holding one option that filters
+  // nothing is furniture. The fact prints below instead.
+  const citySel = $('#city');
+  citySel.closest('label').hidden = !cityOpts.length;
+  if (!cityOpts.length && citySel.value !== 'any') citySel.value = 'any';
+  // The department list, each option stating what it would return. Ordered by
+  // weight rather than alphabetically — the register is sorted by mass and so
+  // is this — with Unclassified last, always present when it has anything in
+  // it, so the derivation's limits are a line on the page rather than a gap.
+  const deptN = new Map();
+  for (const c of here) {
+    for (const r of c.roles) {
+      const d = deptOf(r.title);
+      deptN.set(d, (deptN.get(d) || 0) + 1);
+    }
+  }
+  const deptOpts = [...deptN].filter(([d]) => d !== UNCLASSIFIED)
+    .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
+  if (deptN.has(UNCLASSIFIED)) deptOpts.push([UNCLASSIFIED, deptN.get(UNCLASSIFIED)]);
+  fill($('#dept'), deptOpts.map(([d, n]) =>
+    [d, `${d} — ${count(n)} ${n === 1 ? 'role' : 'roles'}`]), 'Any department');
+  const city = $('#city').value;
+  const dept = $('#dept').value;
+
   // The fold's tally: how many filters are set while the bank is shut. Sort
   // and search are excluded — one always has a value, the other stays visible.
-  const set = ['city', 'remote', 'openness', 'mca', 'bracket', 'recency']
+  // Read AFTER the rebuild above, never before: a plate that no longer offers
+  // last plate's city has just cleared it, and a tally taken first would count
+  // a filter that is no longer set.
+  const set = ['city', 'dept', 'remote', 'openness', 'mca', 'bracket', 'recency']
     .filter((id) => { const n = document.getElementById(id);
                       return !n.closest('label').hidden && n.value !== 'any'; })
     .length;
@@ -2032,11 +2337,6 @@ function render() {
     n.classList.toggle('set', n.id !== 'sort' && n.value !== 'any');
   }
   $('#q').classList.toggle('set', !!$('#q').value.trim());
-
-  const q = $('#q').value.trim().toLowerCase();
-  const city = $('#city').value;
-  const recency = $('#recency').value;
-  const here = companies.map((c) => inScope(c, covers)).filter(Boolean);
   // The openness control's one non-default option states its own yield for
   // the open plate, before the click: 92% of postings say nothing (note 03),
   // so zero is this filter's common answer. Round 5: at zero the control
@@ -2049,20 +2349,65 @@ function render() {
   const openSel = $('#openness');
   openSel.options[1].textContent = `Open to foreign hires — ${count(openN)}`;
   const fchip = $('#fchip');
+  const notes = [];
   if (!openN) {
     if (openSel.value !== 'any') openSel.value = 'any';
     openSel.closest('label').hidden = true;
-    fchip.hidden = false;
-    fchip.textContent = 'Foreign-hires filter withdrawn: no posting in '
+    notes.push('Foreign-hires filter withdrawn: no posting in '
       + `${scopeName()} said yes to visa sponsorship or hiring from abroad on `
-      + 'this snapshot — and silence is not a no (note 03).';
+      + 'this snapshot — and silence is not a no (note 03).');
   } else {
     openSel.closest('label').hidden = false;
-    fchip.hidden = true;
   }
-  const shown = here
-    .filter((c) => c.name.toLowerCase().includes(q))
-    .filter((c) => city === 'any' || c.cities.includes(city))
+  if (!cityOpts.length) {
+    notes.push(`City filter withdrawn: no posting in ${scopeName()} named a `
+      + 'city on this snapshot — the boards state the country and nothing '
+      + 'finer, and a city list is read, never invented (note 06).');
+  }
+  // T5.4, the coverage notes. RAISED and FUNDED filter on fields most of the
+  // register does not state — 36 of 322 companies at this snapshot — so a
+  // reader who sets one watches nine tenths of the page leave and has no way
+  // to know it left over a silence. The numbers are counted here, off the open
+  // plate, every render: a hardcoded pair would be a claim about a build that
+  // has since moved. The line prints only while the filter is set.
+  const covered = (label, has, field) => {
+    const n = here.filter(has).length;
+    notes.push(`${label} — ${count(n)} of ${count(here.length)} `
+      + `${here.length === 1 ? 'company' : 'companies'} on this plate state `
+      + `${field}; the rest are hidden by this filter, not disqualified.`);
+  };
+  if ($('#bracket').value !== 'any') covered('Raised', (c) => c.amount != null, 'an amount');
+  if (recency !== 'any') covered('Funded', (c) => !!c.date, 'a date');
+  // And the department's provenance, said where it is being used rather than
+  // only in the footer: the classification is ours, read off the title, and
+  // the two numbers say how much of this plate it could place.
+  if (dept !== 'any') {
+    const all = here.reduce((n, c) => n + c.roles.length, 0);
+    const placed = all - (deptN.get(UNCLASSIFIED) || 0);
+    notes.push('Department is derived from the role title, not stated by the '
+      + `board: ${count(placed)} of ${count(all)} roles on this plate carry a `
+      + 'title we could place, and the rest are reachable as Unclassified '
+      + '(note 06).');
+  }
+  fchip.replaceChildren(...notes.map((t) => el('p', 'fnote', t)));
+  fchip.hidden = !notes.length;
+
+  // The department filter cuts at ROLE level, before anything counts: a company
+  // stays on the register while one of its roles is in the department, and the
+  // row, the entry and every count then speak about those roles alone — the
+  // same rule a country plate follows (inScope), applied to a second axis.
+  const listed = dept === 'any' ? here : here.map((c) => {
+    const roles = c.roles.filter((r) => deptOf(r.title) === dept);
+    return roles.length ? { ...c, roles } : null;
+  }).filter(Boolean);
+  // T5.4: the search reads role titles as well as company names. `hits` is how
+  // many of the company's roles IN VIEW carry the term — the number the row
+  // prints to say why it is here.
+  const hits = (c) => (q ? c.roles.filter((r) => r.title.toLowerCase().includes(q)).length : 0);
+  const shown = listed
+    .filter((c) => !q || c.name.toLowerCase().includes(q) || hits(c) > 0)
+    .filter((c) => city === 'any' || c.cities.includes(city)
+                || c.roles.some((r) => roleCities(r).includes(city)))
     .filter((c) => $('#remote').value === 'any' || isRemote(c))
     .filter((c) => $('#openness').value === 'any' || opensToForeignHires(c))
     .filter((c) => $('#mca').value === 'any' || c.mca != null)
@@ -2076,7 +2421,7 @@ function render() {
   let prev = null;
   const rows = shown.map((c) => {
     const r = gridref(c.countries);
-    const node = indexRow(c, r === prev);
+    const node = indexRow(c, r === prev, hits(c));
     node.dataset.reqs = c.roles.length;   // the tier rules below read this
     prev = r;
     return node;
@@ -2104,7 +2449,7 @@ function render() {
   if (at >= 0) {
     selectedName = shown[at].name;
     rows[at].setAttribute('aria-current', 'true');
-    entry(shown[at]);
+    entry(shown[at], q);
     for (const cell of markers()) {
       if (shown[at].countries.includes(cell.dataset.country)) cell.classList.add('sel');
     }
@@ -2386,8 +2731,8 @@ function load(data) {
   // The footer closes the loop the masthead opens: the same snapshot date,
   // stated where the integrity claims are made. From the data, never Date.now.
   $('.sources').append(el('span', null, ` · snapshot ${snapshot}`));
-  $('#city').append(...[...new Set(companies.flatMap((c) => c.cities))].sort()
-    .map((city) => el('option', null, city)));
+  // The city and department selects are NOT built here: both list what the open
+  // plate holds, so they are render()'s, rebuilt whenever the page turns.
   // Built here rather than in the markup because a chip states its count, and
   // the count is a fact about the data -- a chart rendered before the fetch
   // would show sixteen zeros it has no build behind, the same claim the

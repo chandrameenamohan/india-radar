@@ -517,8 +517,14 @@ check "a European plate shows only companies with a role in that country" \
 # and a city filter still holding "Bengaluru" while invisible is a tab that shows
 # nothing for a reason the reader cannot see.
 plate "United Kingdom"
-check "the India-only filters are hidden where India is not in view" "hidden hidden" \
-  "$(visibility '#city') $(visibility '#mca')"
+# T5.4 took the city filter off this list: it is every plate's now, built from
+# the plate's own roles (checked in its own section below). The MCA control is
+# still the India-only one -- it reads an enrichment the build attaches to India
+# rows alone, so off India it has nothing to offer and must not be left holding
+# a value nobody can see.
+check "the India-only filter is hidden where India is not in view" "hidden" \
+  "$(visibility '#mca')"
+check "the city filter is not withdrawn off India" "shown" "$(visibility '#city')"
 # Every entry on the plate, not just the one on the sheet: an enrichment that
 # only stayed away from the first company would still be the site inventing a
 # fact about the second.
@@ -606,6 +612,120 @@ plate
 $B select '#openness' 'any' >/dev/null 2>&1
 check "clearing the open-to-foreign-hires filter restores every company" "$(expect True)" "$(rows)"
 
+echo "-- departments, coverage notes, per-plate cities (T5.4)"
+# The department is DERIVED from the role title, so what this holds is not the
+# keyword map's taste but its arithmetic: every role in view lands in exactly one
+# option, Unclassified included. A role the map lost, or counted twice, breaks
+# the sum -- which is precisely what a bucket-by-bucket check would miss, and it
+# is derived from the dataset rather than from the page's own totals.
+check "the department options account for every role in view" \
+  "$($PY -c "
+import json
+rows = json.load(open('tests/fixtures/companies-e2e.json'))['companies']
+print(sum(len(r['roles']) for r in rows), 'roles')")" \
+  "$(val '(() => { const o = [...document.querySelectorAll("#dept option")].slice(1);
+       return o.reduce((n, x) => n + +x.textContent.match(/— ([\d,]+)/)[1]
+         .replace(/,/g, ""), 0) + " roles" })()')"
+
+# The filter cuts at ROLE level: a company stays while one of its roles is in the
+# department, and its count then speaks about those roles alone.
+# The expectation mirrors only what the FIXTURE's own titles say -- every
+# engineering title in it literally reads "Engineer", and the one that also says
+# "Support" is a support role under the map's stated precedence (the more
+# specialised craft takes a title naming two). Mirroring the whole keyword map
+# here would be marking the map's homework with a copy of the map.
+eng="'engineer' in x['title'].lower() and 'support' not in x['title'].lower()"
+$B select '#dept' 'Engineering' >/dev/null 2>&1
+check "the department filter keeps only companies with a role in that department" \
+  "$(expect "any($eng for x in r['roles'])" \
+            "(-sum(1 for x in r['roles'] if $eng), r['name'])")" "$(rows)"
+check "a filtered row counts its roles in that department, not the whole board" \
+  "$($PY -c "
+import json
+rows = json.load(open('tests/fixtures/companies-e2e.json'))['companies']
+eng = lambda r: [x for x in r['roles'] if $eng]
+top = sorted([r for r in rows if eng(r)], key=lambda r: (-len(eng(r)), r['name']))[0]
+n = len(eng(top))
+print(f\"{top['name']} {n} {'role' if n == 1 else 'roles'}\")")" \
+  "$(val '(() => { const r = document.querySelector(".irow");
+       return r.querySelector(".iname").firstChild.textContent + " "
+            + r.querySelector(".ireqs").firstChild.textContent })()')"
+
+# A classification that cannot place a title says so instead of guessing, and the
+# roles it could not place stay reachable rather than falling off the page. The
+# option's own claim is the thing under test: it promises N roles, and selecting
+# it must produce exactly those N. Stated as "yes same" rather than as a count,
+# so a missing option or an empty register cannot pass by matching a zero.
+$B select '#dept' 'Unclassified' >/dev/null 2>&1
+check "Unclassified is reachable and delivers every role it claims" "yes same" \
+  "$(val '(() => {
+       const o = [...document.querySelectorAll("#dept option")].find((x) => x.value === "Unclassified");
+       if (!o) return "no option";
+       const says = +o.textContent.match(/— ([\d,]+)/)[1].replace(/,/g, "");
+       const rows = [...document.querySelectorAll(".irow")];
+       const shown = rows.reduce((n, r) => n + +r.dataset.reqs, 0);
+       return `${says > 0 && rows.length ? "yes" : "no"} `
+            + `${says === shown ? "same" : says + " claimed, " + shown + " shown"}` })()')"
+$B select '#dept' 'any' >/dev/null 2>&1
+check "clearing the department filter restores every company" "$(expect True)" "$(rows)"
+
+# The sparse filters state their own coverage while they are set. RAISED and
+# FUNDED read fields most of the register does not carry, so a reader who sets
+# one watches most of the page leave with no way to know it left over a silence.
+# Both numbers are read back out of the printed sentence and both are derived
+# from the dataset -- a hardcoded pair would be a claim about a build that moved.
+sparse() { $PY -c "
+import json
+rows = json.load(open('tests/fixtures/companies-e2e.json'))['companies']
+print(sum(1 for r in rows if r[$1] is not None), 'of', len(rows))"; }
+note() { val "(() => { const p = [...document.querySelectorAll('#fchip .fnote')]
+     .find((x) => x.textContent.startsWith('$1'));
+     if (!p) return 'no note';
+     const m = p.textContent.match(/([\d,]+) of ([\d,]+)/);
+     return m ? m[1].replace(/,/g, '') + ' of ' + m[2].replace(/,/g, '') : p.textContent })()"; }
+check "the coverage note appears only while a sparse filter is set" "hidden" \
+  "$(visibility '#fchip')"
+$B select '#bracket' 'large' >/dev/null 2>&1
+check "the raised filter states how many companies state an amount" \
+  "$(sparse "'amount'")" "$(note Raised)"
+$B select '#bracket' 'any' >/dev/null 2>&1
+$B select '#recency' '365' >/dev/null 2>&1
+check "the funded filter states how many companies state a date" \
+  "$(sparse "'date'")" "$(note Funded)"
+$B select '#recency' 'any' >/dev/null 2>&1
+check "the coverage note leaves with the filter that raised it" "hidden" \
+  "$(visibility '#fchip')"
+
+# The city filter is every plate's now, and each plate's list is read off its own
+# roles -- so a plate with no India in it offers the cities its own postings name
+# and nobody else's. Both the list and the filtering are checked: a control that
+# offered Berlin and then ignored it would pass half of this.
+plate Germany
+check "the city filter populates from a plate with no India in it" \
+  "$($PY -c "
+import json
+rows = json.load(open('tests/fixtures/companies-e2e.json'))['companies']
+seen = []
+for r in rows:
+    for x in r['roles']:
+        if x['countries'] == ['Germany']:
+            for place in x['locations']:
+                city = place.split(',')[0].strip()
+                if city not in seen: seen.append(city)
+print('|'.join(sorted(seen)))")" \
+  "$(val '[...document.querySelectorAll("#city option")].slice(1)
+       .map((o) => o.value).sort().join("|")')"
+$B select '#city' 'Berlin' >/dev/null 2>&1
+check "filtering a country plate by city returns that plate's companies" \
+  "$(expect_in Germany)" "$(rows)"
+# ...and a city the next plate does not offer is CLEARED by the page turn. Left
+# set and invisible it would be a plate showing nothing for a reason the reader
+# cannot see -- the same rule the MCA control follows off India.
+plate "United Kingdom"
+check "a city the turned-to plate does not offer is cleared, not silently kept" "any" \
+  "$(val 'document.querySelector("#city").value')"
+plate
+
 # 4d accessibility basics: every control reachable and named. Not an audit.
 check "every control has an accessible name" "" \
   "$(val '[...document.querySelectorAll("input,select")].filter(c=>!c.labels.length
@@ -650,6 +770,30 @@ check "every register line is a keyboard-reachable button" \
 # would throw away the console history the next check is about to read.
 $B fill '#q' 'beta' >/dev/null 2>&1
 check "search narrows by name" "$(expect "'beta' in r['name'].lower()")" "$(rows)"
+
+# T5.4: the box reads role titles too. The guard first -- no company NAME in the
+# dataset carries this term, so whatever the next check surfaces was surfaced by
+# a title and by nothing else. Without the guard the check could pass on a name
+# match and prove nothing about roles at all.
+$B fill '#q' 'designer' >/dev/null 2>&1
+check "no company name carries the role-title term" "" \
+  "$(expect "'designer' in r['name'].lower()")"
+check "search surfaces a company by its role titles, not only by its name" \
+  "$(expect "any('designer' in x['title'].lower() for x in r['roles'])")" "$(rows)"
+# And the register says WHY that row is there: a company whose name says nothing
+# about the term would otherwise read as a stranger the search let in.
+check "the register says how many roles a title match was" \
+  "$($PY -c "
+import json
+rows = json.load(open('tests/fixtures/companies-e2e.json'))['companies']
+hit = [r for r in rows if any('designer' in x['title'].lower() for x in r['roles'])][0]
+n = sum(1 for x in hit['roles'] if 'designer' in x['title'].lower())
+print(f\"{hit['name']} matches {n} {'role' if n == 1 else 'roles'} {n} marked\")")" \
+  "$(val '(() => { const r = document.querySelector(".irow");
+       return [r.querySelector(".iname").firstChild.textContent,
+               r.querySelector(".ihit").textContent,
+               document.querySelectorAll("#sheet .roles li.hit").length,
+               "marked"].join(" ") })()')"
 $B fill '#q' 'no-such-company' >/dev/null 2>&1
 check "a filter that matches nothing says so" "No company matches these filters." \
   "$(val 'document.querySelector("#status > span").textContent')"

@@ -1046,6 +1046,93 @@ Out of scope: a per-company diagnostic view.
 
 ---
 
+### T5.4 — Role-title search, departments, per-plate cities, coverage notes `done` · *Phase 6* · after T5.2, T8.5
+> **Four filter-bank changes, and three of them turn on the same rule: a control
+> may only offer what the data holds, and where it derives something it says so.**
+>
+> **Search reads role titles.** A company matches on its name OR on any title in
+> view — and where the name says nothing, the register prints "MATCHES N ROLES"
+> under the count, because a row surfaced for an invisible reason reads as a
+> stranger the search let in. The entry says it at the other scale: matching
+> titles print red, and the role list leads with them (the list folds at eight,
+> and SumUp's ten matches sat past the fold of a 236-role board).
+>
+> **Coverage notes on the sparse filters.** RAISED and FUNDED read fields **36 of
+> 322** companies state. A reader setting one watches nine tenths of the page
+> leave with no way to know it left over a silence, so each prints its own
+> apparatus line while it is set — counted per render off the open plate, never
+> hardcoded — in the same voice and the same place as the withdrawn-openness note.
+>
+> **The city filter is every plate's.** India's cities ship with the build
+> (`src/india.py` canonicalises Bangalore/Bengaluru); the other fourteen countries
+> have no such field, so a plate's list is **parsed off its own roles** — the one
+> place this renderer derives a fact rather than printing one, and note 06 says
+> so. Conservative by construction: a piece yields a place only where the board
+> put the country beside it ("London, UK", "Agde, Hérault, France") or where the
+> whole string is one bare place ("Munich"). Measured over 5,580 roles: **2,734 of
+> the 4,490 non-India roles yield a city, 121 places across the fifteen plates, no
+> place filed under two countries.** The rules were tightened against what leaked:
+> an earlier pass put **Los Angeles on the Singapore plate** (from "Los Angeles,
+> Toronto, Singapore" — a LIST, not an address), which is why a three-part piece
+> is taken only when its middle is a region we can name or the city said twice.
+> Singapore itself now names no city at all, and the control leaves the row with a
+> note, the way the openness filter does at zero yield. Under Plate 01 each place
+> carries its plate code — "Massy · FR" — because 121 bare names spanning a
+> continent are a list, not an index.
+>
+> **Department is derived from the title, and labelled as derived.** No board
+> publishes one. The keyword map was built by MEASURING — every one of the 5,580
+> titles classified, the buckets read by hand, each rule tightened until nothing
+> absurd remained (`communications` was matching *Tele*communications; `brand` was
+> taking "Strategic Brands" off a Customer Success row). It places **4,817 —
+> 86.3%** — and the **763** it cannot are UNCLASSIFIED, an option of their own:
+> a filter that quietly dropped a seventh of the register would be the ambiguous
+> zero in a new costume. Precedence is FIRST MATCH WINS, ordered so the more
+> specialised craft takes a title naming two (Product Designer → Design, Security
+> Engineer → Security, Technical Support Engineer → Support). Go-to-market sits
+> above Engineering deliberately: a Sales Engineer and a Solutions Architect carry
+> a quota. Filtering cuts at ROLE level — the row stays while one role matches,
+> and the count, the entry and the list then speak about those roles alone, the
+> same rule a country plate follows one axis over.
+>
+> **A note on the render cost.** The search box looked eight times slower after
+> the change (107ms → 880ms for five keystrokes) and was not: the old page
+> rendered an EMPTY register for four of those five, because no company name
+> contains "engin". At equal row counts the two are the same (322 rows: 215ms
+> before, 194ms after). **A performance comparison across a behaviour change has
+> to hold the work constant, or it measures the feature and calls it a
+> regression.** Cities and departments are memoized per role and per title, so a
+> keystroke never re-parses the corpus.
+```
+Acceptance (observable):
+  A search term appearing only in role titles surfaces the company, and the
+  register says how many roles it matched. RAISED / FUNDED print computed
+  coverage while set and nothing when clear. Every plate offers the cities its
+  own postings name and no others; a plate that names none withdraws the control
+  and says why. Department options carry live counts, Unclassified is reachable,
+  and a department filter narrows the roles a row counts and lists.
+  No control is ever left set and invisible; nothing overflows at a true 390px.
+Checks:
+  lint -> typecheck -> unit
+       -> e2e:department_options_account_for_every_role,
+          e2e:department_filter_keeps_only_matching_companies,
+          e2e:filtered_row_counts_its_department_roles,
+          e2e:unclassified_reachable_and_delivers_what_it_claims,
+          e2e:raised_and_funded_state_their_coverage,
+          e2e:coverage_note_appears_only_while_set,
+          e2e:city_filter_populates_on_a_plate_without_india,
+          e2e:city_cleared_when_the_turned_to_plate_lacks_it,
+          e2e:search_surfaces_a_company_by_role_title,
+          e2e:register_says_how_many_roles_matched
+       -> CDP true-viewport measure at 390 and 1280, overflow zero, console clean
+Out of scope:
+  - a salary filter (there is no salary control to carry a coverage note)
+  - a gazetteer: the city parser is a stop-list and a shape rule, not a
+    place-name database, and its residue is what the boards typed
+```
+
+---
+
 ## E6 · Automation
 
 ### T6.2 — Greenhouse nightly workflow `done` · *Phase 3* · after T3.1, T6.1
