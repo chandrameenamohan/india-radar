@@ -2434,3 +2434,97 @@ padding, and the docstring asked for exactly this list.
 probe data shows real volume there, not before". Those two do not clear that bar
 in today's corpus. Not a bug in the matcher — a question for whoever owns the
 country list.
+
+---
+
+# Board-stated departments — measured 2026-08-02 (T9.2 Phase 1)
+
+`learning-tests/departments_live.py`, over **5,409 target-country postings on 317
+live boards** — every board in `data/slugs.json`, not a sample. 278MB fetched, ~90
+seconds. The comparison map is not re-typed: the script reads T5.4's `DEPTS` table
+straight out of `site/index.html`, and reproduces the page's own figure (86.1%
+here against the 86.3% published on a corpus one nightly older), which is what
+says the port is faithful.
+
+## "No board publishes one" was wrong by two orders of magnitude
+
+T5.4's note says no board publishes a department. **99.6% of postings state one.**
+
+| provider | postings | states a department | states a team |
+|---|---|---|---|
+| Greenhouse | 4,024 | 4,015 (99.8%) | — |
+| Ashby | 1,170 | 1,170 (100%) | 1,170 (100%) |
+| Lever | 215 | 203 (94.4%) | 215 (100%) |
+
+The claim was read off our own request string, and the request string was right
+about Greenhouse's CHEAP call and only that: `?content=false` carries `departments`
+on **0 of 142** jobs, `?content=true` on **142 of 142**. That second call is the one
+`build.described` already makes for every board that contributes a row (T8.4), so
+the field is **free on all three providers** — no extra call, no extra byte, on the
+build as it stands today. Greenhouse also exposes a `/departments` endpoint (94KB
+for one board); nothing needs it.
+
+## But the vocabulary is an org chart, not a taxonomy
+
+696 distinct departments across Greenhouse alone, **302 of them said exactly once**.
+Only **78.3%** of Greenhouse statements, **66.4%** of Ashby's and **54.7%** of
+Lever's land on a name the site's own map recognises. What the rest are is not
+noise — it is a company's internal structure, which is a different question from
+the one a job-seeker asks:
+
+`Field Sales` · `Value Engineering` · `Field Engineering - Other` ·
+`All Cost Center` · `Business Units` · `SG` · `Expert Insights` ·
+`Partner Success - Cabinets comptable` · `GTM` · `Go To Market` ·
+`Stablecoin Solutions` (Lever, whose team for it is `For Banks`)
+
+So a board-stated department cannot be shown raw and cannot be mapped by
+classifier. It needs a table a human can read — which is what T9.2's spec already
+demanded, now with a measured size: the top ~15 free-text values would carry most
+of what a table can reach, and `All Cost Center` will never be a department.
+
+## Where it matters: the criterion fires ONE WAY, not both
+
+T9.2's kill criterion asks whether the stated field beats 86.3% **on the titles the
+map cannot place, and the titles it places wrongly**. Those two halves answered
+differently, and that is the finding.
+
+**The unplaced half: a clear win.** Of the **754** postings the title map leaves
+UNCLASSIFIED, **742 (98.4%)** carry a board-stated department, and **419** of those
+state a name the site's own vocabulary already recognises. Adopting them where the
+derivation gives up takes the page from **86.1% → 93.8%, +7.7 points**, with a
+mapping table of zero entries. The titles this rescues are exactly the ones a
+keyword map cannot reach — `Acquisition Manager` (Sales), `Market Manager, Japan -
+Hotels` (Business Development), `Safety Specialist` (Community Support),
+`Senior Specialist, Luxe` (Operations).
+
+**The placed half: the criterion fires.** Where both the title map and the board
+answer, they agree on only **74.0% (2,675 of 3,613)**. Reading the 938
+disagreements, they are mostly not the map being wrong — they are the two fields
+answering different questions:
+
+| title | the map says | the board says |
+|---|---|---|
+| Sales Engineer - Italian Speaking | Sales | Field Engineering |
+| Business Development Representative | Sales | Marketing |
+| Senior Data Engineer, BizTech | Data | Software Engineering |
+| Senior Partner Solutions Architect | Sales | Customer Success & Services |
+| Senior Principal, Tax Controversy | Finance | Legal |
+
+Only the last of those is the board plainly winning. The rest are the reporting
+line — whose budget the role sits under — where the reader is asking what the work
+is. Preferring board-stated wholesale would move **938 postings**, many of them to a
+worse answer, in exchange for the +7.7 points that come from the 754 the map never
+claimed.
+
+## Consequence for Phase 2
+
+Proceed, NARROWED. The build fetches the field (free), a role carries it, and the
+site uses it **only where the derivation gives up** — the derivation keeps every
+title it already places, and its label keeps T5.4's mark. That is the whole of the
+measured win and none of the measured harm. `Unclassified` stays reachable for what
+is left; a board value the table cannot map is not guessed into a bucket.
+
+ponytail: the script re-fetches all 278MB on every run — the same ceiling
+`openness_live.py` names. The day someone wants to iterate on a mapping table
+rather than on the corpus, dump `corpus()` to a file first; the analysis is a
+second of CPU on ninety seconds of network.

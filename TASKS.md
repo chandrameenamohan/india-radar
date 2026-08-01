@@ -1548,9 +1548,26 @@ Out of scope:
     T4.4's DIN exclusion
 ```
 
-### T9.2 — Board-stated departments `todo` · *Phase 6*
-> **Deferred: not scheduled.** Nothing rots while this waits — T5.4's map says on
-> the page that it derived the department, so no reader is misled by the delay.
+### T9.2 — Board-stated departments `phase 1 done` · *Phase 6*
+> **PHASE 1 MEASURED 2026-08-02** — `learning-tests/departments_live.py`, 5,409
+> postings on 317 live boards, FINDINGS §"Board-stated departments". Headline: the
+> "no board publishes one" note was wrong — **99.6% state one**, and the field is
+> **free** on all three providers (Greenhouse carries it in the `content=true` call
+> `build.described` already makes; `content=false`, which the claim was read off,
+> carries it on 0 of 142 jobs).
+>
+> **The criterion fired one way, not both, so Phase 2 is NARROWED.** Of the 754
+> titles the map cannot place, 742 state a department and **419 map onto a name the
+> site already uses: 86.1% → 93.8%, +7.7 points, with a mapping table of zero
+> entries.** But where both speak they agree on only **74.0%**, and the 938
+> disagreements are mostly not the map being wrong — they are the reporting line
+> answering a different question from the craft (`Business Development
+> Representative` → the board says Marketing; `Sales Engineer` → Field Engineering).
+> Vocabulary is an org chart: 696 distinct values on Greenhouse, 302 said once,
+> `All Cost Center` and `SG` among them.
+>
+> So: the board fills the gap, and never overrules a title the derivation placed.
+> Phase 2's acceptance below is rewritten to that shape.
 
 T5.4 shipped a DEPARTMENT filter derived from role titles by keyword map: **4,817
 of 5,580 roles — 86.3%** placed, **763** UNCLASSIFIED, labelled on the page as
@@ -1565,7 +1582,7 @@ So this task measures first and decides second, the way T8.1 priced openness bef
 anything was built on it.
 ```
 Acceptance (observable):
-  PHASE 1 — the learning test, cheap, and done alone:
+  PHASE 1 — the learning test, cheap, and done alone:  DONE 2026-08-02
   learning-tests/ gains a script and FINDINGS records covering, per ATS
   (Greenhouse, Ashby, Lever) over a handful of REAL boards each: whether a
   department arrives in the existing list call or costs extra calls and latency;
@@ -1576,13 +1593,17 @@ Acceptance (observable):
   places wrongly — stop, record the numbers, and leave the heuristic standing.
   It is honest about itself already; a thinner fact stated by a board is still
   thinner.
-  PHASE 2 — only on numbers that clear that criterion:
-  probes fetch the field, schema bump, and a role prefers board-stated over
-  derived while carrying WHICH IT IS. Board-stated shows plainly; derived keeps
-  T5.4's mark. The two never collapse into one unmarked label.
+  PHASE 2 — rewritten to what Phase 1 measured, NOT to what it was guessed to be:
+  probes fetch the field (free — it rides in calls the build already makes),
+  schema bump, and a role carries the board's department beside the derived one,
+  never instead of it. The site fills UNCLASSIFIED from the board and CHANGES
+  NOTHING the title map already placed: the 74% agreement says a disagreement is
+  the reporting line, not a correction, and 938 roles must not move on it.
+  Board-stated shows plainly; derived keeps T5.4's mark. The two never collapse
+  into one unmarked label.
   Board free text maps into the site's department vocabulary through a table a
   human can read; an unmappable name is shown verbatim or held, never guessed
-  into the nearest bucket.
+  into the nearest bucket. `All Cost Center` is not a department.
   A build carrying no department data renders exactly as today.
 Checks:
   phase 1: script runs against live APIs; each findings figure matches observed
@@ -1590,6 +1611,8 @@ Checks:
   phase 2: lint -> typecheck -> unit
         -> e2e: T5.4's department suite, unweakened
         -> e2e:stated_and_derived_are_marked_apart
+        -> e2e:a_stated_department_never_moves_a_derived_one — the 4,655 titles
+           the map places must land in the same bucket before and after
         -> the listed set is unchanged before and after, company for company
            (E4: enrichment never moves who is listed)
 Out of scope:
