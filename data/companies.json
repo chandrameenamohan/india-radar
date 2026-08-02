@@ -2,9 +2,9 @@
   "schema_version": 9,
   "snapshot": "2026-08-02",
   "integrity": {
-    "corpus_size": 2915,
-    "checked": 694,
-    "unchecked": 2221
+    "corpus_size": 2925,
+    "checked": 700,
+    "unchecked": 2225
   },
   "companies": [
     {
@@ -10104,12 +10104,12 @@
         },
         {
           "title": "Regional Sales Director",
-          "url": "https://www.catonetworks.com/careers/careers-post/4817161101?gh_jid=4817161101",
+          "url": "https://www.catonetworks.com/careers/careers-post/4895726101?gh_jid=4895726101",
           "locations": [
-            "Oslo, Oslo, Norway"
+            "Singapore"
           ],
           "countries": [
-            "Norway"
+            "Singapore"
           ],
           "workplace": null,
           "department": "Sales - Regional Sales Director",
@@ -10132,12 +10132,12 @@
         },
         {
           "title": "Regional Sales Director",
-          "url": "https://www.catonetworks.com/careers/careers-post/4895726101?gh_jid=4895726101",
+          "url": "https://www.catonetworks.com/careers/careers-post/4899604101?gh_jid=4899604101",
           "locations": [
-            "Singapore"
+            "M\u00fcnchen, Bavaria, Germany"
           ],
           "countries": [
-            "Singapore"
+            "Germany"
           ],
           "workplace": null,
           "department": "Sales - Regional Sales Director",
@@ -10146,12 +10146,12 @@
         },
         {
           "title": "Regional Sales Director",
-          "url": "https://www.catonetworks.com/careers/careers-post/4899604101?gh_jid=4899604101",
+          "url": "https://www.catonetworks.com/careers/careers-post/4817161101?gh_jid=4817161101",
           "locations": [
-            "M\u00fcnchen, Bavaria, Germany"
+            "Oslo, Oslo, Norway"
           ],
           "countries": [
-            "Germany"
+            "Norway"
           ],
           "workplace": null,
           "department": "Sales - Regional Sales Director",
@@ -10216,20 +10216,6 @@
         },
         {
           "title": "Sales Development Representative",
-          "url": "https://www.catonetworks.com/careers/careers-post/4921721101?gh_jid=4921721101",
-          "locations": [
-            "Stockholm, Stockholm, Sweden"
-          ],
-          "countries": [
-            "Sweden"
-          ],
-          "workplace": null,
-          "department": "SDR",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Sales Development Representative",
           "url": "https://www.catonetworks.com/careers/careers-post/4926068101?gh_jid=4926068101",
           "locations": [
             "Tokyo Prefecture, Japan"
@@ -10243,16 +10229,16 @@
           "hire_from_abroad": "unknown"
         },
         {
-          "title": "Sales Engineer",
-          "url": "https://www.catonetworks.com/careers/careers-post/4821119101?gh_jid=4821119101",
+          "title": "Sales Development Representative",
+          "url": "https://www.catonetworks.com/careers/careers-post/4921721101?gh_jid=4921721101",
           "locations": [
-            "Japan"
+            "Stockholm, Stockholm, Sweden"
           ],
           "countries": [
-            "Japan"
+            "Sweden"
           ],
           "workplace": null,
-          "department": "Sales - Sales Engineer",
+          "department": "SDR",
           "visa": "unknown",
           "hire_from_abroad": "unknown"
         },
@@ -10267,6 +10253,20 @@
           ],
           "workplace": null,
           "department": "Sales Engineer EMEA",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Sales Engineer",
+          "url": "https://www.catonetworks.com/careers/careers-post/4821119101?gh_jid=4821119101",
+          "locations": [
+            "Japan"
+          ],
+          "countries": [
+            "Japan"
+          ],
+          "workplace": null,
+          "department": "Sales - Sales Engineer",
           "visa": "unknown",
           "hire_from_abroad": "unknown"
         },
@@ -25999,10 +25999,10 @@
           "hire_from_abroad": "unknown"
         },
         {
-          "title": "Staff Software Engineer",
-          "url": "https://www.fivetran.com/careers/job?gh_jid=7787915003",
+          "title": "Staff Software Engineer - Prism",
+          "url": "https://www.fivetran.com/careers/job?gh_jid=7787917003",
           "locations": [
-            "Bangalore, India"
+            "Bengaluru, Karnataka, India, APAC"
           ],
           "countries": [
             "India"
@@ -26013,10 +26013,10 @@
           "hire_from_abroad": "unknown"
         },
         {
-          "title": "Staff Software Engineer - Prism",
-          "url": "https://www.fivetran.com/careers/job?gh_jid=7787917003",
+          "title": "Staff Software Engineer - Semantic Layer",
+          "url": "https://www.fivetran.com/careers/job?gh_jid=7787915003",
           "locations": [
-            "Bengaluru, Karnataka, India, APAC"
+            "Bangalore, India"
           ],
           "countries": [
             "India"
@@ -48428,7 +48428,7 @@
       "salary": {
         "avg_lpa": 36.9,
         "reports": 104,
-        "observed": "2026-08-01",
+        "observed": "2026-07-28",
         "source_url": "https://www.ambitionbox.com/salaries/nanonets-salaries"
       },
       "mca": null
@@ -49806,7 +49806,7 @@
       "salary": {
         "avg_lpa": 22.2,
         "reports": 226,
-        "observed": "2026-07-31",
+        "observed": "2026-07-29",
         "source_url": "https://www.ambitionbox.com/salaries/nextiva-salaries"
       },
       "mca": null
@@ -61445,9 +61445,9 @@
       "source_url": "https://www.cbinsights.com/company/quince",
       "qualified_by": "stage",
       "salary": {
-        "avg_lpa": 38.4,
-        "reports": 247,
-        "observed": "2026-08-01",
+        "avg_lpa": 38.6,
+        "reports": 244,
+        "observed": "2026-07-26",
         "source_url": "https://www.ambitionbox.com/salaries/quince-salaries"
       },
       "mca": null
@@ -61969,9 +61969,9 @@
       "source_url": "https://www.ycombinator.com/companies/razorpay",
       "qualified_by": "stage",
       "salary": {
-        "avg_lpa": 21.2,
-        "reports": 7060,
-        "observed": "2026-08-01",
+        "avg_lpa": 21.1,
+        "reports": 7054,
+        "observed": "2026-07-31",
         "source_url": "https://www.ambitionbox.com/salaries/razorpay-salaries"
       },
       "mca": null
@@ -65149,7 +65149,7 @@
             "France"
           ],
           "workplace": null,
-          "department": null,
+          "department": "Technology - Software Engineering, Infrastructure, and Security",
           "visa": "unknown",
           "hire_from_abroad": "unknown"
         },
@@ -65163,7 +65163,7 @@
             "France"
           ],
           "workplace": null,
-          "department": null,
+          "department": "Technology - Software Engineering, Infrastructure, and Security",
           "visa": "unknown",
           "hire_from_abroad": "unknown"
         },
@@ -65177,7 +65177,7 @@
             "Spain"
           ],
           "workplace": null,
-          "department": null,
+          "department": "Data Science",
           "visa": "unknown",
           "hire_from_abroad": "unknown"
         },
@@ -65191,7 +65191,7 @@
             "France"
           ],
           "workplace": "remote",
-          "department": null,
+          "department": "Data Science",
           "visa": "unknown",
           "hire_from_abroad": "unknown"
         },
@@ -65205,7 +65205,7 @@
             "Japan"
           ],
           "workplace": null,
-          "department": null,
+          "department": "Data Science",
           "visa": "unknown",
           "hire_from_abroad": "unknown"
         },
@@ -65219,7 +65219,7 @@
             "France"
           ],
           "workplace": null,
-          "department": null,
+          "department": "Data Science",
           "visa": "unknown",
           "hire_from_abroad": "unknown"
         },
@@ -65233,7 +65233,7 @@
             "France"
           ],
           "workplace": null,
-          "department": null,
+          "department": "Technology - Software Engineering, Infrastructure, and Security",
           "visa": "unknown",
           "hire_from_abroad": "unknown"
         },
@@ -65247,7 +65247,7 @@
             "France"
           ],
           "workplace": null,
-          "department": null,
+          "department": "Technology - Software Engineering, Infrastructure, and Security",
           "visa": "unknown",
           "hire_from_abroad": "unknown"
         },
@@ -65261,7 +65261,7 @@
             "United Kingdom"
           ],
           "workplace": null,
-          "department": null,
+          "department": "Data Science",
           "visa": "unknown",
           "hire_from_abroad": "unknown"
         },
@@ -65275,7 +65275,7 @@
             "France"
           ],
           "workplace": "remote",
-          "department": null,
+          "department": "Can't find an open job today that's right for you?",
           "visa": "unknown",
           "hire_from_abroad": "unknown"
         },
@@ -65289,7 +65289,7 @@
             "France"
           ],
           "workplace": null,
-          "department": null,
+          "department": "Technology - Software Engineering, Infrastructure, and Security",
           "visa": "unknown",
           "hire_from_abroad": "unknown"
         },
@@ -65303,7 +65303,7 @@
             "France"
           ],
           "workplace": null,
-          "department": null,
+          "department": "Technology - Software Engineering, Infrastructure, and Security",
           "visa": "unknown",
           "hire_from_abroad": "unknown"
         },
@@ -65317,7 +65317,7 @@
             "Germany"
           ],
           "workplace": "remote",
-          "department": null,
+          "department": "Sales and Go-To-Market (GTM)",
           "visa": "unknown",
           "hire_from_abroad": "unknown"
         },
@@ -65331,7 +65331,7 @@
             "Japan"
           ],
           "workplace": null,
-          "department": null,
+          "department": "Sales and Go-To-Market (GTM)",
           "visa": "unknown",
           "hire_from_abroad": "unknown"
         },
@@ -65345,7 +65345,7 @@
             "France"
           ],
           "workplace": null,
-          "department": null,
+          "department": "Technology - Software Engineering, Infrastructure, and Security",
           "visa": "unknown",
           "hire_from_abroad": "unknown"
         },
@@ -65359,7 +65359,7 @@
             "France"
           ],
           "workplace": null,
-          "department": null,
+          "department": "Human Resources",
           "visa": "unknown",
           "hire_from_abroad": "unknown"
         },
@@ -65373,7 +65373,7 @@
             "Japan"
           ],
           "workplace": null,
-          "department": null,
+          "department": "Delivery & Project Management",
           "visa": "unknown",
           "hire_from_abroad": "unknown"
         }
@@ -65745,6 +65745,41 @@
       "date": null,
       "source_url": "https://www.cbinsights.com/company/slice",
       "qualified_by": "stage",
+      "salary": null,
+      "mca": null
+    },
+    {
+      "name": "Smallest.ai",
+      "ats": "ashby",
+      "slug": "smallest",
+      "roles": [
+        {
+          "title": "Automation QA Engineer",
+          "url": "https://jobs.ashbyhq.com/smallest/41abc8aa-1f14-4bf2-93b5-9cd55d220886",
+          "locations": [
+            "Bengaluru"
+          ],
+          "countries": [
+            "India"
+          ],
+          "workplace": "onsite",
+          "department": "Engineering",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        }
+      ],
+      "countries": [
+        "India"
+      ],
+      "cities": [
+        "Bengaluru"
+      ],
+      "amount": 13000000,
+      "currency": "USD",
+      "round_letter": "A",
+      "date": "2026-07-31",
+      "source_url": "https://www.finsmes.com/2026/07/smallest-ai-raises-13m-in-series-a-funding.html",
+      "qualified_by": "letter",
       "salary": null,
       "mca": null
     },
@@ -74710,20 +74745,6 @@
           "department": "Global Platforms - Engineering",
           "visa": "unknown",
           "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Senior Product Engineer - Web",
-          "url": "https://job-boards.eu.greenhouse.io/tamara/jobs/4680079101",
-          "locations": [
-            "India"
-          ],
-          "countries": [
-            "India"
-          ],
-          "workplace": null,
-          "department": "Global Platforms - Engineering",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
         }
       ],
       "countries": [
@@ -77966,9 +77987,9 @@
       "source_url": "https://www.cbinsights.com/company/tide",
       "qualified_by": "stage",
       "salary": {
-        "avg_lpa": 21.9,
-        "reports": 1555,
-        "observed": "2026-07-28",
+        "avg_lpa": 22.0,
+        "reports": 1562,
+        "observed": "2026-07-30",
         "source_url": "https://www.ambitionbox.com/salaries/tide-salaries"
       },
       "mca": null
@@ -78936,8 +78957,8 @@
       "qualified_by": "stage",
       "salary": {
         "avg_lpa": 18.9,
-        "reports": 1779,
-        "observed": "2026-07-30",
+        "reports": 1791,
+        "observed": "2026-08-01",
         "source_url": "https://www.ambitionbox.com/salaries/turing-salaries"
       },
       "mca": null
@@ -82595,9 +82616,9 @@
       "source_url": "https://www.forbes.com/companies/workato/",
       "qualified_by": "stage",
       "salary": {
-        "avg_lpa": 40.6,
+        "avg_lpa": 40.7,
         "reports": 144,
-        "observed": "2026-07-30",
+        "observed": "2026-07-31",
         "source_url": "https://www.ambitionbox.com/salaries/workato-salaries"
       },
       "mca": {

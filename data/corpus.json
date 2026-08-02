@@ -1141,7 +1141,7 @@
       "round_letter": null,
       "source_url": "https://www.cbinsights.com/company/alloy2",
       "stage": "growth",
-      "website": "https://alloy.app",
+      "website": "https://www.alloy.com",
       "qualified_by": "stage"
     },
     {
@@ -1517,6 +1517,17 @@
       "stage": "growth",
       "website": null,
       "qualified_by": "stage"
+    },
+    {
+      "name": "Antora Energy",
+      "amount": 550000000,
+      "currency": "USD",
+      "date": "2026-07-31",
+      "round_letter": "C",
+      "source_url": "https://www.finsmes.com/2026/07/antora-energy-raises-550m-in-series-c-funding.html",
+      "stage": null,
+      "website": "https://www.antora.com",
+      "qualified_by": "letter"
     },
     {
       "name": "Anyscale",
@@ -1956,17 +1967,6 @@
       "source_url": "https://www.sec.gov/Archives/edgar/data/2109268/000210926826000001/0002109268-26-000001-index.htm",
       "stage": null,
       "website": null,
-      "qualified_by": "amount"
-    },
-    {
-      "name": "Array Labs",
-      "amount": 21000000,
-      "currency": "USD",
-      "date": "2026-07-28",
-      "round_letter": null,
-      "source_url": "https://www.finsmes.com/2026/07/array-labs-raises-additional-21m-in-funding.html",
-      "stage": null,
-      "website": "https://www.arraylabs.io",
       "qualified_by": "amount"
     },
     {
@@ -4632,6 +4632,17 @@
       "qualified_by": "stage"
     },
     {
+      "name": "Candid Health",
+      "amount": null,
+      "currency": null,
+      "date": null,
+      "round_letter": null,
+      "source_url": "https://www.ycombinator.com/companies/candid-health",
+      "stage": "growth",
+      "website": "https://www.joincandidhealth.com",
+      "qualified_by": "stage"
+    },
+    {
       "name": "Canix",
       "amount": null,
       "currency": null,
@@ -6927,7 +6938,7 @@
       "round_letter": null,
       "source_url": "https://www.cbinsights.com/company/cresta",
       "stage": "growth",
-      "website": "https://www.analyticsinsight.net",
+      "website": "https://cresta.com",
       "qualified_by": "stage"
     },
     {
@@ -7446,6 +7457,17 @@
       "stage": null,
       "website": null,
       "qualified_by": "amount"
+    },
+    {
+      "name": "DataBahn",
+      "amount": 40000000,
+      "currency": "USD",
+      "date": "2026-07-30",
+      "round_letter": "B",
+      "source_url": "https://www.finsmes.com/2026/07/databahn-raises-40m-in-series-b-funding.html",
+      "stage": null,
+      "website": "https://www.databahn.ai",
+      "qualified_by": "letter"
     },
     {
       "name": "DataBahn, Inc. \\DE",
@@ -8075,15 +8097,15 @@
       "qualified_by": "amount"
     },
     {
-      "name": "dili",
-      "amount": null,
-      "currency": null,
-      "date": null,
-      "round_letter": null,
-      "source_url": "https://www.ycombinator.com/companies/dili",
-      "stage": "growth",
+      "name": "Dili",
+      "amount": 15000000,
+      "currency": "USD",
+      "date": "2026-07-30",
+      "round_letter": "A",
+      "source_url": "https://www.finsmes.com/2026/07/dili-raises-15m-in-series-a-funding.html",
+      "stage": null,
       "website": "https://www.dili.com",
-      "qualified_by": "stage"
+      "qualified_by": "letter"
     },
     {
       "name": "DiligenceSquared",
@@ -8139,6 +8161,17 @@
       "stage": "growth",
       "website": "https://directshifts.com",
       "qualified_by": "stage"
+    },
+    {
+      "name": "Discern Security",
+      "amount": 13000000,
+      "currency": "USD",
+      "date": "2026-07-31",
+      "round_letter": "A",
+      "source_url": "https://www.finsmes.com/2026/07/discern-security-raises-13m-in-series-a-funding.html",
+      "stage": null,
+      "website": "https://www.discernsecurity.com",
+      "qualified_by": "letter"
     },
     {
       "name": "Discord",
@@ -9164,6 +9197,17 @@
       "qualified_by": "amount"
     },
     {
+      "name": "Ellis",
+      "amount": 10000000,
+      "currency": "USD",
+      "date": "2026-07-31",
+      "round_letter": null,
+      "source_url": "https://www.finsmes.com/2026/07/ellis-raises-10m-in-seed-funding.html",
+      "stage": null,
+      "website": "https://ellis.ai",
+      "qualified_by": "amount"
+    },
+    {
       "name": "ELO LIFE SYSTEMS",
       "amount": 5406221,
       "currency": "USD",
@@ -9908,7 +9952,7 @@
       "round_letter": null,
       "source_url": "https://www.cbinsights.com/company/falconx",
       "stage": "growth",
-      "website": "https://falconx.us",
+      "website": "https://falconx.io",
       "qualified_by": "stage"
     },
     {
@@ -10030,6 +10074,17 @@
       "source_url": "https://www.ycombinator.com/companies/fat-llama",
       "stage": "growth",
       "website": "https://fatllama.com",
+      "qualified_by": "stage"
+    },
+    {
+      "name": "Fazeshift",
+      "amount": null,
+      "currency": null,
+      "date": null,
+      "round_letter": null,
+      "source_url": "https://www.ycombinator.com/companies/fazeshift",
+      "stage": "growth",
+      "website": "https://www.fazeshift.com",
       "qualified_by": "stage"
     },
     {
@@ -10481,17 +10536,6 @@
       "source_url": "https://www.sec.gov/Archives/edgar/data/1823466/000095012325008529/0000950123-25-008529-index.htm",
       "stage": null,
       "website": null,
-      "qualified_by": "amount"
-    },
-    {
-      "name": "Fish Audio",
-      "amount": 52000000,
-      "currency": "USD",
-      "date": "2026-07-29",
-      "round_letter": null,
-      "source_url": "https://www.finsmes.com/2026/07/fish-audio-raises-52m-in-seed-funding.html",
-      "stage": null,
-      "website": "https://fish.audio",
       "qualified_by": "amount"
     },
     {
@@ -11427,6 +11471,17 @@
       "source_url": "https://www.forbes.com/companies/gamma/",
       "stage": "growth",
       "website": null,
+      "qualified_by": "stage"
+    },
+    {
+      "name": "Garage",
+      "amount": null,
+      "currency": null,
+      "date": null,
+      "round_letter": null,
+      "source_url": "https://www.ycombinator.com/companies/garage-2",
+      "stage": "growth",
+      "website": "https://www.shopgarage.com",
       "qualified_by": "stage"
     },
     {
@@ -12794,17 +12849,6 @@
       "qualified_by": "amount"
     },
     {
-      "name": "Healia",
-      "amount": 14000000,
-      "currency": "USD",
-      "date": "2026-07-29",
-      "round_letter": "A",
-      "source_url": "https://www.finsmes.com/2026/07/healia-raises-14m-in-series-a-funding.html",
-      "stage": null,
-      "website": "https://www.healiahealth.com",
-      "qualified_by": "letter"
-    },
-    {
       "name": "Healthcare Triangle",
       "amount": 15000000,
       "currency": "USD",
@@ -14048,6 +14092,17 @@
       "qualified_by": "stage"
     },
     {
+      "name": "Inforcer",
+      "amount": 50000000,
+      "currency": "USD",
+      "date": "2026-07-30",
+      "round_letter": null,
+      "source_url": "https://techcrunch.com/2026/07/30/inforcer-raises-50m-to-help-prepare-smbs-for-a-new-world-of-ai-and-security-risks/",
+      "stage": null,
+      "website": "https://www.inforcer.com",
+      "qualified_by": "amount"
+    },
+    {
       "name": "Infracost",
       "amount": 18849980,
       "currency": "USD",
@@ -14739,6 +14794,17 @@
       "stage": "growth",
       "website": "https://justworks.com",
       "qualified_by": "stage"
+    },
+    {
+      "name": "K2 Space",
+      "amount": 500000000,
+      "currency": "USD",
+      "date": "2026-07-30",
+      "round_letter": "D",
+      "source_url": "https://www.finsmes.com/2026/07/k2-space-raises-500m-in-series-d-funding-at-6-8-billion-valuation.html",
+      "stage": null,
+      "website": "https://www.k2space.com",
+      "qualified_by": "letter"
     },
     {
       "name": "Kable",
@@ -16530,7 +16596,7 @@
       "round_letter": null,
       "source_url": "https://www.cbinsights.com/company/lukka",
       "stage": "growth",
-      "website": "https://lukka.tech",
+      "website": "https://lukka.mx",
       "qualified_by": "stage"
     },
     {
@@ -17667,6 +17733,17 @@
       "qualified_by": "amount"
     },
     {
+      "name": "Mighty Buildings",
+      "amount": null,
+      "currency": null,
+      "date": null,
+      "round_letter": null,
+      "source_url": "https://www.ycombinator.com/companies/mighty-buildings",
+      "stage": "growth",
+      "website": "https://www.mightybuildings.com",
+      "qualified_by": "stage"
+    },
+    {
       "name": "MilkRun",
       "amount": null,
       "currency": null,
@@ -17676,17 +17753,6 @@
       "stage": "growth",
       "website": "https://www.localmilkrun.com",
       "qualified_by": "stage"
-    },
-    {
-      "name": "Millie",
-      "amount": 12000000,
-      "currency": "USD",
-      "date": "2025-02-26",
-      "round_letter": "A",
-      "source_url": "https://techcrunch.com/2025/02/26/maternity-clinic-millie-nabs-12m-series-a-from-an-all-star-all-female-class-of-vcs/",
-      "stage": null,
-      "website": "https://www.millieclinic.com",
-      "qualified_by": "letter"
     },
     {
       "name": "Million Software",
@@ -18213,7 +18279,7 @@
       "round_letter": null,
       "source_url": "https://www.cbinsights.com/company/mondo",
       "stage": "growth",
-      "website": "https://mondo.com",
+      "website": "https://monzo.com",
       "qualified_by": "stage"
     },
     {
@@ -18829,7 +18895,7 @@
       "round_letter": null,
       "source_url": "https://www.cbinsights.com/company/neo-technology",
       "stage": "growth",
-      "website": "https://neo4j.com",
+      "website": "https://neotechnologysolutions.com",
       "qualified_by": "stage"
     },
     {
@@ -19599,7 +19665,7 @@
       "round_letter": null,
       "source_url": "https://www.cbinsights.com/company/numbrs",
       "stage": "growth",
-      "website": "https://numbrs.com.br",
+      "website": "https://numbrs.com",
       "qualified_by": "stage"
     },
     {
@@ -20109,17 +20175,6 @@
       "qualified_by": "amount"
     },
     {
-      "name": "Oneleet",
-      "amount": null,
-      "currency": null,
-      "date": null,
-      "round_letter": null,
-      "source_url": "https://www.ycombinator.com/companies/oneleet",
-      "stage": "growth",
-      "website": "https://www.oneleet.com",
-      "qualified_by": "stage"
-    },
-    {
       "name": "OneLocal",
       "amount": null,
       "currency": null,
@@ -20237,7 +20292,7 @@
       "round_letter": null,
       "source_url": "https://www.cbinsights.com/company/opay",
       "stage": "growth",
-      "website": "https://arabfounders.net",
+      "website": "https://opayweb.com",
       "qualified_by": "stage"
     },
     {
@@ -20798,7 +20853,7 @@
       "round_letter": null,
       "source_url": "https://www.cbinsights.com/company/paddle",
       "stage": "growth",
-      "website": "https://paddle-inc.jp",
+      "website": "https://paddle.com",
       "qualified_by": "stage"
     },
     {
@@ -22584,17 +22639,6 @@
       "qualified_by": "stage"
     },
     {
-      "name": "Procode",
-      "amount": 10000000,
-      "currency": "USD",
-      "date": "2026-07-29",
-      "round_letter": "A",
-      "source_url": "https://www.finsmes.com/2026/07/procode-raises-10m-in-series-a-funding.html",
-      "stage": null,
-      "website": null,
-      "qualified_by": "letter"
-    },
-    {
       "name": "Productboard",
       "amount": null,
       "currency": null,
@@ -22716,17 +22760,6 @@
       "qualified_by": "amount"
     },
     {
-      "name": "ProphetX",
-      "amount": 35000000,
-      "currency": "USD",
-      "date": "2026-07-28",
-      "round_letter": null,
-      "source_url": "https://www.finsmes.com/2026/07/prophetx-raises-35m-in-fundnig.html",
-      "stage": null,
-      "website": "https://www.prophetx.co",
-      "qualified_by": "amount"
-    },
-    {
       "name": "ProrataAI",
       "amount": 39999996,
       "currency": "USD",
@@ -22822,7 +22855,7 @@
       "round_letter": null,
       "source_url": "https://www.cbinsights.com/company/matador",
       "stage": "growth",
-      "website": "https://matadorjapan.co.jp",
+      "website": "https://matador.is",
       "qualified_by": "stage"
     },
     {
@@ -22866,7 +22899,7 @@
       "round_letter": null,
       "source_url": "https://www.cbinsights.com/company/pump",
       "stage": "growth",
-      "website": "https://pump.co",
+      "website": "https://xingxingmobility.com",
       "qualified_by": "stage"
     },
     {
@@ -23339,7 +23372,7 @@
       "round_letter": null,
       "source_url": "https://www.cbinsights.com/company/redpanda",
       "stage": "growth",
-      "website": "https://redpanda.agency",
+      "website": "https://redpandasocial.com",
       "qualified_by": "stage"
     },
     {
@@ -23695,6 +23728,17 @@
       "qualified_by": "amount"
     },
     {
+      "name": "Reducto",
+      "amount": null,
+      "currency": null,
+      "date": null,
+      "round_letter": null,
+      "source_url": "https://www.ycombinator.com/companies/reducto",
+      "stage": "growth",
+      "website": "https://reducto.ai",
+      "qualified_by": "stage"
+    },
+    {
       "name": "Red Ventures",
       "amount": null,
       "currency": null,
@@ -23746,7 +23790,7 @@
       "round_letter": null,
       "source_url": "https://www.cbinsights.com/company/reflection-ai",
       "stage": "growth",
-      "website": "https://reflection.ai",
+      "website": "https://reflectionai.xyz",
       "qualified_by": "stage"
     },
     {
@@ -24641,6 +24685,17 @@
       "qualified_by": "letter"
     },
     {
+      "name": "Ryan Williams",
+      "amount": 10000000,
+      "currency": "USD",
+      "date": "2026-07-31",
+      "round_letter": null,
+      "source_url": "https://techcrunch.com/2026/07/31/repeat-founder-ryan-williams-raises-10m-seed-for-an-ai-startup-for-private-credit-managers/",
+      "stage": null,
+      "website": null,
+      "qualified_by": "amount"
+    },
+    {
       "name": "SafeBase",
       "amount": null,
       "currency": null,
@@ -25353,6 +25408,17 @@
       "source_url": "https://www.ycombinator.com/companies/segment",
       "stage": "growth",
       "website": "http://segment.com",
+      "qualified_by": "stage"
+    },
+    {
+      "name": "Seis",
+      "amount": null,
+      "currency": null,
+      "date": null,
+      "round_letter": null,
+      "source_url": "https://www.ycombinator.com/companies/seis",
+      "stage": "growth",
+      "website": "https://www.seis.com",
       "qualified_by": "stage"
     },
     {
@@ -26078,7 +26144,7 @@
       "round_letter": null,
       "source_url": "https://www.cbinsights.com/company/slice",
       "stage": "growth",
-      "website": "https://sliceit.com",
+      "website": "https://slicelife.com",
       "qualified_by": "stage"
     },
     {
@@ -26113,6 +26179,17 @@
       "stage": null,
       "website": null,
       "qualified_by": "amount"
+    },
+    {
+      "name": "Smallest.ai",
+      "amount": 13000000,
+      "currency": "USD",
+      "date": "2026-07-31",
+      "round_letter": "A",
+      "source_url": "https://www.finsmes.com/2026/07/smallest-ai-raises-13m-in-series-a-funding.html",
+      "stage": null,
+      "website": "https://smallest.ai",
+      "qualified_by": "letter"
     },
     {
       "name": "SmartAsset",
@@ -26533,6 +26610,17 @@
       "qualified_by": "stage"
     },
     {
+      "name": "SoundHealth",
+      "amount": 12250000,
+      "currency": "USD",
+      "date": "2026-07-31",
+      "round_letter": "A",
+      "source_url": "https://www.finsmes.com/2026/07/soundhealth-raises-12-25m-in-series-a-funding.html",
+      "stage": null,
+      "website": "https://www.soundhealth.life",
+      "qualified_by": "letter"
+    },
+    {
       "name": "Sourcegraph",
       "amount": null,
       "currency": null,
@@ -26761,17 +26849,6 @@
       "source_url": "https://www.sec.gov/Archives/edgar/data/2074871/000147083125000094/0001470831-25-000094-index.htm",
       "stage": null,
       "website": null,
-      "qualified_by": "amount"
-    },
-    {
-      "name": "Spur Intelligence",
-      "amount": 200000000,
-      "currency": "USD",
-      "date": "2026-07-29",
-      "round_letter": null,
-      "source_url": "https://www.finsmes.com/2026/07/spur-intelligence-receives-200m-investment-from-insight-partners.html",
-      "stage": null,
-      "website": "https://spur.us",
       "qualified_by": "amount"
     },
     {
@@ -27530,7 +27607,7 @@
       "round_letter": null,
       "source_url": "https://www.cbinsights.com/company/symphony-communication-services-holdings",
       "stage": "growth",
-      "website": "https://getsymphony.co",
+      "website": "https://symphony.com",
       "qualified_by": "stage"
     },
     {
@@ -28128,6 +28205,17 @@
       "qualified_by": "amount"
     },
     {
+      "name": "Terminal",
+      "amount": null,
+      "currency": null,
+      "date": null,
+      "round_letter": null,
+      "source_url": "https://www.ycombinator.com/companies/terminal",
+      "stage": "growth",
+      "website": "https://www.withterminal.com",
+      "qualified_by": "stage"
+    },
+    {
       "name": "TERRANOVA SYSTEMS",
       "amount": 6804997,
       "currency": "USD",
@@ -28269,6 +28357,17 @@
       "stage": "growth",
       "website": "https://thebrandtechgroup.com",
       "qualified_by": "stage"
+    },
+    {
+      "name": "The Farmer Companies",
+      "amount": 17000000,
+      "currency": "USD",
+      "date": "2026-07-30",
+      "round_letter": "A",
+      "source_url": "https://www.finsmes.com/2026/07/the-farmer-companies-raises-17m-in-series-a-funding.html",
+      "stage": null,
+      "website": "https://www.thefarmercompanies.com",
+      "qualified_by": "letter"
     },
     {
       "name": "The Flex Company",
@@ -28445,17 +28544,6 @@
       "stage": "growth",
       "website": "http://www.thriveagritech.com",
       "qualified_by": "stage"
-    },
-    {
-      "name": "Throne Science",
-      "amount": 10000000,
-      "currency": "USD",
-      "date": "2026-07-29",
-      "round_letter": "A",
-      "source_url": "https://www.finsmes.com/2026/07/throne-science-raises-10m-in-series-a-funding.html",
-      "stage": null,
-      "website": "https://thronescience.com",
-      "qualified_by": "letter"
     },
     {
       "name": "Thunkable",
@@ -28851,6 +28939,17 @@
       "source_url": "https://www.cbinsights.com/company/travelperk",
       "stage": "growth",
       "website": "https://perk.com",
+      "qualified_by": "stage"
+    },
+    {
+      "name": "Trayd",
+      "amount": null,
+      "currency": null,
+      "date": null,
+      "round_letter": null,
+      "source_url": "https://www.ycombinator.com/companies/trayd",
+      "stage": "growth",
+      "website": "https://www.buildtrayd.com",
       "qualified_by": "stage"
     },
     {
@@ -29866,6 +29965,17 @@
       "qualified_by": "amount"
     },
     {
+      "name": "Vector Legal",
+      "amount": 5190000,
+      "currency": "USD",
+      "date": "2026-07-30",
+      "round_letter": null,
+      "source_url": "https://www.finsmes.com/2026/07/vector-legal-closes-5-19m-seed-funding-round.html",
+      "stage": null,
+      "website": "https://vectorlegal.com",
+      "qualified_by": "amount"
+    },
+    {
       "name": "Vectra Networks",
       "amount": null,
       "currency": null,
@@ -30394,17 +30504,6 @@
       "qualified_by": "stage"
     },
     {
-      "name": "Vivid Dx",
-      "amount": 15000000,
-      "currency": "USD",
-      "date": "2026-07-29",
-      "round_letter": null,
-      "source_url": "https://www.finsmes.com/2026/07/vivid-dx-raises-15m-in-seed-funding.html",
-      "stage": null,
-      "website": "https://vivid-dx.com",
-      "qualified_by": "amount"
-    },
-    {
       "name": "Vivodyne",
       "amount": 77693306,
       "currency": "USD",
@@ -30780,14 +30879,14 @@
     },
     {
       "name": "Weave",
-      "amount": 13500000,
-      "currency": "USD",
-      "date": "2026-07-29",
-      "round_letter": "A",
-      "source_url": "https://www.finsmes.com/2026/07/weave-raises-13-5m-in-series-a-funding.html",
-      "stage": null,
+      "amount": null,
+      "currency": null,
+      "date": null,
+      "round_letter": null,
+      "source_url": "https://www.ycombinator.com/companies/weave",
+      "stage": "growth",
       "website": "https://weaveos.com",
-      "qualified_by": "letter"
+      "qualified_by": "stage"
     },
     {
       "name": "Weave Communications",
@@ -31681,6 +31780,17 @@
       "qualified_by": "stage"
     },
     {
+      "name": "Zeitview",
+      "amount": null,
+      "currency": null,
+      "date": null,
+      "round_letter": null,
+      "source_url": "https://www.ycombinator.com/companies/zeitview",
+      "stage": "growth",
+      "website": "https://www.zeitview.com",
+      "qualified_by": "stage"
+    },
+    {
       "name": "ZenBusiness",
       "amount": null,
       "currency": null,
@@ -32369,6 +32479,7 @@
     "Amiato",
     "Amika",
     "AminoAnalytica",
+    "Amorphic Labs",
     "AmpUp",
     "AmpliTech Group",
     "Amplifi Intelligence",
@@ -32494,6 +32605,7 @@
     "Arpari",
     "Arpeggio Bio",
     "Arpio",
+    "Array Labs",
     "Arrow",
     "Arroyo",
     "Artemis Search",
@@ -32545,6 +32657,7 @@
     "Atlas Financial Services",
     "Atlas Meridian",
     "AtlasGrid",
+    "Atlia",
     "Atlog",
     "Atmana",
     "Atmeto",
@@ -32793,7 +32906,6 @@
     "Biocogniv",
     "Biodock",
     "Biographicon",
-    "Birdai Labs",
     "Birdie",
     "Birdstop",
     "Birdtown Labs",
@@ -33016,6 +33128,7 @@
     "CLODO",
     "CLOUDASTRUCTURE",
     "CO2Stats",
+    "COACH",
     "COLLANITY",
     "COLORCOM",
     "COMPETITIVE WEDGE",
@@ -33065,7 +33178,6 @@
     "Camp",
     "Campusknot",
     "Cana Wedding Group",
-    "Candid Health",
     "Candidately",
     "Candle",
     "Candor",
@@ -33277,7 +33389,7 @@
     "ClickPe",
     "Clickfacts",
     "Clickpass",
-    "Clicks",
+    "Clicks Health",
     "Clidey",
     "Clinasyst",
     "Clinware Solutions",
@@ -33545,7 +33657,6 @@
     "Cumulus Labs",
     "Cura",
     "Curacel",
-    "Curant.ai",
     "Curatus Inc / FL",
     "Curious Fictions",
     "Curo",
@@ -33902,6 +34013,7 @@
     "EigenPal",
     "EigenQ",
     "Eivod",
+    "Ekho Labs",
     "Ekpa",
     "Ekyam.ai",
     "Elayne",
@@ -34027,6 +34139,7 @@
     "ExceptionALLY",
     "Exec",
     "ExecutiveIQ",
+    "Executor",
     "Exla",
     "Exly",
     "Exmergo",
@@ -34096,7 +34209,6 @@
     "Fathom Water",
     "FathomDB",
     "Favorably",
-    "Fazeshift",
     "Feanix Biotechnologies",
     "FeaturePeek",
     "Fed10",
@@ -34382,7 +34494,6 @@
     "Gamify Analytics",
     "Gander",
     "Gantto",
-    "Garage",
     "Gas Pos",
     "Gate Ready",
     "Gather",
@@ -34424,6 +34535,7 @@
     "Gigs Live",
     "Gigwell",
     "GimBooks",
+    "GitCafe",
     "GitStart",
     "GiveAway",
     "GiveCampus",
@@ -34592,6 +34704,7 @@
     "Haywheel",
     "Hazel",
     "Headstart",
+    "Healia",
     "Health Alert",
     "Health Harbor",
     "HealthKey",
@@ -34635,7 +34748,6 @@
     "Heru",
     "Hessian",
     "Hestus, Inc.",
-    "Hex Security",
     "Hexa",
     "Hexclave",
     "Hexel",
@@ -34697,6 +34809,7 @@
     "Huaming International",
     "Hub",
     "HubHuman",
+    "Hubble",
     "Hublo",
     "Huckleberry Feedback",
     "Huddlefire",
@@ -34862,6 +34975,7 @@
     "Instaplay",
     "Instavest",
     "Instinct",
+    "Instinct Space",
     "Instrumentl",
     "Insurf",
     "Insyterra",
@@ -35010,6 +35124,7 @@
     "Kanuki",
     "Kapacity.io",
     "Kapital Bank",
+    "Kara",
     "Karate Labs",
     "Karmen",
     "Karoo",
@@ -35166,6 +35281,7 @@
     "Lalabox",
     "Lamar Health",
     "Lamb Labs",
+    "Lambda Robotics",
     "Lambda Tea",
     "Lamin",
     "Lamina Labs",
@@ -35205,6 +35321,7 @@
     "Lawyaw",
     "Layer By Layer",
     "LayerV",
+    "Layers",
     "Layerup",
     "Laylo",
     "Layup",
@@ -35375,6 +35492,7 @@
     "Lua Global Inc",
     "Luable",
     "Luca",
+    "Luca IQ",
     "Lucendi",
     "Lucent",
     "Lucible",
@@ -35659,7 +35777,6 @@
     "Midwest Games",
     "Miga",
     "Miggos",
-    "Mighty Buildings",
     "Mighty Health",
     "MightyQuiz",
     "Milio",
@@ -35943,6 +36060,7 @@
     "Nextop",
     "Nextstore",
     "Nexus",
+    "Nexus Power",
     "Nexxt MedTech",
     "Ngentix",
     "Nightingale",
@@ -36057,6 +36175,7 @@
     "OfOne",
     "Offbeast",
     "Officely",
+    "Offscript Worldwide",
     "Offstream",
     "OhLife",
     "Ohanafy",
@@ -36075,7 +36194,6 @@
     "Ole",
     "Olio Labs",
     "Olive Legal",
-    "Olomon",
     "Olympian Motors",
     "Oma Care",
     "Omega Project",
@@ -36111,6 +36229,7 @@
     "OneShop",
     "OneStopKitchen",
     "OneText",
+    "Oneleet",
     "Onfolio Holdings",
     "Onfolk",
     "Oniqq Platforms",
@@ -36148,6 +36267,7 @@
     "OpenTools",
     "OpenTrade",
     "OpenUnit",
+    "OpenVector",
     "OpenWork",
     "OpenWrench",
     "Openbase",
@@ -36324,6 +36444,7 @@
     "Parakey",
     "Parallel Bio",
     "Parallel Universe",
+    "Parameter (fka Hex Security)",
     "Parametric",
     "Parasight System",
     "Parasma",
@@ -36894,7 +37015,6 @@
     "Redsnack Technologies",
     "Redspread",
     "Reduced Energy Microsystems",
-    "Reducto",
     "Reebee",
     "Reebeez",
     "ReelSurfer",
@@ -37269,7 +37389,6 @@
     "Segmed",
     "Segments.ai",
     "Sei AI",
-    "Seis",
     "Sekilo",
     "Selera Medical",
     "Self Inspection",
@@ -37628,6 +37747,7 @@
     "Stamp Free",
     "Stamus Networks",
     "Standard Cyborg",
+    "Standard Machines",
     "Standard Signal",
     "Standard Treasury",
     "Standout",
@@ -37669,6 +37789,7 @@
     "Stipop",
     "Stitch Technologies",
     "Stitch3D",
+    "Stoa",
     "Stock Unlock",
     "StockSight",
     "Stockline",
@@ -37692,6 +37813,7 @@
     "Strand AI",
     "Strata",
     "Strategic Management",
+    "Stratum Industries",
     "StratumAI",
     "Streak",
     "Stream",
@@ -37899,6 +38021,7 @@
     "TapEngage",
     "Tappity",
     "Tapzilla",
+    "TareBio",
     "Tarjimly (acquired)",
     "Taro",
     "Tarragon Systems",
@@ -37928,7 +38051,6 @@
     "Tegore",
     "Tekton Dynamics",
     "Teleborder",
-    "Telemetron",
     "Teleo",
     "Telesair",
     "Telivy",
@@ -37956,7 +38078,6 @@
     "Terark",
     "Tergle",
     "Termii",
-    "Terminal",
     "Terminal Use",
     "Termius",
     "Terra API",
@@ -38100,6 +38221,7 @@
     "Tracecat",
     "Traceforce",
     "Traceloop",
+    "Tracer",
     "Traces",
     "TrackChain",
     "Trackingplan",
@@ -38128,7 +38250,6 @@
     "Traverse",
     "Traverse Technologies",
     "Travo",
-    "Trayd",
     "TreadStone Technologies",
     "Treehouse",
     "Treinta",
@@ -38147,6 +38268,7 @@
     "Trexo Robotics",
     "Tributi",
     "Tricorder",
+    "Trident",
     "Trieve",
     "Trigger",
     "Trigo",
@@ -38354,7 +38476,6 @@
     "VaycayHero",
     "Vector",
     "Vector Health AI",
-    "Vector Legal",
     "Vector Research Group",
     "VectorShift",
     "Vectordash",
@@ -38404,7 +38525,7 @@
     "Versable",
     "Verse Therapy",
     "Verses AI",
-    "Version Story",
+    "Version Story Compare",
     "Versive",
     "Versori",
     "Verto",
@@ -38710,7 +38831,6 @@
     "Zegacy",
     "Zeit AI",
     "Zeit Medical",
-    "Zeitview",
     "Zelos Cloud",
     "Zen",
     "Zenamins",
@@ -38835,6 +38955,7 @@
     "healthKERI",
     "highlight.io",
     "hillclimb",
+    "hiloop",
     "hoop.dev",
     "hostU",
     "hotglue",
@@ -38920,6 +39041,7 @@
     "superglue",
     "sync.",
     "tEQuitable",
+    "tash",
     "tday.com",
     "teaBOT",
     "telli",
@@ -39073,6 +39195,7 @@
     "Allotrope Medical": "medical",
     "ANDROMEDA ROBOTICS": "robotics",
     "Andromeda Surgical": "surgical",
+    "Antora Energy": "energy",
     "Applied Impact Robotics": "robotics",
     "Arkea Bio": "bio",
     "Arpeggio Bio": "bio",
@@ -39154,12 +39277,15 @@
     "Inductive Bio": "bio",
     "InLoop Robotics": "robotics",
     "inSoma Bio": "bio",
+    "Instinct Space": "space",
     "Inversion Space": "space",
     "InVision Medical Technology": "medical",
     "Jasmine Energy": "energy",
+    "K2 Space": "space",
     "Katalyst Space Holdings": "space",
     "Keda Robotics": "robotics",
     "Kopra Bio": "bio",
+    "Lambda Robotics": "robotics",
     "Latent Space": "space",
     "Lhotse Medical": "medical",
     "Libra Robotics": "robotics",

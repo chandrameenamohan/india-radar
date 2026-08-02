@@ -32,10 +32,22 @@ WORKFLOW = WORKFLOWS / "nightly.yml"
 SLUGS = Path("data/slugs.json")
 PUBLISHED = "the last good build\n"
 
+#: The environment for a throwaway repo, which is the ambient one with git's own
+#: variables taken out.
+#:
+#: Load-bearing, and it took a blocked commit to find: git exports GIT_DIR,
+#: GIT_INDEX_FILE and the author identity into every hook it runs, and the
+#: pre-commit hook runs this suite. Inherited, `-C tmp_path` stops meaning
+#: anything — `git init` re-inits the REAL repository ("warning: re-init"), and
+#: `git commit` runs the very pre-commit hook that started us, which `cd`s to a
+#: temp directory with no Makefile and blocks. Every commit to this project was
+#: failing on it. A test that creates its own repo must not borrow anybody's.
+CLEAN = {name: value for name, value in os.environ.items() if not name.startswith("GIT_")}
+
 
 def git(repo: Path, *args: str) -> str:
     done = subprocess.run(
-        ["git", "-C", str(repo), *args], capture_output=True, text=True, check=True
+        ["git", "-C", str(repo), *args], capture_output=True, text=True, check=True, env=CLEAN
     )
     return done.stdout.strip()
 
@@ -72,7 +84,7 @@ def nightly(repo: Path, build: str, seconds: str = "30") -> subprocess.Completed
     return subprocess.run(
         [str(repo / SCRIPT)],
         cwd=repo,
-        env={**os.environ, "NIGHTLY_BUILD": str(stub), "NIGHTLY_TIMEOUT": seconds},
+        env={**CLEAN, "NIGHTLY_BUILD": str(stub), "NIGHTLY_TIMEOUT": seconds},
         capture_output=True,
         text=True,
     )

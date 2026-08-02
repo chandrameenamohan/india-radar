@@ -1906,5 +1906,11 @@
   "for_whom": "Banks, asset managers and financial markets professionals",
   "why_them": "Used by the 10 largest global investment banks",
   "ai": true
+ },
+ "Smallest.ai": {
+  "what": "Real-time voice AI models and agent platform",
+  "for_whom": "Developers and businesses running production voice agents",
+  "why_them": "100 ms text-to-speech latency across 15+ languages",
+  "ai": true
  }
 }

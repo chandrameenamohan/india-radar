@@ -694,6 +694,38 @@ def website_counts(
     }
 
 
+#: The one reason a departure has no outcome: the report accounts for the corpus,
+#: and a company the sources have dropped is not in it to account for.
+LEFT_THE_CORPUS = "left-the-corpus"
+
+
+def departures(previous: Iterable[Row], assigned: Mapping[str, str]) -> dict[str, str]:
+    """Every company the last published build listed and this one does not,
+    mapped to the reason it went — T10.4.
+
+    `report` already accounts for every company IN the corpus under exactly one
+    outcome, which covers a company that stopped hiring or whose board stopped
+    answering. It cannot cover the other direction: a corpus rebuild can drop a
+    name outright (FinSMEs re-paginates, a directory delists), and that company
+    is then in no outcome at all because there is nothing left to assign one to.
+    So a listed set can shrink for a reason nothing states, which is the one
+    shape of loss this project has no other check for.
+
+    Named rather than counted, like `shared_boards`: "4 companies left" is a
+    number nobody can act on, and the names are what tells a human whether a
+    source broke or a company really went away.
+    """
+    # `published` is deliberately forgiving about what it reads back, so a row
+    # that cannot say what it is called is skipped here rather than crashing the
+    # report that exists to explain the loss.
+    names = [row["name"] for row in previous if isinstance(row.get("name"), str)]
+    return {
+        name: assigned.get(name, LEFT_THE_CORPUS)
+        for name in names
+        if assigned.get(name) != Outcome.LISTED.value
+    }
+
+
 def published(path: str | Path) -> list[Row]:
     """The rows the last good build put on the site, or none if there aren't any.
 
@@ -898,8 +930,16 @@ def main(argv: list[str]) -> None:
     # not check (T5.3), and those numbers are the report's, copied rather than
     # counted twice.
     built = report([c["name"] for c in corpus], outcomes)
+    # Read off the file the write is about to replace, so it is the set the site
+    # is serving right now rather than the set some earlier run listed.
+    left = departures(published(out), built["companies"])
     write(out, rows, built)
 
+    # Why the listed set is smaller than the one on the site, name by name
+    # (T10.4). The outcome counts explain a company that stopped hiring; only
+    # this explains one the sources stopped carrying, because a name that left
+    # the corpus is in no outcome at all.
+    built["departed"] = left
     built["websites"] = website_counts(corpus, outcomes)
     # Named, not just counted (T10.1): "10 companies read somebody else's board"
     # is a number nobody can check, and the pair it collapsed is the whole claim.
@@ -933,6 +973,8 @@ def main(argv: list[str]) -> None:
         print(f"  {count:4d}  {label}")
     collapsed = ", ".join(f"{name} -> {owner}" for name, owner in sorted(shared.items()))
     print(f"  {len(shared):4d}  names reading another company's board [{collapsed}]")
+    gone = ", ".join(f"{name} -> {why}" for name, why in sorted(left.items()))
+    print(f"  {len(left):4d}  listed by the last build and not by this one [{gone}]")
     # Only the countries with something in them, the same rule the outcome counts
     # above print by. The zeros are in the report, where the site reads them.
     for country, count in built["countries"].items():
