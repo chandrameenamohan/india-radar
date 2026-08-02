@@ -400,3 +400,343 @@ genuinely observed.
   that decision belongs to the feature that needs it, not to login.
 - **No email from this project.** Clerk sends the verification and reset mail it
   needs. Anything we send ourselves is a sender reputation to manage.
+
+---
+
+# v4 — Applying (decided 2026-08-02)
+
+**Compression:** The register stops being a place to read about an opening and
+becomes the place a person gets the application *done* — for the 371 verified
+companies and nowhere else. A signed-in user holds one profile of the constant
+facts every application form asks for and one uploaded resume, and from any
+verified role produces a complete package: drafted answers to that company's own
+questions, a cover letter where one is asked for. They review it, edit it, and
+submit it themselves on the company's board. Every application becomes a record,
+and the record is completed by a model reading the user's mail rather than by the
+user typing into a form.
+
+**The keystone decision: the backend arrives, and the public register does not
+change.** v3 said it out loud — *"no backend, no database, no session server. It
+will happen — feature 18 and beyond need it."* This is that version. The
+logged-in app is a client-rendered page on the same Pages site, talking to a
+Cloudflare Workers API that holds the LLM key, D1 for records and R2 for
+documents. The register stays the static artifact it is today: same nightly, same
+`companies.json`, same CDN, zero runtime dependencies, no build step, no second
+stack. Clerk continues to run browser-side exactly as T11.1 proved it does.
+
+**The honesty invariant of this version: nothing we put in a form is a fact the
+user has not given us.** Every filled field traces to a profile field or a line
+of the uploaded resume. Where the company asks something we hold no fact for, the
+workspace leaves a marked gap for the user to fill — it does not invent, infer or
+flatter. This is `absence stays absence` pointed at an application form instead
+of at a job board, and it is the whole reason this feature is defensible: the
+user signs their name to what we hand them, so it has to be true.
+
+## Architecture in one line (v4)
+
+`static register (unchanged) + app page (client-rendered, same origin) -> Workers API -> D1 (records) + R2 (documents)`
+
+**No model runs in this version, and that is a decision rather than a gap** — see
+"The drafting slot" below. It is why the line above ends where it does.
+
+### 18. The application workspace
+A signed-in user records their constant facts once and uploads one resume. From
+any role in the register they open a workspace: the posting on one side, the
+company's own questions on the other, each already answered from their profile
+where we hold the fact and marked as a gap where we do not. Every filled answer
+names the profile field it came from. Nothing is ever submitted by us — the user
+copies their answers and sends them on the company's board, and the interface
+says so where they can see it.
+
+**This feature writes prose for nobody.** It fills in facts the user stated once,
+against questions the company published, and it is honest about the rest. That is
+not a reduced version of the feature — it is the larger half of it, and the
+measurement below is why.
+
+**Measured 2026-08-02, and it moved the weight of this feature**
+(`learning-tests/apply_questions_live.py`). Greenhouse states a job's application
+questions on request; **Ashby states nothing, and 401 of 880 resolved slugs are
+Ashby**. Of 52 Greenhouse jobs across 20 boards, 28 — **54%** — ask at least one
+free-text question beyond the resume and cover letter. But the recurring ones are
+*facts*: salary expectations, earliest start date, the address you would work
+from, languages spoken, sponsorship needs, pronouns, interview accommodations,
+how you heard about the job. Genuine prose — "Why Anthropic?", "How are you using
+AI today in your current role?" — is the minority.
+
+So **the profile carries this feature and no model is needed to do it.** A
+profile holding those eight recurring fields removes more repeated typing than
+drafting does, costs nothing per use, and cannot invent. Drafting answers the
+minority question — "Why Anthropic?" — and is deferred with its price on paper.
+
+And the doctrine applies to the form itself: for the Ashby half of the register
+**we cannot see what the company asks, so we say we cannot**. A workspace that
+showed only the resume field for an Ashby role would be claiming the form is
+short when the truth is that we could not look — the same error as an unchecked
+company rendering as "not hiring".
+
+**Acceptance:** a signed-in user uploads a resume and it is retrievable on a
+later visit from a different browser. Opening a Greenhouse role shows that
+posting's real questions, each either answered from a named profile field or
+marked as a gap. A question we hold no fact for renders a marked gap, never a
+sentence — and a check proves it, against a profile deliberately missing the fact
+the question needs. An Ashby role states that we cannot see this company's form,
+and a check proves it does not instead render a short one. There is no control
+anywhere in the interface that submits to a third-party board, and a check proves
+that too. Zero console errors throughout.
+
+### The drafting slot — deferred, priced, and not a gap
+
+*"Why Anthropic?"* is the minority question, and answering it is the one thing in
+this version that needs a model. It is deliberately not built, and the reason is
+that **nobody has decided who pays for it.**
+
+Measured 2026-08-02 (`learning-tests/draft_cost_live.py`), one real application:
+**4,755 input tokens — $0.0195 warm, $0.0297 cold** — with output unmeasured and
+billing at five times the input rate. Call it a few cents each. Twenty
+applications for a hundred users is tens of dollars a month; the same behaviour
+at ten thousand users is thousands. **Drafting cost scales linearly with users,
+forever**, and that is a product decision rather than an engineering one.
+
+Three answers, all defensible, none of them chosen yet:
+- **The user's own key.** They supply it, drafting runs on it, it costs this
+  project nothing. Suits an audience that mostly has one; costs signup friction
+  and key custody.
+- **We pay, funded by the partner side.** `F4` is where money enters this
+  product. Drafting becomes something people pay for rather than something they
+  are given.
+- **It never gets built.** The measurement says the profile does the larger half
+  for free. That is a real option, not a failure state.
+
+**A Claude Code subscription is not one of the three** — verified 2026-08-02, all
+three ways: `count_tokens` returns 200, `messages.create` returns 429, and
+Managed Agents returns `403 OAuth token does not meet scope requirement`. It is a
+credential for measuring, and it is licensed for its holder rather than for a
+backend answering other people's requests.
+
+**Feature 20 shares this slot.** Classifying a message as an acknowledgement, a
+human reply or a rejection needs a model too — on the OAuth path and on the
+auto-forward fallback alike. That feature was already third behind Google's
+security assessment; this is the second thing it waits on, and the two are
+independent.
+
+### 19. The application record
+Every application the user makes is a row they did not type. Applications built
+in the workspace record themselves. Applications we had nothing to do with are
+found by feature 20. The manual path is a box the user pastes a posting URL into
+— there is no form to fill, because a product that makes people do data entry has
+failed the brief it was written for.
+
+**Register-only scope pays for itself here.** A pasted URL is a Greenhouse, Ashby
+or Lever board address, and the corpus already maps every one of those to a
+company, a role and a posting. Resolving the paste is a lookup in
+`companies.json`, not an extraction — no model, no parsing of somebody's HTML, no
+chance of getting the company wrong. A URL that resolves to nothing is a URL for
+a company this register does not cover, and the box says exactly that.
+
+The record obeys the doctrine the register runs on. **"No reply yet" and "we
+could not look" are different facts and always render differently.** When a mail
+connection lapses, expires or is revoked, every record it was feeding says so and
+names the date we last genuinely saw the mailbox. A record never ages into
+"rejected" through silence.
+
+**The user sees their own numbers, and nobody else's** — how many applications,
+how many drew a human reply, the median days to one, and which are still silent
+past their own average. It is the calibration a person applying to thirty
+companies has no way to get, and it is worth having on its own: most silence is
+normal, and a candidate who cannot see that reads every quiet week as a verdict
+on themselves.
+
+**Acceptance:** an application completed in the workspace appears in the record
+without the user entering anything. Pasting a board URL creates a record with
+company, role and date resolved from the corpus, and the user is asked to confirm
+rather than to type; a URL for a company the register does not cover is refused
+by name rather than guessed at. A record whose mail source has stopped reporting renders as unobserved with
+the last-observed date, and a check proves it does not render as "no response".
+The personal counts are computed only over applications whose outcome was
+genuinely observed, and a check proves an unobservable application is excluded
+from the denominator rather than counted as a non-reply.
+
+### 20. The inbox watcher
+With the user's permission, a model reads their mail, recognizes the messages
+that concern applications, and keeps the record current — shortlisted, rejected,
+interview scheduled, or nothing yet. It is what makes the record complete rather
+than a partial diary of what happened to start on our site, and it is the only
+part of this version that works whether or not the user came through our funnel.
+
+**We keep extractions, never contents.** The model reads a message in flight and
+we store what it concluded — company, role, status, the date observed, the
+message id — and nothing else. No body, no subject line, no attachment ever lands
+in our storage. This is the single decision that keeps the liability of this
+feature proportional to its value.
+
+Four fields carry the timing, and they exist from the first row rather than being
+added later: `applied_at`, `first_reply_at`, `reply_kind` — automated
+acknowledgement, human, or rejection — and the outcome. **`reply_kind` is what
+makes the timestamps mean anything and is the reason it cannot be retrofitted:
+without it, an old row cannot say whether a two-day reply was a recruiter reading
+the application or a robot confirming receipt, and every row written before the
+distinction existed is uninterpretable forever.** No consent question attaches to
+any of this — it is the user's own record of their own applications, shown back
+only to them.
+
+**This feature is third, and the reason is not engineering — measured
+2026-08-02.** `gmail.readonly`, `gmail.metadata` and `gmail.modify` are all on
+Google's *restricted* list, so reading only headers buys user trust and no
+compliance relief. Restricted-scope apps must submit to **an annual security
+assessment from a Google empanelled assessor**; until verification completes an
+app is **capped at 100 users**, and in testing mode refresh tokens die after
+**7 days** — which means the cap cannot even be used as a soft launch. That is a
+process with a lead time this project does not control, so 18 and 19 ship first
+and this ships behind either a completed assessment or the fallback: a Gmail
+filter the user sets up themselves, auto-forwarding matching mail to an address
+we own, which touches no OAuth scope at all. **The fallback is therefore the
+design, not the contingency**, and the OAuth path is what replaces it once an
+assessment is worth paying for.
+
+**Acceptance:** a connected mailbox produces status changes on existing records
+without the user acting, and produces new records for applications the user never
+told us about. No message body, subject or attachment is present in D1 or R2, and
+a check proves it by inspecting stored rows after a run over fixture mail. A
+revoked or expired connection surfaces on every record it fed, with a date.
+
+## Personal data, and the retention decision v3 deferred here
+
+v3 refused to make this call and said the feature that needs it should own it.
+It does.
+
+- **Facts split by purpose.** Operational constants — visa need, relocation,
+  on-site tolerance — live server-side, because they will shape what we show the
+  user. The EEO demographics — gender, sexuality, race, veteran status — stay in
+  the user's own browser, autofilled into other people's forms and never
+  persisted by us. They are Article 9 special-category data in the EU and UK,
+  they never needed to sync, and the cheapest correct handling of data you do not
+  need is not to hold it.
+- **One resume, no history.** Replacing it deletes the previous file. Versioning
+  is Epic 1's job and is out of scope here.
+- **Mail: extractions only.** See feature 20.
+- **Deleting the account deletes the data in the same request** — R2 objects and
+  D1 rows, not a queue, not a nightly sweep. A deletion you cannot verify
+  synchronously is a deletion you cannot honestly claim.
+
+## Measured before this froze (2026-08-02)
+
+1. **The Gmail scope assumption holds, and it is worse than assumed.** Google
+   classifies `gmail.readonly`, `gmail.metadata` AND `gmail.modify` as
+   *restricted* — so header-only buys trust but no relief, exactly as feared —
+   and restricted-scope apps "must meet the additional requirement of secure
+   data handling by submitting to an annual security assessment from a Google
+   empanelled group of security assessors." Unverified apps are **capped at 100
+   users**, and refresh tokens for apps in testing mode are invalidated after
+   **7 days**, which makes the cap useless for anything but a pilot. Feature 20
+   is third, and the auto-forward fallback is not a curiosity — it is the design
+   until an assessment completes.
+2. **Greenhouse states its application questions; Ashby does not.** See the
+   measurement folded into feature 18 above. This moved the weight of the
+   feature from the drafting to the profile, and gave the Ashby half of the
+   register an honesty requirement it would not otherwise have had.
+3. **One drafted application: input priced, output still owed** — and the reason
+   drafting is now deferred rather than built
+   (`learning-tests/draft_cost_live.py`). Against a real 9,098-character posting
+   with 6 real questions: **4,755 input tokens, of which only 951 are cacheable**
+   — system, profile and resume together — and **3,804 are the posting**. The
+   posting is four fifths of the prompt, so prompt caching takes one application
+   from $0.0297 to $0.0195 of input rather than to nearly nothing. Output tokens
+   are unmeasured and bill at five times the input rate, so the per-application
+   figure is bounded below and not yet known. The completion returned **429 on
+   the Claude Code subscription token** — it counts tokens freely and will not
+   buy a completion — so finishing this needs an API key on API billing.
+
+**The model calls in this version are single completions, not an agent loop.**
+Drafting an answer, extracting a record from a pasted URL and classifying a
+message are each one request with a JSON schema on the response; none of them
+explores, uses tools or iterates. That matters architecturally: the Claude Agent
+SDK is Claude Code as a library and needs a filesystem and subprocesses, which
+Workers does not have — so reaching for it would cost this version its keystone
+decision to buy a harness nothing here uses. The Anthropic SDK on Workers keeps
+both. If a genuinely agentic feature arrives later — an agent that reads the
+resume, opens the board and assembles the package unattended — that is the point
+to revisit the runtime, and it is a real reason rather than this one.
+
+## v4 non-goals
+
+- **Nothing is ever auto-submitted, and nothing is ever submitted in bulk.** Not
+  behind a flag, not for power users. A bot posting into Greenhouse and Ashby at
+  volume is against their terms, is how a domain gets blocked, and is directly
+  corrosive to a register whose entire claim is that it respects what those
+  boards say.
+- **No company outside the register.** A paste-any-URL applier makes the register
+  decorative and puts this project head-to-head with a dozen tools on ground
+  where it has no advantage.
+- **No resume editing, tailoring or generation.** One uploaded file. Epic 1 owns
+  this and is not built; pretending otherwise here would produce a second resume
+  system to reconcile later.
+- **No LinkedIn, of any kind.** Epic 3 owns the referral path and its whole
+  premise is that partners are the graph. Nothing here scrapes.
+- **No payments, no partner side.** F4's problems — employers forbidding paid
+  referrals, payouts, identity checks, tax — are a different kind of software and
+  none of them are solved by shipping this.
+- **No email sent by this project.** Unchanged from v3, and now load-bearing: we
+  are about to hold a mailbox connection, which makes our sender reputation worth
+  more, not less.
+- **No optimizing a draft to evade AI-detection.** Moot while drafting is
+  deferred, and recorded because it must not creep back in with the feature. The
+  goal is prose that is true, specific and in the user's voice. Writing to beat a
+  detector is a different goal, it does not work reliably, and being caught at it
+  would make a company distrust every candidate this site ever sends.
+- **No LLM call anywhere in v4.** Not for drafting, not for resolving a pasted
+  URL, not for classifying mail. Each one has a stated reason above, and the
+  cumulative effect is that this version has no per-user running cost at all —
+  which is what lets it ship before anyone has decided how it earns.
+
+## Deliberately not building yet (v4)
+
+- **Ranking roles against the resume.** It is the obvious next thing and it is
+  `F2`, not this. It needs job description text at corpus scale, which is `F1`,
+  which this version specifically avoided needing — the workspace fetches one
+  posting on demand rather than storing 5,400 every night.
+- **Interview preparation.** The natural sequel to a shortlist notification, and
+  the thing that makes feature 20's output actionable. It should wait until
+  feature 20 has produced real shortlists, because the shape of that help depends
+  on what the mail actually says.
+- **Multi-resume, per-role variants.** Epic 1.
+- **Any cross-user or public statistic about a company's responsiveness.**
+  Proposed as the one genuine leap of this version and demoted by its own
+  challenge, kept here because the reasoning is worth more than the idea. The
+  register already proves a company is hiring; aggregating feature 20's outcomes
+  would prove whether it is worth applying to, which nobody else can publish
+  because nobody else sees what happens after you apply. Three things stop it,
+  none of them a schedule. **The metric as conceived rewards the wrong
+  behaviour** — a company that auto-rejects in 48 hours scores as more responsive
+  than one that takes three weeks to send a considered human note, which is the
+  kind of flaw that is obvious in retrospect and humiliating on a site whose
+  brand is that its numbers are honest. **The sample is structurally biased** —
+  only applicants who use us and connected a mailbox — and unlike every other
+  claim on this site we could not source it. **And most companies' numbers would
+  rest on one or two applications**, which is publishing a rumour with a number
+  attached. The unblock is three conditions, not a date: a reply classifier
+  proven stable across ATS templates that change without notice, a metric that
+  does not reward speed of refusal, and enough users that one company's figure is
+  not one person's story. Consent is deliberately NOT taken at mailbox-connection
+  time — asking permission for a hypothetical public statistic at the most
+  trust-sensitive moment in the product taxes the feature that least can afford
+  friction. Ask later, from users who already hold twenty outcomes, where the ask
+  is concrete. The timestamps that would feed it are stored anyway, because
+  feature 19 needs them for the user's own numbers.
+- **Sharding D1 or moving to Postgres.** D1 is comfortable past 100k users and
+  has a ~10GB ceiling that 1M would cross. All data access sits behind one
+  module so the move is a swap; building for it now is building for a user count
+  we do not have.
+
+## End-to-end verification scenario (v4)
+
+A new user signs in, fills the operational half of their profile and uploads a
+resume. They open a role in the register, and the workspace shows that company's
+own questions with a draft against each — every draft naming what it was built
+from, and one question, for which the profile holds no fact, showing a marked gap
+instead of a sentence. They edit a draft, copy the set, and follow the link to
+the company's own board, which this site never posts to. The record now shows one
+application they never typed. A message arrives in their connected mailbox; the
+record moves to shortlisted, with the date. The connection is then revoked, and
+every record it fed says so and states the date it was last genuinely observed —
+not one of them says "no response". They delete their account, and the resume in
+R2 and every row in D1 are gone when the same request returns.

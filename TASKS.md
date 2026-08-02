@@ -2300,3 +2300,303 @@ Out of scope:
   - Widening the corpus (F7). Adding companies to a pipeline that cannot check
     three quarters of what it already has is work at the wrong end.
 ```
+
+---
+
+## E11 · Ownership and hosting
+
+### T13.1 — Move the repo to the sennamind org, and make it private `todo` · *Phase 8*
+> **Two asks, and only one of them is free.** Transferring
+> `chandrameenamohan/india-radar` to the `sennamind` org is mechanical. Making it
+> private is not: **GitHub Pages does not serve a private repository on the Free
+> plan**, so flipping visibility on a free org takes
+> https://roleatlas.sennamind.com down. The order below does the transfer first
+> and treats "private" as conditional on the org's plan, because a dead site is
+> a worse outcome than a public one and the register is public by design anyway
+> (T11.1: registration gates nothing).
+>
+> Two things that do NOT survive a transfer untouched, both verified today:
+> - **DNS.** `roleatlas.sennamind.com` is a CNAME to `chandrameenamohan.github.io`
+>   (DNS-only / grey cloud on the sennamind.com Cloudflare zone). After transfer
+>   the target becomes `sennamind.github.io`. The `CNAME` file at the repo root
+>   already reads `roleatlas.sennamind.com` and does not change. GitHub must
+>   re-issue the cert, so expect a window where HTTPS fails.
+> - **The local remote.** `git remote set-url origin` after the move. GitHub
+>   redirects the old URL, but the redirect is not something to leave in place.
+>
+> One thing that does survive, checked so nobody re-checks it: **the workflows
+> use no secrets** — `grep -n 'secrets\.' .github/workflows/*.yml` is empty. The
+> UK badge reads `data/uk.json` from the repo, never the API, so
+> `UK_COMPANY_HOUSE_KEY` is a local-only key and the nightly is unaffected.
+>
+> This is human work — transfer needs org-owner rights and the DNS edit needs
+> the Cloudflare account. An agent can do the `git remote set-url` and the
+> post-move verification, nothing more.
+
+```
+Acceptance (observable):
+  github.com/sennamind/india-radar exists and github.com/chandrameenamohan/india-radar
+    redirects to it.
+  https://roleatlas.sennamind.com still serves the site over valid HTTPS, and the
+    nightly Action still runs green under the new owner.
+  Private only if the sennamind org's plan serves Pages privately. If it does not,
+    the repo stays public and this task records that as the finding rather than
+    trading the live URL for it.
+Checks:
+  after the move: gh repo view sennamind/india-radar --json visibility,owner
+  gh run list --limit 3    (a nightly fires and succeeds under the new owner)
+  curl -sI https://roleatlas.sennamind.com | head -1   -> 200, not a cert error
+  git remote -v            -> origin points at sennamind/india-radar
+Out of scope:
+  - Renaming india-radar to roleatlas. Still a good idea, still a separate human
+    action, and doing it in the same move makes a failure impossible to attribute.
+  - Moving the Clerk instance. It is still a development instance (see HANDOFF);
+    the org move does not touch it.
+```
+
+---
+
+## PHASE 9 — Applying (SPEC v4)
+
+> The backend arrives here, and the public register does not change. Every task
+> below is checkable without an LLM key, because v4 deliberately contains no
+> model call — SPEC v4 "The drafting slot" records what was deferred and what it
+> costs. T14.1 blocks everything; T14.2, T14.3 and T14.4 are independent of each
+> other and can run in parallel behind it.
+
+### T14.1 — A Workers API that knows who you are `todo` · *Phase 9*
+> The first backend this project has ever had, and the task that decides whether
+> the rest are cheap. v3 said it out loud — *"no backend, no database, no session
+> server. It will happen — feature 18 and beyond need it."* Clerk already holds
+> the identity; what does not exist is anything server-side that can **verify**
+> a Clerk session rather than trust a header. That verification is the whole task
+> and it is the only security boundary in Phase 9: every later endpoint reads a
+> user id from it, so a forged one is a data breach and not a bug.
+>
+> The register is untouched. Same nightly, same `companies.json`, same CDN, no
+> build step on the static page.
+
+```
+Acceptance (observable):
+  A request carrying a valid Clerk session token reaches an endpoint that answers
+    with that user's own id, from the deployed Worker.
+  A request with no token, an expired token, or a token signed by a different key
+    is refused with 401 and reveals nothing about whether the user exists.
+  The static register is byte-identical to what it serves today.
+Checks:
+  lint -> typecheck -> unit -> e2e (full gate)
+  + unit: a token signed by the wrong key is rejected, over a fixture keypair
+  + unit: an expired token is rejected, and the failure names expiry, not identity
+  + e2e: the signed-in e2e account gets a 200 and its own id; signed out gets 401
+  + e2e: no secret key appears in the deployed Worker bundle or the repo
+Out of scope:
+  - Any storage. This task is authentication and nothing else.
+  - Rate limiting. Real before launch, not before there is a second endpoint.
+```
+
+### T14.2 — The profile, split by purpose `todo` · *Phase 9* · after T14.1
+> The eight fields `learning-tests/apply_questions_live.py` measured companies
+> actually asking, and the split SPEC v4 makes between them: operational
+> constants server-side because they will shape what we show the user, EEO
+> demographics in the browser only because they are Article 9 special-category
+> data in the EU and UK and they never needed to sync. **The check that matters
+> is the negative one** — that gender, sexuality, race and veteran status never
+> reach the server. That is easy to hold now and impossible to reverse once a
+> single row has been written.
+
+```
+Acceptance (observable):
+  A signed-in user records visa need, relocation, on-site tolerance, earliest
+    start, salary expectation, languages, and how they heard about a role, and
+    sees them again on a later visit from a different browser.
+  The EEO fields are offered, autofill into forms, and survive a reload in the
+    same browser — and are absent from every request the page makes.
+Checks:
+  lint -> typecheck -> unit -> e2e (full gate)
+  + unit: the serializer refuses an EEO key, by name, if one is ever passed to it
+  + e2e: fill every field, then assert no outbound request body contains any EEO
+    value — driven against the running app, not asserted over source
+  + e2e: operational fields survive a session in a second browser context
+Out of scope:
+  - Multiple profiles or per-role variants. Epic 1 owns that.
+  - Validating a salary figure against anything. It is the user's number.
+```
+
+### T14.3 — One resume, and a deletion you can verify `todo` · *Phase 9* · after T14.1
+> The first personal document this project has ever held, and SPEC v4 owns the
+> retention decision v3 deferred to whichever feature needed it. One file. No
+> version history — replacing it deletes the previous one, because versioning is
+> Epic 1's job and two resume systems to reconcile later is worse than none now.
+> **Deletion is synchronous**: a deletion you cannot verify in the same request
+> is a deletion you cannot honestly claim, and this task is where that claim is
+> either true or a lie.
+
+```
+Acceptance (observable):
+  A signed-in user uploads a resume and retrieves it on a later visit from a
+    different browser.
+  Uploading a second resume makes the first unretrievable.
+  Deleting the account removes the file and the profile rows, and a read issued
+    after that same request returns nothing.
+Checks:
+  lint -> typecheck -> unit -> e2e (full gate)
+  + unit: replace deletes the prior object, asserted against the store not the
+    handler's own bookkeeping
+  + e2e: upload, delete the account, then attempt to read the object directly —
+    it is gone in the same request, not eventually
+  + e2e: one user cannot read another user's resume by id
+Out of scope:
+  - Parsing the resume. v4 stores it and attaches it; nothing reads inside it.
+  - Formats beyond PDF and plain text.
+```
+
+### T14.4 — A posting's real questions, fetched on demand `todo` · *Phase 9* · after T14.1
+> Measured 2026-08-02: **Greenhouse states a job's application questions and
+> Ashby states nothing**, and 401 of 880 resolved slugs are Ashby. So this task
+> ships a capability that covers half the register and an honest silence over the
+> other half. Fetching one posting when a reader opens it is also what let v4
+> avoid `F1` entirely — the alternative is storing 5,400 descriptions a night for
+> the handful anyone ever looks at.
+
+```
+Acceptance (observable):
+  Opening a Greenhouse role returns that posting's questions, separated into the
+    ones a profile field answers and the ones it does not.
+  Opening an Ashby or Lever role returns a stated inability to see the form —
+    distinguishable by a caller from "this form has no questions".
+Checks:
+  lint -> typecheck -> unit -> e2e (full gate)
+  + unit: a board that answers 200 with no questions key is reported as unknown,
+    never as zero questions
+  + unit: the structural fields every board asks (name, email, resume upload) are
+    not presented as questions the company chose to ask
+  + e2e: a Greenhouse role and an Ashby role render visibly different states
+Out of scope:
+  - Caching the fetch. Measure the hit rate before building a cache for it.
+  - Lever's questions. It is 51 slugs and its board API is the least trustworthy
+    of the three (T3.3).
+```
+
+### T14.5 — The workspace, and the gap that stays a gap `todo` · *Phase 9* · after T14.2, T14.4
+> Where the honesty invariant becomes something a reader can see: an answer we
+> hold the fact for is filled and names the field it came from; an answer we do
+> not is a marked gap. **A gap is a correct output.** The failure mode this task
+> exists to prevent is a plausible sentence in a box the user then signs their
+> name to — which is `absence stays absence` pointed at an application form.
+>
+> No model runs here. Nothing is submitted by us, and the interface says so where
+> the reader can see it rather than in a policy page nobody opens.
+
+```
+Acceptance (observable):
+  A signed-in user opens a Greenhouse role and sees each question either answered
+    from a named profile field or marked as a gap.
+  A question whose fact the profile lacks renders a gap, never a sentence.
+  An Ashby role states that this company's form cannot be read.
+  No control anywhere submits to a third-party board.
+Checks:
+  lint -> typecheck -> unit -> e2e (full gate)
+  + e2e: with a profile deliberately missing salary expectation, the salary
+    question renders as a gap and contains no digits
+  + e2e: every filled answer displays the profile field it came from
+  + e2e: no form action, fetch or link in the workspace targets a boards-api,
+    ashbyhq or lever host with a non-GET method
+  + e2e: zero console errors across the signed-in workspace
+Out of scope:
+  - Drafting prose. SPEC v4 "The drafting slot" records why and what it costs.
+  - Cover letters. Same slot.
+```
+
+### T14.6 — The application record, resolved rather than extracted `todo` · *Phase 9* · after T14.5
+> A row the user did not type. Applications built in the workspace record
+> themselves; a pasted board URL is resolved against `companies.json` rather than
+> parsed, which register-only scope already paid for — no model, no HTML
+> parsing, and no chance of filing an application under the wrong company. A URL
+> for a company this register does not cover is refused by name.
+>
+> `applied_at`, `first_reply_at`, `reply_kind` and the outcome exist from the
+> first row. Only the first is written in this task; the other three cannot be
+> retrofitted, because a row written before `reply_kind` existed can never say
+> whether a two-day reply was a recruiter or a robot.
+
+```
+Acceptance (observable):
+  Completing an application in the workspace creates a record with nothing typed.
+  Pasting a board URL creates a record with company, role and date resolved from
+    the corpus, offered for confirmation rather than entry.
+  A URL for a company outside the register is refused, naming that reason.
+Checks:
+  lint -> typecheck -> unit -> e2e (full gate)
+  + unit: a Greenhouse, Ashby and Lever URL each resolve to the right company
+  + unit: a URL whose slug is not in the corpus resolves to nothing, and the
+    nothing is distinguishable from a lookup failure
+  + unit: the schema carries reply_kind from creation, asserted against the
+    migration and not against a comment
+  + e2e: an application completed in the workspace appears in the record
+Out of scope:
+  - Populating first_reply_at. Feature 20 does, and it is blocked (T14.8).
+  - Editing a record by hand.
+```
+
+### T14.7 — The user's own numbers, over observed outcomes only `todo` · *Phase 9* · after T14.6
+> The calibration a person applying to thirty companies cannot otherwise get:
+> most silence is normal, and a candidate who cannot see that reads every quiet
+> week as a verdict on themselves. **The denominator is the whole task.** An
+> application whose outcome was never observed is not a non-reply, and counting
+> it as one is the same error that blocks `F6` — the register has made it once
+> already and the fix is to never let an unobserved thing into a statistic.
+
+```
+Acceptance (observable):
+  A user sees how many applications they have made, how many drew a human reply,
+    the median days to one, and which are still silent past their own average.
+  An application we could not observe is excluded from the denominator and is
+    visibly excluded, not silently dropped.
+Checks:
+  lint -> typecheck -> unit -> e2e (full gate)
+  + unit: an unobserved application is excluded from the denominator, over a
+    fixture holding observed, unobserved and pending rows
+  + unit: with zero observed outcomes the reply rate renders as unknown, never 0%
+  + e2e: the counts a signed-in reader sees match the rows they hold
+Out of scope:
+  - Any cross-user or public statistic. SPEC v4 "Deliberately not building yet"
+    records the three conditions that would unblock it and why none is a date.
+```
+
+### T14.8 — The inbox watcher `blocked` · *Phase 9* · after T14.6
+> **Blocked on two independent things, neither of them engineering.**
+>
+> **Google's restricted scopes.** Measured 2026-08-02: `gmail.readonly`,
+> `gmail.metadata` AND `gmail.modify` are all restricted, so reading headers only
+> buys user trust and no compliance relief. Restricted-scope apps must submit to
+> *"an annual security assessment from a Google empanelled group of security
+> assessors"*; until verification completes an app is capped at **100 users** and
+> testing-mode refresh tokens die after **7 days**, so the cap cannot even serve
+> as a soft launch. The fallback that needs no OAuth at all — a user-configured
+> Gmail filter auto-forwarding to an address we own — is therefore the design
+> rather than the contingency.
+>
+> **A model.** Classifying a message as an acknowledgement, a human reply or a
+> rejection needs one on either path, and SPEC v4 "The drafting slot" records
+> that nobody has decided who pays for it.
+>
+> Re-check by re-running the scope question against Google's current policy and
+> by settling the funding question — the two are unrelated and either can move
+> first. Do not unblock on one alone.
+
+```
+Acceptance (observable):
+  A connected mailbox produces status changes on existing records without the
+    user acting, and produces records for applications we were never told about.
+  No message body, subject or attachment is present in D1 or R2.
+  A revoked or expired connection surfaces on every record it fed, with the date
+    it was last genuinely observed — never as "no response".
+Checks:
+  lint -> typecheck -> unit -> e2e (full gate)
+  + unit: after a run over fixture mail, stored rows contain no body or subject
+  + unit: a lapsed connection renders its records as unobserved with a date, and
+    a check proves none of them renders as no-response
+Out of scope:
+  - Sending mail. Unchanged from v3, and now load-bearing: we hold a mailbox
+    connection, which makes our sender reputation worth more, not less.
+```
