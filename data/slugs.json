@@ -1,4 +1,9 @@
 {
+  "0x": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "0x"
+  },
   "1Password": {
     "ats": "ashby",
     "method": "careers-page",
@@ -54,6 +59,16 @@
     "method": "careers-page",
     "slug": "abridge"
   },
+  "Accord": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "accord"
+  },
+  "Acorns": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "acorns"
+  },
   "AfterQuery": {
     "ats": "ashby",
     "method": "careers-page",
@@ -73,6 +88,11 @@
     "ats": "greenhouse",
     "method": "guess",
     "slug": "airbnb"
+  },
+  "Airbyte": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "airbyte"
   },
   "Airtable": {
     "ats": "greenhouse",
@@ -229,6 +249,11 @@
     "method": "guess",
     "slug": "arcadiacareers"
   },
+  "Archil": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "archil"
+  },
   "Arketa": {
     "ats": "ashby",
     "method": "careers-page",
@@ -243,6 +268,21 @@
     "ats": "ashby",
     "method": "careers-page",
     "slug": "artie"
+  },
+  "Artisan": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "artisan"
+  },
+  "Ashby": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "ashby"
+  },
+  "Aspora": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "aspora"
   },
   "Assembled": {
     "ats": "ashby",
@@ -273,6 +313,11 @@
     "ats": "greenhouse",
     "method": "careers-page",
     "slug": "astranis"
+  },
+  "Astronomer": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "astronomer"
   },
   "At-Bay": {
     "ats": "greenhouse",
@@ -309,6 +354,16 @@
     "method": "careers-page",
     "slug": "augmodo"
   },
+  "Aurelian": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "aurelian"
+  },
+  "Automat": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "automat"
+  },
   "Automattic": {
     "ats": "greenhouse",
     "method": "guess",
@@ -318,6 +373,11 @@
     "ats": "greenhouse",
     "method": "guess",
     "slug": "aviatrix"
+  },
+  "Avoca": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "avoca"
   },
   "Awardco": {
     "ats": "greenhouse",
@@ -333,6 +393,11 @@
     "ats": "greenhouse",
     "method": "guess",
     "slug": "azragames"
+  },
+  "Bankjoy": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "bankjoy"
   },
   "Barti Software": {
     "ats": "ashby",
@@ -354,10 +419,25 @@
     "method": "careers-page",
     "slug": "beaconsoftware"
   },
+  "Beacons": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "beacons"
+  },
+  "Beamery": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "beamery"
+  },
   "Benchling": {
     "ats": "ashby",
     "method": "careers-page",
     "slug": "benchling"
+  },
+  "BetterUp": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "betterup"
   },
   "Betterment": {
     "ats": "greenhouse",
@@ -399,6 +479,11 @@
     "method": "guess",
     "slug": "bitso"
   },
+  "Bitstack": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "bitstack"
+  },
   "Black Forest Labs": {
     "ats": "greenhouse",
     "method": "guess",
@@ -418,6 +503,11 @@
     "ats": "ashby",
     "method": "careers-page",
     "slug": "blee"
+  },
+  "Blitzy": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "blitzy"
   },
   "Blockstream": {
     "ats": "ashby",
@@ -484,6 +574,11 @@
     "method": "careers-page",
     "slug": "getbuilt"
   },
+  "Bunkerhill Health": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "bunkerhillhealth"
+  },
   "C6 Bank": {
     "ats": "greenhouse",
     "method": "guess",
@@ -509,10 +604,20 @@
     "method": "guess",
     "slug": "calendly"
   },
+  "Camber": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "camber"
+  },
   "Cambio": {
     "ats": "ashby",
     "method": "careers-page",
     "slug": "cambio"
+  },
+  "Cambly": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "cambly"
   },
   "Cambridge Mobile Telematics": {
     "ats": "greenhouse",
@@ -584,6 +689,11 @@
     "method": "careers-page",
     "slug": "casca"
   },
+  "Catch": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "catch"
+  },
   "Catena Clearing": {
     "ats": "greenhouse",
     "method": "guess",
@@ -619,6 +729,11 @@
     "method": "careers-page",
     "slug": "character"
   },
+  "Chariot": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "chariot"
+  },
   "Chariot Defense": {
     "ats": "greenhouse",
     "method": "guess",
@@ -644,6 +759,11 @@
     "method": "guess",
     "slug": "chowbus"
   },
+  "Cinder": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "cinder"
+  },
   "CircleCI": {
     "ats": "greenhouse",
     "method": "guess",
@@ -664,6 +784,11 @@
     "method": "guess",
     "slug": "clearstreet"
   },
+  "Clearco": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "clearco"
+  },
   "Clever": {
     "ats": "greenhouse",
     "method": "guess",
@@ -673,6 +798,11 @@
     "ats": "greenhouse",
     "method": "override",
     "slug": "clickhouse"
+  },
+  "ClickUp": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "clickup"
   },
   "Clipboard": {
     "ats": "ashby",
@@ -714,6 +844,11 @@
     "method": "careers-page",
     "slug": "coherehealth"
   },
+  "CoinTracker": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "cointracker"
+  },
   "Coinbase": {
     "ats": "greenhouse",
     "method": "guess",
@@ -733,6 +868,11 @@
     "ats": "ashby",
     "method": "careers-page",
     "slug": "compound-eye"
+  },
+  "Conductor": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "conductor"
   },
   "ConductorOne": {
     "ats": "ashby",
@@ -768,6 +908,11 @@
     "ats": "ashby",
     "method": "careers-page",
     "slug": "conveo"
+  },
+  "Corgi": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "corgi"
   },
   "Cortex": {
     "ats": "greenhouse",
@@ -829,6 +974,11 @@
     "method": "guess",
     "slug": "current"
   },
+  "Curri": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "curri"
+  },
   "Cursor": {
     "ats": "ashby",
     "method": "careers-page",
@@ -843,6 +993,11 @@
     "ats": "lever",
     "method": "careers-page",
     "slug": "cypher-games"
+  },
+  "DailyPay": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "dailypay"
   },
   "Databricks": {
     "ats": "greenhouse",
@@ -879,6 +1034,11 @@
     "method": "careers-page",
     "slug": "deepgram"
   },
+  "Deepnote": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "deepnote"
+  },
   "Degreed": {
     "ats": "greenhouse",
     "method": "guess",
@@ -909,6 +1069,11 @@
     "method": "guess",
     "slug": "digitalcurrencygroup"
   },
+  "DiligenceSquared": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "diligencesquared"
+  },
   "DirectShifts": {
     "ats": "greenhouse",
     "method": "careers-page",
@@ -929,15 +1094,30 @@
     "method": "careers-page",
     "slug": "distyl"
   },
+  "Docker": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "docker"
+  },
   "Doppel": {
     "ats": "greenhouse",
     "method": "guess",
     "slug": "doppel"
   },
+  "Doppler": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "doppler"
+  },
   "Dots \ud83d\udcb8": {
     "ats": "greenhouse",
     "method": "guess",
     "slug": "dots"
+  },
+  "Drata": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "drata"
   },
   "Dremio": {
     "ats": "greenhouse",
@@ -1014,6 +1194,11 @@
     "method": "careers-page",
     "slug": "enable"
   },
+  "Encord": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "encord"
+  },
   "Enode": {
     "ats": "ashby",
     "method": "careers-page",
@@ -1069,6 +1254,11 @@
     "method": "careers-page",
     "slug": "evry-health"
   },
+  "Exa": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "exa"
+  },
   "Expel": {
     "ats": "greenhouse",
     "method": "guess",
@@ -1094,6 +1284,11 @@
     "method": "careers-page",
     "slug": "fable"
   },
+  "Factory": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "factory"
+  },
   "Faire": {
     "ats": "greenhouse",
     "method": "guess",
@@ -1103,6 +1298,11 @@
     "ats": "greenhouse",
     "method": "guess",
     "slug": "falconx"
+  },
+  "Fazeshift": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "fazeshift"
   },
   "Feedzai": {
     "ats": "greenhouse",
@@ -1164,6 +1364,11 @@
     "method": "careers-page",
     "slug": "fleek"
   },
+  "Fleetworks": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "fleetworks"
+  },
   "Flex": {
     "ats": "ashby",
     "method": "careers-page",
@@ -1179,10 +1384,25 @@
     "method": "careers-page",
     "slug": "flipboard"
   },
+  "FlutterFlow": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "flutterflow"
+  },
   "Focal Systems": {
     "ats": "greenhouse",
     "method": "careers-page",
     "slug": "focalsystems"
+  },
+  "Formal": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "formal"
+  },
+  "Formance": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "formance"
   },
   "Fortastra": {
     "ats": "greenhouse",
@@ -1214,10 +1434,25 @@
     "method": "careers-page",
     "slug": "frontcareers"
   },
+  "FullStory": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "fullstory"
+  },
   "Fundamental": {
     "ats": "ashby",
     "method": "careers-page",
     "slug": "fundamental"
+  },
+  "Fundamental Research Labs": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "fundamentalresearchlabs"
+  },
+  "FurtherAI": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "furtherai"
   },
   "G2": {
     "ats": "greenhouse",
@@ -1248,6 +1483,11 @@
     "ats": "ashby",
     "method": "careers-page",
     "slug": "gecko-robotics"
+  },
+  "Genies": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "genies"
   },
   "Genius": {
     "ats": "greenhouse",
@@ -1304,6 +1544,11 @@
     "method": "careers-page",
     "slug": "gocardless"
   },
+  "GoLinks": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "golinks"
+  },
   "GoPro": {
     "ats": "greenhouse",
     "method": "guess",
@@ -1349,6 +1594,11 @@
     "method": "careers-page",
     "slug": "greenboard"
   },
+  "Greptile": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "greptile"
+  },
   "Gridware": {
     "ats": "lever",
     "method": "careers-page",
@@ -1374,6 +1624,11 @@
     "method": "guess",
     "slug": "guild"
   },
+  "Gumloop": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "gumloop"
+  },
   "Gusto": {
     "ats": "greenhouse",
     "method": "guess",
@@ -1384,10 +1639,20 @@
     "method": "guess",
     "slug": "hackerrank"
   },
+  "Hadrius": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "hadrius"
+  },
   "Halcyon": {
     "ats": "greenhouse",
     "method": "careers-page",
     "slug": "halcyon"
+  },
+  "Halter": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "halter"
   },
   "Handshake": {
     "ats": "ashby",
@@ -1438,6 +1703,11 @@
     "ats": "greenhouse",
     "method": "guess",
     "slug": "hawkeye360"
+  },
+  "HealthSherpa": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "healthsherpa"
   },
   "Heidi Health": {
     "ats": "ashby",
@@ -1504,6 +1774,11 @@
     "method": "careers-page",
     "slug": "homelight"
   },
+  "HoneyBook": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "honeybook"
+  },
   "Honeycomb Insurance": {
     "ats": "greenhouse",
     "method": "guess",
@@ -1544,6 +1819,16 @@
     "method": "careers-page",
     "slug": "hyperbound"
   },
+  "ICEYE": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "iceye"
+  },
+  "Illumio": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "illumio"
+  },
   "Imbue": {
     "ats": "greenhouse",
     "method": "careers-page",
@@ -1563,6 +1848,11 @@
     "ats": "greenhouse",
     "method": "careers-page",
     "slug": "imply"
+  },
+  "Improbable": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "improbable"
   },
   "InMobi": {
     "ats": "greenhouse",
@@ -1588,6 +1878,16 @@
     "ats": "ashby",
     "method": "careers-page",
     "slug": "influxdata"
+  },
+  "Infracost": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "infracost"
+  },
+  "Injective": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "injective"
   },
   "Inngest": {
     "ats": "ashby",
@@ -1679,6 +1979,16 @@
     "method": "careers-page",
     "slug": "jasper"
   },
+  "Jeevy Fabrication": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "jeevyfabrication"
+  },
+  "Juicebox": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "juicebox"
+  },
   "Junction": {
     "ats": "ashby",
     "method": "careers-page",
@@ -1688,6 +1998,11 @@
     "ats": "greenhouse",
     "method": "guess",
     "slug": "justworks"
+  },
+  "KODEX": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "kodex"
   },
   "Kajabi": {
     "ats": "greenhouse",
@@ -1713,6 +2028,16 @@
     "ats": "ashby",
     "method": "careers-page",
     "slug": "keyrock"
+  },
+  "Kin": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "kin"
+  },
+  "Kingdom": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "kingdom"
   },
   "Klarity": {
     "ats": "ashby",
@@ -1783,6 +2108,36 @@
     "ats": "greenhouse",
     "method": "careers-page",
     "slug": "layerzerolabs"
+  },
+  "Legion Health": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "legionhealth"
+  },
+  "Legora": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "legora"
+  },
+  "LemFi": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "lemfi"
+  },
+  "Lendable": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "lendable"
+  },
+  "Letter AI": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "letterai"
+  },
+  "Lightdash": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "lightdash"
   },
   "Lighthouse": {
     "ats": "greenhouse",
@@ -1894,6 +2249,11 @@
     "method": "careers-page",
     "slug": "lydian"
   },
+  "MEGAZONE": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "megazone"
+  },
   "MOLOCO": {
     "ats": "greenhouse",
     "method": "careers-page",
@@ -1913,6 +2273,11 @@
     "ats": "greenhouse",
     "method": "guess",
     "slug": "magic"
+  },
+  "Magic Eden": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "magiceden"
   },
   "Magic Leap": {
     "ats": "greenhouse",
@@ -1979,6 +2344,11 @@
     "method": "careers-page",
     "slug": "maybern"
   },
+  "Mednet": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "mednet"
+  },
   "MeltPlan": {
     "ats": "greenhouse",
     "method": "guess",
@@ -1988,6 +2358,11 @@
     "ats": "ashby",
     "method": "careers-page",
     "slug": "mem0"
+  },
+  "Memfault": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "memfault"
   },
   "Mercor": {
     "ats": "ashby",
@@ -2003,6 +2378,11 @@
     "ats": "greenhouse",
     "method": "careers-page",
     "slug": "meruhealth"
+  },
+  "Meter": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "meter"
   },
   "Method Financial": {
     "ats": "ashby",
@@ -2034,6 +2414,16 @@
     "method": "guess",
     "slug": "minio"
   },
+  "Mintlify": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "mintlify"
+  },
+  "Miro": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "miro"
+  },
   "Mixpanel": {
     "ats": "greenhouse",
     "method": "careers-page",
@@ -2048,6 +2438,11 @@
     "ats": "ashby",
     "method": "careers-page",
     "slug": "moderntreasury"
+  },
+  "Mollie": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "mollie"
   },
   "Momentic": {
     "ats": "ashby",
@@ -2169,6 +2564,11 @@
     "method": "guess",
     "slug": "netskope"
   },
+  "Newfront": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "newfront"
+  },
   "News Break": {
     "ats": "greenhouse",
     "method": "guess",
@@ -2193,6 +2593,11 @@
     "ats": "ashby",
     "method": "careers-page",
     "slug": "niantic-spatial"
+  },
+  "Nirvana": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "nirvana"
   },
   "Nitricity": {
     "ats": "greenhouse",
@@ -2309,6 +2714,11 @@
     "method": "guess",
     "slug": "omnicareers"
   },
+  "OneChronos": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "onechronos"
+  },
   "OneTrust": {
     "ats": "greenhouse",
     "method": "guess",
@@ -2334,10 +2744,30 @@
     "method": "guess",
     "slug": "openwork"
   },
+  "OpenAI": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "openai"
+  },
+  "OpenRouter": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "openrouter"
+  },
+  "OpenSea": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "opensea"
+  },
   "OpenWeb": {
     "ats": "greenhouse",
     "method": "guess",
     "slug": "openweb"
+  },
+  "Opencall": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "opencall"
   },
   "Ophelia": {
     "ats": "greenhouse",
@@ -2374,6 +2804,11 @@
     "method": "careers-page",
     "slug": "outschool"
   },
+  "Overview": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "overview"
+  },
   "Oyster": {
     "ats": "ashby",
     "method": "careers-page",
@@ -2393,6 +2828,11 @@
     "ats": "greenhouse",
     "method": "careers-page",
     "slug": "pacaso"
+  },
+  "Paddle": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "paddle"
   },
   "PagerDuty": {
     "ats": "greenhouse",
@@ -2424,6 +2864,11 @@
     "method": "guess",
     "slug": "parallel"
   },
+  "Parker": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "parker"
+  },
   "Parloa": {
     "ats": "greenhouse",
     "method": "guess",
@@ -2433,6 +2878,11 @@
     "ats": "lever",
     "method": "careers-page",
     "slug": "patsnap"
+  },
+  "Patreon": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "patreon"
   },
   "Paxos": {
     "ats": "ashby",
@@ -2489,6 +2939,11 @@
     "method": "guess",
     "slug": "phantomai"
   },
+  "Phoenix": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "phoenix"
+  },
   "Photoroom": {
     "ats": "ashby",
     "method": "careers-page",
@@ -2524,6 +2979,11 @@
     "method": "careers-page",
     "slug": "pilothq"
   },
+  "Plaid": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "plaid"
+  },
   "Pleo": {
     "ats": "ashby",
     "method": "careers-page",
@@ -2544,6 +3004,11 @@
     "method": "careers-page",
     "slug": "pomelocare"
   },
+  "Poolside": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "poolside"
+  },
   "Postman": {
     "ats": "greenhouse",
     "method": "guess",
@@ -2553,6 +3018,26 @@
     "ats": "greenhouse",
     "method": "careers-page",
     "slug": "postscript"
+  },
+  "PowerUs": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "powerus"
+  },
+  "Prelim": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "prelim"
+  },
+  "Probably Genetic": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "probablygenetic"
+  },
+  "Product Hunt": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "producthunt"
   },
   "Project44": {
     "ats": "greenhouse",
@@ -2599,10 +3084,20 @@
     "method": "careers-page",
     "slug": "pyka"
   },
+  "Qonto": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "qonto"
+  },
   "Qualia": {
     "ats": "greenhouse",
     "method": "guess",
     "slug": "qualia"
+  },
+  "Quantexa": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "quantexa"
   },
   "Quantinuum": {
     "ats": "lever",
@@ -2639,6 +3134,11 @@
     "method": "guess",
     "slug": "quintoandar"
   },
+  "Qumulo": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "qumulo"
+  },
   "Qventus": {
     "ats": "greenhouse",
     "method": "careers-page",
@@ -2659,6 +3159,11 @@
     "method": "careers-page",
     "slug": "ramp"
   },
+  "Raycast": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "raycast"
+  },
   "Razorpay": {
     "ats": "greenhouse",
     "method": "careers-page",
@@ -2674,6 +3179,11 @@
     "method": "careers-page",
     "slug": "readme"
   },
+  "Reality Defender": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "realitydefender"
+  },
   "Realm": {
     "ats": "greenhouse",
     "method": "guess",
@@ -2688,6 +3198,11 @@
     "ats": "greenhouse",
     "method": "careers-page",
     "slug": "redventures"
+  },
+  "Reducto": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "reducto"
   },
   "Reflection AI": {
     "ats": "ashby",
@@ -2738,6 +3253,11 @@
     "ats": "ashby",
     "method": "careers-page",
     "slug": "replit"
+  },
+  "Resend": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "resend"
   },
   "Resolve AI": {
     "ats": "ashby",
@@ -2839,6 +3359,11 @@
     "method": "guess",
     "slug": "saleswhale"
   },
+  "Salient": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "salient"
+  },
   "Salt Security": {
     "ats": "greenhouse",
     "method": "careers-page",
@@ -2868,6 +3393,16 @@
     "ats": "ashby",
     "method": "careers-page",
     "slug": "sarvam"
+  },
+  "Satispay": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "satispay"
+  },
+  "Saturn": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "saturn"
   },
   "Scalapay": {
     "ats": "lever",
@@ -2923,6 +3458,11 @@
     "ats": "greenhouse",
     "method": "careers-page",
     "slug": "semafor"
+  },
+  "Semperis": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "semperis"
   },
   "Sendbird": {
     "ats": "greenhouse",
@@ -2994,6 +3534,11 @@
     "method": "careers-page",
     "slug": "sisense"
   },
+  "SkydropX": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "skydropx"
+  },
   "Skyways": {
     "ats": "lever",
     "method": "careers-page",
@@ -3009,6 +3554,11 @@
     "method": "guess",
     "slug": "slice"
   },
+  "Slope": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "slope"
+  },
   "Smallest.ai": {
     "ats": "ashby",
     "method": "careers-page",
@@ -3018,6 +3568,11 @@
     "ats": "greenhouse",
     "method": "careers-page",
     "slug": "smartasset"
+  },
+  "Snackpass": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "snackpass"
   },
   "Snapdocs": {
     "ats": "ashby",
@@ -3029,6 +3584,11 @@
     "method": "careers-page",
     "slug": "snorkelai"
   },
+  "Snyk": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "snyk"
+  },
   "Socure": {
     "ats": "ashby",
     "method": "careers-page",
@@ -3038,6 +3598,16 @@
     "ats": "ashby",
     "method": "careers-page",
     "slug": "sola"
+  },
+  "Solve Intelligence": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "solveintelligence"
+  },
+  "Sorare": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "sorare"
   },
   "Sorcero": {
     "ats": "greenhouse",
@@ -3074,6 +3644,16 @@
     "method": "careers-page",
     "slug": "spellbrush"
   },
+  "Sphere": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "sphere"
+  },
+  "SpotOn": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "spoton"
+  },
   "Spotter": {
     "ats": "greenhouse",
     "method": "careers-page",
@@ -3083,6 +3663,11 @@
     "ats": "greenhouse",
     "method": "guess",
     "slug": "stabilityai"
+  },
+  "Stable": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "stable"
   },
   "StackAI": {
     "ats": "ashby",
@@ -3128,6 +3713,11 @@
     "ats": "greenhouse",
     "method": "guess",
     "slug": "submittable"
+  },
+  "Substack": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "substack"
   },
   "SumUp": {
     "ats": "greenhouse",
@@ -3178,6 +3768,11 @@
     "ats": "greenhouse",
     "method": "guess",
     "slug": "tamara"
+  },
+  "Tamarind Bio": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "tamarindbio"
   },
   "Tanium": {
     "ats": "greenhouse",
@@ -3239,6 +3834,11 @@
     "method": "careers-page",
     "slug": "tensorwave"
   },
+  "Terminal": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "terminal"
+  },
   "Tesorio": {
     "ats": "lever",
     "method": "careers-page",
@@ -3288,6 +3888,11 @@
     "ats": "greenhouse",
     "method": "guess",
     "slug": "togetherai"
+  },
+  "Toma": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "toma"
   },
   "Tomo Networks": {
     "ats": "ashby",
@@ -3369,6 +3974,11 @@
     "method": "guess",
     "slug": "truepill"
   },
+  "Trulioo": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "trulioo"
+  },
   "Trumid": {
     "ats": "greenhouse",
     "method": "guess",
@@ -3404,10 +4014,20 @@
     "method": "guess",
     "slug": "typeface"
   },
+  "Unit": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "unit"
+  },
   "Unqork": {
     "ats": "greenhouse",
     "method": "careers-page",
     "slug": "unqork"
+  },
+  "UpCodes": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "upcodes"
   },
   "UpKeep": {
     "ats": "greenhouse",
@@ -3449,6 +4069,11 @@
     "method": "careers-page",
     "slug": "vulcanelements"
   },
+  "Vanta": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "vanta"
+  },
   "Vapi": {
     "ats": "ashby",
     "method": "careers-page",
@@ -3458,6 +4083,11 @@
     "ats": "greenhouse",
     "method": "careers-page",
     "slug": "vectranetworks"
+  },
+  "Vellum": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "vellum"
   },
   "Vercel": {
     "ats": "greenhouse",
@@ -3473,6 +4103,11 @@
     "ats": "greenhouse",
     "method": "guess",
     "slug": "verkada"
+  },
+  "Verse Medical": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "versemedical"
   },
   "Vest": {
     "ats": "greenhouse",
@@ -3529,10 +4164,20 @@
     "method": "careers-page",
     "slug": "voltalabs"
   },
+  "Vooma": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "vooma"
+  },
   "Vori": {
     "ats": "ashby",
     "method": "careers-page",
     "slug": "vori"
+  },
+  "Vorticity": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "vorticity"
   },
   "Vumedi": {
     "ats": "greenhouse",
@@ -3573,6 +4218,11 @@
     "ats": "ashby",
     "method": "careers-page",
     "slug": "weekend"
+  },
+  "Whatnot": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "whatnot"
   },
   "Whop": {
     "ats": "ashby",
@@ -3644,6 +4294,11 @@
     "method": "careers-page",
     "slug": "yugabyte"
   },
+  "Zapier": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "zapier"
+  },
   "ZenBusiness": {
     "ats": "greenhouse",
     "method": "careers-page",
@@ -3664,6 +4319,11 @@
     "method": "careers-page",
     "slug": "ziina"
   },
+  "Zilch": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "zilch"
+  },
   "Zip": {
     "ats": "ashby",
     "method": "careers-page",
@@ -3674,6 +4334,11 @@
     "method": "careers-page",
     "slug": "zocks"
   },
+  "Zyphra": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "zyphra"
+  },
   "airSlate": {
     "ats": "lever",
     "method": "careers-page",
@@ -3683,6 +4348,11 @@
     "ats": "ashby",
     "method": "careers-page",
     "slug": "authzed"
+  },
+  "autone": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "autone"
   },
   "commercetools": {
     "ats": "greenhouse",
@@ -3718,6 +4388,11 @@
     "ats": "greenhouse",
     "method": "careers-page",
     "slug": "impact"
+  },
+  "n8n": {
+    "ats": "ashby",
+    "method": "guess",
+    "slug": "n8n"
   },
   "verisoul": {
     "ats": "ashby",
