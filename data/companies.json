@@ -13285,144 +13285,1158 @@
     },
     {
       "name": "ClickHouse",
-      "ats": "ashby",
-      "slug": "langfuse",
+      "ats": "greenhouse",
+      "slug": "clickhouse",
       "roles": [
         {
-          "title": "Senior Backend Engineer (Data Infrastructure)",
-          "url": "https://jobs.ashbyhq.com/langfuse/1225fa3d-d590-41d2-b798-ef927320fb2e",
+          "title": "AI Product Engineer - ClickStack",
+          "url": "https://job-boards.greenhouse.io/clickhouse/jobs/6014113004",
           "locations": [
-            "Munich",
-            "Paris",
-            "Berlin",
-            "London"
+            "United Kingdom (remote)"
           ],
           "countries": [
-            "United Kingdom",
-            "Germany",
-            "France"
+            "United Kingdom"
           ],
-          "workplace": "hybrid",
+          "workplace": "remote",
           "department": "Engineering",
           "visa": "unknown",
           "hire_from_abroad": "unknown"
         },
         {
-          "title": "Senior Product Engineer (Growth)",
-          "url": "https://jobs.ashbyhq.com/langfuse/71a67633-5770-481b-9fb3-22e4f27cbca1",
+          "title": "AI Product Engineer - ClickStack",
+          "url": "https://job-boards.greenhouse.io/clickhouse/jobs/6014116004",
           "locations": [
-            "Munich",
-            "Paris",
-            "Berlin",
-            "London"
+            "Netherlands (remote)"
           ],
           "countries": [
-            "United Kingdom",
-            "Germany",
-            "France"
+            "Netherlands"
           ],
-          "workplace": "hybrid",
+          "workplace": "remote",
           "department": "Engineering",
           "visa": "unknown",
           "hire_from_abroad": "unknown"
         },
         {
-          "title": "Senior Software Engineer (SDK)",
-          "url": "https://jobs.ashbyhq.com/langfuse/891eda0a-a9f6-45e6-8750-71874db8cc11",
+          "title": "AI Product Engineer - ClickStack",
+          "url": "https://job-boards.greenhouse.io/clickhouse/jobs/6014114004",
           "locations": [
-            "Munich",
-            "Paris",
-            "Berlin",
-            "London"
-          ],
-          "countries": [
-            "United Kingdom",
-            "Germany",
-            "France"
-          ],
-          "workplace": "hybrid",
-          "department": "Engineering",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Senior Product Engineer",
-          "url": "https://jobs.ashbyhq.com/langfuse/a2c4e24c-21d1-4a9f-8d46-422d0592efd6",
-          "locations": [
-            "Munich",
-            "Paris",
-            "Berlin",
-            "London"
-          ],
-          "countries": [
-            "United Kingdom",
-            "Germany",
-            "France"
-          ],
-          "workplace": "hybrid",
-          "department": "Engineering",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Senior Backend Engineer (IAM and Billing)",
-          "url": "https://jobs.ashbyhq.com/langfuse/69bc6e7a-0304-4d81-ae72-7ccf5652a053",
-          "locations": [
-            "Munich",
-            "Paris",
-            "Berlin",
-            "London"
-          ],
-          "countries": [
-            "United Kingdom",
-            "Germany",
-            "France"
-          ],
-          "workplace": "hybrid",
-          "department": "Engineering",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Senior Cloud Infrastructure Engineer",
-          "url": "https://jobs.ashbyhq.com/langfuse/1bc2e248-89e7-41d7-b32f-08e9320eb5d0",
-          "locations": [
-            "Munich",
-            "Paris",
-            "Berlin",
-            "London"
-          ],
-          "countries": [
-            "United Kingdom",
-            "Germany",
-            "France"
-          ],
-          "workplace": "hybrid",
-          "department": "Engineering",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Product Marketing Manager",
-          "url": "https://jobs.ashbyhq.com/langfuse/e821989d-b7f6-444d-880f-7a1b5f77a6ef",
-          "locations": [
-            "Berlin"
+            "Germany (remote)"
           ],
           "countries": [
             "Germany"
           ],
-          "workplace": "hybrid",
-          "department": "Growth",
+          "workplace": "remote",
+          "department": "Engineering",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Cloud Security Engineer",
+          "url": "https://job-boards.greenhouse.io/clickhouse/jobs/5854400004",
+          "locations": [
+            "Netherlands (remote)"
+          ],
+          "countries": [
+            "Netherlands"
+          ],
+          "workplace": "remote",
+          "department": "Security",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Commercial Account Executive - UK",
+          "url": "https://job-boards.greenhouse.io/clickhouse/jobs/6029837004",
+          "locations": [
+            "United Kingdom"
+          ],
+          "countries": [
+            "United Kingdom"
+          ],
+          "workplace": null,
+          "department": "Go-To-Market",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Core Software Engineer (C++) - Remote",
+          "url": "https://job-boards.greenhouse.io/clickhouse/jobs/5767816004",
+          "locations": [
+            "India (remote)"
+          ],
+          "countries": [
+            "India"
+          ],
+          "workplace": "remote",
+          "department": "Engineering",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Core Software Engineer (C++) - Remote",
+          "url": "https://job-boards.greenhouse.io/clickhouse/jobs/5755092004",
+          "locations": [
+            "Germany (remote)"
+          ],
+          "countries": [
+            "Germany"
+          ],
+          "workplace": "remote",
+          "department": "Engineering",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Core Software Engineer (C++) - Remote",
+          "url": "https://job-boards.greenhouse.io/clickhouse/jobs/5755091004",
+          "locations": [
+            "United Kingdom (remote)"
+          ],
+          "countries": [
+            "United Kingdom"
+          ],
+          "workplace": "remote",
+          "department": "Engineering",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Core Software Engineer (C++) - Remote",
+          "url": "https://job-boards.greenhouse.io/clickhouse/jobs/5755090004",
+          "locations": [
+            "Netherlands (remote)"
+          ],
+          "countries": [
+            "Netherlands"
+          ],
+          "workplace": "remote",
+          "department": "Engineering",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Database Reliability Engineer - Core Team",
+          "url": "https://job-boards.greenhouse.io/clickhouse/jobs/5843421004",
+          "locations": [
+            "Netherlands (remote)"
+          ],
+          "countries": [
+            "Netherlands"
+          ],
+          "workplace": "remote",
+          "department": "Engineering",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Database Reliability Engineer - Core Team",
+          "url": "https://job-boards.greenhouse.io/clickhouse/jobs/5843424004",
+          "locations": [
+            "Australia (remote)"
+          ],
+          "countries": [
+            "Australia"
+          ],
+          "workplace": "remote",
+          "department": "Engineering",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Database Reliability Engineer - Core Team",
+          "url": "https://job-boards.greenhouse.io/clickhouse/jobs/5843422004",
+          "locations": [
+            "Germany (remote)"
+          ],
+          "countries": [
+            "Germany"
+          ],
+          "workplace": "remote",
+          "department": "Engineering",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Database Reliability Engineer - Core Team",
+          "url": "https://job-boards.greenhouse.io/clickhouse/jobs/5843423004",
+          "locations": [
+            "United Kingdom (remote)"
+          ],
+          "countries": [
+            "United Kingdom"
+          ],
+          "workplace": "remote",
+          "department": "Engineering",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Enterprise Account Executive - Mumbai",
+          "url": "https://job-boards.greenhouse.io/clickhouse/jobs/5802802004",
+          "locations": [
+            "India "
+          ],
+          "countries": [
+            "India"
+          ],
+          "workplace": null,
+          "department": "Go-To-Market",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Full Stack Software Engineer - Billing Team",
+          "url": "https://job-boards.greenhouse.io/clickhouse/jobs/5395374004",
+          "locations": [
+            "Netherlands (remote)"
+          ],
+          "countries": [
+            "Netherlands"
+          ],
+          "workplace": "remote",
+          "department": "Engineering",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Full Stack Software Engineer - Billing Team",
+          "url": "https://job-boards.greenhouse.io/clickhouse/jobs/5584382004",
+          "locations": [
+            "Germany (remote)"
+          ],
+          "countries": [
+            "Germany"
+          ],
+          "workplace": "remote",
+          "department": "Engineering",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Full Stack Software Engineer - Control Plane",
+          "url": "https://job-boards.greenhouse.io/clickhouse/jobs/5587665004",
+          "locations": [
+            "Germany (remote)"
+          ],
+          "countries": [
+            "Germany"
+          ],
+          "workplace": "remote",
+          "department": "Engineering",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Full Stack Software Engineer - Control Plane",
+          "url": "https://job-boards.greenhouse.io/clickhouse/jobs/5587664004",
+          "locations": [
+            "Netherlands (remote)"
+          ],
+          "countries": [
+            "Netherlands"
+          ],
+          "workplace": "remote",
+          "department": "Engineering",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Incident Response Security Engineer",
+          "url": "https://job-boards.greenhouse.io/clickhouse/jobs/5848335004",
+          "locations": [
+            "Singapore (remote)"
+          ],
+          "countries": [
+            "Singapore"
+          ],
+          "workplace": "remote",
+          "department": "Security",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Partner Sales Director - EMEA",
+          "url": "https://job-boards.greenhouse.io/clickhouse/jobs/6103393004",
+          "locations": [
+            "Germany"
+          ],
+          "countries": [
+            "Germany"
+          ],
+          "workplace": null,
+          "department": "Go-To-Market",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Partner Sales Director-India",
+          "url": "https://job-boards.greenhouse.io/clickhouse/jobs/6001185004",
+          "locations": [
+            "India (Remote)"
+          ],
+          "countries": [
+            "India"
+          ],
+          "workplace": "remote",
+          "department": "Go-To-Market",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Partner Solutions Architect - India",
+          "url": "https://job-boards.greenhouse.io/clickhouse/jobs/6029800004",
+          "locations": [
+            "India"
+          ],
+          "countries": [
+            "India"
+          ],
+          "workplace": null,
+          "department": "Go-To-Market",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "People Business Partner Lead - APJ",
+          "url": "https://job-boards.greenhouse.io/clickhouse/jobs/6097383004",
+          "locations": [
+            "Singapore or Australia (remote)"
+          ],
+          "countries": [
+            "Singapore",
+            "Australia"
+          ],
+          "workplace": "remote",
+          "department": "People",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Principal Product Manager - ClickHouse Cloud",
+          "url": "https://job-boards.greenhouse.io/clickhouse/jobs/5693829004",
+          "locations": [
+            "United Kingdom (remote)"
+          ],
+          "countries": [
+            "United Kingdom"
+          ],
+          "workplace": "remote",
+          "department": "Product Management",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Principal Product Manager - ClickHouse Cloud",
+          "url": "https://job-boards.greenhouse.io/clickhouse/jobs/5680774004",
+          "locations": [
+            "Netherlands (remote)"
+          ],
+          "countries": [
+            "Netherlands"
+          ],
+          "workplace": "remote",
+          "department": "Product Management",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Principal Product Manager - Ecosystems & Connectors",
+          "url": "https://job-boards.greenhouse.io/clickhouse/jobs/6010656004",
+          "locations": [
+            "Netherlands (remote)"
+          ],
+          "countries": [
+            "Netherlands"
+          ],
+          "workplace": "remote",
+          "department": "Product Management",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Principal  Product Manager, Security",
+          "url": "https://job-boards.greenhouse.io/clickhouse/jobs/5664427004",
+          "locations": [
+            "United Kingdom (remote)"
+          ],
+          "countries": [
+            "United Kingdom"
+          ],
+          "workplace": "remote",
+          "department": "Product Management",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Principal Product Manager, Security",
+          "url": "https://job-boards.greenhouse.io/clickhouse/jobs/5664384004",
+          "locations": [
+            "Netherlands (remote)"
+          ],
+          "countries": [
+            "Netherlands"
+          ],
+          "workplace": "remote",
+          "department": "Product Management",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Principal Software Engineer - Postgres",
+          "url": "https://job-boards.greenhouse.io/clickhouse/jobs/6001256004",
+          "locations": [
+            "Netherlands"
+          ],
+          "countries": [
+            "Netherlands"
+          ],
+          "workplace": null,
+          "department": "Engineering",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Principal Software Engineer - Postgres",
+          "url": "https://job-boards.greenhouse.io/clickhouse/jobs/6001255004",
+          "locations": [
+            "India (remote)"
+          ],
+          "countries": [
+            "India"
+          ],
+          "workplace": "remote",
+          "department": "Engineering",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Product Marketing, Industry Marketing",
+          "url": "https://job-boards.greenhouse.io/clickhouse/jobs/6017708004",
+          "locations": [
+            "The Netherlands"
+          ],
+          "countries": [
+            "Netherlands"
+          ],
+          "workplace": null,
+          "department": "Product Marketing",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Product Marketing, Postgres",
+          "url": "https://job-boards.greenhouse.io/clickhouse/jobs/6017719004",
+          "locations": [
+            "The Netherlands"
+          ],
+          "countries": [
+            "Netherlands"
+          ],
+          "workplace": null,
+          "department": "Product Marketing",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Product Security Engineer",
+          "url": "https://job-boards.greenhouse.io/clickhouse/jobs/6130151004",
+          "locations": [
+            "Netherlands (remote)"
+          ],
+          "countries": [
+            "Netherlands"
+          ],
+          "workplace": "remote",
+          "department": "Security",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "QA Engineer - Core Database (remote)",
+          "url": "https://job-boards.greenhouse.io/clickhouse/jobs/5670526004",
+          "locations": [
+            "India (remote)"
+          ],
+          "countries": [
+            "India"
+          ],
+          "workplace": "remote",
+          "department": "Engineering",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "QA Engineer - Core Database (remote)",
+          "url": "https://job-boards.greenhouse.io/clickhouse/jobs/5654024004",
+          "locations": [
+            "Netherlands (remote)"
+          ],
+          "countries": [
+            "Netherlands"
+          ],
+          "workplace": "remote",
+          "department": "Engineering",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "QA Engineer - Core Database (remote)",
+          "url": "https://job-boards.greenhouse.io/clickhouse/jobs/5654025004",
+          "locations": [
+            "United Kingdom (remote)"
+          ],
+          "countries": [
+            "United Kingdom"
+          ],
+          "workplace": "remote",
+          "department": "Engineering",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "QA Engineer - Core Database (remote)",
+          "url": "https://job-boards.greenhouse.io/clickhouse/jobs/5654026004",
+          "locations": [
+            "Spain (remote)"
+          ],
+          "countries": [
+            "Spain"
+          ],
+          "workplace": "remote",
+          "department": "Engineering",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "QA Engineer - Core Database (remote)",
+          "url": "https://job-boards.greenhouse.io/clickhouse/jobs/5654023004",
+          "locations": [
+            "Germany (remote)"
+          ],
+          "countries": [
+            "Germany"
+          ],
+          "workplace": "remote",
+          "department": "Engineering",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Senior Backend Engineer - ClickStack",
+          "url": "https://job-boards.greenhouse.io/clickhouse/jobs/5838218004",
+          "locations": [
+            "United Kingdom (remote)"
+          ],
+          "countries": [
+            "United Kingdom"
+          ],
+          "workplace": "remote",
+          "department": "Engineering",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Senior Backend Engineer - ClickStack",
+          "url": "https://job-boards.greenhouse.io/clickhouse/jobs/5838221004",
+          "locations": [
+            "Netherlands (remote)"
+          ],
+          "countries": [
+            "Netherlands"
+          ],
+          "workplace": "remote",
+          "department": "Engineering",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Senior Backend Engineer - ClickStack",
+          "url": "https://job-boards.greenhouse.io/clickhouse/jobs/5838219004",
+          "locations": [
+            "Germany (remote)"
+          ],
+          "countries": [
+            "Germany"
+          ],
+          "workplace": "remote",
+          "department": "Engineering",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Senior Cloud Data Infrastructure Engineer",
+          "url": "https://job-boards.greenhouse.io/clickhouse/jobs/5778615004",
+          "locations": [
+            "Germany (remote)"
+          ],
+          "countries": [
+            "Germany"
+          ],
+          "workplace": "remote",
+          "department": "Engineering",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Senior Cloud Performance Engineer",
+          "url": "https://job-boards.greenhouse.io/clickhouse/jobs/5768081004",
+          "locations": [
+            "Amsterdam (remote)"
+          ],
+          "countries": [
+            "Netherlands"
+          ],
+          "workplace": "remote",
+          "department": "Engineering",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Senior Cloud Performance Engineer",
+          "url": "https://job-boards.greenhouse.io/clickhouse/jobs/5768080004",
+          "locations": [
+            "Australia (remote)"
+          ],
+          "countries": [
+            "Australia"
+          ],
+          "workplace": "remote",
+          "department": "Engineering",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Senior Cloud Performance Engineer",
+          "url": "https://job-boards.greenhouse.io/clickhouse/jobs/5768078004",
+          "locations": [
+            "United Kingdom (remote)"
+          ],
+          "countries": [
+            "United Kingdom"
+          ],
+          "workplace": "remote",
+          "department": "Engineering",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Senior Cloud Performance Engineer",
+          "url": "https://job-boards.greenhouse.io/clickhouse/jobs/5768077004",
+          "locations": [
+            "Singapore (remote)"
+          ],
+          "countries": [
+            "Singapore"
+          ],
+          "workplace": "remote",
+          "department": "Engineering",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Senior Consulting Engineer - India",
+          "url": "https://job-boards.greenhouse.io/clickhouse/jobs/5848328004",
+          "locations": [
+            "India (Remote)"
+          ],
+          "countries": [
+            "India"
+          ],
+          "workplace": "remote",
+          "department": "Support Services",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Senior Consulting Engineer - Singapore",
+          "url": "https://job-boards.greenhouse.io/clickhouse/jobs/5980183004",
+          "locations": [
+            "Singapore (Remote)"
+          ],
+          "countries": [
+            "Singapore"
+          ],
+          "workplace": "remote",
+          "department": "Support Services",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Senior Engineering Manager - Security Engineering",
+          "url": "https://job-boards.greenhouse.io/clickhouse/jobs/6103158004",
+          "locations": [
+            "Netherlands (remote)"
+          ],
+          "countries": [
+            "Netherlands"
+          ],
+          "workplace": "remote",
+          "department": "Security",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Senior Field Marketing Manager - EMEA",
+          "url": "https://job-boards.greenhouse.io/clickhouse/jobs/6119007004",
+          "locations": [
+            "Germany (Remote)"
+          ],
+          "countries": [
+            "Germany"
+          ],
+          "workplace": "remote",
+          "department": "Marketing",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Senior Full Stack Engineer - ClickStack",
+          "url": "https://job-boards.greenhouse.io/clickhouse/jobs/5748782004",
+          "locations": [
+            "Netherlands (remote)"
+          ],
+          "countries": [
+            "Netherlands"
+          ],
+          "workplace": "remote",
+          "department": "Engineering",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Senior Full Stack Engineer - ClickStack",
+          "url": "https://job-boards.greenhouse.io/clickhouse/jobs/5748779004",
+          "locations": [
+            "Germany (remote)"
+          ],
+          "countries": [
+            "Germany"
+          ],
+          "workplace": "remote",
+          "department": "Engineering",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Senior Full Stack Engineer - ClickStack",
+          "url": "https://job-boards.greenhouse.io/clickhouse/jobs/5748778004",
+          "locations": [
+            "United Kingdom (remote)"
+          ],
+          "countries": [
+            "United Kingdom"
+          ],
+          "workplace": "remote",
+          "department": "Engineering",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Senior Full Stack Software Engineer - ClickPipes Platform",
+          "url": "https://job-boards.greenhouse.io/clickhouse/jobs/5777062004",
+          "locations": [
+            "Netherlands (remote)"
+          ],
+          "countries": [
+            "Netherlands"
+          ],
+          "workplace": "remote",
+          "department": "Engineering",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Senior Full Stack Software Engineer - ClickPipes Platform",
+          "url": "https://job-boards.greenhouse.io/clickhouse/jobs/5777061004",
+          "locations": [
+            "United Kingdom (remote)"
+          ],
+          "countries": [
+            "United Kingdom"
+          ],
+          "workplace": "remote",
+          "department": "Engineering",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Senior Infrastructure Engineer - Postgres",
+          "url": "https://job-boards.greenhouse.io/clickhouse/jobs/5717944004",
+          "locations": [
+            "India (remote)"
+          ],
+          "countries": [
+            "India"
+          ],
+          "workplace": "remote",
+          "department": "Engineering",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Senior Security Automation Engineer",
+          "url": "https://job-boards.greenhouse.io/clickhouse/jobs/6105350004",
+          "locations": [
+            "Netherlands (remote)"
+          ],
+          "countries": [
+            "Netherlands"
+          ],
+          "workplace": "remote",
+          "department": "Security",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Senior Site Reliability Engineer- Remote",
+          "url": "https://job-boards.greenhouse.io/clickhouse/jobs/5819755004",
+          "locations": [
+            "Singapore(Remote)"
+          ],
+          "countries": [
+            "Singapore"
+          ],
+          "workplace": "remote",
+          "department": "Engineering",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Senior Site Reliability Engineer- Remote",
+          "url": "https://job-boards.greenhouse.io/clickhouse/jobs/5819756004",
+          "locations": [
+            "United Kingdom"
+          ],
+          "countries": [
+            "United Kingdom"
+          ],
+          "workplace": null,
+          "department": "Engineering",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Senior Site Reliability Engineer- Remote",
+          "url": "https://job-boards.greenhouse.io/clickhouse/jobs/5828333004",
+          "locations": [
+            "Australia(Remote)"
+          ],
+          "countries": [
+            "Australia"
+          ],
+          "workplace": "remote",
+          "department": "Engineering",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Senior Software Engineer - Clickpipes (CDC/Streaming)",
+          "url": "https://job-boards.greenhouse.io/clickhouse/jobs/5765671004",
+          "locations": [
+            "Germany (remote)"
+          ],
+          "countries": [
+            "Germany"
+          ],
+          "workplace": "remote",
+          "department": "Engineering",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Senior Software Engineer - Clickpipes (CDC/Streaming)",
+          "url": "https://job-boards.greenhouse.io/clickhouse/jobs/6015049004",
+          "locations": [
+            "Spain"
+          ],
+          "countries": [
+            "Spain"
+          ],
+          "workplace": null,
+          "department": "Engineering",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Senior Software Engineer - Clickpipes (CDC/Streaming)",
+          "url": "https://job-boards.greenhouse.io/clickhouse/jobs/6015050004",
+          "locations": [
+            "United Kingdom"
+          ],
+          "countries": [
+            "United Kingdom"
+          ],
+          "workplace": null,
+          "department": "Engineering",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Senior Software Engineer - Cloud Infrastructure",
+          "url": "https://job-boards.greenhouse.io/clickhouse/jobs/5819676004",
+          "locations": [
+            "Singapore (Remote)"
+          ],
+          "countries": [
+            "Singapore"
+          ],
+          "workplace": "remote",
+          "department": "Engineering",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Senior Software Engineer - Cloud Infrastructure",
+          "url": "https://job-boards.greenhouse.io/clickhouse/jobs/5819677004",
+          "locations": [
+            "UK (Remote)"
+          ],
+          "countries": [
+            "United Kingdom"
+          ],
+          "workplace": "remote",
+          "department": "Engineering",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Senior Software Engineer - Cloud Infrastructure",
+          "url": "https://job-boards.greenhouse.io/clickhouse/jobs/5819678004",
+          "locations": [
+            "Amsterdam(Remote)"
+          ],
+          "countries": [
+            "Netherlands"
+          ],
+          "workplace": "remote",
+          "department": "Engineering",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Senior Software Engineer - Cloud Partner Integrations",
+          "url": "https://job-boards.greenhouse.io/clickhouse/jobs/6115275004",
+          "locations": [
+            "Germany (remote)"
+          ],
+          "countries": [
+            "Germany"
+          ],
+          "workplace": "remote",
+          "department": "Integrations Engineering",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Senior Software Engineer - Cloud Partner Integrations",
+          "url": "https://job-boards.greenhouse.io/clickhouse/jobs/6116420004",
+          "locations": [
+            "UK (remote)"
+          ],
+          "countries": [
+            "United Kingdom"
+          ],
+          "workplace": "remote",
+          "department": "Integrations Engineering",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Senior Software Engineer - Cloud Partner Integrations",
+          "url": "https://job-boards.greenhouse.io/clickhouse/jobs/6115280004",
+          "locations": [
+            "Spain (remote)"
+          ],
+          "countries": [
+            "Spain"
+          ],
+          "workplace": "remote",
+          "department": "Integrations Engineering",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Senior Software Engineer - Java Streaming - Connectors",
+          "url": "https://job-boards.greenhouse.io/clickhouse/jobs/6000803004",
+          "locations": [
+            "United Kingdom (Remote)"
+          ],
+          "countries": [
+            "United Kingdom"
+          ],
+          "workplace": "remote",
+          "department": "Engineering",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Senior Software Engineer - Java Streaming - Connectors",
+          "url": "https://job-boards.greenhouse.io/clickhouse/jobs/6000798004",
+          "locations": [
+            "The Netherlands (Remote)"
+          ],
+          "countries": [
+            "Netherlands"
+          ],
+          "workplace": "remote",
+          "department": "Engineering",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Senior Software Engineer - Java Streaming - Connectors",
+          "url": "https://job-boards.greenhouse.io/clickhouse/jobs/6000805004",
+          "locations": [
+            "Germany (Remote)"
+          ],
+          "countries": [
+            "Germany"
+          ],
+          "workplace": "remote",
+          "department": "Engineering",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Senior Software Engineer - Postgres",
+          "url": "https://job-boards.greenhouse.io/clickhouse/jobs/5989606004",
+          "locations": [
+            "India (remote)"
+          ],
+          "countries": [
+            "India"
+          ],
+          "workplace": "remote",
+          "department": "Engineering",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Senior Software Engineer - Python and Data Ecosystem",
+          "url": "https://job-boards.greenhouse.io/clickhouse/jobs/6107516004",
+          "locations": [
+            "Germany (remote)"
+          ],
+          "countries": [
+            "Germany"
+          ],
+          "workplace": "remote",
+          "department": "Engineering",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Senior Software Engineer - Python and Data Ecosystem",
+          "url": "https://job-boards.greenhouse.io/clickhouse/jobs/6107517004",
+          "locations": [
+            "UK (remote)"
+          ],
+          "countries": [
+            "United Kingdom"
+          ],
+          "workplace": "remote",
+          "department": "Engineering",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Senior Technical Customer Support Engineer - Japan",
+          "url": "https://job-boards.greenhouse.io/clickhouse/jobs/5809495004",
+          "locations": [
+            "Tokyo (Remote)"
+          ],
+          "countries": [
+            "Japan"
+          ],
+          "workplace": "remote",
+          "department": "Support Services",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Solutions Architect - India",
+          "url": "https://job-boards.greenhouse.io/clickhouse/jobs/6111658004",
+          "locations": [
+            "Bangalore"
+          ],
+          "countries": [
+            "India"
+          ],
+          "workplace": null,
+          "department": "Go-To-Market",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Solutions Architect - Melbourne",
+          "url": "https://job-boards.greenhouse.io/clickhouse/jobs/5994465004",
+          "locations": [
+            "Melbourne"
+          ],
+          "countries": [
+            "Australia"
+          ],
+          "workplace": null,
+          "department": "Go-To-Market",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Solutions Architect (Presales)",
+          "url": "https://job-boards.greenhouse.io/clickhouse/jobs/5709944004",
+          "locations": [
+            "Singapore"
+          ],
+          "countries": [
+            "Singapore"
+          ],
+          "workplace": null,
+          "department": "Go-To-Market",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Technical Account Manager Architect - Singapore",
+          "url": "https://job-boards.greenhouse.io/clickhouse/jobs/5810564004",
+          "locations": [
+            "Singapore (Remote)"
+          ],
+          "countries": [
+            "Singapore"
+          ],
+          "workplace": "remote",
+          "department": "Support Services",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "\u30b7\u30cb\u30a2 \u30c6\u30af\u30cb\u30ab\u30eb\u30b5\u30dd\u30fc\u30c8\u30a8\u30f3\u30b8\u30cb\u30a2 \u2014 \u65e5\u672c\uff08\u30ea\u30e2\u30fc\u30c8\u3001\u6771\u4eac\u3078\u306e\u51fa\u5f35\u3042\u308a\uff09",
+          "url": "https://job-boards.greenhouse.io/clickhouse/jobs/6121373004",
+          "locations": [
+            "Tokyo (Remote)"
+          ],
+          "countries": [
+            "Japan"
+          ],
+          "workplace": "remote",
+          "department": "Support Services",
           "visa": "unknown",
           "hire_from_abroad": "unknown"
         }
       ],
       "countries": [
+        "India",
         "United Kingdom",
         "Germany",
-        "France"
+        "Netherlands",
+        "Spain",
+        "Japan",
+        "Singapore",
+        "Australia"
       ],
-      "cities": [],
+      "cities": [
+        "Bengaluru"
+      ],
       "amount": null,
       "currency": null,
       "round_letter": null,
@@ -13430,7 +14444,14 @@
       "source_url": "https://www.forbes.com/companies/clickhouse/",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": {
+        "cin": "U63111KA2025FTC202373",
+        "name": "CLICKHOUSE INDIA PRIVATE LIMITED",
+        "incorporated": "2025-05-06",
+        "city": "Bangalore",
+        "status": "Active",
+        "confidence": "exact"
+      }
     },
     {
       "name": "Clipboard",
@@ -49792,7 +50813,7 @@
       "salary": {
         "avg_lpa": 22.2,
         "reports": 226,
-        "observed": "2026-07-31",
+        "observed": "2026-07-29",
         "source_url": "https://www.ambitionbox.com/salaries/nextiva-salaries"
       },
       "mca": null
@@ -61431,9 +62452,9 @@
       "source_url": "https://www.cbinsights.com/company/quince",
       "qualified_by": "stage",
       "salary": {
-        "avg_lpa": 38.4,
-        "reports": 247,
-        "observed": "2026-08-01",
+        "avg_lpa": 38.6,
+        "reports": 244,
+        "observed": "2026-07-26",
         "source_url": "https://www.ambitionbox.com/salaries/quince-salaries"
       },
       "mca": null
@@ -61955,9 +62976,9 @@
       "source_url": "https://www.ycombinator.com/companies/razorpay",
       "qualified_by": "stage",
       "salary": {
-        "avg_lpa": 21.2,
-        "reports": 7060,
-        "observed": "2026-08-01",
+        "avg_lpa": 21.1,
+        "reports": 7054,
+        "observed": "2026-07-31",
         "source_url": "https://www.ambitionbox.com/salaries/razorpay-salaries"
       },
       "mca": null
@@ -66217,9 +67238,9 @@
       "source_url": "https://www.cbinsights.com/company/sparkcognition",
       "qualified_by": "stage",
       "salary": {
-        "avg_lpa": 15.0,
+        "avg_lpa": 14.9,
         "reports": 143,
-        "observed": "2026-08-02",
+        "observed": "2026-07-18",
         "source_url": "https://www.ambitionbox.com/salaries/sparkcognition-salaries"
       },
       "mca": {
@@ -66969,9 +67990,9 @@
       "source_url": "https://www.cbinsights.com/company/starburst",
       "qualified_by": "stage",
       "salary": {
-        "avg_lpa": 12.3,
-        "reports": 4,
-        "observed": "2026-08-02",
+        "avg_lpa": 15.7,
+        "reports": 3,
+        "observed": "2025-10-15",
         "source_url": "https://www.ambitionbox.com/salaries/starburst-salaries"
       },
       "mca": null
@@ -69645,8 +70666,8 @@
       "qualified_by": "stage",
       "salary": {
         "avg_lpa": 28.1,
-        "reports": 983,
-        "observed": "2026-08-01",
+        "reports": 982,
+        "observed": "2026-07-31",
         "source_url": "https://www.ambitionbox.com/salaries/stripe-salaries"
       },
       "mca": {

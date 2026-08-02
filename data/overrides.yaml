@@ -23,3 +23,17 @@ Cross River Bank: greenhouse/crossriverbank
 Prove Identity: greenhouse/prove
 # Board states "Stoke Space " — trailing space and all, verbatim.
 Stoke Space Technologies: greenhouse/stokespacetechnologies
+
+# ClickHouse's OWN careers page links jobs.ashbyhq.com/langfuse, so discovery
+# read it correctly and the site published 7 of Langfuse's roles under
+# ClickHouse's name. Found independently by two agents on 2026-08-02. The
+# company's page is wrong; the pipeline was not. ClickHouse's real board is
+# ashby/clickhouse, which states "ClickHouse Jobs" and publicWebsite
+# clickhouse.com, and carries the same 166 roles as greenhouse/clickhouse.
+# greenhouse/clickhouse, not ashby/clickhouse, and only because verify_override
+# still refuses every non-Greenhouse slug -- its message says "ashby probes land
+# with T3.2/T3.3", which they did, long ago. A stale guard, the same shape as the
+# ~151s Ashby latency T12.1 retired. Both boards are ClickHouse's and carry the
+# same 166 roles, so this costs the reader nothing; widening the verifier is a
+# task, not a line to sneak into a merge.
+ClickHouse: greenhouse/clickhouse

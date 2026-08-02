@@ -40,10 +40,28 @@ Our agent can alert if they receive email and inform user about the shortlisting
 
 ## Epic 3
 
-Find people who they can drop the cold email for referal
+### Feature 1
+Find the relevent person to refer them from Linkedin
+Go to company page in linkedin
+Find the people who may have some connection with the user: college, school, ex-company, mutal connection
+
+### Feature 2
+user provide the linkedin profile of the person.
+Write a nice cold email to ask them to refer the user
+
+
+## Epic 4
+
+Use agent to post in linkedin /  on their behalf to increase their reach
 
 ### Feature 1
-Ask user to upload there linkedin profile and 
+Use composio to register their https://docs.composio.dev/toolkits/linkedin
+
+ask user area of interest where they like to post.
+every day create one interesting post which follows this principle:
+use knowledge base of
+kb/power_writing/The Secret to going viral.pptx
+kb/power_writing/How to Write Amazing Headlines.pptx
 
 
 

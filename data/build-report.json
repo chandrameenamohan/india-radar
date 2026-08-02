@@ -3277,26 +3277,26 @@
     "Insider": "Business Insider"
   },
   "countries": {
-    "India": 116,
+    "India": 117,
     "United Kingdom": 220,
     "Ireland": 42,
     "Germany": 93,
-    "Netherlands": 42,
-    "France": 51,
-    "Spain": 54,
+    "Netherlands": 43,
+    "France": 50,
+    "Spain": 55,
     "Sweden": 27,
     "Denmark": 11,
     "Norway": 3,
     "Finland": 5,
-    "Japan": 54,
-    "Singapore": 68,
-    "Australia": 70,
+    "Japan": 55,
+    "Singapore": 69,
+    "Australia": 71,
     "New Zealand": 2
   },
   "mca": {
     "records": 24102,
     "pulled": "2026-07-29",
-    "matched": 32,
+    "matched": 33,
     "held": [
       {
         "name": "6Sense",
