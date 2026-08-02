@@ -76,7 +76,18 @@ open_page() {
   $B wait --networkidle >/dev/null 2>&1
   # Two browse daemons on one machine split these commands across two browsers,
   # and the symptom is row diffs that look like site bugs. Name it instead.
-  local at; at=$(val 'location.href')
+  #
+  # DECODED on both sides, and that is a fix rather than a loosening. T11.1 put
+  # Clerk on the page, Clerk normalises the URL through history.replaceState, and
+  # the normalisation percent-encodes the slashes in `?data=../tests/...` — so
+  # every `?data=` page started reporting itself as the wrong page while
+  # rendering exactly the right rows. The question this guard asks is "is the
+  # browser on the page I asked for", and two spellings of one URL are the same
+  # page: `location.href` still parses to the same `data` param, and the register
+  # still renders from it. A guard that cannot tell an encoding from a wrong page
+  # answers a question nobody asked.
+  local at; at=$(val 'decodeURIComponent(location.href)')
+  url=$(printf '%s' "$url" | $PY -c 'import sys,urllib.parse;print(urllib.parse.unquote(sys.stdin.read()),end="")')
   if [ "$at" != "$url" ]; then
     echo "  FAIL  browser is on [$at], not [$url]"
     echo "        a second browse daemon is likely serving these commands; try: browse stop"
@@ -859,6 +870,37 @@ check "an unknown schema is refused, not rendered" "refused 0 rows" \
 check "a refused dataset leaves the footer's counts blank rather than stale" "" \
   "$(val 'document.querySelector("#integrity").textContent')"
 console_clean "unknown schema"
+
+# 4e the account control (T11.1). Three things, in the state every reader arrives
+# in: it mounts, it gates nothing, and it costs the page no errors.
+#
+# The AUTHENTICATED half of the round trip -- sign up, reload, still signed in,
+# sign out -- is NOT here, and not because nobody tried. It CANNOT run in this
+# harness: the instance has bot protection on, and Cloudflare Turnstile does not
+# solve in the headless browser. Measured both ways (learning-tests/clerk_live.py
+# finding 7) -- the programmatic path returns `captcha_invalid`, and the real
+# modal leaves Continue disabled forever waiting for a token that never arrives.
+# Turning bot protection off for the DEVELOPMENT instance is the unblock, and it
+# is a dashboard toggle nobody has been asked for yet. Until then session
+# persistence is verified by a human, once, and T11.1 says so rather than
+# pretending the gate covers it.
+echo "-- the account control"
+open_page "$ROOT"
+check "the account control mounts" "true" \
+  "$(val 'document.querySelector("#account").hasAttribute("data-ready")')"
+check "a reader who is not signed in is offered a sign-in" "Sign in" \
+  "$(val 'document.querySelector("#account").textContent.trim()')"
+# The register must be blind to who is reading it. Counting rows before and after
+# the sign-in modal opens is the cheapest form that assertion takes: a page that
+# started gating rows on a session would differ here first.
+before=$(val 'document.querySelectorAll(".irow").length')
+$B js 'document.querySelector("#account button").click()' >/dev/null 2>&1
+$B wait --networkidle >/dev/null 2>&1
+check "the sign-in modal opens on our own page, not Clerk's" "true" \
+  "$(val 'String(!!document.querySelector("[data-clerk-component], .cl-modalContent"))')"
+check "opening it leaves the register untouched" "$before" \
+  "$(val 'document.querySelectorAll(".irow").length')"
+console_clean "account control"
 
 # 4c visual regression is NOT here. It needs baseline screenshots a human
 # approves once (VERIFICATION.md 4c), and an agent approving its own baselines

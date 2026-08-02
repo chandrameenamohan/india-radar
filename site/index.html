@@ -98,6 +98,22 @@
                        letter-spacing: .12em; font-weight: 600;
                        color: var(--ink); }
 
+  /* -------------------------------- account ------------------------------- */
+  /* SPEC v3 feature 17. Deliberately quiet, and deliberately not red: red is the
+     active plate and the counts, and an account is neither. It carries no count
+     and gates nothing — the register is public and stays public.
+     Hidden until Clerk answers. A page whose auth never loads shows no control
+     at all, which is honest, rather than a Sign in that cannot sign anyone in. */
+  .account { display: none; }
+  .account[data-ready] { display: flex; align-items: center; min-height: 1.6rem; }
+  .account button {
+    font: inherit; font-size: 10px; text-transform: uppercase;
+    letter-spacing: .12em; font-weight: 600; color: var(--ink);
+    background: none; border: 1px solid var(--rule-2);
+    padding: .4rem .7rem; cursor: pointer;
+  }
+  .account button:hover { background: var(--ink); color: var(--paper); }
+
   /* ------------------------------- the chart ------------------------------ */
   /* Round 10: the plate becomes a map. The schematic 5×3 grid is replaced by a
      true equirectangular graticule band, latitude compressed the way a printed
@@ -956,6 +972,11 @@
   <div class="masthead">
     <h1>Role<span class="mid">·</span>Atlas</h1>
     <div class="aside">
+      <!-- SPEC v3 feature 17. Empty markup on purpose: the script fills it once
+           Clerk has answered which of the two states the reader is in, and
+           render() never touches it. Nothing below the header reads it — an
+           account changes who the reader is, never what the register shows. -->
+      <div class="account" id="account"></div>
       <p class="snapshot"><span class="k">Snapshot</span><time id="snapshot">—</time></p>
       <!-- Candidate 1: the restamp. The open plate's designation, struck where
            an atlas sheet strikes its number. render() re-stamps it on every
@@ -2823,6 +2844,69 @@ fetch(src, { cache: 'no-cache' })
     load(data);
   })
   .catch((e) => { $('#status').textContent = `Could not load ${src}: ${e.message}`; });
+</script>
+
+<!-- SPEC v3 feature 17 — accounts. Clerk holds the users, the sessions and the
+     password resets; this project holds none of them and stores no credential.
+
+     THE KEY BELOW IS PUBLIC BY DESIGN, and that is measured rather than assumed:
+     learning-tests/clerk_live.py finding 3 reads the entire instance
+     configuration from Clerk with no key at all. The one that must never appear
+     here is the SECRET key (`sk_`), which grants admin over every account —
+     tests/test_auth.py greps for it in the working tree AND in every commit
+     reachable from main, because a secret deleted in the next commit is still a
+     secret that shipped.
+
+     PINNED TO @5 DELIBERATELY. `@latest` serves 4.73.14 — a major version behind
+     — so the tag every quickstart reaches for would load v4 under code written
+     against the v5 API (finding 1).
+
+     ponytail: the key is written into the page rather than injected at build
+     time, because the site is a committed file and the key is public. Ceiling:
+     promoting to a production Clerk instance is an edit to these two lines plus
+     the CNAMEs Clerk asks for on the zone. -->
+<script
+  async crossorigin="anonymous"
+  data-clerk-publishable-key="pk_test_cmVndWxhci10cm9sbC01MC5jbGVyay5hY2NvdW50cy5kZXYk"
+  src="https://regular-troll-50.clerk.accounts.dev/npm/@clerk/clerk-js@5/dist/clerk.browser.js"
+></script>
+<script>
+// Auth is ADDITIVE, and the guards below are the whole point of it. The register
+// is a public document that must render when Clerk is blocked, offline, slow, or
+// broken -- so nothing here runs before the data, nothing here can throw into the
+// page, and a failed load leaves the header exactly as it was: no control, rather
+// than a Sign in that cannot sign anybody in.
+//
+// Mounted on this page, never redirected to Clerk's hosted portal: that portal
+// lives on a DIFFERENT host from the frontend API (finding 6), so the redirect
+// flow would walk the reader off roleatlas.sennamind.com to a Clerk-branded page
+// and back. openSignIn() is a modal on our own sheet.
+window.addEventListener('load', async () => {
+  const slot = document.getElementById('account');
+  if (!slot || !window.Clerk) return;
+  try {
+    await window.Clerk.load();
+  } catch {
+    return;
+  }
+  const paint = () => {
+    slot.replaceChildren();
+    if (window.Clerk.user) {
+      const mount = document.createElement('div');
+      slot.append(mount);
+      window.Clerk.mountUserButton(mount);
+    } else {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.textContent = 'Sign in';
+      button.addEventListener('click', () => window.Clerk.openSignIn());
+      slot.append(button);
+    }
+    slot.dataset.ready = '';
+  };
+  paint();
+  window.Clerk.addListener(paint);   // sign-in and sign-out both land here
+});
 </script>
 </body>
 </html>

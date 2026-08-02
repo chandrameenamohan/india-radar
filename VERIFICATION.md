@@ -80,6 +80,22 @@ look deliberate), mobile width.
 Axe/a11y snapshot on the main view. Fail on violations. This is basics — keyboard
 reachability of filters, contrast, labelled controls — not an audit.
 
+### 4e. the account control (T11.1)
+The signed-out state only: the control mounts, offers a sign-in, opens Clerk's
+modal on our own page rather than redirecting to Clerk's hosted portal, and
+leaves the register's row count untouched while doing it. That last one is SPEC
+v3's central promise held by a check — the register is public, and what it shows
+must not depend on who is reading it.
+
+**The signed-in state is not gated, and cannot be from here.** The instance runs
+bot protection; Cloudflare Turnstile does not solve in the headless browser.
+Measured both ways in `learning-tests/clerk_live.py` (finding 7): the
+programmatic path returns `captcha_invalid`, and the real modal leaves Continue
+disabled forever. Session persistence across a reload is therefore verified by a
+human, once, and T11.1 is marked `needs-review` until that happens. Turning bot
+protection off for the *development* instance would move this into the gate; it
+is a dashboard toggle, not code, and nobody has been asked for it yet.
+
 ---
 
 ## Deterministic code-quality signals
