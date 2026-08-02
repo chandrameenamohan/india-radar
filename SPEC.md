@@ -319,3 +319,67 @@ listed counts. Everything else in feature 12 stands.
   heuristic recall is unacceptably low.
 - No country-specific job-quality scoring, cost-of-living data, or visa-law
   guidance. We report what the posting says, nothing more.
+
+---
+
+# v3 — Accounts (decided 2026-08-02)
+
+**Compression:** The register stops being read-only. A visitor can create an
+account, and the site knows who they are on the next visit — nothing more in this
+version. It matters because of what it is the first step of: ROLE·ATLAS is
+becoming a product for **getting** the job, not browsing it, and every feature in
+that direction (a resume matched to a role, a named person who can refer you, a
+paid ex-employee who preps you) needs an identity to hang off. Registration
+withholds nothing. The corpus stays fully public — that is a decision, not an
+oversight, and the reasoning is in "Not a wall" below.
+
+**The keystone decision: auth is bought, not built.** Clerk holds the users, the
+sessions, the password resets, the OAuth handshakes and the emails that come with
+them. The site keeps zero credentials, stores zero passwords, and adds zero
+backend — Clerk's browser SDK runs on the static page exactly as it stands, and
+the publishable key it needs is public by design. This is the only reason accounts
+fit inside a project whose whole architecture is "one JSON file on a CDN."
+
+### 17. Account creation and sign-in
+A visitor can sign up (email or Google), sign in, sign out, and reset a password
+without leaving the site. A returning visitor is recognized without signing in
+again. The header states which of the two states the reader is in, always.
+
+**Acceptance:** on a page served from the live origin, a signed-out reader sees a
+sign-in control and a signed-in reader sees their own account control; a session
+survives a full page reload; sign-out returns the page to the signed-out state.
+Zero console errors in every one of those states. No secret key exists anywhere
+in the repository or the built site — only the publishable key, and a check
+proves it.
+
+### Not a wall
+Nothing on this site is hidden from anonymous readers, and nothing will be by
+this feature. The corpus is one public file on a CDN — a gate in front of it would
+be a curtain in front of an open door, and the site's own claim is that it proves
+what it says rather than asking to be trusted. Registration has to be worth
+something on its own terms or not exist.
+
+**Measured, 2026-08-01:** one nightly diff of the whole 15-country corpus produced
+**0 new companies and 9 new roles**, while 179 roles disappeared — of which **176
+were companies the build could not check that night, and 3 had actually closed.**
+Two consequences the next version must respect. Alert frequency follows the data,
+so weekly, not daily. And *absence in this corpus means "not observed," never "not
+there"* — the invariant that keeps the site honest becomes a lie the moment
+something differences it naively and emails a reader that a job closed. Any
+feature reading snapshot-to-snapshot change must first record checked-vs-unchecked
+per company per night, and may only speak about transitions where both sides were
+genuinely observed.
+
+### v3 non-goals
+- **No gate, no paywall, no withheld field.** See above.
+- **No profile page, no preferences UI.** Clerk ships its own; a second one is a
+  second thing to maintain for no reader benefit.
+- **No backend, no database, no session server.** The moment one exists, this
+  project stops being a static site and starts being an application to operate.
+  It will happen — feature 18 and beyond need it — but it does not happen for
+  login, and doing it early buys nothing.
+- **No storing of resumes, LinkedIn profiles, or any personal document.** The
+  first PII this project holds should arrive with a decided retention policy, and
+  that decision belongs to the feature that needs it, not to login.
+- **No email from this project.** Clerk sends the verification and reset mail it
+  needs. Anything we send ourselves is a sender reputation to manage.

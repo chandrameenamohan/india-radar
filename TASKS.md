@@ -1894,3 +1894,132 @@ Out of scope:
     real — that is the whole claim the site makes. It is the description that is
     unverified, not the listing.
 ```
+
+---
+
+## PHASE 7 — Accounts (SPEC v3)
+
+The register learns who is reading it. One task, because login is one thing, and
+everything people want to build on top of it is in "The long picture" below,
+deliberately not numbered as work.
+
+### T11.1 — A reader can create an account and be recognized on return `todo` · *Phase 7*
+
+Clerk's browser SDK, loaded on `site/index.html`, and nothing else. No backend, no
+database, no session of our own — the entire feature is a script tag, a
+publishable key, and two mount points in the header.
+
+**The one thing that can go badly wrong here is a leaked secret.** Clerk issues
+two keys: a publishable key (`pk_…`), which is public by design and belongs in the
+page, and a secret key (`sk_…`), which grants full account control over every user
+and must never touch this repository — not in the page, not in a fixture, not in a
+commit that gets reverted. The check below is the guard, and it is the reason this
+task has a test that greps its own git history rather than only its working tree.
+
+Two Clerk instances exist for every application: **development**, which works on
+any origin with no DNS at all and issues test credentials, and **production**,
+which requires CNAME records on the zone. Build and gate against development;
+promote to production as the last step, when the flow is already proven.
+
+```
+Acceptance (observable):
+  On the live origin, a signed-out reader sees a sign-in control in the header;
+  after signing up with email, the same header shows their own account control.
+  A full page reload keeps them signed in. Sign-out returns the header to the
+  signed-out state, and a reload after sign-out stays signed out.
+  Every one of those four states loads with ZERO console errors and zero failed
+  network requests — the standard the site already holds itself to.
+  The corpus renders identically signed-in and signed-out. This feature adds a
+  control to the header; it changes nothing a reader can already see. A diff of
+  the rendered company list across the two states is empty.
+  A learning test in learning-tests/ exercises the REAL Clerk SDK against a
+  development instance and records what it actually does: how a session is
+  persisted, what a reload restores, and how Clerk's test credentials work. The
+  findings comment at its top states what was assumed and what turned out true.
+  No secret key anywhere: no `sk_` string in the working tree, in site/, or in
+  any commit reachable from main.
+Checks:
+  lint -> typecheck -> unit -> e2e (full gate)
+  + unit: the page carries a `pk_` publishable key and NO `sk_` key
+  + unit: `git log -p` over main contains no `sk_` string
+  + e2e: gstack browse drives the live page through signed-out -> sign-up ->
+    reload -> sign-out, asserting header state and zero console errors at each
+    step, using Clerk's test-mode credentials
+Out of scope:
+  - Storing anything about the user beyond what Clerk holds by default. What a
+    reader is FOR (seeker, partner) is real product data and belongs to the
+    feature that uses it, not to the login that precedes it.
+  - Any change to what the corpus shows, to whom, under any condition.
+  - Building a profile or preferences page. Clerk ships one.
+  - Promoting to a production Clerk instance before the development flow is
+    green end to end.
+```
+
+---
+
+## The long picture — not scheduled, not started
+
+Recorded 2026-08-02 so the shape is on paper and the decisions above can be
+checked against it. **None of this is work.** These headers deliberately do not
+match the `^### T<n>` pattern the loop counts, so nothing here can be picked up
+by accident. Numbering them is a decision for a later day.
+
+The product these point at: ROLE·ATLAS stops being a place to read about openings
+and becomes the thing that gets a person through the door — a resume shaped to the
+role, a named human inside who can refer them, and, from the other side of the
+market, ex-employees and ex-recruiters who are paid to refer and to prepare
+people. Software companies only, worldwide, seed through late-stage private,
+never public, and never a company whose funding cannot be sourced.
+
+### F1 — Job descriptions are fetched every night and thrown away
+`src/greenhouse.py` (`content=true`), `src/ashby.py` (`descriptionPlain`) and
+`src/lever.py` (four glued fields) all pull the full posting text on every run.
+The build derives openness and city from it, then discards the prose. **Every
+matching, ranking or summarizing feature below is blocked on text this project
+already pays to download.** Keeping it is not free: ~5,400 roles of prose will not
+sit in a 2.4MB file the browser downloads whole, so the first feature that needs
+it is also the first that needs somewhere other than a CDN to put it. That is the
+real cost of F2, and it should be counted there rather than discovered.
+
+### F2 — Resume in, ranked roles out
+A reader pastes a resume or a LinkedIn URL and gets the roles in the corpus worth
+their time. The first feature that genuinely requires a server: an LLM key cannot
+live in a static page. Also the first that holds personal documents, so it carries
+the retention decision v3 deliberately refused to make early.
+
+### F3 — The referrer, without scraping LinkedIn
+Finding the person inside who can refer you is the wedge of the whole product and
+the part LinkedIn has no API for and litigates over. The version that survives is
+the one that does not scrape: **partners are the graph.** An ex-Stripe engineer who
+registers, declares their company and is paid to refer IS the referral path, with
+no terms of service to breach and a human who actually replies. Whatever gets
+built here, the only LinkedIn data touched should be the reader's own profile,
+supplied by the reader.
+
+### F4 — The partner side
+Ex-employees and ex-recruiters who earn by referring and by preparing candidates.
+Two things to settle before a line of it: many employers forbid taking outside
+payment for a referral, and the partner — not this project — carries that risk;
+and paying people means payouts, identity checks and tax, which is a different
+kind of software than a nightly build. Coaching and mock interviews carry neither
+problem, which is an argument for leading with them.
+
+### F5 — The drafted approach
+A cold message to the referrer, written for the role. Draft it; let the reader
+send it from their own mailbox. Sending mail on someone's behalf at volume is how
+a domain's reputation dies, and this project shares a domain with everything else
+at sennamind.com.
+
+### F6 — Weekly change digest
+What changed this week, to people who asked for it. **Blocked on an honesty
+problem, not an engineering one** — see the measurement in SPEC v3. Until the
+build records checked-vs-unchecked per company per night, a digest cannot tell
+"this job closed" from "we could not look," and it would confidently email people
+the difference.
+
+### F7 — Sourcing rules widen
+Seed stage joins Series A+; role location goes worldwide rather than the current
+fifteen countries; company HQ narrows to developed markets plus India. The
+funding-source requirement does not move — 2,207 companies are unlisted today for
+want of a verifiable source, and that discipline is worth more, not less, once
+people are asked to spend money and reputation on these companies.
