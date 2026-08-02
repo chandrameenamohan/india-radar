@@ -3704,5 +3704,4408 @@
         ]
       }
     ]
+  },
+  "uk": {
+    "names": 220,
+    "stated": 20,
+    "pulled": "2026-08-02",
+    "matched": 19,
+    "held": [
+      {
+        "name": "Airbnb",
+        "confidence": "prefix",
+        "why": "silent; 20 companies reach the prefix tier",
+        "candidates": [
+          {
+            "number": "15419198",
+            "name": "AIRBNB CITY QUIET GARDEN HOMESTAY CO., LTD",
+            "status": "dissolved",
+            "incorporated": "2024-01-17",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "16848631",
+            "name": "AIRBNB CLEANS LTD",
+            "status": "active",
+            "incorporated": "2025-11-11",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "14105594",
+            "name": "AIRBNB 541 WIMBORNE ROAD LTD",
+            "status": "active",
+            "incorporated": "2022-05-13",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "14105134",
+            "name": "AIRBNB 5 WESTHILL ROAD LTD",
+            "status": "active",
+            "incorporated": "2022-05-13",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "SC853876",
+            "name": "AIRBNB HABITAT CLEANING LTD",
+            "status": "active",
+            "incorporated": "2025-06-27",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Airtable",
+        "confidence": "exact",
+        "why": "silent; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "14440416",
+            "name": "AIRTABLE LIMITED",
+            "status": "dissolved",
+            "incorporated": "2022-10-25",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Algolia",
+        "confidence": "exact",
+        "why": "silent; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "11124395",
+            "name": "ALGOLIA LIMITED",
+            "status": "active",
+            "incorporated": "2017-12-27",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Alloy",
+        "confidence": "exact",
+        "why": "silent; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "03567784",
+            "name": "ALLOY LTD",
+            "status": "active",
+            "incorporated": "1998-05-20",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Alpaca",
+        "confidence": "exact",
+        "why": "silent; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "11295408",
+            "name": "ALPACA LIMITED",
+            "status": "active",
+            "incorporated": "2018-04-06",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "AlphaSense",
+        "confidence": "exact",
+        "why": "no website; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "03264282",
+            "name": "ALPHASENSE LIMITED",
+            "status": "active",
+            "incorporated": "1996-10-16",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Amperity",
+        "confidence": "exact",
+        "why": "unreachable; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "13962739",
+            "name": "AMPERITY UK LIMITED",
+            "status": "active",
+            "incorporated": "2022-03-08",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Amplitude",
+        "confidence": "exact",
+        "why": "silent; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "02962681",
+            "name": "AMPLITUDE LIMITED",
+            "status": "active",
+            "incorporated": "1994-08-26",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Andela",
+        "confidence": "exact",
+        "why": "silent; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "13352524",
+            "name": "ANDELA LIMITED",
+            "status": "dissolved",
+            "incorporated": "2021-04-22",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Anthropic",
+        "confidence": "exact",
+        "why": "silent; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "14604577",
+            "name": "ANTHROPIC LIMITED",
+            "status": "active",
+            "incorporated": "2023-01-19",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Applied Intuition",
+        "confidence": "exact",
+        "why": "no website; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "16223681",
+            "name": "APPLIED INTUITION UK LTD.",
+            "status": "active",
+            "incorporated": "2025-02-03",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "AppsFlyer",
+        "confidence": "exact",
+        "why": "silent; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "10246990",
+            "name": "APPSFLYER UK LTD",
+            "status": "active",
+            "incorporated": "2016-06-23",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Arketa",
+        "confidence": "exact",
+        "why": "silent; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "06461694",
+            "name": "ARKETA LIMITED",
+            "status": "dissolved",
+            "incorporated": "2008-01-02",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Armada",
+        "confidence": "exact",
+        "why": "silent; 2 companies reach the exact tier",
+        "candidates": [
+          {
+            "number": "10991884",
+            "name": "ARMADA LTD",
+            "status": "active",
+            "incorporated": "2017-10-02",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "05036574",
+            "name": "ARMADA LIMITED",
+            "status": "dissolved",
+            "incorporated": "2004-02-06",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "ARQ",
+        "confidence": "exact",
+        "why": "silent; 3 companies reach the exact tier",
+        "candidates": [
+          {
+            "number": "15914140",
+            "name": "ARQ LTD",
+            "status": "active",
+            "incorporated": "2024-08-23",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "13777549",
+            "name": "ARQ LIMITED",
+            "status": "dissolved",
+            "incorporated": "2021-12-02",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "09723927",
+            "name": "ARQ LIMITED",
+            "status": "dissolved",
+            "incorporated": "2015-08-08",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Assembled",
+        "confidence": "prefix",
+        "why": "no website; 18 companies reach the prefix tier",
+        "candidates": [
+          {
+            "number": "14815416",
+            "name": "ASSEMBLED BY ARTISANS LTD",
+            "status": "active",
+            "incorporated": "2023-04-19",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "16440799",
+            "name": "ASSEMBLED EUROPE LIMITED",
+            "status": "active",
+            "incorporated": "2025-05-09",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "09886417",
+            "name": "ASSEMBLED GALA LTD",
+            "status": "active",
+            "incorporated": "2015-11-24",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "14419850",
+            "name": "ASSEMBLED HEALTHCARE LTD",
+            "status": "active",
+            "incorporated": "2022-10-14",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "02953245",
+            "name": "ASSEMBLED JOINERY LIMITED",
+            "status": "active",
+            "incorporated": "1994-07-27",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "AssemblyAI",
+        "confidence": "exact",
+        "why": "silent; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "13119338",
+            "name": "ASSEMBLYAI LIMITED",
+            "status": "dissolved",
+            "incorporated": "2021-01-07",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Attentive",
+        "confidence": "exact",
+        "why": "silent; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "13483001",
+            "name": "ATTENTIVE LIMITED",
+            "status": "active",
+            "incorporated": "2021-06-29",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Awardco",
+        "confidence": "prefix",
+        "why": "no website; one prefix-tier name match",
+        "candidates": [
+          {
+            "number": "10693368",
+            "name": "AWARDCO RECOGNITION LIMITED",
+            "status": "active",
+            "incorporated": "2017-03-28",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "AXONIUS",
+        "confidence": "exact",
+        "why": "unreachable; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "14065557",
+            "name": "AXONIUS UK LIMITED",
+            "status": "active",
+            "incorporated": "2022-04-25",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Benchling",
+        "confidence": "exact",
+        "why": "silent; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "13783151",
+            "name": "BENCHLING UK LTD",
+            "status": "active",
+            "incorporated": "2021-12-06",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Bitmovin",
+        "confidence": "exact",
+        "why": "unreachable; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "11066428",
+            "name": "BITMOVIN UK LIMITED",
+            "status": "active",
+            "incorporated": "2017-11-15",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Blee",
+        "confidence": "exact",
+        "why": "silent; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "11734337",
+            "name": "BLEE LTD",
+            "status": "active",
+            "incorporated": "2018-12-19",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Braze",
+        "confidence": "exact",
+        "why": "no website; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "09846844",
+            "name": "BRAZE LIMITED",
+            "status": "active",
+            "incorporated": "2015-10-28",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Bringg",
+        "confidence": "exact",
+        "why": "unreachable; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "11563258",
+            "name": "BRINGG UK LIMITED",
+            "status": "active",
+            "incorporated": "2018-09-11",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "CAIS",
+        "confidence": "prefix",
+        "why": "silent; 3 companies reach the prefix tier",
+        "candidates": [
+          {
+            "number": "08908524",
+            "name": "CAIS CONSULTING LTD",
+            "status": "active",
+            "incorporated": "2014-02-24",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "07728034",
+            "name": "CAIS DESIGN LIMITED",
+            "status": "active",
+            "incorporated": "2011-08-03",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "17276550",
+            "name": "CAIS ENTERPRISE LIMITED",
+            "status": "active",
+            "incorporated": "2026-06-17",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Campfire",
+        "confidence": "exact",
+        "why": "silent; 2 companies reach the exact tier",
+        "candidates": [
+          {
+            "number": "SC789520",
+            "name": "CAMPFIRE LTD",
+            "status": "active",
+            "incorporated": "2023-11-16",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "11136324",
+            "name": "CAMPFIRE LTD",
+            "status": "dissolved",
+            "incorporated": "2018-01-08",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Canary Technologies",
+        "confidence": "exact",
+        "why": "silent; 2 companies reach the exact tier",
+        "candidates": [
+          {
+            "number": "15515060",
+            "name": "CANARY TECHNOLOGIES LTD",
+            "status": "active",
+            "incorporated": "2024-02-22",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "11949019",
+            "name": "CANARY TECHNOLOGIES LTD.",
+            "status": "dissolved",
+            "incorporated": "2019-04-16",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Capi Money",
+        "confidence": "exact",
+        "why": "silent; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "15031811",
+            "name": "CAPI MONEY UK LTD",
+            "status": "active",
+            "incorporated": "2023-07-27",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "CarbonChain",
+        "confidence": "exact",
+        "why": "silent; 2 companies reach the exact tier",
+        "candidates": [
+          {
+            "number": "16240848",
+            "name": "CARBON-CHAIN LTD",
+            "status": "active",
+            "incorporated": "2025-02-10",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "06715922",
+            "name": "CARBON CHAIN LTD",
+            "status": "dissolved",
+            "incorporated": "2008-10-06",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Carta",
+        "confidence": "exact",
+        "why": "unreachable; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "09377949",
+            "name": "CARTA LIMITED",
+            "status": "active",
+            "incorporated": "2015-01-07",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Cato Networks",
+        "confidence": "exact",
+        "why": "no website; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "10964512",
+            "name": "CATO NETWORKS (UK) LIMITED",
+            "status": "active",
+            "incorporated": "2017-09-14",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Celonis",
+        "confidence": "exact",
+        "why": "no website; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "11112312",
+            "name": "CELONIS LTD",
+            "status": "active",
+            "incorporated": "2017-12-14",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Chainguard",
+        "confidence": "exact",
+        "why": "no website; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "17186025",
+            "name": "CHAINGUARD LTD",
+            "status": "active",
+            "incorporated": "2026-04-28",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "CircleCI",
+        "confidence": "exact",
+        "why": "silent; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "11494454",
+            "name": "CIRCLECI UK LIMITED",
+            "status": "active",
+            "incorporated": "2018-08-01",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Clear Street",
+        "confidence": "exact",
+        "why": "silent; 2 companies reach the exact tier",
+        "candidates": [
+          {
+            "number": "06767387",
+            "name": "CLEAR STREET LTD",
+            "status": "dissolved",
+            "incorporated": "2008-12-08",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "15000549",
+            "name": "CLEAR STREET UK LIMITED",
+            "status": "active",
+            "incorporated": "2023-07-13",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "ClickHouse",
+        "confidence": "exact",
+        "why": "no website; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "08657677",
+            "name": "CLICK-HOUSE (UK) LTD",
+            "status": "dissolved",
+            "incorporated": "2013-08-20",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Clipboard",
+        "confidence": "exact",
+        "why": "silent; 3 companies reach the exact tier",
+        "candidates": [
+          {
+            "number": "15104317",
+            "name": "CLIPBOARD LTD",
+            "status": "active",
+            "incorporated": "2023-08-30",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "13131992",
+            "name": "CLIPBOARD LTD",
+            "status": "dissolved",
+            "incorporated": "2021-01-13",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "11278375",
+            "name": "CLIPBOARD LIMITED",
+            "status": "dissolved",
+            "incorporated": "2018-03-27",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Coalition",
+        "confidence": "exact",
+        "why": "silent; 2 companies reach the exact tier",
+        "candidates": [
+          {
+            "number": "14942955",
+            "name": "COALITION LTD",
+            "status": "active",
+            "incorporated": "2023-06-19",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "11265386",
+            "name": "COALITION LIMITED",
+            "status": "dissolved",
+            "incorporated": "2018-03-20",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Cockroach Labs",
+        "confidence": "exact",
+        "why": "silent; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "12329744",
+            "name": "COCKROACH LABS UK LIMITED",
+            "status": "active",
+            "incorporated": "2019-11-22",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Cognition",
+        "confidence": "exact",
+        "why": "no website; 2 companies reach the exact tier",
+        "candidates": [
+          {
+            "number": "12206501",
+            "name": "COGNITION LTD",
+            "status": "active",
+            "incorporated": "2019-09-13",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "03417718",
+            "name": "COGNITION LIMITED",
+            "status": "dissolved",
+            "incorporated": "1997-08-11",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Coinbase",
+        "confidence": "exact",
+        "why": "unreachable; 3 companies reach the exact tier",
+        "candidates": [
+          {
+            "number": "16011581",
+            "name": "COINBASE LTD",
+            "status": "dissolved",
+            "incorporated": "2024-10-10",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "13237380",
+            "name": "COINBASE LIMITED",
+            "status": "dissolved",
+            "incorporated": "2021-03-02",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "09083955",
+            "name": "COINBASE UK, LTD",
+            "status": "dissolved",
+            "incorporated": "2014-06-12",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Collibra",
+        "confidence": "exact",
+        "why": "silent; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "09637739",
+            "name": "COLLIBRA UK LIMITED",
+            "status": "active",
+            "incorporated": "2015-06-15",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "commercetools",
+        "confidence": "exact",
+        "why": "silent; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "11760782",
+            "name": "COMMERCETOOLS LTD",
+            "status": "active",
+            "incorporated": "2019-01-10",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Contentful",
+        "confidence": "exact",
+        "why": "silent; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "13723044",
+            "name": "CONTENTFUL (UK) LIMITED",
+            "status": "active",
+            "incorporated": "2021-11-04",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "ContentSquare",
+        "confidence": "exact",
+        "why": "silent; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "09825744",
+            "name": "CONTENT SQUARE LTD",
+            "status": "active",
+            "incorporated": "2015-10-15",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Conveo",
+        "confidence": "prefix",
+        "why": "silent; one prefix-tier name match",
+        "candidates": [
+          {
+            "number": "16650919",
+            "name": "CONVEO.AI UK LTD",
+            "status": "active",
+            "incorporated": "2025-08-14",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Cresta",
+        "confidence": "exact",
+        "why": "silent; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "03243934",
+            "name": "CRESTA LIMITED",
+            "status": "active",
+            "incorporated": "1996-08-30",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Cribl",
+        "confidence": "exact",
+        "why": "silent; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "14516122",
+            "name": "CRIBL UNITED KINGDOM LIMITED",
+            "status": "active",
+            "incorporated": "2022-11-30",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Culture Amp",
+        "confidence": "exact",
+        "why": "silent; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "10067991",
+            "name": "CULTURE AMP LIMITED",
+            "status": "active",
+            "incorporated": "2016-03-17",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Cursor",
+        "confidence": "exact",
+        "why": "no website; 2 companies reach the exact tier",
+        "candidates": [
+          {
+            "number": "06432552",
+            "name": "CURSOR LIMITED",
+            "status": "active",
+            "incorporated": "2007-11-20",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "01841483",
+            "name": "CURSOR LIMITED",
+            "status": "dissolved",
+            "incorporated": "1984-08-16",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Databricks",
+        "confidence": "prefix",
+        "why": "silent; 3 companies reach the prefix tier",
+        "candidates": [
+          {
+            "number": "17089213",
+            "name": "DATABRICKS IT SOLUTIONS LTD",
+            "status": "active",
+            "incorporated": "2026-03-12",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "10919206",
+            "name": "DATABRICKS U.K. LIMITED",
+            "status": "active",
+            "incorporated": "2017-08-16",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "07042703",
+            "name": "DATA BRICKS CONSULTANCY LIMITED",
+            "status": "dissolved",
+            "incorporated": "2009-10-14",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Dataiku",
+        "confidence": "exact",
+        "why": "silent; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "10534682",
+            "name": "DATAIKU LTD",
+            "status": "active",
+            "incorporated": "2016-12-21",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "DeepL",
+        "confidence": "exact",
+        "why": "no website; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "13013347",
+            "name": "DEEPL UK LTD.",
+            "status": "active",
+            "incorporated": "2020-11-12",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Depot",
+        "confidence": "prefix",
+        "why": "silent; 20 companies reach the prefix tier",
+        "candidates": [
+          {
+            "number": "CS000221",
+            "name": "DEPOT ARTS",
+            "status": "converted-closed",
+            "incorporated": "",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "15443073",
+            "name": "DEPOT AUTOS LIMITED",
+            "status": "active",
+            "incorporated": "2024-01-25",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "13190140",
+            "name": "DEPOT BRISTOL LIMITED",
+            "status": "active",
+            "incorporated": "2021-02-09",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "SC789308",
+            "name": "DEPOT CATERING LTD",
+            "status": "active",
+            "incorporated": "2023-11-14",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "10090751",
+            "name": "DEPOT CONNECT INTERNATIONAL LIMITED",
+            "status": "active",
+            "incorporated": "2016-03-30",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Dialpad",
+        "confidence": "exact",
+        "why": "silent; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "11852821",
+            "name": "DIALPAD UK LIMITED",
+            "status": "active",
+            "incorporated": "2019-02-28",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Doppel",
+        "confidence": "exact",
+        "why": "no website; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "08365543",
+            "name": "DOPPEL LTD",
+            "status": "dissolved",
+            "incorporated": "2013-01-18",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Dropbox",
+        "confidence": "exact",
+        "why": "silent; 3 companies reach the exact tier",
+        "candidates": [
+          {
+            "number": "12109589",
+            "name": "DROPBOX LIMITED",
+            "status": "active",
+            "incorporated": "2019-07-18",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "09874841",
+            "name": "DROPBOX LTD",
+            "status": "dissolved",
+            "incorporated": "2015-11-17",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "12993539",
+            "name": "DROP BOX LTD",
+            "status": "dissolved",
+            "incorporated": "2020-11-03",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Druva",
+        "confidence": "prefix",
+        "why": "silent; 2 companies reach the prefix tier",
+        "candidates": [
+          {
+            "number": "07305286",
+            "name": "DRUVA EUROPE LIMITED",
+            "status": "active",
+            "incorporated": "2010-07-06",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "SL028158",
+            "name": "DRUVA TRADE LP",
+            "status": "active",
+            "incorporated": "2016-09-01",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "EBANX",
+        "confidence": "exact",
+        "why": "silent; 4 companies reach the exact tier",
+        "candidates": [
+          {
+            "number": "10918532",
+            "name": "EBANX LIMITED",
+            "status": "dissolved",
+            "incorporated": "2017-08-16",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "OC392258",
+            "name": "EBANX LLP",
+            "status": "dissolved",
+            "incorporated": "2014-03-27",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "SC205462",
+            "name": "EBANX (UK) LIMITED",
+            "status": "dissolved",
+            "incorporated": "2000-03-24",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "05514354",
+            "name": "E-BANX LIMITED",
+            "status": "dissolved",
+            "incorporated": "2005-07-20",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Epic Games",
+        "confidence": "exact",
+        "why": "silent; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "02865912",
+            "name": "EPIC GAMES UK LTD",
+            "status": "active",
+            "incorporated": "1993-10-26",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Epidemic Sound",
+        "confidence": "exact",
+        "why": "silent; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "14568031",
+            "name": "EPIDEMIC SOUND UK LTD",
+            "status": "active",
+            "incorporated": "2023-01-03",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Faire",
+        "confidence": "exact",
+        "why": "silent; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "SC447782",
+            "name": "FAIRE LIMITED",
+            "status": "dissolved",
+            "incorporated": "2013-04-16",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "FalconX",
+        "confidence": "exact",
+        "why": "silent; 3 companies reach the exact tier",
+        "candidates": [
+          {
+            "number": "16915902",
+            "name": "FALCONX LTD",
+            "status": "active",
+            "incorporated": "2025-12-17",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "15207390",
+            "name": "FALCON X LTD",
+            "status": "dissolved",
+            "incorporated": "2023-10-12",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "11923866",
+            "name": "FALCON X LTD",
+            "status": "dissolved",
+            "incorporated": "2019-04-03",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Feedzai",
+        "confidence": "exact",
+        "why": "silent; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "12661513",
+            "name": "FEEDZAI UK LIMITED",
+            "status": "active",
+            "incorporated": "2020-06-11",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Fieldguide",
+        "confidence": "exact",
+        "why": "silent; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "17124510",
+            "name": "FIELD GUIDE LTD",
+            "status": "active",
+            "incorporated": "2026-03-30",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Fireblocks",
+        "confidence": "prefix",
+        "why": "silent; one prefix-tier name match",
+        "candidates": [
+          {
+            "number": "13650687",
+            "name": "FIREBLOCKS UK INT'L LIMITED",
+            "status": "active",
+            "incorporated": "2021-09-29",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Fivetran",
+        "confidence": "exact",
+        "why": "silent; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "13290687",
+            "name": "FIVETRAN UK LIMITED",
+            "status": "active",
+            "incorporated": "2021-03-24",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Fleek",
+        "confidence": "exact",
+        "why": "silent; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "08107806",
+            "name": "FLEEK LTD",
+            "status": "active",
+            "incorporated": "2012-06-18",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Flexport",
+        "confidence": "exact",
+        "why": "silent; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "07484806",
+            "name": "FLEXPORT LIMITED",
+            "status": "dissolved",
+            "incorporated": "2011-01-06",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Focal Systems",
+        "confidence": "exact",
+        "why": "silent; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "14984506",
+            "name": "FOCAL SYSTEMS UK, LIMITED",
+            "status": "active",
+            "incorporated": "2023-07-06",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Giga",
+        "confidence": "exact",
+        "why": "silent; 2 companies reach the exact tier",
+        "candidates": [
+          {
+            "number": "12553367",
+            "name": "GIGA LTD",
+            "status": "active",
+            "incorporated": "2020-04-09",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "06302282",
+            "name": "GIGA LIMITED",
+            "status": "dissolved",
+            "incorporated": "2007-07-04",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Gigs",
+        "confidence": "prefix",
+        "why": "silent; 9 companies reach the prefix tier",
+        "candidates": [
+          {
+            "number": "13555626",
+            "name": "GIGS AND EVENTS LIMITED",
+            "status": "active",
+            "incorporated": "2021-08-09",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "09703450",
+            "name": "GIGS AND TOURING LTD",
+            "status": "active",
+            "incorporated": "2015-07-27",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "15954152",
+            "name": "GIGS 4 U PROPERTIES LIMITED",
+            "status": "active",
+            "incorporated": "2024-09-12",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "06145356",
+            "name": "GIGS 4 YOU LTD",
+            "status": "active",
+            "incorporated": "2007-03-08",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "11955154",
+            "name": "GIGS GEAR LTD",
+            "status": "active",
+            "incorporated": "2019-04-18",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "GitLab",
+        "confidence": "exact",
+        "why": "silent; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "10353681",
+            "name": "GITLAB UK LIMITED",
+            "status": "active",
+            "incorporated": "2016-08-31",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Glean",
+        "confidence": "exact",
+        "why": "silent; 3 companies reach the exact tier",
+        "candidates": [
+          {
+            "number": "16031793",
+            "name": "GLEAN LIMITED",
+            "status": "active",
+            "incorporated": "2024-10-21",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "10425060",
+            "name": "GLEAN LTD.",
+            "status": "dissolved",
+            "incorporated": "2016-10-13",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "06528341",
+            "name": "GLEAN LIMITED",
+            "status": "dissolved",
+            "incorporated": "2008-03-10",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Grafana Labs",
+        "confidence": "exact",
+        "why": "silent; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "10856224",
+            "name": "GRAFANA LABS LTD.",
+            "status": "active",
+            "incorporated": "2017-07-07",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "HackerRank",
+        "confidence": "exact",
+        "why": "silent; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "11102907",
+            "name": "HACKERRANK UK LIMITED",
+            "status": "active",
+            "incorporated": "2017-12-08",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "HappyRobot",
+        "confidence": "exact",
+        "why": "silent; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "08326197",
+            "name": "HAPPY ROBOT LIMITED",
+            "status": "active",
+            "incorporated": "2012-12-11",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Harmonic",
+        "confidence": "exact",
+        "why": "silent; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "04740221",
+            "name": "HARMONIC LIMITED",
+            "status": "active",
+            "incorporated": "2003-04-22",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Harness",
+        "confidence": "exact",
+        "why": "silent; 3 companies reach the exact tier",
+        "candidates": [
+          {
+            "number": "14612301",
+            "name": "HARNESS LTD",
+            "status": "active",
+            "incorporated": "2023-01-23",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "09951163",
+            "name": "HARNESS LIMITED",
+            "status": "dissolved",
+            "incorporated": "2016-01-14",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "06881285",
+            "name": "HARNESS LIMITED",
+            "status": "dissolved",
+            "incorporated": "2009-04-20",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Heidi Health",
+        "confidence": "exact",
+        "why": "no website; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "15878893",
+            "name": "HEIDI HEALTH LTD",
+            "status": "active",
+            "incorporated": "2024-08-05",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Helsing",
+        "confidence": "exact",
+        "why": "unreachable; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "13447361",
+            "name": "HELSING LIMITED",
+            "status": "active",
+            "incorporated": "2021-06-09",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "HeyGen",
+        "confidence": "exact",
+        "why": "no website; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "17186879",
+            "name": "HEYGEN LTD",
+            "status": "active",
+            "incorporated": "2026-04-28",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Higgsfield",
+        "confidence": "exact",
+        "why": "silent; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "15149907",
+            "name": "HIGGS FIELD LTD",
+            "status": "active",
+            "incorporated": "2023-09-20",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Hightouch",
+        "confidence": "exact",
+        "why": "silent; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "07381521",
+            "name": "HIGHTOUCH LIMITED",
+            "status": "active",
+            "incorporated": "2010-09-20",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Horizon 3 AI",
+        "confidence": "exact",
+        "why": "no website; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "16225773",
+            "name": "HORIZON3 AI UK LTD",
+            "status": "active",
+            "incorporated": "2025-02-03",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Huntress",
+        "confidence": "exact",
+        "why": "silent; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "04536014",
+            "name": "HUNTRESS LTD",
+            "status": "active",
+            "incorporated": "2002-09-16",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "iCapital",
+        "confidence": "exact",
+        "why": "silent; 2 companies reach the exact tier",
+        "candidates": [
+          {
+            "number": "13327906",
+            "name": "ICAPITAL LTD",
+            "status": "active",
+            "incorporated": "2021-04-12",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "05393322",
+            "name": "I-CAPITAL LTD",
+            "status": "dissolved",
+            "incorporated": "2005-03-15",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Intercom",
+        "confidence": "exact",
+        "why": "silent; 2 companies reach the exact tier",
+        "candidates": [
+          {
+            "number": "CE010464",
+            "name": "INTERCOM",
+            "status": "",
+            "incorporated": "",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "05045803",
+            "name": "INTERCOM LTD",
+            "status": "dissolved",
+            "incorporated": "2004-02-16",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Ironclad",
+        "confidence": "exact",
+        "why": "silent; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "NI026345",
+            "name": "IRONCLAD LIMITED",
+            "status": "active",
+            "incorporated": "1992-02-27",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Isomorphic Labs",
+        "confidence": "exact",
+        "why": "no website; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "13223825",
+            "name": "ISOMORPHIC LABS LIMITED",
+            "status": "active",
+            "incorporated": "2021-02-24",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Ivalua",
+        "confidence": "exact",
+        "why": "silent; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "11800568",
+            "name": "IVALUA LTD.",
+            "status": "active",
+            "incorporated": "2019-01-31",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Junction",
+        "confidence": "exact",
+        "why": "silent; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "05051617",
+            "name": "JUNCTION LTD",
+            "status": "dissolved",
+            "incorporated": "2004-02-20",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Justworks",
+        "confidence": "exact",
+        "why": "unreachable; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "07354277",
+            "name": "JUST WORKS LIMITED",
+            "status": "active",
+            "incorporated": "2010-08-24",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Kaseya",
+        "confidence": "prefix",
+        "why": "silent; one prefix-tier name match",
+        "candidates": [
+          {
+            "number": "05752088",
+            "name": "KASEYA INTERNATIONAL (UK) LIMITED",
+            "status": "active",
+            "incorporated": "2006-03-22",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Keyrock",
+        "confidence": "exact",
+        "why": "no website; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "13722013",
+            "name": "KEYROCK UK LIMITED",
+            "status": "active",
+            "incorporated": "2021-11-03",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Kong",
+        "confidence": "prefix",
+        "why": "silent; 20 companies reach the prefix tier",
+        "candidates": [
+          {
+            "number": "06341271",
+            "name": "KONG COMPANY LIMITED",
+            "status": "active",
+            "incorporated": "2007-08-13",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "09785826",
+            "name": "KONG ADVENTURE LTD",
+            "status": "dissolved",
+            "incorporated": "2015-09-21",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "13225200",
+            "name": "KONG & LI LIMITED",
+            "status": "active",
+            "incorporated": "2021-02-25",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "12733916",
+            "name": "KONG & SON LIMITED",
+            "status": "active",
+            "incorporated": "2020-07-10",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "03968181",
+            "name": "KONG AXI I LIMITED",
+            "status": "active",
+            "incorporated": "2000-04-10",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Kpler",
+        "confidence": "exact",
+        "why": "silent; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "11042387",
+            "name": "KPLER LTD",
+            "status": "active",
+            "incorporated": "2017-11-01",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Lattice",
+        "confidence": "exact",
+        "why": "silent; 2 companies reach the exact tier",
+        "candidates": [
+          {
+            "number": "14004034",
+            "name": "LATTICE LTD",
+            "status": "active",
+            "incorporated": "2022-03-25",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "09579785",
+            "name": "LATTICE LIMITED",
+            "status": "dissolved",
+            "incorporated": "2015-05-07",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "LaunchDarkly",
+        "confidence": "exact",
+        "why": "no website; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "13380601",
+            "name": "LAUNCHDARKLY LTD.",
+            "status": "active",
+            "incorporated": "2021-05-06",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Lightning AI",
+        "confidence": "exact",
+        "why": "no website; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "16298141",
+            "name": "LIGHTNING AI LIMITED",
+            "status": "dissolved",
+            "incorporated": "2025-03-06",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Lightricks",
+        "confidence": "exact",
+        "why": "silent; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "11444887",
+            "name": "LIGHTRICKS UK LTD",
+            "status": "active",
+            "incorporated": "2018-07-03",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Linear",
+        "confidence": "exact",
+        "why": "silent; 3 companies reach the exact tier",
+        "candidates": [
+          {
+            "number": "12180540",
+            "name": "LINEAR LTD",
+            "status": "active",
+            "incorporated": "2019-08-29",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "11337112",
+            "name": "LINEAR LIMITED",
+            "status": "dissolved",
+            "incorporated": "2018-04-30",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "08941416",
+            "name": "LINEAR LIMITED",
+            "status": "dissolved",
+            "incorporated": "2014-03-17",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Lucis",
+        "confidence": "exact",
+        "why": "silent; 2 companies reach the exact tier",
+        "candidates": [
+          {
+            "number": "10495503",
+            "name": "LUCIS LTD",
+            "status": "active",
+            "incorporated": "2016-11-24",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "06862613",
+            "name": "LUCIS LTD",
+            "status": "dissolved",
+            "incorporated": "2009-03-30",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Luma AI",
+        "confidence": "exact",
+        "why": "silent; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "17226471",
+            "name": "LUMA AI LTD",
+            "status": "active",
+            "incorporated": "2026-05-18",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "MaintainX",
+        "confidence": "exact",
+        "why": "silent; 2 companies reach the exact tier",
+        "candidates": [
+          {
+            "number": "15088929",
+            "name": "MAINTAINX LTD",
+            "status": "active",
+            "incorporated": "2023-08-22",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "13043207",
+            "name": "MAINTAINX LTD",
+            "status": "dissolved",
+            "incorporated": "2020-11-25",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Marshmallow",
+        "confidence": "exact",
+        "why": "two numbers stated: 11005345, 15834468; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "06899363",
+            "name": "MARSHMALLOW LIMITED",
+            "status": "dissolved",
+            "incorporated": "2009-05-08",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Matillion",
+        "confidence": "exact",
+        "why": "silent; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "07474948",
+            "name": "MATILLION LIMITED",
+            "status": "active",
+            "incorporated": "2010-12-21",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Mattermost",
+        "confidence": "exact",
+        "why": "silent; 2 companies reach the exact tier",
+        "candidates": [
+          {
+            "number": "02347058",
+            "name": "MATTERMOST LIMITED",
+            "status": "dissolved",
+            "incorporated": "1989-02-13",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "12372753",
+            "name": "MATTERMOST UK LTD",
+            "status": "active",
+            "incorporated": "2019-12-20",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Mercor",
+        "confidence": "exact",
+        "why": "no website; 4 companies reach the exact tier",
+        "candidates": [
+          {
+            "number": "11124801",
+            "name": "MERCOR LIMITED",
+            "status": "active",
+            "incorporated": "2017-12-27",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "09733051",
+            "name": "MERCOR LTD",
+            "status": "dissolved",
+            "incorporated": "2015-08-14",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "07533163",
+            "name": "MERCOR LTD",
+            "status": "dissolved",
+            "incorporated": "2011-02-17",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "05441543",
+            "name": "MERCOR (UK) LIMITED",
+            "status": "dissolved",
+            "incorporated": "2005-05-03",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Meticulous",
+        "confidence": "exact",
+        "why": "silent; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "04920098",
+            "name": "METICULOUS LIMITED",
+            "status": "active",
+            "incorporated": "2003-10-02",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Minio",
+        "confidence": "exact",
+        "why": "silent; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "08123799",
+            "name": "MINIO LTD",
+            "status": "dissolved",
+            "incorporated": "2012-06-29",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Mixpanel",
+        "confidence": "exact",
+        "why": "silent; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "11379955",
+            "name": "MIXPANEL UK LIMITED",
+            "status": "active",
+            "incorporated": "2018-05-24",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "MOLOCO",
+        "confidence": "exact",
+        "why": "silent; 2 companies reach the exact tier",
+        "candidates": [
+          {
+            "number": "07596055",
+            "name": "MOLOCO LTD.",
+            "status": "dissolved",
+            "incorporated": "2011-04-07",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "12097069",
+            "name": "MOLOCO UK LIMITED",
+            "status": "active",
+            "incorporated": "2019-07-11",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Moniepoint",
+        "confidence": "exact",
+        "why": "silent; 2 companies reach the exact tier",
+        "candidates": [
+          {
+            "number": "15500471",
+            "name": "MONIEPOINT GB LTD",
+            "status": "active",
+            "incorporated": "2024-02-18",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "07930355",
+            "name": "MONIEPOINT UK LTD",
+            "status": "active",
+            "incorporated": "2012-01-31",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Monte Carlo",
+        "confidence": "exact",
+        "why": "silent; 4 companies reach the exact tier",
+        "candidates": [
+          {
+            "number": "15032583",
+            "name": "MONTE CARLO LIMITED",
+            "status": "dissolved",
+            "incorporated": "2023-07-27",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "11137907",
+            "name": "MONTE CARLO LIMITED",
+            "status": "dissolved",
+            "incorporated": "2018-01-08",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "10009877",
+            "name": "MONTE CARLO LIMITED",
+            "status": "dissolved",
+            "incorporated": "2016-02-17",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "07242881",
+            "name": "MONTE CARLO LIMITED",
+            "status": "dissolved",
+            "incorporated": "2010-05-04",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "MoonPay",
+        "confidence": "exact",
+        "why": "silent; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "12055543",
+            "name": "MOONPAY (UK) LIMITED",
+            "status": "active",
+            "incorporated": "2019-06-17",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "MUBI",
+        "confidence": "exact",
+        "why": "silent; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "07385593",
+            "name": "MUBI UK LIMITED",
+            "status": "active",
+            "incorporated": "2010-09-23",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "MURAL",
+        "confidence": "exact",
+        "why": "silent; 4 companies reach the exact tier",
+        "candidates": [
+          {
+            "number": "14698995",
+            "name": "MURAL LTD",
+            "status": "active",
+            "incorporated": "2023-03-01",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "13518434",
+            "name": "MURAL LIMITED",
+            "status": "dissolved",
+            "incorporated": "2021-07-19",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "10470343",
+            "name": "MURAL LIMITED",
+            "status": "dissolved",
+            "incorporated": "2016-11-09",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "05830172",
+            "name": "MURAL LTD.",
+            "status": "dissolved",
+            "incorporated": "2006-05-26",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Mux",
+        "confidence": "exact",
+        "why": "silent; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "11054768",
+            "name": "MUX UK LTD",
+            "status": "active",
+            "incorporated": "2017-11-08",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Nash",
+        "confidence": "exact",
+        "why": "silent; 2 companies reach the exact tier",
+        "candidates": [
+          {
+            "number": "FC011991",
+            "name": "NASH LIMITED",
+            "status": "active",
+            "incorporated": "1983-07-22",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "BR011302",
+            "name": "NASH LIMITED",
+            "status": "open",
+            "incorporated": "2009-10-01",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Neo4j",
+        "confidence": "exact",
+        "why": "silent; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "10922328",
+            "name": "NEO4J UK LIMITED",
+            "status": "active",
+            "incorporated": "2017-08-18",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Niantic Spatial",
+        "confidence": "exact",
+        "why": "no website; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "16188793",
+            "name": "NIANTIC SPATIAL UK LIMITED",
+            "status": "active",
+            "incorporated": "2025-01-16",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "NIUM",
+        "confidence": "exact",
+        "why": "silent; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "11722005",
+            "name": "NIUM LIMITED",
+            "status": "dissolved",
+            "incorporated": "2018-12-11",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Notabene",
+        "confidence": "exact",
+        "why": "silent; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "07268243",
+            "name": "NOTA BENE LIMITED",
+            "status": "dissolved",
+            "incorporated": "2010-05-28",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Notion",
+        "confidence": "exact",
+        "why": "no website; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "04422370",
+            "name": "NOTION LIMITED",
+            "status": "active",
+            "incorporated": "2002-04-23",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Odyssey",
+        "confidence": "exact",
+        "why": "silent; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "04265934",
+            "name": "ODYSSEY LTD",
+            "status": "active",
+            "incorporated": "2001-08-07",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Oklo",
+        "confidence": "exact",
+        "why": "unreachable; 2 companies reach the exact tier",
+        "candidates": [
+          {
+            "number": "12419700",
+            "name": "OKLO LTD",
+            "status": "dissolved",
+            "incorporated": "2020-01-22",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "07894704",
+            "name": "OKLO LIMITED",
+            "status": "dissolved",
+            "incorporated": "2012-01-03",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "OKX",
+        "confidence": "exact",
+        "why": "unreachable; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "15802291",
+            "name": "OKX LIMITED",
+            "status": "active",
+            "incorporated": "2024-06-25",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "OneTrust",
+        "confidence": "exact",
+        "why": "silent; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "09497463",
+            "name": "ONE TRUST",
+            "status": "active",
+            "incorporated": "2015-03-19",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "OpenWeb",
+        "confidence": "exact",
+        "why": "silent; 3 companies reach the exact tier",
+        "candidates": [
+          {
+            "number": "13463889",
+            "name": "OPENWEB LTD",
+            "status": "dissolved",
+            "incorporated": "2021-06-18",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "12362496",
+            "name": "OPENWEB LIMITED",
+            "status": "dissolved",
+            "incorporated": "2019-12-13",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "05615644",
+            "name": "OPENWEB LTD",
+            "status": "dissolved",
+            "incorporated": "2005-11-08",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Oyster",
+        "confidence": "exact",
+        "why": "silent; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "01497443",
+            "name": "OYSTER LIMITED",
+            "status": "active",
+            "incorporated": "1980-05-19",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "PagerDuty",
+        "confidence": "exact",
+        "why": "silent; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "10131422",
+            "name": "PAGERDUTY, LTD",
+            "status": "active",
+            "incorporated": "2016-04-19",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Payward",
+        "confidence": "exact",
+        "why": "no website; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "08593670",
+            "name": "PAYWARD LTD.",
+            "status": "active",
+            "incorporated": "2013-07-02",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Pelago",
+        "confidence": "exact",
+        "why": "silent; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "OE023306",
+            "name": "PELAGO LIMITED",
+            "status": "registered",
+            "incorporated": "2023-02-06",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Pendo",
+        "confidence": "exact",
+        "why": "silent; 4 companies reach the exact tier",
+        "candidates": [
+          {
+            "number": "15746298",
+            "name": "PENDO LIMITED",
+            "status": "active",
+            "incorporated": "2024-05-28",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "13773961",
+            "name": "PENDO LIMITED",
+            "status": "dissolved",
+            "incorporated": "2021-11-30",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "12496459",
+            "name": "PENDO LTD",
+            "status": "dissolved",
+            "incorporated": "2020-03-04",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "05079026",
+            "name": "PENDO LIMITED",
+            "status": "dissolved",
+            "incorporated": "2004-03-19",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Pennylane",
+        "confidence": "exact",
+        "why": "silent; 2 companies reach the exact tier",
+        "candidates": [
+          {
+            "number": "OE007247",
+            "name": "PENNY LANE LIMITED",
+            "status": "registered",
+            "incorporated": "2022-12-09",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "08710750",
+            "name": "PENNY LANE LTD",
+            "status": "active",
+            "incorporated": "2013-09-30",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Peregrine",
+        "confidence": "exact",
+        "why": "silent; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "12538909",
+            "name": "PEREGRINE LTD",
+            "status": "active",
+            "incorporated": "2020-03-30",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Permutive",
+        "confidence": "exact",
+        "why": "silent; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "08738815",
+            "name": "PERMUTIVE LIMITED",
+            "status": "active",
+            "incorporated": "2013-10-18",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "PhysicsX",
+        "confidence": "exact",
+        "why": "silent; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "12134466",
+            "name": "PHYSICSX LIMITED",
+            "status": "active",
+            "incorporated": "2019-08-01",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "PicsArt",
+        "confidence": "exact",
+        "why": "silent; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "13741239",
+            "name": "PICSART UK LIMITED",
+            "status": "active",
+            "incorporated": "2021-11-12",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Pigment",
+        "confidence": "exact",
+        "why": "silent; 4 companies reach the exact tier",
+        "candidates": [
+          {
+            "number": "16100770",
+            "name": "PIGMENT LIMITED",
+            "status": "active",
+            "incorporated": "2024-11-25",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "13552700",
+            "name": "PIGMENT LTD",
+            "status": "dissolved",
+            "incorporated": "2021-08-06",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "12421814",
+            "name": "PIGMENT LIMITED",
+            "status": "dissolved",
+            "incorporated": "2020-01-23",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "06692366",
+            "name": "PIGMENT LIMITED",
+            "status": "dissolved",
+            "incorporated": "2008-09-09",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Pleo",
+        "confidence": "exact",
+        "why": "two numbers stated: 15842283, 36538686; 2 companies reach the exact tier",
+        "candidates": [
+          {
+            "number": "SC570179",
+            "name": "PLEO LIMITED",
+            "status": "dissolved",
+            "incorporated": "2017-07-03",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "08667215",
+            "name": "PLEO LTD",
+            "status": "dissolved",
+            "incorporated": "2013-08-28",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Postman",
+        "confidence": "exact",
+        "why": "silent; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "10092728",
+            "name": "POSTMAN LIMITED",
+            "status": "dissolved",
+            "incorporated": "2016-03-31",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "PsiQuantum",
+        "confidence": "exact",
+        "why": "no website; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "10255737",
+            "name": "PSIQUANTUM LTD",
+            "status": "active",
+            "incorporated": "2016-06-28",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Quantum Metric",
+        "confidence": "exact",
+        "why": "silent; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "11806042",
+            "name": "QUANTUM METRIC (UK) LIMITED",
+            "status": "active",
+            "incorporated": "2019-02-04",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Quince",
+        "confidence": "exact",
+        "why": "no website; 3 companies reach the exact tier",
+        "candidates": [
+          {
+            "number": "16403460",
+            "name": "QUINCE LTD",
+            "status": "active",
+            "incorporated": "2025-04-23",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "15117509",
+            "name": "QUINCE LIMITED",
+            "status": "dissolved",
+            "incorporated": "2023-09-05",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "13959414",
+            "name": "QUINCE LIMITED",
+            "status": "dissolved",
+            "incorporated": "2022-03-07",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Ramp",
+        "confidence": "prefix",
+        "why": "silent; 20 companies reach the prefix tier",
+        "candidates": [
+          {
+            "number": "15604557",
+            "name": "RAMP ADVENTURES LIMITED",
+            "status": "dissolved",
+            "incorporated": "2024-03-30",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "15908538",
+            "name": "RAMP AM SERVICES LIMITED",
+            "status": "dissolved",
+            "incorporated": "2024-08-20",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "13135153",
+            "name": "RAMP AND MOBILITY SOLUTIONS LTD",
+            "status": "active",
+            "incorporated": "2021-01-14",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "07766107",
+            "name": "RAMP & WRENCH LIMITED",
+            "status": "active",
+            "incorporated": "2011-09-07",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "16936157",
+            "name": "RAMP ASSOCIATES LIMITED",
+            "status": "active",
+            "incorporated": "2025-12-30",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Reflection AI",
+        "confidence": "exact",
+        "why": "silent; 2 companies reach the exact tier",
+        "candidates": [
+          {
+            "number": "11629436",
+            "name": "REFLECTION AI LTD",
+            "status": "dissolved",
+            "incorporated": "2018-10-18",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "16298271",
+            "name": "REFLECTION AI UK LTD.",
+            "status": "active",
+            "incorporated": "2025-03-06",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Reka AI",
+        "confidence": "exact",
+        "why": "silent; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "14242489",
+            "name": "REKA AI LTD.",
+            "status": "active",
+            "incorporated": "2022-07-19",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Replit",
+        "confidence": "exact",
+        "why": "silent; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "17300319",
+            "name": "REPLIT UK LIMITED",
+            "status": "active",
+            "incorporated": "2026-06-24",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Ripple",
+        "confidence": "exact",
+        "why": "silent; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "06371119",
+            "name": "RIPPLE LIMITED",
+            "status": "dissolved",
+            "incorporated": "2007-09-14",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Rogo",
+        "confidence": "exact",
+        "why": "no website; 3 companies reach the exact tier",
+        "candidates": [
+          {
+            "number": "15070969",
+            "name": "ROGO LIMITED",
+            "status": "active",
+            "incorporated": "2023-08-14",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "10872476",
+            "name": "ROGO LTD",
+            "status": "dissolved",
+            "incorporated": "2017-07-18",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "10375805",
+            "name": "ROGO LTD",
+            "status": "dissolved",
+            "incorporated": "2016-09-14",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "SambaNova Systems",
+        "confidence": "exact",
+        "why": "silent; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "12801206",
+            "name": "SAMBANOVA SYSTEMS UK LIMITED",
+            "status": "active",
+            "incorporated": "2020-08-10",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Scale AI",
+        "confidence": "exact",
+        "why": "silent; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "16089452",
+            "name": "SCALE AI LIMITED",
+            "status": "active",
+            "incorporated": "2024-11-19",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Scandit",
+        "confidence": "exact",
+        "why": "silent; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "10866473",
+            "name": "SCANDIT LTD",
+            "status": "active",
+            "incorporated": "2017-07-14",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Sendbird",
+        "confidence": "exact",
+        "why": "silent; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "13526706",
+            "name": "SENDBIRD UK, LTD",
+            "status": "active",
+            "incorporated": "2021-07-23",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Shift",
+        "confidence": "exact",
+        "why": "silent; 2 companies reach the exact tier",
+        "candidates": [
+          {
+            "number": "14368604",
+            "name": "SHIFT LTD",
+            "status": "active",
+            "incorporated": "2022-09-21",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "11895043",
+            "name": "SHIFT LIMITED",
+            "status": "dissolved",
+            "incorporated": "2019-03-20",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Sigma Computing",
+        "confidence": "exact",
+        "why": "silent; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "15120168",
+            "name": "SIGMA COMPUTING UK LIMITED",
+            "status": "active",
+            "incorporated": "2023-09-06",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Slice",
+        "confidence": "prefix",
+        "why": "unreachable; 19 companies reach the prefix tier",
+        "candidates": [
+          {
+            "number": "13904579",
+            "name": "SLICE & BITE LTD",
+            "status": "dissolved",
+            "incorporated": "2022-02-09",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "SC866254",
+            "name": "SLICE AND BITE 4U LIMITED",
+            "status": "active",
+            "incorporated": "2025-10-14",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "15491950",
+            "name": "SLICE & BITES SOTON LIMITED",
+            "status": "active",
+            "incorporated": "2024-02-15",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "16493041",
+            "name": "SLICE AND BUN LTD",
+            "status": "dissolved",
+            "incorporated": "2025-06-03",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "17315629",
+            "name": "SLICE & BUNS LTD",
+            "status": "active",
+            "incorporated": "2026-07-02",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Staffbase",
+        "confidence": "exact",
+        "why": "silent; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "11666265",
+            "name": "STAFFBASE UK LTD",
+            "status": "active",
+            "incorporated": "2018-11-07",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Stripe",
+        "confidence": "exact",
+        "why": "silent; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "09733676",
+            "name": "STRIPE LTD",
+            "status": "dissolved",
+            "incorporated": "2015-08-14",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "SumUp",
+        "confidence": "exact",
+        "why": "silent; 2 companies reach the exact tier",
+        "candidates": [
+          {
+            "number": "05394570",
+            "name": "SUMUP LIMITED",
+            "status": "dissolved",
+            "incorporated": "2005-03-16",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "NI742557",
+            "name": "SUMUP LIMITED",
+            "status": "active",
+            "incorporated": "2026-07-29",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Super",
+        "confidence": "exact",
+        "why": "silent; 4 companies reach the exact tier",
+        "candidates": [
+          {
+            "number": "NI710172",
+            "name": "SUPER LIMITED",
+            "status": "active",
+            "incorporated": "2024-02-18",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "14233353",
+            "name": "SUPER LIMITED",
+            "status": "dissolved",
+            "incorporated": "2022-07-13",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "13640511",
+            "name": "SUPER LIMITED",
+            "status": "dissolved",
+            "incorporated": "2021-09-23",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "04769077",
+            "name": "SUPER LTD",
+            "status": "dissolved",
+            "incorporated": "2003-05-19",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Symphony",
+        "confidence": "exact",
+        "why": "silent; 2 companies reach the exact tier",
+        "candidates": [
+          {
+            "number": "09505789",
+            "name": "SYMPHONY LIMITED",
+            "status": "dissolved",
+            "incorporated": "2015-03-24",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "03701180",
+            "name": "SYMPHONY LIMITED",
+            "status": "dissolved",
+            "incorporated": "1999-01-26",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Tailscale",
+        "confidence": "exact",
+        "why": "silent; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "14859239",
+            "name": "TAILSCALE UK LIMITED",
+            "status": "active",
+            "incorporated": "2023-05-10",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Talkdesk",
+        "confidence": "prefix",
+        "why": "silent; one prefix-tier name match",
+        "candidates": [
+          {
+            "number": "11609285",
+            "name": "TALKDESK U.K. LIMITED",
+            "status": "active",
+            "incorporated": "2018-10-08",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Tanium",
+        "confidence": "exact",
+        "why": "silent; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "09335968",
+            "name": "TANIUM UK LIMITED",
+            "status": "active",
+            "incorporated": "2014-12-02",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "TaxBit",
+        "confidence": "exact",
+        "why": "silent; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "16128756",
+            "name": "TAXBIT UK LTD",
+            "status": "active",
+            "incorporated": "2024-12-10",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Teleport",
+        "confidence": "exact",
+        "why": "silent; 2 companies reach the exact tier",
+        "candidates": [
+          {
+            "number": "16673442",
+            "name": "TELEPORT LIMITED",
+            "status": "active",
+            "incorporated": "2025-08-26",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "02974267",
+            "name": "TELEPORT LIMITED",
+            "status": "dissolved",
+            "incorporated": "1994-10-06",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Temporal",
+        "confidence": "exact",
+        "why": "silent; 2 companies reach the exact tier",
+        "candidates": [
+          {
+            "number": "16727677",
+            "name": "TEMPORAL LIMITED",
+            "status": "active",
+            "incorporated": "2025-09-18",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "07363219",
+            "name": "TEMPORAL LTD",
+            "status": "dissolved",
+            "incorporated": "2010-09-02",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "The Athletic",
+        "confidence": "prefix",
+        "why": "silent; 13 companies reach the prefix tier",
+        "candidates": [
+          {
+            "number": "11037254",
+            "name": "THE ATHLETIC CAMPUS LIMITED",
+            "status": "active",
+            "incorporated": "2017-10-30",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "07768123",
+            "name": "THE ATHLETIC EDGE LTD",
+            "status": "active",
+            "incorporated": "2011-09-09",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "12915817",
+            "name": "THE ATHLETIC GEAR SERVICES LTD",
+            "status": "active",
+            "incorporated": "2020-09-30",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "11992602",
+            "name": "THE ATHLETIC MEDIA COMPANY UK LTD.",
+            "status": "active",
+            "incorporated": "2019-05-13",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "10109645",
+            "name": "THE ATHLETIC NETWORK LTD",
+            "status": "dissolved",
+            "incorporated": "2016-04-07",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "ThreatLocker",
+        "confidence": "exact",
+        "why": "no website; 2 companies reach the exact tier",
+        "candidates": [
+          {
+            "number": "17362714",
+            "name": "THREATLOCKER (GB) LIMITED",
+            "status": "active",
+            "incorporated": "2026-07-27",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "13929871",
+            "name": "THREATLOCKER (UK) LTD",
+            "status": "dissolved",
+            "incorporated": "2022-02-21",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Tide",
+        "confidence": "exact",
+        "why": "two numbers stated: 09595646, 10430958; 3 companies reach the exact tier",
+        "candidates": [
+          {
+            "number": "SC753507",
+            "name": "TIDE LTD",
+            "status": "dissolved",
+            "incorporated": "2022-12-20",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "13447520",
+            "name": "TIDE LIMITED",
+            "status": "dissolved",
+            "incorporated": "2021-06-09",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "05505695",
+            "name": "TIDE LTD",
+            "status": "dissolved",
+            "incorporated": "2005-07-12",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Tipalti",
+        "confidence": "prefix",
+        "why": "silent; 2 companies reach the prefix tier",
+        "candidates": [
+          {
+            "number": "12471817",
+            "name": "TIPALTI EUROPE LTD",
+            "status": "active",
+            "incorporated": "2020-02-19",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "12420590",
+            "name": "TIPALTI SOLUTIONS LTD",
+            "status": "dissolved",
+            "incorporated": "2020-01-23",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Together AI",
+        "confidence": "exact",
+        "why": "no website; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "13318041",
+            "name": "TOGETHERAI UK LIMITED",
+            "status": "dissolved",
+            "incorporated": "2021-04-07",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Torq",
+        "confidence": "exact",
+        "why": "silent; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "03935140",
+            "name": "TORQ LIMITED",
+            "status": "active",
+            "incorporated": "2000-02-28",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Twitch",
+        "confidence": "exact",
+        "why": "silent; 2 companies reach the exact tier",
+        "candidates": [
+          {
+            "number": "SC355644",
+            "name": "TWITCH LIMITED",
+            "status": "dissolved",
+            "incorporated": "2009-02-25",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "10084616",
+            "name": "TWITCH UK LIMITED",
+            "status": "active",
+            "incorporated": "2016-03-24",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Vercel",
+        "confidence": "exact",
+        "why": "silent; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "15286209",
+            "name": "VERCEL UK LTD",
+            "status": "active",
+            "incorporated": "2023-11-15",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Veriff",
+        "confidence": "stated",
+        "why": "a private-limited-guarant-nsc-limited-exemption, which has no equity to have raised a round with",
+        "candidates": [
+          {
+            "number": "02584687",
+            "name": "CIFAS",
+            "status": "active",
+            "incorporated": "1991-02-22",
+            "locality": "London",
+            "postcode": "WC1H 9LT",
+            "sic": [
+              "63990",
+              "82990"
+            ],
+            "kind": "private-limited-guarant-nsc-limited-exemption"
+          }
+        ]
+      },
+      {
+        "name": "Verkada",
+        "confidence": "exact",
+        "why": "no website; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "11985928",
+            "name": "VERKADA LIMITED",
+            "status": "active",
+            "incorporated": "2019-05-09",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Wayflyer",
+        "confidence": "exact",
+        "why": "silent; 3 companies reach the exact tier",
+        "candidates": [
+          {
+            "number": "BR022227",
+            "name": "WAYFLYER LIMITED",
+            "status": "closed",
+            "incorporated": "2020-02-24",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "FC037138",
+            "name": "WAYFLYER LIMITED",
+            "status": "closed-on",
+            "incorporated": "2020-02-24",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "12294939",
+            "name": "WAYFLYER UK LIMITED",
+            "status": "active",
+            "incorporated": "2019-11-04",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Webflow",
+        "confidence": "exact",
+        "why": "silent; 3 companies reach the exact tier",
+        "candidates": [
+          {
+            "number": "16434722",
+            "name": "WEBFLOW LTD",
+            "status": "active",
+            "incorporated": "2025-05-07",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "14980805",
+            "name": "WEBFLOW LTD",
+            "status": "dissolved",
+            "incorporated": "2023-07-04",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "04088901",
+            "name": "WEBFLOW LIMITED",
+            "status": "dissolved",
+            "incorporated": "2000-10-12",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Workato",
+        "confidence": "exact",
+        "why": "no website; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "13852940",
+            "name": "WORKATO (UK) LIMITED",
+            "status": "active",
+            "incorporated": "2022-01-17",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Writer",
+        "confidence": "prefix",
+        "why": "silent; 8 companies reach the prefix tier",
+        "candidates": [
+          {
+            "number": "03869667",
+            "name": "WRITER AT WORK LTD",
+            "status": "active",
+            "incorporated": "1999-11-01",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "14268844",
+            "name": "WRITER DESIGN & BUILD LIMITED",
+            "status": "active",
+            "incorporated": "2022-08-01",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "10747578",
+            "name": "WRITER INFORMATION UK PRIVATE LIMITED",
+            "status": "active",
+            "incorporated": "2017-05-02",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "SC288493",
+            "name": "WRITER PICTURES LTD.",
+            "status": "active",
+            "incorporated": "2005-08-05",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "15676707",
+            "name": "WRITER PLANET LIMITED",
+            "status": "dissolved",
+            "incorporated": "2024-04-24",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Zip",
+        "confidence": "exact",
+        "why": "silent; 4 companies reach the exact tier",
+        "candidates": [
+          {
+            "number": "15673558",
+            "name": "ZIP LTD",
+            "status": "active",
+            "incorporated": "2024-04-23",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "SC720102",
+            "name": "ZIP LTD",
+            "status": "dissolved",
+            "incorporated": "2022-01-17",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "08135521",
+            "name": "ZIP LTD",
+            "status": "dissolved",
+            "incorporated": "2012-07-09",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "04350295",
+            "name": "ZIP LIMITED",
+            "status": "dissolved",
+            "incorporated": "2002-01-09",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      }
+    ]
   }
 }

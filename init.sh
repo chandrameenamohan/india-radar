@@ -45,6 +45,14 @@ else
   bad "DATA_GOV_IN_KEY" "MCA badge disabled; everything else still works"
 fi
 
+# 2b. Companies House key -- warn only, for the same reason: the UK badge reads a
+# cached snapshot, and the key only refreshes it.
+if [ -f .env ] && grep -qE '^UK_COMPANY_HOUSE_KEY=.+' .env; then
+  good "UK_COMPANY_HOUSE_KEY"
+else
+  bad "UK_COMPANY_HOUSE_KEY" "UK badge cannot be refreshed; the snapshot still builds"
+fi
+
 # 3. browse -- warn only. Without it, e2e skips; lint/typecheck/unit still gate.
 BROWSE="$HOME/.claude/skills/gstack/browse/dist/browse"
 if [ -x "$BROWSE" ]; then good "browse (e2e driver)"; else bad "browse" "e2e will skip"; fi

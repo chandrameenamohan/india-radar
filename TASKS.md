@@ -1500,11 +1500,67 @@ Out of scope: renaming the repo directory or remote (human).
 > fact it DERIVED, is there a source that STATES it — and does the stated one
 > actually read better than the derivation (T9.2).
 
-### T9.1 — UK Companies House registration badge `todo` · *Phase 6*
-> **Deferred: not scheduled until a human registers an API key.** Companies House
-> issues free keys at developer.company-information.service.gov.uk. The key has to
-> reach the repo as a secret *and* the local environment, or the pull cannot be run
-> here at all. Nothing in this task starts before that.
+### T9.1 — UK Companies House registration badge `done` · *Phase 6*
+> **UNBLOCKED and SHIPPED 2026-08-02.** A human registered the key; it reaches the
+> local environment as `UK_COMPANY_HOUSE_KEY` and Companies House takes it as HTTP
+> Basic's username with an empty password, which is why `src/net.get` learned an
+> `auth` argument.
+>
+> **The measurement rewrote the task.** Everything below about the name rule
+> stands and none of it turned out to be enough. `learning-tests/companies_house_live.py`,
+> over all 220 listed UK companies, FINDINGS §"Companies House":
+>
+> - **Search ranking is worthless.** `q=monzo` answers `BRAMAND LTD` first —
+>   dissolved, a house in Pwllheli, SIC 99999 — because it was *named* `MONZO LTD`
+>   until 2024. `MONZO BANK LIMITED` is fourth of 39. Previous names are a trap,
+>   not a recall win.
+> - **T4.4's publishable tier does not survive the move.** MCA's slice is 24,102
+>   rows; Companies House is 5.6M, and the collisions are ordinary English words.
+>   Applying T4.4's whole rule here would publish **141 of 220**, and **15 of those
+>   141 are provably a different company** by the register's own fields —
+>   `ALLOY LTD` (1998, Guildford, SIC 74100), `AMPLITUDE LIMITED` (1994, Devon,
+>   estate management), `ALPHASENSE LIMITED` (1996), `CURSOR LIMITED` (2007),
+>   `OYSTER LIMITED` (1980), `INTERCOM` (a charitable incorporated organisation
+>   with no status and no incorporation date). A **10.6% floor**, before any
+>   hand-checking — and the sibling task's 25% name-containment rate says the true
+>   figure is higher.
+> - **A trading name is routinely not the registered name, and no string metric
+>   closes that.** Anima is `CONTINUUM HEALTH LIMITED`; Caribou is `REBANK
+>   TECHNOLOGIES LIMITED`. Neither shares a word with the name it trades under and
+>   neither has a previous name that does.
+>
+> **So the badge is earned by corroboration, not by a name.** UK trading-disclosure
+> law requires a company to state its registered number on its own website;
+> `src/uk.py` reads it there, resolves it at the register, and refuses anything the
+> live board contradicts. **22 of 220 state one** (34 have no website in the corpus,
+> 10 are unreachable), on four measured paths — `/`, `/privacy`, `/privacy-policy`,
+> `/terms`. Three state two genuine numbers (Marshmallow, Pleo, Tide) and are held
+> rather than guessed. Every name match, at either tier, is held: the tiers' whole
+> job is now the work list in `build-report.json`.
+>
+> Two false-positive classes had to be measured out of the number regex, and both
+> resolve to real, wrong UK companies: a seven-digit **Delaware** number padded with
+> a leading zero (capimoney.com → `07262022`, a dissolved London armouring company),
+> and **ICO data-protection registrations**, which are the same eight characters
+> (`ZA797592` beside TrueLayer's real number on the same page). Companies House
+> issues no `Z` prefix.
+>
+> **And "the company stated it" is not sufficient on its own either.** The live pull
+> produced twenty stated numbers and one of them was wrong:
+> veriff.com/privacy-policy says "Veriff is jointly a Data Controller with **Cifas,
+> a company registered in England and Wales under company number 02584687**" — the
+> UK fraud-prevention service. What refuses it is the register's own `type` field:
+> CIFAS is limited by guarantee and has **no share capital**, and every company on
+> this site is here because it raised a priced equity round. That rule also turns
+> away the `registered-overseas-entity` the name tier offered for Caribou, the
+> `uk-establishment` branches and the charity the register answers `q=intercom` with.
+>
+> **SHIPPED: 19 badges of 220, each hand-read against the page that stated it, zero
+> false positives.** 201 held in `build-report.json` with a reason each. Schema v10
+> carries `uk`; the site renders "Registered in the UK" with the number as a LINK to
+> the register's public page, the register's status verbatim, and the registered
+> name beside it — so a reader can see that Anima's registration is `CONTINUUM
+> HEALTH LIMITED` rather than having to take it on trust.
 
 Companies House is the UK register: a free official REST API returning JSON over
 all ~5M UK companies, live rather than a frozen extract, with a search endpoint
@@ -1541,6 +1597,10 @@ Checks:
           test_below_threshold_held_for_review, test_dissolved_status_verbatim,
           test_build_reads_cache_not_api, test_absent_key_degrades
        -> integration:pull respects the 600/5min limit with backoff
+       (all five landed under those names in tests/test_uk.py;
+        test_pull_respects_the_rate_limit_with_backoff is the sixth, as a unit
+        test over the sleep schedule rather than a live 600-call integration —
+        `make check` must not depend on somebody else's uptime, VERIFICATION.md)
 Out of scope:
   - other countries' registers — France Sirene, Japan corporate number and
     Australia ABN are the next candidates, and are NOT this task

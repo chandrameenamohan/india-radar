@@ -826,8 +826,10 @@
 
   .salary .ctc { color: var(--ink); font-weight: 700; }
   /* A CIN is 21 characters a reader may retype into the MCA portal, so it is
-     set to be copied rather than skimmed. */
-  .mca .cin { color: var(--ink); font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+     set to be copied rather than skimmed. A UK company number is eight and is a
+     link besides, but it is the same kind of thing and reads as one. */
+  .mca .cin, .ukreg .num {
+              color: var(--ink); font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
               font-size: .92em; letter-spacing: 0; user-select: all;
               background: var(--wash); padding: .05rem .3rem;
               overflow-wrap: anywhere; }  /* 21 unbroken chars must never set the page width */
@@ -1140,7 +1142,7 @@
 // The site is a renderer and nothing else: it reads the JSON the build wrote and
 // never recomputes a fact. The snapshot date in particular ships with the data,
 // because a date taken at render time would claim a freshness the JSON lacks.
-const SCHEMA = 9;                                  // src/build.py SCHEMA_VERSION
+const SCHEMA = 10;                                 // src/build.py SCHEMA_VERSION
 const DEFAULT_SRC = '../data/companies.json';
 
 // Test seam: e2e drives this same page over a fixture dataset (data/companies.json
@@ -1610,6 +1612,29 @@ function registrationLine(m) {
   );
   return line;
 }
+
+// The UK registration (T9.1). The badge says "Registered in the UK" plainly,
+// which the India one deliberately does not: MCA's slice is foreign subsidiaries
+// only, so a missing CIN there says nothing about a company, while Companies
+// House covers every UK company.
+//
+// The number is a LINK, and that is the badge rather than decoration on it: the
+// claim is checkable in one click on the register's own public page, which is
+// the difference between proven and asserted. The status is the register's word
+// verbatim -- `active`, `liquidation`, `administration` -- and is never
+// rewritten into a word the register did not use.
+function ukRegistrationLine(r) {
+  const line = el('p', 'ukreg');
+  const number = link(r.url, r.number);
+  number.className = 'num';
+  line.append(
+    el('span', null, 'Registered in the UK · '),
+    number,
+    el('span', null, ` · ${r.name} · incorporated ${r.incorporated.slice(0, 4)}`
+      + `${r.city ? ' · ' + r.city : ''} · ${r.status} · on the Companies House register`),
+  );
+  return line;
+}
 const days = (from, to) => (Date.parse(to) - Date.parse(from)) / 86400000;
 
 const brackets = {
@@ -1729,6 +1754,11 @@ function inScope(c, covers) {
     cities: india ? c.cities : [],               // `cities` is India's, from the build
     salary: india ? c.salary : null,
     mca: india ? c.mca : null,
+    // Companies House knows UK companies and nobody else, so the badge follows
+    // its register the way the India ones follow theirs: on a plate that does
+    // not cover the UK, a UK registration beside a list of Tokyo roles would be
+    // this site answering a question nobody asked.
+    uk: covers.includes('United Kingdom') ? c.uk : null,
   };
 }
 
@@ -2231,6 +2261,7 @@ function entry(c, q) {
   body.append(board, roles, funding);
   if (c.salary) body.append(salaryLine(c.salary));
   if (c.mca) body.append(registrationLine(c.mca));
+  if (c.uk) body.append(ukRegistrationLine(c.uk));
   body.append(el('p', null, `Qualified as Series A or later by ${RULES[c.qualified_by]}.`));
 
   SHEET.replaceChildren(meta, head, el('h2', null, c.name), body);

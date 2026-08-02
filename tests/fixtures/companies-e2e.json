@@ -1,451 +1,467 @@
 {
-  "schema_version": 9,
-  "snapshot": "2026-07-28",
-  "integrity": {
-    "corpus_size": 30,
-    "checked": 9,
-    "unchecked": 21
-  },
-  "companies": [
+ "schema_version": 10,
+ "snapshot": "2026-07-28",
+ "integrity": {
+  "corpus_size": 30,
+  "checked": 9,
+  "unchecked": 21
+ },
+ "companies": [
+  {
+   "name": "Acme Cloud",
+   "ats": "greenhouse",
+   "slug": "acmecloud",
+   "roles": [
     {
-      "name": "Acme Cloud",
-      "ats": "greenhouse",
-      "slug": "acmecloud",
-      "roles": [
-        {
-          "title": "Staff Engineer, Platform",
-          "url": "https://job-boards.greenhouse.io/acmecloud/jobs/4001",
-          "locations": [
-            "Bengaluru, India"
-          ],
-          "countries": [
-            "India"
-          ],
-          "workplace": null,
-          "visa": "yes",
-          "hire_from_abroad": "unknown",
-          "department": "R&D: Platform"
-        },
-        {
-          "title": "Product Designer",
-          "url": "https://job-boards.greenhouse.io/acmecloud/jobs/4002",
-          "locations": [
-            "Pune, India"
-          ],
-          "countries": [
-            "India"
-          ],
-          "workplace": "hybrid",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown",
-          "department": "Engineering"
-        },
-        {
-          "title": "Engineering Manager",
-          "url": "https://job-boards.greenhouse.io/acmecloud/jobs/4003",
-          "locations": [
-            "Bengaluru, India; Pune, India"
-          ],
-          "countries": [
-            "India"
-          ],
-          "workplace": null,
-          "visa": "unknown",
-          "hire_from_abroad": "unknown",
-          "department": "R&D"
-        }
-      ],
-      "countries": [
-        "India"
-      ],
-      "cities": [
-        "Bengaluru",
-        "Pune"
-      ],
-      "amount": 40000000,
-      "currency": "USD",
-      "round_letter": "B",
-      "date": "2026-06-30",
-      "source_url": "https://www.finsmes.com/2026/06/acme-cloud-raises-40m.html",
-      "qualified_by": "letter",
-      "salary": null,
-      "mca": null
+     "title": "Staff Engineer, Platform",
+     "url": "https://job-boards.greenhouse.io/acmecloud/jobs/4001",
+     "locations": [
+      "Bengaluru, India"
+     ],
+     "countries": [
+      "India"
+     ],
+     "workplace": null,
+     "visa": "yes",
+     "hire_from_abroad": "unknown",
+     "department": "R&D: Platform"
     },
     {
-      "name": "Beta Logistics",
-      "ats": "greenhouse",
-      "slug": "betalogistics",
-      "roles": [
-        {
-          "title": "Warehouse Systems Engineer",
-          "url": "https://job-boards.greenhouse.io/betalogistics/jobs/5001",
-          "locations": [
-            "Pune, India"
-          ],
-          "countries": [
-            "India"
-          ],
-          "workplace": "onsite",
-          "visa": "no",
-          "hire_from_abroad": "no",
-          "department": "Operations"
-        },
-        {
-          "title": "Data Analyst",
-          "url": "https://job-boards.greenhouse.io/betalogistics/jobs/5002",
-          "locations": [
-            "Pune, India"
-          ],
-          "countries": [
-            "India"
-          ],
-          "workplace": null,
-          "visa": "unknown",
-          "hire_from_abroad": "unknown",
-          "department": null
-        }
-      ],
-      "countries": [
-        "India"
-      ],
-      "cities": [
-        "Pune"
-      ],
-      "amount": 6000000,
-      "currency": "USD",
-      "round_letter": "A",
-      "date": "2026-07-20",
-      "source_url": "https://www.finsmes.com/2026/07/beta-logistics-raises-6m.html",
-      "qualified_by": "letter",
-      "salary": null,
-      "mca": {
-        "cin": "U63030MH2019FTC320014",
-        "name": "BETA LOGISTICS INDIA PRIVATE LIMITED",
-        "incorporated": "2019-11-08",
-        "city": "Mumbai",
-        "status": "Strike Off",
-        "confidence": "exact"
-      }
+     "title": "Product Designer",
+     "url": "https://job-boards.greenhouse.io/acmecloud/jobs/4002",
+     "locations": [
+      "Pune, India"
+     ],
+     "countries": [
+      "India"
+     ],
+     "workplace": "hybrid",
+     "visa": "unknown",
+     "hire_from_abroad": "unknown",
+     "department": "Engineering"
     },
     {
-      "name": "Gamma Health",
-      "ats": "greenhouse",
-      "slug": "gammahealth",
-      "roles": [
-        {
-          "title": "Senior Backend Engineer",
-          "url": "https://job-boards.greenhouse.io/gammahealth/jobs/6001",
-          "locations": [
-            "Bengaluru, India"
-          ],
-          "countries": [
-            "India"
-          ],
-          "workplace": null,
-          "visa": "unknown",
-          "hire_from_abroad": "yes",
-          "department": "Engineering"
-        },
-        {
-          "title": "Clinical Data Lead",
-          "url": "https://job-boards.greenhouse.io/gammahealth/jobs/6002",
-          "locations": [
-            "Hyderabad, India"
-          ],
-          "countries": [
-            "India"
-          ],
-          "workplace": "onsite",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown",
-          "department": "Data Science"
-        },
-        {
-          "title": "Site Reliability Engineer",
-          "url": "https://job-boards.greenhouse.io/gammahealth/jobs/6003",
-          "locations": [
-            "Remote - Bangalore, India"
-          ],
-          "countries": [
-            "India"
-          ],
-          "workplace": "remote",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown",
-          "department": null
-        },
-        {
-          "title": "Engineering Manager, Platform",
-          "url": "https://job-boards.greenhouse.io/gammahealth/jobs/6004",
-          "locations": [
-            "Bengaluru, India",
-            "Hyderabad, India"
-          ],
-          "countries": [
-            "India"
-          ],
-          "workplace": "hybrid",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown",
-          "department": "Engineering"
-        },
-        {
-          "title": "Clinical Trials Coordinator",
-          "url": "https://job-boards.greenhouse.io/gammahealth/jobs/9001",
-          "locations": [
-            "Hyderabad, India"
-          ],
-          "countries": [
-            "India"
-          ],
-          "workplace": "onsite",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown",
-          "department": "All Cost Center"
-        }
-      ],
-      "countries": [
-        "India"
-      ],
-      "cities": [
-        "Bengaluru",
-        "Hyderabad"
-      ],
-      "amount": 120000000,
-      "currency": "USD",
-      "round_letter": "C",
-      "date": "2025-02-14",
-      "source_url": "https://www.finsmes.com/2025/02/gamma-health-raises-120m.html",
-      "qualified_by": "letter",
-      "salary": {
-        "avg_lpa": 24.6,
-        "reports": 1204,
-        "observed": "2026-07-21",
-        "source_url": "https://www.ambitionbox.com/salaries/gamma-health-salaries"
-      },
-      "mca": {
-        "cin": "U62099KA2021FTC150001",
-        "name": "GAMMA HEALTH INDIA PRIVATE LIMITED",
-        "incorporated": "2021-04-21",
-        "city": "Bangalore",
-        "status": "Active",
-        "confidence": "exact"
-      }
-    },
-    {
-      "name": "Delta Remote",
-      "ats": "greenhouse",
-      "slug": "deltaremote",
-      "roles": [
-        {
-          "title": "Customer Support Lead",
-          "url": "https://job-boards.greenhouse.io/deltaremote/jobs/7001",
-          "locations": [
-            "Remote - India"
-          ],
-          "countries": [
-            "India"
-          ],
-          "workplace": "remote",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown",
-          "department": "Customer Experience"
-        }
-      ],
-      "countries": [
-        "India"
-      ],
-      "cities": [],
-      "amount": 9000000,
-      "currency": "USD",
-      "round_letter": null,
-      "date": "2026-07-01",
-      "source_url": "https://www.finsmes.com/2026/07/delta-remote-raises-9m.html",
-      "qualified_by": "amount",
-      "salary": {
-        "avg_lpa": 12.4,
-        "reports": 1,
-        "observed": "2025-10-14",
-        "source_url": "https://www.ambitionbox.com/salaries/delta-remote-salaries"
-      },
-      "mca": null
-    },
-    {
-      "name": "Epsilon Directory",
-      "ats": "greenhouse",
-      "slug": "epsilondirectory",
-      "roles": [
-        {
-          "title": "Founding Engineer",
-          "url": "https://job-boards.greenhouse.io/epsilondirectory/jobs/8001",
-          "locations": [
-            "Bengaluru, India"
-          ],
-          "countries": [
-            "India"
-          ],
-          "workplace": null,
-          "visa": "unknown",
-          "hire_from_abroad": "unknown",
-          "department": null
-        },
-        {
-          "title": "Growth Marketer",
-          "url": "https://job-boards.greenhouse.io/epsilondirectory/jobs/8002",
-          "locations": [
-            "Bengaluru, India"
-          ],
-          "countries": [
-            "India"
-          ],
-          "workplace": "hybrid",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown",
-          "department": "GTM"
-        }
-      ],
-      "countries": [
-        "India"
-      ],
-      "cities": [
-        "Bengaluru"
-      ],
-      "amount": null,
-      "currency": null,
-      "round_letter": null,
-      "date": null,
-      "source_url": "https://www.ycombinator.com/companies/epsilon-directory",
-      "qualified_by": "stage",
-      "salary": null,
-      "mca": null
-    },
-    {
-      "name": "Zeta Placeless",
-      "ats": "greenhouse",
-      "slug": "zetaplaceless",
-      "roles": [
-        {
-          "title": "Solutions Consultant",
-          "url": "https://job-boards.greenhouse.io/zetaplaceless/jobs/9001",
-          "locations": [
-            "India"
-          ],
-          "countries": [
-            "India"
-          ],
-          "workplace": null,
-          "visa": "unknown",
-          "hire_from_abroad": "unknown",
-          "department": "Commercial"
-        }
-      ],
-      "countries": [
-        "India"
-      ],
-      "cities": [],
-      "amount": 15000000,
-      "currency": "USD",
-      "round_letter": "A",
-      "date": "2026-05-05",
-      "source_url": "https://www.finsmes.com/2026/05/zeta-placeless-raises-15m.html",
-      "qualified_by": "letter",
-      "salary": null,
-      "mca": null
-    },
-    {
-      "name": "Theta Global",
-      "ats": "greenhouse",
-      "slug": "thetaglobal",
-      "roles": [
-        {
-          "title": "Backend Engineer, Payments",
-          "url": "https://job-boards.greenhouse.io/thetaglobal/jobs/10001",
-          "locations": [
-            "London, United Kingdom"
-          ],
-          "countries": [
-            "United Kingdom"
-          ],
-          "workplace": null,
-          "visa": "yes",
-          "hire_from_abroad": "yes",
-          "department": "Engineering"
-        },
-        {
-          "title": "Support Engineer",
-          "url": "https://job-boards.greenhouse.io/thetaglobal/jobs/10002",
-          "locations": [
-            "Bengaluru, India"
-          ],
-          "countries": [
-            "India"
-          ],
-          "workplace": "hybrid",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown",
-          "department": "Engineering"
-        }
-      ],
-      "countries": [
-        "India",
-        "United Kingdom"
-      ],
-      "cities": [
-        "Bengaluru"
-      ],
-      "amount": 30000000,
-      "currency": "USD",
-      "round_letter": "B",
-      "date": "2026-07-10",
-      "source_url": "https://www.finsmes.com/2026/07/theta-global-raises-30m.html",
-      "qualified_by": "letter",
-      "salary": {
-        "avg_lpa": 19.2,
-        "reports": 318,
-        "observed": "2026-06-30",
-        "source_url": "https://www.ambitionbox.com/salaries/theta-global-salaries"
-      },
-      "mca": {
-        "cin": "U72900MH2019FTC330045",
-        "name": "THETA GLOBAL INDIA PRIVATE LIMITED",
-        "incorporated": "2019-11-08",
-        "city": "Mumbai",
-        "status": "Active",
-        "confidence": "exact"
-      }
-    },
-    {
-      "name": "Iota Europe",
-      "ats": "ashby",
-      "slug": "iotaeurope",
-      "roles": [
-        {
-          "title": "Platform Engineer",
-          "url": "https://jobs.ashbyhq.com/iotaeurope/11001",
-          "locations": [
-            "Berlin, Germany"
-          ],
-          "countries": [
-            "Germany"
-          ],
-          "workplace": "onsite",
-          "visa": "no",
-          "hire_from_abroad": "unknown",
-          "department": null
-        }
-      ],
-      "countries": [
-        "Germany"
-      ],
-      "cities": [],
-      "amount": 25000000,
-      "currency": "USD",
-      "round_letter": "A",
-      "date": "2026-04-02",
-      "source_url": "https://www.finsmes.com/2026/04/iota-europe-raises-25m.html",
-      "qualified_by": "letter",
-      "salary": null,
-      "mca": null
+     "title": "Engineering Manager",
+     "url": "https://job-boards.greenhouse.io/acmecloud/jobs/4003",
+     "locations": [
+      "Bengaluru, India; Pune, India"
+     ],
+     "countries": [
+      "India"
+     ],
+     "workplace": null,
+     "visa": "unknown",
+     "hire_from_abroad": "unknown",
+     "department": "R&D"
     }
-  ]
+   ],
+   "countries": [
+    "India"
+   ],
+   "cities": [
+    "Bengaluru",
+    "Pune"
+   ],
+   "amount": 40000000,
+   "currency": "USD",
+   "round_letter": "B",
+   "date": "2026-06-30",
+   "source_url": "https://www.finsmes.com/2026/06/acme-cloud-raises-40m.html",
+   "qualified_by": "letter",
+   "salary": null,
+   "mca": null,
+   "uk": null
+  },
+  {
+   "name": "Beta Logistics",
+   "ats": "greenhouse",
+   "slug": "betalogistics",
+   "roles": [
+    {
+     "title": "Warehouse Systems Engineer",
+     "url": "https://job-boards.greenhouse.io/betalogistics/jobs/5001",
+     "locations": [
+      "Pune, India"
+     ],
+     "countries": [
+      "India"
+     ],
+     "workplace": "onsite",
+     "visa": "no",
+     "hire_from_abroad": "no",
+     "department": "Operations"
+    },
+    {
+     "title": "Data Analyst",
+     "url": "https://job-boards.greenhouse.io/betalogistics/jobs/5002",
+     "locations": [
+      "Pune, India"
+     ],
+     "countries": [
+      "India"
+     ],
+     "workplace": null,
+     "visa": "unknown",
+     "hire_from_abroad": "unknown",
+     "department": null
+    }
+   ],
+   "countries": [
+    "India"
+   ],
+   "cities": [
+    "Pune"
+   ],
+   "amount": 6000000,
+   "currency": "USD",
+   "round_letter": "A",
+   "date": "2026-07-20",
+   "source_url": "https://www.finsmes.com/2026/07/beta-logistics-raises-6m.html",
+   "qualified_by": "letter",
+   "salary": null,
+   "mca": {
+    "cin": "U63030MH2019FTC320014",
+    "name": "BETA LOGISTICS INDIA PRIVATE LIMITED",
+    "incorporated": "2019-11-08",
+    "city": "Mumbai",
+    "status": "Strike Off",
+    "confidence": "exact"
+   },
+   "uk": null
+  },
+  {
+   "name": "Gamma Health",
+   "ats": "greenhouse",
+   "slug": "gammahealth",
+   "roles": [
+    {
+     "title": "Senior Backend Engineer",
+     "url": "https://job-boards.greenhouse.io/gammahealth/jobs/6001",
+     "locations": [
+      "Bengaluru, India"
+     ],
+     "countries": [
+      "India"
+     ],
+     "workplace": null,
+     "visa": "unknown",
+     "hire_from_abroad": "yes",
+     "department": "Engineering"
+    },
+    {
+     "title": "Clinical Data Lead",
+     "url": "https://job-boards.greenhouse.io/gammahealth/jobs/6002",
+     "locations": [
+      "Hyderabad, India"
+     ],
+     "countries": [
+      "India"
+     ],
+     "workplace": "onsite",
+     "visa": "unknown",
+     "hire_from_abroad": "unknown",
+     "department": "Data Science"
+    },
+    {
+     "title": "Site Reliability Engineer",
+     "url": "https://job-boards.greenhouse.io/gammahealth/jobs/6003",
+     "locations": [
+      "Remote - Bangalore, India"
+     ],
+     "countries": [
+      "India"
+     ],
+     "workplace": "remote",
+     "visa": "unknown",
+     "hire_from_abroad": "unknown",
+     "department": null
+    },
+    {
+     "title": "Engineering Manager, Platform",
+     "url": "https://job-boards.greenhouse.io/gammahealth/jobs/6004",
+     "locations": [
+      "Bengaluru, India",
+      "Hyderabad, India"
+     ],
+     "countries": [
+      "India"
+     ],
+     "workplace": "hybrid",
+     "visa": "unknown",
+     "hire_from_abroad": "unknown",
+     "department": "Engineering"
+    },
+    {
+     "title": "Clinical Trials Coordinator",
+     "url": "https://job-boards.greenhouse.io/gammahealth/jobs/9001",
+     "locations": [
+      "Hyderabad, India"
+     ],
+     "countries": [
+      "India"
+     ],
+     "workplace": "onsite",
+     "visa": "unknown",
+     "hire_from_abroad": "unknown",
+     "department": "All Cost Center"
+    }
+   ],
+   "countries": [
+    "India"
+   ],
+   "cities": [
+    "Bengaluru",
+    "Hyderabad"
+   ],
+   "amount": 120000000,
+   "currency": "USD",
+   "round_letter": "C",
+   "date": "2025-02-14",
+   "source_url": "https://www.finsmes.com/2025/02/gamma-health-raises-120m.html",
+   "qualified_by": "letter",
+   "salary": {
+    "avg_lpa": 24.6,
+    "reports": 1204,
+    "observed": "2026-07-21",
+    "source_url": "https://www.ambitionbox.com/salaries/gamma-health-salaries"
+   },
+   "mca": {
+    "cin": "U62099KA2021FTC150001",
+    "name": "GAMMA HEALTH INDIA PRIVATE LIMITED",
+    "incorporated": "2021-04-21",
+    "city": "Bangalore",
+    "status": "Active",
+    "confidence": "exact"
+   },
+   "uk": null
+  },
+  {
+   "name": "Delta Remote",
+   "ats": "greenhouse",
+   "slug": "deltaremote",
+   "roles": [
+    {
+     "title": "Customer Support Lead",
+     "url": "https://job-boards.greenhouse.io/deltaremote/jobs/7001",
+     "locations": [
+      "Remote - India"
+     ],
+     "countries": [
+      "India"
+     ],
+     "workplace": "remote",
+     "visa": "unknown",
+     "hire_from_abroad": "unknown",
+     "department": "Customer Experience"
+    }
+   ],
+   "countries": [
+    "India"
+   ],
+   "cities": [],
+   "amount": 9000000,
+   "currency": "USD",
+   "round_letter": null,
+   "date": "2026-07-01",
+   "source_url": "https://www.finsmes.com/2026/07/delta-remote-raises-9m.html",
+   "qualified_by": "amount",
+   "salary": {
+    "avg_lpa": 12.4,
+    "reports": 1,
+    "observed": "2025-10-14",
+    "source_url": "https://www.ambitionbox.com/salaries/delta-remote-salaries"
+   },
+   "mca": null,
+   "uk": null
+  },
+  {
+   "name": "Epsilon Directory",
+   "ats": "greenhouse",
+   "slug": "epsilondirectory",
+   "roles": [
+    {
+     "title": "Founding Engineer",
+     "url": "https://job-boards.greenhouse.io/epsilondirectory/jobs/8001",
+     "locations": [
+      "Bengaluru, India"
+     ],
+     "countries": [
+      "India"
+     ],
+     "workplace": null,
+     "visa": "unknown",
+     "hire_from_abroad": "unknown",
+     "department": null
+    },
+    {
+     "title": "Growth Marketer",
+     "url": "https://job-boards.greenhouse.io/epsilondirectory/jobs/8002",
+     "locations": [
+      "Bengaluru, India"
+     ],
+     "countries": [
+      "India"
+     ],
+     "workplace": "hybrid",
+     "visa": "unknown",
+     "hire_from_abroad": "unknown",
+     "department": "GTM"
+    }
+   ],
+   "countries": [
+    "India"
+   ],
+   "cities": [
+    "Bengaluru"
+   ],
+   "amount": null,
+   "currency": null,
+   "round_letter": null,
+   "date": null,
+   "source_url": "https://www.ycombinator.com/companies/epsilon-directory",
+   "qualified_by": "stage",
+   "salary": null,
+   "mca": null,
+   "uk": null
+  },
+  {
+   "name": "Zeta Placeless",
+   "ats": "greenhouse",
+   "slug": "zetaplaceless",
+   "roles": [
+    {
+     "title": "Solutions Consultant",
+     "url": "https://job-boards.greenhouse.io/zetaplaceless/jobs/9001",
+     "locations": [
+      "India"
+     ],
+     "countries": [
+      "India"
+     ],
+     "workplace": null,
+     "visa": "unknown",
+     "hire_from_abroad": "unknown",
+     "department": "Commercial"
+    }
+   ],
+   "countries": [
+    "India"
+   ],
+   "cities": [],
+   "amount": 15000000,
+   "currency": "USD",
+   "round_letter": "A",
+   "date": "2026-05-05",
+   "source_url": "https://www.finsmes.com/2026/05/zeta-placeless-raises-15m.html",
+   "qualified_by": "letter",
+   "salary": null,
+   "mca": null,
+   "uk": null
+  },
+  {
+   "name": "Theta Global",
+   "ats": "greenhouse",
+   "slug": "thetaglobal",
+   "roles": [
+    {
+     "title": "Backend Engineer, Payments",
+     "url": "https://job-boards.greenhouse.io/thetaglobal/jobs/10001",
+     "locations": [
+      "London, United Kingdom"
+     ],
+     "countries": [
+      "United Kingdom"
+     ],
+     "workplace": null,
+     "visa": "yes",
+     "hire_from_abroad": "yes",
+     "department": "Engineering"
+    },
+    {
+     "title": "Support Engineer",
+     "url": "https://job-boards.greenhouse.io/thetaglobal/jobs/10002",
+     "locations": [
+      "Bengaluru, India"
+     ],
+     "countries": [
+      "India"
+     ],
+     "workplace": "hybrid",
+     "visa": "unknown",
+     "hire_from_abroad": "unknown",
+     "department": "Engineering"
+    }
+   ],
+   "countries": [
+    "India",
+    "United Kingdom"
+   ],
+   "cities": [
+    "Bengaluru"
+   ],
+   "amount": 30000000,
+   "currency": "USD",
+   "round_letter": "B",
+   "date": "2026-07-10",
+   "source_url": "https://www.finsmes.com/2026/07/theta-global-raises-30m.html",
+   "qualified_by": "letter",
+   "salary": {
+    "avg_lpa": 19.2,
+    "reports": 318,
+    "observed": "2026-06-30",
+    "source_url": "https://www.ambitionbox.com/salaries/theta-global-salaries"
+   },
+   "mca": {
+    "cin": "U72900MH2019FTC330045",
+    "name": "THETA GLOBAL INDIA PRIVATE LIMITED",
+    "incorporated": "2019-11-08",
+    "city": "Mumbai",
+    "status": "Active",
+    "confidence": "exact"
+   },
+   "uk": {
+    "number": "99999999",
+    "name": "THETA GLOBAL HOLDINGS LIMITED",
+    "status": "active",
+    "incorporated": "2016-03-04",
+    "city": "London",
+    "url": "https://find-and-update.company-information.service.gov.uk/company/99999999",
+    "confidence": "stated"
+   }
+  },
+  {
+   "name": "Iota Europe",
+   "ats": "ashby",
+   "slug": "iotaeurope",
+   "roles": [
+    {
+     "title": "Platform Engineer",
+     "url": "https://jobs.ashbyhq.com/iotaeurope/11001",
+     "locations": [
+      "Berlin, Germany"
+     ],
+     "countries": [
+      "Germany"
+     ],
+     "workplace": "onsite",
+     "visa": "no",
+     "hire_from_abroad": "unknown",
+     "department": null
+    }
+   ],
+   "countries": [
+    "Germany"
+   ],
+   "cities": [],
+   "amount": 25000000,
+   "currency": "USD",
+   "round_letter": "A",
+   "date": "2026-04-02",
+   "source_url": "https://www.finsmes.com/2026/04/iota-europe-raises-25m.html",
+   "qualified_by": "letter",
+   "salary": null,
+   "mca": null,
+   "uk": null
+  }
+ ]
 }

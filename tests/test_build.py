@@ -141,6 +141,7 @@ def test_listed_row_carries_the_corpus_and_the_board():
             # running without an MCA snapshot, is complete rather than broken.
             "salary": None,
             "mca": None,
+            "uk": None,
         }
     ]
     assert errors(rows[0]) == []

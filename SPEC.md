@@ -281,6 +281,16 @@ AmbitionBox) and the MCA badge (feature 9). Per-country equivalents (Companies
 House, Glassdoor-by-country, …) are six new integrations for a badge — out of
 scope.
 
+> **Superseded for the UK, 2026-08-02 (E9, T9.1).** "Out of scope" held while
+> India was the largest plate; the UK is now 220 of 315 listed companies, which
+> is a different trade. Companies House is built and India-only is now a
+> statement about the OTHER thirteen countries. It also did not turn out to be
+> "the MCA badge again with a different register": MCA's name match is
+> publishable on a 24,102-row slice and is wrong about one company in ten on a
+> 5.6M-company one, so the UK badge is earned by the company's own stated
+> registration number rather than by its name. France, Japan and Australia are
+> still out of scope, and now have a measured reason to be careful.
+
 ### 14. Multi-country role filter
 Keep a company when ≥1 open role matches **any** target country; each kept role
 carries the country it matched. Location matching follows the india.py doctrine:

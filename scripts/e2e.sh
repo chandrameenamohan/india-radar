@@ -861,9 +861,14 @@ console_clean "after interaction"
 # carrying no schema_version at all.
 echo "-- a dataset this page doesn't know how to read"
 open_page "$ROOT?data=../data/build-report.json"
+# The version is read off the page rather than written here. It was hardcoded as
+# v9 and went stale the moment T9.1 bumped the schema to v10 -- and the way it
+# failed is the point: the check reported "rendered" for a page that had refused
+# correctly, so a GREEN check would have been the lie, not the red one.
+schema=$(grep -ao 'const SCHEMA = [0-9]*' site/index.html | grep -o '[0-9]*')
 check "an unknown schema is refused, not rendered" "refused 0 rows" \
-  "$(val '(document.querySelector("#status").textContent.startsWith("This page reads schema v9")
-       ? "refused " : "rendered ") + document.querySelectorAll(".irow").length + " rows"')"
+  "$(val "(document.querySelector('#status').textContent.startsWith('This page reads schema v$schema')
+       ? 'refused ' : 'rendered ') + document.querySelectorAll('.irow').length + ' rows'")"
 # And the footer goes with it. A count left over from the last dataset, sitting
 # under a refusal to render this one, is the site stating a coverage figure for a
 # build it just declined to read.
@@ -896,6 +901,17 @@ check "a reader who is not signed in is offered a sign-in" "Sign in" \
 before=$(val 'document.querySelectorAll(".irow").length')
 $B js 'document.querySelector("#account button").click()' >/dev/null 2>&1
 $B wait --networkidle >/dev/null 2>&1
+# Poll rather than assert straight after networkidle. Clerk mounts the modal from
+# its own bundle AFTER the network settles, so a single read races it -- measured
+# once as a red gate that a re-run turned green, which is the worst kind of check:
+# one that teaches people their failures are noise. It still has to appear; this
+# only stops the test asking before Clerk has answered.
+for _ in $(seq 20); do
+  case "$(val 'String(!!document.querySelector("[data-clerk-component], .cl-modalContent"))')" in
+    true) break;;
+  esac
+  sleep 0.5
+done
 check "the sign-in modal opens on our own page, not Clerk's" "true" \
   "$(val 'String(!!document.querySelector("[data-clerk-component], .cl-modalContent"))')"
 check "opening it leaves the register untouched" "$before" \

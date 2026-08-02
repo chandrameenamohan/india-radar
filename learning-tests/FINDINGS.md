@@ -2531,3 +2531,206 @@ ponytail: the script re-fetches all 278MB on every run — the same ceiling
 `openness_live.py` names. The day someone wants to iterate on a mapping table
 rather than on the corpus, dump `corpus()` to a file first; the analysis is a
 second of CPU on ninety seconds of network.
+
+---
+
+# Companies House — measured 2026-08-02 (T9.1)
+
+`learning-tests/companies_house_live.py`, over **all 220 listed companies with a
+UK role**, not a sample: one `/search/companies` call each, plus a
+`/company/{number}` profile for every candidate the name rule reached, plus twenty
+candidate legal-page paths fetched on each company's own website. The key is a
+registered one (HTTP Basic, key as username, empty password) and the documented
+limit is 600 requests per five minutes.
+
+## The first hit for `q=monzo` is a dissolved sheep farm
+
+| # | search says | number | status |
+|---|---|---|---|
+| 0 | `BRAMAND LTD` | 15296432 | dissolved |
+| 1 | `CAPIWISE LTD` | 14728667 | active |
+| 2 | `12808379 LTD` | 12808379 | dissolved |
+| 3 | `MONZO BANK LIMITED` | 09446231 | active |
+
+39 results, and the right one is fourth. **Ranking is not evidence** — and the
+reason the top hit ranks at all is worse than noise: `BRAMAND LTD` was called
+`MONZO LTD` until March 2024. It is an *exact* match on a name it no longer has,
+at a house in Pwllheli, filing SIC 99999 (dormant). Previous names are a trap
+here, not the recall win they look like, so the matcher reads only the name the
+register holds today.
+
+## An exact name match on this register is wrong about one company in ten
+
+MCA's publishable tier — the register saying the company's name plus a legal form
+and nothing else — does not survive the move. Companies House is 5.6M companies
+where MCA's usable slice is 24,102, and the collisions are ordinary English:
+
+* **178 of 220** names reach the `exact` tier at all; 25 reach only `prefix`; 17
+  reach nothing. **54 of the 178 are ambiguous** (two or more exact-tier
+  companies), which the "publish only a single candidate" rule already refuses.
+* Applying MCA's whole rule — one exact candidate, nothing disqualifying — would
+  publish **141 of 220**.
+* **15 of those 141 are provably the wrong company**, by the register's own
+  fields, before any hand-checking: they are registrations from 1980–2007 for
+  companies founded in the 2010s and 2020s, filed under SIC codes like 96090
+  (other personal service), 68320 (managing real estate), 78109 (employment
+  agency), 59200 (sound recording), 47290 (retail food).
+
+| listed company | what the exact tier publishes | incorporated | SIC |
+|---|---|---|---|
+| Amplitude | `AMPLITUDE LIMITED` 02962681, Devon | 1994-08-26 | 68209, 68320 |
+| AlphaSense | `ALPHASENSE LIMITED` 03264282, Leicester | 1996-10-16 | 26511 |
+| Cresta | `CRESTA LIMITED` 03243934 | 1996-08-30 | 41100, 82990 |
+| Alloy | `ALLOY LTD` 03567784, Guildford | 1998-05-20 | 74100 |
+| Cursor | `CURSOR LIMITED` 06432552, Lincoln | 2007-11-20 | 74100 |
+| Oyster | `OYSTER LIMITED` 01497443 | 1980-05-19 | 59200 |
+| Intercom | `INTERCOM` CE010464 — a **charity**, no status, no date | — | — |
+| Caribou | `CARIBOU LIMITED` OE014495 — a Dubai overseas entity, **removed** | 2023-01-18 | — |
+
+That is a floor of **10.6%**, counting only what the register itself contradicts.
+Amplitude's real UK company is `AMPLITUDE ANALYTICS LTD.` (11291165) — which the
+name rule reads as `prefix` and would never have published either.
+
+## A trading name is routinely not the registered name, and no string metric closes that
+
+Two of the three companies whose registration is *proven* below share not one word
+with the name they trade under, and neither has a previous name that does:
+
+* **Anima** (animahealth.com) is `CONTINUUM HEALTH LIMITED` 12205370. The register
+  separately holds three companies literally called ANIMA — a Poole software firm
+  and two dissolved London shells.
+* **Caribou** (usecaribou.com) is `REBANK TECHNOLOGIES LIMITED` 09695886.
+
+No amount of better string matching reaches either. This is why the badge is
+earned by corroboration rather than by a name.
+
+## What the company says about itself: 22 of 220, on four pages
+
+The Companies (Trading Disclosures) Regulations 2015 require a UK company to state
+its registered number on its websites. Measured over twenty candidate paths:
+
+* **22 of 220** state one. **34** have no website in the corpus at all and **10**
+  could not be reached (Cloudflare, timeouts).
+* Four paths reach all 22: **`/` (13), `/privacy` (+5), `/privacy-policy` (+3),
+  `/terms` (+1)**. The other sixteen paths found nobody these four had missed.
+* The ceiling is structural, not a scraping failure: most of these 220 are US
+  companies with a UK office, and a US company does not print its UK subsidiary's
+  number on its .com.
+
+**Two false-positive classes had to be measured out of the regex**, and both
+produce a real, wrong, resolvable UK company number:
+
+1. **A seven-digit number padded with a leading zero.** capimoney.com states
+   `Capi Money Inc., a company incorporated in Delaware with registration number
+   7262022`. Padded, that is `07262022` — `INTERNATIONAL ARMORING CORPORATION
+   (LONDON) LIMITED`, dissolved. The rule is now exactly eight characters.
+2. **ICO data-protection registrations**, which are the same shape:
+   `ZA283379` (PatSnap), `ZA797592` (TrueLayer), `ZB547039` (Trigger.dev),
+   `ZA165305` (Tide) all sit beside the real number on the same privacy page.
+   Companies House issues no `Z` prefix; without excluding it, four companies that
+   state exactly one company number appear to state two and are held for nothing.
+
+Three companies state two genuine numbers and are held rather than guessed:
+**Marshmallow** (11005345 and 15834468, both UK), **Pleo** (15842283 UK and
+36538686, a Danish CVR — also eight digits), **Tide** (09595646 and 10430958).
+
+## Status and the shape of the register
+
+Over the 460 candidate registrations the searches returned:
+
+| status | count |
+|---|---|
+| active | 299 |
+| dissolved | 156 |
+| converted-closed | 2 |
+| open / registered (overseas entities) | 4 |
+| removed | 1 |
+| closed | 1 |
+| *(blank)* | 2 |
+
+**156 dissolved is the headline**: a listed company is one whose live job board we
+read minutes ago, so a dissolved registration under its name is somebody else's
+company. `dissolved`, `removed`, `closed` and `converted-closed` disqualify;
+`liquidation`, `administration` and `voluntary-arrangement` do not — those are
+companies that still exist and can still be hiring, and the badge states them
+verbatim. Two candidates state no status and no incorporation date at all
+(`INTERCOM`, a charitable incorporated organisation), which the write would refuse
+— so the matcher refuses them first, because an enrichment that hands the write a
+row it rejects is an enrichment that can fail a build.
+
+The incorporation-date check fires twice on the corpus: `DATABRICKS IT SOLUTIONS
+LTD` (incorporated 2026-03-12, Databricks' round stated 2025-12-16) and
+`THREATLOCKER (GB) LIMITED` (2026-07-27, round 2025-03-28). Both are companies
+that did not exist when the round they are being attached to was announced.
+
+## Consequence
+
+The badge is published only where the company stated its own number, the register
+resolved it, and nothing in the register contradicts the live board. That is a
+smaller number than a name match would give and it is the only one that is true.
+The name tiers stay, and their whole job is the held list in `build-report.json`.
+
+ponytail: the pull is corpus-shaped and sequential — 220 searches plus ~20
+profiles plus ~880 page fetches, about half an hour by hand. Ceiling: it cannot
+answer "is this company on the register" for a name nobody searched. Upgrade path:
+Companies House publishes a monthly ~500MB bulk CSV of all 5.6M companies, which
+would make the snapshot a universe like MCA's — worth it the day the held list is
+being worked through by hand rather than read.
+
+## The pull ran, and its twentieth badge was the fraud-prevention service
+
+`python -m src.uk`, 2026-08-02: **220 of 220 UK names answered, 20 state their own
+number, 203 reach a name on the register.** Twenty stated numbers, twenty
+resolvable companies, and then every statement read by hand against the page it
+came from. Nineteen are the company itself:
+
+    9fin              10451957  9FIN LIMITED
+    Anima             12205370  CONTINUUM HEALTH LIMITED     "trading as Anima Health"
+    Caribou           09695886  REBANK TECHNOLOGIES LIMITED  footer © of usecaribou.com
+    DevRev            16761614  DEVREV UK PRIVATE LIMITED
+    Duffel            11188295  DUFFEL TECHNOLOGY LTD
+    Elyos AI          14924564  ELYOS ENERGY UK LTD
+    Forter            12136011  FORTER SOLUTIONS UK LTD
+    GoCardless        07495895  GOCARDLESS LTD
+    Happl             12430540  HAPPL LTD
+    Humaans           11496946  HUMAANS SOFTWARE UK LTD
+    Iterable          12064168  ITERABLE LTD
+    Monzo             09446231  MONZO BANK LIMITED           search ranked it 4th of 39
+    PatSnap           09492371  PATSNAP (UK) LTD
+    PPRO              07653641  PPRO FINANCIAL LTD
+    Teya              12271069  TEYA SERVICES LTD.
+    Thought Machine   11114277  THOUGHT MACHINE GROUP LIMITED
+    Trigger.dev       14441978  API HERO LTD                 "provided by API Hero Ltd"
+    TrueLayer         10278251  TRUELAYER LIMITED
+    Wayve             10924127  WAYVE TECHNOLOGIES LTD
+
+The twentieth was **Veriff → 02584687**, and veriff.com/privacy-policy says why:
+
+> "Veriff is jointly a Data Controller with **Cifas, a company registered in
+> England and Wales under company number 02584687**"
+
+A real UK company number, on the company's own site, in a disclosure sentence —
+belonging to the UK fraud-prevention service they share data with. So "the
+company states a number" is not on its own sufficient either, and the rule that
+catches it is the register's own `type` field: CIFAS is a
+`private-limited-guarant-nsc-limited-exemption`, **limited by guarantee, with no
+share capital**. Every company on this site is here because it raised a priced
+equity round, and a body with no equity cannot have. Checked as an allow-list of
+types (`ltd`, `plc`, `llp`, …), the same rule also refuses the
+`registered-overseas-entity` the name rule offered for Caribou, the
+`uk-establishment` branches, and the charity the register answers `q=intercom`
+with.
+
+**Final: 19 badges of 220, zero false positives on the published set**, every one
+hand-read against the page that stated it. The other 201 are held in
+`build-report.json` with a reason each — 167 at the `exact` name tier, 18 at
+`prefix`, one (Veriff) with a stated number that is somebody else's.
+
+Three companies state two genuine numbers and settle nothing: Marshmallow
+(11005345 / 15834468), Pleo (15842283 and a Danish CVR), Tide (09595646 /
+10430958). Note what the corrections file bought here (T10.1): Monzo's corpus
+website is `mondo.com`, the name they dropped in 2016, and Alloy's is
+`alloy.app`. `uk.main` applies `data/corrections.yaml` over the corpus for
+exactly this reason — reading a registered number off the wrong company's site is
+the failure this module exists to refuse, and Monzo's badge is one of the
+nineteen only because the correction was applied.

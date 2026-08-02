@@ -48,6 +48,7 @@ Find the people who may have some connection with the user: college, school, ex-
 ### Feature 2
 user provide the linkedin profile of the person.
 Write a nice cold email to ask them to refer the user
+use this - kb/power_writing/Cold Emailing.pptx
 
 
 ## Epic 4
