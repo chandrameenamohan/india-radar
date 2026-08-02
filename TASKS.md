@@ -2035,3 +2035,81 @@ fifteen countries; company HQ narrows to developed markets plus India. The
 funding-source requirement does not move — 2,207 companies are unlisted today for
 want of a verifiable source, and that discipline is worth more, not less, once
 people are asked to spend money and reputation on these companies.
+
+---
+
+## PHASE 8 — coverage (the 2,201)
+
+### T12.1 — Guess Ashby slugs, and prove the board is the right company's `todo` · *Phase 8*
+
+`slug-unresolved` is 2,201 of 2,915 — 76% of the corpus, and the largest number
+in this project. Only 4 companies fail a probe; the pipeline works, it does not
+know where the boards are. `data/unresolved.json` splits the reason:
+
+```
+  no-board-link     837   careers page read, no board linked (JS-rendered)
+  no-website        740   no domain to read at all — 650 are SEC Form D
+  no-careers-page   619   domain known, no careers page found
+```
+
+The middle bucket is a corpus problem and out of scope. The other **1,456 have a
+name and no board**, which is exactly what `guess` bypasses the careers page for
+— and `guess` runs against Greenhouse only, for two stated reasons, of which
+**one is measurably stale**: "guessing Ashby means paying its ~151s fixed latency
+per candidate". Ashby answers in ~1.6s and has since at least T3.2. The Lever
+half of that docstring still stands and this task does not touch Lever.
+
+`learning-tests/ashby_guess_live.py` measured the method before this was written:
+**21 of 120 sampled companies, 17.5%**, against a 2% kill criterion set before
+the run. Two mechanics make it possible, and neither is obvious: the posting API
+**404s a wrong slug** in 9 bytes, so misses are nearly free and existence is
+decidable (the T3.3 Lever trap does not apply); and the API **does not name the
+company**, so identity has to come from the board page's `<title>`, which reads
+"Ramp Jobs", "1Password Jobs", and a bare "Jobs" for a slug that does not exist.
+
+**The hard part is not the hit rate, it is the six generic words in it.** Boom,
+Catch, Castle, Formal, Meter and Fathom all resolved, and `states_company` only
+asks whether the board's title contains the company's name — it cannot separate
+two companies that share one. The corpus proves they exist: its own YC URL for
+Castle is `/companies/castle-2`, because YC has two Castles. So 17.5% is a
+CEILING and the yield is lower by however many collisions are in it. Shipping
+the ceiling as if it were the yield publishes one company's roles under another
+company's name, which is the `greenhouse/brave` failure this project already
+remembers.
+
+```
+Acceptance (observable):
+  Ashby joins Greenhouse as a guessable ATS, and the build report's
+  slug-unresolved count falls by a number the run states out loud.
+  EVERY new Ashby slug is verified by the board's own stated name, never by the
+  slug answering. A board that exists and states a name that is not this
+  company's resolves to NOTHING and is counted, exactly as the Greenhouse path
+  already does — a wrong company is worse than an unresolved one, because the
+  site cannot tell the reader it guessed.
+  COLLISIONS ARE MEASURED, NOT ASSUMED AWAY. Before the method is trusted, a
+  learning test takes the single-word and generic-name hits and checks each
+  board against something the corpus independently knows — the company's own
+  website, its YC slug, the locations its roles are in. It states how many of
+  the sampled hits are the wrong company. That number decides whether generic
+  names are resolvable at all or must be excluded and counted as such.
+  KILL CRITERION on the collision rate: if more than ~10% of verified hits turn
+  out to be a different company, name-containment is not enough verification for
+  Ashby and this task ships WITHOUT the generic-name cases rather than shipping
+  a corpus nobody can trust.
+  The nightly does not re-resolve companies that already have a slug — the cost
+  is one-time, and T10.4 already ruled on that.
+Checks:
+  lint -> typecheck -> unit -> e2e (full gate)
+  + unit: a board whose title names a different company resolves to None, over a
+    fixture built from the real collisions this task finds
+  + unit: a bare "Jobs" title — Ashby's 200 for a board that does not exist — is
+    treated as not-knowing, never as a match
+  + the collision learning test, its findings comment stating measured numbers
+Out of scope:
+  - Lever. A wrong Lever slug returns 200 with an empty array, so existence is
+    undecidable there and T3.3's trap is untouched by anything measured here.
+  - The 740 `no-website` companies. 650 are SEC Form D filings that state a name
+    and no domain; guessing does not reach them and neither does this task.
+  - Widening the corpus (F7). Adding companies to a pipeline that cannot check
+    three quarters of what it already has is work at the wrong end.
+```
