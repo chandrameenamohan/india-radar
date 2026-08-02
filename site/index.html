@@ -2885,7 +2885,12 @@ window.addEventListener('load', async () => {
   const slot = document.getElementById('account');
   if (!slot || !window.Clerk) return;
   try {
-    await window.Clerk.load();
+    // afterSignOutUrl is THIS page, deliberately. Clerk's default sends the
+    // reader to `/`, which measurably drops the query string -- so signing out
+    // threw away the plate, the city filter and the search term and dumped the
+    // reader on the unfiltered register. Signing out should cost you your name,
+    // not your place in the atlas.
+    await window.Clerk.load({ afterSignOutUrl: location.href });
   } catch {
     return;
   }

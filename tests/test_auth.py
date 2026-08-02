@@ -22,14 +22,19 @@ import pytest
 ROOT = Path(__file__).resolve().parent.parent
 PAGE = ROOT / "site" / "index.html"
 
-#: Clerk's secret keys are `sk_test_…` and `sk_live_…`. The full prefix, not a
-#: bare `sk_`: measured, because `sk_` alone matches `task_` and `risk_` and the
-#: history check then fails on this project's own task numbers. A check that
-#: cries wolf on every commit is a check somebody deletes.
+#: A Clerk secret key is the prefix AND a long body, and both halves of that are
+#: load-bearing — each was measured by getting it wrong first.
 #:
-#: Built by concatenation so this file does not contain the literal it forbids —
-#: otherwise the first thing the history check finds is itself.
-SECRET_RE = "sk_" + "(test|live)_"
+#: The prefix alone (a bare `sk_`) matches `task_` and `risk_`, so the history
+#: check failed on this project's own task numbers. And the prefix with a
+#: qualifier but no body matches PROSE ABOUT KEYS: the comment above this line
+#: names the two forms, and the first thing the check found was itself.
+#:
+#: So: at least twenty key-ish characters after the qualifier. A mention of a key
+#: is not a key; a key has a body. A check that cries wolf on every commit that
+#: documents it is a check somebody eventually deletes, which is worse than not
+#: having written it.
+SECRET_RE = "sk_" + r"(test|live)_[A-Za-z0-9]{20,}"
 
 
 def test_page_carries_a_publishable_key():

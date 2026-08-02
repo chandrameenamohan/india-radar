@@ -902,6 +902,88 @@ check "opening it leaves the register untouched" "$before" \
   "$(val 'document.querySelectorAll(".irow").length')"
 console_clean "account control"
 
+# 4f the signed-in round trip (T11.1). The one thing a static page genuinely has
+# to prove about accounts: a session survives a reload, and signing out ends it.
+#
+# SIGNS IN, NEVER SIGNS UP, and that is the whole design of this section. Sign-up
+# is bot-protected -- Turnstile does not solve headless (clerk_live.py finding 7)
+# -- and even with it off, a gate that signs up on every commit would deposit a
+# permanent user in a real Clerk instance every time anyone runs `make check`.
+# One dedicated account, reused forever, costs nothing and accumulates nothing.
+#
+# Through Clerk's API rather than its modal DOM: what needs proving is OUR
+# session handling, and Clerk's own form is Clerk's to test. Driving their React
+# inputs was tried and is a trap -- `fill` sets .value without React seeing it,
+# so the form reports an empty password while the DOM shows a full one.
+CLERK_EMAIL=$(grep -s '^CLERK_E2E_EMAIL=' .env | cut -d= -f2- | tr -d '[:space:]')
+CLERK_PASS=$(grep -s '^CLERK_E2E_PASSWORD=' .env | cut -d= -f2- | tr -d '[:space:]')
+if [ -z "${CLERK_EMAIL:-}" ] || [ -z "${CLERK_PASS:-}" ]; then
+  echo "-- the signed-in round trip"
+  echo "  SKIP  CLERK_E2E_EMAIL / CLERK_E2E_PASSWORD not in .env"
+  echo "        (expected on a fresh clone and in CI; see VERIFICATION.md 4f)"
+else
+  echo "-- the signed-in round trip"
+  # JSON-quoted so a password containing quotes or backslashes reaches the page
+  # as itself rather than as a syntax error in the middle of a script.
+  jsq() { printf '%s' "$1" | $PY -c 'import sys,json;print(json.dumps(sys.stdin.read()),end="")'; }
+  # browse's `js` does not await, so the flow parks its answer on window and we
+  # poll for it. Same reason the second factor is handled inline: a test account
+  # on a `+clerk_test` address takes the fixed code 424242 and no inbox exists.
+  settle() { # var
+    local v; for _ in $(seq 15); do
+      v=$($B js "window.$1" 2>/dev/null)
+      [ "$v" != "pending" ] && { echo "$v"; return; }
+      sleep 1
+    done
+    echo "timeout"
+  }
+  open_page "$FIXTURE"
+  anon_rows=$(val 'document.querySelectorAll(".irow").length')
+  $B js "window.__in='pending'; (async () => { try {
+    let a = await window.Clerk.client.signIn.create({ identifier: $(jsq "$CLERK_EMAIL"), password: $(jsq "$CLERK_PASS") });
+    if (a.status === 'needs_second_factor') {
+      await a.prepareSecondFactor({ strategy: 'email_code' });
+      a = await a.attemptSecondFactor({ strategy: 'email_code', code: '424242' });
+    }
+    await window.Clerk.setActive({ session: a.createdSessionId });
+    window.__in = a.status;
+  } catch (e) { window.__in = 'ERR ' + (e.errors ? e.errors.map((x) => x.code).join(',') : e.message); } })()" >/dev/null 2>&1
+  check "a reader can sign in" "complete" "$(settle __in)"
+  sleep 2
+  check "the header stops offering a sign-in" "false" \
+    "$(val 'String(document.querySelector("#account").textContent.trim() === "Sign in")')"
+
+  # THE FEATURE. Everything above this line is setup for it: "recognized on
+  # return" is the whole of T11.1, and a reload is what return means.
+  open_page "$FIXTURE"
+  sleep 2
+  check "the session survives a full page reload" "true" \
+    "$(val 'String(!!window.Clerk.user)')"
+  check "and it is the same reader" "$CLERK_EMAIL" \
+    "$(val 'window.Clerk.user ? window.Clerk.user.primaryEmailAddress.emailAddress : "(none)"')"
+  # SPEC v3's promise from the other side: the signed-out register and the
+  # signed-in one are the same register. Signing in must buy a name, not rows.
+  check "signing in changes nothing about what the register shows" "$anon_rows" \
+    "$(val 'document.querySelectorAll(".irow").length')"
+
+  # signOut NAVIGATES -- so nothing parked on `window` survives it, and this is
+  # asserted on the page that comes back rather than polled for. Measured: with
+  # Clerk's default afterSignOutUrl the reader lands on `/` with the query string
+  # gone, which threw away the plate and the filters. The page pins it to the
+  # current URL, and the row count below is what catches a regression: if signing
+  # out ever bounces the reader off their fixture page again, this reads 315
+  # against the 8 the fixture holds.
+  $B js 'window.Clerk.signOut()' >/dev/null 2>&1
+  $B wait --networkidle >/dev/null 2>&1
+  sleep 3
+  check "signing out ends the session" "false" "$(val 'String(!!window.Clerk.user)')"
+  check "the header offers a sign-in again" "Sign in" \
+    "$(val 'document.querySelector("#account").textContent.trim()')"
+  check "signing out leaves the reader on the page they were reading" "$anon_rows" \
+    "$(val 'document.querySelectorAll(".irow").length')"
+  console_clean "signed-in round trip"
+fi
+
 # 4c visual regression is NOT here. It needs baseline screenshots a human
 # approves once (VERIFICATION.md 4c), and an agent approving its own baselines
 # would assert nothing. Deliberately outside the gate rather than faked inside it.

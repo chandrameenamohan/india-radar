@@ -1903,7 +1903,7 @@ The register learns who is reading it. One task, because login is one thing, and
 everything people want to build on top of it is in "The long picture" below,
 deliberately not numbered as work.
 
-### T11.1 — A reader can create an account and be recognized on return `needs-review` · *Phase 7*
+### T11.1 — A reader can create an account and be recognized on return `done` · *Phase 7*
 
 Clerk's browser SDK, loaded on `site/index.html`, and nothing else. No backend, no
 database, no session of our own — the entire feature is a script tag, a
@@ -1927,16 +1927,18 @@ Acceptance (observable):
   after signing up with email, the same header shows their own account control.
   A full page reload keeps them signed in. Sign-out returns the header to the
   signed-out state, and a reload after sign-out stays signed out.
-  ^ THIS HALF CANNOT BE GATED, and the reason is measured, not assumed: the
-    instance runs bot protection, and Cloudflare Turnstile does not solve in the
-    headless browser. `signUp.create()` returns `captcha_invalid`; the real modal
-    leaves Continue disabled forever waiting for a token that never arrives
-    (learning-tests/clerk_live.py finding 7). Turning bot protection off for the
-    DEVELOPMENT instance unblocks it and is a dashboard toggle, not code — until
-    someone decides that, this is `needs-review`: a human signs up once on the
-    live site and confirms the reload. The gate holds everything else.
+  ^ GATED, by signing IN as a dedicated `+clerk_test` account rather than signing
+    up. Sign-UP cannot be automated here — bot protection, and Turnstile does not
+    solve headless (learning-tests/clerk_live.py finding 7) — and gating on it
+    would have deposited a permanent user in a real Clerk instance on every
+    commit anyway. Credentials live in .env; absent, the section skips and says
+    so, so a fresh clone and CI stay green.
   Every one of those four states loads with ZERO console errors and zero failed
   network requests — the standard the site already holds itself to.
+  Signing out leaves the reader where they were reading. Clerk's default sends
+  them to `/` with the query string gone, which threw away the plate, the city
+  filter and the search term — found by the e2e reading 315 rows against a
+  fixture holding 8.
   The corpus renders identically signed-in and signed-out. This feature adds a
   control to the header; it changes nothing a reader can already see. A diff of
   the rendered company list across the two states is empty.
@@ -1950,9 +1952,11 @@ Checks:
   lint -> typecheck -> unit -> e2e (full gate)
   + unit: the page carries a `pk_` publishable key and NO `sk_` key
   + unit: `git log -p` over main contains no `sk_` string
-  + e2e: gstack browse drives the live page through signed-out -> sign-up ->
-    reload -> sign-out, asserting header state and zero console errors at each
-    step, using Clerk's test-mode credentials
+  + e2e 4e: the signed-out state — control mounts, offers a sign-in, opens the
+    modal on our own page, and leaves the register's row count untouched
+  + e2e 4f: signed-out -> sign IN -> reload -> still the same reader -> sign out,
+    with the row count asserted in all three states and zero console errors at
+    each step. Sign IN, not sign up, and the reason is in the section header.
 Out of scope:
   - Storing anything about the user beyond what Clerk holds by default. What a
     reader is FOR (seeker, partner) is real product data and belongs to the

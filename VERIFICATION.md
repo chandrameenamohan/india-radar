@@ -87,14 +87,30 @@ leaves the register's row count untouched while doing it. That last one is SPEC
 v3's central promise held by a check — the register is public, and what it shows
 must not depend on who is reading it.
 
-**The signed-in state is not gated, and cannot be from here.** The instance runs
-bot protection; Cloudflare Turnstile does not solve in the headless browser.
-Measured both ways in `learning-tests/clerk_live.py` (finding 7): the
-programmatic path returns `captcha_invalid`, and the real modal leaves Continue
-disabled forever. Session persistence across a reload is therefore verified by a
-human, once, and T11.1 is marked `needs-review` until that happens. Turning bot
-protection off for the *development* instance would move this into the gate; it
-is a dashboard toggle, not code, and nobody has been asked for it yet.
+### 4f. the signed-in round trip (T11.1)
+Sign in → header stops offering a sign-in → **full page reload → still signed in,
+same reader** → sign out → offered a sign-in again. The reload is the feature;
+everything around it is setup.
+
+**It signs in and never signs up**, which is the whole design rather than a
+shortcut. Sign-up is bot-protected and Turnstile does not solve headless
+(`learning-tests/clerk_live.py` finding 7) — and even with protection off, a gate
+that signs up on every commit deposits a permanent user in a real Clerk instance
+every time anybody runs `make check`. One dedicated account on a `+clerk_test`
+address, reused forever, accumulates nothing and needs no secret key to clean up
+after itself.
+
+Credentials come from `CLERK_E2E_EMAIL` / `CLERK_E2E_PASSWORD` in `.env`, which
+is gitignored. **Absent, the section skips and says so** — a fresh clone and CI
+stay green, because a check that cannot run is not a check that found something.
+
+Two assertions in it are not about auth at all. The row count is compared
+signed-out, signed-in, and after sign-out: signing in must buy a name, never
+rows. And the count after sign-out doubles as a location check — Clerk's default
+`afterSignOutUrl` is `/`, which measurably dropped the query string and bounced
+the reader off their filtered plate onto the unfiltered register. The page pins
+it to the current URL; if that regresses, this check reads the full corpus
+against the fixture's eight.
 
 ---
 
