@@ -42,6 +42,9 @@ worker:
 		out=$$(node --test 'worker/*.test.mjs' 2>&1); status=$$?; \
 		echo "$$out" | tail -8; \
 		[ $$status -eq 0 ] || { echo "$$out" | grep -E '^not ok|error:|expected:|actual:'; exit 1; }; \
+		e2e=$$(bash scripts/worker-e2e.sh node 2>&1); status=$$?; \
+		echo "$$e2e" | grep -E 'FAIL|SKIP|GREEN|RED' | sed 's/^/  /'; \
+		[ $$status -eq 0 ] || exit 1; \
 	else \
 		echo "SKIP: node not found; worker tests cannot run here"; \
 	fi

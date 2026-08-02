@@ -2411,6 +2411,31 @@ Out of scope:
 >
 > Measured in passing: the bundle is **5.16 KiB with one binding**, and no value
 > from `.env` appears anywhere in it.
+>
+> **Narrowed, not closed** — `.github/workflows/check.yml` now runs the whole
+> gate plus `scripts/worker-e2e.sh wrangler` on `ubuntu-latest`, so real workerd
+> serving real HTTP is checked on every push. Twelve assertions: the refusals,
+> that they are INDISTINGUISHABLE from each other, routing, and the CORS
+> allowlist against both a look-alike and a suffix attack.
+>
+> The e2e takes a runner, and the second one is the point. `wrangler` is what
+> ships and skips by name here; `node` runs the same handler over `node:http` via
+> `worker/serve.mjs` and is what `make check` uses locally — because **a check
+> whose first real run is in CI is a check nobody has tested**. Both were proven
+> to go red by deleting the CORS allowlist.
+>
+> **What remains, and it is one thing:** a valid Clerk token answered with its own
+> id, over the network. It is covered as a unit test against a stubbed JWKS and
+> the refusal side is covered end to end, but the genuine-token path needs either
+> the browse binary in CI or a Clerk secret key, and neither exists today. That
+> is the whole remaining distance between `blocked` and `done`.
+>
+> **The pipe ate the exit code twice.** `node --test | tail` first, then
+> `worker-e2e.sh | tail | sed` one line later — both reported GREEN over red. The
+> second was only caught by appending `exit 1` to the e2e script, because every
+> mutation that breaks the e2e also breaks a unit test, so nothing else isolated
+> it. **Any new gate step in this Makefile must be proven with a fault only that
+> step can see.**
 > The first backend this project has ever had, and the task that decides whether
 > the rest are cheap. v3 said it out loud — *"no backend, no database, no session
 > server. It will happen — feature 18 and beyond need it."* Clerk already holds

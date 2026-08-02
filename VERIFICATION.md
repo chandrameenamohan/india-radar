@@ -279,6 +279,30 @@ guards passed their tests for the wrong reason when this was first done, and the
 gate itself reported green over a red suite because a pipe ate node's exit code.
 Both are fixed; the habit is what prevents the next one.
 
-**What this layer cannot check here:** anything requiring the Worker to execute
-— the deployed round trip and the signed-in e2e assertion in T14.1's DoD. Those
-belong on `ubuntu-latest`, which `nightly.yml` already shows this project has.
+### Two runners, and why there are two
+
+`scripts/worker-e2e.sh` drives a RUNNING server over HTTP rather than calling the
+handler in a vacuum. It takes a runner:
+
+- `wrangler` — real workerd, what actually ships. Needs macOS 13.5+ or Linux, and
+  **skips with a named reason** on the development machine rather than passing.
+- `node` — `worker/serve.mjs`, the same handler over `node:http`. This is what
+  `make check` runs locally, and it exists so the script's own assertions are
+  exercised somewhere before CI. **A check whose first real run is in CI is a
+  check nobody has tested.**
+
+Both were proven to go red: removing the CORS allowlist turns two assertions to
+FAIL and the script exits 1.
+
+### Where the full gate is actually enforced
+
+`.github/workflows/check.yml` on `ubuntu-latest` — because two layers self-skip
+locally. workerd will not start below macOS 13.5, and the browse binary the site
+e2e drives is not installed everywhere. Both skip honestly rather than passing,
+which means CI is the only place every layer runs.
+
+**Still not covered anywhere:** the signed-in round trip against a REAL Clerk
+token — T14.1's "a valid token is answered with that user's own id" over the
+network. It is covered as a unit test with a stubbed JWKS, and the refusal side
+is covered end to end, but the genuine-token path needs either the browse binary
+in CI or a Clerk secret key, and neither exists today.

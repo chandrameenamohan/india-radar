@@ -1,0 +1,47 @@
+# The gate, on a machine that can actually run it.
+#
+# WHY THIS EXISTS: `make check` runs locally, but two of its layers cannot on the
+# development machine. workerd refuses to start below macOS 13.5 (T14.1), and the
+# browse binary the site e2e drives is not installed everywhere. Both skip
+# honestly rather than passing -- which means the only place the full gate is
+# genuinely enforced is here.
+name: check
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: boot the environment
+        run: ./init.sh
+
+      # lint -> typecheck -> unit -> worker -> e2e. The site e2e self-skips here
+      # (no browse binary); the worker step does NOT skip, because it is plain
+      # Node and runs anywhere.
+      - name: make check
+        run: make check
+
+      # The half of T14.1 that no Mac on 13.4 can check: the real Workers runtime
+      # serving real HTTP. Linux runs workerd, so this is where that acceptance
+      # is actually met.
+      - name: worker e2e (real workerd)
+        run: bash scripts/worker-e2e.sh wrangler
