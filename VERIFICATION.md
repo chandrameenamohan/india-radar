@@ -162,6 +162,16 @@ manufactures a phantom hiring collapse.
 `test_20_known_pairs_zero_false_positives` — publishing someone else's company
 registration is a real-world error, not a cosmetic one.
 
+**5b. A wrong company number is worse than no company number, and a name is not
+proof.**
+`test_hand_labelled_pairs_zero_false_positives` (T9.1). Invariant 5's rule, and
+the reason it needed restating rather than reusing: MCA's publishable tier does
+not survive the move to a 5.6M-company register. Measured, T4.4's whole rule
+applied to Companies House would publish 141 of 220 UK companies and **15 of them
+are provably somebody else** — 1980s and 1990s registrations for companies founded
+last decade. So this badge is earned by the company stating its own registered
+number on its own site, and every name match is held.
+
 **6. A failed run never clobbers good data.**
 `test_partial_run_leaves_published_json_intact`.
 
@@ -191,7 +201,7 @@ Boots the dev environment and runs a smoke test:
 
 ## Deterministic vs LLM evaluator
 
-**Deterministic (everything above).** All seven invariants, all four e2e layers,
+**Deterministic (everything above).** All eight invariants, all four e2e layers,
 all code-quality signals. This is the overwhelming majority and it is where effort
 belongs.
 

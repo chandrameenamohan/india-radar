@@ -1,5 +1,5 @@
 {
-  "schema_version": 9,
+  "schema_version": 10,
   "snapshot": "2026-08-02",
   "integrity": {
     "corpus_size": 2915,
@@ -220,7 +220,8 @@
       "source_url": "https://www.forbes.com/companies/1password/",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "6Sense",
@@ -401,7 +402,8 @@
         "observed": "2026-07-31",
         "source_url": "https://www.ambitionbox.com/salaries/6sense-salaries"
       },
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "9fin",
@@ -812,7 +814,16 @@
       "source_url": "https://www.cbinsights.com/company/9fin",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": {
+        "number": "10451957",
+        "name": "9FIN LIMITED",
+        "status": "active",
+        "incorporated": "2016-10-28",
+        "city": "London",
+        "url": "https://find-and-update.company-information.service.gov.uk/company/10451957",
+        "confidence": "stated"
+      }
     },
     {
       "name": "Abacum",
@@ -987,7 +998,8 @@
       "source_url": "https://www.sec.gov/Archives/edgar/data/1856882/000192975225000003/0001929752-25-000003-index.htm",
       "qualified_by": "amount",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Airbnb",
@@ -1549,7 +1561,8 @@
         "city": "South West Delhi",
         "status": "Active",
         "confidence": "exact"
-      }
+      },
+      "uk": null
     },
     {
       "name": "airSlate",
@@ -1582,7 +1595,8 @@
       "source_url": "https://www.cbinsights.com/company/airslate",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Airtable",
@@ -1658,7 +1672,8 @@
       "source_url": "https://www.forbes.com/companies/airtable/",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Algolia",
@@ -2016,7 +2031,8 @@
       "source_url": "https://www.ycombinator.com/companies/algolia",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Alloy",
@@ -2049,7 +2065,8 @@
       "source_url": "https://www.cbinsights.com/company/alloy2",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Alpaca",
@@ -2159,7 +2176,8 @@
         "observed": "2025-10-14",
         "source_url": "https://www.ambitionbox.com/salaries/alpaca-salaries"
       },
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "AlphaSense",
@@ -4040,7 +4058,8 @@
         "observed": "2026-07-31",
         "source_url": "https://www.ambitionbox.com/salaries/alphasense-salaries"
       },
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Ambient.ai",
@@ -4124,7 +4143,8 @@
         "city": "Bangalore",
         "status": "Active",
         "confidence": "exact"
-      }
+      },
+      "uk": null
     },
     {
       "name": "Amperity",
@@ -4157,7 +4177,8 @@
       "source_url": "https://www.cbinsights.com/company/amperity",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Amplitude",
@@ -4292,7 +4313,8 @@
         "city": "Pune",
         "status": "Strike Off",
         "confidence": "exact"
-      }
+      },
+      "uk": null
     },
     {
       "name": "Anchorage Digital",
@@ -4423,7 +4445,8 @@
       "source_url": "https://www.cbinsights.com/company/anchorage",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Andela",
@@ -4498,7 +4521,8 @@
       "source_url": "https://www.cbinsights.com/company/andela",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Anima",
@@ -4601,7 +4625,16 @@
       "source_url": "https://www.ycombinator.com/companies/anima",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": {
+        "number": "12205370",
+        "name": "CONTINUUM HEALTH LIMITED",
+        "status": "active",
+        "incorporated": "2019-09-13",
+        "city": "London",
+        "url": "https://find-and-update.company-information.service.gov.uk/company/12205370",
+        "confidence": "stated"
+      }
     },
     {
       "name": "Anthropic",
@@ -5672,7 +5705,8 @@
         "city": "Bangalore",
         "status": "Active",
         "confidence": "exact"
-      }
+      },
+      "uk": null
     },
     {
       "name": "Anyscale",
@@ -5756,7 +5790,8 @@
         "city": "Bangalore",
         "status": "Active",
         "confidence": "exact"
-      }
+      },
+      "uk": null
     },
     {
       "name": "Apollo.io",
@@ -5862,7 +5897,8 @@
       "source_url": "https://www.ycombinator.com/companies/apollo-io",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "AppDirect",
@@ -5924,7 +5960,8 @@
         "city": "Pune",
         "status": "Active",
         "confidence": "exact"
-      }
+      },
+      "uk": null
     },
     {
       "name": "Applied Intuition",
@@ -6640,7 +6677,8 @@
         "observed": "2026-06-20",
         "source_url": "https://www.ambitionbox.com/salaries/applied-intuition-salaries"
       },
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "AppsFlyer",
@@ -6787,7 +6825,8 @@
         "city": "Bangalore",
         "status": "Active",
         "confidence": "exact"
-      }
+      },
+      "uk": null
     },
     {
       "name": "Arcadia",
@@ -6869,7 +6908,8 @@
         "observed": "2026-08-01",
         "source_url": "https://www.ambitionbox.com/salaries/arcadia-salaries"
       },
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Arketa",
@@ -6916,7 +6956,8 @@
       "source_url": "https://www.ycombinator.com/companies/arketa",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Armada",
@@ -7143,7 +7184,8 @@
         "observed": "2026-07-13",
         "source_url": "https://www.ambitionbox.com/salaries/armada-salaries"
       },
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "ARQ",
@@ -7330,7 +7372,8 @@
       "source_url": "https://www.ycombinator.com/companies/arq",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "ASAPP",
@@ -7402,7 +7445,8 @@
         "observed": "2026-07-30",
         "source_url": "https://www.ambitionbox.com/salaries/asapp-salaries"
       },
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Assembled",
@@ -7435,7 +7479,8 @@
       "source_url": "https://www.ycombinator.com/companies/assembled",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "AssemblyAI",
@@ -7482,7 +7527,8 @@
       "source_url": "https://www.ycombinator.com/companies/assemblyai",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "AtoB",
@@ -7522,7 +7568,8 @@
         "observed": "2026-06-28",
         "source_url": "https://www.ambitionbox.com/salaries/atob-salaries"
       },
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Attentive",
@@ -7654,7 +7701,8 @@
       "source_url": "https://www.forbes.com/companies/attentive/",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Attotude",
@@ -7687,7 +7735,8 @@
       "source_url": "https://www.sec.gov/Archives/edgar/data/2038578/000203857825000001/0002038578-25-000001-index.htm",
       "qualified_by": "amount",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Aviatrix",
@@ -7798,7 +7847,8 @@
         "observed": "2026-07-19",
         "source_url": "https://www.ambitionbox.com/salaries/aviatrix-salaries"
       },
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Awardco",
@@ -7831,7 +7881,8 @@
       "source_url": "https://www.sec.gov/Archives/edgar/data/1799778/000179977825000006/0001799778-25-000006-index.htm",
       "qualified_by": "amount",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "AXONIUS",
@@ -7864,7 +7915,8 @@
       "source_url": "https://www.sec.gov/Archives/edgar/data/1787130/000178713025000002/0001787130-25-000002-index.htm",
       "qualified_by": "amount",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Benchling",
@@ -7914,7 +7966,8 @@
       "source_url": "https://www.ycombinator.com/companies/benchling",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Bitmovin",
@@ -7966,7 +8019,8 @@
       "source_url": "https://www.ycombinator.com/companies/bitmovin",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "BitPanda",
@@ -8197,7 +8251,8 @@
       "source_url": "https://www.cbinsights.com/company/bitpanda",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Black Forest Labs",
@@ -8384,7 +8439,8 @@
       "source_url": "https://www.forbes.com/companies/black-forest-labs/",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Blee",
@@ -8417,7 +8473,8 @@
       "source_url": "https://www.ycombinator.com/companies/blee",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Braze",
@@ -8945,7 +9002,8 @@
       "source_url": "https://www.sec.gov/Archives/edgar/data/1676238/000095010325004677/0000950103-25-004677-index.htm",
       "qualified_by": "amount",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Bringg",
@@ -8978,7 +9036,8 @@
       "source_url": "https://www.cbinsights.com/company/bringg",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "CAIS",
@@ -9011,7 +9070,8 @@
       "source_url": "https://www.cbinsights.com/company/cais",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Cambridge Mobile Telematics",
@@ -9051,7 +9111,8 @@
         "observed": "2026-07-09",
         "source_url": "https://www.ambitionbox.com/salaries/cambridge-mobile-telematics-salaries"
       },
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Campfire",
@@ -9126,7 +9187,8 @@
       "source_url": "https://www.ycombinator.com/companies/campfire-2",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Canary Technologies",
@@ -9269,7 +9331,8 @@
       "source_url": "https://www.ycombinator.com/companies/canary-technologies",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Capi Money",
@@ -9376,7 +9439,8 @@
       "source_url": "https://www.ycombinator.com/companies/capi-money",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "CarbonChain",
@@ -9535,7 +9599,8 @@
       "source_url": "https://www.ycombinator.com/companies/carbonchain",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Caribou",
@@ -9582,7 +9647,16 @@
       "source_url": "https://www.cbinsights.com/company/motorefi",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": {
+        "number": "09695886",
+        "name": "REBANK TECHNOLOGIES LIMITED",
+        "status": "active",
+        "incorporated": "2015-07-21",
+        "city": "London",
+        "url": "https://find-and-update.company-information.service.gov.uk/company/09695886",
+        "confidence": "stated"
+      }
     },
     {
       "name": "Carta",
@@ -9757,7 +9831,8 @@
       "source_url": "https://www.forbes.com/companies/carta/",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Cato Networks",
@@ -10305,7 +10380,8 @@
       "source_url": "https://www.forbes.com/companies/cato-networks/",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Celonis",
@@ -12796,7 +12872,8 @@
         "city": "Bangalore",
         "status": "Active",
         "confidence": "exact"
-      }
+      },
+      "uk": null
     },
     {
       "name": "Chainguard",
@@ -13130,7 +13207,8 @@
       "source_url": "https://www.forbes.com/companies/chainguard/",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "CircleCI",
@@ -13191,7 +13269,8 @@
       "source_url": "https://www.cbinsights.com/company/circleci",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Clear Street",
@@ -13281,7 +13360,8 @@
       "source_url": "https://www.cbinsights.com/company/clear-street",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "ClickHouse",
@@ -13430,7 +13510,8 @@
       "source_url": "https://www.forbes.com/companies/clickhouse/",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Clipboard",
@@ -13505,7 +13586,8 @@
       "source_url": "https://www.ycombinator.com/companies/clipboard",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Coalition",
@@ -13610,7 +13692,8 @@
       "source_url": "https://www.forbes.com/companies/coalition/",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Cockroach Labs",
@@ -13750,7 +13833,8 @@
         "observed": "2026-07-07",
         "source_url": "https://www.ambitionbox.com/salaries/cockroach-labs-salaries"
       },
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Cognition",
@@ -14181,7 +14265,8 @@
       "source_url": "https://www.forbes.com/companies/cognition/",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Cohere Health",
@@ -14657,7 +14742,8 @@
         "city": "Hyderabad",
         "status": "Active",
         "confidence": "exact"
-      }
+      },
+      "uk": null
     },
     {
       "name": "Coinbase",
@@ -15058,7 +15144,8 @@
         "city": "South Delhi",
         "status": "Active",
         "confidence": "exact"
-      }
+      },
+      "uk": null
     },
     {
       "name": "Collibra",
@@ -15163,7 +15250,8 @@
       "source_url": "https://www.forbes.com/companies/collibra/",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "commercetools",
@@ -15423,7 +15511,8 @@
       "source_url": "https://www.cbinsights.com/company/commercetools",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Contentful",
@@ -15683,7 +15772,8 @@
       "source_url": "https://www.cbinsights.com/company/contentful",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "ContentSquare",
@@ -15880,7 +15970,8 @@
       "source_url": "https://www.cbinsights.com/company/contentsquare",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Conveo",
@@ -16025,7 +16116,8 @@
       "source_url": "https://www.ycombinator.com/companies/conveo",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Cresta",
@@ -16384,7 +16476,8 @@
       "source_url": "https://www.cbinsights.com/company/cresta",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Cribl",
@@ -16532,7 +16625,8 @@
       "source_url": "https://www.forbes.com/companies/cribl/",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Cross River Bank",
@@ -16565,7 +16659,8 @@
       "source_url": "https://www.cbinsights.com/company/cross-river-bank",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Culture Amp",
@@ -16866,7 +16961,8 @@
       "source_url": "https://www.cbinsights.com/company/culture-amp",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Cursor",
@@ -17267,7 +17363,8 @@
         "observed": "2026-07-13",
         "source_url": "https://www.ambitionbox.com/salaries/cursor-salaries"
       },
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Cyberhaven",
@@ -17356,7 +17453,8 @@
         "city": "Bangalore",
         "status": "Active",
         "confidence": "exact"
-      }
+      },
+      "uk": null
     },
     {
       "name": "Databricks",
@@ -21615,7 +21713,8 @@
         "city": "Bangalore",
         "status": "Active",
         "confidence": "exact"
-      }
+      },
+      "uk": null
     },
     {
       "name": "Dataiku",
@@ -21769,7 +21868,8 @@
       "source_url": "https://www.forbes.com/companies/dataiku/",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Deepgram",
@@ -21973,7 +22073,8 @@
       "source_url": "https://www.ycombinator.com/companies/deepgram",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "DeepL",
@@ -22486,7 +22587,8 @@
       "source_url": "https://www.forbes.com/companies/deepl/",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Degreed",
@@ -22526,7 +22628,8 @@
         "observed": "2026-07-15",
         "source_url": "https://www.ambitionbox.com/salaries/degreed-salaries"
       },
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Depot",
@@ -22559,7 +22662,8 @@
       "source_url": "https://www.ycombinator.com/companies/depot",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "DevRev",
@@ -22953,7 +23057,16 @@
       "source_url": "https://www.cbinsights.com/company/devrev",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": {
+        "number": "16761614",
+        "name": "DEVREV UK PRIVATE LIMITED",
+        "status": "active",
+        "incorporated": "2025-10-03",
+        "city": "London",
+        "url": "https://find-and-update.company-information.service.gov.uk/company/16761614",
+        "confidence": "stated"
+      }
     },
     {
       "name": "Dialpad",
@@ -23192,7 +23305,8 @@
         "observed": "2026-07-31",
         "source_url": "https://www.ambitionbox.com/salaries/dialpad-salaries"
       },
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "DistroKid",
@@ -23225,7 +23339,8 @@
       "source_url": "https://www.cbinsights.com/company/distrokid",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Distyl AI",
@@ -23272,7 +23387,8 @@
       "source_url": "https://www.cbinsights.com/company/distyl-ai",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "d-Matrix",
@@ -23355,7 +23471,8 @@
         "observed": "2026-03-16",
         "source_url": "https://www.ambitionbox.com/salaries/d-matrix-salaries"
       },
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Doppel",
@@ -23403,7 +23520,8 @@
       "source_url": "https://www.sec.gov/Archives/edgar/data/2006522/000200652225000002/0002006522-25-000002-index.htm",
       "qualified_by": "amount",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "DriveWealth",
@@ -23464,7 +23582,8 @@
       "source_url": "https://www.cbinsights.com/company/mysolomeo-holdings",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Dropbox",
@@ -23514,7 +23633,8 @@
       "source_url": "https://www.ycombinator.com/companies/dropbox",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Druva",
@@ -23738,7 +23858,8 @@
         "observed": "2026-08-01",
         "source_url": "https://www.ambitionbox.com/salaries/druva-salaries"
       },
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Duffel",
@@ -23869,7 +23990,16 @@
       "source_url": "https://www.ycombinator.com/companies/duffel",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": {
+        "number": "11188295",
+        "name": "DUFFEL TECHNOLOGY LTD",
+        "status": "active",
+        "incorporated": "2018-02-05",
+        "city": "London",
+        "url": "https://find-and-update.company-information.service.gov.uk/company/11188295",
+        "confidence": "stated"
+      }
     },
     {
       "name": "EBANX",
@@ -23983,7 +24113,8 @@
         "city": "Mumbai",
         "status": "Active",
         "confidence": "exact"
-      }
+      },
+      "uk": null
     },
     {
       "name": "Elyos AI",
@@ -24072,7 +24203,16 @@
       "source_url": "https://www.ycombinator.com/companies/elyos-ai",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": {
+        "number": "14924564",
+        "name": "ELYOS ENERGY UK LTD",
+        "status": "active",
+        "incorporated": "2023-06-08",
+        "city": "Kings Langley",
+        "url": "https://find-and-update.company-information.service.gov.uk/company/14924564",
+        "confidence": "stated"
+      }
     },
     {
       "name": "Enable",
@@ -24133,7 +24273,8 @@
       "source_url": "https://www.cbinsights.com/company/enable",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Epic Games",
@@ -24180,7 +24321,8 @@
       "source_url": "https://www.cbinsights.com/company/epic-games",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Epidemic Sound",
@@ -24341,7 +24483,8 @@
       "source_url": "https://www.cbinsights.com/company/epidemic-sound",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Escape",
@@ -24416,7 +24559,8 @@
       "source_url": "https://www.ycombinator.com/companies/escape",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Expel",
@@ -24463,7 +24607,8 @@
       "source_url": "https://www.cbinsights.com/company/expel",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Faire",
@@ -24538,7 +24683,8 @@
       "source_url": "https://www.ycombinator.com/companies/faire",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "FalconX",
@@ -24607,7 +24753,8 @@
         "observed": "2026-07-26",
         "source_url": "https://www.ambitionbox.com/salaries/falconx-salaries"
       },
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Feedzai",
@@ -24699,7 +24846,8 @@
       "source_url": "https://www.cbinsights.com/company/feedzai",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Fieldguide",
@@ -24761,7 +24909,8 @@
       "source_url": "https://www.ycombinator.com/companies/fieldguide",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Fireblocks",
@@ -25086,7 +25235,8 @@
       "source_url": "https://www.cbinsights.com/company/fireblocks",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "firmus",
@@ -25515,7 +25665,8 @@
       "source_url": "https://www.cbinsights.com/company/firmus-technologies",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Fivetran",
@@ -26071,7 +26222,8 @@
         "city": "Bangalore",
         "status": "Active",
         "confidence": "exact"
-      }
+      },
+      "uk": null
     },
     {
       "name": "Fleek",
@@ -26314,7 +26466,8 @@
       "source_url": "https://www.ycombinator.com/companies/fleek",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Flexport",
@@ -26840,7 +26993,8 @@
         "observed": "2026-07-19",
         "source_url": "https://www.ambitionbox.com/salaries/flexport-salaries"
       },
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Focal Systems",
@@ -26915,7 +27069,8 @@
       "source_url": "https://www.ycombinator.com/companies/focal-systems",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Forter",
@@ -27147,7 +27302,16 @@
       "source_url": "https://www.forbes.com/companies/forter/",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": {
+        "number": "12136011",
+        "name": "FORTER SOLUTIONS UK LTD",
+        "status": "active",
+        "incorporated": "2019-08-02",
+        "city": "London",
+        "url": "https://find-and-update.company-information.service.gov.uk/company/12136011",
+        "confidence": "stated"
+      }
     },
     {
       "name": "FourKites",
@@ -27215,7 +27379,8 @@
         "observed": "2026-07-26",
         "source_url": "https://www.ambitionbox.com/salaries/fourkites-salaries"
       },
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Front",
@@ -27277,7 +27442,8 @@
       "source_url": "https://www.ycombinator.com/companies/front",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Fundamental",
@@ -27381,7 +27547,8 @@
       "source_url": "https://techcrunch.com/2026/02/05/fundamental-raises-255-million-series-a-with-a-new-take-on-big-data-analysis/",
       "qualified_by": "letter",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Gather AI",
@@ -27456,7 +27623,8 @@
         "city": "Gautam Buddha Nagar",
         "status": "Active",
         "confidence": "exact"
-      }
+      },
+      "uk": null
     },
     {
       "name": "Giga",
@@ -27489,7 +27657,8 @@
       "source_url": "https://www.ycombinator.com/companies/giga",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Gigs",
@@ -27805,7 +27974,8 @@
       "source_url": "https://www.ycombinator.com/companies/gigs",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "GitLab",
@@ -29110,7 +29280,8 @@
         "city": "Mumbai",
         "status": "Active",
         "confidence": "exact"
-      }
+      },
+      "uk": null
     },
     {
       "name": "Glean",
@@ -29518,7 +29689,8 @@
         "observed": "2026-07-30",
         "source_url": "https://www.ambitionbox.com/salaries/glean-salaries"
       },
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "GoCardless",
@@ -29719,7 +29891,16 @@
       "source_url": "https://www.ycombinator.com/companies/gocardless",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": {
+        "number": "07495895",
+        "name": "GOCARDLESS LTD",
+        "status": "active",
+        "incorporated": "2011-01-17",
+        "city": "London",
+        "url": "https://find-and-update.company-information.service.gov.uk/company/07495895",
+        "confidence": "stated"
+      }
     },
     {
       "name": "Grafana Labs",
@@ -30795,7 +30976,8 @@
       "source_url": "https://www.forbes.com/companies/grafana-labs/",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Groww",
@@ -30976,7 +31158,8 @@
         "observed": "2026-08-01",
         "source_url": "https://www.ambitionbox.com/salaries/groww-salaries"
       },
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "HackerRank",
@@ -31311,7 +31494,8 @@
         "observed": "2026-08-01",
         "source_url": "https://www.ambitionbox.com/salaries/hackerrank-salaries"
       },
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Handshake",
@@ -31461,7 +31645,8 @@
         "observed": "2026-06-08",
         "source_url": "https://www.ambitionbox.com/salaries/handshake-salaries"
       },
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Happl",
@@ -31592,7 +31777,16 @@
       "source_url": "https://www.ycombinator.com/companies/happl",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": {
+        "number": "12430540",
+        "name": "HAPPL LTD",
+        "status": "active",
+        "incorporated": "2020-01-28",
+        "city": "London",
+        "url": "https://find-and-update.company-information.service.gov.uk/company/12430540",
+        "confidence": "stated"
+      }
     },
     {
       "name": "HappyRobot",
@@ -31938,7 +32132,8 @@
       "source_url": "https://www.ycombinator.com/companies/happyrobot",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Harmonic",
@@ -31971,7 +32166,8 @@
       "source_url": "https://www.cbinsights.com/company/harmonic-4",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Harness",
@@ -32437,7 +32633,8 @@
         "observed": "2026-07-30",
         "source_url": "https://www.ambitionbox.com/salaries/harness-salaries"
       },
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Heidi Health",
@@ -33123,7 +33320,8 @@
       "source_url": "https://techcrunch.com/2025/10/05/heidi-health-raises-65m-series-b-led-by-steve-cohens-point72/",
       "qualified_by": "letter",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Helsing",
@@ -34830,7 +35028,8 @@
       "source_url": "https://www.cbinsights.com/company/helsing",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "HeyGen",
@@ -34906,7 +35105,8 @@
       "source_url": "https://www.forbes.com/companies/heygen/",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Higgsfield",
@@ -34969,7 +35169,8 @@
       "source_url": "https://www.cbinsights.com/company/higgsfield-agents",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "HighRadius",
@@ -35668,7 +35869,8 @@
         "observed": "2026-08-01",
         "source_url": "https://www.ambitionbox.com/salaries/highradius-salaries"
       },
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Hightouch",
@@ -35783,7 +35985,8 @@
         "observed": "2026-01-18",
         "source_url": "https://www.ambitionbox.com/salaries/hightouch-salaries"
       },
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Horizon 3 AI",
@@ -35990,7 +36193,8 @@
       "source_url": "https://www.sec.gov/Archives/edgar/data/1801975/000180197525000001/0001801975-25-000001-index.htm",
       "qualified_by": "amount",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Humaans",
@@ -36163,7 +36367,16 @@
       "source_url": "https://www.ycombinator.com/companies/humaans",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": {
+        "number": "11496946",
+        "name": "HUMAANS SOFTWARE UK LTD",
+        "status": "active",
+        "incorporated": "2018-08-02",
+        "city": "London",
+        "url": "https://find-and-update.company-information.service.gov.uk/company/11496946",
+        "confidence": "stated"
+      }
     },
     {
       "name": "Huntress",
@@ -36268,7 +36481,8 @@
       "source_url": "https://www.cbinsights.com/company/huntress-labs",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "iCapital",
@@ -36445,7 +36659,8 @@
       "source_url": "https://www.cbinsights.com/company/icapital-network",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Immuta",
@@ -36492,7 +36707,8 @@
       "source_url": "https://www.cbinsights.com/company/immuta",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Immutable",
@@ -36525,7 +36741,8 @@
       "source_url": "https://www.cbinsights.com/company/fuel-bros",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "impact.com",
@@ -36689,7 +36906,8 @@
       "source_url": "https://www.cbinsights.com/company/impact-radius",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Imply Data",
@@ -36736,7 +36954,8 @@
         "city": "Bangalore",
         "status": "Active",
         "confidence": "exact"
-      }
+      },
+      "uk": null
     },
     {
       "name": "Incode Technologies",
@@ -36783,7 +37002,8 @@
       "source_url": "https://www.cbinsights.com/company/incode1",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Infisical",
@@ -36852,7 +37072,8 @@
       "source_url": "https://www.ycombinator.com/companies/infisical",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Inflection AI",
@@ -36885,7 +37106,8 @@
       "source_url": "https://www.cbinsights.com/company/inflection-ai",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "InMobi",
@@ -37543,7 +37765,8 @@
         "observed": "2026-08-01",
         "source_url": "https://www.ambitionbox.com/salaries/inmobi-salaries"
       },
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Instabase",
@@ -37590,7 +37813,8 @@
         "city": "Bangalore",
         "status": "Active",
         "confidence": "exact"
-      }
+      },
+      "uk": null
     },
     {
       "name": "Instawork",
@@ -37905,7 +38129,8 @@
       "source_url": "https://www.ycombinator.com/companies/instawork",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Instead",
@@ -37988,7 +38213,8 @@
         "observed": "2026-08-01",
         "source_url": "https://www.ambitionbox.com/salaries/instead-salaries"
       },
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Intercom",
@@ -39223,7 +39449,8 @@
       "source_url": "https://www.forbes.com/companies/intercom/",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Ironclad",
@@ -39312,7 +39539,8 @@
       "source_url": "https://www.ycombinator.com/companies/ironclad",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Isomorphic Labs",
@@ -39583,7 +39811,8 @@
       "source_url": "https://techcrunch.com/2025/03/31/alphabets-ai-drug-discovery-platform-isomorphic-labs-raises-600m-from-thrive/",
       "qualified_by": "amount",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Iterable",
@@ -39673,7 +39902,16 @@
       "source_url": "https://www.cbinsights.com/company/iterable",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": {
+        "number": "12064168",
+        "name": "ITERABLE LTD",
+        "status": "active",
+        "incorporated": "2019-06-21",
+        "city": "London",
+        "url": "https://find-and-update.company-information.service.gov.uk/company/12064168",
+        "confidence": "stated"
+      }
     },
     {
       "name": "Ivalua",
@@ -40131,7 +40369,8 @@
         "city": "Pune",
         "status": "Active",
         "confidence": "exact"
-      }
+      },
+      "uk": null
     },
     {
       "name": "Junction",
@@ -40181,7 +40420,8 @@
       "source_url": "https://www.ycombinator.com/companies/junction",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Justworks",
@@ -40214,7 +40454,8 @@
       "source_url": "https://www.cbinsights.com/company/justworks",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Karat",
@@ -40254,7 +40495,8 @@
         "observed": "2026-05-02",
         "source_url": "https://www.ambitionbox.com/salaries/karat-salaries"
       },
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Kaseya",
@@ -40536,7 +40778,8 @@
         "observed": "2026-08-01",
         "source_url": "https://www.ambitionbox.com/salaries/kaseya-salaries"
       },
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Keyrock",
@@ -40700,7 +40943,8 @@
       "source_url": "https://www.cbinsights.com/company/keyrock",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Komodo Health",
@@ -40850,7 +41094,8 @@
         "observed": "2026-07-05",
         "source_url": "https://www.ambitionbox.com/salaries/komodo-health-salaries"
       },
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Kong",
@@ -41447,7 +41692,8 @@
         "observed": "2026-07-15",
         "source_url": "https://www.ambitionbox.com/salaries/kong-salaries"
       },
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Kpler",
@@ -41721,7 +41967,8 @@
       "source_url": "https://www.cbinsights.com/company/kpler",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Lago",
@@ -41782,7 +42029,8 @@
       "source_url": "https://www.ycombinator.com/companies/lago",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Lambda Labs",
@@ -41831,7 +42079,8 @@
       "source_url": "https://www.cbinsights.com/company/Lambda Labs",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "LangChain",
@@ -42120,7 +42369,8 @@
       "source_url": "https://www.cbinsights.com/company/langchain",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Lattice",
@@ -42153,7 +42403,8 @@
       "source_url": "https://www.ycombinator.com/companies/lattice",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "LaunchDarkly",
@@ -42284,7 +42535,8 @@
         "city": "Bangalore",
         "status": "Active",
         "confidence": "exact"
-      }
+      },
+      "uk": null
     },
     {
       "name": "Lighthouse",
@@ -42580,7 +42832,8 @@
         "observed": "2026-08-01",
         "source_url": "https://www.ambitionbox.com/salaries/lighthouse-salaries"
       },
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Lightning AI",
@@ -42754,7 +43007,8 @@
       "source_url": "https://www.sec.gov/Archives/edgar/data/2101357/000210135726000001/0002101357-26-000001-index.htm",
       "qualified_by": "amount",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Lightricks",
@@ -42787,7 +43041,8 @@
       "source_url": "https://www.cbinsights.com/company/lightricks-ltd",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Linear",
@@ -42820,7 +43075,8 @@
       "source_url": "https://www.cbinsights.com/company/linear-1",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Lio",
@@ -43091,7 +43347,8 @@
       "source_url": "https://techcrunch.com/2026/03/05/lio-ai-series-a-a16z-30m-raise-automate-enterprise-procurement/",
       "qualified_by": "amount",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Liquid AI",
@@ -43138,7 +43395,8 @@
       "source_url": "https://www.cbinsights.com/company/liquid-ai",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Lucid Software",
@@ -43326,7 +43584,8 @@
       "source_url": "https://www.cbinsights.com/company/lucid-software",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Lucis",
@@ -43469,7 +43728,8 @@
       "source_url": "https://www.ycombinator.com/companies/lucis",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Luma AI",
@@ -43615,7 +43875,8 @@
       "source_url": "https://www.cbinsights.com/company/luma-ai",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "MaintainX",
@@ -43662,7 +43923,8 @@
       "source_url": "https://www.sec.gov/Archives/edgar/data/1762155/000176215525000002/0001762155-25-000002-index.htm",
       "qualified_by": "amount",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "MarqVision",
@@ -43752,7 +44014,8 @@
       "source_url": "https://www.ycombinator.com/companies/marqvision",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Marshmallow",
@@ -43995,7 +44258,8 @@
       "source_url": "https://www.cbinsights.com/company/marshmallow-financial-services",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Matillion",
@@ -44141,7 +44405,8 @@
       "source_url": "https://www.cbinsights.com/company/matillion",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Mattermost",
@@ -44233,7 +44498,8 @@
       "source_url": "https://www.ycombinator.com/companies/mattermost",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "MeltPlan",
@@ -44324,7 +44590,8 @@
       "source_url": "https://www.sec.gov/Archives/edgar/data/2106586/000210658626000001/0002106586-26-000001-index.htm",
       "qualified_by": "amount",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Mercor",
@@ -44357,7 +44624,8 @@
       "source_url": "https://www.forbes.com/companies/mercor/",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Mercury",
@@ -44390,7 +44658,8 @@
       "source_url": "https://www.forbes.com/companies/mercury/",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Meticulous",
@@ -44479,7 +44748,8 @@
       "source_url": "https://www.ycombinator.com/companies/meticulous",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "MindTickle",
@@ -44790,7 +45060,8 @@
         "observed": "2026-08-01",
         "source_url": "https://www.ambitionbox.com/salaries/mindtickle-salaries"
       },
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Minio",
@@ -44866,7 +45137,8 @@
         "city": "Bangalore",
         "status": "Active",
         "confidence": "exact"
-      }
+      },
+      "uk": null
     },
     {
       "name": "Mixpanel",
@@ -45149,7 +45421,8 @@
         "observed": "2025-10-15",
         "source_url": "https://www.ambitionbox.com/salaries/mixpanel-salaries"
       },
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Modern Health",
@@ -45182,7 +45455,8 @@
       "source_url": "https://www.ycombinator.com/companies/modern-health",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "MOLOCO",
@@ -45303,7 +45577,8 @@
       "source_url": "https://www.cbinsights.com/company/moloco",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Moniepoint",
@@ -45751,7 +46026,8 @@
         "observed": "2026-08-01",
         "source_url": "https://www.ambitionbox.com/salaries/moniepoint-salaries"
       },
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Monte Carlo",
@@ -45798,7 +46074,8 @@
       "source_url": "https://www.cbinsights.com/company/monte-carlo",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Monzo",
@@ -46828,7 +47105,16 @@
       "source_url": "https://www.cbinsights.com/company/mondo",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": {
+        "number": "09446231",
+        "name": "MONZO BANK LIMITED",
+        "status": "active",
+        "incorporated": "2015-02-18",
+        "city": "London",
+        "url": "https://find-and-update.company-information.service.gov.uk/company/09446231",
+        "confidence": "stated"
+      }
     },
     {
       "name": "MoonPay",
@@ -47002,7 +47288,8 @@
         "observed": "2025-10-12",
         "source_url": "https://www.ambitionbox.com/salaries/moonpay-salaries"
       },
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "MUBI",
@@ -47049,7 +47336,8 @@
       "source_url": "https://www.cbinsights.com/company/mubi",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "MURAL",
@@ -47154,7 +47442,8 @@
       "source_url": "https://www.cbinsights.com/company/mural",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Mux",
@@ -47187,7 +47476,8 @@
       "source_url": "https://www.ycombinator.com/companies/mux",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "N26",
@@ -48250,7 +48540,8 @@
       "source_url": "https://www.cbinsights.com/company/number26",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "NanoNets",
@@ -48431,7 +48722,8 @@
         "observed": "2026-08-01",
         "source_url": "https://www.ambitionbox.com/salaries/nanonets-salaries"
       },
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Nash",
@@ -48549,7 +48841,8 @@
       "source_url": "https://www.ycombinator.com/companies/nash",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Neo4j",
@@ -49048,7 +49341,8 @@
         "city": "New Delhi",
         "status": "Active",
         "confidence": "exact"
-      }
+      },
+      "uk": null
     },
     {
       "name": "Netskope",
@@ -49741,7 +50035,8 @@
         "observed": "2026-07-27",
         "source_url": "https://www.ambitionbox.com/salaries/netskope-salaries"
       },
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Nextiva",
@@ -49809,7 +50104,8 @@
         "observed": "2026-07-31",
         "source_url": "https://www.ambitionbox.com/salaries/nextiva-salaries"
       },
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Niantic Spatial",
@@ -49856,7 +50152,8 @@
       "source_url": "https://www.sec.gov/Archives/edgar/data/2072158/000207215825000001/0002072158-25-000001-index.htm",
       "qualified_by": "amount",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "NIUM",
@@ -50195,7 +50492,8 @@
         "city": "Mumbai City",
         "status": "Active",
         "confidence": "exact"
-      }
+      },
+      "uk": null
     },
     {
       "name": "Notabene",
@@ -50256,7 +50554,8 @@
       "source_url": "https://www.ycombinator.com/companies/notabene",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Notion",
@@ -50710,7 +51009,8 @@
         "observed": "2026-07-08",
         "source_url": "https://www.ambitionbox.com/salaries/notion-salaries"
       },
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Numeral",
@@ -50757,7 +51057,8 @@
       "source_url": "https://techcrunch.com/2025/09/18/numeral-raises-35m-to-automate-sales-tax-with-ai/",
       "qualified_by": "amount",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Observe.AI",
@@ -50876,7 +51177,8 @@
       "source_url": "https://www.ycombinator.com/companies/observe-ai",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Odyssey",
@@ -51063,7 +51365,8 @@
       "source_url": "https://www.cbinsights.com/company/odyssey-11",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Oklo",
@@ -51098,7 +51401,8 @@
       "source_url": "https://www.ycombinator.com/companies/oklo",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "OKX",
@@ -53263,7 +53567,8 @@
       "source_url": "https://www.cbinsights.com/company/okx",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Oleria",
@@ -53303,7 +53608,8 @@
         "observed": "2026-05-18",
         "source_url": "https://www.ambitionbox.com/salaries/oleria-salaries"
       },
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Onebrief",
@@ -53350,7 +53656,8 @@
       "source_url": "https://www.sec.gov/Archives/edgar/data/1888809/000188880926000001/0001888809-26-000001-index.htm",
       "qualified_by": "amount",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "OneTrust",
@@ -54033,7 +54340,8 @@
       "source_url": "https://www.forbes.com/companies/onetrust/",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "OpenWeb",
@@ -54081,7 +54389,8 @@
       "source_url": "https://www.cbinsights.com/company/spotim",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Oyster",
@@ -54322,7 +54631,8 @@
         "observed": "2026-07-27",
         "source_url": "https://www.ambitionbox.com/salaries/oyster-salaries"
       },
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "PagerDuty",
@@ -54384,7 +54694,8 @@
       "source_url": "https://www.ycombinator.com/companies/pagerduty",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "PandaDoc",
@@ -54544,7 +54855,8 @@
       "source_url": "https://www.cbinsights.com/company/quote-roller",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Parloa",
@@ -54992,7 +55304,8 @@
       "source_url": "https://www.cbinsights.com/company/parloa",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "PatSnap",
@@ -55349,7 +55662,16 @@
       "source_url": "https://www.cbinsights.com/company/patsnap",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": {
+        "number": "09492371",
+        "name": "PATSNAP (UK) LTD",
+        "status": "active",
+        "incorporated": "2015-03-16",
+        "city": "London",
+        "url": "https://find-and-update.company-information.service.gov.uk/company/09492371",
+        "confidence": "stated"
+      }
     },
     {
       "name": "Payward",
@@ -55976,7 +56298,8 @@
       "source_url": "https://www.sec.gov/Archives/edgar/data/1785695/000095012325005750/0000950123-25-005750-index.htm",
       "qualified_by": "amount",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Pelago",
@@ -56009,7 +56332,8 @@
       "source_url": "https://www.ycombinator.com/companies/pelago",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Pendo",
@@ -56129,7 +56453,8 @@
       "source_url": "https://www.forbes.com/companies/pendo/",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Pennylane",
@@ -57337,7 +57662,8 @@
       "source_url": "https://www.cbinsights.com/company/pennylane",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Peregrine",
@@ -57370,7 +57696,8 @@
       "source_url": "https://www.cbinsights.com/company/peregrine-1",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "PermitFlow",
@@ -57406,7 +57733,8 @@
       "source_url": "https://www.ycombinator.com/companies/permitflow",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Permutive",
@@ -57495,7 +57823,8 @@
       "source_url": "https://www.ycombinator.com/companies/permutive",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Photoroom",
@@ -57682,7 +58011,8 @@
       "source_url": "https://www.ycombinator.com/companies/photoroom",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "PhysicsX",
@@ -58066,7 +58396,8 @@
       "source_url": "https://www.cbinsights.com/company/physicsx",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "PicsArt",
@@ -58143,7 +58474,8 @@
       "source_url": "https://www.cbinsights.com/company/picsart",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Pigment",
@@ -58921,7 +59253,8 @@
       "source_url": "https://www.cbinsights.com/company/pigment-1",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Pleo",
@@ -59455,7 +59788,8 @@
       "source_url": "https://www.cbinsights.com/company/pleo",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Podium",
@@ -59600,7 +59934,8 @@
       "source_url": "https://www.ycombinator.com/companies/podium",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Postman",
@@ -60209,7 +60544,8 @@
         "observed": "2026-08-01",
         "source_url": "https://www.ambitionbox.com/salaries/postman-salaries"
       },
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "PPRO",
@@ -60439,7 +60775,16 @@
       "source_url": "https://www.cbinsights.com/company/ppro",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": {
+        "number": "07653641",
+        "name": "PPRO FINANCIAL LTD",
+        "status": "active",
+        "incorporated": "2011-06-01",
+        "city": "London",
+        "url": "https://find-and-update.company-information.service.gov.uk/company/07653641",
+        "confidence": "stated"
+      }
     },
     {
       "name": "Project44",
@@ -60677,7 +61022,8 @@
         "observed": "2026-08-01",
         "source_url": "https://www.ambitionbox.com/salaries/project44-salaries"
       },
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Prove Identity",
@@ -60710,7 +61056,8 @@
       "source_url": "https://www.cbinsights.com/company/prove",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "PsiQuantum",
@@ -60916,7 +61263,8 @@
       "source_url": "https://www.sec.gov/Archives/edgar/data/2070804/000199636625000006/0001996366-25-000006-index.htm",
       "qualified_by": "amount",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Pump",
@@ -60980,7 +61328,8 @@
       "source_url": "https://www.cbinsights.com/company/pump",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Quantum Metric",
@@ -61028,7 +61377,8 @@
       "source_url": "https://www.cbinsights.com/company/quantum-metric",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Quicknode",
@@ -61061,7 +61411,8 @@
       "source_url": "https://www.ycombinator.com/companies/quicknode",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Quince",
@@ -61450,7 +61801,8 @@
         "observed": "2026-08-01",
         "source_url": "https://www.ambitionbox.com/salaries/quince-salaries"
       },
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Ramp",
@@ -61610,7 +61962,8 @@
       "source_url": "https://www.forbes.com/companies/ramp/",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Razorpay",
@@ -61974,7 +62327,8 @@
         "observed": "2026-08-01",
         "source_url": "https://www.ambitionbox.com/salaries/razorpay-salaries"
       },
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Reflection AI",
@@ -62413,7 +62767,8 @@
       "source_url": "https://www.cbinsights.com/company/reflection-ai",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Reka AI",
@@ -62506,7 +62861,8 @@
       "source_url": "https://www.cbinsights.com/company/reka",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Replit",
@@ -62654,7 +63010,8 @@
       "source_url": "https://www.ycombinator.com/companies/replit",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Rigetti Computing",
@@ -62704,7 +63061,8 @@
       "source_url": "https://www.ycombinator.com/companies/rigetti-computing",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Ripple",
@@ -63076,7 +63434,8 @@
       "source_url": "https://www.cbinsights.com/company/ripple-labs",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Rogo",
@@ -63406,7 +63765,8 @@
       "source_url": "https://www.forbes.com/companies/rogo/",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "SambaNova Systems",
@@ -63489,7 +63849,8 @@
         "observed": "2026-05-03",
         "source_url": "https://www.ambitionbox.com/salaries/sambanova-systems-salaries"
       },
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Sarvam",
@@ -64403,7 +64764,8 @@
         "observed": "2026-06-23",
         "source_url": "https://www.ambitionbox.com/salaries/sarvam-salaries"
       },
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Scale AI",
@@ -64939,7 +65301,8 @@
         "city": "Bangalore",
         "status": "Active",
         "confidence": "exact"
-      }
+      },
+      "uk": null
     },
     {
       "name": "Scandit",
@@ -65002,7 +65365,8 @@
       "source_url": "https://www.cbinsights.com/company/scandit",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "SeekOut",
@@ -65037,7 +65401,8 @@
       "source_url": "https://www.cbinsights.com/company/zipstorm",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Sendbird",
@@ -65070,7 +65435,8 @@
       "source_url": "https://www.ycombinator.com/companies/sendbird",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Sentry",
@@ -65132,7 +65498,8 @@
       "source_url": "https://www.cbinsights.com/company/sentry",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Shift",
@@ -65393,7 +65760,8 @@
       "source_url": "https://www.cbinsights.com/company/shift-technology",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Sigma Computing",
@@ -65497,7 +65865,8 @@
       "source_url": "https://www.cbinsights.com/company/bitmoon-computing",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "SingleStore",
@@ -65671,7 +66040,8 @@
         "city": "K.V.Rangareddy",
         "status": "Active",
         "confidence": "exact"
-      }
+      },
+      "uk": null
     },
     {
       "name": "Slice",
@@ -65746,7 +66116,8 @@
       "source_url": "https://www.cbinsights.com/company/slice",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Socure",
@@ -65871,7 +66242,8 @@
         "city": "Chennai",
         "status": "Active",
         "confidence": "exact"
-      }
+      },
+      "uk": null
     },
     {
       "name": "SOLIDROAD",
@@ -65932,7 +66304,8 @@
       "source_url": "https://www.sec.gov/Archives/edgar/data/2126127/000212612726000001/0002126127-26-000001-index.htm",
       "qualified_by": "amount",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Sorcero",
@@ -65965,7 +66338,8 @@
       "source_url": "https://www.sec.gov/Archives/edgar/data/1878243/000187824325000002/0001878243-25-000002-index.htm",
       "qualified_by": "amount",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "SparkCognition",
@@ -66208,7 +66582,8 @@
         "city": "Bangalore",
         "status": "Active",
         "confidence": "exact"
-      }
+      },
+      "uk": null
     },
     {
       "name": "Speak",
@@ -66283,7 +66658,8 @@
       "source_url": "https://www.ycombinator.com/companies/speak",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Spellbrush",
@@ -66414,7 +66790,8 @@
       "source_url": "https://www.ycombinator.com/companies/spellbrush",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "StackAI",
@@ -66461,7 +66838,8 @@
       "source_url": "https://www.ycombinator.com/companies/stackai",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Staffbase",
@@ -66887,7 +67265,8 @@
       "source_url": "https://www.cbinsights.com/company/staffbase",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Starburst",
@@ -66953,7 +67332,8 @@
         "observed": "2025-10-15",
         "source_url": "https://www.ambitionbox.com/salaries/starburst-salaries"
       },
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Stilta",
@@ -67014,7 +67394,8 @@
       "source_url": "https://techcrunch.com/2026/05/19/legal-tech-announced-stilta-announces-10m-seed-backed-by-yc-and-a16z-months-after-launch/",
       "qualified_by": "amount",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Stripe",
@@ -69635,7 +70016,8 @@
         "city": "Bangalore",
         "status": "Active",
         "confidence": "exact"
-      }
+      },
+      "uk": null
     },
     {
       "name": "SumUp",
@@ -72954,7 +73336,8 @@
       "source_url": "https://www.cbinsights.com/company/sumup",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Super",
@@ -74124,7 +74507,8 @@
       "source_url": "https://www.ycombinator.com/companies/super",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Symphony",
@@ -74355,7 +74739,8 @@
       "source_url": "https://www.cbinsights.com/company/symphony-communication-services-holdings",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Tailscale",
@@ -74459,7 +74844,8 @@
       "source_url": "https://www.cbinsights.com/company/tailscale",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Talkdesk",
@@ -74634,7 +75020,8 @@
         "city": "Bangalore",
         "status": "Active",
         "confidence": "exact"
-      }
+      },
+      "uk": null
     },
     {
       "name": "Tamara",
@@ -74742,7 +75129,8 @@
         "observed": "2026-08-01",
         "source_url": "https://www.ambitionbox.com/salaries/tamara-salaries"
       },
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Tanium",
@@ -74962,7 +75350,8 @@
       "source_url": "https://www.forbes.com/companies/tanium/",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "TaxBit",
@@ -75123,7 +75512,8 @@
       "source_url": "https://www.cbinsights.com/company/taxbit",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Teleport",
@@ -75284,7 +75674,8 @@
       "source_url": "https://www.ycombinator.com/companies/teleport",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Temporal",
@@ -75409,7 +75800,8 @@
         "observed": "2026-07-31",
         "source_url": "https://www.ambitionbox.com/salaries/temporal-salaries"
       },
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "TensTorrent",
@@ -75684,7 +76076,8 @@
         "city": "Bangalore",
         "status": "Active",
         "confidence": "exact"
-      }
+      },
+      "uk": null
     },
     {
       "name": "Teya",
@@ -76531,7 +76924,16 @@
       "source_url": "https://www.cbinsights.com/company/saltpay",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": {
+        "number": "12271069",
+        "name": "TEYA SERVICES LTD.",
+        "status": "active",
+        "incorporated": "2019-10-18",
+        "city": "London",
+        "url": "https://find-and-update.company-information.service.gov.uk/company/12271069",
+        "confidence": "stated"
+      }
     },
     {
       "name": "The Athletic",
@@ -76592,7 +76994,8 @@
       "source_url": "https://www.ycombinator.com/companies/the-athletic",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Thought Machine",
@@ -76893,7 +77296,16 @@
       "source_url": "https://www.cbinsights.com/company/thought-machine",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": {
+        "number": "11114277",
+        "name": "THOUGHT MACHINE GROUP LIMITED",
+        "status": "active",
+        "incorporated": "2017-12-15",
+        "city": "London",
+        "url": "https://find-and-update.company-information.service.gov.uk/company/11114277",
+        "confidence": "stated"
+      }
     },
     {
       "name": "ThreatLocker",
@@ -76998,7 +77410,8 @@
       "source_url": "https://www.sec.gov/Archives/edgar/data/1824320/000182432025000001/0001824320-25-000001-index.htm",
       "qualified_by": "amount",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Tide",
@@ -77971,7 +78384,8 @@
         "observed": "2026-07-28",
         "source_url": "https://www.ambitionbox.com/salaries/tide-salaries"
       },
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Tines",
@@ -78075,7 +78489,8 @@
       "source_url": "https://www.cbinsights.com/company/tines",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Tipalti",
@@ -78150,7 +78565,8 @@
       "source_url": "https://www.cbinsights.com/company/tipalti",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Together AI",
@@ -78343,7 +78759,8 @@
       "source_url": "https://www.forbes.com/companies/together-ai/",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Torq",
@@ -78390,7 +78807,8 @@
       "source_url": "https://www.cbinsights.com/company/stackpulse",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Trade Republic",
@@ -78423,7 +78841,8 @@
       "source_url": "https://www.cbinsights.com/company/trade-republic-bank",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Trigger.dev",
@@ -78456,7 +78875,16 @@
       "source_url": "https://www.ycombinator.com/companies/trigger-dev",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": {
+        "number": "14441978",
+        "name": "API HERO LTD",
+        "status": "active",
+        "incorporated": "2022-10-25",
+        "city": "Altrincham",
+        "url": "https://find-and-update.company-information.service.gov.uk/company/14441978",
+        "confidence": "stated"
+      }
     },
     {
       "name": "Triomics",
@@ -78536,7 +78964,8 @@
         "observed": "2026-07-14",
         "source_url": "https://www.ambitionbox.com/salaries/triomics-salaries"
       },
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "TrueLayer",
@@ -78626,7 +79055,16 @@
       "source_url": "https://www.cbinsights.com/company/truelayer",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": {
+        "number": "10278251",
+        "name": "TRUELAYER LIMITED",
+        "status": "active",
+        "incorporated": "2016-07-14",
+        "city": "London",
+        "url": "https://find-and-update.company-information.service.gov.uk/company/10278251",
+        "confidence": "stated"
+      }
     },
     {
       "name": "Tulip",
@@ -78786,7 +79224,8 @@
       "source_url": "https://www.cbinsights.com/company/tulip-interfaces",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Turing",
@@ -78940,7 +79379,8 @@
         "observed": "2026-07-30",
         "source_url": "https://www.ambitionbox.com/salaries/turing-salaries"
       },
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Twin Health",
@@ -79124,7 +79564,8 @@
         "observed": "2026-07-28",
         "source_url": "https://www.ambitionbox.com/salaries/twin-health-salaries"
       },
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Twitch",
@@ -79200,7 +79641,8 @@
       "source_url": "https://www.ycombinator.com/companies/twitch",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Vapi",
@@ -79247,7 +79689,8 @@
       "source_url": "https://www.ycombinator.com/companies/vapi",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Vectra Networks",
@@ -79400,7 +79843,8 @@
       "source_url": "https://www.cbinsights.com/company/vectra-networks",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Vercel",
@@ -79710,7 +80154,8 @@
       "source_url": "https://www.forbes.com/companies/vercel/",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Veriff",
@@ -79801,7 +80246,8 @@
       "source_url": "https://www.ycombinator.com/companies/veriff",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Verkada",
@@ -80359,7 +80805,8 @@
       "source_url": "https://www.sec.gov/Archives/edgar/data/1688873/000168887325000005/0001688873-25-000005-index.htm",
       "qualified_by": "amount",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "VidMob",
@@ -80392,7 +80839,8 @@
       "source_url": "https://www.sec.gov/Archives/edgar/data/1710972/000123191925000043/0001231919-25-000043-index.htm",
       "qualified_by": "amount",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Vivodyne",
@@ -80481,7 +80929,8 @@
       "source_url": "https://www.sec.gov/Archives/edgar/data/1851074/000123191925000073/0001231919-25-000073-index.htm",
       "qualified_by": "amount",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Wayflyer",
@@ -80628,7 +81077,8 @@
       "source_url": "https://www.cbinsights.com/company/wayflyer",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Wayve",
@@ -81434,7 +81884,16 @@
       "source_url": "https://www.cbinsights.com/company/wayve-1",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": {
+        "number": "10924127",
+        "name": "WAYVE TECHNOLOGIES LTD",
+        "status": "active",
+        "incorporated": "2017-08-21",
+        "city": "London",
+        "url": "https://find-and-update.company-information.service.gov.uk/company/10924127",
+        "confidence": "stated"
+      }
     },
     {
       "name": "Webflow",
@@ -81495,7 +81954,8 @@
       "source_url": "https://www.ycombinator.com/companies/webflow",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Wispr Flow",
@@ -81544,7 +82004,8 @@
       "source_url": "https://techcrunch.com/2025/06/24/wispr-flow-raises-30m-from-menlo-ventures-for-its-ai-powered-dictation-app/",
       "qualified_by": "amount",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Workato",
@@ -82607,7 +83068,8 @@
         "city": "Hyderabad",
         "status": "Active",
         "confidence": "exact"
-      }
+      },
+      "uk": null
     },
     {
       "name": "Writer",
@@ -82892,7 +83354,8 @@
       "source_url": "https://www.cbinsights.com/company/qordoba",
       "qualified_by": "stage",
       "salary": null,
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Xendit",
@@ -83058,7 +83521,8 @@
         "observed": "2026-07-18",
         "source_url": "https://www.ambitionbox.com/salaries/xendit-salaries"
       },
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "YipitData",
@@ -83201,7 +83665,8 @@
         "city": "Bangalore",
         "status": "Active",
         "confidence": "exact"
-      }
+      },
+      "uk": null
     },
     {
       "name": "YugaByte",
@@ -83351,7 +83816,8 @@
         "observed": "2026-06-28",
         "source_url": "https://www.ambitionbox.com/salaries/yugabyte-salaries"
       },
-      "mca": null
+      "mca": null,
+      "uk": null
     },
     {
       "name": "Zip",
@@ -83819,7 +84285,8 @@
         "observed": "2026-06-07",
         "source_url": "https://www.ambitionbox.com/salaries/zip-salaries"
       },
-      "mca": null
+      "mca": null,
+      "uk": null
     }
   ]
 }

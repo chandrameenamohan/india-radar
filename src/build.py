@@ -21,7 +21,7 @@ from datetime import date
 from pathlib import Path
 from typing import Any, NamedTuple
 
-from src import ashby, corrections, greenhouse, lever, mca, salary
+from src import ashby, corrections, greenhouse, lever, mca, salary, uk
 from src.countries import COUNTRIES, countries
 from src.greenhouse import Roles
 from src.india import WORKPLACES, cities, workplace
@@ -59,7 +59,12 @@ from src.slugs import Slug, key, states_company
 #: over a difference of question, not of fact), and reads this only where the title
 #: places nothing. Free to carry: it rides in payloads all three probes already
 #: fetch — Greenhouse's `content=true` second pass, Ashby's and Lever's only call.
-SCHEMA_VERSION = 9
+#: v10 added `uk` (T9.1) — the Companies House registration, or null. The UK
+#: sibling of `mca` and NOT its generalisation: the two registers answer
+#: different questions (MCA's slice is subsidiaries of foreign-incorporated
+#: parents; Companies House covers every UK company), so a row can carry one,
+#: both or neither, and each is said in its own register's words.
+SCHEMA_VERSION = 10
 
 Probe = Callable[[str], Roles | Outcome]
 Row = dict[str, Any]
@@ -132,6 +137,10 @@ FIELDS: dict[str, type | tuple[type, ...]] = {
     "qualified_by": str,
     "salary": (dict, type(None)),
     "mca": (dict, type(None)),
+    #: The Companies House registration (T9.1). A UK-role field, the way `mca`
+    #: and `cities` are India's — the register covers UK companies and says
+    #: nothing about anybody else.
+    "uk": (dict, type(None)),
 }
 
 def stated(value: Any) -> str | None:
@@ -206,6 +215,12 @@ SALARY_FIELDS = ("avg_lpa", "reports", "observed", "source_url")
 #: any confidence below the publish threshold.
 MCA_FIELDS = ("cin", "name", "incorporated", "city", "status", "confidence")
 
+#: A Companies House registration's fields (T9.1). `url` is a field rather than
+#: something the page builds from `number`, because the badge's whole claim is
+#: that a reader can go and check it — the link is part of the fact. `uk_errors`
+#: refuses a link that points at a different company from the number beside it.
+UK_FIELDS = ("number", "name", "status", "incorporated", "city", "url", "confidence")
+
 #: The footer's counts (T5.3), lifted from the build report rather than derived
 #: from the rows. `checked` is the companies whose board we actually read —
 #: `outcomes.CHECKED`, listed or not — and `unchecked` is every absence of
@@ -218,6 +233,14 @@ INTEGRITY_FIELDS = ("corpus_size", "checked", "unchecked")
 #: the snapshot conform, so a row that doesn't is a parse gone wrong rather than
 #: an unusual company.
 CIN = re.compile(r"[LU]\d{5}[A-Z]{2}\d{4}[A-Z]{3}\d{6}")
+
+#: A UK company number as Companies House issues it: eight characters, either
+#: eight digits (England and Wales) or a two-letter jurisdiction prefix and six
+#: (`SC` Scotland, `NI` Northern Ireland, `OC`/`SO`/`NC` the LLP series, `FC`
+#: overseas). Leading zeros are part of it — `09446231` is Monzo and `9446231`
+#: is not a company number at all — which is why this ships as a string and is
+#: length-checked rather than parsed as a number.
+COMPANY_NUMBER = re.compile(r"\d{8}|[A-Z]{2}\d{6}")
 
 #: The share of the last published companies a build must still list to publish
 #: (T6.4). A broken provider does not fail this build — every probe returns
@@ -349,6 +372,48 @@ def mca_errors(found: Any) -> list[str]:
     return problems
 
 
+def uk_errors(found: Any) -> list[str]:
+    """Every way one Companies House registration fails the schema. Empty means
+    it may ship.
+
+    A row with no registration is the normal case and `errors` never calls this
+    for one. What this refuses is a registration the site would render as a fact
+    about a company that may not be this one: a malformed company number, a link
+    that points somewhere other than the number beside it, a match the matcher
+    held below the publish threshold — or a company the register has struck off,
+    which contradicts the live job board that put the row here at all.
+
+    The status is checked and NEVER rewritten. `liquidation` and `administration`
+    ship as the register spells them (T9.1's DoD: a company in difficulty must
+    not render as one that is fine); only the four states that mean the company
+    is off the register are refused.
+    """
+    if not isinstance(found, Mapping):
+        return [f"is {type(found).__name__}, not a registration"]
+    problems = _shape(found, UK_FIELDS)
+    number = found.get("number")
+    if not (isinstance(number, str) and COMPANY_NUMBER.fullmatch(number)):
+        problems.append(f"number {number!r} is not a UK company number")
+    for field in ("name", "status"):
+        if not (isinstance(value := found.get(field), str) and value.strip()):
+            problems.append(f"{field} {value!r} is not a non-empty string")
+    if not salary.is_iso_date(found.get("incorporated")):
+        problems.append(f"incorporated {found.get('incorporated')!r} is not an ISO date")
+    # Blank is legal: the register leaves a registered office's locality out on
+    # a real minority of records, and the site renders that absence as one.
+    if not isinstance(found.get("city"), str):
+        problems.append(f"city {found.get('city')!r} is not a string")
+    if found.get("url") != uk.PUBLIC + str(number):
+        problems.append(f"url {found.get('url')!r} does not lead to company {number!r}")
+    if found.get("status") in uk.DEAD:
+        problems.append(
+            f"status {found.get('status')!r}: this company's live board is what listed it"
+        )
+    if found.get("confidence") != uk.STATED:
+        problems.append(f"confidence {found.get('confidence')!r} is below the publish threshold")
+    return problems
+
+
 def integrity_errors(found: Any, listed: int) -> list[str]:
     """Every way the footer's counts fail the schema. Empty means they may ship.
 
@@ -421,6 +486,8 @@ def errors(row: Mapping[str, Any]) -> list[str]:
         problems += [f"salary: {p}" for p in salary_errors(row["salary"])]
     if row.get("mca") is not None:
         problems += [f"mca: {p}" for p in mca_errors(row["mca"])]
+    if row.get("uk") is not None:
+        problems += [f"uk: {p}" for p in uk_errors(row["uk"])]
     # The three rules corpus._qualified_by can fire. A row qualified by anything
     # else was admitted by a rule the site has no wording for.
     if row.get("qualified_by") not in ("letter", "amount", "stage"):
@@ -649,6 +716,7 @@ def build(
                 # third-party site between a company and being listed at all.
                 "salary": None,
                 "mca": None,
+                "uk": None,
             }
         )
 
@@ -893,6 +961,12 @@ def main(argv: list[str]) -> None:
         # Before the write, off the file the write is about to replace.
         carried = carry_salary(local, out)
     held = mca.attach(local)
+    # The UK register, on the rows with a UK role, for the same reason: Companies
+    # House knows every UK company and nobody else, so a badge on a Tokyo-only
+    # row would be this site inventing a fact. It reads a local file too, so it
+    # runs in smoke as well and init.sh proves the whole enrichment offline.
+    british = [row for row in rows if "United Kingdom" in row["countries"]]
+    held_uk = uk.attach(british)
 
     # The report comes first now: the site's footer counts what this build could
     # not check (T5.3), and those numbers are the report's, copied rather than
@@ -921,6 +995,15 @@ def main(argv: list[str]) -> None:
         **mca.counts(),
         "matched": sum(1 for row in rows if row["mca"]),
         "held": held,
+    }
+    # Off the disk for the same reason, and for one more: Companies House has no
+    # bulk endpoint, so a nightly reaching for it would be 220 searches and 300
+    # profile calls against a 600-per-five-minutes limit, every night, to learn
+    # what changed for almost nobody. `src/uk.py` refreshes the cache by hand.
+    built["uk"] = {
+        **uk.counts(),
+        "matched": sum(1 for row in rows if row["uk"]),
+        "held": held_uk,
     }
     if not smoke:
         write_report("data/build-report.json", built)
@@ -951,6 +1034,10 @@ def main(argv: list[str]) -> None:
           f"(pulled {built['mca']['pulled'] or 'never'})")
     print(f"  {built['mca']['matched']:4d}  matched to a CIN, "
           f"{len(built['mca']['held'])} held for review")
+    print(f"  {built['uk']['names']:4d}  UK names looked up on Companies House "
+          f"(pulled {built['uk']['pulled'] or 'never'})")
+    print(f"  {built['uk']['stated']:4d}  state their own company number, "
+          f"{built['uk']['matched']} badged, {len(built['uk']['held'])} held for review")
     print(f"  {sum(1 for row in rows if row['salary']):4d}  salary benchmarks "
           f"({carried} carried from the last build)")
 

@@ -34,8 +34,23 @@ PUBLISHED = "the last good build\n"
 
 
 def git(repo: Path, *args: str) -> str:
+    """Run git against the throwaway repo, and ONLY against it.
+
+    The environment scrub is not hygiene, it is the whole safety of this file.
+    `GIT_DIR` and `GIT_INDEX_FILE` are exported by git's own hooks, so when the
+    pre-commit hook runs `make check-fast` these tests inherit them — and then
+    `-C <tmp>` is ignored, `git add -A` stages the DELETION of every file in the
+    real repo (they are all missing relative to `<tmp>`), and `git reset` moves
+    the real HEAD. Measured, once, the hard way: a blocked commit left this
+    worktree with 160 staged deletions and a reset HEAD.
+
+    `subprocess` inherits `os.environ`, so the fix is to hand it a copy with
+    every `GIT_*` removed. Nothing here needs one.
+    """
+    clean = {name: value for name, value in os.environ.items() if not name.startswith("GIT_")}
     done = subprocess.run(
-        ["git", "-C", str(repo), *args], capture_output=True, text=True, check=True
+        ["git", "-C", str(repo), *args],
+        capture_output=True, text=True, check=True, env=clean,
     )
     return done.stdout.strip()
 
@@ -65,14 +80,19 @@ def nightly(repo: Path, build: str, seconds: str = "30") -> subprocess.Completed
 
     A file rather than an inline command line because NIGHTLY_BUILD is
     word-split by the script — it has to be, to carry `python3 -m src.build`.
+
+    The environment is scrubbed of `GIT_*` for the reason `git` above is: the
+    script commits, and under a pre-commit hook it would inherit the real repo's
+    `GIT_DIR` and commit THERE.
     """
     stub = repo / "stub.sh"
     stub.write_text(f"#!/bin/sh\n{build}\n")
     stub.chmod(0o755)
+    clean = {name: value for name, value in os.environ.items() if not name.startswith("GIT_")}
     return subprocess.run(
         [str(repo / SCRIPT)],
         cwd=repo,
-        env={**os.environ, "NIGHTLY_BUILD": str(stub), "NIGHTLY_TIMEOUT": seconds},
+        env={**clean, "NIGHTLY_BUILD": str(stub), "NIGHTLY_TIMEOUT": seconds},
         capture_output=True,
         text=True,
     )

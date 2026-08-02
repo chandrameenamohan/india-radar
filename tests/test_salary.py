@@ -81,7 +81,7 @@ def test_absent_salary_renders_clean():
         "countries": ["India"], "cities": ["Bengaluru"], "amount": 21_000_000, "currency": "USD",
         "round_letter": "A", "date": "2026-07-28",
         "source_url": "https://www.finsmes.com/2026/07/acme.html", "qualified_by": "letter",
-        "salary": None, "mca": None,
+        "salary": None, "mca": None, "uk": None,
     }
     assert errors(row) == []
     assert errors({**row, "salary": {"avg_lpa": 21.2, "reports": 7060,

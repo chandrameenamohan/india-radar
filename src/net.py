@@ -17,7 +17,9 @@ UA = (
 )
 
 
-def get_bytes(url: str, timeout: int = 45, ua: str = UA) -> tuple[int, bytes]:
+def get_bytes(
+    url: str, timeout: int = 45, ua: str = UA, auth: str | None = None
+) -> tuple[int, bytes]:
     """GET a URL, returning (status, body) with the body undecoded.
 
     Bytes, because not every source is a web page: SEC ships Form D as a zip
@@ -25,11 +27,18 @@ def get_bytes(url: str, timeout: int = 45, ua: str = UA) -> tuple[int, bytes]:
 
     `ua` is overridable because one host's requirement is another host's block —
     SEC serves 403 to the browser UA above and 200 to a declared contact string.
+
+    `auth` is HTTP Basic `user:password`, for the one source that asks for it:
+    Companies House takes its key as the username with an empty password (T9.1).
+    Every other source here puts its key in the query string, and the difference
+    is theirs, not ours.
     """
     done = subprocess.run(
         [
             "curl", "--location", "--silent", "--max-time", str(timeout),
-            "-A", ua, "--write-out", "%{http_code}", url,
+            "-A", ua, "--write-out", "%{http_code}",
+            *(["--user", auth] if auth else []),
+            url,
         ],
         capture_output=True,
     )
@@ -39,7 +48,7 @@ def get_bytes(url: str, timeout: int = 45, ua: str = UA) -> tuple[int, bytes]:
     return (int(status) if status.isdigit() else 0), body
 
 
-def get(url: str, timeout: int = 45) -> tuple[int, str]:
+def get(url: str, timeout: int = 45, auth: str | None = None) -> tuple[int, str]:
     """GET a URL, returning (status, body). Status 0 means the request never got
     an answer at all — DNS failure, refused connection, timeout.
 
@@ -51,7 +60,7 @@ def get(url: str, timeout: int = 45) -> tuple[int, str]:
     wrong slug, a 502 is a board we failed to read, and they send a company to
     different outcomes.
     """
-    status, body = get_bytes(url, timeout)
+    status, body = get_bytes(url, timeout, auth=auth)
     return status, body.decode("utf-8", errors="replace")
 
 
