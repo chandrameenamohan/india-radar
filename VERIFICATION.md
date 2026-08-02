@@ -257,3 +257,28 @@ Adding any of these now would be over-engineering for where we are.
 
 The loop runs in a **separate shell / tmux**, never in the interactive session,
 teeing to `logs/` so progress is monitored from here by tailing the log.
+
+---
+
+## Layer 5 — the Worker (T14.1)
+
+`make check` runs `node --test 'worker/*.test.mjs'` between `unit` and `e2e`.
+Node's stdlib runner, no framework and no `npm install`: `worker/auth.mjs` is
+deliberately dependency-free so the same bytes run in the Workers runtime and
+under plain Node.
+
+**That is the whole reason this layer can exist on a Mac.** workerd requires
+macOS 13.5+ and refuses to start on 13.4, so `wrangler dev` is unavailable here.
+Keeping the security boundary as a pure function over WebCrypto means it is still
+attacked on every commit; a JWT library would have made it unverifiable locally.
+
+**Mutation testing is the standard for this layer, not an extra.** A guard is
+only considered covered once deleting it has been shown to turn a test red.
+Copy `worker/*.mjs` to a scratch directory, `sed` out one guard, re-run. Two
+guards passed their tests for the wrong reason when this was first done, and the
+gate itself reported green over a red suite because a pipe ate node's exit code.
+Both are fixed; the habit is what prevents the next one.
+
+**What this layer cannot check here:** anything requiring the Worker to execute
+— the deployed round trip and the signed-in e2e assertion in T14.1's DoD. Those
+belong on `ubuntu-latest`, which `nightly.yml` already shows this project has.

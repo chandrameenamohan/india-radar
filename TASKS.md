@@ -2364,7 +2364,53 @@ Out of scope:
 > costs. T14.1 blocks everything; T14.2, T14.3 and T14.4 are independent of each
 > other and can run in parallel behind it.
 
-### T14.1 — A Workers API that knows who you are `todo` · *Phase 9*
+### T14.1 — A Workers API that knows who you are `blocked` · *Phase 9*
+> **Built and green; blocked on being RUN.** `worker/auth.mjs`, `worker/index.mjs`
+> and 24 tests exist and pass, wired into `make check` and `make check-fast`.
+> What is NOT met is the half of the acceptance that needs the Worker to execute:
+> **workerd cannot start on this machine** — `Unsupported macOS version: the
+> Cloudflare Workers runtime cannot run on the current version of macOS (13.4.0).
+> The minimum requirement is macOS 13.5.0+.` Unblocking is a deploy, a machine on
+> 13.5+, or a CI gate on `ubuntu-latest` (which `nightly.yml` already proves this
+> project has). **Do not close this by deleting the e2e checks.**
+>
+> **Zero dependencies, and that is what made it testable here at all.**
+> `crypto.subtle.verify` is the same primitive a JWT library calls; what is
+> hand-written is RFC 7519 claim checking. Because it imports nothing, it runs
+> unchanged under `node --test` on the machine where workerd will not start —
+> a library would have left the security boundary unverifiable in this
+> environment. The `ponytail:` note in `auth.mjs` names `@clerk/backend` as the
+> upgrade and the trigger for taking it.
+>
+> **MUTATION TESTING EARNED ITS KEEP TWICE, AND SHOULD BE THE HABIT HERE.**
+> Deleting the algorithm-confusion guard left all 14 original tests green, and so
+> did deleting `kid` selection: every attack was being stopped by signature
+> verification one step later, so two guards were untested and would have rotted
+> in silence. Both now have a test that fails if and only if that guard is gone —
+> the alg one by minting a token whose RSA signature is genuine and whose only
+> defect is the `alg` field; the kid one by publishing two keys and signing with
+> the second. Every guard in both files has since been deleted in a scratch copy
+> and confirmed to turn a test red. **One survivor is recorded rather than
+> removed:** the handler's `if (!jwks)` changes no test, because `verifySession`
+> refuses a null key set itself, and the comment above it says so.
+>
+> **Two things the tests found that the design had wrong.** A JWKS fetch failure
+> fell back to cached keys forever, which would let a key revoked *because it
+> leaked* keep working — now bounded by `JWKS_MAX_STALE_MS`, with the reasoning
+> written where the constant is. And the gate step first reported GREEN over a
+> red suite, because `node --test | tail` returns tail's exit code; the brake was
+> only proven by deliberately breaking a guard and finding `make check-fast` still
+> exited 0. It now exits 2.
+>
+> **CORS is required and is a security control, not boilerplate.** SPEC v4 says
+> the app page is same-origin with the register, but `roleatlas.sennamind.com` is
+> a DNS-only CNAME to GitHub Pages — that is what let GitHub issue the
+> certificate — so a Worker route on that hostname would take the certificate
+> away. The API needs its own hostname, which makes the exact-match origin
+> allowlist load-bearing; `evil-roleatlas.sennamind.com` has a test.
+>
+> Measured in passing: the bundle is **5.16 KiB with one binding**, and no value
+> from `.env` appears anywhere in it.
 > The first backend this project has ever had, and the task that decides whether
 > the rest are cheap. v3 said it out loud — *"no backend, no database, no session
 > server. It will happen — feature 18 and beyond need it."* Clerk already holds

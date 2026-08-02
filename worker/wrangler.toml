@@ -1,0 +1,19 @@
+# T14.1 — the Workers API. Deploy: npx wrangler deploy --config worker/wrangler.toml
+#
+# The register is NOT here. `site/index.html` stays on GitHub Pages exactly as it
+# is; this Worker is a second, separate deployable that the app page calls
+# cross-origin. See the CORS note at the top of index.mjs for why they cannot
+# share a hostname.
+
+name = "roleatlas-api"
+main = "index.mjs"
+compatibility_date = "2026-08-02"
+
+[vars]
+# Not a secret: the frontend API host is base64 inside the Clerk publishable key,
+# which is public by design (v3). It is a var so that a wrong value is a visible
+# config change rather than an invisible one.
+CLERK_ISSUER = "https://regular-troll-50.clerk.accounts.dev"
+
+# No D1 and no R2 bindings yet. T14.2 and T14.3 add them; a binding that exists
+# before anything reads it is a permission granted for no reason.
