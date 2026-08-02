@@ -32,12 +32,25 @@ WORKFLOW = WORKFLOWS / "nightly.yml"
 SLUGS = Path("data/slugs.json")
 PUBLISHED = "the last good build\n"
 
-
-#: The environment with git's own variables taken out of it. These tests run
-#: under the pre-commit hook, and git sets GIT_DIR and GIT_INDEX_FILE for a hook
-#: — which point every command below at the repository being committed to rather
-#: than at the throwaway one this fixture built. Isolation is the whole point of
-#: the fixture, so the inherited git environment is dropped rather than trusted.
+#: The environment for a throwaway repo, which is the ambient one with git's own
+#: variables taken out.
+#:
+#: Load-bearing, and it took a blocked commit to find: git exports GIT_DIR,
+#: GIT_INDEX_FILE and the author identity into every hook it runs, and the
+#: The environment with git's own variables taken out of it.
+#:
+#: Git exports GIT_DIR and GIT_INDEX_FILE to a hook, and this suite runs under
+#: the pre-commit one. Inherited, `-C tmp_path` stops meaning anything: `git
+#: init` re-inits the repository being committed to rather than the throwaway
+#: one, and `git commit` re-enters the hook that started it. Isolation is the
+#: whole point of the fixture, so git's environment is dropped, not trusted.
+#:
+#: Found independently by two agents, both working in git WORKTREES, which is
+#: where it bites hardest — there GIT_DIR points somewhere other than the
+#: checkout and the failure names a pytest tmp path rather than its cause. It
+#: did NOT fail in the main checkout; commits went green through this same hook
+#: all session. Recorded that way deliberately: "every commit was failing" was
+#: the first telling and it is not what the evidence supports.
 CLEAN_ENV = {name: value for name, value in os.environ.items() if not name.startswith("GIT_")}
 
 

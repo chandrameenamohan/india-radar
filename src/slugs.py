@@ -42,13 +42,16 @@ from __future__ import annotations
 
 import json
 import re
+import sys
 from collections import Counter
 from collections.abc import Iterable, Mapping
 from concurrent.futures import ThreadPoolExecutor
+from itertools import chain
 from pathlib import Path
 from typing import Any, NamedTuple, TypedDict
 from urllib.parse import urlsplit
 
+from src import corrections
 from src.ashby import identity as ashby_identity
 from src.greenhouse import board_name
 from src.greenhouse import probe as greenhouse_probe
@@ -464,14 +467,88 @@ def write(directory: str | Path, resolution: Resolution) -> None:
         (out / f"{name}.json").write_text(json.dumps(part, indent=2, sort_keys=True) + "\n")
 
 
-def main() -> None:
+def read(directory: str | Path = "data") -> Resolution:
+    """The answers the last resolution wrote. Both halves or neither: an
+    unresolved.json without its slugs.json is a resolution that lost the
+    companies it succeeded on, and merging into that would silently re-resolve
+    them from scratch."""
+    out = Path(directory)
+    return Resolution(
+        json.loads((out / "slugs.json").read_text()),
+        json.loads((out / "unresolved.json").read_text()),
+    )
+
+
+def pending(
+    corpus: Iterable[str], answered: Iterable[str], changed: Iterable[str] = ()
+) -> set[str]:
+    """The names a rebuild has to resolve — T10.4.
+
+    Everything else already has an answer, and re-asking costs two fetches per
+    company: over the whole corpus that is ~2.5 hours to reproduce what
+    data/slugs.json and data/unresolved.json already say. So a corpus rebuild
+    resolves what the corpus GAINED, and nothing it already knows.
+
+    `changed` is the exception, and it is the one that makes this task worth
+    doing: an address a human corrected and a slug a human wrote down are INPUTS
+    to `resolve` that have moved since the answer was derived. Six of those
+    addresses were a different company's (T10.3), and the answers standing on
+    them were derived from a fact this project now holds to be wrong. They are
+    also free — an override never reaches the network at all, and six corrected
+    websites are twelve fetches.
+    """
+    answered, changed = set(answered), set(changed)
+    return {name for name in corpus if name not in answered or name in changed}
+
+
+def merge(held: Resolution, found: Resolution, corpus: Iterable[str]) -> Resolution:
+    """Last run's answers, updated by this run's, narrowed to today's corpus.
+
+    Narrowed rather than accumulated: a name the sources have dropped keeps an
+    answer here forever otherwise, and `build.shared_boards` reads this file
+    whole — so a dead name sharing a board would collapse a live company into one
+    that is no longer in the corpus at all.
+    """
+    names = list(corpus)
+    resolved = {n: held.resolved[n] for n in names if n in held.resolved}
+    unresolved = {n: held.unresolved[n] for n in names if n in held.unresolved}
+    # A name re-asked leaves its old answer behind whichever half it lands in:
+    # a company that resolved last time and is unresolved now must not keep the
+    # slug as well as the reason.
+    for name in chain(found.resolved, found.unresolved):
+        resolved.pop(name, None)
+        unresolved.pop(name, None)
+    return Resolution(resolved | found.resolved, unresolved | found.unresolved)
+
+
+def main(argv: Iterable[str] = ()) -> None:
+    argv = list(argv)
     companies = json.loads(Path("data/corpus.json").read_text())["companies"]
     stated = sum(1 for company in companies if company.get("website"))
+    overrides = load_overrides()
 
+    if "--gained" in argv:
+        held = read()
+        wanted = pending(
+            (c["name"] for c in companies),
+            set(held.resolved) | set(held.unresolved),
+            set(corrections.load().websites) | set(overrides),
+        )
+        print(f"--gained: {len(wanted)} of {len(companies)} to resolve "
+              f"({len(companies) - len(wanted)} already answered)")
+        found = resolve_all(
+            [c for c in companies if c["name"] in wanted], overrides=overrides
+        )
+        resolution = merge(held, found, (c["name"] for c in companies))
+    else:
+        resolution = resolve_all(companies, overrides=overrides)
+
+    # Read before write() replaces it. T12.1's whole claim is that this number
+    # moves, and --gained means the run that moves it touches only the names the
+    # corpus gained -- so the count has to come off the file, not off this run.
     previous = Path("data/unresolved.json")
     before = len(json.loads(previous.read_text())) if previous.exists() else None
 
-    resolution = resolve_all(companies, overrides=load_overrides())
     write("data", resolution)
     print(f"slugs.json: {len(resolution.resolved)}/{len(companies)} resolved "
           f"({resolution.rate:.0%}), {stated} with a stated website")
@@ -489,4 +566,4 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    main()
+    main(sys.argv[1:])

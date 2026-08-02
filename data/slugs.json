@@ -1,9 +1,4 @@
 {
-  "1910": {
-    "ats": "greenhouse",
-    "method": "careers-page",
-    "slug": "1910genetics"
-  },
   "1Password": {
     "ats": "ashby",
     "method": "careers-page",
@@ -539,6 +534,11 @@
     "method": "careers-page",
     "slug": "canarytechnologies"
   },
+  "Candid Health": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "candidhealth"
+  },
   "Capi Money": {
     "ats": "ashby",
     "method": "careers-page",
@@ -818,11 +818,6 @@
     "ats": "greenhouse",
     "method": "careers-page",
     "slug": "cultureamp"
-  },
-  "Culture Biosciences": {
-    "ats": "greenhouse",
-    "method": "careers-page",
-    "slug": "culturebiosciences"
   },
   "Curative": {
     "ats": "greenhouse",
@@ -1233,6 +1228,11 @@
     "ats": "greenhouse",
     "method": "guess",
     "slug": "goatgroup"
+  },
+  "Garage": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "garage"
   },
   "Gather AI": {
     "ats": "greenhouse",
@@ -2076,7 +2076,7 @@
   },
   "Monzo": {
     "ats": "greenhouse",
-    "method": "guess",
+    "method": "careers-page",
     "slug": "monzo"
   },
   "MoonPay": {
@@ -3008,6 +3008,11 @@
     "ats": "greenhouse",
     "method": "guess",
     "slug": "slice"
+  },
+  "Smallest.ai": {
+    "ats": "ashby",
+    "method": "careers-page",
+    "slug": "smallest"
   },
   "SmartAsset": {
     "ats": "greenhouse",

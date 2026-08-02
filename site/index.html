@@ -1687,7 +1687,21 @@ function descBlock(d) {
     block.append(line);
   }
   if (!block.children.length) return null;
-  if (d.ai) block.append(el('p', 'prov', 'AI-summarized'));
+  // Provenance in two halves, because they answer two different questions.
+  // `ai` says a machine wrote these lines. `checked` says a pass afterwards
+  // opened the company's OWN website and read it against the board we publish
+  // their roles from, and found no contradiction (T10.5).
+  //
+  // The second half exists because a company the corpus holds no address for
+  // cannot be checked at all -- 45 listed rows were in that state when T10.5
+  // started, and their three lines looked exactly like the ones somebody had
+  // read. An unverified description is not a wrong one. It is one nobody has
+  // stood behind, and the page has to be able to say which it is showing.
+  if (d.ai) {
+    block.append(el('p', 'prov', d.checked
+      ? 'AI-summarized · checked against their own site'
+      : 'AI-summarized · unverified'));
+  }
   return block;
 }
 

@@ -13,12 +13,15 @@ from src.ashby import Identity
 from src.outcomes import Outcome
 from src.slugs import (
     OVERRIDES,
+    Resolution,
     Slug,
     careers_urls,
     find_boards,
     guess,
     load_overrides,
+    merge,
     parse_overrides,
+    pending,
     resolve,
     resolve_all,
     same_site,
@@ -571,3 +574,60 @@ def test_load_overrides_verifies_every_entry(monkeypatch):
     overrides = load_overrides()
 
     assert sorted(checked) == sorted(slug["slug"] for slug in overrides.values())
+
+
+# ---------------------------------------------------------------------- T10.4
+# A corpus rebuild adds a handful of names and re-derives 2,900 answers this
+# file already holds. What it has to resolve is the arrivals — and the companies
+# whose ADDRESS a human has since corrected, because that address is the first
+# thing `resolve` reads.
+
+
+def test_a_rebuild_resolves_the_arrivals_and_nothing_it_already_answered():
+    """Both halves of the last resolution count as answered. An unresolved
+    company HAS an answer — the reason it isn't resolved — and re-asking it
+    spends two fetches to be told `no-board-link` a second time."""
+    assert pending(["Held", "Missed", "Arrived"], answered=["Held", "Missed"]) == {"Arrived"}
+
+
+def test_a_corrected_address_is_re_resolved_however_answered_it_looks():
+    """The whole of T10.4. Six corpus addresses were a different company's, so a
+    slug derived from one of them was derived from a fact this project now holds
+    to be wrong. Measured on the rebuild: Monzo's answer moved from `guess` to
+    `careers-page` — same slug, and no longer standing on mondo.com."""
+    corpus = ["Monzo", "Untouched"]
+
+    assert pending(corpus, answered=corpus, changed=["Monzo"]) == {"Monzo"}
+    assert pending(corpus, answered=corpus) == set()
+
+
+def test_a_correction_for_a_company_outside_the_corpus_resolves_nothing():
+    """`corrections.check` is what fails on that, loudly and by name. This must
+    not quietly invent a company to go and resolve in the meantime."""
+    assert pending(["Acme"], answered=["Acme"], changed=["Gone"]) == set()
+
+
+def test_a_re_asked_company_never_keeps_both_its_old_answer_and_its_new_one():
+    """A company that resolved last night and is unresolved tonight would
+    otherwise sit in slugs.json AND unresolved.json, and the build reads the
+    first — so the site would go on listing a board nobody can reach."""
+    slug = Slug(ats="greenhouse", slug="acme", method="guess")
+    held = Resolution({"Acme": slug}, {"Beta": "no-board-link"})
+    found = Resolution({"Beta": slug}, {"Acme": "no-careers-page"})
+
+    merged = merge(held, found, ["Acme", "Beta"])
+
+    assert merged.resolved == {"Beta": slug}
+    assert merged.unresolved == {"Acme": "no-careers-page"}
+
+
+def test_a_name_the_sources_dropped_leaves_the_answer_files_with_it():
+    """`build.shared_boards` reads slugs.json whole, so a dead name left behind
+    here could collapse a live company into one the corpus no longer holds."""
+    slug = Slug(ats="greenhouse", slug="acme", method="guess")
+    held = Resolution({"Acme": slug, "Gone": slug}, {"Beta": "no-board-link", "Left": "no-website"})
+
+    merged = merge(held, Resolution({}, {}), ["Acme", "Beta"])
+
+    assert merged.resolved == {"Acme": slug}
+    assert merged.unresolved == {"Beta": "no-board-link"}

@@ -34,3 +34,9 @@ data/*.json.tmp
 
 # gstack tooling state, not project content
 .gstack/
+
+# Agent worktrees. `git worktree add` puts them INSIDE the repo, so without this
+# they are untracked-but-scanned: `ruff check .` walks into another agent's
+# half-written code and fails the gate on a file this checkout does not own.
+# Measured that way -- a lint error in a sibling agent's src/net.py.
+.claude/worktrees/

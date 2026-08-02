@@ -15,6 +15,7 @@ from src.build import (
     build,
     carry_salary,
     country_counts,
+    departures,
     errors,
     integrity_errors,
     published,
@@ -1007,3 +1008,38 @@ def test_a_carried_figure_that_no_longer_conforms_is_dropped_not_carried(tmp_pat
 
     assert carry_salary(tonight, out) == 0
     assert tonight[0]["salary"] is None
+
+
+# ---------------------------------------------------------------------- T10.4
+# The outcome counts account for every company IN the corpus. A corpus rebuild
+# can also drop a name outright, and that company then has no outcome to be
+# accounted under — which is the one way the listed set can shrink for a reason
+# nothing in the report states.
+
+
+def test_a_company_that_stopped_hiring_departs_under_its_outcome():
+    """Not a new kind of loss and not reported as one: `report` already assigned
+    it a reason, and this only says which of the published rows wore it."""
+    assigned = {"Acme": Outcome.NO_TARGET_ROLES.value, "Beta": Outcome.LISTED.value}
+
+    assert departures([{"name": "Acme"}, {"name": "Beta"}], assigned) == {
+        "Acme": "no-target-roles"
+    }
+
+
+def test_a_company_the_sources_dropped_departs_under_the_reason_nothing_states():
+    """The gap this closes. A name the corpus no longer holds is in no outcome,
+    because there is nothing left in the corpus to assign one to — so without
+    this the site quietly lists one company fewer and the report reads clean."""
+    assert departures([{"name": "Acme"}], {}) == {"Acme": "left-the-corpus"}
+
+
+def test_a_build_that_lost_nobody_reports_no_departures():
+    """A count that is never zero is a count nobody reads."""
+    assert departures([{"name": "Acme"}], {"Acme": Outcome.LISTED.value}) == {}
+
+
+def test_a_published_row_that_cannot_say_its_name_is_skipped_not_fatal():
+    """`published` is deliberately forgiving about what it reads back (T6.4), so
+    the report explaining a loss must not be the thing that fails on one."""
+    assert departures([{"name": 7}, {}, {"name": "Acme"}], {}) == {"Acme": "left-the-corpus"}
