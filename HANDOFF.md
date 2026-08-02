@@ -91,19 +91,17 @@ as nothing, a derivation says it is derived.
 ## NEXT (in order)
 
 1. **T9.1 build** — only after the human supplies the Companies House API key.
-2. **Corpus rebuild** — six T10.1/T10.3 `website` corrections are waiting on
-   one. `python -m src.corpus` is the manual step the nightly never runs, and
-   until it does, corpus.json still states the wrong addresses for Cresta,
-   Monzo, Alloy, FalconX, Slice and Symphony. Nothing on the site is wrong
-   meanwhile — descriptions read corrections.yaml directly (T10.3) and every one
-   of those companies already resolves to its own board — but slug discovery
-   still reads the stale address, which is how three of them went wrong.
-3. **Corpus rebuild, when something wants one** — `python -m src.corpus` is a
-   manual step the nightly never runs, and it is what makes T10.1's two website
-   corrections bite. Nothing is wrong on the site while it waits (both companies
-   already resolve to their own boards); a rebuild also picks up companies the
-   sources have added since 2026-07-29, which then need `python -m src.slugs`
-   (~2.5h) before they can be checked.
+2. **T10.4 — make the six website corrections real.** Specced. `src.corpus`
+   applies them and the nightly never runs it, so corpus.json still states the
+   wrong address for Cresta, Monzo, Alloy, FalconX, Slice and Symphony. Nothing
+   on the site is wrong meanwhile (descriptions read corrections.yaml directly),
+   but SLUG DISCOVERY reads `website`, and a wrong address is how three of those
+   six became wrong listings. Ordering and the 2.5h middle step are in the task.
+3. **T10.5 — the 45 listed companies we hold no address for.** Specced. All 45
+   are described, so 45 published descriptions rest on a check that cannot run.
+   5 of them can derive an address from their board's apply URL; the other 40
+   need a measurement first, with a kill criterion. Do NOT solve it by searching
+   the web for a homepage — that is the exact failure mode this epic exists for.
 4. Late August: re-check T7.1's unblock condition (snapshot count).
 
 ## Billing context (2026-08-01)

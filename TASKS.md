@@ -1800,3 +1800,97 @@ Out of scope:
   - making the audit part of the gate. It is ~40 minutes of live agents against
     270 third-party sites; it belongs beside a corpus rebuild.
 ```
+
+### T10.4 — Make the website corrections real `todo` · *Phase 6* · after T10.1, T10.3
+
+Six companies carry a hand-corrected address in `data/corrections.yaml` — Cresta,
+Monzo, Alloy, FalconX, Slice, Symphony — and **corpus.json still states the wrong
+one for all six.** The corrections are applied by `src.corpus`, and the nightly
+runs `src.build` only, so nothing has rebuilt the corpus since 2026-07-29.
+
+Nothing on the site is wrong while this waits, and that is worth being precise
+about rather than hand-waving: descriptions read `corrections.yaml` directly
+(T10.3 wired that deliberately), and all six already resolve to their own boards.
+What is still stale is **slug discovery**, which reads `website` — and a wrong
+address is how three of these six became wrong listings in the first place. So
+this is not tidying. It is closing the loop that produced the bugs.
+
+The rebuild is also the only thing that picks up companies the sources have added
+in a week, which is what makes it the natural moment to run T10.2's delta and
+T10.3's audit over whatever is new.
+
+> **Ordering matters and the middle step is long.** `src.corpus` (minutes) ->
+> `src.slugs` (~2.5h, and only worth running for names the corpus gained) ->
+> `src.build` (~25min) -> `describe.py` -> `describe.py --audit`. Running build
+> before slugs is legal and just lists nothing new.
+```
+Acceptance (observable):
+  corpus.json states the corrected address for all six, and `corrections.check`
+  passes — no correction naming a company the corpus no longer has.
+  The listed set does not shrink for a reason nobody can name: every company
+  listed before and absent after is accounted for in the build report, under an
+  outcome, exactly as T5.1 already requires.
+  Slug resolution is re-run for the names the corpus GAINED, not all 2,915 — the
+  existing 708 already have answers and re-resolving them is 2.5 hours to learn
+  what data/slugs.json already says.
+  Newly listed companies get descriptions (T10.2) and the audit (T10.3) before
+  anyone calls this done — a new listing with no description is the gap T10.2
+  exists to close, and an unaudited one is the gap T10.3 found 25 of.
+Checks:
+  lint -> typecheck -> unit -> e2e (full gate)
+  + the corpus print line, quoted: qualified / unqualified / not-software /
+    ambiguous / websites, with the "corrected by hand" count reading 6
+Out of scope:
+  - wiring `src.corpus` into the nightly. A corpus that changes under the site
+    every night is a corpus nobody can diff, and T6.4's collapse floor guards the
+    build rather than the corpus.
+  - re-resolving slugs for companies that already have one.
+```
+
+### T10.5 — The 45 listed companies we hold no address for `todo` · *Phase 6* · after T10.3
+
+T10.3 audited 270 of 315 listed companies. The other **45 carry no website in the
+corpus at all**, so there is nothing to read them against — and **all 45 are
+described**, which means 45 published descriptions rest on a check nobody has run
+and cannot currently run. They are not wrong. They are unverified, and today the
+site cannot tell those apart.
+
+**The cheap derivation does not reach them.** A board's apply URL is sometimes the
+company's own domain — that is how Alloy, Slice and Symphony were settled — so the
+obvious idea is to read the address off it. Measured across these 45: **5 apply on
+the company's own domain** (Awardco `award.co`, Cato Networks, Doppel, PsiQuantum,
+Workato) and **40 apply on the ATS's generic host** (`ashbyhq.com`,
+`greenhouse.io`), which says nothing about anybody. So the free win is 5 of 45,
+and the other 40 need a source that does not exist yet.
+
+Take the 5 first — they are a `websites` derivation with evidence behind it, and
+they cost one pass over data we already hold. Then MEASURE before building
+anything for the 40: T1.6 found websites by reading the funding article, and these
+40 are the companies where that failed. What has not been tried is the board's own
+posting text (`Super`'s 195 postings state no domain — one measurement, one
+company, and it is the wrong direction to generalise from), or the ATS's own
+profile endpoints.
+```
+Acceptance (observable):
+  The 5 companies whose apply URL is their own domain carry that address, derived
+  in the pipeline and NOT hand-written into corrections.yaml — a fact a run can
+  re-derive does not belong in the file of facts it cannot.
+  A learning test measures, over the remaining 40, what fraction of a board's
+  posting text states the company's domain, and what the ATS profile endpoints
+  give. KILL CRITERION on T8.1's rule: under ~25% and the honest answer is that
+  these companies have no address, which the corpus should then say plainly
+  rather than leaving the field null and the reason unrecorded.
+  However it ends, the site can tell an unverified description from a verified
+  one — today the reader cannot, and 45 rows of the register are in that state.
+Checks:
+  lint -> typecheck -> unit
+       -> the derivation re-run over the 5, each address checked against the
+          board it came from
+Out of scope:
+  - searching the web for a company's homepage. Every wrong description this
+    project has shipped came from a plausible page that was not the company's,
+    and a search result is exactly that failure with a better hit rate.
+  - dropping the 45 from the site. Their BOARDS are read and their roles are
+    real — that is the whole claim the site makes. It is the description that is
+    unverified, not the listing.
+```
