@@ -32,11 +32,18 @@ ApplicationQuestions`), never the questions themselves. **401 of the 880 resolve
 slugs are Ashby**, so for very nearly half this register the workspace cannot
 know what the form asks, and has to say so rather than imply the form is short.
 
-**52 jobs across 20 Greenhouse boards: 28 of them (54%) ask at least one
-free-text question beyond Resume/CV and Cover Letter**, spread over 12 of the 20
-boards. So there is real material here — the first four-board probe that returned
-nothing but "Resume/CV" and "Cover Letter" was a small sample landing on
-non-engineering roles, not the shape of the thing.
+**CORRECTED 2026-08-03. The 54% this file first reported is not a measurement,
+and the fault is in `STRUCTURAL` below.** It matched boilerplate labels by
+SUBSTRING, so `"location"` deleted "Which office location would you prefer?" — a
+question a company chose to ask, removed from a form we would then have told a
+reader was complete. Switching to exact matching swings the same 52 postings to
+98%, because it then keeps "LinkedIn Profile" and "Preferred First Name" as
+company questions; classifying by Greenhouse's stable field names gives 85%.
+**Three defensible filters, forty-four points apart.** The count is therefore
+withdrawn rather than restated: what varies is the definition, not the boards.
+There IS real material here — the first four-board probe returning nothing but
+"Resume/CV" and "Cover Letter" was a small sample on non-engineering roles — but
+`--labels` prints a distribution, and only the distribution should be read off it.
 
 **But most of those questions are FACTS, not essays, and that is the finding
 that matters.** The recurring labels are salary expectations, earliest start
@@ -50,9 +57,10 @@ the drafting does, costs no tokens, and cannot hallucinate. Note also that the
 `questions` array is where the EEO demographic fields live, which is exactly what
 v4's browser-only demographic store was built to fill.
 
-(Reading the labels is a judgment, not a measurement — the 54% and the 401 are
-measured, the fact/essay split is a characterisation of the distribution printed
-by `--labels` below. Re-run it before leaning harder on it than that.)
+(The 401 Ashby slugs and the per-label counts are measured. The share of
+postings asking a question is not — see the correction above. The fact/essay
+split is a characterisation of the distribution `--labels` prints, and it is the
+part that held up under every filter tried.)
 """
 
 from __future__ import annotations
@@ -149,7 +157,12 @@ def _custom(questions: list[dict[str, Any]]) -> list[str]:
 
 
 def labels(boards: list[str], per_board: int = 3) -> None:
-    """How often does a posting ask something that needs a person to write? (54%)"""
+    """The distribution of labels companies ask. Read the labels, not the count.
+
+    The percentage this prints is an artefact of `STRUCTURAL` and is withdrawn —
+    see the correction in the module docstring. It is still printed because
+    watching it MOVE when the filter changes is the point.
+    """
     seen = asked = 0
     found: Counter[str] = Counter()
     boards_asking = set()

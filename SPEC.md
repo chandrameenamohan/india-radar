@@ -456,12 +456,22 @@ measurement below is why.
 **Measured 2026-08-02, and it moved the weight of this feature**
 (`learning-tests/apply_questions_live.py`). Greenhouse states a job's application
 questions on request; **Ashby states nothing, and 401 of 880 resolved slugs are
-Ashby**. Of 52 Greenhouse jobs across 20 boards, 28 — **54%** — ask at least one
-free-text question beyond the resume and cover letter. But the recurring ones are
+Ashby**. Across 52 Greenhouse jobs on 20 boards, the recurring questions are
 *facts*: salary expectations, earliest start date, the address you would work
 from, languages spoken, sponsorship needs, pronouns, interview accommodations,
 how you heard about the job. Genuine prose — "Why Anthropic?", "How are you using
 AI today in your current role?" — is the minority.
+
+**How many postings ask one is deliberately NOT stated, because the number is an
+artefact of where the structural line is drawn.** This spec said 54%; three
+defensible filters over the same 52 postings give **54%, 85% and 98%**. Matching
+boilerplate labels by substring deletes real questions ("Which office location
+would you prefer?" dies on the word *location*); matching them exactly keeps
+"LinkedIn Profile" and "Preferred First Name" as though a company had chosen to
+ask them. A figure that moves forty-four points on a definitional choice is not a
+measurement, and quoting one would be the same error as a percentage of companies
+"not hiring" that was really companies unchecked. The qualitative claim survives
+every filter, and it is the only part this version's design rests on.
 
 So **the profile carries this feature and no model is needed to do it.** A
 profile holding those eight recurring fields removes more repeated typing than
