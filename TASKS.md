@@ -2040,7 +2040,41 @@ people are asked to spend money and reputation on these companies.
 
 ## PHASE 8 — coverage (the 2,201)
 
-### T12.1 — Guess Ashby slugs, and prove the board is the right company's `todo` · *Phase 8*
+### T12.1 — Guess Ashby slugs, and prove the board is the right company's `done` · *Phase 8*
+> **THE KILL CRITERION FIRED** — `learning-tests/ashby_collision_live.py`, 240
+> sampled of the 1,456 guessable. **8 of 32 name-verified hits were a different
+> company: 25.0%**, against the 10% bar set below. Boom Supersonic was handed
+> `boompay.app`, Castle was handed YC's other Castle, and Pesto, Zego, Fathom,
+> Cohere and Universe went the same way. So a board's title is NOT identity, and
+> shipping the 17.5% ceiling would have published one company's roles under
+> another's name.
+>
+> **The remedy is not the one this task guessed at.** "Ship without the generic
+> names" is not implementable at the size the data has — 19 of the original 21
+> hits are single words, Patreon and Miro and Snyk among them, so the rule costs
+> almost the whole method to remove four wrong answers. What settles it is a
+> fact nobody had noticed the board page was already stating: the same
+> `window.__appData` blob the `<title>` sits beside carries
+> `organization.publicWebsite`, **the company's own address**, in the bytes the
+> title already arrived in. Requiring it to match the address the corpus already
+> held costs the eight collisions and keeps Catch, Formal and Meter — three of
+> the six names the ceiling warning was written about. Verified yield **24 of
+> 240, 10.0%**, projecting ~146 companies over the 1,456.
+>
+> Two more measurements changed the shape of the work. A bare "Jobs" title is
+> **not** proof the slug is dead — 2 of the 264 known-good Ashby boards render
+> the same 7,128-byte shell as a nonsense slug over a live board (`cursor`,
+> 1.04MB of jobs), which is harmless here only because a board that will not say
+> whose it is is unresolvable either way. And the `_GUESS_SUFFIXES` ladder earns
+> **nothing** on Ashby: 32 of 32 hits were the bare name over 1,280 candidate
+> slugs fetched, and where a Greenhouse miss is a 0.3s 404 an Ashby candidate is
+> a 1.6s page — so bare-name-only puts the whole guess at ~4.5 minutes instead
+> of the ~26 scoped below.
+>
+> Found in passing, and NOT fixed here: **8 Ashby slugs in `data/slugs.json` are
+> dead** (charta-health, edison, hitpayapp.com, jasper ×2, paxos-technology-
+> solutions, resolve, tools) and `ClickHouse` is resolved to `ashby/langfuse`.
+> They are `slug-unresolved`/wrong today, not newly so.
 
 `slug-unresolved` is 2,201 of 2,915 — 76% of the corpus, and the largest number
 in this project. Only 4 companies fail a probe; the pipeline works, it does not

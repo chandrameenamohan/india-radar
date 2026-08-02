@@ -33,9 +33,21 @@ SLUGS = Path("data/slugs.json")
 PUBLISHED = "the last good build\n"
 
 
+#: The environment with git's own variables taken out of it. These tests run
+#: under the pre-commit hook, and git sets GIT_DIR and GIT_INDEX_FILE for a hook
+#: — which point every command below at the repository being committed to rather
+#: than at the throwaway one this fixture built. Isolation is the whole point of
+#: the fixture, so the inherited git environment is dropped rather than trusted.
+CLEAN_ENV = {name: value for name, value in os.environ.items() if not name.startswith("GIT_")}
+
+
 def git(repo: Path, *args: str) -> str:
     done = subprocess.run(
-        ["git", "-C", str(repo), *args], capture_output=True, text=True, check=True
+        ["git", "-C", str(repo), *args],
+        capture_output=True,
+        text=True,
+        check=True,
+        env=CLEAN_ENV,
     )
     return done.stdout.strip()
 
@@ -72,7 +84,7 @@ def nightly(repo: Path, build: str, seconds: str = "30") -> subprocess.Completed
     return subprocess.run(
         [str(repo / SCRIPT)],
         cwd=repo,
-        env={**os.environ, "NIGHTLY_BUILD": str(stub), "NIGHTLY_TIMEOUT": seconds},
+        env={**CLEAN_ENV, "NIGHTLY_BUILD": str(stub), "NIGHTLY_TIMEOUT": seconds},
         capture_output=True,
         text=True,
     )
@@ -148,6 +160,26 @@ def test_the_nightly_probes_every_resolved_provider() -> None:
         f"{resolved - set(PROBES)} resolved but unprobeable: those companies are "
         "probe-failed for want of a probe, not for want of a readable board"
     )
+
+
+def test_the_nightly_never_re_resolves_slugs() -> None:
+    """T10.4's ruling, and T12.1 is what makes it bite. Slug discovery is ~2.5
+    hours of careers pages, and T12.1 hangs another ~26 minutes of Ashby
+    guessing off the same pass. A company that already has a slug learns nothing
+    from being resolved again — data/slugs.json already says the answer — and a
+    nightly that spent three hours re-deriving it would sit inside a 6h cap it
+    currently uses 3% of.
+
+    So the nightly runs the BUILD and only the build, and slug resolution is a
+    hand-run for the names the corpus gained. Asserted against the workflow and
+    the script it calls, because "we just don't run it" is the kind of fact that
+    stays true only until someone adds a convenient line.
+    """
+    for path in (WORKFLOW, SCRIPT):
+        assert "src.slugs" not in path.read_text(), (
+            f"{path} resolves slugs: that is ~3h a night to re-derive what "
+            "data/slugs.json already holds, and T10.4 ruled it out"
+        )
 
 
 def test_one_schedule_because_a_second_would_be_a_slower_tier() -> None:

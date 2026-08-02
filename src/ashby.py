@@ -23,6 +23,12 @@ one role a *list* of locations here, where Greenhouse gives exactly one, which
 is why `locations` is per-provider and India roles are counted by role rather
 than by location string.
 
+**The board says who it is; the API does not.** No organizationName, no company
+field — nothing in the posting payload but the slug echoed back inside jobUrl.
+That was harmless while every Ashby slug came off the company's own careers
+page, and became load-bearing the moment T12.1 started guessing them, which is
+why `identity` reads the hosted board PAGE instead.
+
 **On latency.** FINDINGS §1 measured a fixed ~151s per call, growing across
 runs, with 3 of 12 concurrent requests failing — and sized the whole refresh
 budget on it. Re-measured at the start of this task: **~2s, and 12/12 concurrent
@@ -35,10 +41,11 @@ lost night if the throttle returns.
 from __future__ import annotations
 
 import json
+import re
 from collections.abc import Iterable, Mapping
 from concurrent.futures import ThreadPoolExecutor
 from time import sleep
-from typing import Any
+from typing import Any, NamedTuple
 
 from src.net import get
 from src.openness import plain
@@ -48,6 +55,31 @@ from src.outcomes import Outcome
 #: Ashby ships every description inline (~2MB for a 120-role board) and offers
 #: no way to decline them.
 API = "https://api.ashbyhq.com/posting-api/job-board/{slug}"
+
+#: The board PAGE rather than the posting API, and the only place Ashby states
+#: *whose* board a slug is. The API names nobody — no organizationName, no
+#: company field, only the slug echoed back inside jobUrl — so a guessed slug
+#: (T12.1) either comes here or stays unverified.
+BOARD = "https://jobs.ashbyhq.com/{slug}"
+
+#: The board page is rendered client-side: the server ships a spinner and one
+#: `window.__appData` blob, and the organisation sits inside it stating both its
+#: name and its own website. Sliced out with the JSON decoder rather than a
+#: regex because the blob is 7KB-2MB of nested objects and a regex that walks
+#: into one is a regex that eventually reads the wrong string as a company's
+#: address. `raw_decode` stops itself at the value's closing brace.
+_APP_DATA = "window.__appData = "
+
+#: "Ramp Jobs", "1Password Jobs" — and a bare "Jobs" when the page states no
+#: company at all. Measured over the 264 known-good Ashby boards
+#: (learning-tests/ashby_collision_live.py, CONTROL): 254 titled themselves
+#: "<something> Jobs" and the other 10 are the bare form. Nothing else. So the
+#: suffix is Ashby's template rather than a coincidence, and stripping it leaves
+#: the name — which is why it is stripped rather than matched around: a company
+#: literally named "Jobs" would otherwise be contained in every board on the
+#: platform, and `states_company` asks only about containment.
+_TITLE = re.compile(r"<title>([^<]*)</title>")
+_JOBS = " Jobs"
 
 #: Three tries, then the company is `probe-failed` and excluded. FINDINGS' 3-in-12
 #: failure rate is a per-request coin flip; three of them is enough that a
@@ -120,6 +152,66 @@ def probe_all(slugs: Iterable[str], workers: int = WORKERS) -> dict[str, Roles |
     unique = sorted(set(slugs))
     with ThreadPoolExecutor(max_workers=workers) as pool:
         return dict(zip(unique, pool.map(probe, unique), strict=True))
+
+
+class Identity(NamedTuple):
+    """What a board page says about the company behind it.
+
+    Two fields because one of them is not enough, which T12.1 measured rather
+    than assumed: verifying a guessed slug by the stated NAME alone was a
+    different company **8 times in 32**, because so many of these companies are
+    one generic word and Ashby will hand you the other Boom without hesitating.
+    """
+
+    name: str | None
+    website: str | None
+
+
+def identity(slug: str, timeout: int = 30) -> Identity:
+    """Who this board says it belongs to — or `Identity(None, None)`, meaning it
+    said nothing and this company cannot be resolved to it.
+
+    Ashby answers **200 for every slug ever typed**: `jobs.ashbyhq.com/<nonsense>`
+    returns a 7,128-byte shell titled a bare "Jobs" (measured against
+    `zzzznotarealslugxyz`, 1.56s, beside 77KB for `ramp`). So the status line
+    decides nothing and the stated name decides everything.
+
+    **A silent page is not proof there is no board**, and this returns the same
+    nothing either way on purpose. Measured over the 264 Ashby boards
+    careers-page discovery had already proved: 10 serve that same shell, of
+    which 8 slugs are genuinely dead and **2 are live boards Ashby will not name
+    on their hosted page** — `cursor` answers the posting API with 1.04MB of
+    jobs and still renders the nonsense-slug shell, byte for byte. Existence was
+    never the question a guess has to answer: a board that will not say whose it
+    is cannot be verified, so it is unresolvable whether or not it is there.
+
+    The website comes from `organization.publicWebsite`. If Ashby ever stops
+    shipping it, every guess stops verifying and every guessed company stays
+    unresolved, which is the direction this whole module fails in on purpose.
+    """
+    status, body = get(BOARD.format(slug=slug), timeout)
+    if status != 200:
+        return Identity(None, None)
+
+    found = _TITLE.search(body)
+    title = found.group(1).strip() if found else ""
+    name = title[: -len(_JOBS)].strip() if title.endswith(_JOBS) else None
+    return Identity(name or None, _public_website(body))
+
+
+def _public_website(html: str) -> str | None:
+    """The address the organisation states as its own, out of the board page's
+    state blob."""
+    start = html.find(_APP_DATA)
+    if start < 0:
+        return None
+    try:
+        data, _ = json.JSONDecoder().raw_decode(html, start + len(_APP_DATA))
+    except (json.JSONDecodeError, ValueError):
+        return None
+    organization = data.get("organization") if isinstance(data, dict) else None
+    site = organization.get("publicWebsite") if isinstance(organization, Mapping) else None
+    return site if isinstance(site, str) and site.strip() else None
 
 
 def locations(role: Mapping[str, Any]) -> list[str]:

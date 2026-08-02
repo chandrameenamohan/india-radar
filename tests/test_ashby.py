@@ -9,7 +9,17 @@ import json
 
 import pytest
 
-from src.ashby import ATTEMPTS, BACKOFF, locations, parse, probe, probe_all, text
+from src.ashby import (
+    ATTEMPTS,
+    BACKOFF,
+    Identity,
+    identity,
+    locations,
+    parse,
+    probe,
+    probe_all,
+    text,
+)
 from src.outcomes import Outcome
 
 
@@ -181,3 +191,122 @@ def test_text_is_the_prose_ashby_was_already_sending():
     assert text({"descriptionPlain": "   ", "descriptionHtml": "<p>Real text.</p>"}) == "Real text."
     # No description at all is silence, not a crash — and silence is `unknown`.
     assert text({"title": "Staff Engineer"}) == ""
+
+
+# --- T12.1: who a board page says it belongs to -------------------------------
+
+#: The `organization` objects verbatim off the live board pages on 2026-08-02,
+#: fields and all — including the two absences the guess turns on. Ashby renders
+#: its boards client-side, so the server ships a spinner and this blob, and the
+#: blob is the only place the company's own address appears.
+ORGANIZATIONS = {
+    "ramp": {
+        "organizationId": "7a158cac-9866-4881-95a8-bc946d3dca79",
+        "name": "Ramp",
+        "publicWebsite": "https://ramp.com",
+        "customJobsPageUrl": None,
+        "hostedJobsPageSlug": "ramp",
+    },
+    # Boom Supersonic is boomsupersonic.com. THIS Boom is not, and its board is
+    # titled "Boom Jobs" all the same — one of the 8 collisions in 32 that made
+    # T12.1 check addresses at all.
+    "boom": {
+        "organizationId": "4e682054-1b62-4cc5-af99-9c8026b4c85d",
+        "name": "Boom",
+        "publicWebsite": "https://www.boompay.app/",
+        "customJobsPageUrl": None,
+        "hostedJobsPageSlug": "Boom",
+    },
+    # A real board that states its name and NO address: 12 of the 264 known-good
+    # Ashby boards are like this, and `customJobsPageUrl` is deliberately not
+    # read as a substitute — over that whole control it would have rescued one
+    # company, and it is a careers page rather than a claim about who they are.
+    "envoy": {
+        "organizationId": "5805a2a7-7eab-4de6-ba82-2697338a41a0",
+        "name": "Envoy",
+        "publicWebsite": None,
+        "customJobsPageUrl": "https://www.envoy.com/jobs",
+        "hostedJobsPageSlug": "Envoy",
+    },
+}
+
+
+def board_page(title: str, organization: dict | None = None) -> str:
+    """A board page shaped as Ashby serves one: a spinner, then the state blob.
+
+    `organization=None` is the 7,128-byte shell Ashby answers 200 with for a
+    slug it has never heard of — and, measured, for two slugs whose boards are
+    very much alive (`cursor`, 1.04MB of jobs). Its title is a bare "Jobs".
+    """
+    data: dict[str, object] = {"environment": "production", "maintenanceMode": False}
+    if organization is not None:
+        data["organization"] = organization
+    return (
+        f"<!DOCTYPE html><html><head><title>{title}</title>"
+        f'<meta name="title" content="{title}" /></head><body>'
+        '<div class="center"><div class="fade-in"><div class="spinner"></div></div></div>'
+        '<script nonce="mAOCDJNGw4B84B5K9CiLJZ6RTDwvbJaKHKgWJOC">\n'
+        f"      window.__appData = {json.dumps(data)};\n    </script></body></html>"
+    )
+
+
+def serving(pages: dict[str, str]):
+    """Stub `get` with a board page per slug; anything else is the empty shell,
+    which is what Ashby really answers for a slug it has never heard of."""
+    def fake_get(url, timeout=240):
+        return 200, pages.get(url.rsplit("/", 1)[1], board_page("Jobs"))
+    return fake_get
+
+
+def test_identity_states_the_name_and_the_address(monkeypatch):
+    """Both halves, out of one fetch. The name is the `<title>` minus Ashby's
+    own " Jobs" suffix; the address is what the organisation calls its site."""
+    monkeypatch.setattr(
+        "src.ashby.get", serving({"ramp": board_page("Ramp Jobs", ORGANIZATIONS["ramp"])})
+    )
+
+    assert identity("ramp") == Identity("Ramp", "https://ramp.com")
+
+
+def test_a_bare_jobs_title_is_not_knowing(monkeypatch):
+    """Ashby answers 200 for every slug ever typed, so the status line proves
+    nothing and this page has to read as silence rather than as a board named
+    "Jobs" — otherwise every company ever guessed at resolves to something."""
+    monkeypatch.setattr("src.ashby.get", serving({}))
+
+    assert identity("zzzznotarealslugxyz") == Identity(None, None)
+    assert identity("cursor") == Identity(None, None), (
+        "cursor's board is LIVE — 1.04MB of jobs off the posting API — and its "
+        "page serves this same shell. Unnameable is unresolvable either way."
+    )
+
+
+def test_a_board_that_states_no_address_states_only_its_name(monkeypatch):
+    """Envoy, verbatim. Half an identity is what it is, and the caller decides
+    what that half is worth — for a guessed slug, nothing."""
+    monkeypatch.setattr(
+        "src.ashby.get", serving({"envoy": board_page("Envoy Jobs", ORGANIZATIONS["envoy"])})
+    )
+
+    assert identity("envoy") == Identity("Envoy", None)
+
+
+@pytest.mark.parametrize("body", [
+    "<html><head></head><body>no title, no blob</body></html>",
+    "<html><head><title>Ramp Jobs</title></head><body>no blob</body></html>",
+    '<html><head><title>Ramp Jobs</title></head><body><script>window.__appData = {"or'
+    "</script></body></html>",  # a blob that stops mid-object
+])
+def test_a_page_we_cannot_read_claims_no_address(monkeypatch, body):
+    """A trust boundary. A blob that stops mid-object must not become an
+    address, and a page with no blob at all must not either."""
+    monkeypatch.setattr("src.ashby.get", lambda url, timeout=240: (200, body))
+
+    assert identity("whatever").website is None
+
+
+def test_a_page_that_did_not_answer_claims_nothing(monkeypatch):
+    """Ashby being down is not evidence about whose board this is."""
+    monkeypatch.setattr("src.ashby.get", lambda url, timeout=240: (503, ""))
+
+    assert identity("ramp") == Identity(None, None)

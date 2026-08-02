@@ -9,6 +9,7 @@ from pathlib import Path
 
 import pytest
 
+from src.ashby import Identity
 from src.outcomes import Outcome
 from src.slugs import (
     OVERRIDES,
@@ -20,6 +21,7 @@ from src.slugs import (
     parse_overrides,
     resolve,
     resolve_all,
+    same_site,
     states_company,
     verify_override,
 )
@@ -218,10 +220,54 @@ GUESSES = {
 }
 
 
+#: What the live Ashby board pages stated on 2026-08-02, name and address
+#: verbatim — the hit list of learning-tests/ashby_collision_live.py, with the
+#: collisions it found kept in. Three of these boards are a DIFFERENT company
+#: wearing the same one-word name, and nothing in the name says so.
+ASHBY = {
+    "ramp": Identity("Ramp", "https://ramp.com"),
+    "meter": Identity("Meter", "https://www.meter.com/"),
+    "catch": Identity("Catch", "https://catch.co/"),
+    "boom": Identity("Boom", "https://www.boompay.app/"),  # not Boom Supersonic
+    "castle": Identity("Castle", "https://www.getcastle.com/"),  # YC's other Castle
+    "fathom": Identity("Fathom", "https://fathomhealth.com/"),  # Fathom Health
+    "envoy": Identity("Envoy", None),  # a real board that states no address
+}
+
+#: (company, the address the CORPUS holds) -> the slug guessing must return, or
+#: None. Every website here is the one data/corpus.json really carries.
+ASHBY_GUESSES = {
+    ("Ramp", "https://ramp.com"): "ramp",
+    # Both directions of the `www.` the two sources disagree about, which is the
+    # only normalisation `host` does and the only one 24 verified hits needed.
+    ("Meter", "https://meter.com"): "meter",
+    ("Catch", "http://www.catch.co"): "catch",
+    # The collisions, measured. Each board exists, is titled with this company's
+    # exact name, and belongs to somebody else — 8 of 32 name-verified hits.
+    ("Boom", "https://boomsupersonic.com"): None,
+    ("Castle", "https://castle.io"): None,
+    ("Fathom", "https://www.fathom.ai"): None,
+    # A board that states no address cannot be checked, and an unchecked board
+    # is not a verified one. 12 of the 264 known-good boards are like this.
+    ("Envoy", "https://envoy.com"): None,
+    # The corpus knows no address for this company, so there is nothing to check
+    # against and Ashby is not guessed at all — never a fall back to the name,
+    # which is the thing measured at 25% wrong.
+    ("Ramp", None): None,
+    # Ashby answers 200 for every slug ever typed; only a stated name is a board.
+    ("Cursor", "https://cursor.com"): None,
+}
+
+
 @pytest.fixture
 def boards(monkeypatch):
-    """Greenhouse answering for the measured slugs and 404ing everything else."""
+    """Greenhouse and Ashby answering for the measured slugs, and stating
+    nothing at all for everything else — which is what both really do."""
     monkeypatch.setattr("src.slugs.board_name", lambda slug, **kw: GREENHOUSE.get(slug))
+    monkeypatch.setattr(
+        "src.slugs.ashby_identity",
+        lambda slug, **kw: ASHBY.get(slug, Identity(None, None)),
+    )
 
 
 @pytest.mark.parametrize("company", GUESSES)
@@ -234,6 +280,78 @@ def test_a_guess_is_only_kept_if_the_board_says_whose_it_is(boards, company):
     expected = {"ats": "greenhouse", "slug": slug, "method": "guess"} if slug else None
 
     assert guess(company) == expected
+
+
+@pytest.mark.parametrize(("company", "website"), ASHBY_GUESSES)
+def test_an_ashby_guess_needs_the_name_AND_the_address(boards, company, website):
+    """T12.1's whole finding, as a table. Greenhouse can be verified by name
+    alone because a wrong slug 404s; Ashby cannot, because it answers 200 for
+    everything and because a quarter of the boards a name resolved to turned out
+    to be a different company with that name. So the board must also state the
+    address the corpus already held."""
+    slug = ASHBY_GUESSES[(company, website)]
+    expected = {"ats": "ashby", "slug": slug, "method": "guess"} if slug else None
+
+    assert guess(company, website) == expected
+
+
+def test_a_company_with_no_address_is_never_guessed_on_ashby(boards, monkeypatch):
+    """Asserted as SILENCE, not as a None: falling back to the name for a
+    company we cannot check would be the 25%-wrong method, quietly, for exactly
+    the companies we know least about."""
+    asked: list[str] = []
+    monkeypatch.setattr(
+        "src.slugs.ashby_identity",
+        lambda slug, **kw: asked.append(slug) or ASHBY.get(slug, Identity(None, None)),
+    )
+
+    assert guess("Ramp", None) is None
+    assert asked == []
+
+
+def test_ashby_tries_the_bare_name_and_nothing_else(boards, monkeypatch):
+    """A cost ruling with a measurement behind it: 32 of 32 sampled Ashby hits
+    were the bare normalised name, over 1,280 candidate slugs fetched. On
+    Greenhouse the five suffixes are ~free because a miss is a 0.3s 404; here a
+    candidate is a 1.6s board page either way, so they are five sixths of the
+    pass — ~26 minutes against ~4.5 over the whole corpus — for nothing."""
+    asked: list[str] = []
+    monkeypatch.setattr(
+        "src.slugs.ashby_identity",
+        lambda slug, **kw: asked.append(slug) or ASHBY.get(slug, Identity(None, None)),
+    )
+
+    assert guess("Nowhere Inc", "https://nowhere.example") is None
+    assert asked == ["nowhereinc"]
+
+
+def test_greenhouse_is_asked_first_and_ashby_only_after(boards, monkeypatch):
+    """Cost, not preference. A Greenhouse miss is ~0.3s and a clean 404; an
+    Ashby candidate is ~1.6s of board page whatever the answer. A company on
+    Greenhouse must never pay for six Ashby fetches to find that out."""
+    asked: list[str] = []
+    monkeypatch.setattr(
+        "src.slugs.ashby_identity", lambda slug, **kw: asked.append(slug) or Identity(None, None)
+    )
+
+    assert guess("Anthropic", "https://anthropic.com") == {
+        "ats": "greenhouse", "slug": "anthropic", "method": "guess",
+    }
+    assert asked == []
+
+
+@pytest.mark.parametrize(("stated", "website", "same"), [
+    ("https://ramp.com", "https://ramp.com", True),
+    ("https://www.meter.com/", "https://meter.com", True),  # www on the board
+    ("https://catch.co/", "http://www.catch.co", True),  # www on our side, and http
+    ("https://www.boompay.app/", "https://boomsupersonic.com", False),
+    (None, "https://envoy.com", False),  # the board stated no address
+    ("https://ramp.com", None, False),  # the corpus holds none
+])
+def test_two_addresses_are_one_company_only_by_host(stated, website, same):
+    """The rule, isolated from the fetching. Scheme, `www.` and trailing path
+    are noise; the host is the claim."""
+    assert same_site(stated, website) is same
 
 
 @pytest.mark.parametrize(("board", "company", "same"), [
@@ -255,7 +373,7 @@ def test_only_runs_on_unresolved(monkeypatch, boards):
     already told us the answer, and a guess could only disagree with it."""
     guessed = []
     only_figma_has_a_careers_page(monkeypatch)
-    def record(name):
+    def record(name, website=None):
         guessed.append(name)
         return None
 
@@ -280,7 +398,7 @@ def test_method_recorded(boards, monkeypatch):
         "slug": "gleanwork",
         "method": "guess",
     }
-    assert resolution.methods == {"careers-page": 1, "guess": 1}
+    assert resolution.methods == {"greenhouse/careers-page": 1, "greenhouse/guess": 1}
     # Brave Care stayed out, and kept the reason careers-page discovery gave it —
     # here the corpus knows no address for it, so nothing was ever read.
     assert resolution.unresolved == {"Brave Care": "no-website"}
@@ -303,6 +421,34 @@ def test_guessing_strictly_raises_the_combined_rate(boards, monkeypatch):
     assert {"Anthropic", "Glean"} <= set(combined.resolved)
 
 
+def test_ashby_joins_greenhouse_as_a_guessable_ats(boards, monkeypatch):
+    """T12.1's headline, over a corpus careers-page discovery cannot help with.
+
+    The addresses have to travel from the corpus record all the way into the
+    guess or Ashby cannot be verified at all, and the two companies that fail
+    here fail for the two different reasons the measurement found: Boom's board
+    is a different Boom, and Cursor's board will not state a name at all even
+    though it is live.
+    """
+    monkeypatch.setattr("src.slugs.fetch", lambda url, timeout=45: None)
+    companies = [
+        {"name": "Ramp", "website": "https://ramp.com"},
+        {"name": "Meter", "website": "https://meter.com"},
+        {"name": "Boom", "website": "https://boomsupersonic.com"},
+        {"name": "Cursor", "website": "https://cursor.com"},
+        {"name": "Anthropic", "website": "https://anthropic.com"},
+    ]
+
+    resolution = resolve_all(companies)
+
+    assert resolution.resolved["Ramp"] == {"ats": "ashby", "slug": "ramp", "method": "guess"}
+    assert resolution.resolved["Meter"]["ats"] == "ashby"
+    assert resolution.methods == {"ashby/guess": 2, "greenhouse/guess": 1}
+    # Both keep the reason careers-page discovery gave them. A company guessing
+    # also failed is not a vaguer kind of unresolved than one it never tried.
+    assert resolution.unresolved == {"Boom": "no-careers-page", "Cursor": "no-careers-page"}
+
+
 # --- T2.3: the override file, where a human overrules the evidence ------------
 
 
@@ -318,7 +464,10 @@ def test_override_precedence(boards, monkeypatch):
     """
     only_figma_has_a_careers_page(monkeypatch)
     guessed: list[str] = []
-    monkeypatch.setattr("src.slugs.guess", lambda name: guessed.append(name) or guess(name))
+    monkeypatch.setattr(
+        "src.slugs.guess",
+        lambda name, website=None: guessed.append(name) or guess(name, website),
+    )
 
     resolution = resolve_all(
         ["Figma", "Glean", "Brave Care"],
@@ -335,7 +484,7 @@ def test_override_precedence(boards, monkeypatch):
     }
     # `brave` is the browser; only a human can say Brave Care is `bravecare`.
     assert resolution.resolved["Brave Care"]["slug"] == "bravecare"
-    assert resolution.methods == {"override": 2, "guess": 1}
+    assert resolution.methods == {"greenhouse/override": 2, "greenhouse/guess": 1}
     assert guessed == ["Glean"]  # the overridden two were never guessed at
 
 

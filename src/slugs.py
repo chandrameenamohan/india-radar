@@ -18,10 +18,18 @@ not-knowing it was. A company guessing then fails as well keeps that reason
 rather than a vaguer one: it is what tells T2.3 whether the override file owes
 this company a careers URL or a slug.
 
-Whatever careers-page discovery leaves, `guess` tries: build a Greenhouse slug
-out of the name, then ask Greenhouse *whose board that is*. The second half is
-the load-bearing one — guessing without it resolves more companies, and some of
-them are a different company (`greenhouse/brave` is the browser, not Brave Care).
+Whatever careers-page discovery leaves, `guess` tries: build a slug out of the
+name, then ask the ATS *whose board that is*. The second half is the
+load-bearing one — guessing without it resolves more companies, and some of them
+are a different company (`greenhouse/brave` is the browser, not Brave Care).
+
+Greenhouse and Ashby, since T12.1, and the two are not verified alike. Greenhouse
+states a board's name and 404s a slug that is not a board, so the name settles
+it. Ashby answers 200 for every slug ever typed, and a quarter of the boards its
+titles matched turned out to belong to a different company with the same one-word
+name — so an Ashby guess must ALSO match the address the corpus already held
+against the one the board states. Lever is still unguessable: a wrong slug there
+returns 200 with an empty array (T3.3), so nothing can be found to verify.
 
 Above both sits `data/overrides.yaml`. A human's answer does not merely win the
 tie — the automatic methods do not run at all for a company listed there, since
@@ -39,7 +47,9 @@ from collections.abc import Iterable, Mapping
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 from typing import Any, NamedTuple, TypedDict
+from urllib.parse import urlsplit
 
+from src.ashby import identity as ashby_identity
 from src.greenhouse import board_name
 from src.greenhouse import probe as greenhouse_probe
 from src.net import fetch
@@ -96,6 +106,17 @@ _MIN_PAGE = 2_000
 #: which is where a tail belongs, rather than a longer list of guesses here.
 _GUESS_SUFFIXES = ("", "work", "ai", "labs", "jobs", "careers")
 
+#: The same ladder, run against Ashby, earns nothing: **32 of 32 hits were the
+#: bare name**, over 1,280 candidate slugs fetched (T12.1). And where a
+#: Greenhouse miss is a 0.3s 404, an Ashby candidate is a 1.6s board page hit or
+#: miss — so the five suffixes are five sixths of the pass for a yield the
+#: measurement cannot see. Bare name only puts the whole 1,456-company guess at
+#: ~4.5 minutes against ~26.
+#: ponytail: a null result at n=1,248 rather than a proof there is no such
+#: board. Ceiling: an Ashby org that files under `<name>careers` is invisible.
+#: Upgrade path: this tuple, once one of them is measured finding a company.
+_ASHBY_SUFFIXES = ("",)
+
 
 #: The hand-maintained tail. YAML rather than JSON for one reason: a comment.
 #: Every entry is a human overruling the evidence, and an override whose reason
@@ -127,11 +148,18 @@ class Resolution(NamedTuple):
 
     @property
     def methods(self) -> Counter[str]:
-        """How many companies each method resolved. The combined rate is only
-        meaningful next to this split — a rate that rose because guessing
-        accepted anything is a different fact from one that rose because it
-        found boards."""
-        return Counter(slug["method"] for slug in self.resolved.values())
+        """How many companies each `<ats>/<method>` pair resolved. The combined
+        rate is only meaningful next to this split — a rate that rose because
+        guessing accepted anything is a different fact from one that rose
+        because it found boards.
+
+        Keyed by ATS as well as method since T12.1, because the two guessable
+        providers are verified by different evidence and can fail apart: a
+        Greenhouse guess is one board name, an Ashby guess is a board name plus
+        an address, and "guessing resolved 500" would hide which of those two
+        claims the number rests on.
+        """
+        return Counter(f"{slug['ats']}/{slug['method']}" for slug in self.resolved.values())
 
 
 def find_boards(html: str) -> list[tuple[str, str]]:
@@ -181,19 +209,89 @@ def states_company(board: str | None, name: str) -> bool:
     return board is not None and key(name) in key(board)
 
 
-def guess(name: str) -> Slug | None:
-    """A Greenhouse slug guessed from the company name, verified against the
-    board's own name — or None, having proven nothing.
+def host(url: str) -> str:
+    """The bare hostname a URL points at, as an address is compared.
 
-    Greenhouse only, per the DoD: it 404s a wrong slug cleanly and answers in
-    ~0.3s. Lever cannot be guessed at all (a wrong slug returns 200 with an
-    empty array — T3.3's trap), and guessing Ashby means paying its ~151s fixed
-    latency per candidate.
+    ponytail: `www.` stripped and nothing else — no public-suffix list, which
+    would be this project's first runtime dependency for a comparison the data
+    does not need. Measured over the 32 Ashby hits T12.1 sampled: all 24 genuine
+    ones agree on host alone once `www.` is off, and it is needed in both
+    directions (`realitydefender.com` against `www.realitydefender.com`,
+    `www.catch.co` against `catch.co`). Ceiling: a company stating
+    `blog.example.com` against a board stating `example.com` reads as a
+    disagreement and stays unresolved, which is the safe direction. Upgrade
+    path: a public-suffix list, if companies are ever measured lost to it.
+    """
+    split = urlsplit(url if "//" in url else "//" + url)
+    return split.netloc.casefold().rpartition("@")[2].partition(":")[0].removeprefix("www.")
+
+
+def same_site(stated: str | None, website: str | None) -> bool:
+    """Whether a board's stated address and the corpus's are the same company's.
+
+    This is the check `states_company` cannot make, and T12.1 measured the size
+    of the gap: **8 of 32** verified-by-name Ashby hits were a different company
+    — Boom Supersonic handed `boompay.app`, Castle handed `getcastle.com` (the
+    corpus's own YC URL is `/companies/castle-2`, because YC has two), Zego
+    Robotics handed `zego.com`, Fathom handed `fathomhealth.com`. 25%, against a
+    10% kill criterion. Names cannot separate those; addresses can.
+
+    It is not free of false negatives, and the cost was measured on boards known
+    to be right rather than assumed away: over the 264 Ashby slugs careers-page
+    discovery had already proved, **10 of the 192 that state an address on both
+    sides disagree on host** — nine are one company on two domains (Rutter is
+    `rutterapi.com`, Numeral is `numeralhq.com`) and one board states
+    `jobs.ashbyhq.com` as its own website. About 1 right answer in 20, refused.
+    Against 25% wrong that is the trade this module always makes.
+
+    Both sides must state an address. A company the corpus holds none for cannot
+    be checked, and an unchecked company is not a verified one.
+    """
+    return bool(stated and website and host(stated) == host(website))
+
+
+def guess(name: str, website: str | None = None) -> Slug | None:
+    """A Greenhouse or Ashby slug guessed from the company name and verified
+    against the board's own account of itself — or None, having proven nothing.
+
+    Greenhouse first, because it is the cheaper miss: ~0.3s and a clean 404 for
+    a wrong slug. Ashby is second and costs ~1.6s a candidate hit or miss, which
+    is a hundredfold less than the ~151s the docstring here used to cite as the
+    reason not to guess it at all (T3.2 re-measured; `learning-tests/
+    ashby_guess_live.py` re-measured again). It resolves ~10% of the companies
+    careers-page discovery gave up on, verified — 24 of 240 sampled.
+
+    **Ashby is verified twice and Greenhouse once, because Ashby is guessed on a
+    weaker signal.** Greenhouse 404s a wrong slug, so a board that answers at
+    least exists; Ashby answers 200 for every slug ever typed and only the
+    page's title separates a board from a shell. Worse, the title alone is not
+    identity: **8 of 32 name-verified hits were a different company** with the
+    same one-word name — Boom Supersonic handed the other Boom, Castle handed
+    YC's other Castle. 25%, against T12.1's 10% kill criterion. So this also
+    requires the board's stated address to be the one the corpus already held,
+    and that check is free: same page, same fetch, no second call.
+
+    Lever is still not guessable at all: a wrong slug returns 200 with an empty
+    array (T3.3's trap), so existence is undecidable there and no amount of
+    verification helps something that cannot be found.
     """
     for suffix in _GUESS_SUFFIXES:
         slug = key(name) + suffix
         if states_company(board_name(slug), name):
             return Slug(ats="greenhouse", slug=slug, method="guess")
+
+    # No address, no Ashby guess — and deliberately not a fallback to the name
+    # alone. Structurally this costs nothing: every company guessing can help is
+    # one whose careers page we reached or looked for, and a company with no
+    # website never got that far (`resolve` returns `no-website` first).
+    if not website:
+        return None
+
+    for suffix in _ASHBY_SUFFIXES:
+        slug = key(name) + suffix
+        board = ashby_identity(slug)
+        if states_company(board.name, name) and same_site(board.website, website):
+            return Slug(ats="ashby", slug=slug, method="guess")
     return None
 
 
@@ -338,7 +436,10 @@ def resolve_all(
     # a guess could only disagree with it.
     missed = list(unresolved)
     with ThreadPoolExecutor(max_workers=min(workers, _GUESS_WORKERS)) as pool:
-        guesses = pool.map(guess, missed)
+        # The website travels with the name because the Ashby half of `guess` is
+        # verified against it. A guess that only knew the name would have to
+        # trust a board title, and T12.1 measured that at 25% wrong.
+        guesses = pool.map(lambda name: guess(name, sites[name]), missed)
     for name, slug in zip(missed, guesses, strict=True):
         if slug is not None:
             resolved[name] = slug
@@ -367,6 +468,9 @@ def main() -> None:
     companies = json.loads(Path("data/corpus.json").read_text())["companies"]
     stated = sum(1 for company in companies if company.get("website"))
 
+    previous = Path("data/unresolved.json")
+    before = len(json.loads(previous.read_text())) if previous.exists() else None
+
     resolution = resolve_all(companies, overrides=load_overrides())
     write("data", resolution)
     print(f"slugs.json: {len(resolution.resolved)}/{len(companies)} resolved "
@@ -376,6 +480,12 @@ def main() -> None:
     reasons = Counter(resolution.unresolved.values())
     for reason, count in sorted(reasons.items()):
         print(f"  unresolved {count:3d}  {reason}")
+    # Stated out loud rather than left to be diffed out of two JSON files: the
+    # whole of T12.1 is a claim that this number moves, and a run that resolves
+    # nothing new must be as visible as one that resolves 250.
+    if before is not None:
+        print(f"  slug-unresolved {before} -> {len(resolution.unresolved)} "
+              f"({len(resolution.unresolved) - before:+d})")
 
 
 if __name__ == "__main__":

@@ -55,7 +55,14 @@ counted in the build report, never silently dropped.
 ### 3. ATS slug resolution
 For each company, find its job-board slug by (a) regexing its careers page for
 board URLs, then (b) guessing the slug from the company name and probing
-Greenhouse directly, then (c) consulting a hand-maintained override file.
+Greenhouse and Ashby directly, then (c) consulting a hand-maintained override file.
+
+A guess is only kept if the board states whose it is. Greenhouse states a name
+and 404s a slug that is not a board, so the name settles it. Ashby answers 200
+for every slug ever typed and **25% of the boards its titles matched were a
+different company with the same one-word name** (T12.1), so an Ashby guess must
+also agree with the company's own address. Lever is not guessed at all: a wrong
+slug returns 200 with an empty array, so there is nothing to verify.
 
 **Acceptance:** `slugs.json` maps company → `{ats, slug, method}` where method is
 one of `careers-page | guess | override`; unresolved companies land in

@@ -39,6 +39,16 @@ WHAT WAS MEASURED (2026-08-02):
      job-board/<slug>` returned 200/2.0MB for ramp and 1password, 404/"Not
      Found" for a nonsense slug. Misses are nearly free; only hits cost.
 
+  [CORRECTED BY learning-tests/ashby_collision_live.py, same day. Finding B
+   below is right that the API names nobody and that the board page's <title>
+   does — and wrong twice about what it read there. The same page carries a
+   `window.__appData` blob stating the organisation's OWN WEBSITE, which is the
+   independent fact the hit list below badly needed; and a bare "Jobs" is NOT
+   proof the slug is not a board — 2 of 264 known-good boards render that exact
+   shell over a live board. See finding 4 there. The 17.5% below stands as a
+   ceiling; verified against addresses it is 10.0%, and the difference is
+   companies this file would have published under the wrong name.]
+
   B. THE API DOES NOT NAME THE COMPANY — no organizationName, no company field,
      nothing but the slug echoed back inside jobUrl. So the API alone cannot
      answer the question `states_company` exists to ask, and a guess verified by
