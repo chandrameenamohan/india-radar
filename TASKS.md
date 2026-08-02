@@ -2465,7 +2465,24 @@ Out of scope:
   - Rate limiting. Real before launch, not before there is a second endpoint.
 ```
 
-### T14.2 — The profile, split by purpose `todo` · *Phase 9* · after T14.1
+### T14.2 — The profile, split by purpose `blocked` · *Phase 9* · after T14.1
+> **Built, tested, routed; blocked on provisioning.** `worker/profile.mjs` +
+> `/api/profile`. 35 branches, 0 mutation survivors, verified by re-running the
+> sweep independently rather than on the author's word.
+>
+> Two things the review added. **`accommodations` was being accepted
+> server-side** — "will you need accommodations to interview with us?" is a
+> recurring measured question and the answer reveals disability status, Article 9
+> in exactly the same class as the `disability_status` already refused. And
+> **`work_address` was missing from both sides** — "what is the address from
+> which you plan on working?" is measured as recurring and nothing held it.
+> `pronouns` was already refused, correctly and unprompted, because pronouns
+> imply gender identity.
+>
+> **The schema is the second lock.** `worker/schema.sql` has no column that could
+> hold a demographic field. The validator refuses them by name on the way in; a
+> schema is far harder to change by accident than a validator is, which is the
+> whole reason for having both.
 > The eight fields `learning-tests/apply_questions_live.py` measured companies
 > actually asking, and the split SPEC v4 makes between them: operational
 > constants server-side because they will shape what we show the user, EEO
@@ -2493,7 +2510,32 @@ Out of scope:
   - Validating a salary figure against anything. It is the user's number.
 ```
 
-### T14.3 — One resume, and a deletion you can verify `todo` · *Phase 9* · after T14.1
+### T14.3 — One resume, and a deletion you can verify `blocked` · *Phase 9* · after T14.1
+> **Built, tested, routed; blocked on provisioning.** `worker/resume.mjs` +
+> `/api/resume`. 16 branches and 31 mutations, 0 survivors.
+>
+> **The one branch my first sweep flagged turned out to be the critical path,
+> not a defensive extra.** `await request.arrayBuffer()` in Workers returns a
+> BARE ArrayBuffer, which fails `ArrayBuffer.isView` — so with that line gone
+> every real upload would have been refused as `unreadable_body` while every test
+> stayed green, because the tests only ever built Uint8Arrays.
+>
+> **A synchronous fake proves less than it looks like, and that hid three real
+> bugs.** With a synchronous store, a `store.delete` the module forgot to `await`
+> still lands before the verifying read. A macrotask deferral was NOT enough —
+> timers fire FIFO, so the unawaited operation's tick still ran first. The fake
+> now settles writes over two ticks and reads over one; all three missing-`await`
+> mutations died only after that.
+>
+> The claim under test is the one SPEC v4 actually makes — *we never report a
+> deletion we did not observe* — proven against two lying stores: one that
+> accepts a delete and still serves the object, one whose listing is stale.
+> Against both, `deleteResume` throws rather than reporting success.
+>
+> Note for routing, already honoured: there is deliberately **no by-id lookup**.
+> The acceptance line says "one user cannot read another's resume by id"; adding
+> `/api/resume/:id` to satisfy that wording literally would create the hole the
+> wording is worried about. The e2e is "user B's token cannot read user A's".
 > The first personal document this project has ever held, and SPEC v4 owns the
 > retention decision v3 deferred to whichever feature needed it. One file. No
 > version history — replacing it deletes the previous one, because versioning is
@@ -2521,7 +2563,24 @@ Out of scope:
   - Formats beyond PDF and plain text.
 ```
 
-### T14.4 — A posting's real questions, fetched on demand `todo` · *Phase 9* · after T14.1
+### T14.4 — A posting's real questions, fetched on demand `blocked` · *Phase 9* · after T14.1
+> **Built, tested, routed; blocked on provisioning** (the route reads the profile,
+> so it needs D1 even though the questions themselves come from Greenhouse).
+> `worker/questions.mjs` + `/api/questions`. 17 branches, 26 mutations, 0
+> survivors.
+>
+> **This task found a bug in the measurement that justified it.** The learning
+> test filtered boilerplate labels by SUBSTRING, so `"location"` deleted "Which
+> office location would you prefer?" — a question a company chose to ask, removed
+> from a form we would then have called complete. The fix is an ANCHORED rule
+> that must end in the structural word, so "What is the name of your current
+> employer?" survives; a mutation replaces it with a bare substring and turns the
+> test red, which is what proves the widening did not re-introduce the bug.
+>
+> `READ` versus `UNREADABLE` carries seven distinct reasons, and a 200 with no
+> `questions` key is UNKNOWN rather than zero. All seven go through one private
+> `cannotSee()` that spreads its detail first, so no branch can set `questions`
+> to anything but null — the invariant made structural rather than remembered.
 > Measured 2026-08-02: **Greenhouse states a job's application questions and
 > Ashby states nothing**, and 401 of 880 resolved slugs are Ashby. So this task
 > ships a capability that covers half the register and an honest silence over the

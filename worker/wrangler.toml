@@ -15,5 +15,21 @@ compatibility_date = "2026-08-02"
 # config change rather than an invisible one.
 CLERK_ISSUER = "https://regular-troll-50.clerk.accounts.dev"
 
-# No D1 and no R2 bindings yet. T14.2 and T14.3 add them; a binding that exists
-# before anything reads it is a permission granted for no reason.
+# NOT YET PROVISIONED. Both need a Cloudflare account action before deploy:
+#   npx wrangler d1 create roleatlas          -> paste the id below
+#   npx wrangler r2 bucket create roleatlas-resumes
+#   npx wrangler d1 execute roleatlas --file worker/schema.sql --remote
+# They are declared rather than omitted so that a deploy FAILS loudly on a
+# missing id instead of succeeding into a Worker whose storage silently is not
+# there. The tests never touch either: every module takes its store as an
+# argument, which is what let three of them be built in parallel with no
+# infrastructure at all.
+
+[[d1_databases]]
+binding = "DB"
+database_name = "roleatlas"
+database_id = "REPLACE_ME_AFTER_wrangler_d1_create"
+
+[[r2_buckets]]
+binding = "RESUMES"
+bucket_name = "roleatlas-resumes"
