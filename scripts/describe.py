@@ -311,6 +311,45 @@ async def run(delta: dict[str, dict], workers: int) -> dict[str, dict[str, str]]
     return {name: found for name, found in done if found}
 
 
+def verdicts() -> dict[str, str]:
+    """The audit's latest verdict per company. Last row wins, for `report`'s
+    reason: the log is append-only, so a company retried after a harness `error`
+    carries two rows and only the second one happened."""
+    if not AUDIT_LOG.exists():
+        return {}
+    rows = [json.loads(line) for line in AUDIT_LOG.read_text().splitlines() if line.strip()]
+    return {row["name"]: row["verdict"] for row in rows}
+
+
+def mark(described: dict[str, dict], latest: dict[str, str]) -> dict[str, dict]:
+    """descriptions.json with the audit's verdicts folded in as one field — T10.5.
+
+    `checked: true` is the site's licence to say a description was verified, and
+    it means exactly one thing: the audit opened this company's own website, read
+    it against the board we publish their roles from, and found no contradiction.
+    Nothing weaker qualifies. A description regenerated after a
+    `wrong_description` verdict was written under the same check but never
+    re-audited, and an `unreadable` site is a site nobody has read — both stay
+    unverified, which is a work list rather than a claim.
+
+    A company the corpus holds no address for cannot be audited at all, and 45
+    listed rows were in that state when this field was added — 45 descriptions
+    the site published in exactly the same voice as the 245 somebody had read.
+    T10.5's two new sources took that to 14, and the audit then ran over the 32
+    it had freed. The field is what tells the rest apart from them.
+
+    Removed, not set false, where the verdict does not qualify: absence is the
+    absence this file already renders, and a stale `checked: true` surviving a
+    re-audit is the one failure this cannot have.
+    """
+    return {
+        name: {**said, "checked": True}
+        if latest.get(name) == "ok"
+        else {field: value for field, value in said.items() if field != "checked"}
+        for name, said in described.items()
+    }
+
+
 def audited() -> set[str]:
     """Companies the audit log already holds a real verdict for.
 
@@ -375,9 +414,19 @@ def main(argv: list[str]) -> int:
         if args.limit:
             rows = dict(list(rows.items())[: args.limit])
         print(f"{len(listed)} listed, {len(done)} already audited, {len(rows)} to check")
-        if not rows or args.dry_run:
-            return report() if AUDIT_LOG.exists() else 0
-        asyncio.run(run_audit(rows, described, args.workers))
+        if rows and not args.dry_run:
+            asyncio.run(run_audit(rows, described, args.workers))
+        if not AUDIT_LOG.exists():
+            return 0
+        # The verdicts, written back into the file the site reads (T10.5). Done
+        # on every audit invocation rather than only on one that ran agents:
+        # marking is a fold over the log, so a completed audit can refresh the
+        # flags without spending a single fetch to do it.
+        marked = mark(json.loads(DESCRIPTIONS.read_text()), verdicts())
+        DESCRIPTIONS.write_text(json.dumps(marked, indent=1) + "\n")
+        checked = sum(1 for said in marked.values() if said.get("checked"))
+        print(f"{checked} of {len(marked)} descriptions verified against their own site "
+              f"and their board -> {DESCRIPTIONS}")
         return report()
 
     # A company with no address is not a company we can read, so it is not part

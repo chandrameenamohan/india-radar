@@ -3,7 +3,8 @@
   "what": "Payment processing for internet businesses",
   "for_whom": "Any business that takes money online",
   "why_them": "The default payments layer of the internet",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Scale": {
   "what": "Labels and evaluates data for AI models",
@@ -15,43 +16,50 @@
   "what": "Labels and evaluates data for AI models",
   "for_whom": "AI labs and enterprises training models",
   "why_them": "The data backbone behind frontier AI labs",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Glean": {
   "what": "AI search across all your work apps",
   "for_whom": "Employees drowning in scattered company knowledge",
   "why_them": "Enterprise search that actually finds the answer",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Databricks": {
   "what": "One platform for data and AI workloads",
   "for_whom": "Companies with big data and AI ambitions",
   "why_them": "Created Spark, now a data-platform giant",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Anthropic": {
   "what": "Builds Claude, a frontier AI assistant",
   "for_whom": "People and businesses putting AI to work",
   "why_them": "Frontier AI lab built around safety",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Airbnb": {
   "what": "Marketplace for stays and travel experiences",
   "for_whom": "Travelers who want more than hotels",
   "why_them": "The brand that defined home sharing",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Coinbase": {
   "what": "Buy, sell, and store cryptocurrency simply",
   "for_whom": "Retail and institutional investors entering crypto",
   "why_them": "The most trusted US crypto exchange",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Notion": {
   "what": "One workspace for notes, docs, projects",
   "for_whom": "Teams tired of ten scattered tools",
   "why_them": "The connected workspace millions organize in",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Cursor": {
   "what": "A code editor with AI built in",
@@ -63,127 +71,148 @@
   "what": "Makes Devin, an autonomous AI engineer",
   "for_whom": "Engineering teams with more work than people",
   "why_them": "Built the first credible AI engineer",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "GitLab": {
   "what": "One platform for the whole software lifecycle",
   "for_whom": "Teams shipping code from plan to deploy",
   "why_them": "The all-remote pioneer of DevOps platforms",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Vercel": {
   "what": "Hosting and tooling for frontend developers",
   "for_whom": "Teams building fast websites and apps",
   "why_them": "They make Next.js, the web's favorite framework",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Fivetran": {
   "what": "Moves data from apps into warehouses automatically",
   "for_whom": "Data teams sick of maintaining pipelines",
   "why_them": "The standard for zero-maintenance data pipelines",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Flexport": {
   "what": "Freight forwarding run on modern software",
   "for_whom": "Companies shipping goods across borders",
   "why_them": "Rebuilt global logistics around software and visibility",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Kong": {
   "what": "Manages and secures APIs at scale",
   "for_whom": "Platform teams running many services",
   "why_them": "The most widely adopted open-source API gateway",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "LaunchDarkly": {
   "what": "Feature flags for safe software releases",
   "for_whom": "Teams that ship code every day",
   "why_them": "They made feature flags a product category",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Neo4j": {
   "what": "A database built around relationships between things",
   "for_whom": "Teams whose data is a network",
   "why_them": "The leading graph database for two decades",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Mixpanel": {
   "what": "Analytics that show what users actually do",
   "for_whom": "Product teams making decisions from guesses",
   "why_them": "Product analytics pioneer trusted by thousands",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Amplitude": {
   "what": "Analytics for understanding user behavior in products",
   "for_whom": "Product teams optimizing activation and retention",
   "why_them": "Public company, the enterprise product-analytics leader",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Razorpay": {
   "what": "Payments infrastructure for businesses in India",
   "for_whom": "Indian companies accepting money online",
   "why_them": "India's leading full-stack payments platform",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Groww": {
   "what": "An app for investing in stocks and funds",
   "for_whom": "Everyday Indians investing for the first time",
   "why_them": "India's largest retail broking app",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "InMobi": {
   "what": "Mobile advertising and app monetization platform",
   "for_whom": "App publishers and brand advertisers worldwide",
   "why_them": "India's first unicorn, global ad-tech scale",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "HackerRank": {
   "what": "Coding tests for hiring software engineers",
   "for_whom": "Companies screening technical candidates at scale",
   "why_them": "The default technical-screening tool in hiring",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Harness": {
   "what": "Automates software delivery from commit to production",
   "for_whom": "Engineering teams tired of slow releases",
   "why_them": "CI/CD platform from the AppDynamics founder",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Druva": {
   "what": "Backs up and protects company data in cloud",
   "for_whom": "IT teams guarding against loss and ransomware",
   "why_them": "SaaS data-protection leader, born in Pune",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Minio": {
   "what": "High-performance object storage you run anywhere",
   "for_whom": "Teams building AI and data infrastructure",
   "why_them": "The most deployed open-source object store",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Temporal": {
   "what": "Makes long-running code reliable by default",
   "for_whom": "Developers building workflows that must not fail",
   "why_them": "Invented durable execution, runs huge production systems",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "SingleStore": {
   "what": "A fast database for transactions and analytics",
   "for_whom": "Teams needing real-time answers on live data",
   "why_them": "One engine where others need two",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Cockroach Labs": {
   "what": "A SQL database that survives failures",
   "for_whom": "Companies that cannot afford database downtime",
   "why_them": "Resilient distributed SQL, built by ex-Googlers",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Starburst": {
   "what": "Query all your data where it lives",
   "for_whom": "Data teams with data in many places",
   "why_them": "The company behind the Trino query engine",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Together AI": {
   "what": "Cloud for training and running open models",
@@ -201,115 +230,134 @@
   "what": "Designs AI chips and open hardware",
   "for_whom": "Companies wanting alternatives to Nvidia",
   "why_them": "Led by legendary chip designer Jim Keller",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Turing": {
   "what": "Matches companies with remote software engineers",
   "for_whom": "Companies hiring vetted global engineering talent",
   "why_them": "Huge vetted talent pool, now powering AI training",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Observe.AI": {
   "what": "AI that analyzes contact-center conversations",
   "for_whom": "Support teams coaching agents at scale",
   "why_them": "Conversation intelligence leader for contact centers",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Tide": {
   "what": "Business banking built for small companies",
   "for_whom": "Small businesses and freelancers in the UK",
   "why_them": "One of the UK's biggest SME banking platforms",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Sarvam": {
   "what": "Builds AI models for Indian languages",
   "for_whom": "India-first products needing voice and language AI",
   "why_them": "India's flagship sovereign AI-model effort",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "1Password": {
   "what": "A password manager for people and companies",
   "for_whom": "Individuals and company IT security teams",
   "why_them": "One of the oldest, most trusted password apps",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Algolia": {
   "what": "Search that powers a website's search box",
   "for_whom": "Developers adding search to apps and shops",
   "why_them": "Known for very fast, easy-to-add search",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Anchorage Digital": {
   "what": "Holds and trades crypto for big institutions",
   "for_whom": "Funds, asset managers, and large companies",
   "why_them": "The first federally chartered US crypto bank",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Applied Intuition": {
   "what": "Software that teaches vehicles to drive themselves",
   "for_whom": "Carmakers, defense, trucking, mining, and farming",
   "why_them": "Covers the whole stack, not one piece",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "ASAPP": {
   "what": "AI agents that handle customer service conversations",
   "for_whom": "Large call centers at airlines, banks, insurers",
   "why_them": "Automation with humans watching and correcting it",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Aviatrix": {
   "what": "Security and networking across multiple cloud providers",
   "for_whom": "Companies running on AWS, Azure and Google",
   "why_them": "One policy instead of each cloud's firewall",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Black Forest Labs": {
   "what": "AI models that generate images and video",
   "for_whom": "Developers, creative teams, and companies building tools",
   "why_them": "Makes FLUX, and releases open model weights",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Campfire": {
   "what": "Accounting software that closes the books automatically",
   "for_whom": "Finance teams at mid-size and large companies",
   "why_them": "Built around an AI model for accounting",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Cato Networks": {
   "what": "One cloud service for company networking and security",
   "for_whom": "IT teams connecting offices, staff, and clouds",
   "why_them": "One vendor instead of stitching tools together",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Clipboard": {
   "what": "An app matching nurses to open hospital shifts",
   "for_whom": "Care homes, hospitals, and hourly healthcare workers",
   "why_them": "Fills most shifts posted a day ahead",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "ContentSquare": {
   "what": "Shows how people actually use your website",
   "for_whom": "Product, marketing, and design teams at brands",
   "why_them": "Records whole journeys without tagging each button",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Cyberhaven": {
   "what": "Tracks where sensitive company data actually goes",
   "for_whom": "Security teams worried about leaks and insiders",
   "why_them": "Follows data's history, so fewer false alarms",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "DevRev": {
   "what": "One system linking support, sales, and engineering",
   "for_whom": "Support and product teams at larger companies",
   "why_them": "AI that reads across all your live data",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "DriveWealth": {
   "what": "Lets other apps offer stock trading",
   "for_whom": "Fintech apps and banks adding investing features",
   "why_them": "Pioneered buying fractions of a share",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Epic Games": {
   "what": "Makes Fortnite and the Unreal game engine",
@@ -321,103 +369,120 @@
   "what": "Spots fraudulent payments as they happen",
   "for_whom": "Banks, payment processors, and fintech companies",
   "why_them": "Catches more fraud while blocking fewer customers",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Focal Systems": {
   "what": "Cameras that watch grocery shelves for gaps",
   "for_whom": "Supermarket and grocery chains running many stores",
   "why_them": "Watches every product continuously, no manual counts",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Giga": {
   "what": "AI agents that answer customer support questions",
   "for_whom": "Banks, retailers, and telecoms with big support teams",
   "why_them": "Tests its own changes on live traffic",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "HighRadius": {
   "what": "Automates invoicing, collections, and closing the books",
   "for_whom": "Finance teams at large and mid-size companies",
   "why_them": "Charges only when the numbers actually improve",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Immuta": {
   "what": "Controls who can see which company data",
   "for_whom": "Data and security teams at big companies",
   "why_them": "Treats AI agents as users needing permissions",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Inflection AI": {
   "what": "Builds Pi, a conversational AI assistant",
   "for_whom": "Everyday users and companies wanting friendlier AI",
   "why_them": "Focuses on emotionally aware, human-feeling conversation",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Ironclad": {
   "what": "Software for writing and managing legal contracts",
   "for_whom": "Legal, sales, and procurement teams at companies",
   "why_them": "One of the first AI-driven contract tools",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Karat": {
   "what": "Runs technical job interviews for other companies",
   "for_whom": "Engineering hiring teams at large employers",
   "why_them": "Over 600,000 interviews make scoring consistent",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "LangChain": {
   "what": "Tools for building and monitoring AI agents",
   "for_whom": "Developers putting AI features into production",
   "why_them": "Its open-source library is downloaded everywhere",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Lio": {
   "what": "AI agents that handle company purchasing work",
   "for_whom": "Procurement teams at large global companies",
   "why_them": "Agents research vendors and negotiate in parallel",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "MaintainX": {
   "what": "App for tracking repairs and factory equipment",
   "for_whom": "Maintenance crews in factories, hotels, and fleets",
   "why_them": "Built for phones and the shop floor",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Mercor": {
   "what": "Matches experts with companies training AI models",
   "for_whom": "AI labs hiring, and specialists seeking contract work",
   "why_them": "Screens and matches expert contractors at scale",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Moniepoint": {
   "what": "Payments and banking for African small businesses",
   "for_whom": "Merchants and small business owners across Africa",
   "why_them": "Huge agent network reaching underbanked shop owners",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Mux": {
   "what": "Video hosting and streaming built for developers",
   "for_whom": "Engineering teams adding video to their products",
   "why_them": "Working streaming in a day, not months",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Nextiva": {
   "what": "Business phone, chat, and customer messaging system",
   "for_whom": "Small businesses and larger contact center teams",
   "why_them": "Every customer channel in one place",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Odyssey": {
   "what": "AI that generates interactive video worlds",
   "for_whom": "Game, film, robotics, and research teams",
   "why_them": "Minutes-long interactive scenes, not short clips",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "OpenWeb": {
   "what": "Comment sections and forums for news sites",
   "for_whom": "Online publishers and the advertisers reaching readers",
   "why_them": "Turns reader conversation into ad revenue",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Payward": {
   "what": "Parent company of the Kraken crypto exchange",
@@ -429,61 +494,71 @@
   "what": "Ad targeting without sharing personal data",
   "for_whom": "Publishers, advertisers, and media buying agencies",
   "why_them": "Matches audiences without moving anyone's data",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Podium": {
   "what": "Answers and follows up on customer leads",
   "for_whom": "Local businesses: dealerships, clinics, home services",
   "why_them": "Replies in seconds instead of hours",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Quantum Metric": {
   "what": "Finds where websites frustrate and lose customers",
   "for_whom": "Product and digital teams at big brands",
   "why_them": "AI investigates problems without being asked",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Reka AI": {
   "what": "AI models that understand video, audio, images",
   "for_whom": "Security, media, and defense organizations",
   "why_them": "Handles many input types in one model",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "SeekOut": {
   "what": "Search tool for finding job candidates",
   "for_whom": "Recruiters and talent teams at companies",
   "why_them": "Profiles for a billion people, deeply searchable",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Socure": {
   "what": "Checks people are who they claim online",
   "for_whom": "Banks, fintechs, marketplaces, and government agencies",
   "why_them": "Huge identity dataset means fewer wrong rejections",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "StackAI": {
   "what": "Build AI agents without writing code",
   "for_whom": "IT teams in banking, healthcare, and law",
   "why_them": "Drag-and-drop building with enterprise security controls",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Tailscale": {
   "what": "Private network connecting your devices anywhere",
   "for_whom": "Developers and IT teams replacing clunky VPNs",
   "why_them": "Works in minutes, no firewall configuration needed",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Teya": {
   "what": "Card machines and accounts for small shops",
   "for_whom": "Small European businesses taking card payments",
   "why_them": "Money lands in the account almost instantly",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Torq": {
   "what": "Automates the routine work of security teams",
   "for_whom": "Security operations teams drowning in alerts",
   "why_them": "Agents triage alerts using past decisions",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Twin Health": {
   "what": "Program to reverse type 2 diabetes",
@@ -495,79 +570,92 @@
   "what": "Analyzes which ad creative actually performs",
   "for_whom": "Brand marketing teams and their ad agencies",
   "why_them": "Partnered with every major ad platform",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Workato": {
   "what": "Connects business apps and automates work between them",
   "for_whom": "IT, finance, and HR teams at enterprises",
   "why_them": "A repeated Gartner leader in enterprise automation",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "6Sense": {
   "what": "Software that predicts which companies are ready to buy",
   "for_whom": "B2B sales and marketing teams at larger companies",
   "why_them": "Pioneered buying-intent data before most rivals existed",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Andela": {
   "what": "Marketplace matching companies with vetted remote software engineers",
   "for_whom": "Companies hiring engineers they cannot find locally",
   "why_them": "Built its talent network across Africa first",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "AppsFlyer": {
   "what": "Measures which ads actually drove app installs",
   "for_whom": "Marketing teams at mobile app companies",
   "why_them": "Longest-running independent name in mobile ad measurement",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Assembled": {
   "what": "Scheduling and forecasting software for customer support teams",
   "for_whom": "Support operations leaders at fast-growing companies",
   "why_them": "Built for modern support teams, not call centers",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Awardco": {
   "what": "Platform for giving employees recognition and rewards",
   "for_whom": "HR teams at companies of every size",
   "why_them": "Reward catalog runs on Amazon's product range",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Blee": {
   "what": "Checks marketing content against legal and compliance rules",
   "for_whom": "Legal and marketing teams at regulated financial companies",
   "why_them": "Reviews content before publishing and monitors it after",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Canary Technologies": {
   "what": "Guest software for hotels: check-in, payments, and messaging",
   "for_whom": "Hotels and hotel groups worldwide",
   "why_them": "Started by killing paper credit card forms",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Celonis": {
   "what": "Maps how work actually flows through a company",
   "for_whom": "Operations and finance teams at large enterprises",
   "why_them": "Effectively invented the process mining software category",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Coalition": {
   "what": "Cyber insurance paired with active threat monitoring",
   "for_whom": "Small and mid-sized businesses buying cyber coverage",
   "why_them": "Scans customers for holes instead of just paying claims",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Conveo": {
   "what": "Runs customer interviews with an AI moderator",
   "for_whom": "Market research teams at large consumer brands",
   "why_them": "Keeps findings across studies instead of one-off reports",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Dataiku": {
   "what": "Shared workspace for building data and AI projects",
   "for_whom": "Analysts and data scientists inside large enterprises",
   "why_them": "Works for both coders and point-and-click users",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Dialpad": {
   "what": "Business phone and support lines with live transcription",
@@ -579,13 +667,15 @@
   "what": "Stores your files online and syncs them everywhere",
   "for_whom": "Individuals and teams sharing documents",
   "why_them": "Made file syncing simple long before rivals did",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Epidemic Sound": {
   "what": "Licenses music and sound effects for video makers",
   "for_whom": "YouTubers, podcasters, and brands making video",
   "why_them": "Owns its catalog, so licensing is one flat fee",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Fern": {
   "what": "Turns an API description into SDKs and docs",
@@ -597,49 +687,57 @@
   "what": "Decides instantly whether an online order is fraudulent",
   "for_whom": "Large online retailers and marketplaces",
   "why_them": "Recognizes shoppers across its whole merchant network",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Gigs": {
   "what": "Lets companies offer their own mobile phone plans",
   "for_whom": "Software companies bundling connectivity into their product",
   "why_them": "Handles carrier deals and SIM cards through one API",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Harmonic": {
   "what": "AI that solves math and formally checks its answers",
   "for_whom": "Mathematicians, researchers, students, and code verification users",
   "why_them": "Its model scored gold-medal level at the math olympiad",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Hightouch": {
   "what": "Pushes data from your warehouse into business tools",
   "for_whom": "Data teams supporting marketing and sales",
   "why_them": "Made the warehouse the single source for campaigns",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Immutable": {
   "what": "Blockchain tools for building and trading in games",
   "for_whom": "Game studios adding tradable digital items",
   "why_them": "Built an early Ethereum network made for games",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Isomorphic Labs": {
   "what": "Uses AI models to design new medicines",
   "for_whom": "Pharmaceutical companies partnering on drug programs",
   "why_them": "Spun out of DeepMind, built on AlphaFold",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Kaseya": {
   "what": "Software for managing and securing other people's IT",
   "for_whom": "IT service providers and internal IT departments",
   "why_them": "Bought up many tools into one bundled suite",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Lattice": {
   "what": "Software for reviews, goals, and employee feedback",
   "for_whom": "HR teams at growing companies",
   "why_them": "Popularized ongoing check-ins over annual reviews",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Lio (formerly askLio)": {
   "what": "AI agents that handle company purchasing requests",
@@ -651,25 +749,29 @@
   "what": "Finds and removes counterfeit listings online",
   "for_whom": "Brands losing sales to fakes",
   "why_them": "Automates takedown filings lawyers used to do manually",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Mercury": {
   "what": "Business banking built for startups",
   "for_whom": "Founders and finance teams at young companies",
   "why_them": "Accounts open fast, without a branch visit",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Monte Carlo": {
   "what": "Alerts data teams when their data quietly breaks",
   "for_whom": "Data engineers at companies relying on dashboards",
   "why_them": "First to treat bad data as an outage",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "N26": {
   "what": "A bank you run entirely from your phone",
   "for_whom": "Everyday consumers banking across Europe",
   "why_them": "One of Europe's first licensed mobile-only banks",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Niantic Spatial": {
   "what": "Builds detailed 3D maps of the real world",
@@ -681,61 +783,71 @@
   "what": "Designs small nuclear reactors and sells the power",
   "for_whom": "Data centers and industrial sites needing steady power",
   "why_them": "Plans to own and run its own plants",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Oyster": {
   "what": "Hires and pays your staff in other countries",
   "for_whom": "Companies hiring abroad without local legal entities",
   "why_them": "Handles local contracts, taxes, and benefits abroad",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Pelago": {
   "what": "Online clinic treating alcohol, tobacco, and opioid use",
   "for_whom": "Employers and health plans covering their members",
   "why_them": "Treats addiction as a measurable covered benefit",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Photoroom": {
   "what": "Phone app that removes and replaces photo backgrounds",
   "for_whom": "Small sellers and marketers making product photos",
   "why_them": "Trained its own cutout models for speed",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "PPRO": {
   "what": "Connects payment companies to local payment methods",
   "for_whom": "Payment providers and marketplaces selling across borders",
   "why_them": "One integration reaches dozens of country-specific methods",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Quicknode": {
   "what": "Runs blockchain servers so developers do not",
   "for_whom": "Crypto apps, wallets, and exchanges",
   "why_them": "Fast, reliable access across many different chains",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Sendbird": {
   "what": "Chat, calls, and notifications you drop into apps",
   "for_whom": "Product teams adding messaging to their apps",
   "why_them": "Handles scale and moderation most teams cannot build",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "SOLIDROAD": {
   "what": "Reviews support conversations and coaches agents afterwards",
   "for_whom": "Customer support quality and training managers",
   "why_them": "Reviews every conversation, not a small sample",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Staffbase": {
   "what": "App and intranet for talking to employees",
   "for_whom": "Internal communications teams at large employers",
   "why_them": "Reaches frontline workers who lack company email",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Talkdesk": {
   "what": "Cloud software for running phone and chat support",
   "for_whom": "Companies operating customer service centers",
   "why_them": "Early to move contact centers fully to cloud",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Trade Republic": {
   "what": "App for buying stocks, funds, and saving money",
@@ -747,49 +859,57 @@
   "what": "Live streaming, mostly people playing video games",
   "for_whom": "Streamers and the viewers who follow them",
   "why_them": "The default place live gaming happens",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Vivodyne": {
   "what": "Grows human tissue to test drugs on",
   "for_whom": "Drug companies deciding which candidates to advance",
   "why_them": "Robots run thousands of human-tissue tests, not animals",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Writer": {
   "what": "Enterprise platform for AI writing and content workflows",
   "for_whom": "Marketing, support, and operations teams at big companies",
   "why_them": "Builds its own models, tuned to company voice",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "9fin": {
   "what": "Data and analytics on corporate debt markets",
   "for_whom": "Investors, banks, and advisers in leveraged finance",
   "why_them": "Machine-read bond documents surface details humans miss",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Alpaca": {
   "what": "Stock and crypto trading APIs for developers",
   "for_whom": "Fintech apps and brokerages that embed investing",
   "why_them": "Brokerage plumbing others rent instead of building",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Anima": {
   "what": "Online consultation and triage software for clinics",
   "for_whom": "UK primary care practices and NHS boards",
   "why_them": "Built by doctors; used by a thousand practices",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Arcadia": {
   "what": "Software consolidating a company's utility and energy data",
   "for_whom": "Large enterprises tracking energy costs and emissions",
   "why_them": "Cleans messy bills into one trusted dataset",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "AssemblyAI": {
   "what": "Speech-to-text and audio understanding APIs",
   "for_whom": "Developers adding transcription to their own products",
   "why_them": "Accurate models sold as a simple developer API",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "AXONIUS": {
   "what": "Inventories all of a company's technology assets",
@@ -801,13 +921,15 @@
   "what": "Tools for sending targeted app and email messages",
   "for_whom": "Consumer brands running large customer messaging programs",
   "why_them": "Live customer data drives every messaging decision",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Capi Money": {
   "what": "Cross-border payments for businesses paying overseas suppliers",
   "for_whom": "Importers in emerging markets buying from abroad",
   "why_them": "Settles within a day where banks take weeks",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Chainguard": {
   "what": "Hardened container images kept free of known vulnerabilities",
@@ -819,85 +941,99 @@
   "what": "Automates prior authorization decisions for health insurers",
   "for_whom": "Health plans and the doctors requesting approvals",
   "why_them": "Approves routine requests instantly instead of days later",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Cresta": {
   "what": "AI coaching for contact center agents during calls",
   "for_whom": "Companies running large service or sales teams",
   "why_them": "Suggests the next thing to say, live",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Deepgram": {
   "what": "Speech recognition and voice AI APIs for developers",
   "for_whom": "Teams building voice apps, call analytics, agents",
   "why_them": "Fast, cheap transcription from custom-trained models",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "DistroKid": {
   "what": "Gets independent musicians onto streaming services",
   "for_whom": "Independent artists and small record labels",
   "why_them": "Flat yearly fee, unlimited songs, artists keep royalties",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Duffel": {
   "what": "Booking APIs for flights, hotels, and travel extras",
   "for_whom": "Travel companies and businesses selling trips online",
   "why_them": "Modern API replacing decades-old airline booking plumbing",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Escape": {
   "what": "Automated security testing for APIs and web apps",
   "for_whom": "Security teams at companies shipping many APIs",
   "why_them": "Understands business logic, not just known attack patterns",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Fieldguide": {
   "what": "AI workflow software for audit and advisory work",
   "for_whom": "Accounting firms doing audits and compliance engagements",
   "why_them": "Automates the evidence gathering and paperwork of audits",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "FourKites": {
   "what": "Tracks freight shipments in real time",
   "for_whom": "Manufacturers, retailers, and their logistics teams",
   "why_them": "Huge carrier network feeding one visibility picture",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "GoCardless": {
   "what": "Collects recurring payments directly from bank accounts",
   "for_whom": "Subscription businesses and anyone billing customers regularly",
   "why_them": "Bank debit costs less than card payments",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Heidi Health": {
   "what": "AI scribe writing clinical notes from consultations",
   "for_whom": "Doctors, nurses, and clinics in several countries",
   "why_them": "Listens during the visit so notes write themselves",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Horizon 3 AI": {
   "what": "Software that continuously attacks your own network",
   "for_whom": "Security teams wanting to find exploitable weaknesses",
   "why_them": "Automated penetration testing you can run anytime",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "impact.com": {
   "what": "Software for running affiliate and partner marketing programs",
   "for_whom": "Brands paying creators, publishers, and referral partners",
   "why_them": "Handles discovery, contracts, tracking, and payouts together",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Instabase": {
   "what": "Turns messy documents into structured, usable data",
   "for_whom": "Banks and insurers processing paperwork at scale",
   "why_them": "Handles unfamiliar document layouts without custom templates",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Iterable": {
   "what": "Runs marketing campaigns across email, push, and SMS",
   "for_whom": "Consumer brands with large marketing teams",
   "why_them": "Marketers build complex journeys without engineering help",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Keyrock": {
   "what": "Provides trading liquidity in crypto markets",
@@ -909,73 +1045,85 @@
   "what": "Pricing and market data software for hotels",
   "for_whom": "Hotels, hotel groups, and tourism organizations",
   "why_them": "Largest dataset of hotel rates and demand signals",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Liquid AI": {
   "what": "Builds small, efficient AI models",
   "for_whom": "Companies running AI on phones, cars, devices",
   "why_them": "MIT research into architectures beyond the transformer",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Marshmallow": {
   "what": "Car insurance priced for people new to Britain",
   "for_whom": "UK drivers, especially recent arrivals from abroad",
   "why_them": "Prices foreign driving history other insurers ignore",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Meticulous": {
   "what": "Generates frontend tests by recording real user sessions",
   "for_whom": "Web engineering teams tired of writing tests",
   "why_them": "Tests update themselves and are built never to flake",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Monzo": {
   "what": "A digital bank run entirely from an app",
   "for_whom": "UK consumers and small businesses",
   "why_them": "Built banking from scratch, no branches involved",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "NanoNets": {
   "what": "Extracts data from invoices and other documents",
   "for_whom": "Finance and operations teams drowning in paperwork",
   "why_them": "Learns your document types without engineering effort",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "NIUM": {
   "what": "Infrastructure for sending money across borders",
   "for_whom": "Banks, fintechs, and payroll or payout platforms",
   "why_them": "One connection reaches payout rails in many countries",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "OKX": {
   "what": "A large cryptocurrency exchange and wallet",
   "for_whom": "Retail and institutional crypto traders worldwide",
   "why_them": "Among the biggest exchanges by trading volume",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "PagerDuty": {
   "what": "Alerts the right engineer when systems break",
   "for_whom": "Software and operations teams running on-call rotations",
   "why_them": "Largely defined how modern on-call response works",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Pendo": {
   "what": "Product analytics plus in-app guides and surveys",
   "for_whom": "Product managers at software companies",
   "why_them": "See how people use software, then nudge them",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "PhysicsX": {
   "what": "AI models that simulate physics for engineers",
   "for_whom": "Aerospace, semiconductor, automotive, and energy engineering teams",
   "why_them": "Design iterations in minutes instead of long simulations",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Project44": {
   "what": "Tracks shipments across ocean, air, road, rail",
   "for_whom": "Global shippers, retailers, and logistics providers",
   "why_them": "Connects thousands of carriers into one live view",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Quince": {
   "what": "Sells cashmere, linen, and homeware at low prices",
@@ -987,13 +1135,15 @@
   "what": "Builds superconducting quantum computers and cloud access",
   "for_whom": "Researchers, governments, and enterprises exploring quantum computing",
   "why_them": "Makes its own chips in its own foundry",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Sentry": {
   "what": "Catches and reports errors in running software",
   "for_whom": "Developers who need to debug production problems",
   "why_them": "Shows the exact line and context that broke",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Sorcero": {
   "what": "AI that analyzes medical literature and drafts content",
@@ -1005,49 +1155,57 @@
   "what": "AI agents that research patents and prior art",
   "for_whom": "Patent attorneys and corporate intellectual property teams",
   "why_them": "Reads full patent texts and cites every source",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Tamara": {
   "what": "Buy now, pay later checkout in the Gulf",
   "for_whom": "Shoppers and merchants in Saudi Arabia and neighbours",
   "why_them": "Instalments designed for local rules and shopping habits",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Thought Machine": {
   "what": "Core banking software banks run in the cloud",
   "for_whom": "Banks replacing decades-old account systems",
   "why_them": "Products defined in code, not fixed by vendor",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Trigger.dev": {
   "what": "Runs long background jobs for developers",
   "for_whom": "Developers building AI workflows and scheduled tasks",
   "why_them": "Open source, and jobs survive crashes and timeouts",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Vapi": {
   "what": "Platform for building AI phone-call agents",
   "for_whom": "Companies automating support, booking, and sales calls",
   "why_them": "Handles the hard parts of real-time voice",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Wayflyer": {
   "what": "Funds ecommerce brands against their future revenue",
   "for_whom": "Online brands needing cash for inventory and ads",
   "why_them": "Repayments flex with sales; no equity given up",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Xendit": {
   "what": "Payment processing across Southeast Asian countries",
   "for_whom": "Businesses selling online in Indonesia and Philippines",
   "why_them": "Connects the region's fragmented local payment methods",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Abacum": {
   "what": "Planning and forecasting software for finance teams",
   "for_whom": "CFOs and financial planning teams at growing companies",
   "why_them": "Connects live company data to budgets and forecasts",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "AlphaSense": {
   "what": "Search engine for company filings, news, and research",
@@ -1059,25 +1217,29 @@
   "what": "Managed platform for distributed Python and AI workloads",
   "for_whom": "Machine learning engineers training and serving large models",
   "why_them": "Founded by the creators of the Ray framework",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Arketa": {
   "what": "Booking and membership software for fitness studios",
   "for_whom": "Yoga, pilates, and gym studio owners",
   "why_them": "Built only for wellness businesses, including branded apps",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "AtoB": {
   "what": "Fuel cards and payment tools for trucking",
   "for_whom": "Small and mid-sized trucking fleet owners",
   "why_them": "Modern replacement for old, fraud-prone fleet cards",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Benchling": {
   "what": "Software for recording and managing laboratory research",
   "for_whom": "Biotech and pharma scientists running experiments",
   "why_them": "Became the standard lab notebook for modern biotech",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Bringg": {
   "what": "Software for planning and tracking deliveries",
@@ -1089,67 +1251,78 @@
   "what": "Software that calculates emissions across supply chains",
   "for_whom": "Manufacturers, commodity traders, and the banks financing them",
   "why_them": "Asset-level emissions data on thousands of industrial suppliers",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "CircleCI": {
   "what": "Service that builds and tests code automatically",
   "for_whom": "Software engineering teams shipping code frequently",
   "why_them": "One of the earliest widely used continuous integration tools",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Collibra": {
   "what": "Catalogs company data and the rules for using it",
   "for_whom": "Data governance teams at large regulated companies",
   "why_them": "Long-established leader in enterprise data governance",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Cribl": {
   "what": "Routes and trims machine data before it is stored",
   "for_whom": "Security and operations teams drowning in logs",
   "why_them": "Cuts observability bills by filtering data in transit",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "DeepL": {
   "what": "Machine translation for text and whole documents",
   "for_whom": "Businesses and individuals working across languages",
   "why_them": "Widely judged to read more naturally than rivals",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Distyl AI": {
   "what": "Builds AI agent systems for large enterprises",
   "for_whom": "Fortune 500 firms in healthcare, finance, telecom",
   "why_them": "Deploys agents with audit trails and human oversight",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "EBANX": {
   "what": "Payment processing for selling into Latin America",
   "for_whom": "Global companies selling to Latin American shoppers",
   "why_them": "Deep coverage of local payment methods and rules",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Expel": {
   "what": "Around-the-clock monitoring and response for security threats",
   "for_whom": "Companies without a full security operations team",
   "why_them": "Shows customers exactly what its analysts did",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Fireblocks": {
   "what": "Secure storage and transfer of digital assets",
   "for_whom": "Banks, exchanges, and crypto trading firms",
   "why_them": "Widely trusted custody plumbing moving enormous volumes",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Front": {
   "what": "Shared inbox for team email and messages",
   "for_whom": "Support, sales, and operations teams answering customers",
   "why_them": "Keeps real email addresses while adding team workflow",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Grafana Labs": {
   "what": "Dashboards and tools for monitoring running systems",
   "for_whom": "Engineers watching infrastructure and application health",
   "why_them": "Grafana is the default open-source monitoring dashboard",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Helsing": {
   "what": "AI software for defense systems and drones",
@@ -1161,31 +1334,36 @@
   "what": "HR system for employee records and onboarding",
   "for_whom": "Fast-growing startups and small HR teams",
   "why_them": "Fast, clean tool replacing clunky legacy HR software",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Imply Data": {
   "what": "Real-time analytics database for large event data",
   "for_whom": "Engineers building fast dashboards over streaming data",
   "why_them": "Founded by the creators of Apache Druid",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Instawork": {
   "what": "App matching hourly shifts with local workers",
   "for_whom": "Restaurants, warehouses, and hospitality staffing managers",
   "why_them": "Fills last-minute shifts with vetted, rated workers",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Ivalua": {
   "what": "Software for purchasing and managing suppliers",
   "for_whom": "Procurement teams at large global corporations",
   "why_them": "One platform covering the whole purchasing process",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Komodo Health": {
   "what": "Analyzes healthcare data to map patient journeys",
   "for_whom": "Pharma companies and life sciences commercial teams",
   "why_them": "Tracks care patterns across hundreds of millions of patients",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Lightning AI": {
   "what": "Tools and cloud workspaces for training AI models",
@@ -1197,91 +1375,106 @@
   "what": "Online diagramming and visual collaboration tools",
   "for_whom": "Engineering, IT, and business teams mapping processes",
   "why_them": "Lucidchart is a standard for shared work diagrams",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Matillion": {
   "what": "Moves and transforms data into cloud warehouses",
   "for_whom": "Data engineers building analytics pipelines",
   "why_them": "Visual pipeline building tuned for Snowflake and Databricks",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "MindTickle": {
   "what": "Training and coaching software for sales teams",
   "for_whom": "Sales enablement leaders at large sales organizations",
   "why_them": "Ties rep training directly to deal performance data",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "MoonPay": {
   "what": "Lets people buy crypto with cards and banks",
   "for_whom": "Crypto wallets, exchanges, and their retail users",
   "why_them": "Embedded in many major wallets as the payment layer",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Nash": {
   "what": "Software coordinating last-mile deliveries across many carriers",
   "for_whom": "Retailers, grocers, and restaurants delivering to customers",
   "why_them": "One connection reaching many delivery fleets and couriers",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Notabene": {
   "what": "Compliance checks for crypto transfers between firms",
   "for_whom": "Exchanges and banks handling regulated crypto transactions",
   "why_them": "Focused specialist in crypto Travel Rule compliance",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Oleria": {
   "what": "Shows who has access to what across apps",
   "for_whom": "Security teams governing employee and machine access",
   "why_them": "Connects in hours instead of months-long rollouts",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "PandaDoc": {
   "what": "Creates, sends, and signs business documents",
   "for_whom": "Sales teams sending quotes, proposals, and contracts",
   "why_them": "Proposal building and e-signature in one tool",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Pennylane": {
   "what": "Accounting and finance software for French businesses",
   "for_whom": "Small businesses and the accounting firms serving them",
   "why_them": "Built jointly for company owners and their accountants",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Prove Identity": {
   "what": "Verifies identity using a person's phone number",
   "for_whom": "Banks and apps signing up new customers",
   "why_them": "Uses carrier signals instead of passwords or documents",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Ripple": {
   "what": "Payment infrastructure built on blockchain and digital assets",
   "for_whom": "Banks and payment firms moving money across borders",
   "why_them": "Built around XRP, with long-standing institutional partnerships",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Shift": {
   "what": "AI that spots fraud in insurance claims",
   "for_whom": "Insurance companies reviewing claims and policies",
   "why_them": "Trained on claims data from insurers worldwide",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "SparkCognition": {
   "what": "AI software for heavy industrial operations",
   "for_whom": "Energy, manufacturing, aerospace, and defense operators",
   "why_them": "Predicts equipment failures from plant sensor data",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "SumUp": {
   "what": "Card readers and payments for small merchants",
   "for_whom": "Cafes, market stalls, and independent shop owners",
   "why_them": "Cheap hardware working without a traditional merchant account",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Tanium": {
   "what": "Manages and secures every computer in a company",
   "for_whom": "IT and security teams at very large organizations",
   "why_them": "Queries hundreds of thousands of machines in seconds",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "ThreatLocker": {
   "what": "Blocks any software that is not explicitly approved",
@@ -1293,145 +1486,169 @@
   "what": "AI that reads cancer patient records for clinicians",
   "for_whom": "Cancer centers and oncology research teams",
   "why_them": "Every answer cites its exact source in the record",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Vectra Networks": {
   "what": "Detects attackers by watching network and cloud traffic",
   "for_whom": "Security operations teams hunting active intrusions",
   "why_them": "Spots attacker behaviour rather than known malware signatures",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Wayve": {
   "what": "Self-driving software that learns from driving data",
   "for_whom": "Carmakers adding autonomy to production vehicles",
   "why_them": "End-to-end learning instead of hand-coded driving rules",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "YipitData": {
   "what": "Sells data estimating how companies are actually performing",
   "for_whom": "Hedge funds and corporate strategy teams",
   "why_them": "Turns web and transaction data into revenue estimates",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "airSlate": {
   "what": "Tools to build and automate document workflows",
   "for_whom": "Businesses that handle many forms and signatures",
   "why_them": "Owns pdfFiller and SignNow, used by millions",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Ambient.ai": {
   "what": "Software that watches security cameras for threats",
   "for_whom": "Security teams at large offices and campuses",
   "why_them": "Spots incidents from behaviour, not face matching",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Apollo.io": {
   "what": "A business contact database plus sales outreach tools",
   "for_whom": "Sales and marketing teams hunting new customers",
   "why_them": "Huge contact database bundled with the outreach tooling",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Armada": {
   "what": "Ruggedized mobile data centres and edge computing software",
   "for_whom": "Mining, defence, energy and telecom sites far from cities",
   "why_them": "Puts real compute where no cloud reaches",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Attentive": {
   "what": "Text message marketing for online stores",
   "for_whom": "Retail and ecommerce brands selling to consumers",
   "why_them": "One of the largest SMS marketing platforms in retail",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Bitmovin": {
   "what": "Video encoding, playback and streaming analytics tools",
   "for_whom": "Broadcasters and companies streaming video at scale",
   "why_them": "Founded by engineers who helped write MPEG-DASH",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "CAIS": {
   "what": "A marketplace for buying alternative investments",
   "for_whom": "Independent advisors managing wealthy clients' money",
   "why_them": "Gives smaller advisors access to private market funds",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Caribou": {
   "what": "Software handling transfer pricing between company entities",
   "for_whom": "Finance teams at companies operating in several countries",
   "why_them": "Flat fee instead of hourly Big Four advisors",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Clear Street": {
   "what": "Modern clearing and prime brokerage for traders",
   "for_whom": "Hedge funds, brokers and active professional traders",
   "why_them": "Rebuilt decades-old clearing plumbing from scratch",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "commercetools": {
   "what": "Building blocks and APIs for online stores",
   "for_whom": "Large retailers building custom shopping experiences",
   "why_them": "Pioneered headless commerce, splitting storefront from backend",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Cross River Bank": {
   "what": "A real bank that powers fintech apps",
   "for_whom": "Lending, payments and crypto firms needing a bank",
   "why_them": "Banking licence plus its own technology, rare combination",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Degreed": {
   "what": "A platform tracking what employees learn and can do",
   "for_whom": "Large employers building skills across their workforce",
   "why_them": "Counts learning from anywhere, not just internal courses",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "d-Matrix": {
   "what": "Chips built to run AI models cheaply",
   "for_whom": "Data centres and clouds serving AI inference",
   "why_them": "Does the maths inside memory, cutting power use",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Elyos AI": {
   "what": "AI agents answering calls and admin for tradespeople",
   "for_whom": "Plumbing, heating, electrical and home service firms",
   "why_them": "Built only for trades, not generic businesses",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Faire": {
   "what": "An online wholesale market for independent retailers",
   "for_whom": "Small shop owners and the brands supplying them",
   "why_them": "Takes the risk with returns and payment terms",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "firmus": {
   "what": "Efficient liquid-cooled data centres built for AI",
   "for_whom": "Governments, researchers and companies renting AI compute",
   "why_them": "Cuts the energy and water big clusters need",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Handshake": {
   "what": "A hiring network connecting students to employers",
   "for_whom": "College students, universities and graduate recruiters",
   "why_them": "Wired into most US university career offices",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "HeyGen": {
   "what": "Generates videos of realistic talking AI avatars",
   "for_whom": "Marketing, training and localisation teams making video",
   "why_them": "Avatars and cloned voices across many languages fast",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Huntress": {
   "what": "Security monitoring that hunts intruders on computers",
   "for_whom": "Small businesses and the IT providers serving them",
   "why_them": "Serious threat hunting priced for small companies",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Incode Technologies": {
   "what": "Identity checks using face scans and documents",
   "for_whom": "Banks, governments and anyone verifying new users",
   "why_them": "Builds its own biometrics rather than licensing others",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Instead": {
   "what": "AI that finds tax savings and files returns",
@@ -1443,133 +1660,155 @@
   "what": "One API for lab tests and wearable data",
   "for_whom": "Digital health companies and virtual clinics",
   "why_them": "Replaces months of separate lab and device integrations",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Kpler": {
   "what": "Tracks ships and cargo to explain commodity flows",
   "for_whom": "Traders and analysts in energy, shipping and metals",
   "why_them": "Vessel and satellite data revealing trade others miss",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Lightricks": {
   "what": "Creative apps for editing photos and video",
   "for_whom": "Creators and small brands making social content",
   "why_them": "Made Facetune; brings studio effects to phones",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Lucis": {
   "what": "A yearly membership for detailed blood testing",
   "for_whom": "People across Europe tracking their own health",
   "why_them": "Over a hundred markers combined with wearable data",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Mattermost": {
   "what": "Self-hosted team chat and workflow collaboration",
   "for_whom": "Defence, government and engineering teams with strict rules",
   "why_them": "Open source, so customers run it themselves",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Modern Health": {
   "what": "Mental health care provided through employers",
   "for_whom": "Companies offering therapy and coaching to staff",
   "why_them": "Spans light coaching through to clinical therapy",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Netskope": {
   "what": "Security inspecting company traffic to cloud apps",
   "for_whom": "Large enterprises with remote staff and cloud software",
   "why_them": "Runs its own global network carrying that traffic",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Numeral": {
   "what": "Automatic sales tax registration, filing and payment",
   "for_whom": "Ecommerce and software firms selling across many states",
   "why_them": "Pays your penalties if a filing runs late",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Onebrief": {
   "what": "Software for planning military operations together",
   "for_whom": "Military staffs and defence departments",
   "why_them": "Built by officers who lived the planning paperwork",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Peregrine": {
   "what": "Software unifying scattered public safety records",
   "for_whom": "Police departments and city government agencies",
   "why_them": "Connects old systems that never talked to each other",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Pigment": {
   "what": "Software for planning budgets, sales and headcount",
   "for_whom": "Finance and operations teams outgrowing giant spreadsheets",
   "why_them": "Spreadsheet-like flexibility that still runs fast",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "PsiQuantum": {
   "what": "Building a large quantum computer using light",
   "for_whom": "Governments and enterprises needing quantum-scale computation later",
   "why_them": "Bets on photonics and existing chip factories",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Ramp": {
   "what": "Corporate cards and software controlling company spending",
   "for_whom": "Finance teams at startups and mid-sized companies",
   "why_them": "Earns money while pushing customers to spend less",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Rogo": {
   "what": "An AI analyst for financial research and banking",
   "for_whom": "Bankers, investors and analysts at financial firms",
   "why_them": "Trained on the documents and formats finance uses",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Sigma Computing": {
   "what": "A spreadsheet interface over cloud data warehouses",
   "for_whom": "Business analysts who know Excel, not SQL",
   "why_them": "Live warehouse data without exports or extracts",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "TaxBit": {
   "what": "Tax and accounting software for digital assets",
   "for_whom": "Crypto exchanges, enterprises and government tax agencies",
   "why_them": "Built around regulator requirements from the start",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Tines": {
   "what": "A workflow builder automating security and IT tasks",
   "for_whom": "Security teams drowning in repetitive alerts",
   "why_them": "Serious automation without analysts writing code",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "TrueLayer": {
   "what": "Bank-to-bank payments and account data connections",
   "for_whom": "European fintechs, marketplaces and merchants taking payments",
   "why_them": "Early mover in European open banking payments",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Veriff": {
   "what": "Checks identity documents and faces during signup",
   "for_whom": "Online businesses required to verify their users",
   "why_them": "Estonian roots, broad coverage of global ID documents",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Webflow": {
   "what": "A visual tool for building real websites",
   "for_whom": "Designers and marketing teams who avoid code",
   "why_them": "Produces production sites, not just clickable mockups",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "YugaByte": {
   "what": "A distributed database that speaks PostgreSQL",
   "for_whom": "Engineering teams needing databases spread across regions",
   "why_them": "PostgreSQL compatibility with scale-out, and open source",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Airtable": {
   "what": "Spreadsheet-like database people use to build apps",
   "for_whom": "Teams tracking projects, content, and operations",
   "why_them": "Made databases usable without writing any code",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Amperity": {
   "what": "Software that stitches scattered customer records together",
@@ -1581,13 +1820,15 @@
   "what": "Platform for selling and managing software subscriptions",
   "for_whom": "Telecom carriers and resellers with software catalogs",
   "why_them": "Runs the marketplace and billing behind big partners",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "ARQ": {
   "what": "App for holding and converting digital dollars",
   "for_whom": "Latin Americans saving in a steadier currency",
   "why_them": "Real exchange rates instead of hidden bank markups",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Attotude": {
   "what": "Chips that send data over plastic waveguides",
@@ -1599,7 +1840,8 @@
   "what": "App for buying crypto, stocks, and metals",
   "for_whom": "Everyday investors across Austria and wider Europe",
   "why_them": "Early European platform with proper local licenses",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Carta": {
   "what": "Software tracking who owns shares in companies",
@@ -1617,19 +1859,22 @@
   "what": "Content system that feeds any website or app",
   "for_whom": "Marketing and engineering teams at larger brands",
   "why_them": "Separated content from the front end early on",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Culture Amp": {
   "what": "Surveys and reviews measuring how employees feel",
   "for_whom": "HR teams at growing and large companies",
   "why_them": "Compares your answers against thousands of companies",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Depot": {
   "what": "Remote machines that make container builds faster",
   "for_whom": "Engineering teams stuck waiting on slow CI",
   "why_them": "Persistent caches and native ARM build machines",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Doppel": {
   "what": "Finds and removes fake sites impersonating brands",
@@ -1641,13 +1886,15 @@
   "what": "Software for managing rebate deals between businesses",
   "for_whom": "Distributors, manufacturers, and buying groups",
   "why_them": "Replaces spreadsheets in a neglected corner of finance",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Fleek": {
   "what": "Wholesale marketplace for buying used clothing in bulk",
   "for_whom": "Vintage resellers and secondhand clothing shops",
   "why_them": "Vets suppliers and handles shipping and customs",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Gather AI": {
   "what": "Drones and cameras that count warehouse inventory",
@@ -1659,49 +1906,57 @@
   "what": "Platform for running employee benefits and allowances",
   "for_whom": "HR teams with staff in many countries",
   "why_them": "Handles benefits paperwork and compliance country by country",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Higgsfield": {
   "what": "Tools for generating video with AI",
   "for_whom": "Marketers and creators making short videos",
   "why_them": "Camera-motion controls that mimic real filming",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "iCapital": {
   "what": "Plumbing for buying private equity and hedge funds",
   "for_whom": "Wealth advisors and their wealthy clients",
   "why_them": "Cut the minimums and paperwork advisors faced",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Infisical": {
   "what": "Store for API keys and application secrets",
   "for_whom": "Developers keeping credentials out of their code",
   "why_them": "Open source alternative to closed secret managers",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Intercom": {
   "what": "Chat and help desk software for customers",
   "for_whom": "Support teams at software companies",
   "why_them": "Its AI agent resolves many tickets outright",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Justworks": {
   "what": "Payroll, benefits, and HR handled for you",
   "for_whom": "Small US businesses without HR staff",
   "why_them": "Pools small firms to get big-company benefits",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Lago": {
   "what": "Billing engine for usage-based pricing",
   "for_whom": "Software companies charging by what customers consume",
   "why_them": "Open source and self-hostable, unlike most billing",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Linear": {
   "what": "Issue tracker for planning software work",
   "for_whom": "Product and engineering teams at software companies",
   "why_them": "Fast, opinionated, and unusually well designed",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "MeltPlan": {
   "what": "AI that plans buildings before construction starts",
@@ -1713,13 +1968,15 @@
   "what": "Machine learning that places mobile ads",
   "for_whom": "App makers and marketplaces buying new users",
   "why_them": "Ranks ads on first-party data, not cookies",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "MURAL": {
   "what": "Shared online whiteboard for group work",
   "for_whom": "Distributed teams running workshops and planning sessions",
   "why_them": "Built for facilitated meetings, not just drawing",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Next Caller": {
   "what": "Verifies who is really calling a phone line",
@@ -1737,85 +1994,99 @@
   "what": "Software for privacy consent and data compliance",
   "for_whom": "Companies subject to privacy and disclosure rules",
   "why_them": "Grew fast when GDPR forced everyone to comply",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "PatSnap": {
   "what": "Search and analysis over patents and research",
   "for_whom": "R&D teams and intellectual property lawyers",
   "why_them": "Connects patent data to markets and competitors",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "PermitFlow": {
   "what": "Software for filing construction permits",
   "for_whom": "Builders and contractors working across many cities",
   "why_them": "Knows the quirks of thousands of local offices",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Pleo": {
   "what": "Company cards with expense tracking built in",
   "for_whom": "European small and mid-sized companies",
   "why_them": "Kills expense reports by capturing receipts immediately",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Pump": {
   "what": "Automatically lowers cloud infrastructure bills",
   "for_whom": "Startups and mid-sized companies on AWS",
   "why_them": "Free to use; buys cloud commitments in bulk",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Scandit": {
   "what": "Barcode scanning using ordinary phone cameras",
   "for_whom": "Retail, delivery, and hospital frontline workers",
   "why_them": "Scans reliably without dedicated scanner hardware",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Spellbrush": {
   "what": "AI tools that generate anime art",
   "for_whom": "Anime fans, artists, and game players",
   "why_them": "Made Waifu Labs and helped build niji journey",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Teleport": {
   "what": "Secure access to servers, databases, and clusters",
   "for_whom": "Infrastructure teams replacing shared SSH keys",
   "why_them": "Short-lived certificates instead of passwords and keys",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Tipalti": {
   "what": "Automates paying suppliers around the world",
   "for_whom": "Finance teams with many global vendors",
   "why_them": "Handles tax forms and cross-border payment rules",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Tulip": {
   "what": "Apps that guide and measure factory work",
   "for_whom": "Manufacturers digitizing their shop floors",
   "why_them": "Engineers build the apps without writing code",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Verkada": {
   "what": "Cloud-managed security cameras and door access",
   "for_whom": "Schools, offices, and multi-site businesses",
   "why_them": "Everything managed from a browser, no servers",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Wispr Flow": {
   "what": "Dictation that turns speech into clean text",
   "for_whom": "People who write faster by talking",
   "why_them": "Strips filler words and formats the result",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Zip": {
   "what": "One front door for company purchase requests",
   "for_whom": "Procurement and finance teams at larger companies",
   "why_them": "Routes approvals across legal, security, and finance",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Fundamental": {
   "what": "A pre-trained foundation model for tabular data prediction",
   "for_whom": "Enterprise data scientists working with business data tables",
   "why_them": "Research-rooted team, large Series A, one cross-industry model",
-  "ai": true
+  "ai": true,
+  "checked": true
  },
  "Alloy": {
   "what": "An identity verification and fraud prevention platform",
@@ -1911,6 +2182,7 @@
   "what": "Real-time voice AI models and agent platform",
   "for_whom": "Developers and businesses running production voice agents",
   "why_them": "100 ms text-to-speech latency across 15+ languages",
-  "ai": true
+  "ai": true,
+  "checked": true
  }
 }

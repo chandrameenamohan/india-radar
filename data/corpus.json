@@ -63,7 +63,7 @@
       "round_letter": null,
       "source_url": "https://www.forbes.com/companies/1password/",
       "stage": "growth",
-      "website": null,
+      "website": "https://1password.com",
       "qualified_by": "stage"
     },
     {
@@ -1658,7 +1658,7 @@
       "round_letter": null,
       "source_url": "https://www.forbes.com/companies/applied-intuition/",
       "stage": "growth",
-      "website": null,
+      "website": "https://appliedintuition.com",
       "qualified_by": "stage"
     },
     {
@@ -2164,7 +2164,7 @@
       "round_letter": null,
       "source_url": "https://www.ycombinator.com/companies/assembled",
       "stage": "growth",
-      "website": null,
+      "website": "https://assembled.com",
       "qualified_by": "stage"
     },
     {
@@ -2703,7 +2703,7 @@
       "round_letter": null,
       "source_url": "https://www.sec.gov/Archives/edgar/data/1799778/000179977825000006/0001799778-25-000006-index.htm",
       "stage": null,
-      "website": null,
+      "website": "https://award.co",
       "qualified_by": "amount"
     },
     {
@@ -3550,7 +3550,7 @@
       "round_letter": null,
       "source_url": "https://www.forbes.com/companies/black-forest-labs/",
       "stage": "growth",
-      "website": null,
+      "website": "https://blackforestlabs.ai",
       "qualified_by": "stage"
     },
     {
@@ -4067,7 +4067,7 @@
       "round_letter": null,
       "source_url": "https://www.sec.gov/Archives/edgar/data/1676238/000095010325004677/0000950103-25-004677-index.htm",
       "stage": null,
-      "website": null,
+      "website": "https://braze.com",
       "qualified_by": "amount"
     },
     {
@@ -5035,7 +5035,7 @@
       "round_letter": null,
       "source_url": "https://www.forbes.com/companies/cato-networks/",
       "stage": "growth",
-      "website": null,
+      "website": "https://catonetworks.com",
       "qualified_by": "stage"
     },
     {
@@ -5112,7 +5112,7 @@
       "round_letter": null,
       "source_url": "https://www.forbes.com/companies/celonis/",
       "stage": "growth",
-      "website": null,
+      "website": "https://celonis.com",
       "qualified_by": "stage"
     },
     {
@@ -6069,7 +6069,7 @@
       "round_letter": null,
       "source_url": "https://www.forbes.com/companies/cognition/",
       "stage": "growth",
-      "website": null,
+      "website": "https://cognition.ai",
       "qualified_by": "stage"
     },
     {
@@ -6113,7 +6113,7 @@
       "round_letter": null,
       "source_url": "https://www.sec.gov/Archives/edgar/data/1851745/000185174525000001/0001851745-25-000001-index.htm",
       "stage": null,
-      "website": null,
+      "website": "https://coherehealth.com",
       "qualified_by": "amount"
     },
     {
@@ -7741,7 +7741,7 @@
       "round_letter": null,
       "source_url": "https://www.forbes.com/companies/deepl/",
       "stage": "growth",
-      "website": null,
+      "website": "https://deepl.com",
       "qualified_by": "stage"
     },
     {
@@ -8401,7 +8401,7 @@
       "round_letter": null,
       "source_url": "https://www.sec.gov/Archives/edgar/data/2006522/000200652225000002/0002006522-25-000002-index.htm",
       "stage": null,
-      "website": null,
+      "website": "https://doppel.com",
       "qualified_by": "amount"
     },
     {
@@ -12889,7 +12889,7 @@
       "round_letter": "B",
       "source_url": "https://techcrunch.com/2025/10/05/heidi-health-raises-65m-series-b-led-by-steve-cohens-point72/",
       "stage": null,
-      "website": null,
+      "website": "https://heidihealth.com",
       "qualified_by": "letter"
     },
     {
@@ -13054,7 +13054,7 @@
       "round_letter": null,
       "source_url": "https://www.forbes.com/companies/heygen/",
       "stage": "growth",
-      "website": null,
+      "website": "https://heygen.com",
       "qualified_by": "stage"
     },
     {
@@ -13340,7 +13340,7 @@
       "round_letter": null,
       "source_url": "https://www.sec.gov/Archives/edgar/data/1801975/000180197525000001/0001801975-25-000001-index.htm",
       "stage": null,
-      "website": null,
+      "website": "https://horizon3.ai",
       "qualified_by": "amount"
     },
     {
@@ -14484,7 +14484,7 @@
       "round_letter": null,
       "source_url": "https://techcrunch.com/2025/03/31/alphabets-ai-drug-discovery-platform-isomorphic-labs-raises-600m-from-thrive/",
       "stage": null,
-      "website": null,
+      "website": "https://isomorphiclabs.com",
       "qualified_by": "amount"
     },
     {
@@ -14968,7 +14968,7 @@
       "round_letter": null,
       "source_url": "https://www.cbinsights.com/company/keyrock",
       "stage": "growth",
-      "website": null,
+      "website": "https://keyrock.com",
       "qualified_by": "stage"
     },
     {
@@ -15276,7 +15276,7 @@
       "round_letter": null,
       "source_url": "https://www.forbes.com/companies/komodo-health/",
       "stage": "growth",
-      "website": null,
+      "website": "https://komodohealth.com",
       "qualified_by": "stage"
     },
     {
@@ -15595,7 +15595,7 @@
       "round_letter": null,
       "source_url": "https://www.forbes.com/companies/launchdarkly/",
       "stage": "growth",
-      "website": null,
+      "website": "https://launchdarkly.com",
       "qualified_by": "stage"
     },
     {
@@ -16035,7 +16035,7 @@
       "round_letter": null,
       "source_url": "https://www.sec.gov/Archives/edgar/data/2101357/000210135726000001/0002101357-26-000001-index.htm",
       "stage": null,
-      "website": null,
+      "website": "https://lightning.ai",
       "qualified_by": "amount"
     },
     {
@@ -17432,7 +17432,7 @@
       "round_letter": null,
       "source_url": "https://www.sec.gov/Archives/edgar/data/2106586/000210658626000001/0002106586-26-000001-index.htm",
       "stage": null,
-      "website": null,
+      "website": "https://meltplan.com",
       "qualified_by": "amount"
     },
     {
@@ -17487,7 +17487,7 @@
       "round_letter": null,
       "source_url": "https://www.forbes.com/companies/mercor/",
       "stage": "growth",
-      "website": null,
+      "website": "https://mercor.com",
       "qualified_by": "stage"
     },
     {
@@ -19203,7 +19203,7 @@
       "round_letter": null,
       "source_url": "https://www.sec.gov/Archives/edgar/data/2072158/000207215825000001/0002072158-25-000001-index.htm",
       "stage": null,
-      "website": null,
+      "website": "https://nianticspatial.com",
       "qualified_by": "amount"
     },
     {
@@ -19489,7 +19489,7 @@
       "round_letter": null,
       "source_url": "https://www.forbes.com/companies/notion/",
       "stage": "growth",
-      "website": null,
+      "website": "https://notion.com",
       "qualified_by": "stage"
     },
     {
@@ -19984,7 +19984,7 @@
       "round_letter": null,
       "source_url": "https://www.sec.gov/Archives/edgar/data/1960598/000196059825000003/0001960598-25-000003-index.htm",
       "stage": null,
-      "website": null,
+      "website": "https://oleria.com",
       "qualified_by": "amount"
     },
     {
@@ -22844,7 +22844,7 @@
       "round_letter": null,
       "source_url": "https://www.sec.gov/Archives/edgar/data/2070804/000199636625000006/0001996366-25-000006-index.htm",
       "stage": null,
-      "website": null,
+      "website": "https://psiquantum.com",
       "qualified_by": "amount"
     },
     {
@@ -24472,7 +24472,7 @@
       "round_letter": null,
       "source_url": "https://www.forbes.com/companies/rogo/",
       "stage": "growth",
-      "website": null,
+      "website": "https://rogodata.com",
       "qualified_by": "stage"
     },
     {
@@ -30192,7 +30192,7 @@
       "round_letter": null,
       "source_url": "https://www.sec.gov/Archives/edgar/data/1688873/000168887325000005/0001688873-25-000005-index.htm",
       "stage": null,
-      "website": null,
+      "website": "https://verkada.com",
       "qualified_by": "amount"
     },
     {
@@ -30346,7 +30346,7 @@
       "round_letter": null,
       "source_url": "https://www.sec.gov/Archives/edgar/data/1710972/000123191925000043/0001231919-25-000043-index.htm",
       "stage": null,
-      "website": null,
+      "website": "https://vidmob.com",
       "qualified_by": "amount"
     },
     {
@@ -30511,7 +30511,7 @@
       "round_letter": null,
       "source_url": "https://www.sec.gov/Archives/edgar/data/1851074/000123191925000073/0001231919-25-000073-index.htm",
       "stage": null,
-      "website": null,
+      "website": "https://vivodyne.com",
       "qualified_by": "amount"
     },
     {
@@ -31204,7 +31204,7 @@
       "round_letter": null,
       "source_url": "https://www.forbes.com/companies/workato/",
       "stage": "growth",
-      "website": null,
+      "website": "https://workato.com",
       "qualified_by": "stage"
     },
     {

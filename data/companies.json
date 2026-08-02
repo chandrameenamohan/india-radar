@@ -45312,20 +45312,6 @@
       "roles": [
         {
           "title": "Data Science Manager (Credit)",
-          "url": "https://job-boards.eu.greenhouse.io/moniepoint/jobs/4938471101",
-          "locations": [
-            "London, United Kingdom"
-          ],
-          "countries": [
-            "United Kingdom"
-          ],
-          "workplace": null,
-          "department": "Data Science",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Data Science Manager (Credit)",
           "url": "https://job-boards.eu.greenhouse.io/moniepoint/jobs/4737157101",
           "locations": [
             "Remote, Spain"
@@ -45334,6 +45320,20 @@
             "Spain"
           ],
           "workplace": "remote",
+          "department": "Data Science",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Data Science Manager (Credit)",
+          "url": "https://job-boards.eu.greenhouse.io/moniepoint/jobs/4938471101",
+          "locations": [
+            "London, United Kingdom"
+          ],
+          "countries": [
+            "United Kingdom"
+          ],
+          "workplace": null,
           "department": "Data Science",
           "visa": "unknown",
           "hire_from_abroad": "unknown"
@@ -45452,20 +45452,6 @@
         },
         {
           "title": "Lead, Business Analysis",
-          "url": "https://job-boards.eu.greenhouse.io/moniepoint/jobs/4936062101",
-          "locations": [
-            "London, United Kingdom"
-          ],
-          "countries": [
-            "United Kingdom"
-          ],
-          "workplace": null,
-          "department": "Marketing & Sales",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Lead, Business Analysis",
           "url": "https://job-boards.eu.greenhouse.io/moniepoint/jobs/4941696101",
           "locations": [
             "Remote, Spain"
@@ -45474,6 +45460,20 @@
             "Spain"
           ],
           "workplace": "remote",
+          "department": "Marketing & Sales",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Lead, Business Analysis",
+          "url": "https://job-boards.eu.greenhouse.io/moniepoint/jobs/4936062101",
+          "locations": [
+            "London, United Kingdom"
+          ],
+          "countries": [
+            "United Kingdom"
+          ],
+          "workplace": null,
           "department": "Marketing & Sales",
           "visa": "unknown",
           "hire_from_abroad": "unknown"
@@ -45494,12 +45494,12 @@
         },
         {
           "title": "Mobile Architect (POS Terminal)",
-          "url": "https://job-boards.eu.greenhouse.io/moniepoint/jobs/4932688101",
+          "url": "https://job-boards.eu.greenhouse.io/moniepoint/jobs/4378148101",
           "locations": [
-            "Remote, Poland; Remote, Spain"
+            "Remote, Bangalore"
           ],
           "countries": [
-            "Spain"
+            "India"
           ],
           "workplace": "remote",
           "department": "Moniepoint MFB",
@@ -45508,12 +45508,12 @@
         },
         {
           "title": "Mobile Architect (POS Terminal)",
-          "url": "https://job-boards.eu.greenhouse.io/moniepoint/jobs/4378148101",
+          "url": "https://job-boards.eu.greenhouse.io/moniepoint/jobs/4932688101",
           "locations": [
-            "Remote, Bangalore"
+            "Remote, Poland; Remote, Spain"
           ],
           "countries": [
-            "India"
+            "Spain"
           ],
           "workplace": "remote",
           "department": "Moniepoint MFB",
@@ -45592,12 +45592,12 @@
         },
         {
           "title": "Senior Business Analyst",
-          "url": "https://job-boards.eu.greenhouse.io/moniepoint/jobs/4912592101",
+          "url": "https://job-boards.eu.greenhouse.io/moniepoint/jobs/4912941101",
           "locations": [
-            "Remote, London, United Kingdom"
+            "Remote, Bangalore"
           ],
           "countries": [
-            "United Kingdom"
+            "India"
           ],
           "workplace": "remote",
           "department": null,
@@ -45606,12 +45606,12 @@
         },
         {
           "title": "Senior Business Analyst",
-          "url": "https://job-boards.eu.greenhouse.io/moniepoint/jobs/4912941101",
+          "url": "https://job-boards.eu.greenhouse.io/moniepoint/jobs/4912592101",
           "locations": [
-            "Remote, Bangalore"
+            "Remote, London, United Kingdom"
           ],
           "countries": [
-            "India"
+            "United Kingdom"
           ],
           "workplace": "remote",
           "department": null,
@@ -45713,20 +45713,6 @@
           ],
           "workplace": "remote",
           "department": "Pool: Product",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Senior Quality Assurance Engineer",
-          "url": "https://job-boards.eu.greenhouse.io/moniepoint/jobs/4941088101",
-          "locations": [
-            "Remote, Bangalore"
-          ],
-          "countries": [
-            "India"
-          ],
-          "workplace": "remote",
-          "department": "Moniepoint Inc.",
           "visa": "unknown",
           "hire_from_abroad": "unknown"
         }
@@ -48428,7 +48414,7 @@
       "salary": {
         "avg_lpa": 36.9,
         "reports": 104,
-        "observed": "2026-07-28",
+        "observed": "2026-08-01",
         "source_url": "https://www.ambitionbox.com/salaries/nanonets-salaries"
       },
       "mca": null
@@ -49806,7 +49792,7 @@
       "salary": {
         "avg_lpa": 22.2,
         "reports": 226,
-        "observed": "2026-07-29",
+        "observed": "2026-07-31",
         "source_url": "https://www.ambitionbox.com/salaries/nextiva-salaries"
       },
       "mca": null
@@ -61445,9 +61431,9 @@
       "source_url": "https://www.cbinsights.com/company/quince",
       "qualified_by": "stage",
       "salary": {
-        "avg_lpa": 38.6,
-        "reports": 244,
-        "observed": "2026-07-26",
+        "avg_lpa": 38.4,
+        "reports": 247,
+        "observed": "2026-08-01",
         "source_url": "https://www.ambitionbox.com/salaries/quince-salaries"
       },
       "mca": null
@@ -61969,9 +61955,9 @@
       "source_url": "https://www.ycombinator.com/companies/razorpay",
       "qualified_by": "stage",
       "salary": {
-        "avg_lpa": 21.1,
-        "reports": 7054,
-        "observed": "2026-07-31",
+        "avg_lpa": 21.2,
+        "reports": 7060,
+        "observed": "2026-08-01",
         "source_url": "https://www.ambitionbox.com/salaries/razorpay-salaries"
       },
       "mca": null
@@ -64927,9 +64913,9 @@
       "source_url": "https://www.ycombinator.com/companies/scale-ai",
       "qualified_by": "stage",
       "salary": {
-        "avg_lpa": 15.9,
-        "reports": 88,
-        "observed": "2026-07-19",
+        "avg_lpa": 15.8,
+        "reports": 89,
+        "observed": "2026-08-01",
         "source_url": "https://www.ambitionbox.com/salaries/scale-ai-salaries"
       },
       "mca": {
@@ -66231,9 +66217,9 @@
       "source_url": "https://www.cbinsights.com/company/sparkcognition",
       "qualified_by": "stage",
       "salary": {
-        "avg_lpa": 14.9,
+        "avg_lpa": 15.0,
         "reports": 143,
-        "observed": "2026-07-18",
+        "observed": "2026-08-02",
         "source_url": "https://www.ambitionbox.com/salaries/sparkcognition-salaries"
       },
       "mca": {
@@ -66983,9 +66969,9 @@
       "source_url": "https://www.cbinsights.com/company/starburst",
       "qualified_by": "stage",
       "salary": {
-        "avg_lpa": 15.7,
-        "reports": 3,
-        "observed": "2025-10-15",
+        "avg_lpa": 12.3,
+        "reports": 4,
+        "observed": "2026-08-02",
         "source_url": "https://www.ambitionbox.com/salaries/starburst-salaries"
       },
       "mca": null
@@ -69659,8 +69645,8 @@
       "qualified_by": "stage",
       "salary": {
         "avg_lpa": 28.1,
-        "reports": 982,
-        "observed": "2026-07-31",
+        "reports": 983,
+        "observed": "2026-08-01",
         "source_url": "https://www.ambitionbox.com/salaries/stripe-salaries"
       },
       "mca": {

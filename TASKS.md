@@ -1801,7 +1801,44 @@ Out of scope:
     270 third-party sites; it belongs beside a corpus rebuild.
 ```
 
-### T10.4 — Make the website corrections real `todo` · *Phase 6* · after T10.1, T10.3
+### T10.4 — Make the website corrections real `done` · *Phase 6*
+
+**Done 2026-08-02, and the loop it closed is smaller and more interesting than
+this task assumed.** All six now state the corrected address:
+`corpus.json: 2925 qualified … websites: 1825 of 2925 (1154 stated by a source,
+671 read off an article; 6 of the stated ones corrected by hand)`.
+
+The assumption below — that a wrong address is how these became wrong listings —
+does not survive the measurement. **All six had resolved their slug by `guess`,
+not by careers page**, so the address was never what sent them to a board.
+Re-resolving on the corrected address moved exactly one: **Monzo, from `guess` to
+`careers-page`**, same slug. Its board is now proven by Monzo's own careers page
+rather than by a name that happened to match, which is the loop, measured.
+
+`src.slugs --gained` is the new incremental path: 31 names in 20 seconds against
+2.5 hours — the 21 the corpus gained, plus the names a HUMAN has since answered
+differently (a corrected address and an override are inputs to `resolve` that
+moved). `merge` narrows the answer files to today's corpus, so a dropped name
+leaves both rather than sitting in slugs.json for `build.shared_boards` to read.
+
+The build report gains **`departed`**, which closes a real hole: the outcome
+counts explain a company that stopped hiring, and nothing explained a name the
+CORPUS stopped holding — that company has no outcome because there is nothing
+left to assign one to. It printed `0` this run, against 11 names that left the
+corpus and 21 that joined. 315 -> 316 listed, one arrival (Smallest.ai,
+described). The same delta run refused two more and both refusals are the check
+working: `Super`, whose corpus address is an Indonesian shopping app and whose
+board is a 5,000-person betting group (T10.3's finding, reproduced from a clean
+read), and `The Athletic`, whose site would not load.
+
+A blocker found on the way out, unrelated and worse: `tests/test_nightly.py`
+built its throwaway repo with the ambient git environment, so under the
+pre-commit hook — which exports `GIT_DIR` and `GIT_INDEX_FILE` — `git init`
+re-inited the real repository and `git commit` re-entered the hook that started
+it. **Every commit to this project was failing on it**, naming a pytest tmp path
+rather than the cause.
+
+<details><summary>the task as written</summary>
 
 Six companies carry a hand-corrected address in `data/corrections.yaml` — Cresta,
 Monzo, Alloy, FalconX, Slice, Symphony — and **corpus.json still states the wrong
@@ -1846,8 +1883,63 @@ Out of scope:
     build rather than the corpus.
   - re-resolving slugs for companies that already have one.
 ```
+</details>
 
-### T10.5 — The 45 listed companies we hold no address for `todo` · *Phase 6* · after T10.3
+### T10.5 — The 45 listed companies we hold no address for `done` · *Phase 6*
+
+**Done 2026-08-02. The kill criterion did not fire, and the reason is that the
+premise below — "the other 40 need a source that does not exist yet" — is
+wrong.** Measured live over exactly those 40
+(`learning-tests/addresses_live.py`), under the same evidence rule everything
+else here keeps (the company's name must be inside the REGISTRABLE domain, and
+the avenue must yield one):
+
+```
+  apply-url        0/40   0%   the free win, and it is spent: 5 of the 45
+  ats-profile     26/40  65%   <- the ATS's own page ABOUT the board
+  posting-text    11/40  28%
+  ANY             29/40  72%                  kill criterion: ~25%
+  control, 20 companies whose address we already hold: 19 answers, 0 disagreements
+```
+
+**The ATSes publish whose board a slug is, on the page a human opens rather than
+on the jobs endpoint this project reads.** Ashby server-renders its whole
+organisation record into the board's HTML and `publicWebsite` is a field in it;
+Lever's board page carries one link off its own host and it is the company's
+home; Greenhouse says it more weakly, in the board object's "About us" blurb and
+in the hosted page's own navigation. Both cheap sources are now in the pipeline
+and the corpus says so:
+`websites: 1856 of 2925 (1154 stated by a source, 671 read off an article,
+5 read off the company's own job board, 26 stated by its ATS; 6 corrected by
+hand)`. **45 listed companies with no address -> 14.**
+
+The posting text (28%) is measured and deliberately NOT built: it clears the
+criterion and adds three companies the ATS page does not already reach, for a
+second class of fetch — the rich board, per company, in a corpus run that today
+fetches no board at all.
+
+The containment rule earns its keep on this avenue more than anywhere else,
+because Ashby answers confidently and a wrong SLUG then yields another company's
+address with no hesitation at all. Three of the 45 are refused by it, and the
+first is a bug:
+
+- **`ClickHouse` is listed on `ashby/langfuse`, and Ashby names `langfuse.com`
+  for that board.** A wrong listing — T10.1's shape, found here by accident.
+  Needs a human: it is a `board` correction or a slug override, not an address.
+- `Lambda Labs` -> `lambda.ai` and `Payward` -> `kraken.com` are the same company
+  under a name no source here states — `states_company`'s refused direction, and
+  the measured cost of keeping it.
+
+And the site can now tell the two apart. `data/descriptions.json` carries
+`checked: true`, meaning one pass opened the company's own website and read it
+against the board we publish their roles from and found no contradiction —
+folded out of the audit log by `describe.py --audit`, and rendered as
+`AI-SUMMARIZED · CHECKED AGAINST THEIR OWN SITE` against
+`AI-SUMMARIZED · UNVERIFIED`. `tests/test_descriptions.py` holds the invariant
+that a description cannot be marked verified for a company we hold no address
+for.
+
+<details><summary>the task as written</summary>
 
 T10.3 audited 270 of 315 listed companies. The other **45 carry no website in the
 corpus at all**, so there is nothing to read them against — and **all 45 are
@@ -1894,6 +1986,7 @@ Out of scope:
     real — that is the whole claim the site makes. It is the description that is
     unverified, not the listing.
 ```
+</details>
 
 ---
 

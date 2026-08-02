@@ -216,6 +216,14 @@ def main() -> None:
     # duplicate round and every company no rule qualifies.
     stated = sum(1 for company in corpus.companies if company["website"])
     found = websites.fill(corpus.companies)
+    # Last, because it is the cheapest and the narrowest: it reads the apply URLs
+    # the last build already published and costs no fetch at all (T10.5). It runs
+    # after the article read rather than before only so that `found` keeps
+    # meaning what it has always meant.
+    derived = websites.fill_from_boards(corpus.companies)
+    # And where the board's own apply links say nothing, the ATS's page about
+    # that board usually does — 26 of the 40 it left (T10.5).
+    told = websites.fill_from_ats(corpus.companies)
 
     write("data/corpus.json", corpus)
     print(
@@ -226,8 +234,9 @@ def main() -> None:
         f"{len(unparsed)} unparsed headlines"
     )
     print(
-        f"  websites: {stated + found} of {len(corpus.companies)} "
-        f"({stated} stated by a source, {found} read off an article; "
+        f"  websites: {stated + found + derived + told} of {len(corpus.companies)} "
+        f"({stated} stated by a source, {found} read off an article, "
+        f"{derived} read off the company's own job board, {told} stated by its ATS; "
         f"{len(fixed)} of the stated ones corrected by hand)"
     )
 
