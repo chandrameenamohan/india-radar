@@ -1695,3 +1695,108 @@ Out of scope:
     place. That is a rule over all 708 resolved slugs and needs the measurement
     T2.2 got before it, not a fourth hand-written line.
 ```
+
+### T10.2 — The descriptions delta, and the check it turned into `done` · *Phase 6*
+
+A company newly listed by a build carried no description and nothing generated
+one — the last gap in T8.7, deferred because wiring it needed an
+`ANTHROPIC_API_KEY` the account cannot currently issue.
+
+It does not need one. `scripts/describe.py` runs on **`claude-agent-sdk`**, which
+is the Claude Code harness as a library and takes the credential Claude Code
+already has: `CLAUDE_CODE_OAUTH_TOKEN`. Measured 2026-08-02 — that token also
+authenticates against the raw Messages API (as `Authorization: Bearer` plus
+`anthropic-beta: oauth-2025-04-20`; as `x-api-key` it is a flat 401), but there
+it is throttled to Haiku, with Opus and Sonnet both answering 429. Through the
+agent path Opus answers. So this is an agent for a second reason besides the
+fetch tool.
+
+**The pass is a verification step, not a writing step, and the first run proved
+why.** Given only the corpus website, the writer described `Insider` faithfully
+and wrongly: the website is a French finance-interview coaching programme, and
+`greenhouse/insider` states "Business Insider" and was hiring a Business Reporter
+in Singapore. The site had been publishing a newsroom's job under a third
+company's name for as long as it had listed it. T2.2's containment rule admits it
+because "Insider" IS inside "Business Insider" — the measured cost of that rule,
+not a bug in it. The brief now carries the board and its role titles beside the
+website and omits on contradiction; re-run, it refuses `Insider` and says exactly
+why. `Fundamental`, the other honest omission, verified clean and now has a
+description.
+```
+Acceptance (observable):
+  `scripts/describe.py --dry-run` states listed / described / to-write and exits
+  0 on an empty delta. A run writes only companies whose own site AND whose board
+  agree, merges into descriptions.json without dropping hand-checked or
+  now-unlisted entries, and marks every row it writes `ai: true`.
+  A company it cannot verify stays absent and prints WHY, in one line.
+  The dependency stays out of `src/`: the pipeline that builds companies.json
+  imports the standard library and nothing else. init.sh reports the SDK and the
+  token as warn-only, like the MCA key and browse.
+Checks:
+  lint -> the live run above, whose omission line is quoted in the task note
+Out of scope:
+  - wiring it into the nightly. The delta is normally 0-2 companies and the
+    nightly would spend an agent per night to discover that; it belongs beside a
+    corpus rebuild, which is the thing that creates newly-listed companies.
+  - regenerating the 314 descriptions that already exist. The board cross-check
+    would re-verify them, and that is a real audit worth running — but it is a
+    full pass over the corpus, not a delta, and it should be costed as one.
+```
+
+### T10.3 — The description audit `done` · *Phase 6*
+
+T10.2's board cross-check found a wrong company on the first row it ran. The
+other 314 were written without it, so this ran the check over every one:
+`scripts/describe.py --audit`, **270 companies** (the other 45 listed rows carry
+no website in the corpus, so there is nothing to check them against — counted,
+not skipped silently).
+
+**245 clean. 25 were not, in three classes that need three different repairs:**
+
+**7 wrong company** — the corpus address is a different company wearing the same
+word, and the description described *that* one. Six are corrected in
+`corrections.yaml` as a `website`, because the BOARD proves the listing and the
+address is the thing that is wrong: Alloy (`alloy.app` vs the identity fintech),
+FalconX (a founder accelerator vs the crypto prime broker), Slice (an Indian
+neobank vs Slice Life's pizzeria tech), Symphony (a YC insurance startup vs
+Symphony Communication), plus Cresta and Monzo, which this audit rediscovered
+independently from raw corpus data having been fixed the same morning. Insider is
+the seventh and the exception — there the BOARD was foreign (Business Insider's),
+so it is a `board` correction and left the site. **`Super` is deliberately
+uncorrected**: its board is Super Technologies, and across all 195 postings there
+is no domain anywhere, so there is no address that can be evidenced. Inventing
+one is the error this whole task exists to catch, so it stays undescribed.
+
+**12 wrong description** — right company, our own line overstating. Ten of the
+twelve are the same failure in the same field: `why_them` inventing a market
+position. Postman's "tens of millions of developers" is not on Postman's site;
+Parloa's "focused on live phone conversation, not just chat" is contradicted by
+Parloa's own platform page. The brief now requires `why_them` to be a concrete
+fact the site states, and says a thin true line beats an impressive invented one.
+Regenerated, they read "Microsoft, Meta, Salesforce and Stripe shown as
+customers" instead.
+
+**8 unreadable** — Carta, Dialpad, Epic Games, Axonius, Amperity, Helsing, Trade
+Republic, The Athletic: bot protection, 429s, and one client-rendered SPA. Not
+faults and not passes. Their existing descriptions stand unverified and the log
+says so, which is the same absence-is-absence rule the rest of the site keeps.
+```
+Acceptance (observable):
+  `--audit` writes one verdict per company to logs/description-audit.jsonl as it
+  lands, and `--report` summarises worst-first. A re-run resumes: rows that are a
+  real verdict are skipped, rows that are a harness `error` are retried — the two
+  are separate verdicts precisely so a crash never hardens into a finding.
+  A retried company's later row wins the count; the log is append-only.
+  Every flagged company is repaired in its own class: a website correction, a
+  board correction, a regenerated description, or nothing at all where nothing
+  can be evidenced.
+Checks:
+  lint -> typecheck -> unit -> e2e (full gate)
+  + the audit itself, re-run over Cresta and Monzo after their corrections: both
+    flip to `ok`, which is what says the corrections file actually reaches this
+Out of scope:
+  - auditing the 45 listed companies with no corpus website. They need an address
+    first, and that is a corpus problem, not a descriptions one.
+  - making the audit part of the gate. It is ~40 minutes of live agents against
+    270 third-party sites; it belongs beside a corpus rebuild.
+```

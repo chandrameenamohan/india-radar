@@ -1,15 +1,15 @@
 {
   "corpus_size": 2915,
-  "checked": 698,
-  "unchecked": 2217,
+  "checked": 694,
+  "unchecked": 2221,
   "counts": {
-    "listed": 316,
-    "no-target-roles": 382,
-    "slug-unresolved": 2202,
-    "probe-failed": 0,
+    "listed": 315,
+    "no-target-roles": 379,
+    "slug-unresolved": 2201,
+    "probe-failed": 4,
     "empty-board-unverified": 4,
     "not-qualified": 0,
-    "another-companys-board": 11
+    "another-companys-board": 12
   },
   "listed": [
     "1Password",
@@ -149,7 +149,6 @@
     "Incode Technologies",
     "Infisical",
     "Inflection AI",
-    "Insider",
     "Instabase",
     "Instawork",
     "Instead",
@@ -1594,7 +1593,7 @@
     "InnoVein": "slug-unresolved",
     "Innova Vascular": "slug-unresolved",
     "Innventure": "slug-unresolved",
-    "Insider": "listed",
+    "Insider": "another-companys-board",
     "Insight Data Science": "slug-unresolved",
     "Inspectify": "slug-unresolved",
     "Instabase": "listed",
@@ -2241,7 +2240,7 @@
     "Payflow Digital": "slug-unresolved",
     "Payhawk": "slug-unresolved",
     "Paystack": "slug-unresolved",
-    "Paystand": "no-target-roles",
+    "Paystand": "probe-failed",
     "Payward": "listed",
     "PeakMetrics": "slug-unresolved",
     "Pebble": "slug-unresolved",
@@ -2390,7 +2389,7 @@
     "Quantbase Investments": "slug-unresolved",
     "Quantexa": "slug-unresolved",
     "Quantierra": "slug-unresolved",
-    "Quantinuum": "slug-unresolved",
+    "Quantinuum": "probe-failed",
     "Quantstamp": "no-target-roles",
     "Quantum Metric": "listed",
     "Quantum Surgical": "slug-unresolved",
@@ -2905,7 +2904,7 @@
     "Tongdun Technology": "slug-unresolved",
     "Torch": "slug-unresolved",
     "Torq": "listed",
-    "Toss": "no-target-roles",
+    "Toss": "probe-failed",
     "Touareg Group Technologies": "slug-unresolved",
     "Tovala": "no-target-roles",
     "Tractable": "no-target-roles",
@@ -3123,7 +3122,7 @@
     "Workhuman": "slug-unresolved",
     "Workpay": "slug-unresolved",
     "Workwise Solutions": "slug-unresolved",
-    "World Labs": "no-target-roles",
+    "World Labs": "probe-failed",
     "World View Enterprises": "slug-unresolved",
     "WorldCover": "slug-unresolved",
     "Worldcoin": "slug-unresolved",
@@ -3249,7 +3248,7 @@
   "websites": {
     "with_website": 1815,
     "slug_unresolved_with_website": 1252,
-    "slug_unresolved_without_website": 950
+    "slug_unresolved_without_website": 949
   },
   "shared_boards": {
     "Bright": "BrightAI",
@@ -3262,7 +3261,8 @@
     "Relativity": "Relativity Space",
     "Scale": "Scale AI",
     "VITLrx": "VITL",
-    "Next Caller": "Pindrop"
+    "Next Caller": "Pindrop",
+    "Insider": "Business Insider"
   },
   "countries": {
     "India": 115,
@@ -3277,7 +3277,7 @@
     "Norway": 3,
     "Finland": 5,
     "Japan": 54,
-    "Singapore": 69,
+    "Singapore": 68,
     "Australia": 70,
     "New Zealand": 2
   },

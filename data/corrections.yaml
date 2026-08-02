@@ -29,8 +29,36 @@ Cresta: website https://cresta.com
 # CB Insights files Monzo under `mondo`, the name they left behind in 2016, and
 # links the domain that went with it.
 Monzo: website https://monzo.com
+# Two companies called Alloy. The corpus has alloy.app (an AI prototyping tool);
+# `greenhouse/alloy` 302s to www.alloy.com/about/jobs and its role applies at
+# www.alloy.com — the identity-risk fintech. The BOARD is the one we publish, so
+# the listing is right and the address is wrong. Found by the description audit
+# (T10.3), which read alloy.app and wrote a description of the wrong company.
+Alloy: website https://www.alloy.com
+# The rest of the name collisions the T10.3 audit turned up. Each is the same
+# shape: the BOARD is a real company we can name, and the corpus address is
+# somebody else wearing the same word. The listing is proven by the board, so the
+# listing stays and the address is what gets corrected. Evidence in each case is
+# the board's own apply URL or a link off its careers site — never a guess.
+#   falconx.us -> falconx.vc, a founder accelerator. The board is the crypto
+#   prime brokerage, and falconx.io titles itself exactly that.
+FalconX: website https://falconx.io
+#   sliceit.com -> slice.bank.in, an Indian consumer fintech. The board applies
+#   at slice.careers, which links about.slicelife.com — the pizzeria tech company.
+Slice: website https://slicelife.com
+#   getsymphony.co is a YC insurance-AI startup. The board applies at
+#   symphony.com, which is Symphony Communication Services, enterprise messaging.
+Symphony: website https://symphony.com
 
 # Acquired by Pindrop in 2021. nextcaller.com links Pindrop's board, so the one
 # role listed under "Next Caller" was Pindrop's, and no evidence here says Next
 # Caller employs anybody as itself any more.
 Next Caller: board Pindrop
+# Three different companies wearing one word. The corpus row's website is
+# insider-coaching.com (finance career coaching); `greenhouse/insider` states
+# "Business Insider" and its one role links businessinsider.com — a news
+# organisation. T2.2's containment rule let this through because "Insider" IS
+# inside "Business Insider", which is the measured cost of that rule, not a bug
+# in it. Found by the description pass (T8.7): the writer read the website,
+# described a coaching programme, and the board was hiring a Business Reporter.
+Insider: board Business Insider

@@ -23,6 +23,21 @@ for t in ruff mypy pytest; do
   if [ -x "$VENV/bin/$t" ]; then good "$t"; else bad "$t" "install failed"; fi
 done
 
+# 1b. The description writer's dependency, and the ONLY one this repo has --
+# warn only, and deliberately not in the gate's install above. scripts/describe.py
+# is a hand-run tool, not part of the pipeline: `src/` builds companies.json with
+# the standard library and nothing else, and that stays true.
+if "$VENV/bin/python" -c "import claude_agent_sdk" 2>/dev/null; then
+  good "claude-agent-sdk (scripts/describe.py)"
+else
+  bad "claude-agent-sdk" "descriptions delta unavailable: pip install claude-agent-sdk"
+fi
+if [ -f .env ] && grep -qE '^CLAUDE_CODE_OAUTH_TOKEN=.+' .env; then
+  good "CLAUDE_CODE_OAUTH_TOKEN"
+else
+  bad "CLAUDE_CODE_OAUTH_TOKEN" "descriptions delta unavailable; the site still builds"
+fi
+
 # 2. MCA key -- warn only. MCA is enrichment and MUST degrade to "no badge".
 if [ -f .env ] && grep -qE '^DATA_GOV_IN_KEY=.+' .env; then
   good "DATA_GOV_IN_KEY"

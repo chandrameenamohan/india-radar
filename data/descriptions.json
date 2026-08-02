@@ -17,12 +17,6 @@
   "why_them": "The data backbone behind frontier AI labs",
   "ai": true
  },
- "Postman": {
-  "what": "A workspace for building and testing APIs",
-  "for_whom": "Developers who work with APIs daily",
-  "why_them": "Tens of millions of developers already use it",
-  "ai": true
- },
  "Glean": {
   "what": "AI search across all your work apps",
   "for_whom": "Employees drowning in scattered company knowledge",
@@ -203,12 +197,6 @@
   "why_them": "The GPU cloud AI researchers actually prefer",
   "ai": true
  },
- "SambaNova Systems": {
-  "what": "Builds chips and systems for AI",
-  "for_whom": "Enterprises running AI outside big clouds",
-  "why_them": "Full-stack AI hardware from Stanford veterans",
-  "ai": true
- },
  "TensTorrent": {
   "what": "Designs AI chips and open hardware",
   "for_whom": "Companies wanting alternatives to Nvidia",
@@ -345,12 +333,6 @@
   "what": "AI agents that answer customer support questions",
   "for_whom": "Banks, retailers, and telecoms with big support teams",
   "why_them": "Tests its own changes on live traffic",
-  "ai": true
- },
- "HappyRobot": {
-  "what": "AI agents that make and take business calls",
-  "for_whom": "Freight, logistics, utility, and airline operations teams",
-  "why_them": "Started in trucking, knows the messy details",
   "ai": true
  },
  "HighRadius": {
@@ -525,12 +507,6 @@
   "what": "Software that predicts which companies are ready to buy",
   "for_whom": "B2B sales and marketing teams at larger companies",
   "why_them": "Pioneered buying-intent data before most rivals existed",
-  "ai": true
- },
- "Alloy": {
-  "what": "Tool for prototyping changes to your live product",
-  "for_whom": "Product managers and designers at software companies",
-  "why_them": "Edits your real codebase, not a throwaway mockup",
   "ai": true
  },
  "Andela": {
@@ -737,12 +713,6 @@
   "why_them": "Fast, reliable access across many different chains",
   "ai": true
  },
- "Replit": {
-  "what": "Write and run code entirely in your browser",
-  "for_whom": "Learners, hobbyists, and small teams building apps",
-  "why_them": "No setup; describe an app and it builds it",
-  "ai": true
- },
  "Sendbird": {
   "what": "Chat, calls, and notifications you drop into apps",
   "for_whom": "Product teams adding messaging to their apps",
@@ -765,12 +735,6 @@
   "what": "Cloud software for running phone and chat support",
   "for_whom": "Companies operating customer service centers",
   "why_them": "Early to move contact centers fully to cloud",
-  "ai": true
- },
- "The Athletic": {
-  "what": "Subscription sports journalism without ads",
-  "for_whom": "Serious fans wanting deep coverage of their team",
-  "why_them": "Hired local beat writers from shrinking newspapers",
   "ai": true
  },
  "Trade Republic": {
@@ -1283,12 +1247,6 @@
   "why_them": "Built jointly for company owners and their accountants",
   "ai": true
  },
- "PicsArt": {
-  "what": "Photo and video editing app with AI tools",
-  "for_whom": "Everyday creators posting to social media",
-  "why_them": "Hundreds of millions of downloads on mobile",
-  "ai": true
- },
  "Prove Identity": {
   "what": "Verifies identity using a person's phone number",
   "for_whom": "Banks and apps signing up new customers",
@@ -1517,12 +1475,6 @@
   "why_them": "Spans light coaching through to clinical therapy",
   "ai": true
  },
- "MUBI": {
-  "what": "Streaming service and distributor for arthouse film",
-  "for_whom": "Film lovers wanting curation over endless catalogues",
-  "why_them": "Hand-picks a small selection and funds original films",
-  "ai": true
- },
  "Netskope": {
   "what": "Security inspecting company traffic to cloud apps",
   "for_whom": "Large enterprises with remote staff and cloud software",
@@ -1539,12 +1491,6 @@
   "what": "Software for planning military operations together",
   "for_whom": "Military staffs and defence departments",
   "why_them": "Built by officers who lived the planning paperwork",
-  "ai": true
- },
- "Parloa": {
-  "what": "AI voice agents that handle customer phone calls",
-  "for_whom": "Large contact centres in telecom, insurance and retail",
-  "why_them": "Focused on live phone conversation, not just chat",
   "ai": true
  },
  "Peregrine": {
@@ -1581,18 +1527,6 @@
   "what": "A spreadsheet interface over cloud data warehouses",
   "for_whom": "Business analysts who know Excel, not SQL",
   "why_them": "Live warehouse data without exports or extracts",
-  "ai": true
- },
- "Speak": {
-  "what": "An app for practising spoken English with AI",
-  "for_whom": "Adults learning English, largely across Asia",
-  "why_them": "Drills speaking aloud rather than vocabulary lists",
-  "ai": true
- },
- "Super": {
-  "what": "A shopping app delivering everyday goods next day",
-  "for_whom": "Shoppers in smaller Indonesian cities and towns",
-  "why_them": "Cheap prices and free shipping outside big cities",
   "ai": true
  },
  "TaxBit": {
@@ -1667,12 +1601,6 @@
   "why_them": "Early European platform with proper local licenses",
   "ai": true
  },
- "Cambridge Mobile Telematics": {
-  "what": "Phone software that measures how people drive",
-  "for_whom": "Car insurers pricing policies by actual behavior",
-  "why_them": "Huge driving dataset gathered from phones, not hardware",
-  "ai": true
- },
  "Carta": {
   "what": "Software tracking who owns shares in companies",
   "for_whom": "Startups, their investors, and their employees",
@@ -1713,12 +1641,6 @@
   "what": "Software for managing rebate deals between businesses",
   "for_whom": "Distributors, manufacturers, and buying groups",
   "why_them": "Replaces spreadsheets in a neglected corner of finance",
-  "ai": true
- },
- "FalconX": {
-  "what": "Trading desk for large crypto orders",
-  "for_whom": "Funds, banks, and other institutional investors",
-  "why_them": "Deep liquidity and credit at institutional size",
   "ai": true
  },
  "Fleek": {
@@ -1781,12 +1703,6 @@
   "why_them": "Fast, opinionated, and unusually well designed",
   "ai": true
  },
- "Luma AI": {
-  "what": "AI that generates video and 3D scenes",
-  "for_whom": "Filmmakers, marketers, and hobbyist creators",
-  "why_them": "Came from 3D capture research, not just video",
-  "ai": true
- },
  "MeltPlan": {
   "what": "AI that plans buildings before construction starts",
   "for_whom": "Contractors, developers, and building owners",
@@ -1847,34 +1763,16 @@
   "why_them": "Free to use; buys cloud commitments in bulk",
   "ai": true
  },
- "Reflection AI": {
-  "what": "Building frontier AI models for autonomous coding",
-  "for_whom": "Engineering teams wanting agents that write code",
-  "why_them": "Founded by DeepMind researchers from the AlphaGo team",
-  "ai": true
- },
  "Scandit": {
   "what": "Barcode scanning using ordinary phone cameras",
   "for_whom": "Retail, delivery, and hospital frontline workers",
   "why_them": "Scans reliably without dedicated scanner hardware",
   "ai": true
  },
- "Slice": {
-  "what": "Credit and payments app for everyday spending",
-  "for_whom": "Young Indians with thin credit histories",
-  "why_them": "Merged with a bank to lend directly",
-  "ai": true
- },
  "Spellbrush": {
   "what": "AI tools that generate anime art",
   "for_whom": "Anime fans, artists, and game players",
   "why_them": "Made Waifu Labs and helped build niji journey",
-  "ai": true
- },
- "Symphony": {
-  "what": "AI that trains and assists insurance staff",
-  "for_whom": "Insurance carriers and claims administrators",
-  "why_them": "Tuned to insurance workflows and compliance rules",
   "ai": true
  },
  "Teleport": {
@@ -1911,6 +1809,102 @@
   "what": "One front door for company purchase requests",
   "for_whom": "Procurement and finance teams at larger companies",
   "why_them": "Routes approvals across legal, security, and finance",
+  "ai": true
+ },
+ "Fundamental": {
+  "what": "A pre-trained foundation model for tabular data prediction",
+  "for_whom": "Enterprise data scientists working with business data tables",
+  "why_them": "Research-rooted team, large Series A, one cross-industry model",
+  "ai": true
+ },
+ "Alloy": {
+  "what": "An identity verification and fraud prevention platform",
+  "for_whom": "Banks, credit unions and fintechs onboarding customers",
+  "why_them": "Names Navy Federal, Ramp and Marqeta as customers",
+  "ai": true
+ },
+ "Cambridge Mobile Telematics": {
+  "what": "A sensor and AI platform for driving safety",
+  "for_whom": "Auto insurers, rideshare and mobile network operators",
+  "why_them": "Named customers include State Farm, Progressive, Uber, Verizon",
+  "ai": true
+ },
+ "FalconX": {
+  "what": "An institutional prime brokerage for digital asset markets",
+  "for_whom": "Hedge funds, asset managers, banks, family offices, miners",
+  "why_them": "Over $2.5 trillion in executed trading volume",
+  "ai": true
+ },
+ "HappyRobot": {
+  "what": "An AI agent platform for enterprise operations",
+  "for_whom": "Large enterprises in logistics, utilities, finance and telecom",
+  "why_them": "names DHL and Kuehne+Nagel as customers",
+  "ai": true
+ },
+ "Luma AI": {
+  "what": "AI video and brand models for making campaigns",
+  "for_whom": "Brands and advertising agencies producing marketing campaigns",
+  "why_them": "Names Publicis Groupe, Dentsu and Mazda among its partners",
+  "ai": true
+ },
+ "MUBI": {
+  "what": "A curated streaming service for world and classic cinema",
+  "for_whom": "Film lovers and students taking out memberships",
+  "why_them": "Also publishes Notebook, its own printed film magazine",
+  "ai": true
+ },
+ "Parloa": {
+  "what": "An AI agent management platform for contact centers",
+  "for_whom": "Enterprise customer service teams in insurance, travel, retail",
+  "why_them": "Names TUI and BarmeniaGothaer as customers",
+  "ai": true
+ },
+ "PicsArt": {
+  "what": "An AI creative platform for image and video editing",
+  "for_whom": "Content creators, marketers, and filmmakers making social media content",
+  "why_them": "States 100M+ creators and 150+ AI models available",
+  "ai": true
+ },
+ "Postman": {
+  "what": "An AI-native platform to develop, test and manage APIs",
+  "for_whom": "Engineers and enterprise teams building and running APIs",
+  "why_them": "Microsoft, Meta, Salesforce and Stripe shown as customers",
+  "ai": true
+ },
+ "Reflection AI": {
+  "what": "Open-weight AI models with a deployable open-source stack",
+  "for_whom": "Developers, enterprises and public sector running own infrastructure",
+  "why_them": "Partners with Dell and the US Department of Energy",
+  "ai": true
+ },
+ "Replit": {
+  "what": "An AI agent that builds apps from prompts",
+  "for_whom": "Non-coders, product teams and enterprises building internal software",
+  "why_them": "Databricks, Zillow and Gusto are named as customers",
+  "ai": true
+ },
+ "SambaNova Systems": {
+  "what": "An AI inference platform running on custom chips",
+  "for_whom": "Enterprises, developers, governments and sovereign AI cloud providers",
+  "why_them": "Runs gpt-oss-120b at over 600 tokens per second",
+  "ai": true
+ },
+ "Slice": {
+  "what": "An online ordering and marketing platform for pizzerias",
+  "for_whom": "Pizzeria owners and the staff running shops",
+  "why_them": "Branding Studio gives shops ready-to-post social media images",
+  "ai": true
+ },
+ "Speak": {
+  "what": "An AI language learning app for speaking practice",
+  "for_whom": "Beginner and intermediate learners wanting conversational fluency",
+  "why_them": "15+ million downloads, backed by the OpenAI Startup Fund",
+  "ai": true
+ },
+ "Symphony": {
+  "what": "Secure messaging, trader voice and analytics for finance",
+  "for_whom": "Banks, asset managers and financial markets professionals",
+  "why_them": "Used by the 10 largest global investment banks",
   "ai": true
  }
 }

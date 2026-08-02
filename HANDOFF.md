@@ -48,6 +48,20 @@ as nothing, a derivation says it is derived.
   human registering a free API key at
   developer.company-information.service.gov.uk and adding it as a repo secret
   + local env.
+- **T10.3 (description audit) done 2026-08-02.** All 270 checkable rows read
+  against their own site AND their board: 245 clean, 7 wrong company, 12 wrong
+  description, 8 unreadable (bot-protected). Repaired in kind — six website
+  corrections, one board correction, 15 regenerated descriptions, and `Super`
+  left undescribed because no address for it can be evidenced. The recurring
+  fault was `why_them` inventing a market position; the brief now demands a fact
+  the site states. Verdicts in `logs/description-audit.jsonl`, `--report` reads
+  it back.
+- **T10.2 (descriptions delta) done 2026-08-02.** `scripts/describe.py` uses
+  `claude-agent-sdk` + `CLAUDE_CODE_OAUTH_TOKEN` — no ANTHROPIC_API_KEY, and
+  Opus works there where the raw Messages API throttles that token to Haiku.
+  Its board-vs-website check found that `Insider` was Business Insider's board
+  under a coaching company's name; corrections.yaml now drops it. The dep is
+  hand-run only — `src/` is still standard-library-only.
 - **T9.2 (board-stated departments) done 2026-08-02, both phases.** Phase 1
   measured 5,409 postings on 317 live boards: "no board publishes one" was wrong
   (99.6% state one, free in calls the build already makes), but the vocabulary is
@@ -77,13 +91,13 @@ as nothing, a derivation says it is derived.
 ## NEXT (in order)
 
 1. **T9.1 build** — only after the human supplies the Companies House API key.
-2. **Descriptions nightly delta** — newly listed companies get no description
-   until regenerated; wiring the delta into the nightly needs an
-   ANTHROPIC_API_KEY repo secret (human step). Until then, a manual
-   regeneration pass (6 parallel writer agents, website-verified, omit when
-   unverifiable) is the pattern — see `data/descriptions.json` provenance.
-   The 316-company set has churned since the last pass — new names carry no
-   description, and 11 collapsed names (T10.1) now carry one nothing reads.
+2. **Corpus rebuild** — six T10.1/T10.3 `website` corrections are waiting on
+   one. `python -m src.corpus` is the manual step the nightly never runs, and
+   until it does, corpus.json still states the wrong addresses for Cresta,
+   Monzo, Alloy, FalconX, Slice and Symphony. Nothing on the site is wrong
+   meanwhile — descriptions read corrections.yaml directly (T10.3) and every one
+   of those companies already resolves to its own board — but slug discovery
+   still reads the stale address, which is how three of them went wrong.
 3. **Corpus rebuild, when something wants one** — `python -m src.corpus` is a
    manual step the nightly never runs, and it is what makes T10.1's two website
    corrections bite. Nothing is wrong on the site while it waits (both companies
