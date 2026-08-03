@@ -31,7 +31,27 @@ cd "$(dirname "$0")/.."
 # shellcheck disable=SC2086
 timeout "${NIGHTLY_TIMEOUT:-5400}" ${NIGHTLY_BUILD:-.venv/bin/python -m src.build}
 
-git add -- data/companies.json data/build-report.json
+# T15.2. Dates every role URL the build just published that the artifact has not
+# seen before, and marks it new ONLY where the company's board was read on the
+# previous snapshot as well as this one.
+#
+# READS NO GIT HISTORY, and that is the whole reason it is a separate step
+# rather than a diff. nightly.yml checks out with actions/checkout@v4, which
+# fetches depth 1 — there is no previous commit here to diff against. Everything
+# it knows about yesterday comes out of data/first-seen.json, which the last run
+# committed. `scripts/first_seen_backfill.py` is the only thing in this repo
+# that reads git, it is a hand run, and nothing automatic may call it.
+#
+# After the build, deliberately: it reads the two files the build has just
+# written. `set -e` means a build that died never reaches this line, and a
+# failure here reaches no commit.
+#
+# Same seam as NIGHTLY_BUILD above, for the same reason and unquoted for the
+# same reason: it is a command line, and the dry-run test substitutes one.
+# shellcheck disable=SC2086
+${NIGHTLY_FIRSTSEEN:-.venv/bin/python -m src.firstseen}
+
+git add -- data/companies.json data/build-report.json data/first-seen.json
 if git diff --cached --quiet; then
   echo "nightly: build produced no change; nothing to commit"
   exit 0

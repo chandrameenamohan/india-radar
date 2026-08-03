@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "snapshot": "2026-07-28",
+  "note": "first_seen is the snapshot date a role's URL first appeared in a build. A role is confirmed only where its company's board was read on the previous snapshot AND on this one — both sides genuinely observed. Everything else is unconfirmed: we saw it for the first time, which is not the same as it being new. Only confirmed roles may be called new.",
+  "observed": [
+    "Acme Cloud",
+    "Beta Logistics",
+    "Delta Remote",
+    "Epsilon Directory",
+    "Gamma Health",
+    "Iota Europe",
+    "Theta Global",
+    "Zeta Placeless"
+  ],
+  "dates": {
+    "2026-07-10": {
+      "confirmed": [],
+      "unconfirmed": [
+        "https://job-boards.greenhouse.io/acmecloud/jobs/4003",
+        "https://job-boards.greenhouse.io/epsilondirectory/jobs/8002",
+        "https://job-boards.greenhouse.io/gammahealth/jobs/6002",
+        "https://job-boards.greenhouse.io/gammahealth/jobs/6003",
+        "https://job-boards.greenhouse.io/gammahealth/jobs/6004",
+        "https://job-boards.greenhouse.io/gammahealth/jobs/9001",
+        "https://job-boards.greenhouse.io/thetaglobal/jobs/10002",
+        "https://job-boards.greenhouse.io/zetaplaceless/jobs/9001",
+        "https://jobs.ashbyhq.com/iotaeurope/11001"
+      ]
+    },
+    "2026-07-20": {
+      "confirmed": [
+        "https://job-boards.greenhouse.io/epsilondirectory/jobs/8001"
+      ],
+      "unconfirmed": []
+    },
+    "2026-07-21": {
+      "confirmed": [
+        "https://job-boards.greenhouse.io/thetaglobal/jobs/10001"
+      ],
+      "unconfirmed": []
+    },
+    "2026-07-24": {
+      "confirmed": [
+        "https://job-boards.greenhouse.io/deltaremote/jobs/7001"
+      ],
+      "unconfirmed": []
+    },
+    "2026-07-28": {
+      "confirmed": [
+        "https://job-boards.greenhouse.io/acmecloud/jobs/4001",
+        "https://job-boards.greenhouse.io/gammahealth/jobs/6001"
+      ],
+      "unconfirmed": [
+        "https://job-boards.greenhouse.io/acmecloud/jobs/4002",
+        "https://job-boards.greenhouse.io/betalogistics/jobs/5001"
+      ]
+    }
+  }
+}

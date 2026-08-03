@@ -838,6 +838,11 @@
          vertical-align: .06em; border-radius: 0; }
   .tag.open   { border-color: var(--red); color: var(--red); }
   .tag.closed { border-color: var(--ink); color: var(--ink); }
+  /* T15.2. A role we watched appear, on a night we could read its company's
+     board on both sides. It takes the red because it is the one thing on a
+     register line that is a claim about a CHANGE rather than about a state --
+     and it is rare on purpose: nine roles on the night SPEC measured. */
+  .tag.fresh  { border-color: var(--red); color: var(--red); }
 
   .salary .ctc { color: var(--ink); font-weight: 700; }
   /* A CIN is 21 characters a reader may retype into the MCA portal, so it is
@@ -1088,6 +1093,12 @@
     <option value="raised">Amount raised</option>
     <option value="date">Most recently funded</option>
     <option value="name">Name</option>
+    <!-- T15.2, and the first sort in this bank that is a fact about a ROLE
+         rather than about its company: the other four order the company blocks
+         the roles sit in. It has nothing to order in the company register and
+         nothing to read where no role carries a date, so it leaves the row in
+         both cases — the openness control's rule, one control along. -->
+    <option value="newest">Newest roles</option>
   </select></label>
   <!-- Round 5: where the foreign-hires filter has nothing to offer it leaves
        the row (a permanently disabled select is furniture, not honesty) and
@@ -1132,6 +1143,10 @@
          until a dataset loads and stays empty for one this page refuses to read —
          a count with no build behind it would be the exact claim this says. -->
     <p id="integrity"></p>
+    <!-- T15.2. Filled from data/first-seen.json, and empty without it: the
+         count of roles we cannot call new is the honest half of this feature,
+         so it prints beside the register rather than sitting in the file. -->
+    <p id="firstseen"></p>
     <p>Every company here showed at least one open role, in one of the countries this radar covers,
       on its own job board on the snapshot date. A company we could not check is excluded
       rather than shown as "not hiring".</p>
@@ -1159,7 +1174,8 @@
       each change of pitch, so the band spends its paper where the register is.</p>
   </div>
   <p class="sources"><a href="../data/build-report.json">build report</a> ·
-     <a href="../data/companies.json">the data</a></p>
+     <a href="../data/companies.json">the data</a> ·
+     <a href="../data/first-seen.json">first seen</a></p>
 </footer>
 
 <script>
@@ -1175,6 +1191,14 @@ const DEFAULT_SRC = '../data/companies.json';
 // rows under our name.
 const asked = new URLSearchParams(location.search).get('data');
 const src = asked && !/^[a-z]+:|^\/\//i.test(asked) ? asked : DEFAULT_SRC;
+
+// T15.2. The same seam for the first-seen artifact, and it needs its own: the
+// e2e's dataset is seventeen invented roles, so the dates for them have to be
+// invented alongside — and the real artifact holds 6,505 URLs none of which
+// appear in it. Same same-origin guard, for the same reason.
+const DEFAULT_SEEN = '../data/first-seen.json';
+const askedSeen = new URLSearchParams(location.search).get('seen');
+const seenSrc = askedSeen && !/^[a-z]+:|^\/\//i.test(askedSeen) ? askedSeen : DEFAULT_SEEN;
 
 const $ = (sel) => document.querySelector(sel);
 const el = (tag, cls, text) => {
@@ -1672,6 +1696,13 @@ const sorts = {
   raised: (a, b) => (b.amount ?? -1) - (a.amount ?? -1),
   date: (a, b) => (b.date || '').localeCompare(a.date || ''),   // undated sort last
   name: (a, b) => a.name.localeCompare(b.name),
+  // T15.2. `newest` is a ROLE fact and has no company comparator of its own, so
+  // the company blocks keep the register's canonical order and render() re-sorts
+  // the flattened roles themselves. It is written out rather than left missing
+  // because `Array.sort(undefined)` is a lexicographic sort of stringified
+  // objects — every company would compare as "[object Object]" and the register
+  // would scramble into insertion order without saying it had.
+  newest: (a, b) => sorts.reqs(a, b),
 };
 
 let companies = [];
@@ -1738,6 +1769,31 @@ let BUILDREP = null;
 const buildReady = fetch('../data/build-report.json', { cache: 'no-cache' })
   .then((r) => (r.ok ? r.json() : null))
   .catch(() => null);
+
+// T15.2 — when we first saw each role, keyed by its posting URL. Enrichment on
+// the descriptions' terms: fetched optionally, resolving to null on any failure,
+// so a missing file costs the badge and the Newest sort and nothing else. The
+// register is a public document that renders without it.
+//
+// A Map rather than the file's own shape: the artifact is grouped by DATE
+// because that is how it is written and diffed one night at a time, and the page
+// asks the opposite question 6,422 times a render — what does this URL say.
+let FIRSTSEEN = new Map();
+const firstSeenReady = fetch(seenSrc, { cache: 'no-cache' })
+  .then((r) => (r.ok ? r.json() : null))
+  .catch(() => null);
+// A role is called NEW for a week after we first saw it, and no longer. SPEC v3
+// "Not a wall" set the cadence from the data — 9 new roles a night, so alerts
+// weekly rather than daily — and a badge that outlives its alert would be
+// telling a reader something the register no longer means by it.
+const NEW_DAYS = 7;
+// Inclusive on both ends: `days` is signed, and a role dated AFTER the snapshot
+// (a hand build folded in out of order) is not new, it is a build we cannot
+// place. Confirmed is checked at the call site, never here — this answers "is it
+// recent", and the two questions must stay separable to be testable apart.
+const freshlySeen = (entry) =>
+  !!entry && entry.date != null && days(entry.date, snapshot) >= 0
+  && days(entry.date, snapshot) <= NEW_DAYS;
 
 // What we can say about a company, said in the page's smallest voice: three
 // labelled lines and a provenance mark stating a machine wrote them.
@@ -2138,6 +2194,22 @@ function roleRow(c, r) {
   if (WORKPLACE[r.workplace]) {
     namecell.append(el('span', 'tag workplace', WORKPLACE[r.workplace]));
   }
+  // T15.2 — the new badge, and both halves of the condition are load-bearing.
+  // `confirmed` says we read this company's board on the previous snapshot as
+  // well as this one, so a URL that was not there and now is really did appear;
+  // without it the badge would be worn by every role of every company we simply
+  // could not check last night, which is 176 of the 179 changes SPEC measured on
+  // 2026-08-01. `freshlySeen` says it happened this week. A role with no entry,
+  // an unconfirmed one and an old one all render nothing at all: absence stays
+  // absence, and there is no "old" badge for the same reason there is no "not
+  // hiring" one.
+  const seen = FIRSTSEEN.get(r.url);
+  if (seen && seen.confirmed && freshlySeen(seen)) {
+    const badge = el('span', 'tag fresh', 'New');
+    badge.title = `First seen ${seen.date} — this company's board was read on `
+      + 'the previous snapshot too, so this role appeared between them.';
+    namecell.append(badge);
+  }
   // The role's own locations, never the company's city list: `cities` is a
   // build-level India fact attached to a COMPANY, and printing it under one of
   // its roles would place a job in a city no posting named.
@@ -2537,6 +2609,22 @@ function render() {
     n.classList.toggle('set', n.id !== 'sort' && n.id !== 'view' && n.value !== 'any');
   }
   $('#q').classList.toggle('set', !!$('#q').value.trim());
+  // T15.2 — the Newest sort withdraws, on the openness control's rule (round 5)
+  // and the MCA control's: a control that cannot work leaves the row rather than
+  // sitting disabled, and clears itself on the way out, because a sort holding a
+  // value while invisible orders the register by something nobody can see.
+  //
+  // Two ways it cannot work, and they are different facts. In the COMPANY
+  // register there is nothing role-shaped to order — the other four sorts are
+  // company facts and this one is not. And with no artifact loaded (it is
+  // optional, and a build predating the backfill has none) there is no date to
+  // read. Read here rather than at the sort itself, which is thirty lines below
+  // and would then be ordering by a control it had just hidden.
+  const roleView = $('#view').value === 'roles';
+  const sortable = roleView && FIRSTSEEN.size > 0;
+  const sortSel = $('#sort');
+  sortSel.querySelector('option[value="newest"]').hidden = !sortable;
+  if (!sortable && sortSel.value === 'newest') sortSel.value = 'reqs';
   // The openness control's one non-default option states its own yield for
   // the open plate, before the click: 92% of postings say nothing (note 03),
   // so zero is this filter's common answer. Round 5: at zero the control
@@ -2622,7 +2710,6 @@ function render() {
   // remote-filtered ROLE list showing the on-site jobs of a company with one
   // remote opening elsewhere would be the register answering a question nobody
   // asked — the same fault inScope exists to prevent one level up.
-  const roleView = $('#view').value === 'roles';
   const remote = $('#remote').value;
   const openness = $('#openness').value;
   const roleRows = [];
@@ -2644,10 +2731,21 @@ function render() {
     }
   }
   // The roles keep their company's rank, and their board's order within it. The
-  // four sort controls are all COMPANY facts — open roles, amount, date, name —
-  // so ordering 6,422 roles by one of them is ordering the company blocks they
-  // sit in; re-sorting the roles themselves would claim an order the data has
-  // no field for.
+  // four original sort controls are all COMPANY facts — open roles, amount,
+  // date, name — so ordering 6,422 roles by one of them is ordering the company
+  // blocks they sit in; re-sorting the roles themselves would claim an order the
+  // data has no field for.
+  //
+  // T15.2 gave it one field: first_seen is a fact about a ROLE, so Newest is the
+  // one sort that has to reach past the company blocks and order the flattened
+  // list itself. Undated roles sort last and are never dated to force it — an
+  // absence sorted as an old date would be the register inventing the fact it
+  // exists to avoid. The sort is stable, so roles sharing a date keep the
+  // canonical company order underneath.
+  if (roleView && $('#sort').value === 'newest') {
+    const seenAt = (it) => (FIRSTSEEN.get(it.r.url) || {}).date || '';
+    roleRows.sort((x, y) => seenAt(y).localeCompare(seenAt(x)));
+  }
   const items = roleView ? roleRows : shown;
   const total = items.length;
   const page = roleView ? items.slice(0, roleCap) : items;
@@ -3007,6 +3105,33 @@ function load(data) {
   // The footer closes the loop the masthead opens: the same snapshot date,
   // stated where the integrity claims are made. From the data, never Date.now.
   $('.sources').append(el('span', null, ` · snapshot ${snapshot}`));
+  // T15.2 — the count of roles we hold a date for but may not call new. It is
+  // the honest half of the feature and it is the larger half, so it prints in
+  // the apparatus rather than staying inside the file. Counted over the roles on
+  // this register, not over the artifact, which also remembers postings that
+  // have since closed: the reader is being told about the page in front of them.
+  //
+  // Silent with no artifact, as the integrity line is with no build report. A
+  // sentence about zero dates would be a claim with nothing behind it.
+  if (FIRSTSEEN.size) {
+    let dated = 0, unconfirmed = 0, total = 0;
+    for (const c of companies) for (const r of c.roles) {
+      total += 1;
+      const entry = FIRSTSEEN.get(r.url);
+      if (!entry) continue;
+      dated += 1;
+      if (!entry.confirmed) unconfirmed += 1;
+    }
+    $('#firstseen').textContent =
+      `Every role carries the date we first saw it — ${count(dated)} of `
+      + `${count(total)} on this snapshot. A role is marked new only where we `
+      + `read its company's board on the previous snapshot as well as this one; `
+      + `${count(unconfirmed)} are dated but unconfirmed, which means we saw `
+      + `them for the first time on a night we could not compare, and not that `
+      + `they are new or that they are old. Roles that disappear are not `
+      + `reported at all: on the night we measured, 176 of the 179 that vanished `
+      + `were companies we could not check, and 3 had closed.`;
+  }
   // The city and department selects are NOT built here: both list what the open
   // plate holds, so they are render()'s, rebuilt whenever the page turns.
   // Built here rather than in the markup because a chip states its count, and
@@ -3066,6 +3191,21 @@ fetch(src, { cache: 'no-cache' })
       ? found : {};
     const rep = await buildReady;
     BUILDREP = rep && typeof rep === 'object' && !Array.isArray(rep) ? rep : null;
+    // T15.2. The artifact is written grouped by date, one bucket a night, which
+    // is what makes it diffable in a commit; the page needs the inverse index.
+    // Flattened once here rather than searched per row: 6,422 rows against 5
+    // date buckets is a lookup, and doing it per render would be 32,000 array
+    // scans a keystroke. A shape this does not recognise leaves the Map empty,
+    // which is the same state as no file at all — the badge and the sort go, the
+    // register stays.
+    const seenDoc = await firstSeenReady;
+    FIRSTSEEN = new Map();
+    for (const [day, buckets] of Object.entries(seenDoc?.dates || {})) {
+      for (const [kind, urls] of Object.entries(buckets || {})) {
+        if (!Array.isArray(urls)) continue;
+        for (const url of urls) FIRSTSEEN.set(url, { date: day, confirmed: kind === 'confirmed' });
+      }
+    }
     load(data);
   })
   .catch((e) => { $('#status').textContent = `Could not load ${src}: ${e.message}`; });

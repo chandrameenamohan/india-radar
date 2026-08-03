@@ -2884,3 +2884,121 @@ Out of scope:
     index-is-master rule; revisit if it reads wrong in use.
   - Deleting the company register. Cheap later, irreversible now.
 ```
+
+---
+
+### T15.2 — First seen, and the badge it is allowed to earn `done` · *Phase 10*
+> **Every role now carries the date we first saw it, and almost none of them may
+> be called new.** That gap is the feature. `data/first-seen.json` maps 6,505
+> role URLs to the snapshot date each first appeared, split into `confirmed` and
+> `unconfirmed` — and only a confirmed role, first seen inside the last seven
+> days, wears the `New` badge on a register line.
+>
+> **The rule, and it is one line in `src/firstseen.py`:** a role may be called
+> new only where its company was `listed` in the PREVIOUS snapshot and in this
+> one. SPEC's measurement of 2026-08-01 is why — one nightly diff gave 0 new
+> companies and 9 new roles while 179 roles disappeared, of which **176 were
+> companies the build could not check that night and 3 had actually closed.** A
+> naive diff is ~98% noise and the noise is all one shape: absence of knowledge
+> read as a finding. A role under a company we could not read last night gets its
+> date, because when we first saw something is a fact about US and always true,
+> and gets no badge, because "new" is a claim about the company.
+>
+> **THE BACKFILL DATES AND CONFIRMS NOTHING, and that was the finding.** Folding
+> `advance` over all 26 published commits of `data/companies.json`, the
+> both-sides rule confirms 1,728 roles — **1,604 of them on 2026-07-31 alone**,
+> the night T8.4's fifteen-country radar reached a nightly. Every one of those
+> roles was open the day before; the build was not looking at its country yet. A
+> change in what the build LOOKS FOR is indistinguishable, inside the artifact,
+> from a company opening a job, and this history holds two (T8.4, and T12.1's 135
+> new boards). So history gives dates and no badges, and confirmation starts with
+> the first nightly after this lands — one build definition, two consecutive
+> observations, which is the only shape the rule was ever measured against. The
+> site ships badging nothing, on purpose, and SPEC's own number says the first
+> honest night should badge about nine.
+>
+> **The nightly reads no git history, and that is the constraint that shaped the
+> artifact.** `actions/checkout@v4` fetches depth 1 — a step that diffed against
+> the previous commit would work perfectly on a laptop with 26 commits behind it
+> and produce garbage at 20:00 UTC. So the artifact carries its own memory: every
+> URL ever seen, and `observed`, the companies genuinely read at the last
+> snapshot, which is the previous side of tomorrow's rule. Drop that field and
+> every tomorrow silently becomes a baseline that confirms nothing —
+> mutation-tested, three tests red. `scripts/first_seen_backfill.py` is the only
+> thing in this repo that reads git, it is a hand run, and a test asserts that
+> neither the script, the workflow nor the module names it.
+>
+> **The backfill IS the nightly, folded 26 times.** It contains a `git show` and
+> a loop; every judgement in it is `advance`'s. A second implementation of the
+> rule for the one-time path would have been a second place for it to be wrong,
+> and the one-time path is the one nobody re-runs.
+>
+> **Newest is the first ROLE-level sort this register has had.** The other four
+> are company facts, so they order the company blocks the roles sit in; this one
+> reaches past them and orders the flattened list. It has nothing to order in the
+> company register and nothing to read where no artifact loaded, so it leaves the
+> row and clears itself — the openness control's rule at zero yield, and the MCA
+> control's off an India-less plate. An undated role sorts last and is never
+> dated to force it: an absence given a date is the register inventing the fact
+> it exists to avoid, and there is no "old" badge for the same reason there is no
+> "not hiring" one.
+>
+> **The artifact is enrichment on the descriptions' exact terms** — fetched
+> optionally, resolving to null on any failure. A missing file costs the badge
+> and the sort and costs the register nothing, and the e2e proves it against a
+> 404 rather than by reading the code.
+>
+> **Role closures are out of scope and this is where they were refused.** They
+> are where the 98% lives, and the honest version needs the same both-sides rule
+> plus a policy for the 176.
+
+```
+Acceptance (observable):
+  Every role in data/companies.json carries a first-seen date; 6,422 of 6,422.
+  A role whose company was NOT read on the previous snapshot renders no badge,
+    however recently we first saw it.
+  A role with no first-seen date renders no badge and sorts last, never "old".
+  Newest orders the roles themselves, not the company blocks they sit in.
+  Newest leaves the control bank in the company register and where no artifact
+    loaded, and clears itself on the way out.
+  A missing data/first-seen.json costs the badge and the sort; the register
+    renders every role regardless.
+  The count of dated-but-unconfirmed roles is printed in the footer, not hidden.
+  The nightly commits data/first-seen.json beside companies.json and the report.
+Checks:
+  lint -> typecheck -> unit -> worker -> e2e (full gate)
+  + unit: the both-sides rule, four sides — baseline, previous-observed,
+    currently-observed, and a URL already known
+  + unit: a role that disappears and returns keeps its first date
+  + unit: rebuilding the same snapshot rewrites a byte-identical artifact, which
+    is what makes the nightly's "no change, no commit" branch mean anything
+  + unit: every published role in the REAL corpus carries a date
+  + unit: the e2e's first-seen fixture is a file src/firstseen.py could have
+    written — no invented URL, no unsorted bucket, no URL dated twice
+  + unit: nightly.sh, nightly.yml and src/firstseen.py read no git history, and
+    the backfill still does (a guard over a rule nothing implements is furniture)
+  + unit: the real module, run by the real script, in a throwaway repo — the
+    artifact reaches the commit and `observed` survives in it
+  + e2e: the badge, the two unconfirmed roles that must never wear it, and the
+    seven-day window at its edge and one day past it, over a first-seen fixture
+  + e2e: the register badges exactly as many roles as the real artifact
+    confirms, which is today none — a regression badging on the date alone
+    shows up here as the whole printed page
+  + mutation: `both_sides = True` turns 6 tests red; dropping the previous side
+    alone, the baseline alone, or `observed` each turn their own red; dropping
+    `seen.confirmed` from the badge turns 3 e2e checks red (400 badges on real
+    data); dropping the window turns 2 red; dropping the role-level sort turns
+    the Newest order red
+Out of scope:
+  - Role closures and disappearances. 176 of the 179 that vanished on the night
+    SPEC measured were companies we could not check. The honest version needs
+    this same rule plus a policy for those 176, and it is a feature, not a flag.
+  - Alerting anybody. SPEC v3 sets the cadence at weekly from the same
+    measurement; first_seen is the substrate it will read, and nothing more.
+  - A "company first seen" date. The register's unit is the role now, and a
+    company's first sighting is derivable from its roles' the day it is wanted.
+  - Pruning URLs that stopped being published. They are what stops a posting
+    that vanished for a week returning as new; the ceiling is in the code.
+  - Re-confirming the backfill's 1,728. It would mean a table of which builds
+    changed the definition, hand-maintained, to badge roles a week old.
+```

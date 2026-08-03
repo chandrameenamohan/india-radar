@@ -218,6 +218,46 @@ else
   echo "  --    the roles fold not exercised: this build lists $matched roles, under one page"
 fi
 
+# T15.2, against the real artifact. The badge itself is driven on the fixture
+# below, because the corpus's own history cannot exercise it: the backfill dates
+# 6,505 URLs off git and confirms none of them (a change in what the build LOOKS
+# FOR is indistinguishable from a company opening a job, and the history holds
+# two), so until a nightly runs there is nothing on this page to badge. What CAN
+# be checked here is the rule that matters most, and it is the negative one: the
+# page badges exactly as many roles as the artifact confirms, which today is
+# none. A regression that badged on the date alone shows up here as 6,422.
+badged=$(val 'document.querySelectorAll(".jrow .tag.fresh").length')
+# Over the roles PRINTED, in the order the register prints them -- company rank
+# first, board order within, one page at a time. Counting the whole corpus would
+# compare a page against a file, and this check runs after the fold above has
+# turned a page, so how many are printed is read off the page rather than assumed.
+onpage=$(val 'document.querySelectorAll(".jrow").length')
+confirmable=$($PY -c '
+import datetime, json, pathlib, sys
+art = pathlib.Path("data/first-seen.json")
+if not art.exists():
+    print(0); raise SystemExit
+seen = json.loads(art.read_text())
+data = json.load(open("data/companies.json"))
+snap = datetime.date.fromisoformat(data["snapshot"])
+fresh = {url for day, buckets in seen["dates"].items() for url in buckets["confirmed"]
+         if 0 <= (snap - datetime.date.fromisoformat(day)).days <= 7}
+cs = sorted(data["companies"], key=lambda c: (-len(c["roles"]), c["name"]))
+roles = [r["url"] for c in cs for r in c["roles"]][: int(sys.argv[1])]
+print(sum(1 for url in roles if url in fresh))' "$onpage")
+check "the register badges exactly the roles the artifact confirms" \
+  "$confirmable" "$badged"
+if [ "$confirmable" = "0" ]; then
+  echo "  --    the new badge not exercised on real data: the backfill confirms"
+  echo "        nothing by design, so this corpus has no confirmed role until a"
+  echo "        nightly has run. Driven on the fixture below instead."
+fi
+# The unconfirmed count is published rather than hidden -- it is the larger half
+# of this feature and the reason most of the register carries no badge.
+check "the footer states how many roles are dated but unconfirmed" "true" \
+  "$(val 'String(/\d[\d,]* are dated but unconfirmed/.test(
+       document.querySelector("#firstseen").textContent))')"
+
 echo "-- behaviour, over the committed dataset"
 open_page "$FIXTURE"
 # A register line is `.irow`, and a long register continues in the spread below
@@ -1128,6 +1168,117 @@ check "the company cell opens THAT role's company" "$target" \
 check "every role line's company control has an accessible name" "true" \
   "$(val '[...document.querySelectorAll(".jrow .cobtn")]
        .every((b) => (b.getAttribute("aria-label") || "").trim().length > 0) + ""')"
+
+# ---- T15.2: first seen, the badge and the Newest sort -----------------------
+#
+# Driven over a first-seen fixture, and it needs one: the real artifact holds
+# 6,505 URLs, none of which this dataset publishes, and confirms none of them
+# (see the run against real data above). A check that can never reach its own
+# branch is the shape this repo has been bitten by before, so the history the
+# corpus cannot express is written down instead -- held to a file the real
+# module could have produced by test_the_e2e_artifact_is_a_file_this_module_
+# could_have_written, which is what stops it drifting into wishful data.
+#
+# The fixture's snapshot is 2026-07-28 and its dates are placed against it:
+# two confirmed that day, two UNCONFIRMED that day, one confirmed at seven days
+# and one at eight, nine older, and one role with no date at all.
+SEEN="$ROLES&seen=../tests/fixtures/first-seen-e2e.json"
+open_page "$SEEN"
+console_clean "roles register with first-seen dates"
+
+badges() { val '[...document.querySelectorAll(".jrow")]
+     .filter((n) => n.querySelector(".tag.fresh"))
+     .map((n) => n.querySelector(".iname").firstChild.textContent).join("|")'; }
+
+# Derived from the two fixtures rather than hardcoded, the way every other
+# expectation here is -- and in Python against JavaScript, so the rule is
+# implemented twice and has to agree with itself.
+check "the badge marks the confirmed roles first seen inside the week" \
+  "$($PY -c '
+import datetime, json
+data = json.load(open("tests/fixtures/companies-e2e.json"))
+art = json.load(open("tests/fixtures/first-seen-e2e.json"))
+snap = datetime.date.fromisoformat(data["snapshot"])
+fresh = {url for day, buckets in art["dates"].items() for url in buckets["confirmed"]
+         if 0 <= (snap - datetime.date.fromisoformat(day)).days <= 7}
+cs = sorted(data["companies"], key=lambda c: (-len(c["roles"]), c["name"]))
+print("|".join(r["title"] for c in cs for r in c["roles"] if r["url"] in fresh))')" \
+  "$(badges)"
+
+# THE CHECK THIS FEATURE EXISTS FOR, and it is named rather than derived: these
+# two roles were first seen on the snapshot date itself -- as new as a role can
+# be -- under companies whose board we could not read on the previous snapshot.
+# SPEC measured that case at 176 of 179 changes on 2026-08-01. They carry the
+# date, because when we first saw something is a fact about us and always true.
+# They must not carry the badge, because "new" is a claim about the company.
+#
+# Counted as well as asserted: "none of these rows is badged" passes trivially
+# when the rows are not there, and that is the failure this check would miss.
+check "a role we saw first today but could not compare is dated, never badged" "2 0" \
+  "$(val '(() => {
+     const names = ["Product Designer", "Warehouse Systems Engineer"];
+     const rows = [...document.querySelectorAll(".jrow")]
+       .filter((n) => names.includes(n.querySelector(".iname").firstChild.textContent));
+     return `${rows.length} ${rows.filter((n) => n.querySelector(".tag.fresh")).length}`;
+   })()')"
+# The window, at its edge and one day past it: both roles are confirmed, so the
+# only thing separating them is the week. A badge with no window would show both
+# and a badge with an off-by-one would show neither.
+check "seven days is inside the week and eight is outside" "Backend Engineer, Payments" \
+  "$(val '[...document.querySelectorAll(".jrow")]
+       .filter((n) => ["Backend Engineer, Payments", "Founding Engineer"]
+         .includes(n.querySelector(".iname").firstChild.textContent))
+       .filter((n) => n.querySelector(".tag.fresh"))
+       .map((n) => n.querySelector(".iname").firstChild.textContent).join("|")')"
+
+# The first sort in this register that is a fact about a ROLE. The other four
+# order the company blocks the roles sit in; this one has to reach past them and
+# order the flattened list, so it is checked against an order no company sort
+# can produce -- and the undated role sorts LAST rather than being dated to
+# force it, because an absence given a date would be the register inventing the
+# fact it exists to avoid.
+$B select '#sort' 'newest' >/dev/null 2>&1
+check "Newest orders the roles themselves, and undated roles sort last" \
+  "$($PY -c '
+import json
+data = json.load(open("tests/fixtures/companies-e2e.json"))
+art = json.load(open("tests/fixtures/first-seen-e2e.json"))
+when = {url: day for day, buckets in art["dates"].items()
+        for urls in buckets.values() for url in urls}
+cs = sorted(data["companies"], key=lambda c: (-len(c["roles"]), c["name"]))
+flat = [r for c in cs for r in c["roles"]]
+flat.sort(key=lambda r: when.get(r["url"], ""), reverse=True)
+print("|".join(r["title"] for r in flat))')" \
+  "$(rows)"
+
+# The company register has nothing role-shaped to order, so the control leaves
+# the row -- the openness filter's rule at zero yield, and the MCA filter's off
+# an India-less plate. It clears itself on the way out for the same reason they
+# do: a sort holding a value while invisible orders the register by something
+# nobody can see or change.
+$B select '#view' 'companies' >/dev/null 2>&1
+check "Newest leaves the row where the register counts companies" "true" \
+  "$(val 'String(document.querySelector("#sort option[value=newest]").hidden)')"
+check "and clears itself rather than ordering by an invisible control" "reqs" \
+  "$(val 'document.querySelector("#sort").value')"
+
+# The artifact is enrichment and never a dependency -- the descriptions' rule,
+# and the register is a public document that has to render without it. A missing
+# file costs the badge and the sort, and costs the register nothing.
+#
+# console_clean is deliberately NOT called here: the 404 this check is ABOUT is
+# a failed request, and a page that asked for a file that is not there is what
+# is being proved. Every other page in this run is held to zero.
+open_page "$ROLES&seen=../tests/fixtures/no-such-artifact.json"
+check "a missing artifact costs the badge and nothing else" "17 0" \
+  "$(val '`${document.querySelectorAll(".jrow").length} `
+        + `${document.querySelectorAll(".jrow .tag.fresh").length}`')"
+check "and takes the Newest sort off the bank with it" "true" \
+  "$(val 'String(document.querySelector("#sort option[value=newest]").hidden)')"
+check "and the footer claims no dates it does not hold" "" \
+  "$(val 'document.querySelector("#firstseen").textContent')"
+
+open_page "$ROLES"
 
 # Search at the ROLE scale: the company register answers "which companies hold a
 # matching title", this one answers "which jobs match". Last of the interactions

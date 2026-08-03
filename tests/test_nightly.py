@@ -19,18 +19,27 @@ from __future__ import annotations
 import json
 import os
 import subprocess
+import sys
 import time
 from pathlib import Path
 
 import pytest
 
 from src.build import PROBES
+from src.firstseen import SCHEMA_VERSION
 
 SCRIPT = Path("scripts/nightly.sh")
+BACKFILL = Path("scripts/first_seen_backfill.py")
+FIRSTSEEN = Path("src/firstseen.py")
 WORKFLOWS = Path(".github/workflows")
 WORKFLOW = WORKFLOWS / "nightly.yml"
 SLUGS = Path("data/slugs.json")
 PUBLISHED = "the last good build\n"
+#: A first-seen artifact that has never folded a snapshot — the state a repo is
+#: in before the backfill, and the one the bootstrap has to survive.
+EMPTY_ARTIFACT = json.dumps(
+    {"schema_version": SCHEMA_VERSION, "snapshot": None, "note": "", "observed": [], "dates": {}}
+)
 
 #: The environment for a throwaway repo, which is the ambient one with git's own
 #: variables taken out.
@@ -76,6 +85,7 @@ def repo(tmp_path: Path) -> Path:
     (tmp_path / "data").mkdir()
     (tmp_path / "data/companies.json").write_text(PUBLISHED)
     (tmp_path / "data/build-report.json").write_text(PUBLISHED)
+    (tmp_path / "data/first-seen.json").write_text(EMPTY_ARTIFACT)
 
     git(tmp_path, "init", "-q", "-b", "main")
     git(tmp_path, "config", "user.name", "test")
@@ -85,11 +95,17 @@ def repo(tmp_path: Path) -> Path:
     return tmp_path
 
 
-def nightly(repo: Path, build: str, seconds: str = "30") -> subprocess.CompletedProcess[str]:
+def nightly(
+    repo: Path, build: str, seconds: str = "30", firstseen: str = "true"
+) -> subprocess.CompletedProcess[str]:
     """Run the script with `build` standing in for the real build.
 
     A file rather than an inline command line because NIGHTLY_BUILD is
     word-split by the script — it has to be, to carry `python3 -m src.build`.
+
+    `firstseen` stands in for T15.2's step the same way, and defaults to a no-op
+    so the four publish tests below keep testing publishing. The one test that
+    wants the real module passes it, and it is the one that proves the wiring.
     """
     stub = repo / "stub.sh"
     stub.write_text(f"#!/bin/sh\n{build}\n")
@@ -97,7 +113,13 @@ def nightly(repo: Path, build: str, seconds: str = "30") -> subprocess.Completed
     return subprocess.run(
         [str(repo / SCRIPT)],
         cwd=repo,
-        env={**CLEAN_ENV, "NIGHTLY_BUILD": str(stub), "NIGHTLY_TIMEOUT": seconds},
+        env={
+            **CLEAN_ENV,
+            "NIGHTLY_BUILD": str(stub),
+            "NIGHTLY_TIMEOUT": seconds,
+            "NIGHTLY_FIRSTSEEN": firstseen,
+            "PYTHONPATH": str(Path.cwd()),
+        },
         capture_output=True,
         text=True,
     )
@@ -105,6 +127,20 @@ def nightly(repo: Path, build: str, seconds: str = "30") -> subprocess.Completed
 
 def commits(repo: Path) -> int:
     return int(git(repo, "rev-list", "--count", "HEAD"))
+
+
+def code_only(path: Path) -> str:
+    """The file with its comments and its module docstring taken out.
+
+    The rule below is about what a file DOES, and all three of these files
+    explain at length why they do not do it — a substring check over the whole
+    text would be reading the explanation as the offence, and the fix for that
+    failure would be deleting the explanation.
+    """
+    body = path.read_text()
+    if path.suffix == ".py":
+        body = body.split('"""', 2)[-1]
+    return "\n".join(line for line in body.splitlines() if not line.lstrip().startswith("#"))
 
 
 def test_successful_build_is_committed(repo: Path) -> None:
@@ -147,6 +183,68 @@ def test_overrun_is_killed_and_publishes_nothing(repo: Path) -> None:
     assert done.returncode == 124, "124 is timeout's 'I killed it'"
     assert commits(repo) == 1
     assert git(repo, "show", "HEAD:data/companies.json") == PUBLISHED.strip()
+
+
+def test_the_first_seen_artifact_is_folded_after_the_build_and_published(repo: Path) -> None:
+    """T15.2's wiring, with the real module rather than a stub.
+
+    Ordering is what this proves, and the fixture is what makes it prove it: the
+    published data/ holds `the last good build`, which is not JSON. A first-seen
+    step running BEFORE the build would read that and die. It succeeds only if it
+    ran after, over the file the build had just written — and the artifact it
+    wrote has to reach the commit, or tomorrow's nightly starts from nothing and
+    re-dates the whole register to tomorrow.
+    """
+    (repo / "fresh.json").write_text(
+        json.dumps(
+            {
+                "schema_version": 10,
+                "snapshot": "2026-08-03",
+                "companies": [{"name": "Acme", "roles": [{"url": "https://boards/1"}]}],
+            }
+        )
+    )
+    (repo / "fresh-report.json").write_text(json.dumps({"listed": ["Acme"]}))
+
+    done = nightly(
+        repo,
+        "cp fresh.json data/companies.json\ncp fresh-report.json data/build-report.json",
+        firstseen=f"{sys.executable} -m src.firstseen",
+    )
+
+    assert done.returncode == 0, done.stderr
+    assert commits(repo) == 2
+    art = json.loads(git(repo, "show", "HEAD:data/first-seen.json"))
+    assert art["dates"] == {"2026-08-03": {"confirmed": [], "unconfirmed": ["https://boards/1"]}}
+    assert art["observed"] == ["Acme"], "without this the next night confirms nothing"
+
+
+def test_the_nightly_reads_no_git_history() -> None:
+    """T15.2, and it is the one way this feature fails silently in production.
+
+    `actions/checkout@v4` fetches depth 1. A first-seen step that diffed against
+    the previous commit would work perfectly on a laptop with 26 commits of
+    data/companies.json behind it and produce garbage at 20:00 UTC, where there
+    is exactly one. So the nightly's whole memory is the committed artifact, and
+    the only thing in this repo that reads git is the one-time backfill, which
+    nothing automatic may call.
+
+    Asserted against the files rather than trusted, because "we just don't do
+    that" is the kind of fact that stays true until someone adds a convenient
+    line — the same reason the slug rule above is a test.
+    """
+    for path in (SCRIPT, WORKFLOW, FIRSTSEEN):
+        body = code_only(path)
+        for reads_history in ("git show", "git log", "rev-list", "git diff HEAD"):
+            assert reads_history not in body, (
+                f"{path} reads git history: CI checks out at depth 1 and there is "
+                f"none to read. The delta comes from the committed artifact."
+            )
+        assert BACKFILL.name not in body, f"{path} calls the one-time backfill"
+    assert "git show" in BACKFILL.read_text(), (
+        "the backfill is the one thing that may read history; if it no longer "
+        "does, this test is guarding a rule nothing implements"
+    )
 
 
 def test_workflow_runs_the_tested_script_nightly() -> None:
