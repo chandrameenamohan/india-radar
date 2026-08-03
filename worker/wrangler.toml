@@ -9,6 +9,17 @@ name = "roleatlas-api"
 main = "index.mjs"
 compatibility_date = "2026-08-02"
 
+# NO workers.dev SUBDOMAIN. Registering one would publish this API on a second,
+# permanent hostname that nothing needs and the CORS allowlist does not cover --
+# a free extra front door. The custom domain below is the only way in, and
+# `custom_domain = true` makes Cloudflare create and proxy the DNS record itself.
+#
+# The API is on its own hostname because it has to be PROXIED (orange cloud) and
+# `roleatlas.sennamind.com` must stay DNS-only for GitHub to keep issuing the
+# certificate for the register. See the CORS note at the top of index.mjs.
+workers_dev = false
+routes = [{ pattern = "api.roleatlas.sennamind.com", custom_domain = true }]
+
 [vars]
 # Not a secret: the frontend API host is base64 inside the Clerk publishable key,
 # which is public by design (v3). It is a var so that a wrong value is a visible

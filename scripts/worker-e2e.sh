@@ -8,8 +8,14 @@
 #                these assertions can be exercised on a machine where workerd
 #                refuses to start, because a check whose first real run is in CI
 #                is a check nobody has tested.
+#   deployed  -- the real thing over the internet. Starts no server: it points
+#                the same assertions at a URL that is already live, which is the
+#                only runner that also proves DNS, the certificate, the route and
+#                the bindings. Not part of `make check` -- a gate that fails when
+#                a third party is having a bad minute is a gate people learn to
+#                ignore. Run it after a deploy.
 #
-# Usage: scripts/worker-e2e.sh [wrangler|node]
+# Usage: scripts/worker-e2e.sh [wrangler|node|deployed [url]]
 set -uo pipefail
 cd "$(dirname "$0")/.."
 
@@ -41,13 +47,19 @@ case "$RUNNER" in
   node)
     PORT="$PORT" node worker/serve.mjs >"$LOG" 2>&1 &
     ;;
+  deployed)
+    BASE="${2:-https://api.roleatlas.sennamind.com}"
+    SERVER_PID=""
+    ;;
   *)
     echo "FAIL: unknown runner '$RUNNER'"
     exit 1
     ;;
 esac
-SERVER_PID=$!
-trap 'kill $SERVER_PID 2>/dev/null; wait $SERVER_PID 2>/dev/null' EXIT
+if [ "$RUNNER" != "deployed" ]; then
+  SERVER_PID=$!
+  trap 'kill $SERVER_PID 2>/dev/null; wait $SERVER_PID 2>/dev/null' EXIT
+fi
 
 # Wait for it, rather than sleeping a guessed interval.
 ready=0
