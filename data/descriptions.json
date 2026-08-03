@@ -2184,5 +2184,311 @@
   "why_them": "100 ms text-to-speech latency across 15+ languages",
   "ai": true,
   "checked": true
+ },
+ "Artisan": {
+  "what": "An AI BDR that books outbound sales meetings",
+  "for_whom": "B2B sales teams at startups, SMBs and enterprises",
+  "why_them": "Claims 250M+ verified B2B contacts, enriched from 22+ sources",
+  "ai": true
+ },
+ "Ashby": {
+  "what": "An all-in-one recruiting and applicant tracking platform",
+  "for_whom": "Recruiting teams at startups through enterprise organizations",
+  "why_them": "Customers named include Shopify, Notion, Snowflake and Ramp",
+  "ai": true
+ },
+ "Aspora": {
+  "what": "Cross-border money transfers and NRI banking app",
+  "for_whom": "Indians living abroad sending money back home",
+  "why_them": "Over $2 billion transferred, 1 million-plus users",
+  "ai": true
+ },
+ "Astronomer": {
+  "what": "A managed data and AI orchestration platform on Apache Airflow",
+  "for_whom": "Data engineers moving pipelines from prototype to production",
+  "why_them": "Booking.com and Together AI named as customers",
+  "ai": true
+ },
+ "Beamery": {
+  "what": "An AI platform for workforce and talent transformation",
+  "for_whom": "Enterprise executives, HR leaders, recruiters and candidates",
+  "why_them": "Wells Fargo: 700% increase in military job seekers",
+  "ai": true
+ },
+ "BetterUp": {
+  "what": "Human coaching, AI guidance and performance intelligence platform",
+  "for_whom": "Enterprises developing leaders, managers and individual contributors",
+  "why_them": "Reports 21% efficiency uptick at Mercedes-AMG Petronas F1",
+  "ai": true
+ },
+ "Bitstack": {
+  "what": "A bitcoin savings app with automatic purchase round-ups",
+  "for_whom": "Everyday savers across twenty European countries",
+  "why_them": "over 350,000 users and \u20ac350 million invested in bitcoin",
+  "ai": true
+ },
+ "Cambly": {
+  "what": "Online English tutoring with native speakers, available 24/7",
+  "for_whom": "Adults, children and businesses practising conversational English",
+  "why_them": "Lesson recordings and transcripts after every lesson",
+  "ai": true
+ },
+ "ClickUp": {
+  "what": "An all-in-one workspace for projects, docs and chat",
+  "for_whom": "Work teams at small companies through large enterprises",
+  "why_them": "Site claims 5+ million teams and 85% of Fortune 500",
+  "ai": true
+ },
+ "Corgi": {
+  "what": "AI-native full-stack business insurance platform for startups",
+  "for_whom": "Technology company founders from pre-seed through growth stage",
+  "why_them": "Names Bland, Artisan and Origami as customers",
+  "ai": true
+ },
+ "Docker": {
+  "what": "Container tools for building, sharing and running software",
+  "for_whom": "Developers, plus enterprise platform and security teams",
+  "why_them": "Says 91% of the Fortune 100 run on it",
+  "ai": true
+ },
+ "Drata": {
+  "what": "An agentic trust and compliance automation platform",
+  "for_whom": "Security, risk and compliance teams at companies",
+  "why_them": "Site states trusted by 8,500+ global customers",
+  "ai": true
+ },
+ "Encord": {
+  "what": "A platform to curate, annotate and evaluate AI data",
+  "for_whom": "Machine learning teams at startups, enterprises and research institutions",
+  "why_them": "Handles images, video, audio, text and medical imaging",
+  "ai": true
+ },
+ "Exa": {
+  "what": "One API for search, crawling and research agents",
+  "for_whom": "Developers and companies building AI agents",
+  "why_them": "Cursor, HubSpot and Databricks listed as customers",
+  "ai": true
+ },
+ "Factory": {
+  "what": "An AI agent platform spanning the software development lifecycle",
+  "for_whom": "Enterprise engineering organisations shipping production software",
+  "why_them": "Names Blackstone, Wipro and Adyen as customers",
+  "ai": true
+ },
+ "FullStory": {
+  "what": "A behavioral analytics and session replay platform",
+  "for_whom": "Product, engineering, data, support and marketing teams",
+  "why_them": "Pizza Hut increased total transactions by 6.5%",
+  "ai": true
+ },
+ "FurtherAI": {
+  "what": "Domain-specific AI that automates insurance underwriting and claims workflows",
+  "for_whom": "Insurance carriers, MGAs, brokers and reinsurers",
+  "why_them": "raised a $25M Series A led by Andreessen Horowitz",
+  "ai": true
+ },
+ "Halter": {
+  "what": "A virtual fencing collar and app for cattle",
+  "for_whom": "Dairy farmers and beef ranchers, family to enterprise scale",
+  "why_them": "Collars connect directly to satellites, no towers required",
+  "ai": true
+ },
+ "ICEYE": {
+  "what": "Radar satellite imaging and continuous Earth monitoring",
+  "for_whom": "Governments, insurers, banks and energy utilities",
+  "why_them": "Claims 25 cm resolution and sub-hour tasking-to-delivery",
+  "ai": true
+ },
+ "Illumio": {
+  "what": "A microsegmentation and cloud detection breach containment platform",
+  "for_whom": "Enterprise security teams running hybrid, multi-cloud environments",
+  "why_them": "Names Microsoft, Morgan Stanley and Salesforce as customers",
+  "ai": true
+ },
+ "Improbable": {
+  "what": "A venture builder for AI, metaverse and web3 startups",
+  "for_whom": "Founders building in AI transformation, metaverse and web3",
+  "why_them": "Ventures include Somnia, MSquared, Kallikor and Otomato",
+  "ai": true
+ },
+ "Juicebox": {
+  "what": "An AI recruiting platform with search, CRM and agents",
+  "for_whom": "Recruiters at Fortune 500s and boutique recruiting agencies",
+  "why_them": "Talent search across 800M+ profiles from 30+ sources",
+  "ai": true
+ },
+ "KODEX": {
+  "what": "A portal for managing law enforcement data requests",
+  "for_whom": "Legal, compliance and security teams at fintech companies",
+  "why_them": "Used by Coinbase, Bitfinex and Bitget",
+  "ai": true
+ },
+ "Legora": {
+  "what": "An agentic AI operating system for legal work",
+  "for_whom": "Lawyers and firms in M&A, litigation, banking, tax",
+  "why_them": "Publishes $2.0m potential extra yearly billing per 100 lawyers",
+  "ai": true
+ },
+ "LemFi": {
+  "what": "Multi-currency wallet app for international money transfers",
+  "for_whom": "People sending money to family across borders",
+  "why_them": "Sends to 30+ countries with zero transfer fees",
+  "ai": true
+ },
+ "Lendable": {
+  "what": "Online personal loans with rates quoted before applying",
+  "for_whom": "UK consumers borrowing between \u00a31,000 and \u00a325,000",
+  "why_them": "Site claims a new customer approved every 30 seconds",
+  "ai": true
+ },
+ "Lightdash": {
+  "what": "An AI-first, open-source business intelligence platform",
+  "for_whom": "Data teams at growing and large organisations",
+  "why_them": "Connects to dbt so metrics are defined once",
+  "ai": true
+ },
+ "Magic Eden": {
+  "what": "An NFT marketplace with a cross-chain wallet",
+  "for_whom": "NFT collectors, traders and creators minting collections",
+  "why_them": "Supports Metaplex Core, Token 22, cNFTs and SPL20",
+  "ai": true
+ },
+ "Meter": {
+  "what": "full-stack enterprise networks, internet, wired, Wi-Fi and cellular",
+  "for_whom": "companies of all sizes running multi-site offices",
+  "why_them": "designs its own firewalls, switches, access points and gateways",
+  "ai": true
+ },
+ "Miro": {
+  "what": "A visual collaboration workspace where teams plan together",
+  "for_whom": "Product, design, engineering, marketing and operations teams",
+  "why_them": "Site states 100M+ people and 250,000+ companies collaborating",
+  "ai": true
+ },
+ "Mollie": {
+  "what": "A payments platform for online and in-person sales",
+  "for_whom": "European businesses of every size, startups to enterprises",
+  "why_them": "States it powers growth for over 250,000 businesses",
+  "ai": true
+ },
+ "n8n": {
+  "what": "A visual workflow automation platform for AI agents",
+  "for_whom": "Technical teams in IT, dev, sec and sales ops",
+  "why_them": "Lists Microsoft, Mercedes-Benz and NVIDIA as customers",
+  "ai": true
+ },
+ "Overview": {
+  "what": "AI smart cameras for factory defect inspection",
+  "for_whom": "Manufacturers in electronics, automotive, aerospace and pharma",
+  "why_them": "Toyota, Honda and Clorox are named customers",
+  "ai": true
+ },
+ "Paddle": {
+  "what": "A merchant of record handling payments, tax and billing",
+  "for_whom": "SaaS, mobile app, software and game businesses",
+  "why_them": "manages tax and compliance across 300+ markets",
+  "ai": true
+ },
+ "Patreon": {
+  "what": "A platform where creators earn from their fans",
+  "for_whom": "Podcasters, video creators, musicians, artists and game devs",
+  "why_them": "featured creators include RossDraws, Jade Novah, Culture Study",
+  "ai": true
+ },
+ "Plaid": {
+  "what": "An API network connecting apps to bank data",
+  "for_whom": "Fintech developers, banks, lenders and payment platforms",
+  "why_them": "Connects 12,000 financial institutions across 20 countries",
+  "ai": true
+ },
+ "Poolside": {
+  "what": "Open-weight foundation models for agentic coding",
+  "for_whom": "Developers building with open-weight coding models, plus government",
+  "why_them": "Laguna s 2.1: 118B params, 1M context",
+  "ai": true
+ },
+ "PowerUs": {
+  "what": "A job platform for skilled trades and industry",
+  "for_whom": "German tradespeople and the employers recruiting them",
+  "why_them": "Over 250,000 registered skilled workers, 6,000 open positions",
+  "ai": true
+ },
+ "Qonto": {
+  "what": "An all-in-one business account with invoicing and cards",
+  "for_whom": "Self-employed people, micro-businesses and SMEs across Europe",
+  "why_them": "600,000+ clients use it daily to run their business",
+  "ai": true
+ },
+ "Quantexa": {
+  "what": "A decision intelligence platform using entity resolution and graph analytics",
+  "for_whom": "Banks, insurers, telecoms and public sector agencies",
+  "why_them": "Named customers include HSBC, Standard Chartered and Vodafone",
+  "ai": true
+ },
+ "Qumulo": {
+  "what": "A file data platform for exabyte-scale storage",
+  "for_whom": "Enterprises with large unstructured data and AI workloads",
+  "why_them": "Trusted by over 1,100 enterprise companies globally",
+  "ai": true
+ },
+ "Satispay": {
+  "what": "A mobile payments and money management app",
+  "for_whom": "Consumers, merchants and companies in Italy and Europe",
+  "why_them": "Over 6.5 million active users, 450,000 affiliated merchants",
+  "ai": true
+ },
+ "Saturn": {
+  "what": "Data capture, workflow and compliance software for advice firms",
+  "for_whom": "Financial advice firms, their advisers and operations teams",
+  "why_them": "Site states 500+ advice firms and 3000+ advisers",
+  "ai": true
+ },
+ "Semperis": {
+  "what": "Threat prevention, detection and recovery for hybrid identity systems",
+  "for_whom": "Large enterprises and government agencies running Active Directory",
+  "why_them": "Purple Knight assessment tool scans 150+ security indicators",
+  "ai": true
+ },
+ "Solve Intelligence": {
+  "what": "AI software for drafting and prosecuting patents",
+  "for_whom": "Patent attorneys at law firms and companies",
+  "why_them": "Used by 700+ IP teams including Intel and Siemens",
+  "ai": true
+ },
+ "SpotOn": {
+  "what": "Point-of-sale, payments, and restaurant management software",
+  "for_whom": "Restaurants, bars, breweries, cafes, and quick-service operators",
+  "why_them": "Point-of-sale software plans start at $0 per month",
+  "ai": true
+ },
+ "Substack": {
+  "what": "A subscription publishing platform for writers and creators",
+  "for_whom": "Writers, podcasters and newsrooms selling paid subscriptions to readers",
+  "why_them": "Five million paid subscriptions; writers keep 90% of revenue",
+  "ai": true
+ },
+ "Trulioo": {
+  "what": "An identity verification platform for KYC, KYB, AML",
+  "for_whom": "Banks, payments, crypto and marketplace compliance teams",
+  "why_them": "Publishes coverage of 195 countries, 450+ data sources",
+  "ai": true
+ },
+ "Vanta": {
+  "what": "A compliance automation platform covering 35+ security frameworks",
+  "for_whom": "Startup, mid-market and enterprise security and compliance teams",
+  "why_them": "Says it has 16,000+ customers, including Atlassian and Snowflake",
+  "ai": true
+ },
+ "Zapier": {
+  "what": "Automation platform for AI workflows, agents and apps",
+  "for_whom": "Businesses automating work across their software tools",
+  "why_them": "Connects 9,000+ apps, trusted by 3 million+ businesses",
+  "ai": true
+ },
+ "Zilch": {
+  "what": "A credit card with pay-now or instalment repayment options",
+  "for_whom": "UK shoppers aged 18 and over",
+  "why_them": "States over 6 million customers, credit \u00a350\u2013\u00a34,500",
+  "ai": true
  }
 }
