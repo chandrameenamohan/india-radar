@@ -25,7 +25,13 @@ ROOT="http://127.0.0.1:$PORT/site/index.html"
 # The site's own data is legitimately empty until slug resolution improves
 # (T5.1), so behaviour is driven against a committed dataset instead. It is held
 # to the shipped schema by test_the_e2e_dataset_is_a_file_this_build_could_have_written.
-FIXTURE="$ROOT?data=../tests/fixtures/companies-e2e.json"
+FIXTURE="$ROOT?data=../tests/fixtures/companies-e2e.json&view=companies"
+# The page now opens on the ROLES register, so every check below that speaks
+# about companies pins the company one explicitly on $FIXTURE above. That is a
+# statement of what each check is about, not a way around the change: the
+# default itself is asserted in the roles section, on a URL that sets nothing.
+ROLES="$ROOT?data=../tests/fixtures/companies-e2e.json&view=roles"
+DEFAULT="$ROOT?data=../tests/fixtures/companies-e2e.json"
 
 $PY -m http.server "$PORT" --bind 127.0.0.1 >/dev/null 2>&1 &
 srv=$!
@@ -157,15 +163,60 @@ print('|'.join(sorted(f'{c} ({listed[c]})' for c in COUNTRIES)))")" \
 # The tally sits inside the status line`s plate stamp now, so it is read off the
 # tally itself rather than off the whole line -- which also carries the plate
 # number, the index control and the folio mark.
+# The published page opens on the ROLES register, so the tally it states is a
+# role count. The check is unchanged in what it is FOR -- a tally must state the
+# truth, and an empty snapshot must say so in words rather than render a silent
+# zero -- and follows the register's unit rather than pinning a view, because
+# this is the number a reader actually meets. `count()` groups en-IN, so the
+# commas come off both sides.
+tally() { val '(() => { const scope = document.querySelector("#status .pscope");
+       return (scope ? scope.nextElementSibling.textContent
+                     : document.querySelector("#status > span").textContent)
+                .replace(/,/g, "") })()'; }
 check "the empty snapshot says so instead of implying nothing is hiring" \
+  "$($PY -c '
+import json
+n = sum(len(c["roles"]) for c in json.load(open("data/companies.json"))["companies"])
+print(f"{n} of {n} roles" if n else
+      "This snapshot listed no companies. The build report says why for each one.")')" \
+  "$(tally)"
+# And the same tally under the other register, on the same real data: the switch
+# has to change the UNIT, not just the rows. A view that reported roles under
+# both labels would pass every row check above and still be lying here.
+$B select '#view' 'companies' >/dev/null 2>&1
+check "switching the register switches the unit the tally counts" \
   "$($PY -c '
 import json
 n = len(json.load(open("data/companies.json"))["companies"])
 print(f"{n} of {n} companies" if n else
       "This snapshot listed no companies. The build report says why for each one.")')" \
-  "$(val '(() => { const scope = document.querySelector("#status .pscope");
-       return scope ? scope.nextElementSibling.textContent
-                    : document.querySelector("#status > span").textContent })()')"
+  "$(tally)"
+$B select '#view' 'roles' >/dev/null 2>&1
+
+# The roles register PAGES: 6,422 lines is a download, not a page. Checked here
+# against the real corpus rather than on the fixture, because the fixture holds
+# seventeen roles and would never reach the fold at all -- a check that passes by
+# never running is the shape of check this repo has been bitten by before. The
+# numbers are read off the page's own tally so they stay true as the corpus grows.
+printed=$(val 'document.querySelectorAll(".jrow").length')
+matched=$(tally | sed 's/ of .*//')
+check "the roles register prints one page, not the whole corpus" "true" \
+  "$([ "$printed" -le 200 ] && echo true || echo false)"
+# The tally counts what MATCHED, never what is printed -- the rule that keeps the
+# fold's own count readable and the register the size of the snapshot it reports.
+check "the tally states the matched total, not the printed page" "true" \
+  "$([ "$matched" -ge "$printed" ] && echo true || echo false)"
+if [ "$matched" -gt "$printed" ]; then
+  $B click '.spreadfold' >/dev/null 2>&1
+  check "the fold prints the next page" "$((printed + 200))" \
+    "$(val 'document.querySelectorAll(".jrow").length')"
+  # Nothing is dropped and nothing is hidden: the fold says how many are behind it.
+  check "the fold says how many roles are behind it" "true" \
+    "$(val 'String(/\d[\d,]* further roles/.test(
+         (document.querySelector(".spreadfold") || {}).textContent || ""))')"
+else
+  echo "  --    the roles fold not exercised: this build lists $matched roles, under one page"
+fi
 
 echo "-- behaviour, over the committed dataset"
 open_page "$FIXTURE"
@@ -999,6 +1050,100 @@ else
     "$(val 'document.querySelectorAll(".irow").length')"
   console_clean "signed-in round trip"
 fi
+
+# ---------------------------------------------------------------------------
+# THE ROLES REGISTER. Everything above drives the company register, pinned by
+# `&view=companies`; this section is the new unit. The checks that matter are
+# the ones proving it cuts at the ROLE where the other cuts at the company --
+# a view that merely relabelled the same eight rows would pass none of them.
+echo "-- the roles register"
+
+# The fixture's roles in the order this register prints them: company rank
+# first (open roles, then name -- the default sort), board order within.
+xroles() { $PY -c "
+import json
+data = json.load(open('tests/fixtures/companies-e2e.json'))
+cs = sorted(data['companies'], key=lambda c: (-len(c['roles']), c['name']))
+print('|'.join(r['title'] for c in cs for r in c['roles'] if $1))"; }
+
+# Asserted where a reader meets it: no parameter, no click, no preference --
+# the page a stranger lands on lists jobs.
+open_page "$DEFAULT"
+check "the page opens on the roles register" "roles" \
+  "$(val 'document.querySelector("#view").value')"
+console_clean "roles register"
+
+open_page "$ROLES"
+check "the roles register prints one line per role" "$(xroles True)" "$(rows)"
+# Eight companies, seventeen roles. A tally still counting companies would be
+# the header describing the other register.
+check "the tally counts roles" "17 of 17 roles" \
+  "$(val '(document.querySelector("#status").textContent.match(/\d+ of \d+ roles/) || [""])[0]')"
+
+# THE role-level cut. Under the company register a company with one remote job
+# keeps every on-site job it has -- correct there, wrong here.
+$B select '#remote' 'remote' >/dev/null 2>&1
+check "the remote filter returns only remote ROLES" \
+  "$(xroles "r['workplace'] == 'remote'")" "$(rows)"
+$B select '#remote' 'any' >/dev/null 2>&1
+check "clearing the remote filter restores every role" "$(xroles True)" "$(rows)"
+
+# Read off the ROLE's own posting the same way: three roles across three
+# companies said yes, and their silent siblings must not ride in on them.
+$B select '#openness' 'open' >/dev/null 2>&1
+check "the foreign-hires filter reads the role's own posting" \
+  "$(xroles "r['visa'] == 'yes' or r['hire_from_abroad'] == 'yes'")" "$(rows)"
+$B select '#openness' 'any' >/dev/null 2>&1
+
+# The gutter cites the ROLE's countries, never its company's: Theta Global hires
+# in India and the UK, so built off c.countries both its rows would say both.
+check "a role line cites its own country, not its company's" "true" \
+  "$(val '[...document.querySelectorAll(".jrow")]
+       .every((n) => n.dataset.countries.split("|").length === 1) + ""')"
+
+# A plate cuts roles now. Theta keeps its London job here and its Bengaluru one
+# on India's plate -- the same rule inScope follows, one level down.
+plate 'United Kingdom'
+check "a country plate shows only the roles in that country" \
+  "$(xroles "'United Kingdom' in r['countries']")" "$(rows)"
+plate
+
+# The title IS the apply link, the rule the gazetteer entry already follows, so
+# the register reaches the posting without a detour through the company.
+check "every role line links to its own posting" "17" \
+  "$(val 'document.querySelectorAll(".jrow .iname a[href^=\"http\"]").length')"
+# The second affordance, and why the line is not a button: a job has two
+# destinations. Both halves are read off the page rather than off the fixture,
+# so the check is about the MECHANISM and not about which company sorts sixth --
+# and the guard is what makes it mean anything: the sheet always shows some
+# company (the plate walk above left one open), so without proving it was not
+# already this one, the assertion would pass on a click that did nothing.
+target=$(val 'document.querySelectorAll(".jrow .cobtn")[5].textContent.trim()')
+before=$(val 'document.querySelector("#sheet h2").textContent.trim()')
+check "the sheet is not already open on the company that row names" "true" \
+  "$([ "$before" != "$target" ] && echo true || echo false)"
+$B js 'document.querySelectorAll(".jrow .cobtn")[5].click()' >/dev/null 2>&1
+check "the company cell opens THAT role's company" "$target" \
+  "$(val 'document.querySelector("#sheet h2").textContent.trim()')"
+check "every role line's company control has an accessible name" "true" \
+  "$(val '[...document.querySelectorAll(".jrow .cobtn")]
+       .every((b) => (b.getAttribute("aria-label") || "").trim().length > 0) + ""')"
+
+# Search at the ROLE scale: the company register answers "which companies hold a
+# matching title", this one answers "which jobs match". Last of the interactions
+# -- `browse fill` cannot pass an empty value, so only a reload clears the box.
+$B fill '#q' 'engineer' >/dev/null 2>&1
+check "search returns the matching roles themselves" \
+  "$(xroles "'engineer' in r['title'].lower()")" "$(rows)"
+# A company NAME match still brings that company's jobs: a reader typing a
+# company is asking for its roles, not for roles named after it.
+$B fill '#q' 'gamma' >/dev/null 2>&1
+check "a company name returns that company's roles" \
+  "$(xroles "'gamma' in c['name'].lower()")" "$(rows)"
+$B fill '#q' 'no-such-role' >/dev/null 2>&1
+check "a roles filter that matches nothing says so" "No role matches these filters." \
+  "$(val 'document.querySelector("#status > span").textContent')"
+console_clean "roles register after interaction"
 
 # 4c visual regression is NOT here. It needs baseline screenshots a human
 # approves once (VERIFICATION.md 4c), and an agent approving its own baselines

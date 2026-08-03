@@ -573,6 +573,21 @@
                  font-size: 9.5px; font-weight: 700; letter-spacing: .09em;
                  text-transform: uppercase; }
   .irow[aria-current="true"] .ireqs .ihit { color: var(--red); }
+  /* The roles register's line — the same three columns, a different unit.
+     NOT a button, unlike the company line: a job has two destinations, so the
+     title carries its posting and the company cell opens the gazetteer entry.
+     A link inside a button would be neither valid HTML nor separately
+     reachable, and the register's rule is that a title IS its apply link. */
+  .jrow { cursor: default; }
+  .jrow .iname a { color: inherit; text-decoration: none; }
+  .jrow .iname a:hover, .jrow .iname a:focus-visible {
+    color: var(--red); text-decoration: underline; text-underline-offset: 2px; }
+  /* Chrome only — the typography stays .ireqs's, so the two views' third
+     column sets identically whether it holds a count or a company. */
+  .cobtn { appearance: none; margin: 0; padding: 0; border: 0; background: none;
+           font-family: inherit; text-align: right; cursor: pointer; }
+  .cobtn:hover, .cobtn:focus-visible {
+    color: var(--red); text-decoration: underline; text-underline-offset: 2px; }
   /* The plate's question, answered by the index: pointing at a masthead cell
      ghosts every row with no role in that country and turns the matching
      rows' coordinates red. A preview, never a filter — nothing fires until
@@ -1014,6 +1029,15 @@
        roles. So the placeholder states both, because a search box that silently
        widened would just look like it had started returning strangers. -->
   <label class="q-always"><span class="lbl">Search</span><input id="q" type="search" placeholder="company or role title" autocomplete="off"></label>
+  <!-- The register's UNIT. A reader is looking for a job, so the page opens on
+       roles; the company register the atlas was built as is one switch away and
+       unchanged. This is not a filter — it changes what a LINE IS, not which
+       lines show — so it never reddens and never counts toward the fold's
+       tally, the same exemption the sort control has. -->
+  <label class="q-always"><span class="lbl">Register</span><select id="view">
+    <option value="roles">Roles</option>
+    <option value="companies">Companies</option>
+  </select></label>
   <!-- T5.4: the city filter is every plate's now. India's cities ship with the
        build (src/india.py canonicalises the spellings); for the other fourteen
        countries no such field exists, so the list is read off the plate's own
@@ -1673,6 +1697,21 @@ let wantScroll = false;
 // keeps it through filter changes.
 let indexOpen = false;
 let spreadOpen = false;
+// The roles register runs to 6,422 lines, which is not a page but a download,
+// so it prints in pages. Reset by any control change: a reader who narrowed the
+// register is asking a new question, not scrolling the old answer. Nothing is
+// dropped — the fold says how many are behind it and the tally above always
+// states the true total.
+const ROLE_PAGE = 200;
+let roleCap = ROLE_PAGE;
+// The open register is deep-linkable, like the dataset seam above it: a reader
+// who found the company index useful can send someone the company index. Roles
+// is the default because a reader arrives looking for a job — and an unknown
+// value is ignored rather than honoured, so a typo opens the page, not a blank.
+{
+  const want = new URLSearchParams(location.search).get('view');
+  if (want === 'companies' || want === 'roles') $('#view').value = want;
+}
 // The last plate rendered, for the page-turn sweep: the sweep runs only when
 // this changes, so filters and sorts never fire it. '01' is the load state.
 let lastTurn = '01';
@@ -2066,6 +2105,68 @@ function indexRow(c, repeated, hits) {
   return button;
 }
 
+// One ROLE line, set in the index's own anatomy: the same three columns as
+// indexRow, so switching the register's unit never changes the shape of a line.
+// The reference gutter cites the role's OWN countries, not its company's — a
+// London job under a company also hiring in Tokyo prints ·GB and nothing else,
+// which is the rule inScope follows one level up.
+function roleRow(c, r) {
+  const ref = REFS[c.name] || '—';
+  const row = el('div', 'irow jrow');
+  row.dataset.countries = r.countries.join('|');   // the plate preview reads this
+  row.dataset.ref = ref;
+  const iref = el('span', 'iref', ref + '·');
+  const igr = el('span', 'igr');
+  r.countries.map((x) => [x, CODE[x]]).filter(([, cd]) => cd).slice(0, 2)
+    .forEach(([nation, cd], i) => {
+      if (i) igr.append('·');
+      const cite = el('span', 'igc', cd);
+      cite.dataset.country = nation;
+      cite.title = `Turn to Plate ${plateNo(nation)} — ${nation}`;
+      // The company line resolves its citations through the row button's own
+      // handler; this row is not a button, so each citation carries its own.
+      cite.addEventListener('click', () => { activeCountry = nation; render(); });
+      igr.append(cite);
+    });
+  iref.append(igr);
+  iref.title = r.countries.join(' · ');
+  const namecell = el('span', 'iname');
+  namecell.append(link(r.url, r.title));
+  // Absent is absent, the rule roleItem states at the other scale: 822 of the
+  // published India roles state no workplace at all, so a missing badge means
+  // the board did not say — never "on-site".
+  if (WORKPLACE[r.workplace]) {
+    namecell.append(el('span', 'tag workplace', WORKPLACE[r.workplace]));
+  }
+  // The role's own locations, never the company's city list: `cities` is a
+  // build-level India fact attached to a COMPANY, and printing it under one of
+  // its roles would place a job in a city no posting named.
+  const places = canonPlaces(r.locations);
+  if (places.length) {
+    const cell = el('span', 'iwhere');
+    cell.dataset.places = places.join('|');
+    cell.append(el('span', 'ipl', places.join(' · ')), el('span', 'ipn', ''));
+    namecell.append(cell);
+  }
+  const cobtn = el('button', 'ireqs cobtn', c.name);
+  cobtn.type = 'button';
+  cobtn.setAttribute('aria-label', `${c.name} — open entry`);
+  cobtn.addEventListener('click', () => {
+    selectedName = c.name;
+    wantScroll = true;
+    render();
+  });
+  const light = (on) => {
+    for (const cell of markers()) {
+      if (r.countries.includes(cell.dataset.country)) cell.classList.toggle('lit', on);
+    }
+  };
+  row.addEventListener('mouseenter', () => light(true));
+  row.addEventListener('mouseleave', () => light(false));
+  row.append(iref, namecell, cobtn);
+  return row;
+}
+
 // The inset locator map: the masthead chart reprinted at thumbnail size —
 // the same projection, every anchor a faint dot, this company's country
 // dot(s) in red. Apparatus, never content — it is aria-hidden and the
@@ -2433,7 +2534,7 @@ function render() {
   // A departed filter shows its state on the control itself: red until
   // cleared. Sort always has a value and never reddens.
   for (const n of document.querySelectorAll('#controls select')) {
-    n.classList.toggle('set', n.id !== 'sort' && n.value !== 'any');
+    n.classList.toggle('set', n.id !== 'sort' && n.id !== 'view' && n.value !== 'any');
   }
   $('#q').classList.toggle('set', !!$('#q').value.trim());
   // The openness control's one non-default option states its own yield for
@@ -2514,43 +2615,97 @@ function render() {
     .filter((c) => recency === 'any' || (c.date != null && days(c.date, snapshot) <= +recency))
     .sort(sorts[$('#sort').value]);
 
+  // ---- the register's unit: one line per role, or one per company ----
+  // The plate and the department already cut at ROLE level (inScope, `listed`
+  // above), so the flatten re-applies only the controls a company could have
+  // satisfied through a DIFFERENT role than the one being printed. A
+  // remote-filtered ROLE list showing the on-site jobs of a company with one
+  // remote opening elsewhere would be the register answering a question nobody
+  // asked — the same fault inScope exists to prevent one level up.
+  const roleView = $('#view').value === 'roles';
+  const remote = $('#remote').value;
+  const openness = $('#openness').value;
+  const roleRows = [];
+  if (roleView) {
+    for (const c of shown) {
+      for (const r of c.roles) {
+        // A company-name match shows that company's roles: a reader searching
+        // "Stripe" is asking for Stripe's jobs, not for jobs called Stripe.
+        if (q && !r.title.toLowerCase().includes(q)
+              && !c.name.toLowerCase().includes(q)) continue;
+        // The city is read off the ROLE's own locations. A company matched by
+        // the build's India city list can hold roles in three other cities, and
+        // this filter may not put a job somewhere no posting named it.
+        if (city !== 'any' && !roleCities(r).includes(city)) continue;
+        if (remote !== 'any' && r.workplace !== 'remote') continue;
+        if (openness !== 'any' && r.visa !== 'yes' && r.hire_from_abroad !== 'yes') continue;
+        roleRows.push({ c, r });
+      }
+    }
+  }
+  // The roles keep their company's rank, and their board's order within it. The
+  // four sort controls are all COMPANY facts — open roles, amount, date, name —
+  // so ordering 6,422 roles by one of them is ordering the company blocks they
+  // sit in; re-sorting the roles themselves would claim an order the data has
+  // no field for.
+  const items = roleView ? roleRows : shown;
+  const total = items.length;
+  const page = roleView ? items.slice(0, roleCap) : items;
+  const companyOf = (it) => (roleView ? it.c : it);
+
   // `prev` feeds the atlas index discipline: indexRow() suppresses the
   // coordinate ink on a line whose reference equals the line above, so the
   // gutter reads as an index (quiet until the plate turns), not wallpaper.
   let prev = null;
-  const rows = shown.map((c) => {
+  const rows = page.map((it) => {
+    const c = companyOf(it);
+    if (roleView) {
+      const node = roleRow(c, it.r);
+      node.dataset.reqs = c.roles.length;
+      return node;
+    }
     const r = gridref(c.countries);
     const node = indexRow(c, r === prev, hits(c));
     node.dataset.reqs = c.roles.length;   // the tier rules below read this
     prev = r;
     return node;
   });
+  // The head strip names the unit the register is printing. Under roles the
+  // third column holds the company rather than a count, so both labels move.
+  $('#indexhead').replaceChildren(
+    el('span', null, 'Ref'),
+    el('span', null, roleView ? 'Role' : 'Company'),
+    el('span', null, roleView ? 'Company' : 'Roles'));
   // Round 9: the split. The board keeps the first entries beside the sticky
   // sheet; a register long enough to outrun any sheet continues in the
   // full-width spread below, refs unbroken. Short registers stay whole —
   // a spread of four lines is a caption, not a spread.
   const CAPB = 16;
-  const split = shown.length > CAPB * 2;
+  const split = page.length > CAPB * 2;
   // Unhidden BEFORE the balance pass below measures it: a hidden board
   // measures zero high, and a balance struck against zero keeps nothing.
-  $('#board').hidden = !shown.length;
+  $('#board').hidden = !page.length;
   $('#index').replaceChildren(...(split ? rows.slice(0, CAPB) : rows));
   $('#spreadrows').replaceChildren(...(split ? rows.slice(CAPB) : []));
   $('#spread').hidden = !split;
   // The sheet always shows one worked entry — the reader's pick while it is
   // still on the board, else the first line — so a gazetteer never opens to a
   // blank plate, and the honest-absence rules are visible without a click.
-  const at = shown.length
-    ? Math.max(0, shown.findIndex((c) => c.name === selectedName)) : -1;
+  const at = page.length
+    ? Math.max(0, page.findIndex((it) => companyOf(it).name === selectedName)) : -1;
   // The crosshair's map arm: the open entry's marker(s) hold a red ring,
   // cleared first so yesterday's selection never lingers on the chart.
   for (const cell of markers()) cell.classList.remove('sel');
   if (at >= 0) {
-    selectedName = shown[at].name;
+    // The sheet is always a COMPANY entry, in both views: a role's detail is
+    // its company's board, its funding and its registrations, and a second
+    // gazetteer keyed on jobs would restate all of it one line at a time.
+    const sel = companyOf(page[at]);
+    selectedName = sel.name;
     rows[at].setAttribute('aria-current', 'true');
-    entry(shown[at], q);
+    entry(sel, q);
     for (const cell of markers()) {
-      if (shown[at].countries.includes(cell.dataset.country)) cell.classList.add('sel');
+      if (sel.countries.includes(cell.dataset.country)) cell.classList.add('sel');
     }
   } else {
     selectedName = null;
@@ -2580,8 +2735,8 @@ function render() {
     // The continuation states a count, never a ref range: refs are citations
     // struck in canonical order, so under any other sort a range would lie.
     const more = $('#spreadrows').querySelectorAll('.irow').length;
-    $('#spreadlabel').textContent =
-      `Register · continued — ${count(more)} further of ${count(shown.length)} entries`;
+    $('#spreadlabel').textContent = `Register · continued — ${count(more)} further of `
+      + `${count(page.length)} ${roleView ? 'roles printed' : 'entries'}`;
     $('#spread').hidden = !more;
   }
   // Round 3: the hand-fold. On a phone the full register printed a 9,400px
@@ -2602,6 +2757,17 @@ function render() {
       $('#spread').append(fold);
     }
   }
+  // The roles fold, on every width rather than a phone's. Same continuation
+  // rule, one page at a time, and it states what is behind it — the tally above
+  // has already printed the true total, so the fold never has to imply one.
+  if (roleView && total > page.length && !$('#spread .spreadfold')) {
+    const rest = total - page.length;
+    const fold = el('button', 'spreadfold', `Register continued — show `
+      + `${count(Math.min(ROLE_PAGE, rest))} more of ${count(rest)} further roles`);
+    fold.type = 'button';
+    fold.addEventListener('click', () => { roleCap += ROLE_PAGE; render(); });
+    $('#spread').append(fold);
+  }
   tierRules();
   // The berthed sheet arrives where the reader is, smoothly: only after a row
   // CLICK, and only where the sheet files inline (narrow screens, the spread)
@@ -2619,7 +2785,7 @@ function render() {
   // number struck as a stamp, then the sheet range its scope covers on the
   // masthead grid, then the count. The empty states stay plain sentences:
   // a stamp certifies a sheet that exists.
-  if (shown.length) {
+  if (page.length) {
     // One vocabulary (round 1): the atlas binds PLATES, the index prints
     // REFS — "chart" said the same thing in a third register and is gone.
     // A country plate states its ref and anchor; Plate 01 states its range.
@@ -2652,8 +2818,15 @@ function render() {
     // than hidden as a sibling, so the interpunct beside it never dangles; the
     // wide sheet, which has the room, keeps both.
     const tally = el('span');
+    // The tally counts what MATCHED, never what is printed: the roles register
+    // pages, and a number that shrank to the size of the visible page would
+    // make the fold's own count unreadable and the register look smaller than
+    // the snapshot it is reporting.
+    const corpusRoles = companies.reduce((n, c) => n + c.roles.length, 0);
     tally.append(el('span', 'pscope', `${activeCountry || 'All countries'} — `),
-                 el('span', null, `${shown.length} of ${companies.length} companies`));
+                 el('span', null, roleView
+                   ? `${count(total)} of ${count(corpusRoles)} roles`
+                   : `${shown.length} of ${companies.length} companies`));
     $('#status').replaceChildren(
       el('span', 'pstamp', `Plate ${plateNo(activeCountry)}`),
       el('span', 'psep', '·'),
@@ -2685,7 +2858,8 @@ function render() {
           ? `No posting in ${scopeName()} said yes to visa sponsorship or `
             + `hiring from abroad. 92% of the postings we measured say nothing `
             + `at all, and a posting that says nothing is not a no — note 03.`
-          : 'No company matches these filters.'),
+          : roleView ? 'No role matches these filters.'
+                     : 'No company matches these filters.'),
       folioMark());
   }
   seps();
@@ -2705,6 +2879,9 @@ function render() {
 // register never restates itself at the spread's top.
 function tierRules() {
   for (const t of document.querySelectorAll('#spreadrows .trule')) t.remove();
+  // The bands are a company fact — 10+ / 2–9 / 1 OPEN ROLES — so under the roles
+  // register they would print a rule between two jobs at the same company.
+  if ($('#view').value === 'roles') return;
   if ($('#sort').value !== 'reqs' || $('#spread').hidden) return;
   const tier = (n) => (n >= 10 ? '10+' : n >= 2 ? '2–9' : '1');
   const last = [...document.querySelectorAll('#index .irow')].pop();
@@ -2840,8 +3017,11 @@ function load(data) {
   render();
 }
 
-$('#controls').addEventListener('input', render);
-$('#controls').addEventListener('change', render);   // some agents/browsers fire only this
+// Any control change re-asks the question, so the roles register starts again
+// at its first page: a reader who just filtered is not scrolling the old answer.
+const reask = () => { roleCap = ROLE_PAGE; render(); };
+$('#controls').addEventListener('input', reask);
+$('#controls').addEventListener('change', reask);   // some agents/browsers fire only this
 
 // The fold's hinge (the CSS shows the button only under 52rem). Folding is
 // presentation: values persist, and render()'s tally says what is set.

@@ -2801,3 +2801,86 @@ Out of scope:
   - Telling the reader how full the site is. Nobody has asked, and it is a number
     that invites a support conversation.
 ```
+
+---
+
+### T15.1 — Jobs are the page `done` · *Phase 10*
+> **A reader arrives looking for a job, and the register was a list of
+> companies.** The unit flips: the page opens on 6,422 roles rather than 371
+> companies, and the company register the atlas was built as stays one switch
+> away, unchanged, at `?view=companies`.
+>
+> **Added beside rather than instead of, and that was the decision.** Replacing
+> the company register outright would have invalidated about forty of the e2e's
+> eighty-seven checks — every "clearing the filter restores every company", every
+> "each plate shows as many companies as its chip claims" — and those would have
+> had to be rewritten, never weakened, against a design nobody has used yet.
+> Pinning them with one `&view=companies` on `$FIXTURE` cost a line. Deleting the
+> company view later is cheap; rewriting forty checks twice is not.
+>
+> **The filters now cut at the ROLE, and that is the whole difference between
+> this and a re-skin.** Under the company register a company with one remote job
+> keeps every on-site job it has — correct there, because the unit is the
+> company. Here it would be the register answering a question nobody asked, which
+> is the fault `inScope` already exists to prevent one level up. Workplace,
+> foreign-hires and the city are re-applied per role on the flatten; the plate and
+> the department were already role-level and come through free.
+>
+> **A role line cites its own countries, never its company's.** Theta Global
+> hires in India and the UK; built off `c.countries` both its rows would print
+> both codes. The e2e asserts every line's gutter holds exactly one country,
+> which is what makes that a covered guard rather than an intention.
+>
+> **The line is not a button, unlike the company line, because a job has two
+> destinations.** The title is the posting — the rule `roleItem` already follows
+> one scale down — and the company cell opens the gazetteer entry. A link inside
+> a button is neither valid HTML nor separately reachable.
+>
+> **6,422 lines is a download, not a page**, so the register prints 200 at a time
+> behind the fold the narrow spread already used. The tally states the MATCHED
+> total and never the printed page: a number that shrank to the size of the
+> visible page would make the fold's own count unreadable and the register look
+> smaller than the snapshot it reports.
+>
+> **The fold is checked against the real corpus, not the fixture.** The fixture
+> holds seventeen roles and can never reach a 200-row cap — a check that passes
+> by never running is the exact shape this project has been bitten by before
+> (the pipe that ate the exit code). It runs on `data/companies.json` and says
+> so when a build is too small to exercise it.
+>
+> **Found by its own checks, not by review:** `.rrow` was already the gazetteer
+> receipt's class, so the new row silently matched the sheet's detail rows —
+> renamed `.jrow`. Deleting the role-level workplace cut turns the remote check
+> red with Gamma Health's four on-site roles riding in on its one remote job.
+
+```
+Acceptance (observable):
+  The page opens on the roles register with no parameter and no click.
+  One line per role, not per company; the tally counts roles.
+  The remote and foreign-hires filters return only roles that themselves say so.
+  A country plate shows only the roles in that country.
+  A role line links to its own posting; its company cell opens that company's entry.
+  The register prints one page at a time and states how many are behind the fold.
+  ?view=companies renders the company register exactly as it was.
+Checks:
+  lint -> typecheck -> unit -> worker -> e2e (full gate)
+  + e2e: all 87 pre-existing checks pass unchanged, pinned to ?view=companies
+  + e2e: the role-level cut, asserted against roles the fixture's companies hold
+    but the filter must not return
+  + e2e: every role line's gutter cites exactly one country
+  + e2e: the fold, against data/companies.json, with an honest note when a build
+    is under one page
+  + mutation: deleting the role-level workplace cut turns the remote check RED
+Out of scope:
+  - Any gate, cap, or sign-in wall on results. Step 3 of the ladder, and it is
+    worth building only once there is something to measure. HLD-v5.md holds the
+    argument and the cost.
+  - first_seen / "new since" per role. Step 2, and it needs the build to diff
+    two snapshots checked-vs-unchecked (SPEC's 2026-08-01 measurement: a naive
+    diff is ~98% noise).
+  - A SPEC.md section. The shape may still move after the view has been used;
+    writing the doctrine down before that would be recording a guess.
+  - One-click apply from the register. Two clicks is the site's own
+    index-is-master rule; revisit if it reads wrong in use.
+  - Deleting the company register. Cheap later, irreversible now.
+```
