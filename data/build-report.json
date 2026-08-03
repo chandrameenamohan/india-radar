@@ -3333,25 +3333,25 @@
   },
   "countries": {
     "India": 129,
-    "United Kingdom": 261,
+    "United Kingdom": 263,
     "Ireland": 55,
     "Germany": 109,
     "Netherlands": 50,
     "France": 59,
-    "Spain": 64,
+    "Spain": 65,
     "Sweden": 32,
-    "Denmark": 16,
+    "Denmark": 17,
     "Norway": 7,
     "Finland": 7,
     "Japan": 65,
-    "Singapore": 78,
-    "Australia": 85,
-    "New Zealand": 4
+    "Singapore": 80,
+    "Australia": 84,
+    "New Zealand": 3
   },
   "mca": {
     "records": 24102,
     "pulled": "2026-07-29",
-    "matched": 36,
+    "matched": 37,
     "held": [
       {
         "name": "6Sense",
