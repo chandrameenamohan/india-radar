@@ -15,13 +15,10 @@ compatibility_date = "2026-08-02"
 # config change rather than an invisible one.
 CLERK_ISSUER = "https://regular-troll-50.clerk.accounts.dev"
 
-# NOT YET PROVISIONED. Both need a Cloudflare account action before deploy:
-#   npx wrangler d1 create roleatlas          -> paste the id below
-#   npx wrangler r2 bucket create roleatlas-resumes
+# PROVISIONED 2026-08-03. Re-run the schema after any change to `schema.sql` --
+# it is `CREATE TABLE IF NOT EXISTS` throughout, so applying it twice is safe:
 #   npx wrangler d1 execute roleatlas --file worker/schema.sql --remote
-# They are declared rather than omitted so that a deploy FAILS loudly on a
-# missing id instead of succeeding into a Worker whose storage silently is not
-# there. The tests never touch either: every module takes its store as an
+# The tests never touch either binding: every module takes its store as an
 # argument, which is what let three of them be built in parallel with no
 # infrastructure at all.
 

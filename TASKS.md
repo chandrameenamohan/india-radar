@@ -2730,3 +2730,74 @@ Out of scope:
   - Sending mail. Unchanged from v3, and now load-bearing: we hold a mailbox
     connection, which makes our sender reputation worth more, not less.
 ```
+
+### T14.9 — The free tier is a limit, not a target `done` · *Phase 9* · after T14.3
+> **R2 does not stop at its free tier, it bills past it**, and the human's ruling
+> is that this project refuses the upload rather than pays the invoice. So the
+> stop had to be built: `worker/stores.mjs` counts, `withinFreeTier` in
+> `resume.mjs` decides, and `/api/resume` PUT answers **507 `storage_full`** or
+> **429 `monthly_ops_exhausted`** before anything reaches the bucket.
+>
+> **R2 cannot answer "how many bytes am I holding" without listing every object,
+> and a list is itself a Class A operation** — so the total is counted in D1 on
+> the write path that already existed. New table `resume_usage`, one row per user,
+> because a single global counter cannot do the arithmetic a REPLACEMENT needs:
+> the new resume displaces the old rather than adding to it, and only a per-user
+> figure knows what to subtract.
+>
+> **The two aggregates have deliberately opposite scopes, and that is the whole
+> design.** Bytes EXCLUDE the caller — counting their existing resume would refuse
+> a replacement that frees as much as it takes. Operations INCLUDE everyone —
+> a per-user allowance is an invitation to open a second account, and the bill is
+> one bill. Both directions have a test that fails if they are swapped.
+>
+> **Reads are not counted, and that is a measurement rather than an omission.**
+> Counting a download would mean a D1 write per read, and D1's free tier (100k
+> writes/day) is TIGHTER than the R2 read allowance it would be protecting
+> (10M/month). The 10x-larger read tier is what pays for leaving it alone.
+>
+> **The monthly reset has no scheduled job.** A row carries the month it last
+> wrote in; a row whose month is not the current one counts zero and is
+> overwritten on its next write. Nothing to forget to run.
+>
+> **A fake reimplements a query rather than running it**, so every existing suite
+> was blind to the SQL being wrong — and this feature is arithmetic expressed
+> almost entirely in SQL. `worker/stores.test.mjs` runs `schema.sql` and both
+> statements against real SQLite via `node:sqlite`. It also executes `schema.sql`
+> for the first time in a test at all; until now a syntax error in it was
+> discoverable only by deploying.
+>
+> **Two mutation survivors, and both were the same mistake:** a `COALESCE` in the
+> SQL and a `?? 0` in JS defending against one failure, so neither could be shown
+> to do anything. The `COALESCE` went. Note that `SUM` over an empty table is
+> NULL and `Number(null)` is 0 — the case that actually produces NaN, and so
+> passes every `>` comparison silently, is a driver returning NO ROW.
+>
+> Provisioning done in the same session: R2 enabled by the human, bucket
+> `roleatlas-resumes` created, `schema.sql` applied remotely (`num_tables: 2`).
+
+```
+Acceptance (observable):
+  An upload that would take total stored bytes past the free tier is refused with
+    507, and the bucket is unchanged — a refusal that still writes is not one.
+  An upload in a month whose Class A allowance is spent is refused with 429.
+  A DELETE is never refused by either limit: it frees storage.
+  A user replacing their own resume is not refused by the storage limit.
+Checks:
+  lint -> typecheck -> unit -> worker -> e2e (full gate)
+  + unit: both limits at the boundary, one byte and one operation either side
+  + unit: the recorded size is the STORED size and operations accumulate across
+    writes but reset across months
+  + unit: the SQL runs against real SQLite, not a fake that reimplements it
+  + unit: CLASS_A_PER_WRITE is >= what put and delete actually cost, counted by
+    wrapping the store — so a new list or delete cannot silently make the
+    arithmetic wrong in the direction that costs money
+Out of scope:
+  - Counting Class B reads. See the note above; D1's write tier is the tighter
+    limit, and the read allowance is 10x.
+  - Reconciling the counter against the bucket. A crash between the R2 put and
+    the D1 row undercounts by one resume; the margins absorb it, and a sweep to
+    fix it would itself cost Class A operations.
+  - Telling the reader how full the site is. Nobody has asked, and it is a number
+    that invites a support conversation.
+```

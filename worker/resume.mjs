@@ -46,6 +46,59 @@
 export const MAX_RESUME_BYTES = 2 * 1024 * 1024;
 
 /**
+ * The R2 free tier, minus a margin, as the number this project refuses to cross.
+ *
+ * Cloudflare's free tier is 10 GB-month of storage and 1,000,000 Class A
+ * operations a month. It is not a hard stop -- R2 bills past it -- so the stop
+ * has to be here, and the decision recorded is that an upload which would cross
+ * the line is REFUSED rather than paid for.
+ *
+ * The margins are 10% and 20%, and they are not decoration. The storage figure
+ * is compared against the bytes we are holding at this instant, while Cloudflare
+ * bills a monthly AVERAGE, so our number is the conservative one; the margin
+ * covers the other direction -- the gap between a write landing in R2 and the row
+ * that records it landing in D1. The ops margin is larger because ops are
+ * counted per request and a burst can spend several between two reads of the
+ * total. 9 GB at the 2 MiB cap is about 4,400 readers, which is a long way past
+ * anyone this site has.
+ *
+ * Raise these the day someone decides to pay for R2, which is a business
+ * decision and not a code one.
+ */
+export const FREE_TIER_BYTES = 9_000_000_000;
+export const FREE_TIER_CLASS_A = 800_000;
+
+/**
+ * Class A operations one write costs, counted from the code rather than guessed:
+ * `putResume` does list + put + list, `deleteResume` does list + delete + list,
+ * and a replacement can add a stale delete. Four is the honest ceiling for both.
+ *
+ * If either function grows an operation, this number is wrong in the expensive
+ * direction, so it is asserted against the store in `resume.test.mjs`.
+ */
+export const CLASS_A_PER_WRITE = 4;
+
+/**
+ * Whether this upload fits inside the free tier, and if not, which limit stopped
+ * it. Pure, because the whole point is to decide BEFORE anything is written and
+ * a decision that needs a store to be tested is a decision nobody tests.
+ *
+ * `otherBytes` excludes this user on purpose: their existing resume is REPLACED,
+ * not added to. `ops` includes everyone, which is the opposite choice and just as
+ * deliberate -- excluding a caller from the count they are spending is how one
+ * account in a loop empties the month for everybody else.
+ *
+ * @returns {{ok: true} | {ok: false, reason: "storage_full" | "monthly_ops_exhausted"}}
+ */
+export function withinFreeTier({ otherBytes = 0, ops = 0 } = {}, incomingBytes = 0) {
+  if (otherBytes + incomingBytes > FREE_TIER_BYTES) return { ok: false, reason: "storage_full" };
+  if (ops + CLASS_A_PER_WRITE > FREE_TIER_CLASS_A) {
+    return { ok: false, reason: "monthly_ops_exhausted" };
+  }
+  return { ok: true };
+}
+
+/**
  * Exactly two. SPEC v4 puts "formats beyond PDF and plain text" out of scope,
  * and each of these has a cheap structural check below -- which is the actual
  * reason the list is short. A format we cannot verify is a format we would be

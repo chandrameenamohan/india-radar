@@ -56,6 +56,67 @@ export function profileStore(db) {
   };
 }
 
+/** Where the free-tier counters live. See `schema.sql` for why they exist at all. */
+const USAGE_TABLE = "resume_usage";
+
+/** The month key the counter resets on. UTC, so it does not turn over twice. */
+export const usageMonth = (now = Date.now()) => new Date(now).toISOString().slice(0, 7);
+
+/**
+ * The R2 usage counters over D1.
+ *
+ * `load` is ONE query returning both totals, because it sits in front of every
+ * upload and the whole feature is only worth having if it is cheaper than the
+ * thing it protects. The two aggregates have different scopes -- bytes exclude
+ * the caller (their old resume is replaced), ops include everyone (see
+ * `withinFreeTier`) -- which is why they are two CASE expressions over one scan
+ * rather than two statements.
+ *
+ * A missing row and an empty table both have to read as zero. `SUM` over no rows
+ * is NULL, which `Number` already makes 0, but a driver that answers `SELECT
+ * SUM(...)` with NO ROW leaves `undefined` -- and `Number(undefined)` is NaN,
+ * which is false for `>`, so every limit would silently pass. Hence `?? 0`, and
+ * hence no `COALESCE` beside it: two guards against one failure mean neither can
+ * be shown to be doing anything, and a mutation sweep proved exactly that.
+ * ponytail: counted on the write path only, so a crash between the R2 put and
+ * this row undercounts by one resume. Move to a scheduled reconcile against
+ * `bucket.list()` if the drift ever matters -- it costs Class A ops to fix.
+ */
+export function usageStore(db) {
+  return {
+    async load(userId, month = usageMonth()) {
+      const row = await db
+        .prepare(
+          `SELECT SUM(CASE WHEN user_id <> ?1 THEN bytes ELSE 0 END) AS other_bytes,
+                  SUM(CASE WHEN month = ?2 THEN ops ELSE 0 END) AS ops
+             FROM ${USAGE_TABLE}`,
+        )
+        .bind(userId, month)
+        .first();
+      return { otherBytes: Number(row?.other_bytes ?? 0), ops: Number(row?.ops ?? 0) };
+    },
+
+    /**
+     * Record what a write cost. `bytes` is what the user is now storing (0 after
+     * a deletion); ops ACCUMULATE within a month and start again outside one,
+     * which is the whole of the monthly reset -- there is no job to forget to run.
+     */
+    async record(userId, bytes, ops, month = usageMonth()) {
+      await db
+        .prepare(
+          `INSERT INTO ${USAGE_TABLE} (user_id, bytes, ops, month)
+           VALUES (?1, ?2, ?3, ?4)
+           ON CONFLICT(user_id) DO UPDATE SET
+             bytes = ?2,
+             ops   = CASE WHEN month = ?4 THEN ops + ?3 ELSE ?3 END,
+             month = ?4`,
+        )
+        .bind(userId, bytes, ops, month)
+        .run();
+    },
+  };
+}
+
 /**
  * A resume store over R2.
  *

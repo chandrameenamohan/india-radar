@@ -8,6 +8,8 @@ import { strict as assert } from "node:assert";
 import { test } from "node:test";
 
 import worker, { _internals } from "./index.mjs";
+import { CLASS_A_PER_WRITE, FREE_TIER_BYTES, FREE_TIER_CLASS_A } from "./resume.mjs";
+import { usageMonth } from "./stores.mjs";
 import { ISSUER, makeKeypair, mint } from "./_testing.mjs";
 
 const ENV = { CLERK_ISSUER: ISSUER };
@@ -149,19 +151,53 @@ test("unknown paths and wrong methods are refused before any token work", async 
 // cannot reach another's data through a route, and that CORS survives every
 // return path including the one that returns bytes.
 
-/** D1, minimally. Enough for `stores.mjs`, and no more. */
+/**
+ * D1, minimally. Enough for `stores.mjs`, and no more.
+ *
+ * Rows are keyed by TABLE and user, which they were not until `resume_usage`
+ * existed: both tables key on the user id, so a single map made saving a resume
+ * overwrite that user's profile — inside the fake only, but the isolation test
+ * failed for a reason that was not about isolation at all.
+ *
+ * The usage aggregate is computed here rather than stubbed, because the two sums
+ * have deliberately different scopes (bytes exclude the caller, ops do not) and a
+ * fake that returned a constant would pass whichever way round they were wired.
+ */
 function fakeDb() {
   const rows = new Map();
+  const usageRows = () =>
+    [...rows].filter(([key]) => key.startsWith("resume_usage:")).map(([, row]) => row);
+  const sum = (list, field) => list.reduce((total, row) => total + row[field], 0);
+
   return {
     rows,
     prepare(sql) {
+      const usage = sql.includes("resume_usage");
       let args = [];
       const api = {
         bind: (...a) => ((args = a), api),
-        first: async () => (sql.includes("SELECT") ? (rows.get(args[0]) ?? null) : null),
+        first: async () => {
+          if (!sql.includes("SELECT")) return null;
+          if (!usage) return rows.get(`profiles:${args[0]}`) ?? null;
+          return {
+            other_bytes: sum(usageRows().filter((r) => r.user_id !== args[0]), "bytes"),
+            ops: sum(usageRows().filter((r) => r.month === args[1]), "ops"),
+          };
+        },
         run: async () => {
-          if (sql.includes("INSERT")) rows.set(args[0], { value: args[1] });
-          if (sql.startsWith("DELETE")) rows.delete(args[0]);
+          if (sql.includes("INSERT") && usage) {
+            const key = `resume_usage:${args[0]}`;
+            const prior = rows.get(key);
+            rows.set(key, {
+              user_id: args[0],
+              bytes: args[1],
+              ops: prior?.month === args[3] ? prior.ops + args[2] : args[2],
+              month: args[3],
+            });
+          } else if (sql.includes("INSERT")) {
+            rows.set(`profiles:${args[0]}`, { value: args[1] });
+          }
+          if (sql.startsWith("DELETE")) rows.delete(`profiles:${args[0]}`);
           return { success: true };
         },
       };
@@ -305,5 +341,91 @@ test("the bytes route still carries the CORS header", async () => {
       response.headers.get("access-control-allow-origin"),
       "https://roleatlas.sennamind.com",
     );
+  });
+});
+
+// ---------------------------------------------------------------------------
+// The free-tier gate. R2 bills past its free tier rather than stopping, so these
+// tests are the whole of the promise that this project never crosses it.
+
+/** Seed the usage table directly — the state a full month of other readers left. */
+const seedUsage = (env, user_id, { bytes = 0, ops = 0, month = usageMonth() } = {}) =>
+  env.DB.rows.set(`resume_usage:${user_id}`, { user_id, bytes, ops, month });
+
+const upload = (who, env) =>
+  as(who, "/api/resume", {
+    method: "PUT", env, body: PDF, headers: { "content-type": "application/pdf" },
+  });
+
+test("an upload that would cross the storage free tier is refused, not billed", async () => {
+  await withJwks({ keys: [real.jwk] }, async () => {
+    const env = envWith();
+    seedUsage(env, "user_someone_else", { bytes: FREE_TIER_BYTES });
+
+    const response = await upload("a", env);
+    assert.equal(response.status, 507);
+    assert.equal((await response.json()).error, "storage_full");
+    // And nothing was written. A refusal that still stores the object is not one.
+    assert.equal(env.RESUMES.objects.size, 0);
+  });
+});
+
+test("the storage total excludes the uploader's own resume, because a replace displaces it", async () => {
+  // The inverse of the test above, and the reason it is here: if the sum counted
+  // the caller's existing bytes, the last reader before the line could never
+  // replace their own resume even though doing so frees as much as it costs.
+  await withJwks({ keys: [real.jwk] }, async () => {
+    const env = envWith();
+    seedUsage(env, "user_a", { bytes: FREE_TIER_BYTES });
+    assert.equal((await upload("a", env)).status, 200);
+  });
+});
+
+test("a month of Class A operations, spent, refuses the next write for everyone", async () => {
+  await withJwks({ keys: [real.jwk] }, async () => {
+    const env = envWith();
+    // Spent by ONE other reader. Ops are counted globally on purpose: a per-user
+    // allowance is an invitation to open a second account, and the bill is one bill.
+    seedUsage(env, "user_loop", { ops: FREE_TIER_CLASS_A });
+
+    const response = await upload("a", env);
+    assert.equal(response.status, 429);
+    assert.equal((await response.json()).error, "monthly_ops_exhausted");
+    assert.equal(env.RESUMES.objects.size, 0);
+
+    // A DELETE is still allowed through: it frees storage, and locking someone
+    // out of removing their own resume is the wrong way to save an operation.
+    assert.equal((await as("a", "/api/resume", { method: "DELETE", env })).status, 200);
+  });
+});
+
+test("last month's operations do not count against this month", async () => {
+  await withJwks({ keys: [real.jwk] }, async () => {
+    const env = envWith();
+    seedUsage(env, "user_loop", { ops: FREE_TIER_CLASS_A, month: "2001-01" });
+    assert.equal((await upload("a", env)).status, 200);
+  });
+});
+
+test("a successful upload records what it stored and what it cost", async () => {
+  await withJwks({ keys: [real.jwk] }, async () => {
+    const env = envWith();
+    assert.equal((await upload("a", env)).status, 200);
+
+    const row = env.DB.rows.get("resume_usage:user_a");
+    assert.equal(row.bytes, PDF.byteLength, "the recorded size is not the stored size");
+    assert.equal(row.ops, CLASS_A_PER_WRITE);
+    assert.equal(row.month, usageMonth());
+
+    // Twice: ops accumulate, bytes do not — the second resume replaced the first.
+    assert.equal((await upload("a", env)).status, 200);
+    const after = env.DB.rows.get("resume_usage:user_a");
+    assert.equal(after.bytes, PDF.byteLength);
+    assert.equal(after.ops, 2 * CLASS_A_PER_WRITE);
+
+    // And deleting returns the bytes to the pool while still costing operations.
+    await as("a", "/api/resume", { method: "DELETE", env });
+    assert.equal(env.DB.rows.get("resume_usage:user_a").bytes, 0);
+    assert.equal(env.DB.rows.get("resume_usage:user_a").ops, 3 * CLASS_A_PER_WRITE);
   });
 });

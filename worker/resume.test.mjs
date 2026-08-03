@@ -18,7 +18,11 @@ import { test } from "node:test";
 
 import {
   ACCEPTED_TYPES,
+  CLASS_A_PER_WRITE,
+  FREE_TIER_BYTES,
+  FREE_TIER_CLASS_A,
   MAX_RESUME_BYTES,
+  withinFreeTier,
   checkResume,
   deleteResume,
   getResume,
@@ -489,4 +493,69 @@ test("the stored bytes are the bytes that were checked", async () => {
   const store = fakeStore();
   await upload(store, USER);
   assert.deepEqual(store.objects.get(resumeKey(USER)).body, PDF);
+});
+
+// --- the free tier ----------------------------------------------------------
+//
+// R2 does not stop at its free tier, it bills past it. These two tests are what
+// stands between this project and an invoice nobody chose.
+
+test("the free-tier decision is made on the bytes that would exist AFTER the write", async () => {
+  // Boundary in both directions: exactly at the limit is allowed, one byte over
+  // is not. A `>=` here would refuse the last upload that actually fits, and a
+  // `>` on the wrong side of the addition would let one through that does not.
+  assert.equal(withinFreeTier({ otherBytes: FREE_TIER_BYTES - 100 }, 100).ok, true);
+  assert.equal(withinFreeTier({ otherBytes: FREE_TIER_BYTES - 100 }, 101).ok, false);
+  assert.equal(withinFreeTier({ otherBytes: FREE_TIER_BYTES - 100 }, 101).reason, "storage_full");
+
+  // The operation allowance is spent in units of a whole write, not one op, so
+  // the last write that fits is the one with room for all of its operations.
+  const nearly = FREE_TIER_CLASS_A - CLASS_A_PER_WRITE;
+  assert.equal(withinFreeTier({ ops: nearly }, 1).ok, true);
+  assert.equal(withinFreeTier({ ops: nearly + 1 }, 1).ok, false);
+  assert.equal(withinFreeTier({ ops: nearly + 1 }, 1).reason, "monthly_ops_exhausted");
+
+  // An absent counter reads as zero rather than as NaN. Every comparison above
+  // is `>`, and `NaN > x` is false, so a missing figure would pass every limit.
+  assert.equal(withinFreeTier(undefined, 1).ok, true);
+  assert.equal(withinFreeTier({}, FREE_TIER_BYTES + 1).ok, false);
+});
+
+test("CLASS_A_PER_WRITE is not smaller than what a write actually costs", async () => {
+  // The constant is what the free-tier arithmetic is done in. If a write grows a
+  // list or a delete and this is not updated, the sum is wrong in the direction
+  // that costs money, and nothing else in the suite would notice.
+  const counted = (store) => {
+    let ops = 0;
+    return {
+      ...store,
+      put: (...a) => (ops++, store.put(...a)),
+      delete: (...a) => (ops++, store.delete(...a)),
+      list: (...a) => (ops++, store.list(...a)),
+      get: (...a) => store.get(...a), // Class B, counted separately or not at all
+      ops: () => ops,
+    };
+  };
+
+  const first = counted(fakeStore());
+  await upload(first);
+  assert.ok(first.ops() <= CLASS_A_PER_WRITE, `a first upload cost ${first.ops()} Class A ops`);
+
+  // A replacement is the expensive path: it sweeps whatever the old scheme left.
+  const replacing = counted(fakeStore());
+  await upload(replacing);
+  const stale = `${resumePrefix(USER)}resume.pdf`;
+  replacing.objects.set(stale, { key: stale, body: PDF, httpMetadata: {}, customMetadata: {} });
+  const before = replacing.ops();
+  await upload(replacing);
+  assert.ok(
+    replacing.ops() - before <= CLASS_A_PER_WRITE,
+    `a replacement cost ${replacing.ops() - before} Class A ops`,
+  );
+
+  const deleting = counted(fakeStore());
+  await upload(deleting);
+  const spent = deleting.ops();
+  await deleteResume(deleting, USER);
+  assert.ok(deleting.ops() - spent <= CLASS_A_PER_WRITE, `a delete cost ${deleting.ops() - spent}`);
 });

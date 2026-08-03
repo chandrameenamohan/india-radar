@@ -12,8 +12,8 @@
 import { bearerToken, verifySession } from "./auth.mjs";
 import { loadProfile, saveProfile } from "./profile.mjs";
 import { postingQuestions } from "./questions.mjs";
-import { deleteResume, getResume, putResume } from "./resume.mjs";
-import { profileStore, resumeStore } from "./stores.mjs";
+import { CLASS_A_PER_WRITE, deleteResume, getResume, putResume, withinFreeTier } from "./resume.mjs";
+import { profileStore, resumeStore, usageStore } from "./stores.mjs";
 
 /** Exact origins, no wildcards, no suffix matching. `evil-roleatlas.com` must not pass. */
 const ALLOWED_ORIGINS = new Set([
@@ -196,15 +196,36 @@ const ROUTES = {
     // Affordable precisely because the cap is 2 MiB.
     PUT: async ({ request, env, userId }) => {
       const body = await request.arrayBuffer();
+
+      // THE FREE-TIER GATE, and it runs BEFORE the write because refusing after
+      // one is not refusing. R2 bills past its free tier rather than stopping,
+      // and the decision on record is that we stop instead. 507 and 429 are
+      // separated so the reader is told which wall they hit: one is "this site
+      // is full", which is ours to fix, and the other is "come back next month".
+      const usage = usageStore(env.DB);
+      const room = withinFreeTier(await usage.load(userId), body.byteLength);
+      if (!room.ok) {
+        return { status: room.reason === "storage_full" ? 507 : 429, body: { error: room.reason } };
+      }
+
       const result = await putResume(resumeStore(env.RESUMES), userId, body, {
         contentType: request.headers.get("content-type"),
         filename: request.headers.get("x-resume-filename"),
       });
       if (!result.ok) return { status: 422, body: { error: result.reason } };
+
+      await usage.record(userId, result.size, CLASS_A_PER_WRITE);
       return { resume: { size: result.size, contentType: result.contentType, replaced: result.replaced } };
     },
 
-    DELETE: async ({ env, userId }) => deleteResume(resumeStore(env.RESUMES), userId),
+    // Not gated. A deletion FREES the storage it costs ops to free, so refusing
+    // one because the month is spent would lock readers out of removing their
+    // own resume at exactly the moment we most want them to be able to.
+    DELETE: async ({ env, userId }) => {
+      const result = await deleteResume(resumeStore(env.RESUMES), userId);
+      await usageStore(env.DB).record(userId, 0, CLASS_A_PER_WRITE);
+      return result;
+    },
   },
 
   "/api/questions": {

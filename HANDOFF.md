@@ -109,12 +109,16 @@ no column for them. Two locks on purpose.
 
 - ✅ **D1 created and schema applied.** `roleatlas`, region APAC,
   `database_id = 8383daaf-b15f-4813-804b-7c4c8419eb34`, already written into
-  `worker/wrangler.toml`. `num_tables: 1`.
-- ⛔ **R2 NOT ENABLED on the account.** The API says
-  `Please enable R2 through the Cloudflare Dashboard.` This is not a token scope —
-  R2 must be switched on once in the dashboard (R2 Object Storage → Purchase R2
-  Plan → add a payment method; the free tier is real, 10 GB). **A human must do
-  this.** Then: `npx wrangler r2 bucket create roleatlas-resumes`.
+  `worker/wrangler.toml`. `num_tables: 2` (`profiles`, `resume_usage`).
+- ✅ **R2 enabled and the bucket exists.** The human enabled it in the dashboard
+  2026-08-03 (it is not a token scope — R2 has to be switched on once, with a
+  payment method attached); `roleatlas-resumes` created immediately after.
+- ✅ **The free tier is enforced in code (T14.9), because R2 bills past it rather
+  than stopping.** `resume_usage` in D1 counts stored bytes and Class A ops; an
+  upload that would cross either line is refused with 507 or 429 and never
+  reaches the bucket. Margins are 9 GB of 10 and 800k ops of 1M. Reads are
+  deliberately uncounted — counting them costs a D1 write each, and D1's 100k
+  writes/day is tighter than R2's 10M reads/month.
 - ⛔ **Worker NOT deployed.** Deliberately: deploying with the R2 binding
   unresolved leaves `/api/resume` broken. Deploy once R2 exists.
 - ⛔ **`api.roleatlas.sennamind.com` does not exist.** Add it as a Workers
@@ -127,8 +131,8 @@ no column for them. Two locks on purpose.
 
 ## NEXT (in order)
 
-1. **Enable R2** (human, dashboard) → `wrangler r2 bucket create roleatlas-resumes`
-   → `npx wrangler deploy --config worker/wrangler.toml` → bind the custom domain
+1. **R2 and D1 are both provisioned now.** What is left of this step:
+   `npx wrangler deploy --config worker/wrangler.toml` → bind the custom domain
    → add the hostname to `ALLOWED_ORIGINS` with a test → run
    `bash scripts/worker-e2e.sh` against the deployed URL. **That last step is the
    first time the real Workers runtime will ever have executed this code**, because
