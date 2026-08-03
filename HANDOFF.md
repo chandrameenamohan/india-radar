@@ -119,24 +119,45 @@ no column for them. Two locks on purpose.
   reaches the bucket. Margins are 9 GB of 10 and 800k ops of 1M. Reads are
   deliberately uncounted — counting them costs a D1 write each, and D1's 100k
   writes/day is tighter than R2's 10M reads/month.
-- ⛔ **Worker NOT deployed.** Deliberately: deploying with the R2 binding
-  unresolved leaves `/api/resume` broken. Deploy once R2 exists.
-- ⛔ **`api.roleatlas.sennamind.com` does not exist.** Add it as a Workers
-  **Custom Domain** after deploy — that creates and proxies the DNS record itself.
-  Then add the hostname to `ALLOWED_ORIGINS` in `worker/index.mjs` **with a test**.
-  `roleatlas.sennamind.com` stays DNS-only so GitHub keeps issuing its cert; the
-  API on a different, proxied hostname does not disturb that.
+- ✅ **Worker deployed** 2026-08-03, version `6fb8927d`. Both bindings resolved
+  at upload: `env.DB (roleatlas)`, `env.RESUMES (roleatlas-resumes)`.
+- ✅ **`api.roleatlas.sennamind.com` is a Workers Custom Domain** in zone
+  `sennamind.com` (`f054c1df5235c938cf2ac873d6d99c52`). Cloudflare created and
+  proxied the DNS record itself; `roleatlas.sennamind.com` stays DNS-only so
+  GitHub keeps issuing the register's certificate.
+- ⏳ **The edge certificate was still being issued when the session ended.** DNS
+  resolves to Cloudflare, the route is live, but TLS was refusing the handshake
+  (`sslv3 alert handshake failure`) for the first ten minutes — normal for a new
+  custom domain, and the API token cannot read `ssl/certificate_packs` to watch
+  it. **Re-check with `bash scripts/worker-e2e.sh deployed` before assuming
+  anything is wrong.** Note it is a THREE-level hostname, and Universal SSL only
+  covers one level of subdomain — if it is still failing hours later, that is the
+  suspect, and the fix is Total TLS / Advanced Certificate Manager (paid) or a
+  two-level hostname like `roleatlas-api.sennamind.com`.
+- **No workers.dev subdomain, deliberately.** The first deploy failed asking for
+  one; registering it would publish the API on a second permanent hostname the
+  CORS allowlist does not cover. `workers_dev = false` and one route instead.
+- **The API hostname is NOT in `ALLOWED_ORIGINS`, contrary to the older plan
+  above.** An `Origin` is the page making the request, and nothing is served from
+  that hostname — it answers `/api/*` with JSON and nothing else. Adding it would
+  widen a security allowlist by an entry that cannot legitimately appear. It
+  belongs there the day a page is served from it.
 
-**Nothing is pushed.** `git log origin/main..HEAD` lists all five commits.
+**Nothing is pushed.** `git log origin/main..HEAD` lists seven commits.
 
 ## NEXT (in order)
 
-1. **R2 and D1 are both provisioned now.** What is left of this step:
-   `npx wrangler deploy --config worker/wrangler.toml` → bind the custom domain
-   → add the hostname to `ALLOWED_ORIGINS` with a test → run
-   `bash scripts/worker-e2e.sh` against the deployed URL. **That last step is the
-   first time the real Workers runtime will ever have executed this code**, because
-   workerd refuses to start on this Mac (13.4; needs 13.5+).
+1. **`bash scripts/worker-e2e.sh deployed`** — provisioning and deploy are done;
+   what is left is the certificate finishing (see above). **This is the first time
+   the real Workers runtime will ever have executed this code**, because workerd
+   refuses to start on this Mac (13.4; needs 13.5+).
+   Then the check nothing has done yet: **an AUTHENTICATED upload against the
+   live API**, to prove D1, R2 and the free-tier counter agree in production —
+   `resume_usage` has been tested against SQLite and against a fake, never
+   against D1. The `+clerk_test` account can sign in headlessly (`/browse`), and
+   note that the permission classifier in this session refused to POST the test
+   credentials to Clerk's frontend API from a shell, so drive it through the
+   browser skill rather than curl.
 2. **Push.** CI (`.github/workflows/check.yml`, ubuntu-latest) is the only place
    workerd runs. One unverified risk: whether `wrangler dev` boots in CI now that
    `database_id` is real. If CI goes red on the first push, that is the first
