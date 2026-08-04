@@ -1,0 +1,1440 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>789 companies hiring — read from their own job boards on Aug 4, 2026</title>
+<link rel="icon" href="data:,">
+<style>
+/* =====================================================================
+   r05-c — "the comparison plate"
+
+   The craft is the live register's, deliberately and closely: one grid of
+   twelve, Inter, hairline rules, 11px uppercase micro-labels at .11em,
+   tabular numerals in every count, crop marks on the sheet, and ONE red.
+   Signal 4 says the founder likes that page and the round-4 cards were less
+   designed than it; so this page keeps its structure new and its craft
+   continuous.
+
+   The red is spent on one thing and one thing only: THE READER'S OWN RECORD.
+   Not on a status, not on a warning, not on a count the corpus produced.
+   Everything the data says is ink; everything you did is red. That is why a
+   status word can never be red here — the founder reads a young public
+   company as attractive, and a colour would answer that for him.
+
+   No serif. r04-a's serif/mono evidence split was on the graft list, but the
+   baseline the founder named is a single sans with mono for apparatus, and
+   Signal 4 outranks a graft.
+   ===================================================================== */
+:root{
+  --paper:#ffffff;
+  --ink:#111111;
+  --ink-2:#4a4a4a;     /* secondary prose */
+  --ink-3:#8a8a8a;     /* micro-labels, apparatus, absent-ish things */
+  --rule:#d5d5d5;      /* hairline */
+  --rule-2:#111111;    /* structural rule */
+  --wash:#f4f4f4;      /* the only fill on the page */
+  --red:#E30613;       /* the reader's own record. Nowhere else. */
+  --gut:2rem;
+  --ref:3.4rem;        /* the index gutter, e.g. 001 */
+  --lab:9.5rem;        /* the comparison plate's label rail */
+  --col:repeat(12,minmax(0,1fr));
+  --sans:Inter,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,monospace;
+}
+*{box-sizing:border-box;min-width:0}
+html{-webkit-text-size-adjust:100%;overflow-x:clip}
+body{
+  margin:0;padding:0 0 5rem;background:var(--paper);color:var(--ink);
+  overflow-x:clip;
+  font-family:var(--sans);font-size:15px;line-height:1.45;
+  font-variant-numeric:tabular-nums;
+  font-feature-settings:"tnum" 1;
+  letter-spacing:-0.006em;
+  -webkit-font-smoothing:antialiased;
+}
+.sheet{max-width:78rem;margin-inline:auto;padding-inline:var(--gut)}
+a{color:var(--ink)}
+button{font:inherit;letter-spacing:inherit;color:inherit;background:none;border:0;
+  padding:0;margin:0;border-radius:0;cursor:pointer}
+a:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible,
+summary:focus-visible,[tabindex]:focus-visible{outline:2px solid var(--red);outline-offset:3px}
+
+/* ---- micro-label: 11px, uppercase, wide. The page's smallest voice. ---- */
+.micro{font-size:11px;line-height:1.15;text-transform:uppercase;
+  letter-spacing:.11em;font-weight:600}
+.num{font-variant-numeric:tabular-nums}
+/* apparatus numerals — the index gutter, the ladder, the register */
+.appn{font-family:var(--mono);font-size:10px;letter-spacing:.05em;color:var(--ink-3);
+  font-variant-numeric:tabular-nums}
+
+/* ------------------------------ registration marks ---------------------- */
+/* The sheet is a printed thing and printed things carry crop marks. */
+header,#endmark{position:relative}
+header::before,header::after,#endmark::before,#endmark::after{
+  content:"";position:absolute;width:.7rem;height:.7rem;
+  border:0 solid var(--ink-3);pointer-events:none}
+header::before{top:.75rem;left:.55rem;border-left-width:1px;border-top-width:1px}
+header::after{top:.75rem;right:.55rem;border-right-width:1px;border-top-width:1px}
+#endmark::before{bottom:0;left:.55rem;border-left-width:1px;border-bottom-width:1px}
+#endmark::after{bottom:0;right:.55rem;border-right-width:1px;border-bottom-width:1px}
+#endmark{height:1.6rem}
+
+/* ---------------------------------- masthead ---------------------------- */
+header{padding-top:1.6rem}
+.masthead{display:grid;grid-template-columns:var(--col);gap:0 1.25rem;
+  align-items:end;padding-bottom:.6rem}
+h1{grid-column:1/8;margin:0;
+  font-size:clamp(1.9rem,4.4vw,3rem);font-weight:800;
+  letter-spacing:-0.045em;line-height:.9;text-transform:uppercase}
+h1 .n{font-variant-numeric:tabular-nums}
+.mhside{grid-column:8/-1;display:flex;flex-direction:column;align-items:flex-end;
+  gap:.55rem;text-align:right}
+.mhside .k{color:var(--ink-3)}
+.mhside time,.mhside .big{font-size:1.05rem;font-weight:600;letter-spacing:-0.01em;
+  font-variant-numeric:tabular-nums}
+.thesis{display:grid;grid-template-columns:var(--col);gap:0 1.25rem;margin:0;
+  padding:.35rem 0 .9rem;border-bottom:2px solid var(--rule-2)}
+.thesis span{grid-column:1/8;font-size:1.0625rem;line-height:1.35;
+  letter-spacing:-0.017em;font-weight:500;color:var(--ink-2);max-width:58rem}
+.thesis b{font-weight:600;color:var(--ink)}
+.lk{appearance:none;color:var(--ink);border-bottom:1px solid var(--ink-3);
+  padding-bottom:.05rem;white-space:nowrap}
+.lk:hover{color:var(--red);border-bottom-color:var(--red)}
+a.lk{text-decoration:none}
+
+/* ============================ the comparison plate ====================== */
+/* The departure. The shortlist is not a tray at the edge of the page; it is
+   the head of the page, and the moment two companies are in it they stand in
+   the same rows — which is the choice the reader is actually making. */
+#sitting{padding-top:.85rem;padding-bottom:.95rem;border-bottom:2px solid var(--rule-2)}
+.pl-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:.45rem .95rem;
+  padding-bottom:.7rem}
+.pl-head .t{color:var(--ink)}
+.pl-head .m{color:var(--ink-3)}
+.stamp{display:inline-block;border:1.5px solid var(--red);color:var(--red);
+  font-weight:800;padding:.16rem .45rem .12rem;white-space:nowrap;
+  font-size:11px;text-transform:uppercase;letter-spacing:.11em;
+  font-variant-numeric:tabular-nums}
+.stamp.off{border-color:var(--ink-3);color:var(--ink-3);font-weight:600}
+.pl-tools{margin-left:auto;display:flex;flex-wrap:wrap;gap:.45rem 1.1rem}
+.pl-tools button{font-size:11px;text-transform:uppercase;letter-spacing:.11em;
+  font-weight:600;color:var(--ink);border-bottom:1px solid var(--ink-3);
+  padding-bottom:.05rem}
+.pl-tools button:hover{color:var(--red);border-bottom-color:var(--red)}
+
+.cmp-scroll{overflow-x:auto;scrollbar-width:thin}
+.crow{display:grid;
+  grid-template-columns:var(--lab) repeat(var(--n),minmax(14.5rem,1fr));
+  gap:0 1.25rem;border-top:1px solid var(--rule);padding:.5rem 0;align-items:start}
+.crow.head{border-top:2px solid var(--rule-2);padding-top:.6rem}
+.crow.foot{border-top:1px solid var(--rule-2)}
+.clab{position:sticky;left:0;z-index:2;background:var(--paper);
+  color:var(--ink-3);padding-right:.5rem;
+  font-size:11px;line-height:1.35;text-transform:uppercase;letter-spacing:.11em;
+  font-weight:600}
+.ccol{min-width:0}
+.ccol .ltr{display:block;color:var(--red);font-weight:800;
+  font-size:11px;text-transform:uppercase;letter-spacing:.11em;margin-bottom:.15rem}
+.ccol .ltr.ghost{color:var(--ink-3);font-weight:600}
+.ccol .cnm{font-size:1.35rem;font-weight:700;letter-spacing:-0.025em;line-height:1.1;
+  display:inline-block;text-decoration:none;border-bottom:1px solid var(--rule)}
+.ccol .cnm:hover{color:var(--red);border-bottom-color:var(--red)}
+.ccol p{margin:0;font-size:.875rem;line-height:1.4;color:var(--ink-2)}
+.ccol p.said{color:var(--ink);font-size:.9375rem;letter-spacing:-0.012em}
+.ccol p.unread{color:var(--ink-3)}
+.ccol p b{color:var(--ink);font-weight:600}
+.ccol p.unread b{color:var(--ink-2);font-weight:600}
+.ccol .big{font-size:1.5rem;font-weight:800;letter-spacing:-0.03em;line-height:1;
+  font-variant-numeric:tabular-nums}
+.ccol .big.nil{font-size:.875rem;font-weight:500;color:var(--ink-3);letter-spacing:0}
+.ccol .sub{display:block;color:var(--ink-3);margin-top:.15rem;
+  font-size:11px;text-transform:uppercase;letter-spacing:.11em;font-weight:600}
+.ccol a.rcpt{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--rule)}
+.ccol a.rcpt:hover{color:var(--red);border-bottom-color:var(--red)}
+.ccol .you{color:var(--red);font-size:.875rem;line-height:1.45;font-weight:500}
+.ccol .you .none{color:var(--ink-3);font-weight:400}
+.ccol .acts{display:flex;flex-wrap:wrap;gap:.3rem .9rem;margin-top:.1rem}
+.ccol .acts button{font-size:11px;text-transform:uppercase;letter-spacing:.11em;
+  font-weight:600;color:var(--ink);border-bottom:1px solid var(--ink-3);padding-bottom:.05rem}
+.ccol .acts button:hover{color:var(--red);border-bottom-color:var(--red)}
+/* the ghost cell: apparatus, never a value. A dash would read as a number
+   that failed to load; a hairline reads as a row waiting to be filled. */
+.ghostbar{display:block;height:1px;width:3.2rem;background:var(--rule);margin:.55rem 0}
+.ask{margin-top:.4rem;border:1px solid var(--rule-2);padding:.45rem .55rem}
+.ask .q{font-size:.875rem;line-height:1.4;color:var(--ink)}
+.ask .as{display:flex;gap:.9rem;margin-top:.35rem}
+.ask .as button{font-size:11px;text-transform:uppercase;letter-spacing:.11em;
+  font-weight:700;color:var(--red);border-bottom:1px solid var(--red);padding-bottom:.05rem}
+.pl-empty{padding-top:.15rem;font-size:1.0625rem;line-height:1.35;
+  letter-spacing:-0.017em;font-weight:500;color:var(--ink-2);max-width:72rem;margin:0}
+.pl-legend{display:flex;flex-wrap:wrap;align-items:baseline;gap:.2rem .9rem;
+  margin-top:.6rem;border-top:1px solid var(--rule);padding-top:.45rem}
+.pl-legend .lg-k,.pl-legend .lg-r{font-size:11px;line-height:1.5;text-transform:uppercase;
+  letter-spacing:.11em;font-weight:600}
+.pl-legend .lg-k{color:var(--ink-3);margin-right:.2rem}
+.pl-legend .lg-r{color:var(--ink)}
+.pl-foot{margin:.7rem 0 0;font-size:.8125rem;line-height:1.5;color:var(--ink-3);
+  max-width:52rem}
+#copyout{display:none;margin-top:.7rem}
+#copyout.on{display:block}
+#copyout textarea{width:100%;height:12rem;font-family:var(--mono);font-size:11.5px;
+  line-height:1.55;background:var(--wash);color:var(--ink-2);border:1px solid var(--rule);
+  border-radius:0;padding:.6rem}
+#copynote{margin:.3rem 0 0;color:var(--ink-3);font-size:11px;text-transform:uppercase;
+  letter-spacing:.11em;font-weight:600}
+
+/* ---------------------------------- controls ---------------------------- */
+#controls{display:grid;grid-template-columns:repeat(auto-fit,minmax(11rem,1fr));
+  gap:.85rem 1.5rem;padding-top:1rem;padding-bottom:.35rem;align-items:end}
+#controls label{display:flex;flex-direction:column;gap:.35rem}
+#controls .lbl{color:var(--ink-3)}
+select{appearance:none;-webkit-appearance:none;font:inherit;font-size:.9375rem;
+  font-weight:500;letter-spacing:-0.012em;color:var(--ink);background:transparent;
+  border:0;border-bottom:1px solid var(--rule-2);border-radius:0;
+  padding:.3rem 1.2rem .35rem 0;width:100%;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='7'%3E%3Cpath d='M1 1l4.5 4.5L10 1' fill='none' stroke='%238a8a8a' stroke-width='1.25'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right .1rem center}
+select:hover{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='7'%3E%3Cpath d='M1 1l4.5 4.5L10 1' fill='none' stroke='%23111111' stroke-width='1.25'/%3E%3C/svg%3E")}
+/* The giants toggle and the order's reasoning sit under the bank, not in it:
+   as a fourth grid cell the checkbox wrapped to three lines and its label
+   broke mid-sentence. `hide the giants` ships on, so the way to turn it off
+   has to read as one plain line, not as a cramped afterthought. */
+.cnotes{padding-top:.6rem;padding-bottom:.75rem;border-bottom:1px solid var(--rule)}
+.giants{display:flex;align-items:baseline;gap:.55rem;cursor:pointer;
+  color:var(--ink-2);font-size:.875rem;line-height:1.45}
+.giants input{margin:0;accent-color:var(--ink);flex:0 0 auto;
+  transform:translateY(1px)}
+.giants b{color:var(--ink);font-weight:600;font-variant-numeric:tabular-nums}
+.orderwhy{margin:.35rem 0 0;font-size:.8125rem;line-height:1.55;
+  color:var(--ink-3);max-width:64rem}
+
+/* ------------------------------- the yield ------------------------------ */
+#deal{padding-top:.85rem}
+.yield{margin:0;font-size:1.0625rem;line-height:1.35;letter-spacing:-0.017em;
+  font-weight:500;max-width:52rem}
+.yield b{font-weight:700;font-variant-numeric:tabular-nums}
+.yield .m{display:block;margin-top:.25rem;color:var(--ink-3);font-size:.8125rem;
+  font-weight:500;letter-spacing:0}
+#starts{margin:.8rem 0 0;display:flex;flex-wrap:wrap;align-items:baseline;gap:.5rem .7rem}
+#starts .sl{color:var(--ink-3)}
+#starts button{border:1px solid var(--rule-2);padding:.4rem .6rem .36rem;
+  font-size:11px;text-transform:uppercase;letter-spacing:.11em;font-weight:600}
+#starts button:hover{background:var(--ink);color:var(--paper)}
+#starts button .c{color:var(--ink-3);font-variant-numeric:tabular-nums}
+#starts button:hover .c{color:var(--paper)}
+.prov{margin:.85rem 0 0;font-size:.8125rem;line-height:1.6;color:var(--ink-2);
+  max-width:58rem;border-left:2px solid var(--rule);padding-left:.85rem}
+.prov b{color:var(--ink);font-weight:600;font-variant-numeric:tabular-nums}
+
+/* ---------------------------------- cards ------------------------------- */
+#cards{margin-top:.9rem;border-top:2px solid var(--rule-2)}
+.card{position:relative;display:grid;grid-template-columns:var(--ref) 1fr;
+  gap:0 1.25rem;border-bottom:1px solid var(--rule);padding:1rem 0 .95rem}
+.card.kept::before{content:"";position:absolute;left:-.85rem;top:1rem;bottom:.95rem;
+  width:2px;background:var(--red)}
+.card.on{background:var(--wash);box-shadow:0 0 0 .85rem var(--wash)}
+.cref{padding-top:.3rem}
+.card.kept .cno{color:var(--red);font-weight:700}
+.chead{display:flex;justify-content:space-between;align-items:baseline;gap:1.25rem}
+.cname{margin:0;font-size:1.35rem;font-weight:700;letter-spacing:-0.028em;line-height:1.15}
+.ccount{text-align:right;white-space:nowrap}
+.ccount b{font-size:1.35rem;font-weight:800;letter-spacing:-0.03em;
+  font-variant-numeric:tabular-nums}
+.ccount .u{display:block;color:var(--ink-3);margin-top:.05rem;
+  font-size:11px;text-transform:uppercase;letter-spacing:.11em;font-weight:600}
+.ccount .u .mt{color:var(--ink)}
+.says{margin:.45rem 0 0}
+.say{display:grid;grid-template-columns:4.4rem 1fr;gap:0 1rem;align-items:baseline;
+  padding:.08rem 0}
+.say .k{color:var(--ink-3);text-align:right;
+  font-size:11px;line-height:1.5;text-transform:uppercase;letter-spacing:.11em;font-weight:600}
+.say .v{min-width:0;max-width:56rem}
+.say.what .v{font-size:1.0625rem;line-height:1.35;letter-spacing:-0.017em;font-weight:500}
+.say.sub .v{font-size:.875rem;line-height:1.45;color:var(--ink-2)}
+.say.unread .v{font-size:.875rem;line-height:1.5;color:var(--ink-3)}
+.say.unread .v b{color:var(--ink-2);font-weight:600;font-variant-numeric:tabular-nums}
+.ev{margin:.5rem 0 0;font-size:.8125rem;line-height:1.5;color:var(--ink-2)}
+.ev a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--rule)}
+.ev a:hover{color:var(--red);border-bottom-color:var(--red)}
+.ev .sep{color:var(--rule);padding:0 .4rem}
+.mix{margin:.2rem 0 0;font-size:11px;line-height:1.6;text-transform:uppercase;
+  letter-spacing:.09em;font-weight:600;color:var(--ink-3);
+  font-variant-numeric:tabular-nums}
+.mix .bar{padding:0 .5rem;color:var(--rule)}
+.acts{margin-top:.65rem;display:flex;flex-wrap:wrap;gap:.5rem .75rem;align-items:center}
+.keep,.open{font-size:11px;text-transform:uppercase;letter-spacing:.11em;font-weight:600;
+  border:1px solid var(--rule-2);padding:.42rem .7rem .38rem}
+.keep:hover{border-color:var(--red);color:var(--red)}
+.card.kept .keep{background:var(--red);border-color:var(--red);color:var(--paper)}
+.open{font-variant-numeric:tabular-nums}
+.open:hover{background:var(--ink);color:var(--paper)}
+
+/* -------------------------------- role rows ----------------------------- */
+.roles{margin-top:.8rem;border-top:1px solid var(--rule-2)}
+.rnote{padding:.45rem 0 .35rem;font-size:.8125rem;line-height:1.5;color:var(--ink-3);
+  max-width:56rem}
+.rnote b{color:var(--ink-2);font-weight:600}
+a.role{display:grid;grid-template-columns:1.9rem 1fr auto;gap:0 1rem;align-items:baseline;
+  padding:.45rem 0;border-bottom:1px solid var(--rule);text-decoration:none;color:var(--ink)}
+a.role:hover{background:var(--paper);color:var(--red)}
+a.role .rn{font-family:var(--mono);font-size:10px;letter-spacing:.05em;color:var(--ink-3);
+  font-variant-numeric:tabular-nums}
+a.role .rt{font-size:.9375rem;line-height:1.35;letter-spacing:-0.012em;font-weight:500}
+a.role .rk{text-align:right;color:var(--ink-3);
+  font-size:11px;line-height:1.5;text-transform:uppercase;letter-spacing:.09em;font-weight:600}
+a.role.seen .rt::after{content:" — you opened this";color:var(--red);
+  font-size:11px;text-transform:uppercase;letter-spacing:.11em;font-weight:600}
+.vchip{margin-left:.5rem;border:1px solid var(--rule);padding:.05rem .3rem;
+  font-size:10px;text-transform:uppercase;letter-spacing:.09em;font-weight:600;
+  color:var(--ink-2);white-space:nowrap}
+.rfoot{display:flex;flex-wrap:wrap;gap:.3rem 1.4rem;padding:.5rem 0}
+.more{font-size:11px;text-transform:uppercase;letter-spacing:.11em;
+  font-weight:600;color:var(--ink);border-bottom:1px solid var(--ink-3);
+  padding-bottom:.05rem}
+.more:hover{color:var(--red);border-bottom-color:var(--red)}
+
+/* ---------------------------------- hands ------------------------------- */
+/* The rule between hands of ten. It is the only place the page performs
+   arithmetic over the reader's own record, and the only ink on it that is
+   red is the reader's own numbers. */
+.hand{display:flex;align-items:baseline;gap:.85rem;padding:.85rem 0 .8rem;
+  border-bottom:1px solid var(--rule)}
+.hand .hn{color:var(--ink-3);white-space:nowrap;
+  font-size:11px;text-transform:uppercase;letter-spacing:.11em;font-weight:600}
+.hand .hb{flex:1 1 auto;height:1px;background:var(--rule)}
+.hand .hs{white-space:nowrap;color:var(--ink-2);
+  font-size:11px;text-transform:uppercase;letter-spacing:.11em;font-weight:600;
+  font-variant-numeric:tabular-nums}
+.hand .hs b{color:var(--red);font-weight:800}
+.hand.last{border-bottom:0;border-top:2px solid var(--rule-2);padding-bottom:1.4rem}
+
+/* --------------------------- set-aside + register ----------------------- */
+.aside{padding-top:1.1rem;border-top:1px solid var(--rule)}
+.aside h2{margin:0;color:var(--ink-3);
+  font-size:11px;text-transform:uppercase;letter-spacing:.11em;font-weight:600}
+.aside p{margin:.4rem 0 0;font-size:.875rem;line-height:1.5;color:var(--ink-2);max-width:56rem}
+.aside .names{margin-top:.5rem;font-size:11px;line-height:1.9;color:var(--ink-3);
+  text-transform:uppercase;letter-spacing:.09em;font-weight:600;
+  font-variant-numeric:tabular-nums}
+details.reg{margin-top:1.5rem;border-top:1px solid var(--rule);padding-top:.8rem}
+details.reg summary{color:var(--ink-3);cursor:pointer;list-style:none;
+  font-size:11px;text-transform:uppercase;letter-spacing:.11em;font-weight:600}
+details.reg summary::-webkit-details-marker{display:none}
+details.reg summary:hover{color:var(--red)}
+#reg{margin-top:.6rem}
+.regrow{display:grid;grid-template-columns:1fr 14rem 6rem;gap:0 1rem;
+  padding:.28rem 0;border-bottom:1px solid var(--rule);
+  font-size:.8125rem;line-height:1.5;color:var(--ink-2)}
+.regrow .rgn{color:var(--ink);font-weight:500}
+.regrow .rgg{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.regrow .rgg a{color:var(--ink-2);text-decoration:none;border-bottom:1px solid var(--rule)}
+.regrow .rgr{text-align:right;font-variant-numeric:tabular-nums;color:var(--ink-3)}
+
+/* --------------------------------- the sheet ---------------------------- */
+#sheet{position:fixed;inset:0;background:rgba(17,17,17,.42);display:none;z-index:40}
+#sheet.on{display:block}
+#sheet .in{position:absolute;right:0;top:0;bottom:0;width:min(40rem,100%);
+  background:var(--paper);overflow:auto;padding:2rem 2.2rem 4rem;
+  border-left:2px solid var(--rule-2)}
+#sheet h2{margin:0 0 .3rem;font-size:1.75rem;font-weight:800;letter-spacing:-0.035em;
+  line-height:1.05;text-transform:uppercase;max-width:22rem}
+#sheet h3{margin:1.6rem 0 .4rem;color:var(--ink-3);
+  font-size:11px;text-transform:uppercase;letter-spacing:.11em;font-weight:600;
+  border-top:1px solid var(--rule);padding-top:.65rem}
+#sheet p{margin:.5rem 0 0;font-size:.875rem;line-height:1.55;color:var(--ink-2);max-width:34rem}
+#sheet p b{color:var(--ink);font-weight:600}
+#sheet code{font-family:var(--mono);font-size:11.5px;background:var(--wash);padding:.05rem .25rem}
+#sheet .close{position:absolute;right:1.6rem;top:1.5rem;color:var(--ink);
+  font-size:11px;text-transform:uppercase;letter-spacing:.11em;font-weight:600;
+  border-bottom:1px solid var(--ink-3);padding-bottom:.05rem}
+#sheet .close:hover{color:var(--red);border-bottom-color:var(--red)}
+.rung{display:grid;grid-template-columns:5.5rem 1fr;gap:0 1rem;padding:.2rem 0;
+  border-bottom:1px solid var(--rule);font-size:.8125rem;line-height:1.55;color:var(--ink-2)}
+.rung .n{text-align:right;color:var(--ink);font-weight:600;font-variant-numeric:tabular-nums}
+.rung.sub .n{color:var(--ink-3);font-weight:500}
+.rung.sub .w{padding-left:1rem;color:var(--ink-3)}
+.keys{margin-top:.5rem;font-size:.8125rem;line-height:2.1;color:var(--ink-2)}
+.keys b{display:inline-block;min-width:1.4rem;text-align:center;color:var(--ink);
+  border:1px solid var(--rule-2);font-family:var(--mono);font-size:11px;font-weight:600;
+  margin-right:.3rem;padding:.05rem 0}
+
+@media (max-width:56rem){
+  h1{grid-column:1/-1}
+  .mhside{grid-column:1/-1;align-items:flex-start;text-align:left;margin-top:.8rem}
+  .thesis span{grid-column:1/-1}
+  .regrow{grid-template-columns:1fr 5rem}
+  .regrow .rgg{display:none}
+}
+@media (max-width:34rem){
+  :root{--gut:1.1rem;--ref:2.4rem;--lab:7.2rem}
+  body{font-size:14px}
+  .pl-tools{margin-left:0;width:100%}
+  .crow{grid-template-columns:var(--lab) repeat(var(--n),minmax(12.5rem,1fr))}
+  .chead{flex-direction:column;gap:.15rem}
+  .ccount{text-align:left}
+  .say{grid-template-columns:3.6rem 1fr;gap:0 .7rem}
+  a.role{grid-template-columns:1.6rem 1fr;gap:0 .6rem}
+  a.role .rk{grid-column:2;text-align:left;margin-top:.1rem}
+  #sheet .in{padding:1.6rem 1.2rem 3rem}
+}
+</style>
+
+<header class="sheet">
+  <div class="masthead">
+    <h1 id="h1"></h1>
+    <div class="mhside">
+      <div>
+        <div class="micro k">Snapshot</div>
+        <time id="snap"></time>
+      </div>
+      <div>
+        <div class="micro k">Roles open on their own boards</div>
+        <div class="big num" id="rolesum"></div>
+      </div>
+    </div>
+  </div>
+  <p class="thesis"><span id="work"></span></p>
+</header>
+
+<!-- ============================================ the comparison plate -->
+<section id="sitting" class="sheet" aria-label="your shortlist"></section>
+
+<!-- ============================================ the deal -->
+<section id="deal" class="sheet">
+  <div id="controls">
+    <label><span class="micro lbl">I am in</span>
+      <select id="dept" aria-label="field"></select></label>
+    <label><span class="micro lbl">Looking in</span>
+      <select id="place" aria-label="place"></select></label>
+    <label><span class="micro lbl">Dealt by</span>
+      <select id="order" aria-label="the order the companies are dealt in"></select></label>
+  </div>
+  <div class="cnotes">
+    <label class="giants"><input type="checkbox" id="giants" checked>
+      <span id="giantlab"></span></label>
+    <p class="orderwhy" id="orderwhy"></p>
+  </div>
+
+  <div style="padding-top:.85rem">
+    <p class="yield" id="yield"></p>
+    <p id="starts"></p>
+    <p class="prov" id="prov"></p>
+  </div>
+
+  <div id="cards"></div>
+</section>
+
+<!-- ============================================ set aside -->
+<section class="aside sheet" id="asideBox" hidden>
+  <h2>Set aside, not cut</h2>
+  <p id="asideWhy"></p>
+  <div class="names" id="asideNames"></div>
+</section>
+
+<!-- ============================================ the register -->
+<div class="sheet">
+  <details class="reg" id="regBox">
+    <summary id="regSum">see all 789 companies as one list</summary>
+    <div id="reg"></div>
+  </details>
+</div>
+<div id="endmark" class="sheet"></div>
+
+<!-- ============================================ the funnel sheet -->
+<div id="sheet" role="dialog" aria-label="how this list was built">
+  <div class="in">
+    <button class="close" id="sheetClose">close &#10005;</button>
+    <div id="sheetBody"></div>
+  </div>
+</div>
+
+<script id="head-data" type="application/json">__HEAD_JSON__</script>
+<script>
+/* =====================================================================
+   r05-c — "the comparison plate"
+
+   Three departures, one craft:
+     1. the shortlist is the HEAD of the page and becomes an aligned
+        comparison the moment two companies are in it — the same rows, side
+        by side, which is the A-or-B decision no prior variant supported;
+     2. the deal is dealt in hands of ten, and the rule between hands spends
+        the reader's own record;
+     3. the card says what the company IS before it says who vouched — in
+        the page's voice where the build has read the company, and in the
+        company's own board headings where it has not.
+
+   The craft is the live register's: twelve columns, hairline rules, 11px
+   uppercase micro-labels, tabular numerals, crop marks, and one red spent
+   only on the reader's own record.
+   ===================================================================== */
+var HEAD = JSON.parse(document.getElementById('head-data').textContent);
+var META = HEAD.meta, DL = HEAD.dept_labels, PL = HEAD.place_labels;
+var IX = null;                 // all 789, once data/index.json lands
+var ROWS = [];                 // the slugs currently dealt, in order
+var SHARDS = {};               // slug -> roles, fetched per company
+var TODAY = new Date();
+var LOAD = String(Date.now()) + '.' + Math.random().toString(36).slice(2, 7);
+var LETTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+/* ---------------------------------------------------------------- state */
+var SKEY = 'roleatlas.r05c.v1';
+var S = {keeps: {}};
+try { S = JSON.parse(localStorage.getItem(SKEY)) || {keeps: {}}; } catch (e) { S = {keeps: {}}; }
+if (!S.keeps) S.keeps = {};
+function save() { try { localStorage.setItem(SKEY, JSON.stringify(S)); } catch (e) {} }
+
+var Q = {f: 'any', p: 'any', g: 1, o: 'roles'};
+
+/* ---------------------------------------------------------------- helpers */
+function esc(s) {
+  return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) {
+    return {'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c];
+  });
+}
+function n(x) { return Number(x || 0).toLocaleString('en-US'); }
+function pad(i) { return (i < 10 ? '00' : i < 100 ? '0' : '') + i; }
+var MON = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+function day(d) { return MON[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear(); }
+function dayKey(t) { var d = new Date(t); return d.toISOString().slice(0, 10); }
+function plural(k, one, many) { return k === 1 ? one : (many || one + 's'); }
+
+/* matching roles for a company under the current cut */
+function match(c) {
+  if (Q.f === 'any' && Q.p === 'any') return c.r;
+  if (Q.p === 'any') return c.d[Q.f] || 0;
+  if (Q.f === 'any') return c.p[Q.p] || 0;
+  var t = 0, x = c.x;
+  for (var i = 0; i < x.length; i++) if (x[i][0] === Q.f && x[i][1] === Q.p) t += x[i][2];
+  return t;
+}
+function cut(list) {
+  var out = [];
+  for (var i = 0; i < list.length; i++) {
+    var c = list[i], m = match(c);
+    if (m > 0) { c._m = m; out.push(c); }
+  }
+  return out;
+}
+function ordered(list) {
+  if (Q.o === 'hiring') {
+    return list.slice().sort(function (a, b) {
+      var ah = a.hi === undefined ? -1 : a.hi, bh = b.hi === undefined ? -1 : b.hi;
+      if (bh !== ah) return bh - ah;
+      return b._m - a._m || b.r - a.r || (a.n < b.n ? -1 : 1);
+    });
+  }
+  return list.slice().sort(function (a, b) {
+    return b._m - a._m || b.r - a.r || (a.n < b.n ? -1 : 1);
+  });
+}
+
+/* ---------------------------------------------------------------- the URL */
+function readHash() {
+  var h = location.hash.replace(/^#/, ''); if (!h) return;
+  h.split('&').forEach(function (part) {
+    var kv = part.split('='), k = kv[0], v = decodeURIComponent(kv[1] || '');
+    if (k === 'f') Q.f = v; else if (k === 'p') Q.p = v;
+    else if (k === 'g') Q.g = v === '1' ? 1 : 0;
+    else if (k === 'o') Q.o = (v === 'hiring' ? 'hiring' : 'roles');
+    else if (k === 'k' && v) {
+      v.split(',').forEach(function (slug) {
+        if (!slug) return;
+        // A shortlist that arrived in a link is not a keep the reader made.
+        // It renders with no date and says where it came from, until they
+        // press keep themselves.
+        if (!S.keeps[slug]) S.keeps[slug] = {via: 'link', kept_at: null, opened: [], applied: null};
+      });
+    }
+  });
+}
+function writeHash() {
+  var slugs = Object.keys(S.keeps).filter(isKept);
+  var bits = ['f=' + Q.f, 'p=' + Q.p, 'g=' + Q.g, 'o=' + Q.o];
+  if (slugs.length) bits.push('k=' + slugs.join(','));
+  try { history.replaceState(null, '', '#' + bits.join('&')); } catch (e) {}
+}
+function shareURL() { return location.origin + location.pathname + location.hash; }
+
+/* ================================================================ the head */
+function paintHead() {
+  var f = META.funnel;
+  document.getElementById('h1').innerHTML =
+    '<span class="n">' + n(META.companies) + '</span> companies hiring';
+  document.getElementById('snap').textContent =
+    day(new Date(META.snapshot + 'T12:00:00'));
+  document.getElementById('rolesum').textContent = n(META.roles_open_sum);
+  document.getElementById('work').innerHTML =
+    'We read <b>' + n(f.read) + '</b> companies to get here. <b>' + n(f.not_qualified) +
+    '</b> did not qualify, <b>' + n(f.no_board) + '</b> had no job board we could resolve. ' +
+    'Every company below is on someone named’s list, and every count is read off ' +
+    'the company’s own board. <button class="lk" id="fbtn">How &#8599;</button>';
+  document.getElementById('fbtn').onclick = function () { openSheet(); };
+}
+
+/* ========================================================= the comparison plate
+
+   Two hands, kept apart. `kept_at` is only ever set by the reader pressing
+   keep. Opening a role writes an `opened` row and nothing else — a company you
+   opened a role at appears on the plate, but it is not kept and does not say
+   it was. r04-a printed "kept Aug 4" for a company nobody kept; this is the
+   same data with the page's hand taken back out of it. */
+function isKept(slug) { var k = S.keeps[slug]; return !!(k && k.kept_at); }
+function nOpened(slug) { var k = S.keeps[slug]; return k && k.opened ? k.opened.length : 0; }
+function sitSlugs() {
+  return Object.keys(S.keeps).filter(function (s) {
+    var k = S.keeps[s];
+    return k.kept_at || k.via === 'link' || (k.opened && k.opened.length);
+  }).sort(function (a, b) {
+    var ka = isKept(a) ? 0 : 1, kb = isKept(b) ? 0 : 1;
+    if (ka !== kb) return ka - kb;
+    return (S.keeps[a].kept_at || 0) - (S.keeps[b].kept_at || 0);
+  });
+}
+function keptList() {
+  var out = [];
+  sitSlugs().forEach(function (slug) {
+    var c = byslug(slug);
+    if (c) out.push(c);
+  });
+  return out;
+}
+function byslug(slug) {
+  var list = IX ? IX.companies : HEAD.companies;
+  for (var i = 0; i < list.length; i++) if (list[i].s === slug) return list[i];
+  if (IX) return null;
+  var g = (HEAD.giants_list || []).filter(function (x) { return x[2] === slug; })[0];
+  return g ? {s: slug, n: g[0], r: g[1], d: {}, p: {}, x: [], g: null, say: {v: 'none'}} : null;
+}
+function openedAt(k) {
+  var t = 0; (k.opened || []).forEach(function (o) { if (o.at > t) t = o.at; }); return t;
+}
+function askDue(slug) {
+  var k = S.keeps[slug];
+  if (!k || k.applied || k.asked) return false;
+  if (!k.opened || !k.opened.length) return false;
+  // The reader's answer belongs to a later moment than the click. The gate is
+  // the day; with a pinned snapshot the only other clock the page has is a
+  // fresh page load, and it says so in the sheet.
+  var last = k.opened[k.opened.length - 1];
+  return dayKey(openedAt(k)) !== dayKey(Date.now()) || last.load !== LOAD;
+}
+
+/* One row of the plate: a micro-label in the rail, then one cell per kept
+   company. Every row uses the same grid template, so the cells line up and
+   the comparison is the alignment itself — no scoring, no verdict. */
+function row(label, cells, cls) {
+  return '<div class="crow' + (cls ? ' ' + cls : '') + '"><div class="clab">' + label + '</div>' +
+    cells.map(function (c) { return '<div class="ccol">' + c + '</div>'; }).join('') + '</div>';
+}
+function ghost() { return '<span class="ghostbar"></span>'; }
+
+function cellName(c, i) {
+  return '<span class="ltr">' + LETTERS[i] + '</span>' +
+    '<a class="cnm" href="#c-' + esc(c.s) + '" data-jump="' + esc(c.s) + '">' + esc(c.n) + '</a>';
+}
+function cellWhat(c) {
+  var say = c.say || {v: 'none'};
+  if (say.v === 'ours') return '<p class="said">' + esc(say.w) + '</p>';
+  if (say.v === 'theirs') {
+    return '<p class="unread">Not read yet. Their board files roles under ' +
+      say.bw.slice(0, 3).map(function (w) {
+        return esc(w[0]) + ' <b>' + w[1] + '</b>';
+      }).join(', ') + '.</p>';
+  }
+  return '<p class="unread">Not read yet, and their board files its roles under no heading at all.</p>';
+}
+function cellFor(c) {
+  var say = c.say || {v: 'none'};
+  if (say.v === 'ours' && say.f) return '<p>' + esc(say.f) + '</p>';
+  return ghost();
+}
+function cellWhy(c) {
+  var say = c.say || {v: 'none'};
+  if (say.v !== 'ours' || !say.y) return ghost();
+  return '<p>' + esc(say.y) + '</p>';
+}
+/* Provenance as a ROW, not as a footnote under every column. Repeated under
+   each column it was two lines of identical small caps twice over — the
+   wallpaper the brief warns about. As a row it becomes what it actually is:
+   a fact that varies company by company, aligned with the others, and read
+   in one glance across. */
+function cellSource(c) {
+  var say = c.say || {v: 'none'};
+  if (say.v === 'ours') {
+    return '<p>Written by this page from their own site' +
+      (say.ck ? ', <b>then checked against it</b>' : ', <b>not re-checked</b>') + '</p>';
+  }
+  if (say.v === 'theirs') {
+    return '<p class="unread">Not read yet. The line above is their own board’s ' +
+      'heading words, not a summary.</p>';
+  }
+  return '<p class="unread">Not read yet, and their board carries no headings either.</p>';
+}
+function cellVouch(c) {
+  if (!c.g) return ghost();
+  return '<p><a class="rcpt" href="' + esc(c.g.url) + '" target="_blank" rel="noopener">' +
+    esc(c.g.line) + ' &#8599;</a></p>';
+}
+function cellStatus(c) {
+  // A fact and its source, in the page's ordinary ink. No colour, no adjective,
+  // no ranking. A company that went public young is a different thing from one
+  // that did not, and which of those the reader wants is theirs to decide.
+  // Where no source publishes a status, the row says so rather than drawing a
+  // blank the reader has to interpret.
+  if (!c.g) return ghost();
+  if (!c.g.status) {
+    return '<p class="unread">' + esc(c.g.who) + ' publishes no status for them</p>';
+  }
+  return '<p>' + esc(c.g.status) + ' &mdash; per Y Combinator, ' + esc(c.g.batch) + '</p>';
+}
+function cellRoles(c) {
+  var m = c._m === undefined ? match(c) : c._m;
+  var h = '<span class="big num">' + n(c.r) + '</span>' +
+    '<span class="sub">open on their board</span>';
+  if (m !== c.r) h += '<span class="sub">' + n(m) + ' in this cut</span>';
+  return h;
+}
+function cellStaff(c) {
+  if (!c.ts) return '<span class="big nil">No staff count stated in any source</span>';
+  return '<span class="big num">' + n(c.ts) + '</span><span class="sub">people, per Y Combinator</span>';
+}
+function cellYou(c) {
+  var k = S.keeps[c.s], nOpen = (k.opened || []).length, lines = [];
+  if (k.kept_at) lines.push('Kept ' + esc(day(new Date(k.kept_at))));
+  else if (k.via === 'link') lines.push('<span class="none">Arrived in the link you opened &mdash; you have not kept it</span>');
+  else lines.push('<span class="none">Not kept &mdash; here because you opened a role</span>');
+  if (nOpen) {
+    lines.push(nOpen + ' ' + plural(nOpen, 'role') + ' opened on ' +
+      esc(day(new Date(openedAt(k)))));
+  }
+  if (nOpen && k.applied) {
+    lines.push('You said: ' + esc(k.applied === 'yes' ? 'applied' : 'did not apply'));
+  }
+  var h = '<p class="you">' + lines.join('<br>') + '</p>';
+  if (askDue(c.s)) {
+    h += '<div class="ask"><div class="q">On ' + esc(day(new Date(openedAt(k)))) +
+      ' you opened ' + nOpen + ' ' + plural(nOpen, 'role') + ' at ' + esc(c.n) +
+      '. Did you apply?</div>' +
+      '<div class="as"><button data-ans="yes" data-s="' + esc(c.s) + '">yes</button>' +
+      '<button data-ans="no" data-s="' + esc(c.s) + '">no</button>' +
+      '<button data-ans="later" data-s="' + esc(c.s) + '">not yet</button></div></div>';
+  }
+  return h;
+}
+function cellActs(c) {
+  var k = S.keeps[c.s];
+  return '<div class="acts"><button data-jump="' + esc(c.s) + '">the card</button>' +
+    (k.kept_at ? '' : '<button data-keep="' + esc(c.s) + '">keep</button>') +
+    '<button data-drop="' + esc(c.s) + '">drop</button></div>';
+}
+
+/* The empty plate. It must show the SHAPE of the decision without spending the
+   fold on it: the first build drew all eight rows full height and pushed every
+   company card below 900px, which is the one thing this page cannot afford.
+   So the rows print as a legend band — the same words, in the same voice, on
+   one line — and become real rows the moment there is anything to compare. */
+var PLATE_ROWS = ['What they do', 'For whom', 'Why them', 'Summary', 'Who vouched',
+  'Status', 'Roles open', 'Staff listed', 'Your record'];
+function emptyPlate() {
+  return '<p class="pl-empty">Keep a company and it fills column A; keep a second and the two ' +
+    'stand in the same rows &mdash; which is the choice you are actually making, and when you ' +
+    'leave, what you take with you.</p>' +
+    '<div class="pl-legend"><span class="lg-k">The rows they will stand in</span>' +
+    PLATE_ROWS.map(function (r) { return '<span class="lg-r">' + r + '</span>'; }).join('') +
+    '</div>';
+}
+
+function paintSitting() {
+  var box = document.getElementById('sitting');
+  var list = keptList();
+  var opens = 0, kept = 0;
+  Object.keys(S.keeps).forEach(function (s) {
+    opens += (S.keeps[s].opened || []).length;
+    if (isKept(s)) kept++;
+  });
+
+  var h = '<div class="pl-head"><span class="micro t">Your shortlist</span>' +
+    '<span class="stamp' + (kept ? '' : ' off') + '">' + kept + ' kept</span>' +
+    '<span class="micro m">' + opens + ' ' + plural(opens, 'role') + ' opened</span>' +
+    (list.length > kept
+      ? '<span class="micro m">' + (list.length - kept) + ' here but not kept</span>' : '') +
+    '<span class="micro m">' + esc(day(TODAY)) + '</span>';
+  if (list.length) {
+    h += '<span class="pl-tools">' +
+      '<button id="copyTxt">copy as text</button>' +
+      '<button id="copyLink">copy the link</button></span>';
+  }
+  h += '</div>';
+
+  if (!list.length) {
+    box.innerHTML = h + emptyPlate();
+    return;
+  }
+
+  var cell = function (fn) { return list.map(fn); };
+  h += '<div class="cmp-scroll"><div class="cmp" style="--n:' + list.length + '">';
+  h += row('', list.map(cellName), 'head');
+  h += row('What they do', cell(cellWhat));
+  h += row('For whom', cell(cellFor));
+  h += row('Why them', cell(cellWhy));
+  h += row('Summary', cell(cellSource));
+  h += row('Who vouched', cell(cellVouch));
+  h += row('Status', cell(cellStatus));
+  h += row('Roles open', cell(cellRoles));
+  h += row('Staff listed', cell(cellStaff));
+  h += row('Your record', cell(cellYou));
+  h += row('', cell(cellActs), 'foot');
+  h += '</div></div>';
+
+  h += '<p class="pl-foot">' +
+    (list.length === 1
+      ? 'Keep one more and the two stand side by side in these same rows. '
+      : 'Two numbers, two sources, never divided into a score: the staff Y Combinator lists ' +
+        'and the roles the board lists tonight. Set in the same rows, you can do the ' +
+        'arithmetic this page refuses to do for you. ') +
+    'Everything red on this page is something you did; everything the data says is in ink.</p>';
+  h += '<div id="copyout"><textarea readonly id="copyta"></textarea>' +
+    '<p id="copynote"></p></div>';
+  box.innerHTML = h;
+
+  box.querySelectorAll('[data-jump]').forEach(function (b) {
+    b.onclick = function (e) { e.preventDefault(); jump(b.getAttribute('data-jump')); };
+  });
+  box.querySelectorAll('[data-drop]').forEach(function (b) {
+    b.onclick = function () { drop(b.getAttribute('data-drop')); };
+  });
+  box.querySelectorAll('[data-keep]').forEach(function (b) {
+    b.onclick = function () { toggleKeep(b.getAttribute('data-keep')); };
+  });
+  box.querySelectorAll('[data-ans]').forEach(function (b) {
+    b.onclick = function () { answer(b.getAttribute('data-s'), b.getAttribute('data-ans')); };
+  });
+  document.getElementById('copyTxt').onclick = function () { doCopy('text'); };
+  document.getElementById('copyLink').onclick = function () { doCopy('link'); };
+}
+
+function answer(slug, a) {
+  var k = S.keeps[slug]; if (!k) return;
+  // `applied` is the reader's word, never the page's. It is only ever set here,
+  // from a button whose label is the answer, and it is asked exactly once.
+  k.asked = true;
+  k.applied = (a === 'later') ? null : a;
+  save(); paintSitting();
+}
+
+/* ---------------------------------------------------------------- copy out */
+function sittingText() {
+  var list = keptList();
+  var lines = [];
+  lines.push(list.length + ' ' + plural(list.length, 'company', 'companies') + " I'm looking at");
+  lines.push('from a list of ' + n(META.companies) + ' companies whose own job boards were read on ' +
+    day(new Date(META.snapshot + 'T12:00:00')) + '.');
+  lines.push('this shortlist: ' + shareURL());
+  lines.push('');
+  list.forEach(function (c, i) {
+    var k = S.keeps[c.s], m = c._m === undefined ? match(c) : c._m;
+    lines.push((i + 1) + '. ' + c.n.toUpperCase() + ' — ' + c.r + ' roles open' +
+      (m !== c.r ? ', ' + m + ' of them in the cut I was looking at' : ''));
+    var say = c.say || {v: 'none'};
+    if (say.v === 'ours') {
+      lines.push('   What they do: ' + say.w);
+      if (say.f) lines.push('   For whom: ' + say.f);
+      if (say.y) lines.push('   Why them: ' + say.y);
+      lines.push('   (a summary the page wrote from their site' +
+        (say.ck ? ', then checked against it' : ', not yet checked against it') + ')');
+    } else if (say.v === 'theirs') {
+      lines.push('   No summary yet. Their own board files roles under: ' +
+        say.bw.slice(0, 4).map(function (w) { return w[0] + ' ' + w[1]; }).join(' · '));
+    } else {
+      lines.push('   No summary yet, and their board files roles under no heading.');
+    }
+    if (c.g) {
+      lines.push('   Who vouched: ' + c.g.line);
+      if (c.g.status) lines.push('   Status: ' + c.g.status + ', per Y Combinator, ' + c.g.batch);
+      lines.push('   ' + c.g.url);
+    }
+    if (c.ts) lines.push('   Staff: Y Combinator lists ' + c.ts + ' people');
+    if ((k.opened || []).length) {
+      lines.push('   Roles I opened:');
+      k.opened.forEach(function (o) { lines.push('   - ' + o.t + '  ' + o.u); });
+    }
+    lines.push('');
+  });
+  if (Q.g) lines.push('Not shown: ' + META.giants + ' companies with 100 or more roles open were set aside.');
+  return lines.join('\n');
+}
+function doCopy(kind) {
+  var text = kind === 'link' ? shareURL() : sittingText();
+  var out = document.getElementById('copyout'), ta = document.getElementById('copyta');
+  if (!out) return;
+  ta.value = text; out.className = 'on';
+  var ok = false;
+  try { ta.focus(); ta.select(); ok = document.execCommand('copy'); } catch (e) { ok = false; }
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    try { navigator.clipboard.writeText(text); ok = true; } catch (e) {}
+  }
+  document.getElementById('copynote').textContent = ok
+    ? 'copied — and here it is, so you can see exactly what you are sending'
+    : 'your browser would not let the page reach the clipboard; the text is here, select it and copy';
+}
+
+/* ================================================================ the deal */
+function fillSelects() {
+  var d = document.getElementById('dept'), p = document.getElementById('place'), o = document.getElementById('order');
+  var dh = '<option value="any">anything (' + n(META.companies) + ' companies)</option>';
+  HEAD.depts.forEach(function (x) {
+    dh += '<option value="' + x.k + '">' + esc(x.l) + ' (' + n(x.c) + ' companies, ' + n(x.r) + ' roles)</option>';
+  });
+  d.innerHTML = dh;
+  var groups = {}, order = [];
+  HEAD.places.forEach(function (x) {
+    if (!groups[x.g]) { groups[x.g] = []; order.push(x.g); }
+    groups[x.g].push(x);
+  });
+  var ph = '<option value="any">anywhere (' + n(META.companies) + ' companies)</option>';
+  order.forEach(function (gname) {
+    ph += '<optgroup label="' + esc(gname) + '">';
+    groups[gname].forEach(function (x) {
+      ph += '<option value="' + x.k + '">' + esc(x.l) + ' (' + n(x.c) + ' companies, ' + n(x.r) + ' roles)</option>';
+    });
+    ph += '</optgroup>';
+  });
+  p.innerHTML = ph;
+  o.innerHTML = '<option value="roles">the most roles for me</option>' +
+    '<option value="hiring">how hard they are hiring for their size</option>';
+  d.value = Q.f; p.value = Q.p; o.value = Q.o;
+  document.getElementById('giants').checked = !!Q.g;
+  d.onchange = function () { Q.f = d.value; render(); };
+  p.onchange = function () { Q.p = p.value; render(); };
+  o.onchange = function () { Q.o = o.value; render(); };
+  document.getElementById('giants').onchange = function () {
+    Q.g = document.getElementById('giants').checked ? 1 : 0; render();
+  };
+}
+
+function orderWhy() {
+  if (Q.o === 'hiring') {
+    return 'Two numbers, two sources, never divided into a score: the staff count ' +
+      'Y Combinator lists and the roles the company’s own board lists today. ' +
+      n(META.intensity.n) + ' companies state both; the other ' +
+      n(META.companies - META.intensity.n) + ' state no staff count anywhere and are dealt after them, ' +
+      'not hidden. Y Combinator’s headcount carries no date, so where it is small and the board is ' +
+      'large — ' + n(META.intensity.small) + ' companies list under ten people — a hiring spree and a ' +
+      'stale row look identical. Both numbers are on the card. The page does not decide which it is.';
+  }
+  return 'Matching roles first, then total roles. Both are counts of what is open on the company’s ' +
+    'own board tonight, which is the only signal in this corpus with no gaps in it.';
+}
+
+function giantLabel() {
+  return 'Set aside the <b>' + n(META.giants) + '</b> companies with 100 or more roles open' +
+    (Q.g ? ' — <button class="lk" id="showg">show them</button>' : ' <b>(shown)</b>');
+}
+
+function yieldLine(shown, hidden) {
+  var f = Q.f === 'any' ? 'any field' : DL[Q.f];
+  var p = Q.p === 'any' ? 'anywhere' : PL[Q.p];
+  var s = '<b>' + n(shown) + '</b> ' + plural(shown, 'company', 'companies') +
+    (Q.f === 'any' && Q.p === 'any'
+      ? ' are hiring tonight.'
+      : ' are hiring in ' + esc(f) + ' ' + (Q.p === 'any' ? 'anywhere' : 'in ' + esc(p)) + '.');
+  var bits = [];
+  if (hidden) bits.push(n(hidden) + ' more have 100 or more roles open and are set aside below');
+  if (IX && (Q.f !== 'any' || Q.p !== 'any')) {
+    bits.push(n(IX.companies.length - shown - hidden) + ' of the ' + n(IX.companies.length) +
+      ' are hiring, but not for this');
+  }
+  return s + (bits.length ? '<span class="m">' + esc(bits.join(' · ')) + '.</span>' : '');
+}
+
+/* One-click ways in, each priced before it is clicked. The counts come from
+   the build, over the same cut the click will produce. */
+function paintStarts() {
+  var box = document.getElementById('starts');
+  if (Q.f !== 'any' || Q.p !== 'any') { box.innerHTML = ''; return; }
+  var h = '<span class="micro sl">Most people start here</span>';
+  (HEAD.starts || []).forEach(function (st) {
+    h += '<button data-f="' + st[0] + '" data-p="' + st[1] + '">' + esc(DL[st[0]]) + ' in ' +
+      esc(PL[st[1]]) + ' <span class="c">' + n(st[2]) + '</span></button>';
+  });
+  box.innerHTML = h;
+  box.querySelectorAll('button').forEach(function (b) {
+    b.onclick = function () {
+      Q.f = b.getAttribute('data-f'); Q.p = b.getAttribute('data-p');
+      document.getElementById('dept').value = Q.f;
+      document.getElementById('place').value = Q.p;
+      render();
+    };
+  });
+}
+
+function provLine() {
+  var v = META.voice;
+  /* Said once, well, and never repeated on the cards themselves — a footnote
+     under 732 cards is wallpaper, and the unread cards already state their own
+     condition on their face. */
+  return '<b>' + n(v.ours) + '</b> of these companies carry a summary this page wrote from their ' +
+    'own site, <b>' + n(v.checked) + '</b> of them checked back against it. The other <b>' +
+    n(v.theirs + v.none) + ' have not been read yet</b> — their cards quote the headings their own ' +
+    'job board files roles under, and invent nothing. ' +
+    '<button class="lk" id="provmore">What this page will not say &#8599;</button>';
+}
+
+/* ---------------------------------------------------------------- one card */
+function cardHTML(c, i) {
+  var m = c._m, say = c.say || {v: 'none'};
+  var kept = isKept(c.s);
+  var h = '<article class="card' + (kept ? ' kept' : '') + '" id="c-' + esc(c.s) + '" data-slug="' +
+    esc(c.s) + '" tabindex="-1">';
+  h += '<div class="cref"><span class="appn cno">' + pad(i + 1) + '</span></div>';
+  h += '<div class="cbody">';
+  h += '<div class="chead"><h3 class="cname">' + esc(c.n) + '</h3>' +
+    '<div class="ccount"><b class="num">' + n(c.r) + '</b><span class="u">roles open' +
+    (m !== c.r ? ' &middot; <span class="mt">' + n(m) + '</span> match' : '') + '</span></div></div>';
+
+  /* WHAT / FOR WHOM / WHY THEM, on the collapsed card, in the largest voice on
+     it after the name — the product's winning list is six-of-ten unknown
+     companies, so this is the line that makes a stranger's name a find. */
+  h += '<div class="says">';
+  if (say.v === 'ours') {
+    h += '<div class="say what"><span class="k">What</span><div class="v">' + esc(say.w) + '</div></div>';
+    if (say.f) h += '<div class="say sub"><span class="k">For</span><div class="v">' + esc(say.f) + '</div></div>';
+    if (say.y) h += '<div class="say sub"><span class="k">Why</span><div class="v">' + esc(say.y) + '</div></div>';
+  } else if (say.v === 'theirs') {
+    var bw = say.bw.slice(0, 5);
+    h += '<div class="say unread"><span class="k">Unread</span><div class="v">Not read yet. Their own board files ' +
+      n(c.r) + ' open ' + plural(c.r, 'role') + ' under ' +
+      (say.bw.length === 1 ? 'one heading: ' : 'these headings: ') +
+      bw.map(function (w) { return esc(w[0]) + ' <b>' + w[1] + '</b>'; }).join(' &middot; ') +
+      (say.bw.length > 5 ? ' &middot; +' + (say.bw.length - 5) : '') + '</div></div>';
+  } else {
+    h += '<div class="say unread"><span class="k">Unread</span><div class="v">Not read yet, and their own board files its ' +
+      n(c.r) + ' roles under no heading at all. Nothing here is composed to fill the gap.</div></div>';
+  }
+  h += '</div>';
+
+  h += '<p class="ev">';
+  if (c.g) {
+    h += '<a href="' + esc(c.g.url) + '" target="_blank" rel="noopener">' + esc(c.g.line) + ' &#8599;</a>';
+    if (c.g.status) h += '<span class="sep">&middot;</span>' + esc(c.g.status) + ', per Y Combinator';
+  }
+  if (c.ts) h += '<span class="sep">&middot;</span>Y Combinator lists ' + n(c.ts) + ' people';
+  h += '</p>';
+
+  var dparts = Object.keys(c.d).sort(function (a, b) { return c.d[b] - c.d[a]; });
+  var top = dparts.slice(0, 3).map(function (k) { return esc(DL[k]) + ' ' + c.d[k]; });
+  if (dparts.length > 3) top.push('+' + (dparts.length - 3) + ' more');
+  var pparts = Object.keys(c.p).sort(function (a, b) { return c.p[b] - c.p[a]; }).slice(0, 3)
+    .map(function (k) { return esc(PL[k]) + ' ' + c.p[k]; });
+  h += '<p class="mix">' + top.join(' &middot; ') + '<span class="bar">/</span>' +
+    pparts.join(' &middot; ') + '</p>';
+
+  h += '<div class="acts">' +
+    '<button class="keep">' + (kept ? 'kept' : 'keep') + '</button>' +
+    '<button class="open">' + n(m) + ' ' + (Q.f === 'any' ? '' : esc(DL[Q.f]).toLowerCase() + ' ') +
+    plural(m, 'role') + ' &#8594;</button></div>';
+  h += '<div class="roles" hidden></div></div></article>';
+  return h;
+}
+
+/* ---------------------------------------------------------------- hands */
+function handHTML(i, upto, total, last) {
+  return '<div class="hand' + (last ? ' last' : '') + '" data-upto="' + upto + '" data-total="' + total +
+    '"><span class="hn">' + (last ? 'the end of the cut' : 'hand ' + i) + '</span>' +
+    '<span class="hb"></span><span class="hs"></span></div>';
+}
+function refreshHands() {
+  var hands = document.querySelectorAll('#cards .hand');
+  for (var i = 0; i < hands.length; i++) {
+    var upto = +hands[i].getAttribute('data-upto'), total = +hands[i].getAttribute('data-total');
+    var kept = 0, opened = 0;
+    for (var j = 0; j < upto; j++) {
+      if (isKept(ROWS[j])) kept++;
+      opened += nOpened(ROWS[j]);
+    }
+    var ahead = total - upto;
+    var txt;
+    if (!ahead) {
+      txt = 'that is all ' + n(total) + ' of them' +
+        (kept ? ' · you kept <b>' + kept + '</b>' : ' · you kept nothing');
+    } else {
+      txt = n(upto) + ' dealt · ' + (kept
+        ? 'you kept <b>' + kept + '</b>' + (opened ? ' and opened <b>' + opened + '</b> ' + plural(opened, 'role') : '')
+        : 'nothing kept yet') + ' · ' + n(ahead) + ' still ahead';
+    }
+    hands[i].querySelector('.hs').innerHTML = txt;
+  }
+}
+
+/* ---------------------------------------------------------------- render */
+var STAMPED = false;
+function render() {
+  /* Before data/index.json lands, the page holds one screenful of the default
+     cut and nothing else. It will paint that, and it will state the default
+     cut's true size — but it will not pretend to answer a narrowed question it
+     does not have the rows for. Anything narrower waits the extra beat. */
+  var deflt = Q.f === 'any' && Q.p === 'any' && Q.o === 'roles' && Q.g === 1;
+  if (!IX && !deflt) {
+    document.getElementById('yield').innerHTML = 'Reading the register…';
+    document.getElementById('cards').innerHTML = '';
+    document.getElementById('starts').innerHTML = '';
+    document.getElementById('prov').innerHTML = provLine();
+    paintSitting();
+    return;
+  }
+  var all = IX ? IX.companies : HEAD.companies;
+  var hiddenGiants = 0;
+  var pool = [];
+  for (var i = 0; i < all.length; i++) {
+    if (Q.g && all[i].r >= 100) { if (match(all[i]) > 0) hiddenGiants++; continue; }
+    pool.push(all[i]);
+  }
+  var list = ordered(cut(pool));
+  ROWS = list.map(function (c) { return c.s; });
+  // the pre-index head holds 14 rows of a 732-company cut; the rules must not
+  // tell the reader the cut is 14 long
+  var total = IX ? list.length : META.default_cut;
+  var partial = !IX;
+
+  document.getElementById('orderwhy').textContent = orderWhy();
+  document.getElementById('giantlab').innerHTML = giantLabel();
+  var sg = document.getElementById('showg');
+  if (sg) sg.onclick = function (e) { e.preventDefault(); document.getElementById('giants').click(); };
+  document.getElementById('yield').innerHTML =
+    yieldLine(IX ? list.length : total, IX ? hiddenGiants : META.giants);
+  paintStarts();
+  document.getElementById('prov').innerHTML = provLine();
+  var pm = document.getElementById('provmore');
+  if (pm) pm.onclick = function () { openSheet('will-not-say'); };
+
+  var out = [], hand = 0;
+  for (var j = 0; j < list.length; j++) {
+    out.push(cardHTML(list[j], j));
+    if ((j + 1) % 10 === 0 && j + 1 < list.length) out.push(handHTML(++hand, j + 1, total, false));
+  }
+  if (list.length && !partial) out.push(handHTML(++hand, list.length, total, true));
+  else if (!list.length) {
+    out.push('<p class="yield" style="padding-top:1.1rem">No company in the register is hiring for that, tonight. ' +
+      'Nothing has been removed — widen either menu and they come straight back.</p>');
+  }
+  document.getElementById('cards').innerHTML = out.join('');
+  refreshHands();
+  wireCards();
+  paintAside();
+  paintSitting();
+  writeHash();
+  if (!STAMPED && list.length) {
+    STAMPED = true;
+    window.__firstCardPainted = performance.now();
+  }
+}
+
+function wireCards() {
+  var box = document.getElementById('cards');
+  box.querySelectorAll('.card').forEach(function (el) {
+    var slug = el.getAttribute('data-slug');
+    el.querySelector('.keep').onclick = function () { toggleKeep(slug); };
+    el.querySelector('.open').onclick = function () { expand(slug); };
+  });
+}
+
+function paintAside() {
+  var box = document.getElementById('asideBox');
+  if (!Q.g) { box.hidden = true; return; }
+  box.hidden = false;
+  document.getElementById('asideWhy').innerHTML =
+    'These ' + n(META.giants) + ' companies each have 100 or more roles open. They are the household ' +
+    'names, and they are not hard to find, so the deal starts without them. Nothing about them is ' +
+    'hidden or ranked down: <button class="lk" id="showg2">put them back in the deal</button> and they sort ' +
+    'by the same rule as everyone else.';
+  document.getElementById('showg2').onclick = function () { document.getElementById('giants').click(); };
+  document.getElementById('asideNames').textContent =
+    (HEAD.giants_list || []).map(function (g) { return g[0] + ' ' + g[1]; }).join('  ·  ');
+}
+
+/* ---------------------------------------------------------------- register */
+function paintRegister() {
+  var all = IX.companies;
+  document.getElementById('regSum').textContent =
+    'see all ' + n(all.length) + ' companies as one list — the register this page was cut from';
+  var out = [];
+  all.slice().sort(function (a, b) { return a.n.toLowerCase() < b.n.toLowerCase() ? -1 : 1; })
+    .forEach(function (c) {
+      out.push('<div class="regrow"><span class="rgn">' + esc(c.n) + '</span>' +
+        '<span class="rgg"><a href="' + esc(c.g.url) + '" target="_blank" rel="noopener">' +
+        esc(c.g.who) + ' &#8599;</a></span>' +
+        '<span class="rgr">' + n(c.r) + ' roles</span></div>');
+    });
+  document.getElementById('reg').innerHTML = out.join('');
+}
+
+/* ---------------------------------------------------------------- keeps */
+function toggleKeep(slug) {
+  var k = S.keeps[slug];
+  if (k && k.kept_at) {
+    k.kept_at = null;                     // un-keeping leaves the opens alone
+    if (!(k.opened && k.opened.length)) delete S.keeps[slug];
+  } else {
+    if (!k) k = S.keeps[slug] = {kept_at: null, opened: [], applied: null};
+    k.kept_at = Date.now();
+    k.via = 'you';
+  }
+  save(); markCard(slug);
+  refreshHands(); paintSitting(); writeHash();
+}
+function markCard(slug) {
+  var el = document.getElementById('c-' + slug);
+  if (!el) return;
+  var on = isKept(slug);
+  el.classList.toggle('kept', on);
+  el.querySelector('.keep').innerHTML = on ? 'kept' : 'keep';
+}
+function drop(slug) { delete S.keeps[slug]; save(); render(); }
+
+/* ---------------------------------------------------------------- expand */
+function expand(slug) {
+  var el = document.getElementById('c-' + slug);
+  if (!el) return;
+  var box = el.querySelector('.roles');
+  if (!box.hidden) { box.hidden = true; el.classList.remove('on'); return; }
+  box.hidden = false; el.classList.add('on');
+  if (SHARDS[slug]) { paintRoles(slug); return; }
+  box.innerHTML = '<div class="rnote">reading their board…</div>';
+  fetch('data/roles/' + slug + '.json').then(function (r) { return r.json(); })
+    .then(function (j) { SHARDS[slug] = j.roles; paintRoles(slug); })
+    .catch(function () { box.innerHTML = '<div class="rnote">their roles did not load. Reload and try again.</div>'; });
+}
+var SHOWN = {};
+function paintRoles(slug) {
+  var el = document.getElementById('c-' + slug), box = el.querySelector('.roles');
+  var rows = SHARDS[slug].filter(function (r) {
+    if (Q.f !== 'any' && r.d !== Q.f) return false;
+    if (Q.p !== 'any' && r.p.indexOf(Q.p) < 0) return false;
+    return true;
+  });
+  var lim = SHOWN[slug] || 8;
+  var k = S.keeps[slug], seen = {};
+  if (k) (k.opened || []).forEach(function (o) { seen[o.u] = 1; });
+  var stated = rows.filter(function (r) { return r.v; }).length;
+  var h = '<div class="rnote"><b>' + n(rows.length) + '</b> of their <b>' + n(SHARDS[slug].length) +
+    '</b> open roles match this cut. ' +
+    (stated
+      ? stated + ' of these ' + plural(stated, 'row', 'rows') + ' state whether they hire from abroad; the rest are silence, not a no.'
+      : 'None of these rows says anything about hiring from abroad — that is silence, not a no.') +
+    '</div>';
+  rows.slice(0, lim).forEach(function (r, i) {
+    h += '<a class="role' + (seen[r.u] ? ' seen' : '') + '" href="' + esc(r.u) +
+      '" target="_blank" rel="noopener" data-u="' + esc(r.u) + '" data-t="' + esc(r.t) + '">' +
+      '<span class="rn">' + (i < 9 ? pad(i + 1) : '') + '</span>' +
+      '<span class="rt">' + esc(r.t) +
+      (r.v ? '<span class="vchip">hires from abroad: ' + esc(r.v) + '</span>' : '') + '</span>' +
+      '<span class="rk">' + esc(r.l || 'their board did not say where') +
+      (r.w ? ' &middot; ' + esc(r.w) : '') + '</span></a>';
+  });
+  h += '<div class="rfoot">';
+  if (rows.length > lim) {
+    h += '<button class="more" data-more="' + esc(slug) + '">show the other ' +
+      n(rows.length - lim) + ' &#8594;</button>';
+  }
+  h += '<button class="more" data-collapse="1">collapse &#8593;</button></div>';
+  box.innerHTML = h;
+  box.querySelectorAll('a.role').forEach(function (a) {
+    a.onclick = function () { witness(slug, a.getAttribute('data-u'), a.getAttribute('data-t')); };
+  });
+  var mb = box.querySelector('[data-more]');
+  if (mb) mb.onclick = function () { SHOWN[slug] = lim + 25; paintRoles(slug); };
+  box.querySelector('[data-collapse]').onclick = function () { expand(slug); };
+}
+
+/* The page witnesses that a role was opened. It never concludes an application
+   from it: `applied` is set in answer() and nowhere else. */
+function witness(slug, url, title) {
+  var k = S.keeps[slug];
+  // kept_at stays null. The click is the page's hand; keeping is the reader's.
+  if (!k) { k = S.keeps[slug] = {kept_at: null, via: 'open', opened: [], applied: null}; }
+  if (!k.opened) k.opened = [];
+  if (!k.opened.some(function (o) { return o.u === url; })) {
+    k.opened.push({u: url, t: title, at: Date.now(), load: LOAD});
+  }
+  save();
+  refreshHands(); paintSitting(); writeHash();
+  setTimeout(function () { paintRoles(slug); }, 30);
+}
+
+function jump(slug) {
+  var el = document.getElementById('c-' + slug);
+  if (!el) {
+    if (Q.g) { document.getElementById('giants').click(); el = document.getElementById('c-' + slug); }
+  }
+  if (el) { el.scrollIntoView({block: 'center'}); el.focus(); }
+}
+
+/* ================================================================ the sheet */
+function sheetHTML() {
+  var f = META.funnel, v = META.voice, st = META.status || {};
+  var rung = function (num, word, sub) {
+    return '<div class="rung' + (sub ? ' sub' : '') + '"><span class="n">' + n(num) +
+      '</span><span class="w">' + esc(word) + '</span></div>';
+  };
+  var h = '<h2>How these ' + n(META.companies) + ' companies got here</h2>';
+  h += '<p>Every number below is counted by the build, not quoted from anyone. ' +
+    'The ladder runs from every company name the build read to the ones with something open tonight.</p>';
+  h += rung(f.read, 'company names read from the sources');
+  h += rung(f.not_qualified, 'did not qualify', true);
+  h += rung(f.not_software, 'not software', true);
+  h += rung(f.ambiguous, 'ambiguous', true);
+  h += rung(f.qualified, 'qualified as software companies with money behind them');
+  h += rung(f.no_board, 'no job board we could resolve', true);
+  h += rung(f.boards_read, 'boards actually read');
+  h += rung(f.nothing_open, 'read, nothing open', true);
+  h += rung(f.wrong_board, "turned out to be another company's board", true);
+  h += rung(f.empty, 'empty, unverified', true);
+  h += rung(META.companies, 'companies with something open tonight');
+  h += rung(META.roles, 'roles, each live on the company’s own board on ' + META.snapshot);
+
+  h += '<h3>Who vouched</h3><p>Every company on this page is here because a named ' +
+    'gatekeeper put it on a list, and the build kept the link. There is no card without one.</p>';
+  Object.keys(META.gates).sort(function (a, b) { return META.gates[b] - META.gates[a]; })
+    .forEach(function (who) { h += rung(META.gates[who], who); });
+
+  h += '<h3>Status, stated flat</h3><p>Y Combinator publishes a status for each of its ' +
+    n(META.yc.n) + ' companies here. This page prints that word and links to the page it came from. ' +
+    'It does not colour it, rank on it, or tell you what to think of it. A company that went public ' +
+    'recently is a different thing from a company that did not, and which of those you want is your ' +
+    'call, not the page’s.</p>';
+  Object.keys(st).sort(function (a, b) { return st[b] - st[a]; })
+    .forEach(function (word) { h += rung(st[word], word + ' — per Y Combinator'); });
+  h += '<p>' + n(META.yc.top) + ' of the ' + n(META.yc.n) +
+    ' carry Y Combinator’s own top-company flag. It is a judgement they publish and this page ' +
+    'does not sort on it either.</p>';
+
+  h += '<h3>Where the summaries come from</h3>';
+  h += rung(v.ours, 'companies with a summary on this page');
+  h += rung(v.checked, 'of those, checked against the company’s own site', true);
+  h += rung(v.unchecked, 'of those, written from their site but not re-checked', true);
+  h += rung(v.theirs, 'not read — the card quotes their board’s own headings instead');
+  h += rung(v.none, 'not read, and no headings on their board either');
+  h += '<p>The three lines are an AI’s summary, written from the company’s own site. That is ' +
+    'this page’s voice, not a board’s and not the company’s. Closing the gap is build work ' +
+    '— <code>scripts/describe.py</code> is the script that would do it — and until it runs, ' +
+    n(v.theirs + v.none) + ' cards say so on their face.</p>';
+
+  h += '<h3>What the red means</h3><p>There is one colour on this page besides ink, and it is ' +
+    'spent on one thing: <b>what you did</b>. Your kept mark, your count, your record. Nothing the ' +
+    'data says is ever red — no status, no warning, no badge — because a colour on a fact is an ' +
+    'opinion about that fact, and the opinions here are yours.</p>';
+
+  h += '<h3 id="will-not-say">What this page will not say</h3>';
+  h += '<p><b>It will not call anything recently funded.</b> A funding date exists for ' +
+    n(META.amounts || 122) + ' of ' + n(META.companies) + ' companies. Four of them are inside ninety ' +
+    'days. An adjective true of 0.5% of a list is not a promise, it is a decoration.</p>';
+  h += '<p><b>It will not compute a rocketship score.</b> Where two numbers exist it prints both ' +
+    'and names both sources — the ' + n(META.intensity.n) + ' companies with a staff count get ' +
+    'two numbers, never a ratio. One number would hide which of them is doing the work.</p>';
+  h += '<p><b>It will not turn a click into an application.</b> Opening a role is the page’s hand ' +
+    'moving; applying is yours. The page records which role URLs you opened and when, and then it ' +
+    'asks you. Your answer is the only thing that ever sets it.</p>';
+  h += '<p><b>It will not say a role is new.</b> The build has dated first-sightings for ' +
+    n(META.first_seen.dated) + ' role URLs out of ' + n(META.roles) + '. A freshness badge needs a ' +
+    'second snapshot, and there is one snapshot.</p>';
+  h += '<p><b>It will not read a silence as a no.</b> ' + n(META.visa.yes) + ' roles say their company ' +
+    'hires from abroad, ' + n(META.visa.no) + ' say it does not, and ' + n(META.visa.unknown) +
+    ' say nothing. The third group renders as nothing, never as a no.</p>';
+
+  h += '<h3>The clock this page has</h3>';
+  h += '<p>The corpus is one pinned snapshot, read on ' + META.snapshot + '. The question about ' +
+    'whether you applied is meant for the day after you opened the roles; with a single snapshot the ' +
+    'only other clock available is a fresh page load, so it will also fire on your next reload. It ' +
+    'fires once per company and dies on any answer, including "not yet".</p>';
+
+  h += '<h3>Keys</h3><div class="keys">' +
+    '<b>j</b>/<b>k</b> move between cards &nbsp; <b>x</b> keep &nbsp; <b>o</b> or <b>&#8629;</b> open the roles &nbsp; ' +
+    '<b>1</b>&ndash;<b>9</b> open that role in a tab &nbsp; <b>t</b> jump to your shortlist &nbsp; ' +
+    '<b>c</b> copy your shortlist &nbsp; <b>g</b> put the giants back &nbsp; <b>?</b> this sheet &nbsp; ' +
+    '<b>esc</b> close</div>';
+
+  h += '<h3>What is a renderer’s stopgap, not a fact</h3>';
+  h += '<p>The field menu is eleven buckets this page invented over ' +
+    '2,318 department strings the boards wrote themselves. It is a vocabulary, not data, and it is ' +
+    'why the same corpus can be counted three ways by three pages. It belongs in the build as one ' +
+    'canon. The place menu is the same kind of guess over 3,632 raw location strings, and it merges ' +
+    'the Bay Area into San Francisco, which will be wrong for someone.</p>';
+  return h;
+}
+function openSheet(anchor) {
+  var s = document.getElementById('sheet');
+  document.getElementById('sheetBody').innerHTML = sheetHTML();
+  s.className = 'on';
+  if (anchor) {
+    var t = document.getElementById(anchor);
+    if (t) t.scrollIntoView({block: 'start'});
+  }
+  document.getElementById('sheetClose').focus();
+}
+function closeSheet() { document.getElementById('sheet').className = ''; }
+document.getElementById('sheet').onclick = function (e) { if (e.target.id === 'sheet') closeSheet(); };
+document.getElementById('sheetClose').onclick = closeSheet;
+
+/* ================================================================ keyboard */
+var FOCUS = -1;
+var QUEUE = [];
+function cards() { return document.querySelectorAll('#cards .card'); }
+function focusCard(i) {
+  var cs = cards(); if (!cs.length) return;
+  FOCUS = Math.max(0, Math.min(cs.length - 1, i));
+  cs[FOCUS].scrollIntoView({block: 'center'});
+  cs[FOCUS].focus();
+}
+function currentSlug() {
+  var cs = cards();
+  if (FOCUS < 0 || !cs[FOCUS]) return null;
+  return cs[FOCUS].getAttribute('data-slug');
+}
+function key(e) {
+  if (e.metaKey || e.ctrlKey || e.altKey) return;
+  var tag = (e.target.tagName || '').toLowerCase();
+  if (tag === 'select' || tag === 'input' || tag === 'textarea') {
+    if (e.key === 'Escape') e.target.blur();
+    return;
+  }
+  var k = e.key;
+  if (k === 'Escape') { closeSheet(); return; }
+  if (k === '?') { openSheet(); return; }
+  if (!IX && 'jkxo1234567890gtc'.indexOf(k) >= 0) { QUEUE.push(k); return; }
+  if (k === 'j') { focusCard(FOCUS + 1); e.preventDefault(); return; }
+  if (k === 'k') { focusCard(FOCUS - 1); e.preventDefault(); return; }
+  if (k === 'g') { document.getElementById('giants').click(); return; }
+  if (k === 't') { document.getElementById('sitting').scrollIntoView({block: 'start'}); return; }
+  if (k === 'c') { if (keptList().length) doCopy('text'); return; }
+  var slug = currentSlug();
+  if (!slug) { if (k === 'j' || k === 'o') focusCard(0); return; }
+  if (k === 'x') { toggleKeep(slug); return; }
+  if (k === 'o' || k === 'Enter') { expand(slug); e.preventDefault(); return; }
+  if (/^[1-9]$/.test(k)) {
+    var el = document.getElementById('c-' + slug);
+    var rows = el.querySelectorAll('.roles a.role');
+    var r = rows[+k - 1];
+    if (r) r.click();
+  }
+}
+document.addEventListener('keydown', key);
+function drainQueue() {
+  var q = QUEUE.slice(); QUEUE = [];
+  q.forEach(function (k) { key({key: k, target: document.body, preventDefault: function () {}}); });
+}
+
+/* ================================================================ boot */
+readHash();
+paintHead();
+fillSelects();
+render();
+
+fetch('data/index.json').then(function (r) { return r.json(); }).then(function (j) {
+  IX = j;
+  META = j.meta; DL = j.meta.dept_labels; PL = j.meta.place_labels;
+  render();
+  paintRegister();
+  drainQueue();
+});
+</script>
+</html>

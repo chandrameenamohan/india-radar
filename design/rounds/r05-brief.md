@@ -66,7 +66,29 @@ says where they are NOT: not in speed (all three beat every measure by an order
 of magnitude), not in more mechanism. They are in **representation** (no
 variant scored above 17.5/20) and in the gaps every variant shared.
 
-## The shared gaps — close them this round
+## Signal 4 — the baseline is the live site, and the founder likes it
+
+Added mid-round, 2026-08-05:
+
+> "My baseline is this: https://roleatlas.sennamind.com/site/index.html — I
+> want better than this. This is not better but I like it so far."
+
+Read it carefully: the founder LIKES the live register's design — the Swiss /
+International Typographic identity, the hairline rules, the tabular numerals,
+the printed-instrument confidence of `site/index.html`. The round-4 product
+cards are more *useful* than the register and **less designed than it** — and
+that is why none of them was liked. The bar is not "better than the other two
+variants"; it is **better than the live site**, on the live site's own terms of
+craft, while being the product the register never was.
+
+What this does NOT mean: do not rebuild the register. The behaviours stand —
+the shortlist loop, the six measures, the calibration items above. What it
+means: the representation must carry the design DNA the founder already chose
+once — a page that looks like it was set by someone who cared about type, not a
+generic card list. `site/index.html` is in this repo; open it, study what makes
+it feel authored (the grid, the micro-labels, one red, the crop marks, numerals
+as columns), and bring that authority to the product. The judge will compare
+against the live site directly.
 
 From the round-4 verdict's "what none did":
 
