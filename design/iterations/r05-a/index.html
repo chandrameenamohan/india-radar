@@ -1,0 +1,1653 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>789 companies are hiring tonight — what each one does, and who says so</title>
+<style>
+/* ROLE·ATLAS — the product, set in the register's own hand.
+
+   Signal 4 of the round-5 brief: the founder's baseline is the live register at
+   site/index.html and he likes it. So the identity here is that page's, not a
+   new one — the same Swiss / International Typographic system, token for token:
+   white paper, one ink, one red used only for live state, hairline rules under
+   a 2px structural rule, 11px uppercase micro-labels at .11em, tabular numerals
+   in a mono voice, crop marks on the sheet, a twelve-column grid.
+
+   One deliberate departure from the round-4 graft list. r04-a's serif/mono
+   "evidence split" was praised by the judge; the founder's chosen page has no
+   serif in it anywhere. The brief's own lesson is that the founder calibrates
+   the judge, so the split survives in the register's own grammar instead —
+   prose is sans, and every number I counted is mono and tabular, so a figure is
+   visibly a different kind of thing from a sentence without importing a
+   typeface the baseline never used. */
+
+:root{
+  --paper:#ffffff;
+  --ink:#111111;
+  --ink-2:#4a4a4a;    /* secondary prose */
+  --ink-3:#8a8a8a;    /* micro-labels, apparatus, absent-ish things */
+  --rule:#d5d5d5;     /* hairline */
+  --rule-2:#111111;   /* structural rule */
+  --wash:#f4f4f4;     /* the only fill on the page */
+  --red:#E30613;      /* live state and the counts on a live line. Nowhere else. */
+  --gut:2rem;
+  --ref:3.2rem;       /* the card's reference gutter — 001, 002, 003 … */
+  --side:15rem;       /* the count-and-act column, the register's right edge */
+  --col:repeat(12,minmax(0,1fr));
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
+*{box-sizing:border-box;min-width:0}
+html{-webkit-text-size-adjust:100%;overflow-x:clip}
+body{
+  margin:0;padding:0;background:var(--paper);color:var(--ink);
+  overflow-x:clip;
+  font-family:Inter,-apple-system,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size:15px;line-height:1.45;
+  font-variant-numeric:tabular-nums;          /* every count is a column, not a word */
+  font-feature-settings:"tnum" 1;
+  letter-spacing:-0.006em;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:78rem;margin:0 auto;padding:0 var(--gut) 6rem;position:relative}
+b,strong{font-weight:700}
+h1,h2,h3,h4{margin:0}
+
+/* ---- the page's smallest voice: 11px, uppercase, wide. Apparatus, always. --- */
+.micro,.lbl,.wk,.slhead,.copen,.starts,#controls .lbl,.setaside .pre,.sources{
+  font-size:11px;line-height:1.15;text-transform:uppercase;letter-spacing:.11em;
+  font-weight:600}
+
+/* ------------------------------------------------- the evidence split, again */
+/* Anything in the mono is a number I counted off the fixture. Anything in the
+   sans is a sentence somebody wrote — me, or a source I name on the same line. */
+.n,.facts b,.copen b,.fl .v,.regrow .rr,.rec .n,.setaside button,.cref,
+.slot .num,.roles li::before{
+  font-family:var(--mono);font-variant-numeric:tabular-nums}
+
+/* ------------------------------- registration marks ------------------------ */
+/* The sheet corners. A printed instrument carries crop marks; four hairline
+   corners register the sheet, in the margin gray so they read as apparatus. */
+header.op,footer.tail{position:relative}
+header.op::before,header.op::after,footer.tail::before,footer.tail::after{
+  content:"";position:absolute;width:.7rem;height:.7rem;
+  border:0 solid var(--ink-3);pointer-events:none}
+header.op::before{top:.55rem;left:-1.45rem;border-left-width:1px;border-top-width:1px}
+header.op::after{top:.55rem;right:-1.45rem;border-right-width:1px;border-top-width:1px}
+footer.tail::before{bottom:-1.6rem;left:-1.45rem;border-left-width:1px;border-bottom-width:1px}
+footer.tail::after{bottom:-1.6rem;right:-1.45rem;border-right-width:1px;border-bottom-width:1px}
+
+/* ------------------------------------------------------------------ masthead */
+header.op{padding:1.35rem 0 0}
+.masthead{display:grid;grid-template-columns:var(--col);gap:0 1.25rem;align-items:end;
+  padding-bottom:.5rem}
+h1{grid-column:1/8;font-size:clamp(1.7rem,3.7vw,2.6rem);font-weight:800;
+  letter-spacing:-.04em;line-height:.94;text-transform:uppercase}
+h1 .n{color:var(--red)}
+.subhead{grid-column:1/8;margin:.55rem 0 0;font-size:1rem;line-height:1.32;
+  letter-spacing:-.017em;font-weight:500;max-width:36rem}
+.subhead .n{color:var(--ink)}
+.masthead>.aside{grid-column:8/-1;display:flex;flex-direction:column;
+  align-items:flex-end;gap:.6rem;text-align:right}
+.snapshot{display:flex;flex-direction:column;gap:.2rem;align-items:flex-end}
+.snapshot .k{color:var(--ink-3)}
+.snapshot time{font-size:1.05rem;font-weight:600;letter-spacing:-.01em}
+/* The plate stamp: the sheet's designation struck in a hairline red frame, the
+   way an atlas plate carries its number in the margin. */
+.platestamp{border:1.5px solid var(--red);padding:.5rem .75rem .45rem;display:flex;
+  flex-direction:column;gap:.18rem;align-items:flex-end;text-align:right}
+.platestamp .pnum{color:var(--red);font-weight:800;font-size:1.6rem;line-height:1;
+  letter-spacing:-.02em;font-family:var(--mono);white-space:nowrap}
+.platestamp .pname{font-size:10px;text-transform:uppercase;letter-spacing:.12em;
+  font-weight:600;color:var(--ink)}
+.lede{margin:.7rem 0 0;font-size:.875rem;line-height:1.55;color:var(--ink-2);
+  max-width:54rem;padding-bottom:.85rem;border-bottom:2px solid var(--rule-2)}
+.lede .g{color:var(--ink);white-space:nowrap;font-family:var(--mono);font-size:.88em;
+  font-weight:600}
+.lede code{font-family:var(--mono);font-size:.86em;color:var(--ink)}
+
+/* ------------------------------------------------------------------- links */
+a.rcpt{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--ink-3);
+  font-weight:600}
+a.rcpt:hover{color:var(--red);border-bottom-color:var(--red)}
+a.rcpt .arw{color:var(--ink-3);font-size:.82em;margin-left:.15em}
+a.rcpt:hover .arw{color:var(--red)}
+a:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible,
+summary:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+/* A button that is really a sentence's verb: hairline underline, red under the
+   hand. The page's one inline control grammar. */
+.linkish,.funnelbtn{background:none;border:0;border-radius:0;padding:0;margin:0;
+  font:inherit;color:var(--ink);cursor:pointer;
+  border-bottom:1px solid var(--ink-3)}
+.linkish:hover,.funnelbtn:hover{color:var(--red);border-bottom-color:var(--red)}
+.funnelbtn{font-weight:600}
+
+/* -------------------------------------------------------------------- funnel */
+.funnel{display:none;margin:1.2rem 0 0;border:1px solid var(--rule-2);
+  padding:1.1rem 1.25rem 1.3rem;max-width:52rem}
+.funnel.on{display:block}
+.funnel h3{font-size:1.15rem;font-weight:800;letter-spacing:-.03em;
+  text-transform:uppercase;margin:0 0 .7rem}
+.funnel h4{margin:1.6rem 0 .5rem;padding-top:.85rem;border-top:2px solid var(--rule-2);
+  font-size:11px;text-transform:uppercase;letter-spacing:.11em;font-weight:700;
+  color:var(--ink)}
+.fl{display:grid;grid-template-columns:5.4rem minmax(0,1fr);gap:0 1.2rem;
+  align-items:baseline;font-size:.8125rem;padding:.3rem 0;
+  border-top:1px solid var(--rule)}
+.fl:first-of-type{border-top:0}
+.fl .v{font-size:.9375rem;font-weight:700;color:var(--ink);text-align:right}
+.fl.sub{padding-left:1.5rem}
+.fl.sub .v{color:var(--ink-3);font-size:.8125rem}
+.fl.win .v{color:var(--red)}
+.fl .k{color:var(--ink-2);line-height:1.4}
+.fl .q{color:var(--ink-3);font-size:9px;text-transform:uppercase;letter-spacing:.12em;
+  font-weight:600;white-space:nowrap;margin-left:.3rem}
+.fnote{font-size:.8125rem;color:var(--ink-2);margin:1rem 0 0;line-height:1.6}
+.fnote+.fnote{margin-top:.6rem}
+.wont{font-size:.8125rem;color:var(--ink-2);line-height:1.6}
+.wont b{color:var(--ink);font-weight:700}
+.wont .row{padding:.45rem 0;border-top:1px solid var(--rule)}
+.wont .row:first-child{border-top:0;padding-top:.1rem}
+
+/* ----------------------------------------------------------------- shortlist */
+/* The deliverable, and it is berthed above everything else because it is the
+   only thing on the page that is yours. Framed like the register's receipt
+   stamp: hairline box, struck red edge. */
+.shortlist{margin:1.6rem 0 0;border:1px solid var(--rule-2);
+  border-left:3px solid var(--red);padding:.85rem 1.1rem 1rem}
+.slhead{color:var(--ink);margin:0 0 .55rem;padding-bottom:.42rem;
+  border-bottom:1px solid var(--rule-2)}
+.slrow{display:flex;gap:.15rem 1rem;align-items:baseline;padding:.45rem 0;
+  border-bottom:1px solid var(--rule);flex-wrap:wrap;font-size:.875rem}
+.slrow:last-of-type{border-bottom:0}
+.slrow .nm{font-weight:700;min-width:9rem;letter-spacing:-.015em}
+.slrow .mt{color:var(--ink-3);font-size:.75rem;line-height:1.5}
+.slrow .gone{color:var(--red);text-decoration:line-through}
+.slrow .live{color:var(--ink-2)}
+.slrow .drop{margin-left:auto;background:none;border:0;padding:0;cursor:pointer;
+  font:inherit;font-size:10px;text-transform:uppercase;letter-spacing:.11em;
+  font-weight:600;color:var(--ink-3)}
+.slrow .drop:hover{color:var(--red)}
+.slout{margin:.85rem 0 0;padding-top:.75rem;border-top:1px solid var(--rule-2);
+  display:flex;gap:.6rem;align-items:baseline;flex-wrap:wrap;font-size:.75rem;
+  color:var(--ink-3)}
+.slout button{font:inherit;font-size:11px;text-transform:uppercase;letter-spacing:.11em;
+  font-weight:700;background:none;border:1px solid var(--rule-2);border-radius:0;
+  color:var(--ink);padding:.48rem .8rem .42rem;cursor:pointer;white-space:nowrap}
+.slout button:hover{background:var(--ink);color:var(--paper)}
+.slout .say{flex:1 1 20rem;min-width:14rem;line-height:1.55}
+.ask{margin:.9rem 0 0;padding:.75rem .9rem .85rem;border:1px solid var(--rule-2);
+  background:var(--wash)}
+.ask .q{font-size:1rem;font-weight:700;letter-spacing:-.018em;line-height:1.3}
+.ask .btns{margin-top:.65rem;display:flex;gap:.5rem;flex-wrap:wrap}
+.ask button{font:inherit;font-size:11px;text-transform:uppercase;letter-spacing:.11em;
+  font-weight:700;background:var(--paper);border:1px solid var(--rule-2);
+  border-radius:0;color:var(--ink);padding:.42rem .85rem .38rem;cursor:pointer}
+.ask button:hover{background:var(--ink);color:var(--paper)}
+.ask .why{display:block;margin-top:.65rem;font-size:.75rem;color:var(--ink-3);
+  line-height:1.55}
+
+/* ------------------------------------------------------------------ controls */
+/* The register's filter bank: bare fields on a hairline rule, a micro-label
+   above each, and the one that has left its default prints in red — the page's
+   live-state colour — so a set filter is visible from across the room. */
+#controls{display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(0,1.45fr) minmax(0,1.15fr);
+  gap:1rem 1.6rem;padding:1rem 0 1.05rem;border-bottom:2px solid var(--rule-2)}
+#controls label{display:flex;flex-direction:column;gap:.42rem;min-width:0}
+#controls .lbl{color:var(--ink-3)}
+select{appearance:none;-webkit-appearance:none;font:inherit;font-size:.9375rem;
+  font-weight:500;letter-spacing:-.012em;color:var(--ink);background:transparent;
+  border:0;border-bottom:1px solid var(--rule-2);border-radius:0;
+  padding:.3rem 1.2rem .35rem 0;width:100%;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='7'%3E%3Cpath d='M1 1l4.5 4.5L10 1' fill='none' stroke='%238a8a8a' stroke-width='1.25'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right .1rem center}
+select:hover{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='7'%3E%3Cpath d='M1 1l4.5 4.5L10 1' fill='none' stroke='%23111111' stroke-width='1.25'/%3E%3C/svg%3E")}
+select.set{color:var(--red);border-bottom-color:var(--red);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='7'%3E%3Cpath d='M1 1l4.5 4.5L10 1' fill='none' stroke='%23E30613' stroke-width='1.25'/%3E%3C/svg%3E")}
+select:focus{border-bottom-color:var(--red)}
+.giants .gwrap{display:flex;align-items:center;gap:.5rem;font-size:.9375rem;
+  font-weight:500;color:var(--ink);cursor:pointer;padding:.3rem 0 .35rem;
+  border-bottom:1px solid var(--rule-2)}
+.giants input{width:15px;height:15px;accent-color:var(--red);cursor:pointer;margin:0;
+  flex:none}
+.giants .n{color:var(--ink);font-weight:700}
+
+/* ------------------------------------------------------------------- status */
+#status{padding:.85rem 0 .8rem;border-bottom:1px solid var(--rule-2)}
+.yield{font-size:.9375rem;line-height:1.6;color:var(--ink-2);max-width:56rem}
+.yield .lead{color:var(--ink);font-weight:600}
+.yield .n{color:var(--red);font-weight:700}
+.yield .residue{color:var(--ink-3)}
+.starts{display:block;margin-bottom:.5rem;color:var(--ink-3)}
+.starts .linkish{display:inline-block;font-size:11px;letter-spacing:.11em;
+  text-transform:uppercase;font-weight:700;color:var(--ink);
+  border-bottom-color:var(--rule-2)}
+.starts .linkish:hover{color:var(--red);border-bottom-color:var(--red)}
+/* The one line of arithmetic over the reader's own record. It is the only thing
+   on this page that is about them, so it is framed like the shortlist is. */
+.rec{display:block;margin-top:.7rem;padding:.5rem .75rem .55rem;
+  border:1px solid var(--rule-2);border-left:3px solid var(--red);
+  background:var(--wash);font-size:.8125rem;line-height:1.55;color:var(--ink)}
+.rec .n{color:var(--red);font-weight:700}
+
+/* ---------------------------------------------------------------- set aside */
+.asidewrap{position:relative;border-bottom:1px solid var(--rule)}
+.asidewrap:after{content:"";position:absolute;right:0;top:0;bottom:6px;width:3.5rem;
+  background:linear-gradient(90deg,rgba(255,255,255,0),#fff 78%);pointer-events:none}
+.asidewrap.empty,.asidewrap.empty:after{border-bottom:0;display:none}
+.setaside{display:flex;overflow-x:auto;padding:.5rem 0;scrollbar-width:thin;
+  align-items:baseline}
+.setaside .pre{flex:0 0 auto;color:var(--ink-3);padding-right:.9rem;white-space:nowrap}
+.setaside button{flex:0 0 auto;font:inherit;font-size:11px;background:none;border:0;
+  border-right:1px solid var(--rule);border-radius:0;color:var(--ink-2);cursor:pointer;
+  padding:.1rem .7rem;white-space:nowrap;letter-spacing:.04em}
+.setaside button:hover{color:var(--red)}
+.setaside button:last-child{border-right:0;padding-right:4rem}
+
+/* --------------------------------------------------------------------- cards */
+/* One entry, one anatomy, three columns: the reference gutter, the entry, and
+   the count. The number in the gutter is the row's place in the cut you asked
+   for — it is a CSS counter, so it is right in both renderers and stays right
+   through every re-narrowing without either of them being told. */
+.cards{counter-reset:card}
+.card{display:grid;grid-template-columns:var(--ref) minmax(0,1fr) var(--side);
+  gap:0 2rem;align-items:start;
+  padding:.9rem .5rem 1rem .55rem;
+  border-bottom:1px solid var(--rule);border-left:2px solid transparent;
+  scroll-margin-top:.8rem}
+.card::before{counter-increment:card;content:counter(card,decimal-leading-zero);
+  grid-column:1;font-family:var(--mono);font-size:11px;font-weight:500;
+  letter-spacing:.05em;color:var(--ink-3);padding-top:.32rem}
+.card.cur{background:var(--wash)}
+.card.kept{border-left-color:var(--red)}
+.card:hover::before,.card.cur::before{color:var(--red)}
+.cbody{grid-column:2;min-width:0}
+.cside{grid-column:3;min-width:0;text-align:right}
+.chead{display:flex;align-items:baseline;gap:.3rem .55rem;flex-wrap:wrap}
+.cname{font-size:1.35rem;font-weight:800;letter-spacing:-.032em;line-height:1.04;
+  overflow-wrap:anywhere}
+/* Square, hairline, uppercase — and in ink. A status is a fact with a source;
+   the red on this page marks live state, and a company's status is not one. */
+.slot{display:inline-block;padding:.15rem .38rem .11rem;border:1px solid var(--rule);
+  color:var(--ink-3);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;
+  font-weight:600;white-space:nowrap;text-decoration:none;border-radius:0;
+  vertical-align:.08em}
+a.slot:hover{border-color:var(--red);color:var(--red)}
+.slot.ink{border-color:var(--ink);color:var(--ink)}
+.slot.kept{border-color:var(--red);color:var(--red)}
+
+/* --------------------------------------------------- what the company is */
+/* The three lines the founder said were missing, and they are set as what they
+   are: three fields of one record, side by side in ruled columns under the
+   name, in the page's smallest voice with the value beneath it. Not an expand,
+   not a tooltip — the collapsed card. A name you have never heard is not
+   information until these are there, and six in ten names here are meant to be
+   names you have never heard. The provenance is struck along the bottom edge of
+   the slot, once, rather than after every field. */
+.says{position:relative;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+  margin:.5rem 0 .6rem;padding:.42rem 0 .4rem;
+  border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.wl{font-size:.8125rem;line-height:1.4;color:var(--ink);letter-spacing:-.008em;
+  padding-right:1.3rem}
+.wl+.wl{border-left:1px solid var(--rule);padding-left:1.3rem}
+.wl.what{font-weight:600}
+.wk{display:block;margin-bottom:.16rem;color:var(--ink-3);font-size:10px;
+  text-transform:uppercase;letter-spacing:.12em;font-weight:600}
+.prov{position:absolute;right:0;bottom:calc(100% + .3rem);text-align:right;font-size:9px;
+  text-transform:uppercase;letter-spacing:.12em;font-weight:600;color:var(--ink-3);
+  pointer-events:none}
+/* Absence, designed. The slot keeps its rules and its footing so the card never
+   reads as broken; the key says which kind of nothing this is, the value points
+   at what the card does have, and the footing names the build job that ends it.
+   418 of 789 look like this, and not one of them is invented. */
+.says.none{grid-template-columns:minmax(0,1fr)}
+.says.none .wl{color:var(--ink-2);font-weight:400}
+
+.gate{margin:.5rem 0 0;font-size:.875rem;line-height:1.45;color:var(--ink)}
+.gate .aside{display:block;margin-top:.12rem;color:var(--ink-2);font-size:.8125rem;
+  line-height:1.45}
+.facts{margin:.5rem 0 0;font-size:.75rem;color:var(--ink-2);line-height:1.45}
+.facts .row{display:block;padding:.18rem 0;border-top:1px solid var(--rule)}
+.facts .lbl{display:inline-block;min-width:4rem;color:var(--ink-3);
+  vertical-align:baseline}
+.facts b{color:var(--ink);font-weight:700;font-size:.92em}
+.facts .hit,.facts .hit b{color:var(--red)}
+
+/* -------------------------------------------- the count, and the two verbs */
+.copen{color:var(--ink-3)}
+.copen b{display:block;font-size:1.75rem;font-weight:700;letter-spacing:-.02em;
+  line-height:1;color:var(--ink);margin-bottom:.22rem}
+.card:hover .copen b,.card.cur .copen b{color:var(--red)}
+.act{margin:.9rem 0 0;display:flex;flex-direction:column;gap:.45rem}
+.keep,.open{font:inherit;border-radius:0;cursor:pointer;text-align:center;
+  font-size:11px;text-transform:uppercase;letter-spacing:.11em;font-weight:700;
+  line-height:1.3}
+.keep{background:none;border:1px solid var(--rule-2);color:var(--ink);
+  padding:.5rem .5rem .45rem}
+.keep:hover{background:var(--ink);color:var(--paper)}
+.keep.on{border-color:var(--red);color:var(--red)}
+.keep.on:hover{background:var(--red);color:var(--paper)}
+/* The loudest thing on the page is the button that opens their roles, and it is
+   the only filled block on the sheet. */
+.open{background:var(--ink);border:1px solid var(--ink);color:var(--paper);
+  padding:.6rem .6rem .55rem}
+.open:hover{background:var(--red);border-color:var(--red)}
+.open.on{background:none;color:var(--ink)}
+.open.on:hover{background:var(--ink);color:var(--paper)}
+
+/* --------------------------------------------------------------------- roles */
+.roles{grid-column:2/-1;margin:1rem 0 .2rem;padding-top:.75rem;
+  border-top:2px solid var(--rule-2);counter-reset:role}
+.rnote{font-size:.8125rem;color:var(--ink-2);margin:0 0 .55rem;line-height:1.55;
+  max-width:52rem}
+a.role{counter-increment:role;position:relative;display:flex;gap:0 1rem;
+  align-items:baseline;text-decoration:none;color:var(--ink);
+  padding:.44rem .3rem .42rem 2.35rem;border-bottom:1px solid var(--rule);
+  font-size:.875rem}
+a.role::before{content:counter(role,decimal-leading-zero);position:absolute;left:0;
+  top:.52rem;font-family:var(--mono);font-size:10px;font-weight:600;
+  letter-spacing:.06em;color:var(--ink-3)}
+a.role .t{flex:1 1 auto;min-width:0;font-weight:600;overflow-wrap:anywhere}
+a.role .their{font-family:var(--mono);font-size:10px;color:var(--ink-3);
+  margin-left:.5rem;letter-spacing:.04em;font-weight:500}
+a.role .loc{color:var(--ink-3);font-size:.75rem;text-align:right;flex:0 0 auto;
+  max-width:34%}
+a.role .go{font-size:10px;text-transform:uppercase;letter-spacing:.11em;
+  font-weight:700;color:var(--ink-3);flex:0 0 auto;white-space:nowrap}
+a.role:hover,a.role.rcur{background:var(--wash)}
+a.role:hover .t,a.role.rcur .t,a.role:hover .go,a.role.rcur .go{color:var(--red)}
+a.role.seen{background:var(--wash)}
+a.role.seen .go{color:var(--ink)}
+.vchip{display:inline-block;margin-left:.45rem;padding:.1rem .32rem .07rem;
+  border:1px solid var(--ink);color:var(--ink);font-size:9px;letter-spacing:.1em;
+  text-transform:uppercase;font-weight:600;white-space:nowrap;vertical-align:.08em}
+.vchip.no{border-color:var(--rule);color:var(--ink-3)}
+.more{background:none;border:0;border-radius:0;font:inherit;font-size:11px;
+  text-transform:uppercase;letter-spacing:.11em;font-weight:700;color:var(--red);
+  cursor:pointer;padding:.65rem 0 .15rem;text-align:left}
+.more:hover{text-decoration:underline;text-underline-offset:2px}
+
+/* --------------------------------------------------------------------- sheet */
+.veil{position:fixed;inset:0;background:rgba(17,17,17,.55);display:flex;
+  align-items:flex-start;justify-content:center;padding:3rem 1.2rem;overflow:auto;
+  z-index:20}
+.veil[hidden]{display:none}
+.sheet{background:var(--paper);border:1px solid var(--rule-2);max-width:38rem;
+  width:100%;padding:1.3rem 1.5rem 1.4rem;font-size:.8125rem;line-height:1.6;
+  color:var(--ink-2)}
+.sheet h3{font-size:1.1rem;font-weight:800;letter-spacing:-.03em;
+  text-transform:uppercase;color:var(--ink);margin:0 0 .7rem;padding-bottom:.5rem;
+  border-bottom:2px solid var(--rule-2)}
+.sheet .kr{display:grid;grid-template-columns:5.5rem minmax(0,1fr);gap:0 1.1rem;
+  padding:.34rem 0;border-top:1px solid var(--rule);align-items:baseline}
+.sheet .kr:first-of-type{border-top:0}
+.sheet .kk{font-family:var(--mono);font-size:11px;font-weight:700;color:var(--red);
+  letter-spacing:.04em}
+.sheet .kbnote{margin:.9rem 0 0}
+.sheet .close{margin-top:1rem;font:inherit;font-size:11px;text-transform:uppercase;
+  letter-spacing:.11em;font-weight:700;background:none;color:var(--ink);
+  border:1px solid var(--rule-2);border-radius:0;padding:.45rem .9rem .4rem;
+  cursor:pointer}
+.sheet .close:hover{background:var(--ink);color:var(--paper)}
+
+/* -------------------------------------------------------------------- footer */
+footer.tail{margin:3rem 0 0;padding-top:1.1rem;border-top:2px solid var(--rule-2);
+  font-size:.8125rem;color:var(--ink-2);line-height:1.6}
+footer.tail h3{font-size:11px;text-transform:uppercase;letter-spacing:.11em;
+  font-weight:700;color:var(--ink);margin:0 0 .55rem}
+footer.tail p{margin:0 0 .8rem;max-width:52rem}
+details.reg summary{cursor:pointer;font-size:11px;text-transform:uppercase;
+  letter-spacing:.11em;font-weight:700;color:var(--ink);padding:.55rem 0;
+  list-style:none;border-top:1px solid var(--rule)}
+details.reg summary::-webkit-details-marker{display:none}
+details.reg summary:hover{color:var(--red)}
+.regtable{max-height:32rem;overflow:auto;margin:.4rem 0 .9rem;
+  border-top:1px solid var(--rule-2);border-bottom:1px solid var(--rule-2)}
+.regrow{display:grid;grid-template-columns:minmax(0,1fr) 12rem 5.5rem;gap:0 1.2rem;
+  padding:.4rem .5rem .38rem 0;border-bottom:1px solid var(--rule);
+  font-size:.8125rem;align-items:baseline}
+.regrow:last-child{border-bottom:0}
+.regrow .rn{color:var(--ink);font-weight:600;text-decoration:none}
+.regrow .rn:hover{color:var(--red)}
+.regrow .rg{color:var(--ink-3);font-size:.75rem;overflow:hidden;
+  text-overflow:ellipsis;white-space:nowrap;text-decoration:none}
+.regrow .rg:hover{color:var(--red)}
+.regrow .rr{text-align:right;color:var(--ink-2);font-size:.75rem}
+.loading{padding:.9rem .1rem;color:var(--ink-3);font-size:.8125rem}
+.sources{margin:1.4rem 0 0;padding-top:.8rem;border-top:1px solid var(--rule);
+  color:var(--ink-3)}
+.warnline{color:var(--red)}
+
+/* ---------------------------------------------------------------- the fold */
+@media (max-width:62rem){
+  :root{--side:auto}
+  .card{grid-template-columns:var(--ref) minmax(0,1fr)}
+  .cside{grid-column:2;text-align:left;margin-top:.85rem}
+  .copen b{display:inline;font-size:1.15rem;margin:0 .35rem 0 0}
+  .act{flex-direction:row;flex-wrap:wrap;margin-top:.6rem}
+  .keep,.open{padding-left:1rem;padding-right:1rem}
+  h1{grid-column:1/-1}
+  .subhead{grid-column:1/-1}
+  .masthead>.aside{grid-column:1/-1;text-align:left;margin-top:.9rem;
+    flex-direction:row;gap:1.4rem;align-items:flex-end}
+  .snapshot{align-items:flex-start}
+}
+@media (max-width:52rem){
+  :root{--gut:1.1rem;--ref:2.4rem}
+  .wrap{padding-bottom:4rem}
+  header.op::before,header.op::after,footer.tail::before,footer.tail::after{display:none}
+  #controls{grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem 1.1rem}
+  .card{gap:0 1rem;padding-left:.4rem}
+  a.role{flex-wrap:wrap;gap:.15rem .8rem}
+  a.role .t{flex:1 1 100%}
+  a.role .loc{max-width:none;text-align:left;flex:1 1 auto}
+  a.role .go{margin-left:auto}
+  .regrow{grid-template-columns:minmax(0,1fr) 4.5rem}
+  .regrow .rg{display:none}
+  .says{grid-template-columns:minmax(0,1fr)}
+  .prov{position:static;margin:.4rem 0 0}
+  .wl{padding:.24rem 0 0}
+  .wl+.wl{border-left:0;border-top:1px solid var(--rule);padding-left:0}
+}
+@media (max-width:30rem){
+  #controls{grid-template-columns:minmax(0,1fr)}
+}
+@media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div id="shortlist"></div>
+
+  <header class="op">
+    <div class="masthead">
+      <h1 id="h1">I read <span class="n">10,125</span> companies to build this</h1>
+      <div class="aside">
+        <div class="snapshot"><span class="k">boards read on</span><time id="snapdate">Aug 4, 2026</time></div>
+        <div class="platestamp"><span class="pnum">789</span><span class="pname">hiring tonight</span></div>
+      </div>
+      <p class="subhead"><span class="n">6,895</span> didn’t qualify. These <span class="n">789</span> are hiring right now &mdash; and under every name is what they do, who it is for, and why them.</p>
+    </div>
+    <p class="lede" id="lede"></p>
+    <div class="funnel" id="funnel"></div>
+  </header>
+
+  <div id="controls">
+    <label><span class="lbl">field of work</span><select id="dept" aria-label="field of work"></select></label>
+    <label><span class="lbl">place</span><select id="place" aria-label="place"></select></label>
+    <label class="giants"><span class="lbl">the giants</span><span class="gwrap"><input type="checkbox" id="giants" checked> hide the <span class="n" id="gcount">57</span> with 100+ roles</span></label>
+  </div>
+
+  <div id="status"><div class="yield" id="yield"></div></div>
+  <div class="asidewrap empty" id="asidewrap"><div class="setaside" id="setaside"></div></div>
+
+  <div class="cards" id="cards"><div class="card" id="c-billiontoone"><div class="cbody"><div class="chead"><h2 class="cname">BillionToOne</h2><a class="slot ink" href="https://www.ycombinator.com/companies/billiontoone" target="_blank" rel="noopener noreferrer">Public, per YC ↗</a></div><div class="says none"><div class="wl"><span class="wk">not yet read</span>Not written up yet — below is only what Y Combinator and their own board state.</div><div class="prov">the backfill job is scripts/describe.py</div></div><div class="gate"><a class="rcpt" href="https://www.ycombinator.com/companies/billiontoone" target="_blank" rel="noopener noreferrer">Y Combinator backed them, Summer 2017<span class="arw">↗</span></a><span class="aside"> — and YC’s own status field for them reads Public.</span></div><div class="facts"><div class="row"><span class="lbl">fields</span><span>Sales &amp; Partnerships <b>68</b></span><span> · Engineering <b>11</b></span><span> · Operations &amp; Admin <b>10</b></span><span> · Customer &amp; Support <b>3</b></span><span> · and <b>4</b> more</span></div><div class="row"><span class="lbl">places</span><span>The Bay Area outside San Francisco <b>24</b></span><span> · Remote <b>7</b></span><span> · Dallas / Houston <b>4</b></span><span> · and <b>12</b> more</span></div></div></div><div class="cside"><div class="copen"><b>98</b> roles open</div><div class="act"><button class="keep">♢ keep</button><button class="open" data-slug="billiontoone">98 roles  →</button></div></div></div><script>requestAnimationFrame(function(){requestAnimationFrame(function(){window.__firstCardPainted=performance.now()})})</script><div class="card" id="c-langchain"><div class="cbody"><div class="chead"><h2 class="cname">LangChain</h2></div><div class="says"><div class="wl what"><span class="wk">what</span>Tools for building and monitoring AI agents</div><div class="wl"><span class="wk">for whom</span>Developers putting AI features into production</div><div class="wl"><span class="wk">why them</span>Its open-source library is downloaded everywhere</div><div class="prov">in my words, checked against their own site · Aug 4, 2026</div></div><div class="gate"><a class="rcpt" href="https://www.cbinsights.com/company/langchain" target="_blank" rel="noopener noreferrer">CB Insights tracks them at a $1B+ valuation<span class="arw">↗</span></a><span class="aside"> — a tracker’s call on size, not a funding fact. $1B means the launch already happened; they are hiring in 21 places tonight, and a company opening that many doors is the part I can count.</span></div><div class="facts"><div class="row"><span class="lbl">fields</span><span>Engineering <b>48</b></span><span> · Sales &amp; Partnerships <b>35</b></span><span> · Marketing <b>5</b></span><span> · Finance <b>4</b></span><span> · and <b>2</b> more</span></div><div class="row"><span class="lbl">places</span><span>San Francisco proper <b>40</b></span><span> · New York <b>24</b></span><span> · London <b>13</b></span><span> · and <b>18</b> more</span></div></div></div><div class="cside"><div class="copen"><b>97</b> roles open</div><div class="act"><button class="keep">♢ keep</button><button class="open" data-slug="langchain">97 roles  →</button></div></div></div><div class="card" id="c-pigment"><div class="cbody"><div class="chead"><h2 class="cname">Pigment</h2></div><div class="says"><div class="wl what"><span class="wk">what</span>Software for planning budgets, sales and headcount</div><div class="wl"><span class="wk">for whom</span>Finance and operations teams outgrowing giant spreadsheets</div><div class="wl"><span class="wk">why them</span>Spreadsheet-like flexibility that still runs fast</div><div class="prov">in my words, checked against their own site · Aug 4, 2026</div></div><div class="gate"><a class="rcpt" href="https://www.cbinsights.com/company/pigment-1" target="_blank" rel="noopener noreferrer">CB Insights tracks them at a $1B+ valuation<span class="arw">↗</span></a><span class="aside"> — a tracker’s call on size, not a funding fact. $1B means the launch already happened; they are hiring in 13 places tonight, and a company opening that many doors is the part I can count.</span></div><div class="facts"><div class="row"><span class="lbl">fields</span><span>Operations &amp; Admin <b>49</b></span><span> · Customer &amp; Support <b>21</b></span><span> · Engineering <b>16</b></span><span> · People &amp; Recruiting <b>10</b></span><span> · and <b>1</b> more</span></div><div class="row"><span class="lbl">places</span><span>Paris <b>26</b></span><span> · London <b>20</b></span><span> · United States — city not stated <b>15</b></span><span> · and <b>11</b> more</span></div></div></div><div class="cside"><div class="copen"><b>97</b> roles open</div><div class="act"><button class="keep">♢ keep</button><button class="open" data-slug="pigment">97 roles  →</button></div></div></div><div class="card" id="c-harnessinc"><div class="cbody"><div class="chead"><h2 class="cname">Harness</h2></div><div class="says"><div class="wl what"><span class="wk">what</span>Automates software delivery from commit to production</div><div class="wl"><span class="wk">for whom</span>Engineering teams tired of slow releases</div><div class="wl"><span class="wk">why them</span>CI/CD platform from the AppDynamics founder</div><div class="prov">in my words, checked against their own site · Aug 4, 2026</div></div><div class="gate"><a class="rcpt" href="https://www.forbes.com/companies/harness/" target="_blank" rel="noopener noreferrer">A Forbes editor put them on a list<span class="arw">↗</span></a><span class="aside"> — an editor’s call. No funding number behind it, and I will not invent one.</span></div><div class="facts"><div class="row"><span class="lbl">fields</span><span>Sales &amp; Partnerships <b>40</b></span><span> · Engineering <b>38</b></span><span> · Customer &amp; Support <b>7</b></span><span> · Product <b>5</b></span><span> · and <b>3</b> more</span></div><div class="row"><span class="lbl">places</span><span>Remote <b>20</b></span><span> · Bengaluru <b>18</b></span><span> · San Francisco proper <b>10</b></span><span> · and <b>21</b> more</span></div></div></div><div class="cside"><div class="copen"><b>96</b> roles open</div><div class="act"><button class="keep">♢ keep</button><button class="open" data-slug="harnessinc">96 roles  →</button></div></div></div><div class="card" id="c-astranis"><div class="cbody"><div class="chead"><h2 class="cname">Astranis</h2></div><div class="says none"><div class="wl"><span class="wk">not yet read</span>Not written up yet — below is only what Y Combinator and their own board state.</div><div class="prov">the backfill job is scripts/describe.py</div></div><div class="gate"><a class="rcpt" href="https://www.ycombinator.com/companies/astranis" target="_blank" rel="noopener noreferrer">Y Combinator backed them, Winter 2016<span class="arw">↗</span></a><span class="aside"> — still independent; YC lists 500 people, their own board lists 95 roles.</span></div><div class="facts"><div class="row"><span class="lbl">fields</span><span>Engineering <b>72</b></span><span> · Operations &amp; Admin <b>4</b></span><span> · Design <b>3</b></span><span> · People &amp; Recruiting <b>3</b></span><span> · and <b>5</b> more</span></div><div class="row"><span class="lbl">places</span><span>San Francisco proper <b>95</b></span></div></div></div><div class="cside"><div class="copen"><b>95</b> roles open</div><div class="act"><button class="keep">♢ keep</button><button class="open" data-slug="astranis">95 roles  →</button></div></div></div><div class="card" id="c-horizon3ai"><div class="cbody"><div class="chead"><h2 class="cname">Horizon 3 AI</h2></div><div class="says"><div class="wl what"><span class="wk">what</span>Software that continuously attacks your own network</div><div class="wl"><span class="wk">for whom</span>Security teams wanting to find exploitable weaknesses</div><div class="wl"><span class="wk">why them</span>Automated penetration testing you can run anytime</div><div class="prov">in my words, checked against their own site · Aug 4, 2026</div></div><div class="gate"><a class="rcpt" href="https://www.sec.gov/Archives/edgar/data/1801975/000180197525000001/0001801975-25-000001-index.htm" target="_blank" rel="noopener noreferrer">They filed a Form D with the SEC for $72,999,996 on May 8, 2025<span class="arw">↗</span></a><span class="aside"> — a filing signed by their own counsel, not a press release.</span></div><div class="facts"><div class="row"><span class="lbl">fields</span><span>Sales &amp; Partnerships <b>44</b></span><span> · Engineering <b>25</b></span><span> · Marketing <b>11</b></span><span> · Customer &amp; Support <b>5</b></span><span> · and <b>4</b> more</span></div><div class="row"><span class="lbl">places</span><span>Remote <b>58</b></span><span> · Amsterdam <b>7</b></span><span> · Chicago <b>7</b></span><span> · and <b>10</b> more</span></div><div class="row"><span class="lbl">visa</span><span><b>1</b> says they will not</span></div></div></div><div class="cside"><div class="copen"><b>95</b> roles open</div><div class="act"><button class="keep">♢ keep</button><button class="open" data-slug="horizon3ai">95 roles  →</button></div></div></div><div class="card" id="c-justworks"><div class="cbody"><div class="chead"><h2 class="cname">Justworks</h2></div><div class="says"><div class="wl what"><span class="wk">what</span>Payroll, benefits, and HR handled for you</div><div class="wl"><span class="wk">for whom</span>Small US businesses without HR staff</div><div class="wl"><span class="wk">why them</span>Pools small firms to get big-company benefits</div><div class="prov">in my words, checked against their own site · Aug 4, 2026</div></div><div class="gate"><a class="rcpt" href="https://www.cbinsights.com/company/justworks" target="_blank" rel="noopener noreferrer">CB Insights tracks them at a $1B+ valuation<span class="arw">↗</span></a><span class="aside"> — a tracker’s call on size, not a funding fact. $1B means the launch already happened; the 93 roles on their own board tonight are what I would go on.</span></div><div class="facts"><div class="row"><span class="lbl">fields</span><span>Engineering <b>22</b></span><span> · Sales &amp; Partnerships <b>15</b></span><span> · Customer &amp; Support <b>11</b></span><span> · Marketing <b>11</b></span><span> · and <b>6</b> more</span></div><div class="row"><span class="lbl">places</span><span>New York <b>73</b></span><span> · Remote <b>7</b></span><span> · Mexico City <b>4</b></span><span> · and <b>4</b> more</span></div></div></div><div class="cside"><div class="copen"><b>93</b> roles open</div><div class="act"><button class="keep">♢ keep</button><button class="open" data-slug="justworks">93 roles  →</button></div></div></div><div class="card" id="c-gusto"><div class="cbody"><div class="chead"><h2 class="cname">Gusto</h2><a class="slot ink" href="https://www.ycombinator.com/companies/gusto" target="_blank" rel="noopener noreferrer">on YC’s own Top Company list ↗</a></div><div class="says none"><div class="wl"><span class="wk">not yet read</span>Not written up yet — below is only what Y Combinator and their own board state.</div><div class="prov">the backfill job is scripts/describe.py</div></div><div class="gate"><a class="rcpt" href="https://www.ycombinator.com/companies/gusto" target="_blank" rel="noopener noreferrer">Y Combinator backed them, Winter 2012<span class="arw">↗</span></a><span class="aside"> — still independent; YC lists 2,400 people, their own board lists 92 roles.</span></div><div class="facts"><div class="row"><span class="lbl">fields</span><span>Engineering <b>32</b></span><span> · Customer &amp; Support <b>20</b></span><span> · Sales &amp; Partnerships <b>11</b></span><span> · Design <b>6</b></span><span> · and <b>5</b> more</span></div><div class="row"><span class="lbl">places</span><span>Denver <b>44</b></span><span> · San Francisco proper <b>19</b></span><span> · Phoenix <b>9</b></span><span> · and <b>3</b> more</span></div></div></div><div class="cside"><div class="copen"><b>92</b> roles open</div><div class="act"><button class="keep">♢ keep</button><button class="open" data-slug="gusto">92 roles  →</button></div></div></div><div class="card" id="c-socure"><div class="cbody"><div class="chead"><h2 class="cname">Socure</h2></div><div class="says"><div class="wl what"><span class="wk">what</span>Checks people are who they claim online</div><div class="wl"><span class="wk">for whom</span>Banks, fintechs, marketplaces, and government agencies</div><div class="wl"><span class="wk">why them</span>Huge identity dataset means fewer wrong rejections</div><div class="prov">in my words, checked against their own site · Aug 4, 2026</div></div><div class="gate"><a class="rcpt" href="https://www.forbes.com/companies/socure/" target="_blank" rel="noopener noreferrer">A Forbes editor put them on a list<span class="arw">↗</span></a><span class="aside"> — an editor’s call. No funding number behind it, and I will not invent one.</span></div><div class="facts"><div class="row"><span class="lbl">fields</span><span>Engineering <b>32</b></span><span> · Sales &amp; Partnerships <b>30</b></span><span> · Marketing <b>19</b></span><span> · Product <b>8</b></span><span> · and <b>1</b> more</span></div><div class="row"><span class="lbl">places</span><span>New York <b>60</b></span><span> · San Francisco proper <b>60</b></span><span> · Seattle <b>54</b></span><span> · and <b>5</b> more</span></div><div class="row"><span class="lbl">visa</span><span><b>1</b> role says they will hire from abroad · <b>1</b> says they will not</span></div></div></div><div class="cside"><div class="copen"><b>92</b> roles open</div><div class="act"><button class="keep">♢ keep</button><button class="open" data-slug="socure">92 roles  →</button></div></div></div><div class="card" id="c-kong"><div class="cbody"><div class="chead"><h2 class="cname">Kong</h2></div><div class="says"><div class="wl what"><span class="wk">what</span>Manages and secures APIs at scale</div><div class="wl"><span class="wk">for whom</span>Platform teams running many services</div><div class="wl"><span class="wk">why them</span>The most widely adopted open-source API gateway</div><div class="prov">in my words, checked against their own site · Aug 4, 2026</div></div><div class="gate"><a class="rcpt" href="https://www.cbinsights.com/company/mashape" target="_blank" rel="noopener noreferrer">CB Insights tracks them at a $1B+ valuation<span class="arw">↗</span></a><span class="aside"> — a tracker’s call on size, not a funding fact. $1B means the launch already happened; they are hiring in 20 places tonight, and a company opening that many doors is the part I can count.</span></div><div class="facts"><div class="row"><span class="lbl">fields</span><span>Engineering <b>42</b></span><span> · Sales &amp; Partnerships <b>26</b></span><span> · Customer &amp; Support <b>3</b></span><span> · Design <b>2</b></span><span> · and <b>4</b> more</span></div><div class="row"><span class="lbl">places</span><span>Bengaluru <b>13</b></span><span> · Milan / Rome <b>8</b></span><span> · Washington DC <b>7</b></span><span> · and <b>18</b> more</span></div></div></div><div class="cside"><div class="copen"><b>91</b> roles open</div><div class="act"><button class="keep">♢ keep</button><button class="open" data-slug="kong">91 roles  →</button></div></div></div><div class="card" id="c-replit"><div class="cbody"><div class="chead"><h2 class="cname">Replit</h2></div><div class="says"><div class="wl what"><span class="wk">what</span>An AI agent that builds apps from prompts</div><div class="wl"><span class="wk">for whom</span>Non-coders, product teams and enterprises building internal software</div><div class="wl"><span class="wk">why them</span>Databricks, Zillow and Gusto are named as customers</div><div class="prov">in my words, not yet checked against their site · Aug 4, 2026</div></div><div class="gate"><a class="rcpt" href="https://www.ycombinator.com/companies/replit" target="_blank" rel="noopener noreferrer">Y Combinator backed them, Winter 2018<span class="arw">↗</span></a><span class="aside"> — still independent; YC lists 65 people, their own board lists 90 roles.</span></div><div class="facts"><div class="row"><span class="lbl">fields</span><span>Engineering <b>50</b></span><span> · Sales &amp; Partnerships <b>29</b></span><span> · Operations &amp; Admin <b>6</b></span><span> · Design <b>3</b></span><span> · and <b>2</b> more</span></div><div class="row"><span class="lbl">places</span><span>The Bay Area outside San Francisco <b>72</b></span><span> · Remote <b>8</b></span><span> · New York <b>5</b></span><span> · and <b>3</b> more</span></div></div></div><div class="cside"><div class="copen"><b>90</b> roles open</div><div class="act"><button class="keep">♢ keep</button><button class="open" data-slug="replit">90 roles  →</button></div></div></div><div class="card" id="c-satispay"><div class="cbody"><div class="chead"><h2 class="cname">Satispay</h2></div><div class="says"><div class="wl what"><span class="wk">what</span>A mobile payments and money management app</div><div class="wl"><span class="wk">for whom</span>Consumers, merchants and companies in Italy and Europe</div><div class="wl"><span class="wk">why them</span>Over 6.5 million active users, 450,000 affiliated merchants</div><div class="prov">in my words, not yet checked against their site · Aug 4, 2026</div></div><div class="gate"><a class="rcpt" href="https://www.cbinsights.com/company/satispay" target="_blank" rel="noopener noreferrer">CB Insights tracks them at a $1B+ valuation<span class="arw">↗</span></a><span class="aside"> — a tracker’s call on size, not a funding fact. $1B means the launch already happened; the 88 roles on their own board tonight are what I would go on.</span></div><div class="facts"><div class="row"><span class="lbl">fields</span><span>Legal &amp; Compliance <b>46</b></span><span> · Product <b>18</b></span><span> · Sales &amp; Partnerships <b>14</b></span><span> · Finance <b>5</b></span><span> · and <b>4</b> more</span></div><div class="row"><span class="lbl">places</span><span>Milan / Rome <b>45</b></span><span> · Europe — city not stated <b>25</b></span><span> · Barcelona <b>6</b></span><span> · and <b>3</b> more</span></div><div class="row"><span class="lbl">visa</span><span><b>82</b> roles say they will hire from abroad</span></div></div></div><div class="cside"><div class="copen"><b>88</b> roles open</div><div class="act"><button class="keep">♢ keep</button><button class="open" data-slug="satispay">88 roles  →</button></div></div></div><div class="card" id="c-quintoandar"><div class="cbody"><div class="chead"><h2 class="cname">QuintoAndar</h2></div><div class="says none"><div class="wl"><span class="wk">not yet read</span>Not written up yet — below is only what CB Insights and their own board state.</div><div class="prov">the backfill job is scripts/describe.py</div></div><div class="gate"><a class="rcpt" href="https://www.cbinsights.com/company/quintoandar" target="_blank" rel="noopener noreferrer">CB Insights tracks them at a $1B+ valuation<span class="arw">↗</span></a><span class="aside"> — a tracker’s call on size, not a funding fact. $1B means the launch already happened; the 87 roles on their own board tonight are what I would go on.</span></div><div class="facts"><div class="row"><span class="lbl">fields</span><span>Engineering <b>16</b></span><span> · Sales &amp; Partnerships <b>10</b></span><span> · Finance <b>6</b></span><span> · Marketing <b>5</b></span><span> · and <b>5</b> more</span></div><div class="row"><span class="lbl">places</span><span>São Paulo <b>38</b></span><span> · Latin America — city not stated <b>35</b></span><span> · Mexico City <b>9</b></span><span> · and <b>1</b> more</span></div></div></div><div class="cside"><div class="copen"><b>87</b> roles open</div><div class="act"><button class="keep">♢ keep</button><button class="open" data-slug="quintoandar">87 roles  →</button></div></div></div><div class="card" id="c-onetrust"><div class="cbody"><div class="chead"><h2 class="cname">OneTrust</h2></div><div class="says"><div class="wl what"><span class="wk">what</span>Software for privacy consent and data compliance</div><div class="wl"><span class="wk">for whom</span>Companies subject to privacy and disclosure rules</div><div class="wl"><span class="wk">why them</span>Grew fast when GDPR forced everyone to comply</div><div class="prov">in my words, checked against their own site · Aug 4, 2026</div></div><div class="gate"><a class="rcpt" href="https://www.forbes.com/companies/onetrust/" target="_blank" rel="noopener noreferrer">A Forbes editor put them on a list<span class="arw">↗</span></a><span class="aside"> — an editor’s call. No funding number behind it, and I will not invent one.</span></div><div class="facts"><div class="row"><span class="lbl">fields</span><span>Engineering <b>28</b></span><span> · Sales &amp; Partnerships <b>26</b></span><span> · Customer &amp; Support <b>19</b></span><span> · Product <b>6</b></span><span> · and <b>3</b> more</span></div><div class="row"><span class="lbl">places</span><span>Atlanta <b>28</b></span><span> · Bengaluru <b>24</b></span><span> · Madrid <b>13</b></span><span> · and <b>8</b> more</span></div></div></div><div class="cside"><div class="copen"><b>86</b> roles open</div><div class="act"><button class="keep">♢ keep</button><button class="open" data-slug="onetrust">86 roles  →</button></div></div></div></div>
+
+  <footer class="tail" id="tail"></footer>
+
+</div>
+
+<div class="veil" id="veil" hidden><div class="sheet" id="sheet"></div></div>
+
+<script id="head-data" type="application/json">{"meta":{"snapshot":"2026-08-04","companies":789,"roles":27689,"roles_open_sum":27689,"giants":57,"funnel":{"read":10125,"not_qualified":6895,"not_software":109,"ambiguous":196,"qualified":2925,"no_board":2076,"boards_read":832,"unchecked":2076,"nothing_open":43,"wrong_board":12,"empty":5,"listed":789,"quoted":["read","not_qualified","not_software","ambiguous"]},"gates":{"SEC EDGAR":101,"Forbes":78,"Y Combinator":298,"CB Insights":291,"TechCrunch":20,"FinSMEs":1},"no_amount":667,"first_seen":{"dated":7,"observed":371},"yc":{"n":298,"active":266,"not_active":32,"top":35},"visa":{"yes":1891,"no":947,"unknown":24851},"desc":{"checked":272,"unchecked":93,"board":6,"absent":418,"written":371},"residue":{"roles":1063,"companies":203,"places":2874,"place_companies":272}},"depts":[{"k":"design","l":"Design","c":164,"r":580},{"k":"research","l":"Research & AI","c":143,"r":1025},{"k":"product","l":"Product","c":389,"r":2057},{"k":"eng","l":"Engineering","c":622,"r":9063},{"k":"sales","l":"Sales & Partnerships","c":575,"r":6170},{"k":"marketing","l":"Marketing","c":330,"r":1216},{"k":"cs","l":"Customer & Support","c":344,"r":2260},{"k":"finance","l":"Finance","c":274,"r":1090},{"k":"legal","l":"Legal & Compliance","c":173,"r":684},{"k":"people","l":"People & Recruiting","c":246,"r":686},{"k":"ops","l":"Operations & Admin","c":362,"r":1795},{"k":"other","l":"Something else","c":203,"r":1063}],"places":[{"k":"remote","l":"Remote","c":418,"r":4696,"g":"The big four"},{"k":"sfbay","l":"San Francisco and the wider Bay Area","c":338,"r":5855,"g":"The big four"},{"k":"nyc","l":"New York","c":287,"r":3064,"g":"The big four"},{"k":"london","l":"London","c":201,"r":1423,"g":"The big four"},{"k":"sf","l":"San Francisco proper","c":274,"r":4488,"g":"…and the Bay Area split in two, if you mean the city"},{"k":"bayarea","l":"The Bay Area outside San Francisco","c":87,"r":1411,"g":"…and the Bay Area split in two, if you mean the city"},{"k":"us_any","l":"United States — city not stated","c":123,"r":887,"g":"United States"},{"k":"chicago","l":"Chicago","c":72,"r":349,"g":"United States"},{"k":"austin","l":"Austin","c":70,"r":457,"g":"United States"},{"k":"seattle","l":"Seattle","c":60,"r":636,"g":"United States"},{"k":"boston","l":"Boston","c":60,"r":350,"g":"United States"},{"k":"la","l":"Los Angeles","c":55,"r":583,"g":"United States"},{"k":"dc","l":"Washington DC","c":54,"r":292,"g":"United States"},{"k":"dallas","l":"Dallas / Houston","c":50,"r":162,"g":"United States"},{"k":"denver","l":"Denver","c":47,"r":241,"g":"United States"},{"k":"atlanta","l":"Atlanta","c":38,"r":125,"g":"United States"},{"k":"miami","l":"Miami","c":36,"r":173,"g":"United States"},{"k":"midwest","l":"Detroit / Minneapolis / Ohio","c":35,"r":127,"g":"United States"},{"k":"raleigh","l":"Raleigh / Durham","c":31,"r":264,"g":"United States"},{"k":"philly","l":"Philadelphia","c":26,"r":71,"g":"United States"},{"k":"phoenix","l":"Phoenix","c":21,"r":55,"g":"United States"},{"k":"slc","l":"Salt Lake City","c":19,"r":147,"g":"United States"},{"k":"sandiego","l":"San Diego","c":19,"r":27,"g":"United States"},{"k":"nashville","l":"Nashville / Denver South","c":15,"r":28,"g":"United States"},{"k":"portland","l":"Portland","c":11,"r":23,"g":"United States"},{"k":"eu_any","l":"Europe — city not stated","c":70,"r":423,"g":"Europe"},{"k":"uk_any","l":"United Kingdom — city not stated","c":57,"r":257,"g":"Europe"},{"k":"paris","l":"Paris","c":42,"r":224,"g":"Europe"},{"k":"berlin","l":"Berlin","c":41,"r":296,"g":"Europe"},{"k":"es_any","l":"Spain / Portugal — city not stated","c":38,"r":234,"g":"Europe"},{"k":"munich","l":"Munich","c":32,"r":254,"g":"Europe"},{"k":"de_any","l":"Germany — city not stated","c":32,"r":117,"g":"Europe"},{"k":"amsterdam","l":"Amsterdam","c":28,"r":132,"g":"Europe"},{"k":"dublin","l":"Dublin","c":28,"r":205,"g":"Europe"},{"k":"stockholm","l":"Stockholm / Nordics","c":26,"r":256,"g":"Europe"},{"k":"madrid","l":"Madrid","c":23,"r":135,"g":"Europe"},{"k":"barcelona","l":"Barcelona","c":23,"r":154,"g":"Europe"},{"k":"milan","l":"Milan / Rome","c":18,"r":112,"g":"Europe"},{"k":"vienna","l":"Vienna / Zurich-adjacent","c":17,"r":104,"g":"Europe"},{"k":"bucharest","l":"Bucharest / Sofia","c":16,"r":97,"g":"Europe"},{"k":"warsaw","l":"Warsaw / Kraków","c":16,"r":71,"g":"Europe"},{"k":"lisbon","l":"Lisbon","c":15,"r":135,"g":"Europe"},{"k":"zurich","l":"Zurich","c":14,"r":58,"g":"Europe"},{"k":"bengaluru","l":"Bengaluru","c":76,"r":618,"g":"Asia-Pacific & Middle East"},{"k":"singapore","l":"Singapore","c":67,"r":422,"g":"Asia-Pacific & Middle East"},{"k":"sydney","l":"Sydney / Melbourne","c":62,"r":327,"g":"Asia-Pacific & Middle East"},{"k":"apac_any","l":"Asia-Pacific — city not stated","c":57,"r":199,"g":"Asia-Pacific & Middle East"},{"k":"tokyo","l":"Tokyo","c":42,"r":209,"g":"Asia-Pacific & Middle East"},{"k":"in_any","l":"India — city not stated","c":36,"r":133,"g":"Asia-Pacific & Middle East"},{"k":"indiaother","l":"Mumbai / Delhi / Hyderabad","c":34,"r":253,"g":"Asia-Pacific & Middle East"},{"k":"hongkong","l":"Hong Kong","c":28,"r":248,"g":"Asia-Pacific & Middle East"},{"k":"telaviv","l":"Tel Aviv","c":25,"r":179,"g":"Asia-Pacific & Middle East"},{"k":"dubai","l":"Dubai","c":24,"r":63,"g":"Asia-Pacific & Middle East"},{"k":"seoul","l":"Seoul","c":22,"r":603,"g":"Asia-Pacific & Middle East"},{"k":"toronto","l":"Toronto","c":57,"r":386,"g":"The Americas & Africa"},{"k":"latam_any","l":"Latin America — city not stated","c":47,"r":269,"g":"The Americas & Africa"},{"k":"ca_any","l":"Canada — city not stated","c":37,"r":150,"g":"The Americas & Africa"},{"k":"mexico","l":"Mexico City","c":34,"r":138,"g":"The Americas & Africa"},{"k":"saopaulo","l":"São Paulo","c":28,"r":314,"g":"The Americas & Africa"},{"k":"bogota","l":"Bogotá / Buenos Aires","c":20,"r":89,"g":"The Americas & Africa"},{"k":"montreal","l":"Montreal","c":18,"r":181,"g":"The Americas & Africa"},{"k":"vancouver","l":"Vancouver","c":17,"r":122,"g":"The Americas & Africa"},{"k":"lagos","l":"Lagos / Nairobi","c":11,"r":82,"g":"The Americas & Africa"},{"k":"elsewhere","l":"Somewhere not in this list","c":272,"r":2874,"g":"Stated, but not as a place"}],"dept_labels":{"design":"Design","research":"Research & AI","product":"Product","eng":"Engineering","sales":"Sales & Partnerships","marketing":"Marketing","cs":"Customer & Support","finance":"Finance","legal":"Legal & Compliance","people":"People & Recruiting","ops":"Operations & Admin","other":"Something else"},"place_labels":{"remote":"Remote","sf":"San Francisco proper","bayarea":"The Bay Area outside San Francisco","nyc":"New York","london":"London","seattle":"Seattle","la":"Los Angeles","boston":"Boston","austin":"Austin","chicago":"Chicago","denver":"Denver","dc":"Washington DC","atlanta":"Atlanta","dallas":"Dallas / Houston","miami":"Miami","raleigh":"Raleigh / Durham","slc":"Salt Lake City","phoenix":"Phoenix","sandiego":"San Diego","philly":"Philadelphia","midwest":"Detroit / Minneapolis / Ohio","nashville":"Nashville / Denver South","portland":"Portland","toronto":"Toronto","vancouver":"Vancouver","montreal":"Montreal","dublin":"Dublin","berlin":"Berlin","munich":"Munich","paris":"Paris","amsterdam":"Amsterdam","barcelona":"Barcelona","madrid":"Madrid","lisbon":"Lisbon","zurich":"Zurich","stockholm":"Stockholm / Nordics","warsaw":"Warsaw / Kraków","milan":"Milan / Rome","vienna":"Vienna / Zurich-adjacent","bucharest":"Bucharest / Sofia","telaviv":"Tel Aviv","dubai":"Dubai","bengaluru":"Bengaluru","indiaother":"Mumbai / Delhi / Hyderabad","singapore":"Singapore","tokyo":"Tokyo","seoul":"Seoul","hongkong":"Hong Kong","sydney":"Sydney / Melbourne","saopaulo":"São Paulo","mexico":"Mexico City","bogota":"Bogotá / Buenos Aires","lagos":"Lagos / Nairobi","sfbay":"San Francisco and the wider Bay Area","us_any":"United States — city not stated","uk_any":"United Kingdom — city not stated","in_any":"India — city not stated","ca_any":"Canada — city not stated","de_any":"Germany — city not stated","es_any":"Spain / Portugal — city not stated","eu_any":"Europe — city not stated","latam_any":"Latin America — city not stated","apac_any":"Asia-Pacific — city not stated","unstated":"Their board did not say where","elsewhere":"Somewhere not in this list"},"giants_list":[["Databricks",808,"databricks"],["OpenAI",735,"openai"],["Stripe",546,"stripe"],["Toss",515,"tosscareers"],["Anthropic",394,"anthropic"],["SumUp",371,"sumup"],["Relativity Space",363,"relativity"],["OKX",334,"okx"],["Brex",302,"brex"],["Halter",287,"halter"],["Legora",279,"legora"],["Verkada",274,"verkada"],["Applied Intuition",264,"applied"],["Celonis",249,"celonis"],["Braze",244,"braze"],["Scale AI",216,"scaleai"],["AlphaSense",211,"alphasense"],["iCapital",199,"icapitalnetwork"],["Fivetran",198,"fivetran"],["Airbnb",189,"airbnb"],["GitLab",187,"gitlab"],["Super",186,"super"],["ClickHouse",167,"clickhouse"],["Coinbase",163,"coinbase"],["Workato",159,"workato"],["C6 Bank",157,"c6bank"],["ICEYE",157,"iceye"],["MaintainX",153,"maintainx"],["Epic Games",152,"epicgames"],["Flexport",152,"flexport"],["Quince",147,"quince"],["Netskope",141,"netskope"],["Grafana Labs",140,"grafanalabs"],["Helsing",135,"helsing"],["Ripple",133,"ripple"],["Handshake",132,"handshake"],["Teya",128,"teya"],["Cato Networks",124,"catonetworks"],["Zip",124,"zip"],["Intercom",123,"intercom"],["Ramp",123,"ramp"],["TensTorrent",122,"tenstorrent"],["Instacart",116,"instacart"],["Pennylane",115,"pennylane"],["Cursor",114,"cursor"],["Moniepoint",112,"moniepoint"],["Plaid",112,"plaid"],["Finni Health",111,"finni-health"],["Notion",110,"notion"],["Wayve",110,"wayve"],["Helion Energy",109,"helion"],["Glean",108,"gleanwork"],["Postman",106,"postman"],["EliseAI",102,"eliseai"],["Tide",102,"tide"],["Cresta",100,"cresta"],["Vanta",100,"vanta"]],"starts":[["eng","sfbay",201],["eng","remote",204],["sales","nyc",174]],"companies":[{"s":"billiontoone","n":"BillionToOne","r":98,"g":{"who":"Y Combinator","line":"Y Combinator backed them, Summer 2017","url":"https://www.ycombinator.com/companies/billiontoone","kind":"yc","batch":"Summer 2017","status":"Public","team":300,"top":false,"cap":" — and YC’s own status field for them reads Public."},"d":{"ops":10,"eng":11,"cs":3,"research":3,"product":1,"sales":68,"design":1,"finance":1},"p":{"elsewhere":48,"bayarea":24,"sfbay":24,"remote":7,"dc":1,"atlanta":1,"boston":2,"midwest":4,"dallas":4,"miami":1,"portland":1,"philly":1,"seattle":1,"phoenix":1,"slc":1,"la":1},"x":[["ops","elsewhere",5],["eng","bayarea",10],["eng","sfbay",10],["ops","bayarea",5],["ops","sfbay",5],["cs","elsewhere",2],["research","bayarea",3],["research","sfbay",3],["product","remote",1],["sales","remote",5],["cs","remote",1],["design","bayarea",1],["design","sfbay",1],["sales","dc",1],["sales","elsewhere",40],["sales","bayarea",4],["sales","sfbay",4],["sales","atlanta",1],["sales","boston",2],["sales","midwest",4],["sales","dallas",4],["sales","miami",1],["sales","portland",1],["sales","philly",1],["sales","seattle",1],["sales","phoenix",1],["sales","slc",1],["sales","la",1],["eng","elsewhere",1],["finance","bayarea",1],["finance","sfbay",1]],"vy":0,"vn":0},{"s":"langchain","n":"LangChain","r":97,"g":{"who":"CB Insights","line":"CB Insights tracks them at a $1B+ valuation","url":"https://www.cbinsights.com/company/langchain","kind":"cbi","cap":" — a tracker’s call on size, not a funding fact. $1B means the launch already happened; they are hiring in 21 places tonight, and a company opening that many doors is the part I can count."},"d":{"eng":48,"sales":35,"product":2,"people":3,"marketing":5,"finance":4},"p":{"boston":8,"sf":40,"sfbay":40,"midwest":2,"nyc":24,"austin":4,"chicago":2,"la":3,"sandiego":1,"seattle":5,"miami":1,"atlanta":2,"nashville":1,"amsterdam":3,"london":13,"dallas":5,"eu_any":2,"raleigh":2,"dc":2,"denver":1,"slc":1,"remote":4},"x":[["eng","boston",7],["eng","sf",24],["eng","sfbay",24],["sales","midwest",2],["sales","sf",6],["sales","sfbay",6],["eng","nyc",16],["eng","austin",4],["eng","chicago",1],["eng","la",2],["eng","sandiego",1],["eng","seattle",4],["sales","miami",1],["sales","atlanta",1],["sales","nashville",1],["eng","amsterdam",2],["product","boston",1],["product","nyc",1],["product","sf",2],["product","sfbay",2],["eng","london",3],["people","nyc",2],["people","sf",2],["people","sfbay",2],["sales","nyc",3],["sales","chicago",1],["sales","dallas",2],["sales","london",10],["sales","eu_any",2],["eng","dallas",3],["eng","atlanta",1],["marketing","sf",4],["marketing","sfbay",4],["eng","raleigh",2],["sales","dc",2],["eng","denver",1],["eng","slc",1],["finance","sf",2],["finance","sfbay",2],["finance","nyc",2],["sales","la",1],["eng","remote",2],["sales","remote",1],["marketing","remote",1],["sales","seattle",1],["sales","amsterdam",1]],"vy":0,"vn":0,"w":{"w":"Tools for building and monitoring AI agents","f":"Developers putting AI features into production","y":"Its open-source library is downloaded everywhere","p":"checked"}},{"s":"pigment","n":"Pigment","r":97,"g":{"who":"CB Insights","line":"CB Insights tracks them at a $1B+ valuation","url":"https://www.cbinsights.com/company/pigment-1","kind":"cbi","cap":" — a tracker’s call on size, not a funding fact. $1B means the launch already happened; they are hiring in 13 places tonight, and a company opening that many doors is the part I can count."},"d":{"ops":49,"cs":21,"eng":16,"people":10,"other":1},"p":{"nyc":11,"toronto":13,"sf":8,"sfbay":9,"london":20,"austin":9,"eu_any":7,"elsewhere":5,"paris":26,"uk_any":1,"us_any":15,"munich":1,"remote":1,"bayarea":1,"chicago":1},"x":[["ops","nyc",6],["cs","toronto",3],["cs","sf",3],["cs","sfbay",3],["cs","nyc",2],["cs","london",2],["cs","austin",2],["eng","eu_any",6],["ops","elsewhere",5],["ops","toronto",5],["ops","austin",5],["ops","paris",13],["ops","uk_any",1],["ops","us_any",10],["ops","london",11],["ops","sf",5],["ops","sfbay",6],["eng","paris",4],["eng","toronto",4],["eng","london",5],["ops","munich",1],["cs","remote",1],["cs","paris",4],["cs","us_any",3],["people","paris",5],["people","london",1],["people","nyc",3],["ops","bayarea",1],["cs","eu_any",1],["other","london",1],["people","austin",2],["people","us_any",2],["people","chicago",1],["people","toronto",1]],"vy":0,"vn":0,"w":{"w":"Software for planning budgets, sales and headcount","f":"Finance and operations teams outgrowing giant spreadsheets","y":"Spreadsheet-like flexibility that still runs fast","p":"checked"}},{"s":"harnessinc","n":"Harness","r":96,"g":{"who":"Forbes","line":"A Forbes editor put them on a list","url":"https://www.forbes.com/companies/harness/","kind":"forbes","cap":" — an editor’s call. No funding number behind it, and I will not invent one."},"d":{"eng":38,"cs":7,"sales":40,"people":1,"product":5,"finance":3,"marketing":2},"p":{"sf":10,"sfbay":14,"atlanta":3,"miami":2,"raleigh":2,"remote":20,"chicago":2,"bengaluru":18,"austin":5,"dc":1,"berlin":1,"london":5,"sydney":2,"amsterdam":2,"nyc":5,"boston":3,"saopaulo":1,"bayarea":4,"la":2,"denver":1,"midwest":1,"elsewhere":2,"dubai":1,"stockholm":2,"singapore":1},"x":[["eng","sf",3],["eng","sfbay",5],["eng","atlanta",1],["eng","miami",1],["eng","raleigh",1],["eng","remote",10],["cs","remote",3],["cs","chicago",1],["eng","bengaluru",13],["cs","bengaluru",2],["sales","austin",5],["sales","dc",1],["sales","berlin",1],["sales","london",3],["sales","sydney",2],["sales","amsterdam",1],["sales","nyc",4],["sales","sf",3],["sales","sfbay",3],["people","bengaluru",1],["sales","boston",3],["sales","saopaulo",1],["product","bayarea",2],["product","sfbay",2],["cs","london",1],["eng","amsterdam",1],["eng","la",1],["eng","london",1],["sales","atlanta",2],["sales","chicago",1],["sales","denver",1],["sales","remote",5],["sales","miami",1],["sales","midwest",1],["sales","la",1],["sales","raleigh",1],["sales","elsewhere",1],["sales","dubai",1],["sales","stockholm",1],["eng","nyc",1],["finance","sf",3],["finance","sfbay",3],["product","remote",1],["eng","singapore",1],["eng","stockholm",1],["marketing","sf",1],["marketing","sfbay",1],["product","bengaluru",2],["eng","bayarea",2],["eng","elsewhere",1],["marketing","remote",1]],"vy":0,"vn":0,"w":{"w":"Automates software delivery from commit to production","f":"Engineering teams tired of slow releases","y":"CI/CD platform from the AppDynamics founder","p":"checked"}},{"s":"astranis","n":"Astranis","r":95,"g":{"who":"Y Combinator","line":"Y Combinator backed them, Winter 2016","url":"https://www.ycombinator.com/companies/astranis","kind":"yc","batch":"Winter 2016","status":"Active","team":500,"top":false,"cap":" — still independent; YC lists 500 people, their own board lists 95 roles."},"d":{"other":5,"eng":72,"marketing":2,"ops":4,"legal":2,"design":3,"finance":2,"product":2,"people":3},"p":{"sf":95,"sfbay":95},"x":[["other","sf",5],["other","sfbay",5],["eng","sf",72],["eng","sfbay",72],["marketing","sf",2],["marketing","sfbay",2],["ops","sf",4],["ops","sfbay",4],["legal","sf",2],["legal","sfbay",2],["design","sf",3],["design","sfbay",3],["finance","sf",2],["finance","sfbay",2],["product","sf",2],["product","sfbay",2],["people","sf",3],["people","sfbay",3]],"vy":0,"vn":0},{"s":"horizon3ai","n":"Horizon 3 AI","r":95,"g":{"who":"SEC EDGAR","line":"They filed a Form D with the SEC for $72,999,996 on May 8, 2025","url":"https://www.sec.gov/Archives/edgar/data/1801975/000180197525000001/0001801975-25-000001-index.htm","kind":"sec","amount":"$72,999,996","date":"May 8, 2025","cap":" — a filing signed by their own counsel, not a press release."},"d":{"eng":25,"sales":44,"marketing":11,"product":3,"people":2,"cs":5,"finance":3,"legal":2},"p":{"remote":58,"elsewhere":9,"chicago":7,"nyc":6,"dc":3,"sf":2,"sfbay":2,"de_any":2,"singapore":1,"es_any":1,"amsterdam":7,"seattle":1,"london":1,"apac_any":2},"x":[["eng","remote",25],["sales","elsewhere",9],["sales","remote",17],["marketing","chicago",2],["sales","nyc",3],["sales","chicago",5],["product","nyc",3],["people","remote",2],["product","dc",2],["product","sf",2],["product","sfbay",2],["marketing","remote",6],["sales","de_any",2],["cs","remote",4],["finance","remote",3],["sales","singapore",1],["sales","es_any",1],["marketing","amsterdam",3],["sales","seattle",1],["marketing","london",1],["sales","apac_any",2],["legal","remote",1],["sales","amsterdam",3],["cs","dc",1],["legal","amsterdam",1]],"vy":0,"vn":1,"w":{"w":"Software that continuously attacks your own network","f":"Security teams wanting to find exploitable weaknesses","y":"Automated penetration testing you can run anytime","p":"checked"}},{"s":"justworks","n":"Justworks","r":93,"g":{"who":"CB Insights","line":"CB Insights tracks them at a $1B+ valuation","url":"https://www.cbinsights.com/company/justworks","kind":"cbi","cap":" — a tracker’s call on size, not a funding fact. $1B means the launch already happened; the 93 roles on their own board tonight are what I would go on."},"d":{"sales":15,"ops":4,"legal":6,"design":5,"cs":11,"finance":9,"marketing":11,"product":8,"people":2,"eng":22},"p":{"phoenix":2,"remote":7,"nyc":73,"mexico":4,"miami":4,"london":1,"toronto":2},"x":[["sales","phoenix",1],["sales","remote",4],["ops","nyc",3],["legal","nyc",4],["sales","nyc",9],["design","nyc",5],["cs","nyc",7],["cs","mexico",2],["finance","nyc",5],["marketing","nyc",11],["product","nyc",8],["cs","remote",1],["people","nyc",2],["cs","miami",1],["eng","nyc",19],["ops","remote",1],["sales","miami",1],["eng","mexico",1],["eng","phoenix",1],["finance","london",1],["finance","toronto",1],["finance","mexico",1],["finance","remote",1],["legal","miami",2],["eng","toronto",1]],"vy":0,"vn":0,"w":{"w":"Payroll, benefits, and HR handled for you","f":"Small US businesses without HR staff","y":"Pools small firms to get big-company benefits","p":"checked"}},{"s":"gusto","n":"Gusto","r":92,"g":{"who":"Y Combinator","line":"Y Combinator backed them, Winter 2012","url":"https://www.ycombinator.com/companies/gusto","kind":"yc","batch":"Winter 2012","status":"Active","team":2400,"top":true,"cap":" — still independent; YC lists 2,400 people, their own board lists 92 roles."},"d":{"cs":20,"marketing":6,"legal":4,"eng":32,"sales":11,"design":6,"people":3,"finance":4,"product":6},"p":{"denver":44,"phoenix":9,"remote":9,"sf":19,"sfbay":19,"nyc":8,"chicago":3},"x":[["cs","denver",14],["cs","phoenix",3],["marketing","remote",1],["legal","denver",4],["eng","sf",13],["eng","sfbay",13],["marketing","phoenix",3],["eng","remote",4],["sales","denver",7],["eng","nyc",4],["sales","remote",3],["cs","chicago",3],["eng","denver",11],["design","denver",2],["sales","phoenix",1],["people","phoenix",1],["people","denver",1],["finance","nyc",1],["product","sf",2],["product","sfbay",2],["product","denver",2],["design","sf",2],["design","sfbay",2],["design","nyc",2],["marketing","denver",2],["finance","sf",1],["finance","sfbay",1],["product","nyc",1],["product","phoenix",1],["finance","denver",1],["finance","remote",1],["people","sf",1],["people","sfbay",1]],"vy":0,"vn":0},{"s":"socure","n":"Socure","r":92,"g":{"who":"Forbes","line":"A Forbes editor put them on a list","url":"https://www.forbes.com/companies/socure/","kind":"forbes","cap":" — an editor’s call. No funding number behind it, and I will not invent one."},"d":{"sales":30,"eng":32,"marketing":19,"product":8,"ops":3},"p":{"miami":34,"nyc":60,"seattle":54,"sf":60,"sfbay":60,"dc":21,"elsewhere":37,"toronto":1,"london":4},"x":[["sales","miami",14],["sales","nyc",22],["sales","seattle",17],["sales","sf",20],["sales","sfbay",20],["sales","dc",16],["eng","nyc",18],["eng","seattle",17],["eng","sf",18],["eng","sfbay",18],["eng","miami",8],["eng","elsewhere",11],["eng","toronto",1],["marketing","miami",8],["marketing","nyc",10],["marketing","seattle",10],["marketing","sf",11],["marketing","sfbay",11],["marketing","elsewhere",8],["product","sf",8],["product","sfbay",8],["sales","elsewhere",14],["eng","london",4],["marketing","dc",4],["ops","miami",3],["ops","nyc",3],["ops","seattle",3],["ops","sf",3],["ops","sfbay",3],["product","nyc",7],["product","seattle",7],["ops","dc",1],["ops","elsewhere",1],["product","elsewhere",3],["product","miami",1]],"vy":1,"vn":1,"w":{"w":"Checks people are who they claim online","f":"Banks, fintechs, marketplaces, and government agencies","y":"Huge identity dataset means fewer wrong rejections","p":"checked"}},{"s":"kong","n":"Kong","r":91,"g":{"who":"CB Insights","line":"CB Insights tracks them at a $1B+ valuation","url":"https://www.cbinsights.com/company/mashape","kind":"cbi","cap":" — a tracker’s call on size, not a funding fact. $1B means the launch already happened; they are hiring in 20 places tonight, and a company opening that many doors is the part I can count."},"d":{"other":14,"eng":42,"sales":26,"cs":3,"design":2,"ops":1,"people":1,"marketing":2},"p":{"apac_any":5,"toronto":4,"us_any":7,"milan":8,"bengaluru":13,"dc":7,"nyc":7,"elsewhere":16,"es_any":3,"uk_any":4,"indiaother":2,"hongkong":5,"eu_any":4,"ca_any":2,"singapore":6,"sydney":1,"london":6,"chicago":1,"sf":3,"sfbay":3,"de_any":1,"paris":2},"x":[["other","apac_any",1],["eng","toronto",4],["eng","us_any",1],["eng","milan",7],["sales","bengaluru",3],["eng","dc",3],["eng","nyc",1],["eng","elsewhere",3],["sales","es_any",2],["sales","uk_any",1],["sales","indiaother",1],["other","bengaluru",2],["other","indiaother",1],["eng","hongkong",4],["sales","elsewhere",10],["eng","bengaluru",7],["other","elsewhere",2],["cs","eu_any",1],["design","ca_any",1],["design","nyc",1],["design","us_any",1],["eng","es_any",1],["sales","singapore",2],["sales","nyc",5],["other","us_any",3],["sales","sydney",1],["ops","dc",1],["ops","us_any",1],["eng","apac_any",1],["other","london",3],["other","uk_any",2],["sales","eu_any",1],["sales","chicago",1],["sales","dc",3],["cs","apac_any",1],["cs","singapore",1],["people","hongkong",1],["eng","uk_any",1],["eng","sf",2],["eng","sfbay",2],["marketing","bengaluru",1],["sales","de_any",1],["sales","us_any",1],["eng","eu_any",2],["eng","paris",2],["eng","singapore",2],["other","singapore",1],["cs","london",1],["marketing","elsewhere",1],["eng","london",2],["eng","ca_any",1],["sales","apac_any",2],["design","sf",1],["design","sfbay",1],["sales","milan",1]],"vy":0,"vn":0,"w":{"w":"Manages and secures APIs at scale","f":"Platform teams running many services","y":"The most widely adopted open-source API gateway","p":"checked"}},{"s":"replit","n":"Replit","r":90,"g":{"who":"Y Combinator","line":"Y Combinator backed them, Winter 2018","url":"https://www.ycombinator.com/companies/replit","kind":"yc","batch":"Winter 2018","status":"Active","team":65,"top":false,"cap":" — still independent; YC lists 65 people, their own board lists 90 roles."},"d":{"eng":50,"sales":29,"design":3,"product":1,"cs":1,"ops":6},"p":{"bayarea":72,"sfbay":72,"nyc":5,"remote":8,"slc":3,"latam_any":1,"in_any":1},"x":[["eng","bayarea",48],["eng","sfbay",48],["sales","bayarea",14],["sales","sfbay",14],["design","bayarea",3],["design","sfbay",3],["product","bayarea",1],["product","sfbay",1],["sales","nyc",5],["cs","remote",1],["sales","slc",3],["sales","remote",5],["eng","remote",2],["ops","bayarea",6],["ops","sfbay",6],["sales","latam_any",1],["sales","in_any",1]],"vy":0,"vn":0,"w":{"w":"An AI agent that builds apps from prompts","f":"Non-coders, product teams and enterprises building internal software","y":"Databricks, Zillow and Gusto are named as customers","p":"unchecked"}},{"s":"satispay","n":"Satispay","r":88,"g":{"who":"CB Insights","line":"CB Insights tracks them at a $1B+ valuation","url":"https://www.cbinsights.com/company/satispay","kind":"cbi","cap":" — a tracker’s call on size, not a funding fact. $1B means the launch already happened; the 88 roles on their own board tonight are what I would go on."},"d":{"product":18,"sales":14,"ops":1,"finance":5,"legal":46,"other":1,"people":2,"marketing":1},"p":{"milan":45,"elsewhere":7,"barcelona":6,"eu_any":25,"de_any":3,"uk_any":2},"x":[["product","milan",18],["sales","milan",11],["sales","elsewhere",3],["ops","milan",1],["finance","milan",3],["legal","milan",9],["legal","barcelona",6],["legal","eu_any",23],["legal","de_any",3],["legal","uk_any",2],["finance","eu_any",2],["other","milan",1],["people","milan",2],["legal","elsewhere",3],["marketing","elsewhere",1]],"vy":82,"vn":0,"w":{"w":"A mobile payments and money management app","f":"Consumers, merchants and companies in Italy and Europe","y":"Over 6.5 million active users, 450,000 affiliated merchants","p":"unchecked"}},{"s":"quintoandar","n":"QuintoAndar","r":87,"g":{"who":"CB Insights","line":"CB Insights tracks them at a $1B+ valuation","url":"https://www.cbinsights.com/company/quintoandar","kind":"cbi","cap":" — a tracker’s call on size, not a funding fact. $1B means the launch already happened; the 87 roles on their own board tonight are what I would go on."},"d":{"sales":10,"other":42,"ops":3,"marketing":5,"people":3,"finance":6,"legal":1,"eng":16,"product":1},"p":{"saopaulo":38,"latam_any":35,"bogota":5,"mexico":9},"x":[["sales","saopaulo",5],["other","saopaulo",22],["other","latam_any",13],["sales","bogota",2],["ops","saopaulo",3],["sales","latam_any",2],["marketing","mexico",1],["other","mexico",6],["people","latam_any",2],["people","mexico",1],["finance","saopaulo",4],["legal","saopaulo",1],["finance","latam_any",1],["marketing","saopaulo",3],["sales","mexico",1],["marketing","bogota",1],["other","bogota",1],["eng","latam_any",16],["product","latam_any",1],["finance","bogota",1]],"vy":0,"vn":0},{"s":"onetrust","n":"OneTrust","r":86,"g":{"who":"Forbes","line":"A Forbes editor put them on a list","url":"https://www.forbes.com/companies/onetrust/","kind":"forbes","cap":" — an editor’s call. No funding number behind it, and I will not invent one."},"d":{"sales":26,"finance":1,"legal":5,"cs":19,"marketing":1,"eng":28,"product":6},"p":{"nyc":2,"amsterdam":2,"munich":2,"denver":1,"elsewhere":5,"madrid":13,"atlanta":28,"bengaluru":24,"sf":6,"sfbay":6,"london":2,"chicago":1},"x":[["sales","nyc",1],["sales","amsterdam",2],["sales","munich",2],["sales","denver",1],["sales","elsewhere",4],["sales","madrid",6],["sales","atlanta",7],["finance","madrid",1],["legal","atlanta",3],["cs","bengaluru",6],["marketing","atlanta",1],["cs","madrid",5],["cs","atlanta",5],["legal","sf",2],["legal","sfbay",2],["cs","elsewhere",1],["eng","bengaluru",17],["sales","sf",1],["sales","sfbay",1],["eng","atlanta",9],["sales","london",2],["eng","sf",1],["eng","sfbay",1],["cs","nyc",1],["cs","chicago",1],["eng","madrid",1],["product","bengaluru",1],["product","atlanta",3],["product","sf",2],["product","sfbay",2]],"vy":0,"vn":0,"w":{"w":"Software for privacy consent and data compliance","f":"Companies subject to privacy and disclosure rules","y":"Grew fast when GDPR forced everyone to comply","p":"checked"}}]}</script>
+<script>
+(function(){
+"use strict";
+
+var HEAD = JSON.parse(document.getElementById('head-data').textContent);
+var META = HEAD.meta, DL = HEAD.dept_labels, PL = HEAD.place_labels;
+var ALL = HEAD.companies.slice();     // grows to all 789 when index.json lands
+var FULL = false;
+var TODAY = META.snapshot;            // the corpus date, pinned
+// The real clock, kept apart from the corpus date. `applied` is gated on this
+// one, because "did you apply?" is a question about days that have passed in
+// the reader's life, not about the snapshot the page was built from.
+var REALDAY = new Date().toISOString().slice(0,10);
+
+// ---------------------------------------------------------------- small utils
+function el(t,c,x){var e=document.createElement(t);if(c)e.className=c;
+  if(x!==undefined&&x!==null)e.textContent=x;return e;}
+function n(v){return (v||0).toLocaleString('en-US');}
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){
+  return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+function pretty(d){ // 2026-08-04 -> Aug 4, 2026
+  if(!d) return '';
+  var M=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  var p=d.split('-'); return M[+p[1]-1]+' '+(+p[2])+', '+p[0];
+}
+function plural(k,one,many){return k===1?one:many;}
+function $(s){return document.querySelector(s);}
+
+// -------------------------------------------------------------------- state
+// keys on the company, never on the posting: the endgame is a referral and the
+// unit of a referral is company + person.  PRODUCT-1 §5.1.
+var SKEY='roleatlas.r05a.v1';
+var S;
+try{S=JSON.parse(localStorage.getItem(SKEY))||{}}catch(e){S={}}
+if(!S.keeps) S.keeps={};
+function save(){try{localStorage.setItem(SKEY,JSON.stringify(S))}catch(e){}}
+function entry(slug){
+  if(!S.keeps[slug]) S.keeps[slug]={kept_at:null,opened:[],applied:null,answered_at:null};
+  if(!S.keeps[slug].opened) S.keeps[slug].opened=[];
+  return S.keeps[slug];
+}
+function isKept(slug){var e=S.keeps[slug];return !!(e&&e.kept_at);}
+
+// ------------------------------------------------------ the shortlist's address
+// Three rounds running, nothing here was built for the friend. The narrowing and
+// the kept companies both live in the URL now, so the list can be sent — and a
+// link that arrives carrying companies says so, rather than pretending they were
+// always yours.
+var dept=null, place=null, hideGiants=true, adoptedFromLink=0;
+
+function readHash(){
+  var q={}, raw=location.hash.replace(/^#/,'');
+  if(!raw) return;
+  raw.split('&').forEach(function(kv){
+    var i=kv.indexOf('='); if(i<0) return;
+    q[decodeURIComponent(kv.slice(0,i))]=decodeURIComponent(kv.slice(i+1));
+  });
+  if(q.field) dept=q.field;
+  if(q.place) place=q.place;
+  if(q.giants==='0') hideGiants=false;
+  if(q.keep) q.keep.split(',').filter(Boolean).forEach(function(slug){
+    if(isKept(slug)) return;
+    var e=entry(slug); e.kept_at=TODAY; e.from_link=true; adoptedFromLink++;
+  });
+  if(adoptedFromLink) save();
+}
+function hashBits(){
+  var kept=Object.keys(S.keeps).filter(function(s){return S.keeps[s].kept_at;});
+  var bits=[];
+  if(dept) bits.push('field='+encodeURIComponent(dept));
+  if(place) bits.push('place='+encodeURIComponent(place));
+  if(!hideGiants) bits.push('giants=0');
+  if(kept.length) bits.push('keep='+kept.map(encodeURIComponent).join(','));
+  return bits;
+}
+function writeHash(){
+  var bits=hashBits();
+  try{history.replaceState(null,'',
+    bits.length?('#'+bits.join('&')):(location.pathname+location.search));}catch(e){}
+}
+function shareURL(){
+  var bits=hashBits();
+  return location.origin+location.pathname+(bits.length?'#'+bits.join('&'):'');
+}
+
+var PROVLINE={checked:'in my words, checked against their own site',
+              unchecked:'in my words, not yet checked against their site',
+              board:'in my words, read off their own job board'};
+
+// The plain-text version. A friend has none of your localStorage, so everything
+// they need is in the text: what each company does, who vouched for it, the
+// links, and the address that reopens the exact view you were looking at.
+function shortlistText(){
+  var kept=Object.keys(S.keeps).filter(function(s){return S.keeps[s].kept_at;});
+  var out=['My shortlist — '+n(kept.length)+' '+plural(kept.length,'company','companies')+
+           ', off job boards read on '+pretty(TODAY),''];
+  kept.forEach(function(s){
+    var e=S.keeps[s], c=byslug(s);
+    out.push((c?c.n:s)+(c?'  ·  '+n(c.r)+' roles open':''));
+    if(c&&c.w){
+      out.push('  '+c.w.w);
+      out.push('  for '+c.w.f);
+      out.push('  why them: '+c.w.y);
+      out.push('  ('+PROVLINE[c.w.p]+')');
+    } else if(c){
+      out.push('  (not written up yet — '+c.g.who+' is who put them on a list)');
+    }
+    if(c) out.push('  '+c.g.line+' — '+c.g.url);
+    e.opened.forEach(function(o){ out.push('  a role I opened: '+o.title+' — '+o.url); });
+    if(e.applied) out.push('  I said: '+
+      ({yes:'applied',no:'did not apply',not_yet:'not yet'}[e.applied]));
+    out.push('');
+  });
+  out.push('Reopen this exact list, narrowing and all:');
+  out.push(shareURL());
+  return out.join('\n');
+}
+
+// ------------------------------------------------------------------ controls
+var deptOpts={}, placeOpts={};
+
+function fillMenus(){
+  var ds=$('#dept'), ps=$('#place');
+  var o=el('option',null,'any field'); o.value=''; ds.appendChild(o); deptOpts['']=o;
+  // "Something else" is in this menu. It is 3.8% of the corpus and leaving it
+  // out was the one silent exclusion on the round-4 page.
+  HEAD.depts.forEach(function(d){
+    var op=el('option',null,d.l.toLowerCase()); op.value=d.k;
+    ds.appendChild(op); deptOpts[d.k]=op;
+  });
+  var oa=el('option',null,'anywhere'); oa.value=''; ps.appendChild(oa); placeOpts['']=oa;
+  var group=null,og=null;
+  HEAD.places.forEach(function(p){
+    if(p.g!==group){group=p.g;og=document.createElement('optgroup');og.label=group;
+      ps.appendChild(og);}
+    var op=el('option',null,p.l); op.value=p.k; og.appendChild(op); placeOpts[p.k]=op;
+  });
+  priceMenus();
+  ds.value=dept||''; ps.value=place||'';
+  ds.addEventListener('change',function(){dept=ds.value||null;cur=0;collapseAll();render();});
+  ps.addEventListener('change',function(){place=ps.value||null;cur=0;collapseAll();render();});
+  $('#giants').checked=hideGiants;
+  $('#giants').addEventListener('change',function(e){
+    hideGiants=e.target.checked;cur=0;render();});
+  markSet();
+}
+
+// The register's own device: a control that has left its default prints in red,
+// so which two words are narrowing this page is legible from across the room.
+function markSet(){
+  $('#dept').className=dept?'set':'';
+  $('#place').className=place?'set':'';
+}
+
+// a's graft: price every narrowing before it is clicked. The number beside an
+// option is what THAT option would leave you with given the other menu as it
+// stands right now — not a static total that stops being true the moment you
+// touch the other one.
+var PAIR=null;
+function pairIndex(){
+  if(PAIR) return PAIR;
+  PAIR=[];
+  for(var i=0;i<ALL.length;i++){
+    var m={},x=ALL[i].x,j;
+    for(j=0;j<x.length;j++) m[x[j][0]+'|'+x[j][1]]=x[j][2];
+    PAIR.push(m);
+  }
+  return PAIR;
+}
+function countFor(f,p){
+  var idx=pairIndex(),t=0,i,c,hit;
+  for(i=0;i<ALL.length;i++){
+    c=ALL[i];
+    if(hideGiants && c.r>=100) continue;
+    if(!f&&!p) hit=c.r;
+    else if(f&&!p) hit=c.d[f]||0;
+    else if(!f&&p) hit=c.p[p]||0;
+    else hit=idx[i][f+'|'+p]||0;
+    if(hit) t++;
+  }
+  return t;
+}
+function priceOne(map,labels,other,isDept){
+  Object.keys(map).forEach(function(k){
+    var label=k ? (isDept?labels[k].toLowerCase():labels[k])
+                : (isDept?'any field':'anywhere');
+    // Until the whole register is in hand the honest price is no price: a
+    // number off a fourteenth of the corpus would be wrong in the reader's
+    // favour and they would never know.
+    map[k].textContent=FULL
+      ? label+' — '+n(countFor(isDept?(k||null):other, isDept?other:(k||null)))+' companies'
+      : label;
+  });
+}
+function priceMenus(){
+  priceOne(deptOpts,DL,place,true);
+  priceOne(placeOpts,PL,dept,false);
+}
+
+// --------------------------------------------------------------------- lede
+function lede(){
+  var g=META.gates||{}, d=META.desc||{};
+  var parts=[['Y Combinator',g['Y Combinator']],['the SEC',g['SEC EDGAR']],
+             ['CB Insights',g['CB Insights']],['Forbes',g['Forbes']],
+             ['TechCrunch',g['TechCrunch']]]
+    .filter(function(p){return p[1];})
+    .map(function(p){return '<span class="g">'+esc(p[0])+' '+n(p[1])+'</span>';});
+  $('#lede').innerHTML =
+    'Every one is here because somebody with a name put it on a list — '+
+    parts.join(' · ')+' — and the receipt is the linked line on every card. '+
+    'Under '+n(d.written||0)+' of the names I have written what they do, who it is for and '+
+    'why them, in my own words after reading their site ('+n(d.checked||0)+' of those '+
+    'checked against it); the other '+n(d.absent||0)+' say so where the words would be and '+
+    'wait for <code>scripts/describe.py</code>, not for a guess from me. '+
+    n(META.roles_open_sum)+' roles, every one read off a company’s own board on '+
+    pretty(TODAY)+'. '+
+    '<button class="funnelbtn" id="fbtn">The whole funnel, and what this page will not say →</button>';
+  $('#fbtn').addEventListener('click',function(){
+    var f=$('#funnel');
+    f.classList.toggle('on');
+    this.textContent = f.classList.contains('on')
+      ? 'Hide the funnel ↑'
+      : 'The whole funnel, and what this page will not say →';
+    if(f.classList.contains('on')) f.scrollIntoView({block:'nearest',behavior:'smooth'});
+  });
+}
+
+function funnelRows(box){
+  var f=META.funnel, quoted={};
+  (f.quoted||[]).forEach(function(k){quoted[k]=1;});
+  function row(key,v,k,cls){
+    var r=el('div','fl'+(cls?' '+cls:''));
+    r.appendChild(el('div','v',n(v)));
+    var kk=el('div','k',k);
+    // a's graft: two provenances live in one ladder, so the panel says which is
+    // which — counted by last night's build, or quoted from the corpus study.
+    if(quoted[key]) kk.appendChild(el('span','q','  · quoted, not counted by this build'));
+    r.appendChild(kk);
+    box.appendChild(r);
+  }
+  row('read',f.read,'company names read out of Y Combinator, CB Insights, Forbes, SEC EDGAR filings, TechCrunch and FinSMEs');
+  row('not_qualified',f.not_qualified,'did not qualify — no round, no stage, nothing a source would stand behind','sub');
+  row('not_software',f.not_software,'were not software companies','sub');
+  row('ambiguous',f.ambiguous,'were too ambiguous to tell apart from another company of the same name','sub');
+  row('qualified',f.qualified,'qualified');
+  row('no_board',f.no_board,'of those, I could not resolve a job board — that is “I could not look”, never “they are not hiring”','sub');
+  row('boards_read',f.boards_read,'boards actually read last night');
+  row('nothing_open',f.nothing_open,'were read and had nothing open','sub');
+  row('wrong_board',f.wrong_board,'turned out to be a different company’s board','sub');
+  row('empty',f.empty,'came back empty and I could not verify it','sub');
+  row('listed',f.listed,'companies with something open tonight. Those are the cards below.','win');
+}
+
+function funnelBlock(){
+  var box=$('#funnel'), d=META.desc||{}, r=META.residue||{};
+  box.innerHTML='';
+  box.appendChild(el('h3',null,'Where the other 9,336 went'));
+  funnelRows(box);
+
+  var a=el('p','fnote');
+  a.innerHTML='The '+n(META.funnel.no_board)+' I could not resolve are the honest hole in this. '+
+    'They are not absent because nobody is hiring there; they are absent because I could not '+
+    'find the board. I would rather show you a smaller page than a page that says “nothing” '+
+    'when it means “I did not look”.';
+  box.appendChild(a);
+
+  // b's best page of prose, absorbed. Every line is a coverage count and the
+  // sentence that count forbids.
+  box.appendChild(el('h4',null,'What this page will not say'));
+  var w=el('div','wont');
+  w.innerHTML=
+    '<div class="row"><b>“Recently funded.”</b> An amount and a date exist together on '+
+      n(META.companies-(META.no_amount||0))+' of '+n(META.companies)+' companies. It would be '+
+      'true of 15% of this page, so it is not printed as a promise anywhere on it.</div>'+
+    '<div class="row"><b>A round letter — seed, Series A, B, C.</b> That field is filled on '+
+      '<b>5</b> companies out of '+n(META.companies)+'. There is no round menu here and there '+
+      'will not be one until there is a column behind it.</div>'+
+    '<div class="row"><b>An investor’s name.</b> No source in this build states one in a field. '+
+      'Twenty TechCrunch headlines mention one in prose, and twenty is not a feature.</div>'+
+    '<div class="row"><b>A score.</b> Nothing here is composited into a number, because a '+
+      'number has no source URL. The order is one count: how many roles match what you '+
+      'asked for.</div>'+
+    '<div class="row"><b>A “new” badge.</b> '+n(META.first_seen.dated)+' role URLs have been '+
+      'seen on two consecutive nights, against '+n(META.roles_open_sum)+' roles open tonight. '+
+      'Around Aug 29 there will be thirty clean snapshots and freshness becomes a real '+
+      'number. Not before.</div>'+
+    '<div class="row"><b>That I know what all of these companies do.</b> '+n(d.written||0)+
+      ' of '+n(META.companies)+' carry three lines under the name. '+n(d.checked||0)+' of '+
+      'those I checked against the company’s own site, '+n(d.unchecked||0)+' I have not yet, '+
+      'and '+n(d.board||0)+' I read off their own job board. They are my sentences — not the '+
+      'company’s, not a board’s. The remaining '+n(d.absent||0)+' cards say “not written up '+
+      'yet” and I did not invent a line to cover the gap.</div>'+
+    '<div class="row"><b>That my eleven fields are the industry’s.</b> They are mine: a '+
+      'renderer’s grouping of the 2,300 department strings the boards themselves wrote. '+
+      n(r.roles||0)+' roles at '+n(r.companies||0)+' companies matched none of the eleven and '+
+      'sit in <b>Something else</b>, which is in the menu — and every role row prints the '+
+      'board’s own word beside it, so you can see where I put it wrong.</div>';
+  box.appendChild(w);
+
+  box.appendChild(el('h4',null,'Where a fact is missing, and what I print instead'));
+  var c=el('p','fnote');
+  c.innerHTML='Most cards carry no dollar amount: '+n(META.no_amount)+' of '+n(META.companies)+
+    ' have no round on file that I can cite. That is a silence, not a zero, and not a reason '+
+    'to hide a company from you. Same for visas — '+n(META.visa?META.visa.yes:0)+' roles state '+
+    'on the posting that they will hire from abroad and '+n(META.visa?META.visa.no:0)+
+    ' state they will not; the other '+n(META.visa?META.visa.unknown:0)+' say nothing at all, '+
+    'and nothing is what I print. None of the three is a menu here, because a filter over a '+
+    'sparse column silently deletes everyone the board was quiet about.';
+  box.appendChild(c);
+  if(META.yc){
+    var d2=el('p','fnote');
+    d2.innerHTML='A status is a fact with a source, so it is printed as one and nothing more. '+
+      n(META.yc.not_active)+' of the '+n(META.yc.n)+' Y Combinator companies here carry a '+
+      'status of Acquired, Public or Inactive in YC’s own directory — Airbnb, batch Winter '+
+      '2009, among them. Those cards say <b>Public, per YC</b> and link the page that says '+
+      'it, with the batch year on the very next line. What a company that already listed is '+
+      'worth to you is your call, and I do not lean on it in either direction: they are '+
+      'neither hidden, nor demoted, nor sorted differently from anyone else.';
+    box.appendChild(d2);
+  }
+}
+
+// -------------------------------------------------------------------- match
+function matching(c){
+  if(!dept && !place) return c.r;
+  if(dept && !place) return c.d[dept]||0;
+  if(!dept && place) return c.p[place]||0;
+  var t=0,x=c.x,i;
+  for(i=0;i<x.length;i++) if(x[i][0]===dept && x[i][1]===place) t+=x[i][2];
+  return t;
+}
+function selection(){
+  var hit=[],giants=[],i,c,m;
+  for(i=0;i<ALL.length;i++){
+    c=ALL[i]; m=matching(c);
+    if(!m) continue;
+    if(c.r>=100){giants.push([m,c]); if(hideGiants) continue;}
+    hit.push([m,c]);
+  }
+  hit.sort(function(a,b){return b[0]-a[0] || b[1].r-a[1].r || (a[1].n<b[1].n?-1:1);});
+  giants.sort(function(a,b){return b[1].r-a[1].r;});
+  // Before the rest of the register lands, ALL holds only the first screenful.
+  // Counting it and printing the answer as if it were the whole thing is the
+  // one lie this page could tell without noticing, so it does not: with no
+  // narrowing applied, the counts come from the build's own totals.
+  var shown=hit.length, gcount=giants.length, gl=giants;
+  if(!FULL && !dept && !place){
+    shown=META.companies-META.giants;
+    gcount=META.giants;
+    gl=(HEAD.giants_list||[]).map(function(g){return [g[1],{n:g[0],r:g[1],s:g[2]}];});
+  }
+  return {hit:hit,giants:gl,shown:shown,gcount:gcount,partial:!FULL};
+}
+
+// -------------------------------------------------------------------- yield
+function phrase(){
+  var f=dept?DL[dept].toLowerCase():null;
+  var p=place?PL[place]:null;
+  if(f&&p) return 'hiring in '+f+' in '+p;
+  if(f) return 'hiring in '+f;
+  if(p) return 'hiring in '+p;
+  return 'hiring tonight';
+}
+
+// The one line of arithmetic over the reader's own record. It counts only
+// inside the cut on screen, because "you have opened 2" means nothing without
+// "of these 141" — and it appears only once there is a record to spend.
+function recordLine(sel){
+  var inCut={},i;
+  for(i=0;i<sel.hit.length;i++) inCut[sel.hit[i][1].s]=1;
+  var total=sel.hit.length, keptHere=0, openedCos=0, openedRoles=0, touched=0;
+  Object.keys(S.keeps).forEach(function(s){
+    if(!inCut[s]) return;
+    var e=S.keeps[s];
+    if(e.kept_at) keptHere++;
+    if(e.opened.length){openedCos++;openedRoles+=e.opened.length;}
+    if(e.kept_at||e.opened.length) touched++;
+  });
+  if(!keptHere && !openedRoles) return '';
+  var bits=[];
+  if(keptHere) bits.push('kept <span class="n">'+n(keptHere)+'</span>');
+  if(openedRoles) bits.push('opened <span class="n">'+n(openedRoles)+'</span> '+
+    plural(openedRoles,'role','roles')+' at <span class="n">'+n(openedCos)+'</span> of them');
+  var left=Math.max(0,total-touched);
+  return '<span class="rec">Of the <span class="n">'+n(total)+'</span> '+
+    plural(total,'company','companies')+' in this cut you have '+bits.join(' and ')+'. '+
+    (left ? 'The other <span class="n">'+n(left)+'</span> you have not touched at all — '+
+            'that is the arithmetic, and it is the only thing on this page that is about you.'
+          : 'That is all of them.')+'</span>';
+}
+
+function drawYield(sel){
+  var y=$('#yield'), aside=$('#setaside'), awrap=$('#asidewrap');
+  y.innerHTML=''; aside.innerHTML=''; awrap.className='asidewrap empty';
+  var shown=sel.shown, gi=sel.gcount;
+  $('#gcount').textContent=n(META.giants);
+
+  if(sel.partial && (dept||place)){
+    y.innerHTML='<span class="lead">One moment — I am still reading in the other '+
+      n(Math.max(0,META.companies-ALL.length))+' companies.</span> '+
+      'I would rather make you wait a second than answer you out of half the register.';
+    return;
+  }
+  if(shown===0){
+    y.innerHTML='<span class="lead">Nobody on these '+n(ALL.length)+' boards is '+phrase()+
+      ' tonight.</span> That is what '+n(ALL.length)+' boards said on '+pretty(TODAY)+
+      ', not a claim about the world — widen one of the two menus and I will show you who is.';
+    return;
+  }
+  var s='';
+  if(!dept && !place) s+='<span class="starts" id="starts"></span>';
+  s+='<span class="lead"><span class="n">'+n(shown)+'</span> '+
+        plural(shown,'company is','companies are')+' '+phrase()+'.</span>';
+  if(hideGiants && gi){
+    s+=' I have set aside <span class="n">'+n(gi)+'</span> of them with 100 or more roles open — '+
+       'you have heard of those, and hearing about them again is not what you came for. '+
+       '<button class="linkish" id="showg">Put them back →</button>';
+  } else if(!hideGiants && gi){
+    s+=' <span class="n">'+n(gi)+'</span> of them have 100 or more roles open and are in the list. '+
+       '<button class="linkish" id="hideg">Set the giants aside →</button>';
+  }
+  // The residue, confessed where it costs something rather than in a footnote.
+  if(dept==='other'||place==='elsewhere'){
+    s+=' <span class="residue">You are looking at my residue bucket: '+
+      (dept==='other'
+        ? '<span class="n">'+n(META.residue.roles)+'</span> roles whose department string '+
+          'matched none of my eleven fields'
+        : '<span class="n">'+n(META.residue.places)+'</span> roles whose place string matched '+
+          'none of my named places')+
+      '. Nothing was dropped to make the other menus tidy; the board’s own word is printed '+
+      'beside every one of these roles.</span>';
+  }
+  s+=recordLine(sel);
+  y.innerHTML=s;
+  drawStarts();
+  var sg=$('#showg'), hg=$('#hideg');
+  if(sg) sg.addEventListener('click',function(){
+    $('#giants').checked=false;hideGiants=false;cur=0;render();});
+  if(hg) hg.addEventListener('click',function(){
+    $('#giants').checked=true;hideGiants=true;cur=0;render();});
+
+  if(hideGiants && gi){
+    awrap.className='asidewrap';
+    aside.appendChild(el('div','pre','set aside — click any to put it back'));
+    sel.giants.forEach(function(pair){
+      var c=pair[1];
+      var b=el('button',null,c.n+'  '+n(c.r));
+      b.title='Put the giants back and jump to '+c.n;
+      b.addEventListener('click',function(){
+        $('#giants').checked=false;hideGiants=false;render();
+        var t=document.getElementById('c-'+c.s);
+        if(t){t.scrollIntoView({block:'center',behavior:'smooth'});}
+      });
+      aside.appendChild(b);
+    });
+  }
+}
+
+// Three openers, offered because a blank page is the worst thing to hand
+// somebody who is tired. Each one is one click and each prints what it costs.
+var STARTS=HEAD.starts||[];
+function drawStarts(){
+  var host=$('#starts');
+  if(!host) return;
+  host.appendChild(document.createTextNode('Not sure where to start? '));
+  STARTS.forEach(function(pair,i){
+    var d=pair[0],p=pair[1];
+    if(!DL[d]||!PL[p]) return;
+    var b=el('button','linkish');
+    b.textContent=DL[d].toLowerCase().replace(' & partnerships','').replace(' & ai','')+
+      (p==='remote'?', remote':' in '+PL[p])+' ('+n(pair[2])+')';
+    b.addEventListener('click',function(){
+      dept=d;place=p;cur=0;
+      $('#dept').value=d; $('#place').value=p;
+      collapseAll(); render();
+    });
+    if(i) host.appendChild(document.createTextNode(' · '));
+    host.appendChild(b);
+  });
+  host.appendChild(document.createTextNode('. '));
+}
+
+// --------------------------------------------------------------------- card
+// Every word a card says comes off the record build.py wrote — the gate line,
+// its caption, the three description lines, their provenance. That is what lets
+// build.py render the fold as HTML and this function render card 400, with
+// qa/crosscheck.mjs asserting the two agree.
+function gateNode(c){
+  var g=c.g, d=el('div','gate');
+  var a=el('a','rcpt'); a.href=g.url; a.target='_blank'; a.rel='noopener noreferrer';
+  a.textContent=g.line; a.appendChild(el('span','arw','↗'));
+  d.appendChild(a);
+  if(g.cap) d.appendChild(el('span','aside',g.cap));
+  return d;
+}
+
+// The slot keeps one anatomy whether the three lines exist or not: same grid,
+// same rules, same footing. A value is a bare text node beside its key, never
+// wrapped — so the sentence and the dated provenance under it stay in one
+// scope, which is also what makes M4's audit read them together.
+function wline(key,value,cls){
+  var r=el('div','wl'+(cls?' '+cls:''));
+  r.appendChild(el('span','wk',key));
+  r.appendChild(document.createTextNode(value));
+  return r;
+}
+function saysNode(c){
+  if(!c.w){
+    // Absence, designed. Not a dash, not a blank, not an invention: the key
+    // says which kind of nothing this is, the value points at what the card
+    // does have, and the footing names the job that will end it.
+    var none=el('div','says none');
+    none.appendChild(wline('not yet read','Not written up yet — below is only what '+
+      c.g.who+' and their own board state.'));
+    none.appendChild(el('div','prov','the backfill job is scripts/describe.py'));
+    return none;
+  }
+  var box=el('div','says');
+  box.appendChild(wline('what',c.w.w,'what'));
+  box.appendChild(wline('for whom',c.w.f));
+  box.appendChild(wline('why them',c.w.y));
+  box.appendChild(el('div','prov',PROVLINE[c.w.p]+' · '+pretty(TODAY)));
+  return box;
+}
+
+// "somewhere not in this list", "their board did not say where" and the Bay
+// Area union are true counts that stay on the record; none of them may take a
+// slot on the card from a place a reader could travel to.
+var VAGUE={elsewhere:1,unstated:1,other:1};
+function topPairs(obj,limit,hi){
+  var ks=Object.keys(obj).sort(function(a,b){
+    var va=VAGUE[a]?1:0, vb=VAGUE[b]?1:0;
+    return va-vb || obj[b]-obj[a] || (a<b?-1:1);
+  });
+  var out=[],i;
+  for(i=0;i<ks.length&&i<limit;i++) out.push([ks[i],obj[ks[i]]]);
+  (hi||[]).forEach(function(k){
+    if(obj[k]===undefined) return;
+    if(out.some(function(p){return p[0]===k;})) return;
+    out.unshift([k,obj[k]]); out.pop();
+  });
+  return {top:out,rest:Math.max(0,ks.length-limit)};
+}
+
+function factsRow(f,label,obj,labels,hi,lim){
+  var t=topPairs(obj,lim,hi);
+  if(!t.top.length) return;
+  var row=el('div','row');
+  row.appendChild(el('span','lbl',label));
+  t.top.forEach(function(p,i){
+    var s=el('span',hi.indexOf(p[0])>=0?'hit':null);
+    s.textContent=(i?' · ':'')+labels[p[0]]+' ';
+    s.appendChild(el('b',null,n(p[1])));
+    row.appendChild(s);
+  });
+  if(t.rest>0){
+    var more=el('span',null,' · and ');
+    more.appendChild(el('b',null,n(t.rest)));
+    more.appendChild(document.createTextNode(' more'));
+    row.appendChild(more);
+  }
+  f.appendChild(row);
+}
+
+function factsNode(c){
+  var f=el('div','facts'), places={}, k;
+  factsRow(f,'fields',c.d,DL,dept?[dept]:[],4);
+  // the union bucket is an answer in the menu, never a third line on the card
+  for(k in c.p) if(k!=='sfbay') places[k]=c.p[k];
+  factsRow(f,'places',places,PL,
+    place==='sfbay'?['sf','bayarea']:(place?[place]:[]),3);
+  if(c.vy||c.vn){
+    var row=el('div','row'), span=el('span');
+    row.appendChild(el('span','lbl','visa'));
+    if(c.vy){
+      span.appendChild(el('b',null,n(c.vy)));
+      span.appendChild(document.createTextNode(' '+plural(c.vy,'role says','roles say')+
+        ' they will hire from abroad'));
+    }
+    if(c.vn){
+      if(c.vy) span.appendChild(document.createTextNode(' · '));
+      span.appendChild(el('b',null,n(c.vn)));
+      span.appendChild(document.createTextNode(' '+plural(c.vn,'says','say')+' they will not'));
+    }
+    row.appendChild(span);
+    f.appendChild(row);
+  }
+  return f;
+}
+
+function chipsInto(head,c){
+  if(c.g.kind==='yc'&&c.g.status&&c.g.status!=='Active'){
+    // The fact and its source. Round 4 rendered this as a warning; the founder
+    // reads a young public company the opposite way. The card takes neither
+    // side — it states the status, links the directory that says it, and the
+    // batch year sits on the very next line for you to read either way.
+    var st=el('a','slot ink'); st.textContent=c.g.status+', per YC ↗';
+    st.href=c.g.url; st.target='_blank'; st.rel='noopener noreferrer';
+    head.appendChild(st);
+  }
+  if(c.g.kind==='yc'&&c.g.top){
+    var tc=el('a','slot ink'); tc.textContent='on YC’s own Top Company list ↗';
+    tc.href=c.g.url; tc.target='_blank'; tc.rel='noopener noreferrer';
+    head.appendChild(tc);
+  }
+}
+
+function makeCard(c,m){
+  var card=el('div','card'); card.id='c-'+c.s;
+  if(isKept(c.s)) card.className='card kept';
+
+  var body=el('div','cbody');
+  var head=el('div','chead');
+  head.appendChild(el('h2','cname',c.n));
+  chipsInto(head,c);
+  if(isKept(c.s)) head.appendChild(el('span','slot kept','on your shortlist'));
+  body.appendChild(head);
+
+  body.appendChild(saysNode(c));
+  body.appendChild(gateNode(c));
+  body.appendChild(factsNode(c));
+  card.appendChild(body);
+
+  // The right-hand column is the register's count column: the number first, at
+  // the size a number gets when it is the thing you are choosing on, and the
+  // two verbs under it.
+  var side=el('div','cside');
+  var open=el('div','copen');
+  open.appendChild(el('b',null,n(c.r)));
+  open.appendChild(document.createTextNode(' '+plural(c.r,'role','roles')+' open'));
+  side.appendChild(open);
+
+  var act=el('div','act');
+  var k=el('button','keep'+(isKept(c.s)?' on':''));
+  k.textContent=isKept(c.s)?('◆ kept '+pretty(S.keeps[c.s].kept_at)):'♢ keep';
+  k.addEventListener('click',function(){toggleKeep(c);});
+  act.appendChild(k);
+
+  var label = dept ? n(m)+' '+DL[dept].toLowerCase()+' '+plural(m,'role','roles')
+                   : n(m)+' '+plural(m,'role','roles');
+  if(place) label += ' in '+PL[place];
+  var b=el('button','open'); b.textContent=label+'  →';
+  b.setAttribute('data-slug',c.s);
+  b.addEventListener('click',function(){toggleRoles(card,c,b);});
+  act.appendChild(b);
+  side.appendChild(act);
+  card.appendChild(side);
+  return card;
+}
+
+// Keeping a company must never cost you the role list you already opened, so
+// this repaints the one card and the strip, and leaves the page where it is.
+function toggleKeep(c){
+  var e=entry(c.s);
+  if(e.kept_at){ e.kept_at=null; if(!e.opened.length) delete S.keeps[c.s]; }
+  else { e.kept_at=TODAY; }
+  save(); refreshCard(c.s); drawShortlist(); writeHash();
+  if(lastSel) drawYield(lastSel);
+}
+function refreshCard(slug){
+  var card=document.getElementById('c-'+slug);
+  if(!card) return;
+  var kept=isKept(slug), wasCur=card.classList.contains('cur');
+  card.className='card'+(kept?' kept':'')+(wasCur?' cur':'');
+  var k=card.querySelector('.keep');
+  if(k){
+    k.className='keep'+(kept?' on':'');
+    k.textContent=kept?('◆ kept '+pretty(S.keeps[slug].kept_at)):'♢ keep';
+  }
+  var chip=card.querySelector('.slot.kept');
+  if(kept&&!chip){
+    card.querySelector('.chead').appendChild(el('span','slot kept','on your shortlist'));
+  } else if(!kept&&chip){ chip.remove(); }
+}
+
+// -------------------------------------------------------------------- roles
+var roleCache={};
+function fetchRoles(slug,cb){
+  if(roleCache[slug]) return cb(roleCache[slug]);
+  fetch('data/roles/'+slug+'.json').then(function(r){return r.json();})
+    .then(function(j){roleCache[slug]=j;cb(j);})
+    .catch(function(){cb({roles:[]});});
+}
+
+var openSlug=null, roleCur=0;
+function collapseAll(){
+  var box=document.querySelector('.roles');
+  if(box){
+    var card=box.parentNode, b=card.querySelector('.open');
+    box.remove();
+    if(b){b.textContent=b.getAttribute('data-label')||b.textContent;b.classList.remove('on');}
+  }
+  openSlug=null; roleCur=0;
+}
+
+function toggleRoles(card,c,btn){
+  if(card.querySelector('.roles')){ collapseAll(); return; }
+  collapseAll();
+  btn.setAttribute('data-label',btn.textContent);
+  btn.textContent='▲ close the list';
+  btn.classList.add('on');
+  var box=el('div','roles');
+  box.appendChild(el('div','rnote','opening their board…'));
+  card.appendChild(box);
+  openSlug=c.s; roleCur=0;
+  fetchRoles(c.s,function(j){ if(openSlug===c.s) drawRoles(box,c,j); });
+}
+
+function roleNote(c,mine,unknown){
+  var txt=n(mine.length)+' '+plural(mine.length,'role','roles')+' on '+c.n+'’s own board';
+  if(dept||place) txt+=' that '+plural(mine.length,'matches','match')+' what you asked for';
+  txt+='. ';
+  if(unknown===mine.length)
+    txt+='Their board says nothing about visa sponsorship on any of them — that is silence, not a no. ';
+  else if(unknown)
+    txt+='Their board says nothing about visa sponsorship on '+n(unknown)+' of them — that is silence, not a no. ';
+  else txt+='Every one of them states something about hiring from abroad. ';
+  return txt+'The grey word after a title is the board’s own department name; the field I '+
+    'filed it under is mine.';
+}
+
+function drawRoles(box,c,j){
+  box.innerHTML='';
+  var all=j.roles||[];
+  var mine=all.filter(function(r){
+    return (!dept || r.d===dept) && (!place || r.p.indexOf(place)>=0);
+  });
+  var rest=all.length-mine.length;
+  var e=S.keeps[c.s];
+  var seen={}; if(e) e.opened.forEach(function(o){seen[o.url]=1;});
+
+  box.appendChild(el('div','rnote',
+    roleNote(c,mine,mine.filter(function(r){return !r.v;}).length)));
+
+  var LIMIT=25, shown=0;
+  function row(r){
+    var a=el('a','role'+(seen[r.u]?' seen':''));
+    a.href=r.u; a.target='_blank'; a.rel='noopener noreferrer';
+    var t=el('span','t',r.t);
+    // b's graft: the board's own department word, beside my bucket.
+    if(r.b) t.appendChild(el('span','their',r.b));
+    if(r.v==='yes') t.appendChild(el('span','vchip','says it will hire from abroad'));
+    else if(r.v==='no') t.appendChild(el('span','vchip no','says it will not hire from abroad'));
+    a.appendChild(t);
+    a.appendChild(el('span','loc',(r.l||'')+(r.w?' · '+r.w:'')));
+    a.appendChild(el('span','go',seen[r.u]?'opened ↗':'Apply ↗'));
+    a.addEventListener('click',function(){witness(c,r);});
+    box.appendChild(a);
+  }
+  function paint(upto){
+    for(;shown<Math.min(upto,mine.length);shown++) row(mine[shown]);
+    var mb=box.querySelector('.more'); if(mb) mb.remove();
+    if(shown<mine.length){
+      var b=el('button','more','Show the other '+n(mine.length-shown)+' →');
+      b.addEventListener('click',function(){paint(shown+50);});
+      box.appendChild(b);
+    } else if(rest>0 && (dept||place)){
+      var b2=el('button','more','They have '+n(rest)+' more '+plural(rest,'role','roles')+
+        ' open in other fields or places — clear a menu to see them');
+      b2.addEventListener('click',function(){
+        dept=null;place=null;cur=0;
+        $('#dept').value='';$('#place').value='';
+        render();
+      });
+      box.appendChild(b2);
+    }
+  }
+  paint(LIMIT);
+  var col=el('button','more','▲ close the list');
+  col.addEventListener('click',function(){
+    var card=box.parentNode, b=card.querySelector('.open');
+    collapseAll();
+    if(b){ b.scrollIntoView({block:'nearest'}); b.focus(); }
+  });
+  box.appendChild(col);
+}
+
+// `applied` never comes out of this handler. The page may witness that it
+// handed you a door; only you can say whether you walked through it. `day` is
+// the real clock and `at` is the corpus date — the ask is gated on the first.
+function witness(c,r){
+  var e=entry(c.s);
+  if(!e.opened.some(function(o){return o.url===r.u;}))
+    e.opened.push({url:r.u,title:r.t,at:TODAY,day:REALDAY});
+  save();
+  drawShortlist(); writeHash();
+}
+
+// ---------------------------------------------------------------- shortlist
+function askRow(w,s){
+  var e=S.keeps[s], c=byslug(s);
+  var k=el('div','ask'), q=el('div','q');
+  q.textContent='On '+pretty(e.opened[0].at)+' you opened '+n(e.opened.length)+' '+
+    plural(e.opened.length,'role','roles')+' at '+(c?c.n:s)+'. Did you apply?';
+  k.appendChild(q);
+  var bs=el('div','btns');
+  [['yes','yes'],['no','no'],['not_yet','not yet']].forEach(function(p){
+    var b=el('button',null,p[1]);
+    b.addEventListener('click',function(){
+      e.applied=p[0]; e.answered_at=REALDAY; save(); drawShortlist();});
+    bs.appendChild(b);
+  });
+  k.appendChild(bs);
+  k.appendChild(el('span','why',
+    'I am asking because I cannot know. I watched this page hand you '+n(e.opened.length)+' '+
+    plural(e.opened.length,'link','links')+' — that is the page’s hand, not yours. '+
+    'I will ask this once and then never again.'));
+  w.appendChild(k);
+}
+
+function keptRow(w,s){
+  var e=S.keeps[s], c=byslug(s), r=el('div','slrow');
+  r.appendChild(el('span','nm',c?c.n:s));
+  var m=el('span','mt');
+  var bits=['kept '+pretty(e.kept_at)];
+  if(c) bits.push(n(c.r)+' roles open');
+  if(e.opened.length) bits.push('you opened '+n(e.opened.length)+' of them');
+  if(e.applied) bits.push('you said: '+
+    ({yes:'applied',no:'did not apply',not_yet:'not yet'}[e.applied]));
+  m.textContent=bits.join(' · ');
+  r.appendChild(m);
+  // The one thing this page can truthfully say about the passage of time: a URL
+  // you opened is either still on tonight's board or it is not.
+  if(e.opened.length) checkStillLive(s,e,m);
+  var d=el('button','drop','drop');
+  d.addEventListener('click',function(){
+    e.kept_at=null; if(!e.opened.length) delete S.keeps[s];
+    save(); refreshCard(s); drawShortlist(); writeHash();
+    if(lastSel) drawYield(lastSel);});
+  r.appendChild(d);
+  w.appendChild(r);
+}
+
+function outRow(w){
+  var out=el('div','slout');
+  var cp=el('button',null,'Copy my shortlist'); cp.id='copysl';
+  cp.addEventListener('click',function(){copyOut(shortlistText(),cp,'Copy my shortlist');});
+  out.appendChild(cp);
+  var lk=el('button',null,'Copy the link to it');
+  lk.addEventListener('click',function(){copyOut(shareURL(),lk,'Copy the link to it');});
+  out.appendChild(lk);
+  out.appendChild(el('span','say','The link carries the narrowing and every company you '+
+    'kept, so whoever opens it sees what you are looking at. The text carries what each one '+
+    'does, who vouched, and every role you opened — so it survives without me.'));
+  w.appendChild(out);
+}
+
+function drawShortlist(){
+  var box=$('#shortlist');
+  box.innerHTML='';
+  var kept=Object.keys(S.keeps).filter(function(s){return S.keeps[s].kept_at;});
+  // The day gate: whether you applied is a question about a day that has ended.
+  // It fires on a later calendar day than the opening — never in the same
+  // sitting — and once answered it never returns.
+  var asks=Object.keys(S.keeps).filter(function(s){
+    var e=S.keeps[s];
+    return e.applied===null && e.opened.length &&
+           e.opened.some(function(o){return (o.day||o.at)!==REALDAY;});
+  });
+  if(!kept.length && !asks.length) return;
+  var w=el('div','shortlist');
+
+  if(kept.length){
+    w.appendChild(el('div','slhead','Your shortlist — '+n(kept.length)+' '+
+      plural(kept.length,'company','companies')+', kept on this device, no account'));
+    if(adoptedFromLink){
+      var fl=el('div','slrow');
+      fl.appendChild(el('span','mt',n(adoptedFromLink)+' of these arrived in the link you '+
+        'opened, not from this device. I dated them '+pretty(TODAY)+' because I do not know '+
+        'when whoever sent it kept them.'));
+      w.appendChild(fl);
+    }
+    kept.forEach(function(s){keptRow(w,s);});
+    outRow(w);
+  }
+  asks.forEach(function(s){askRow(w,s);});
+  box.appendChild(w);
+}
+
+function copyOut(text,btn,label){
+  function done(ok){
+    btn.textContent=ok?'copied ✓':'could not copy — select it yourself';
+    setTimeout(function(){btn.textContent=label;},2400);
+  }
+  function fallback(){
+    var ta=document.createElement('textarea');
+    ta.value=text; ta.style.position='fixed'; ta.style.opacity='0';
+    document.body.appendChild(ta); ta.select();
+    var ok=false; try{ok=document.execCommand('copy');}catch(e){}
+    document.body.removeChild(ta); done(ok);
+  }
+  if(navigator.clipboard && navigator.clipboard.writeText)
+    navigator.clipboard.writeText(text).then(function(){done(true);},fallback);
+  else fallback();
+}
+
+function checkStillLive(slug,e,host){
+  fetchRoles(slug,function(j){
+    var live={};
+    (j.roles||[]).forEach(function(r){live[r.u]=1;});
+    var gone=e.opened.filter(function(o){return !live[o.url];});
+    var span=el('span',gone.length?'gone':'live');
+    if(!gone.length){
+      span.textContent=' · '+(e.opened.length===1?'it is':(e.opened.length===2?'both are':
+        'all '+n(e.opened.length)+' are'))+' still on their board on '+pretty(TODAY);
+    } else {
+      span.textContent=' · '+n(gone.length)+' of them '+plural(gone.length,'is','are')+
+        ' gone from their board: '+gone.map(function(o){return o.title;}).join(', ');
+    }
+    host.appendChild(span);
+  });
+}
+
+var _by=null;
+function byslug(s){
+  if(!_by){_by={};ALL.forEach(function(c){_by[c.s]=c;});}
+  return _by[s];
+}
+
+// ------------------------------------------------------- the keyboard, layered
+// b's loop, on this page. Keys pressed before the register lands are not keys
+// thrown away: they queue and then happen.
+var cur=0, ROWS=[], booted=false, pending=[], kbUsed=false;
+function curCard(){return ROWS[cur]?document.getElementById('c-'+ROWS[cur].s):null;}
+function focusCard(i,scroll){
+  if(!ROWS.length) return;
+  var old=document.querySelector('.card.cur'); if(old) old.classList.remove('cur');
+  cur=Math.max(0,Math.min(i,ROWS.length-1));
+  var c=curCard();
+  if(!c||!kbUsed) return;
+  c.classList.add('cur');
+  if(scroll!==false) c.scrollIntoView({block:'nearest'});
+}
+function clickCur(sel){
+  var c=curCard(); if(!c) return;
+  var b=c.querySelector(sel); if(b) b.click();
+}
+function roleEls(){return document.querySelectorAll('.roles a.role');}
+function markRole(i){
+  var rows=roleEls();
+  [].forEach.call(rows,function(r){r.classList.remove('rcur');});
+  if(rows[i]){roleCur=i;rows[i].classList.add('rcur');rows[i].scrollIntoView({block:'nearest'});}
+}
+function openNth(i){
+  var rows=roleEls();
+  if(!rows[i]) return;
+  rows[i].click(); markRole(Math.min(i+1,rows.length-1));
+}
+function openNext(){
+  var rows=roleEls(), i=roleCur;
+  while(i<rows.length && rows[i].classList.contains('seen')) i++;
+  if(i>=rows.length) return;
+  rows[i].click(); markRole(Math.min(i+1,rows.length-1));
+}
+function toggleGiants(){
+  var b=$('#giants'); b.checked=!b.checked; hideGiants=b.checked; cur=0; render();
+}
+function onKey(e){
+  if(e.metaKey||e.ctrlKey||e.altKey) return;
+  kbUsed=true;
+  var tag=(e.target.tagName||'').toLowerCase();
+  var inField=tag==='select'||tag==='input'||tag==='textarea';
+  var k=e.key;
+  if(k==='Escape'){
+    if(!$('#veil').hidden){$('#veil').hidden=true;return;}
+    if(inField){e.target.blur();return;}
+    if(openSlug) collapseAll();
+    return;
+  }
+  if(inField){ if(k==='Enter'){e.preventDefault();e.target.blur();} return; }
+  if(!$('#veil').hidden){ if(k==='?'||k==='h') $('#veil').hidden=true; return; }
+  if(!booted && ('jkxgG'.indexOf(k)>=0 || k==='Enter')){
+    e.preventDefault(); pending.push(k); return;
+  }
+  if(k==='j'||k==='ArrowDown'){e.preventDefault();
+    if(openSlug) markRole(roleCur+1); else focusCard(cur+1); return;}
+  if(k==='k'||k==='ArrowUp'){e.preventDefault();
+    if(openSlug){ if(roleCur>0) markRole(roleCur-1); else collapseAll(); }
+    else focusCard(cur-1);
+    return;}
+  if(k==='Enter'){e.preventDefault();clickCur('.open');return;}
+  if(k==='x'){e.preventDefault();clickCur('.keep');return;}
+  if(k==='o'){e.preventDefault(); if(openSlug) openNext(); else clickCur('.open'); return;}
+  if(k>='1'&&k<='9'){ if(!openSlug) return; e.preventDefault(); openNth(+k-1); return; }
+  if(k==='f'){e.preventDefault();$('#dept').focus();return;}
+  if(k==='c'){e.preventDefault();$('#place').focus();return;}
+  if(k==='g'){e.preventDefault();toggleGiants();return;}
+  if(k==='s'){var cp=$('#copysl'); if(cp){e.preventDefault();cp.click();} return;}
+  if(k==='G'){e.preventDefault();focusCard(ROWS.length-1);return;}
+  if(k==='?'){e.preventDefault();sheet(KEYS);return;}
+  if(k==='h'){e.preventDefault();$('#fbtn').click();
+    $('#funnel').scrollIntoView({block:'start',behavior:'smooth'});return;}
+}
+function flushPending(){
+  pending.splice(0).forEach(function(k){
+    if(k==='j') focusCard(cur+1);
+    else if(k==='k') focusCard(cur-1);
+    else if(k==='G') focusCard(ROWS.length-1);
+    else if(k==='x') clickCur('.keep');
+    else if(k==='g') toggleGiants();
+    else if(k==='Enter') clickCur('.open');
+  });
+}
+var KEYS='<h3>The keyboard</h3>'+
+  '<div class="kr"><span class="kk">j / k</span><span>down and up the cards; inside an open '+
+  'card, down and up its roles</span></div>'+
+  '<div class="kr"><span class="kk">↵</span><span>open the card you are on</span></div>'+
+  '<div class="kr"><span class="kk">o</span><span>open the next role you have not opened, in a '+
+  'new tab</span></div>'+
+  '<div class="kr"><span class="kk">1 … 9</span><span>open that role by number</span></div>'+
+  '<div class="kr"><span class="kk">x</span><span>keep this company</span></div>'+
+  '<div class="kr"><span class="kk">s</span><span>copy your shortlist</span></div>'+
+  '<div class="kr"><span class="kk">f / c</span><span>jump to the field menu, and the place '+
+  'menu</span></div>'+
+  '<div class="kr"><span class="kk">g</span><span>show the giants, or set them aside '+
+  'again</span></div>'+
+  '<div class="kr"><span class="kk">G</span><span>the last card</span></div>'+
+  '<div class="kr"><span class="kk">h</span><span>the funnel, and what this page will not '+
+  'say</span></div>'+
+  '<div class="kr"><span class="kk">esc</span><span>close whatever is open</span></div>'+
+  '<p class="kbnote">Keys pressed before the register has finished loading are not '+
+  'lost. They queue, and then they happen.</p>'+
+  '<button class="close">close</button>';
+function sheet(html){
+  $('#sheet').innerHTML=html;
+  $('#veil').hidden=false;
+  var c=$('#sheet .close'); if(c) c.addEventListener('click',function(){$('#veil').hidden=true;});
+}
+
+// ------------------------------------------------------------------- render
+var lastSel=null;
+function render(){
+  _by=null;
+  var sel=selection(); lastSel=sel;
+  ROWS=sel.hit.map(function(p){return p[1];});
+  drawYield(sel);
+  priceMenus();
+  markSet();
+  drawShortlist();
+  writeHash();
+  var box=$('#cards');
+  box.innerHTML='';
+  openSlug=null; roleCur=0;
+  if(sel.partial && (dept||place)){
+    box.appendChild(el('div','loading','reading in the rest of the register…'));
+    drawTail(); return;
+  }
+  var frag=document.createDocumentFragment();
+  sel.hit.forEach(function(p){ frag.appendChild(makeCard(p[1],p[0])); });
+  box.appendChild(frag);
+  if(ROWS.length) focusCard(Math.min(cur,ROWS.length-1),false);
+  drawTail();
+}
+
+// build.py already wrote the first cards into the document. When the page opens
+// in its default state those cards are correct as they stand, so they are
+// adopted — listeners attached, nothing repainted — and what the reader reads
+// never waited for a script.
+function adoptFold(){
+  var cards=document.querySelectorAll('#cards .card');
+  if(!cards.length) return false;
+  var sel=selection(); lastSel=sel;
+  ROWS=sel.hit.map(function(p){return p[1];});
+  [].forEach.call(cards,function(card){
+    var c=byslug(card.id.replace(/^c-/,''));
+    if(!c) return;
+    card.querySelector('.keep').addEventListener('click',function(){toggleKeep(c);});
+    var b=card.querySelector('.open');
+    b.addEventListener('click',function(){toggleRoles(card,c,b);});
+  });
+  drawYield(sel);
+  drawTail();
+  return true;
+}
+
+function drawTail(){
+  var t=$('#tail');
+  if(t.getAttribute('data-done')==='1'+(FULL?'f':'h')) return;
+  t.setAttribute('data-done','1'+(FULL?'f':'h'));
+  t.innerHTML='';
+  t.appendChild(el('h3',null,'The whole register, if you want to check my work'));
+  var p=el('p',null,'');
+  p.innerHTML='Every one of the '+n(META.companies)+' companies I read is in the list below '+
+    'with its role count and the source that admitted it. The menus above are there to save '+
+    'you time, not to hide anything: nothing is ever dropped from this page for having no '+
+    'funding number, no stated city, no answer about visas, or no write-up from me yet. '+
+    '<button class="linkish" id="keysbtn">There is a keyboard, too →</button>';
+  t.appendChild(p);
+  var kb=document.getElementById('keysbtn');
+  if(kb) kb.addEventListener('click',function(){sheet(KEYS);});
+  var d=el('details','reg');
+  d.appendChild(el('summary',null,'Open the register — all '+n(META.companies)+
+    ' companies, alphabetically'));
+  var tb=el('div','regtable');
+  if(!FULL){
+    tb.appendChild(el('div','loading','still loading the other '+
+      n(META.companies-ALL.length)+' — one moment'));
+  } else {
+    var frag=document.createDocumentFragment();
+    ALL.slice().sort(function(a,b){return a.n.toLowerCase()<b.n.toLowerCase()?-1:1;})
+      .forEach(function(c){
+        var r=el('div','regrow');
+        var a=el('a','rn'); a.href='#c-'+c.s; a.textContent=c.n;
+        a.style.textDecoration='none';
+        r.appendChild(a);
+        var g=el('a','rg'); g.href=c.g.url; g.target='_blank'; g.rel='noopener noreferrer';
+        g.textContent=c.g.who;
+        r.appendChild(g);
+        r.appendChild(el('div','rr',n(c.r)+' open'));
+        frag.appendChild(r);
+      });
+    tb.appendChild(frag);
+  }
+  d.appendChild(tb);
+  t.appendChild(d);
+  var f=el('p',null,'');
+  f.innerHTML='Built from a pinned snapshot dated '+pretty(TODAY)+'. Nothing on this page is '+
+    'computed into a score: there is no ranking number, no grade, no composite. The order is '+
+    'simply how many roles match what you asked for, and every other judgement here belongs '+
+    'to whoever is named beside it. Set in one typeface and two voices on purpose — prose is '+
+    'a sentence somebody wrote, and every figure in the monospace is a number I counted off '+
+    'the corpus myself.';
+  t.appendChild(f);
+  var src=el('div','sources','sources — '+
+    'Y Combinator · SEC EDGAR · CB Insights · Forbes · TechCrunch · FinSMEs · '+
+    'and every company’s own job board, read on '+pretty(TODAY));
+  t.appendChild(src);
+}
+
+// --------------------------------------------------------------------- boot
+readHash();
+fillMenus();
+lede();
+funnelBlock();
+document.addEventListener('keydown',onKey);
+$('#veil').addEventListener('click',function(e){
+  if(e.target.id==='veil') $('#veil').hidden=true;});
+
+var clean = !dept && !place && hideGiants && !Object.keys(S.keeps).length;
+if(!(clean && adoptFold())) render();
+
+// the rest of the 789 arrive after first paint
+fetch('data/index.json').then(function(r){return r.json();}).then(function(j){
+  META=j.meta; ALL=j.companies; FULL=true; PAIR=null;
+  DL=j.meta.dept_labels; PL=j.meta.place_labels;
+  funnelBlock();
+  render();
+  booted=true; flushPending();
+}).catch(function(){
+  booted=true;
+  var w=el('p','warnline','I could not load the rest of the register just now — what you '+
+    'see is the first '+n(ALL.length)+' of '+n(META.companies)+'. Reload and I will try again.');
+  $('#yield').appendChild(w);
+});
+
+})();
+</script>
+</body>
+</html>
