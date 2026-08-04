@@ -715,6 +715,9 @@
     /* हिन्दी is three characters wide and was a 39px target; the finder was a
        31px one, which is the most-pressed control on the page. */
     .chip, .srcs a { min-width: 44px; justify-content: center; }
+    /* "Erase" is two characters in Hindi and one word everywhere else, so its
+       width is the translator's and its target is not. */
+    #standclear { min-width: 44px; text-align: end; }
     #q { min-height: 44px; }
     .crow { padding-block: .5rem; }
     .fold .x { min-width: 44px; }

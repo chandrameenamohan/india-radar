@@ -158,13 +158,22 @@ Private headless Chrome on CDP :9345, profile in the scratchpad, served from
 :8741. 1440×1000 and 390×844 via CDP device metrics. Fixture corpus (schema 10,
 371 companies, 6,423 roles).
 
+Everything below was re-measured after 19:20, on a tree verified good, with the
+server restarted from scratch. Another process on this machine checked the work
+tree over to a pre-harness branch between about 18:41 and 18:45, which deleted
+`design/fixture` and the `design/iterations/data` symlink; the fixture came back
+at 18:45:25. The only run of mine inside that window was a first smoke test that
+returned 404s and zero rows, which I discarded at the time — but the whole pass
+has been repeated regardless, because a measurement you have to reason about is
+not a measurement.
+
 - **Clerk blocked** (`Network.setBlockedURLs '*clerk*'`): 6,423 rows render, no
   account control rather than a dead button, no ask, `ra2.ask.noask 1`, no
   console errors.
 - **`prefers-reduced-motion: reduce`**: zero elements in the document with a
   non-zero transition or animation duration; `scroll-behavior: auto`.
 - **No console errors** anywhere in the pass, including the two stale paths.
-- **Contrast**: 45 distinct colour/size/weight/ground combinations measured
+- **Contrast**: 47 distinct colour/size/weight/ground combinations measured
   against their real composited backgrounds — including the new wash, the
   cursor's tint and the magenta reader-dates — **0 failures** at WCAG AA.
 - **Layout shift 0.007**, of which essentially all is the webfont swapping in
@@ -172,20 +181,26 @@ Private headless Chrome on CDP :9345, profile in the scratchpad, served from
   night goes into the ledger *before* the fetch, so the strip is drawn at full
   height in the first paint rather than growing when the corpus lands.
 - **Scroll**, 60px/frame through the middle of the full sheet with a standpoint
-  stated: p50 **20ms** at 1×, 113ms at 4× — r02-a on the same machine, same
-  minute, same state: 22ms and 127ms. It was 29ms until I found that re-inking
-  6,423 rows rewrote every date cell's text node whether or not it had changed,
-  which cost ten milliseconds a frame *for the rest of the session*; the write
-  is now conditional.
+  stated, three interleaved repetitions of each variant back to back: r03-a
+  **19 · 19 · 19ms**, r02-a **18 · 21 · 21ms**. Take that as *indistinguishable*
+  rather than as a win — this machine is running several headless browsers at
+  once and single runs of the same pair have landed either side of each other
+  (at 4× throttle, 93–118ms for both). It was 29ms flat until I found that
+  re-inking 6,423 rows rewrote every date cell's text node whether or not it had
+  changed, which cost ten milliseconds a frame *for the rest of the session*;
+  the write is conditional now, and that one is not noise — it reproduced on
+  every run, before and after.
 - **The cursor still follows the eye**: scrolled to 24,000px, pressed `j` →
   line 786, 7px from the top, scrollY unmoved; 60,000px, `k` → line 2,007, in
   view. `f a a` walks a line through its three states with the scroll unmoved
   and one cursor on the sheet.
-- **380/390px**: no horizontal page scroll (`scrollWidth === innerWidth`), every
-  control ≥44px — the finder (was 31px tall), the locale chips (हिन्दी was 39px
-  wide), the footer source chips and the dog-ear (was 30px wide) were all fixed
-  here. The nights strip **scrolls inside itself** at 44px a night rather than
-  shrinking ten nights into a 350px screen, and opens on tonight.
+- **380/390px**: no horizontal page scroll (`scrollWidth === innerWidth`), no
+  element whose right edge passes the viewport, and **every** control ≥44px in
+  every edition — the finder (was 31px tall), the locale chips (हिन्दी was 39px
+  wide), the footer source chips, the dog-ear (was 30px wide) and the
+  standpoint's *Erase* (28px wide in Hindi) were all found and fixed here. The
+  nights strip **scrolls inside itself** at 44px a night rather than shrinking
+  ten nights into a 350px screen, and opens on tonight.
 - **Eight editions**: swept the title block, margin, finder, heads, ask, footer,
   key panel and slip in all eight for strings that did not move — none. The
   gauge's *of 6,423 printed* was orphaned English in seven editions in r02-a
@@ -203,10 +218,11 @@ Private headless Chrome on CDP :9345, profile in the scratchpad, served from
    screen a reader with a shaky hand will pick the wrong night. The blank ones
    are not pressable at all, which helps, and every cell carries its date and
    its events in `title` and `aria-label`.
-2. **A naive overflow check will flag the nights strip.** Its cells extend past
-   the viewport *inside their own scroll container*; the page's `scrollWidth`
-   equals `innerWidth`, but an evaluator listing elements whose right edge is
-   past the viewport will name three `.nt` spans.
+2. **The nights strip is the one thing on the page that scrolls sideways.** At
+   rest nothing overflows — it opens on tonight, so the cells that do not fit
+   are off to the left — but a reader who pushes it back through the month puts
+   cells past its right edge, inside the container. Nothing about the page ever
+   scrolls horizontally; the ruler does, and it is the only element that can.
 3. **`≈0 km` is printed for every role in the reader's own country** — 1,145 of
    them if they said India — so the staircase's first flight is flat. It is
    exactly what the stated derivation produces (capital to capital, and you are
