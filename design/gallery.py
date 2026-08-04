@@ -15,9 +15,40 @@ ITER = HERE / "iterations"
 TOTAL = re.compile(r"^TOTAL:\s*(\d+)", re.M)
 TITLE = re.compile(r'^#\s*\S+\s*[—\-]?\s*(.+?)\s*(?:—\s*judge.*)?$', re.M)
 MOVE = re.compile(r"^## The one change.*?\n+(.+?)(?:\n\n|\Z)", re.S | re.M)
-# The judge's total is the one bold number on its card. Both card layouts the
-# judges have used put it first, so the first match is the score.
-JUDGE = re.compile(r"\*\*(\d+(?:\.\d)?)\*\*")
+# The judge's total, and it is deliberately anchored to the LABEL rather than to
+# a position. Three rounds produced three card layouts: two put the total first
+# among the bold numbers, and round 3 bolded every criterion, so "the first bold
+# number" silently read the ask score as the total and named the wrong leader.
+# Every layout so far writes the total on a row saying 'total' or '/70'.
+# One regex cannot do it: the label itself contains a number ("Judge total (70)"),
+# so find the row and take the LAST number on it.
+LABEL = re.compile(r"total|judge\s*/\s*70", re.I)
+NUM = re.compile(r"\d+(?:\.\d)?")
+# The out-of marks, which are never the score: /25 /25 /20 /70.
+DENOM = {"70", "25", "20"}
+
+
+def judge_total(text):
+    """The judge's 70-point total, from whichever card layout this round used.
+
+    Three rounds produced three layouts, so this anchors on the LABEL and not on
+    a position — 'first bold number' silently read round 3's ask score as the
+    total and named the wrong leader. Two shapes exist: the label and the value
+    on one row, and a header row whose values land on the next line.
+    """
+    lines = text.splitlines()
+    for i, line in enumerate(lines):
+        if not LABEL.search(line):
+            continue
+        # The label's own row, then the next two — a header row is followed by
+        # markdown's |---|---| separator before the values arrive.
+        for row in lines[i:i + 3]:
+            if set(row.strip()) <= set("|- "):
+                continue
+            nums = [n for n in NUM.findall(row) if n not in DENOM]
+            if nums:
+                return float(nums[-1])
+    return None
 LANE = {"a": "atlas", "b": "depart", "c": "wildcard"}
 
 
@@ -30,7 +61,7 @@ def variants():
         if not (d / "index.html").exists():
             continue
         score, judge = read(d / "SCORE.md"), read(d / "JUDGE.md")
-        m, j = TOTAL.search(score), JUDGE.search(judge)
+        m, j = TOTAL.search(score), judge_total(judge)
         # A variant is named before it is judged, so NOTES is the last fallback
         # — otherwise a round in progress shows three blank cards.
         t = (TITLE.search(judge) or TITLE.search(score)
@@ -44,7 +75,7 @@ def variants():
             # The judge's 70 is the score every round actually has; the
             # evaluators' 30 exists for one variant only, so it is a footnote
             # rather than the headline.
-            "judge": float(j.group(1)) if j else None,
+            "judge": j,
             "name": (t.group(1).strip().strip('"“”') if t else ""),
             "total": int(m.group(1)) if m else None,
             "note": (c.group(1).strip() if c else "").split("\n")[0],
