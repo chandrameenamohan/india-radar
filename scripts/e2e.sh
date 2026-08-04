@@ -1543,6 +1543,14 @@ console_clean "the rest of the world"
 # plate. It is still a company whose board we read, which is the whole basis of
 # this register, so Plate 01 must list it.
 open_page "$FIXTURE"
+# The scope wording is the register's, not the roles register's, so the other
+# unit has to state it too — a page that fixed the sentence under one tally and
+# left "All countries" over the other would have moved the claim rather than
+# retired it. Same scope, different unit, which is the whole of the switch.
+check "the company register states the same honest scope" \
+  "Every board we read — $(expect True | awk -F'|' '{print NF}') of $(expect True | awk -F'|' '{print NF}') companies" \
+  "$(val '(() => { const s = document.querySelector("#status .pscope");
+       return s.textContent + s.nextElementSibling.textContent })()')"
 check "a company with only unclassified roles is on Plate 01" "true" \
   "$(val 'String([...document.querySelectorAll(".irow .iname")]
        .some((n) => n.firstChild.textContent === "Kappa Analytics"))')"
