@@ -1,10 +1,10 @@
 {
- "schema_version": 10,
+ "schema_version": 11,
  "snapshot": "2026-07-28",
  "integrity": {
   "corpus_size": 30,
-  "checked": 9,
-  "unchecked": 21
+  "checked": 11,
+  "unchecked": 19
  },
  "companies": [
   {
@@ -458,6 +458,110 @@
    "round_letter": "A",
    "date": "2026-04-02",
    "source_url": "https://www.finsmes.com/2026/04/iota-europe-raises-25m.html",
+   "qualified_by": "letter",
+   "salary": null,
+   "mca": null,
+   "uk": null
+  },
+  {
+   "name": "Kappa Analytics",
+   "ats": "greenhouse",
+   "slug": "kappaanalytics",
+   "roles": [
+    {
+     "title": "Infrastructure Engineer",
+     "url": "https://job-boards.greenhouse.io/kappaanalytics/jobs/12001",
+     "locations": [
+      "Sao Paulo, Brazil"
+     ],
+     "countries": [],
+     "workplace": null,
+     "visa": "unknown",
+     "hire_from_abroad": "unknown",
+     "department": "Engineering"
+    },
+    {
+     "title": "Account Executive",
+     "url": "https://job-boards.greenhouse.io/kappaanalytics/jobs/12002",
+     "locations": [
+      "Remote - Warsaw, Poland"
+     ],
+     "countries": [],
+     "workplace": "remote",
+     "visa": "unknown",
+     "hire_from_abroad": "unknown",
+     "department": "Sales"
+    }
+   ],
+   "countries": [],
+   "cities": [],
+   "amount": 12000000,
+   "currency": "USD",
+   "round_letter": "A",
+   "date": "2026-05-11",
+   "source_url": "https://www.finsmes.com/2026/05/kappa-analytics-raises-12m.html",
+   "qualified_by": "letter",
+   "salary": null,
+   "mca": null,
+   "uk": null
+  },
+  {
+   "name": "Lambda Bridge",
+   "ats": "greenhouse",
+   "slug": "lambdabridge",
+   "roles": [
+    {
+     "title": "Reliability Engineer",
+     "url": "https://job-boards.greenhouse.io/lambdabridge/jobs/13001",
+     "locations": [
+      "Dublin, Ireland"
+     ],
+     "countries": [
+      "Ireland"
+     ],
+     "workplace": null,
+     "visa": "unknown",
+     "hire_from_abroad": "unknown",
+     "department": "Engineering"
+    },
+    {
+     "title": "Field Operations Lead",
+     "url": "https://job-boards.greenhouse.io/lambdabridge/jobs/13002",
+     "locations": [
+      "Toronto, Canada"
+     ],
+     "countries": [],
+     "workplace": "onsite",
+     "visa": "unknown",
+     "hire_from_abroad": "unknown",
+     "department": null
+    },
+    {
+     "title": "Solutions Architect",
+     "url": "https://job-boards.greenhouse.io/lambdabridge/jobs/13003",
+     "locations": [
+      "Singapore, Singapore",
+      "Jakarta, Indonesia"
+     ],
+     "countries": [
+      "Singapore"
+     ],
+     "workplace": null,
+     "visa": "unknown",
+     "hire_from_abroad": "unknown",
+     "department": null
+    }
+   ],
+   "countries": [
+    "Ireland",
+    "Singapore"
+   ],
+   "cities": [],
+   "amount": 40000000,
+   "currency": "USD",
+   "round_letter": "B",
+   "date": "2026-06-15",
+   "source_url": "https://www.finsmes.com/2026/06/lambda-bridge-raises-40m.html",
    "qualified_by": "letter",
    "salary": null,
    "mca": null,

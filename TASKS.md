@@ -82,8 +82,9 @@ T4.2/T4.3.
 A single shared vocabulary for why a company did or didn't make the site, and a
 `build-report.json` that counts every company under exactly one outcome.
 
-Outcomes: `listed` · `no-target-roles` (`no-india-roles` until T8.4 widened the
-radar to fifteen countries) · `slug-unresolved` · `probe-failed` ·
+Outcomes: `listed` · `no-located-roles` (`no-india-roles` until T8.4 widened the
+radar to fifteen countries, `no-target-roles` until T16.1 stopped the fifteen
+being an admission ticket) · `slug-unresolved` · `probe-failed` ·
 `empty-board-unverified` (the Lever 200-with-empty-array trap) · `not-qualified`.
 
 ```
@@ -3023,3 +3024,106 @@ Out of scope:
   - Re-confirming the backfill's 1,728. It would mean a table of which builds
     changed the definition, hand-maintained, to badge roles a week old.
 ```
+
+### T16.1 — Find a job anywhere, not in fifteen countries `todo` · *Phase 10*
+> **A role in São Paulo is not absent from this register; it is deleted by it.**
+> `src/build.py:507` drops every place a posting names outside the fifteen, and
+> `countries()` returns `[]` for "Warsaw, Poland" by design. That is a radar
+> width decision (T8.2, T8.4) quietly doing duty as a truth claim, and it is the
+> one place this repo violates its own doctrine: absence stays absence
+> *everywhere except here*, where a country we chose not to look at renders
+> identically to a board we could not read.
+>
+> Round 1's judge found it from the reader's side rather than the code's — the
+> brief named readers in São Paulo and Warsaw, and for them every role in the
+> register is remote-or-relocation by definition and no variant says so. Two
+> descriptions of the same defect from opposite ends.
+>
+> **The fifteen lists are right and stay.** They are measured over 26,880 real
+> strings with zero false positives, and the honesty in them is what is
+> *missing* — no bare "Cambridge", no US-marker rule. Widening by adding
+> countries reproduces the problem one ring out and costs a measurement per
+> country. The cheaper move is to stop discarding: keep the role, keep the
+> location string it stated, and let a country matched from the fifteen be an
+> enrichment rather than an admission ticket. `countries: []` then means "we
+> did not classify this", which is what it has always actually meant.
+>
+> **Filters are where this gets decided, not the pipeline.** A reader filtering
+> to Germany must not see unclassified roles; a reader filtering to nothing must
+> see all of them. The country control gains no "Other" bucket that pretends to
+> be a place.
+
+```
+Acceptance (observable):
+  A role whose location names no target country is built, published and
+    rendered, showing the location string its own board stated.
+  Its country row is empty rather than guessed, and the page never prints a
+    country for it.
+  The fifteen-country filter still yields exactly the roles that matched, and
+    an unclassified role appears under no country tab.
+  The status line's role count includes them, and the count is stated as roles
+    on boards we read, not roles in fifteen countries.
+  Company-level `countries` remains the union of its classified roles only.
+Checks:
+  lint -> typecheck -> unit -> e2e (full gate)
+  + unit: a fixture posting located "Sao Paulo, Brazil" survives the build with
+    countries == [] and its location string intact
+  + unit: `countries()` is unchanged — its fixture passes untouched, and no
+    term is added to any list by this task
+  + e2e: filtering to each of the fifteen never returns an unclassified role
+  + e2e: with the country filter cleared, unclassified roles are present and
+    display no country
+  + mutation: restoring the drop in build.py turns the new unit and e2e red
+  + the published role count moves, and the delta is recorded here as a
+    measurement rather than asserted as a range
+Out of scope:
+  - Adding countries to `src/countries.py`. SPEC's bar is probe data showing
+    real volume, per country, and this task is the reason that bar can wait.
+  - Guessing a country from an unclassified string. That is the gazetteer this
+    module was written to avoid; "Newcastle" stays no country at all.
+  - A country tab, badge or facet for "Other" / "Worldwide" / "Rest of world".
+    None of those is a place, and the register does not name absences.
+  - The reader-side lens (round 2 gap 1: languages read, mobility, sponsorship).
+    It reads this task's output; it is design work and lives in design/rounds.
+```
+
+**Measured — the pipeline half, 2026-08-04.** A sample, and it says so: 90 real
+boards over the live network, 45 of the 371 `listed` companies and 45 of the 462
+that left as `no-target-roles`, picked every k-th name alphabetically. One fetch
+per board answers both predicates, so the delta is exact on the sample rather
+than two runs apart.
+
+| | before | after (sampled) | scaled to the corpus |
+|---|---|---|---|
+| companies listed | 371 | 44 of 45 excluded boards now list | **~823** |
+| roles published | 6,423 | listed boards x3.27; +680 from the 45 | **~28,000** |
+| roles with no country | 0 by construction | 2,266 of 2,964 | **~69%** |
+
+The 45th excluded board still leaves: its postings name no place at all, which
+is `no-located-roles` and is the outcome doing the only job it has left.
+
+**Cost.** Greenhouse is the only provider that charges for prose, and the second
+pass now runs on boards that used to skip it. Over the 47 Greenhouse boards in
+the sample: 26 second passes become 47, but the newly-contributing boards are
+small — 0.23MB / 0.71s each against 0.79MB / 0.83s for the ones that already
+paid — so the whole sample goes 37MB to 41MB (x1.13) and 122s to 137s (x1.12).
+Scaled to 428 Greenhouse slugs: **~191 extra second passes, +136s, +43MB**, on a
+~14-minute nightly with a 90-minute timeout. **The 20:00 UTC nightly is not at
+risk** and nothing was reordered or skipped to make that true.
+
+**The cost that is NOT in the nightly, and is not this task's to decide.**
+`data/companies.json` is 471 bytes a role, so ~28,000 roles is **3.03MB ->
+~13.2MB, fetched by every visitor on every page load** (`{cache: 'no-cache'}`,
+and Pages does not compress it any harder for us). `data/first-seen.json` goes
+0.51MB -> ~2.1MB the same way. That is a product decision about what the page
+downloads, not a build one — HLD-v5's Worker-served corpus is the standing
+answer to it and ladder step 4 is where it lives.
+
+**Mutation sweep** (unit suite, 606 tests): restoring the drop in `located()`
+turns **11** red; restoring the country admission ticket in `keeps()` **10**;
+refusing an empty `countries` list again **19**; dropping the first-seen
+definition guard **4**; dropping `definition` from the artifact **7**; dropping
+it from the build report **1** (a source-level check — that line is in `main`,
+which no offline test can execute, and the sweep is how the gap was found);
+adding "Brazil" to `src/countries.py` **6**, that one being an absence and so
+mutation-tested by committing the forbidden act rather than by deleting a guard.

@@ -3,14 +3,19 @@
 The spine's job is to lose no one: every company either becomes a row or leaves
 with an outcome, and a row that doesn't conform never reaches the disk.
 """
+import hashlib
+import inspect
 import json
 from pathlib import Path
 
 import pytest
 
+from src import build as build_module
 from src import greenhouse, lever
 from src.build import (
     PROBES,
+    ROLE_DEFINITION,
+    ROLE_DEFINITION_FINGERPRINT,
     SCHEMA_VERSION,
     build,
     carry_salary,
@@ -25,6 +30,7 @@ from src.build import (
     write,
 )
 from src.countries import COUNTRIES
+from src.firstseen import advance
 from src.outcomes import Outcome, report
 from src.slugs import Slug
 from tests.test_ashby import board as ashby_board
@@ -32,7 +38,9 @@ from tests.test_greenhouse import board
 from tests.test_lever import board as lever_board
 
 #: The same fixture board init.sh's smoke build runs on: four roles, of which
-#: two are India — and one of the other two is the `In-Office` trap.
+#: two are India, one is Warsaw and one is the `In-Office` trap. Since T16.1 all
+#: four are published — the two India ones carrying a country, the other two
+#: carrying the place their board stated and no country at all.
 BOARD = json.loads(Path("tests/fixtures/greenhouse-board.json").read_text())["jobs"]
 
 CORPUS = [
@@ -84,7 +92,7 @@ def answering(ats="greenhouse", **boards):
 
 def test_listed_row_carries_the_corpus_and_the_board():
     """A listed row is the funding facts plus what the board proved — and what it
-    carries is the India roles themselves, not the board's size and not a count."""
+    carries is the roles themselves, not the board's size and not a count."""
     rows, outcomes = build(CORPUS[:1], {"Acme": GREENHOUSE}, answering(acme=BOARD))
 
     assert outcomes == {"Acme": Outcome.LISTED}
@@ -93,9 +101,9 @@ def test_listed_row_carries_the_corpus_and_the_board():
             "name": "Acme",
             "ats": "greenhouse",
             "slug": "acme",
-            # Two of the board's four roles; Warsaw and In-Office are not India.
-            # Greenhouse states no workplace on any role, ever — so `None` here
-            # is the measured normal case, not a fixture that forgot to say.
+            # All four of the board's roles, in the board's order. Greenhouse
+            # states no workplace on any role, ever — so `None` here is the
+            # measured normal case, not a fixture that forgot to say.
             "roles": [
                 {
                     "title": "Senior Software Engineer, Platform",
@@ -114,6 +122,22 @@ def test_listed_row_carries_the_corpus_and_the_board():
                     "visa": "yes",
                     "hire_from_abroad": "unknown",
                 },
+                # T16.1: the Warsaw role. Until this task it was deleted by the
+                # register rather than absent from it, and a reader in Warsaw got
+                # the same page as a reader in a country nobody had checked. It
+                # is published with the place its own board stated and NO
+                # country, because Poland is not one of the fifteen and guessing
+                # one would be the gazetteer src/countries.py refuses to be.
+                {
+                    "title": "Account Executive",
+                    "url": "https://job-boards.greenhouse.io/acme/jobs/5988684005",
+                    "locations": ["Warsaw, Poland"],
+                    "countries": [],
+                    "workplace": None,
+                    "department": "Field Sales",
+                    "visa": "unknown",
+                    "hire_from_abroad": "unknown",
+                },
                 {
                     "title": "Staff Engineer, Data",
                     "url": "https://job-boards.greenhouse.io/acme/jobs/5988684006",
@@ -125,6 +149,22 @@ def test_listed_row_carries_the_corpus_and_the_board():
                     # refusing the visa and the relocation together.
                     "visa": "no",
                     "hire_from_abroad": "no",
+                },
+                # The `In-Office` trap, and it is still a trap and still not
+                # India — it is a role whose board wrote a workplace where a
+                # place goes. T16.1 publishes it because the board stated
+                # SOMETHING and the site renders what the board stated; the
+                # string classifies to no country, and `india.workplace` reads
+                # the one thing it does say.
+                {
+                    "title": "Recruiter",
+                    "url": "https://job-boards.greenhouse.io/acme/jobs/5988684007",
+                    "locations": ["In-Office"],
+                    "countries": [],
+                    "workplace": "onsite",
+                    "department": None,
+                    "visa": "unknown",
+                    "hire_from_abroad": "unknown",
                 },
             ],
             "countries": ["India"],  # what the site's country tabs offer
@@ -168,9 +208,12 @@ def test_an_ashby_row_counts_roles_not_places():
     assert outcomes == {"Acme": Outcome.LISTED}
     assert len(rows[0]["roles"]) == 2  # two postings, not the three India strings
     assert rows[0]["cities"] == ["Bengaluru", "Mumbai"]  # the Warsaw role is also Remote - India
-    # T4.1: the Warsaw posting is listed for its Remote - India half alone, and
-    # its Warsaw location does not come along — this is a site about India roles.
-    assert rows[0]["roles"][1]["locations"] == ["Remote - India"]
+    # T4.1 listed the Warsaw-and-Remote-India posting for its India half alone and
+    # dropped the Warsaw string on the floor. T16.1 keeps both, and the role still
+    # carries India alone in `countries` — a place we cannot classify does not
+    # subtract from one we can, and it does not add a country either.
+    assert rows[0]["roles"][1]["locations"] == ["Warsaw, Poland", "Remote - India"]
+    assert rows[0]["roles"][1]["countries"] == ["India"]
     assert rows[0]["roles"][1]["workplace"] == "remote"
     assert errors(rows[0]) == []
 
@@ -233,7 +276,7 @@ ROLE = {
 @pytest.mark.parametrize(
     ("field", "value", "because"),
     [
-        ("roles", [], "at least one target-country role"),  # the ambiguous zero
+        ("roles", [], "at least one located role"),  # the ambiguous zero
         ("roles", "two", "not"),
         ("name", None, "not"),
         ("qualified_by", "vibes", "qualified_by"),
@@ -250,12 +293,12 @@ ROLE = {
         ("roles", [{k: v for k, v in ROLE.items() if k != "url"}], "missing 'url'"),
         ("roles", [{**ROLE, "salary": "20 LPA"}], "unknown field"),
         ("roles", ["Staff Engineer"], "not a role"),
-        # T8.4's own. A role's countries are what put it here, so an empty list
-        # is the same contradiction an empty location list is — and a country
-        # outside the fifteen is a matcher this site has no tab for.
-        ("roles", [{**ROLE, "countries": []}], "not a non-empty list of target countries"),
-        ("roles", [{**ROLE, "countries": ["Poland"]}], "not a non-empty list of target countries"),
-        ("roles", [{**ROLE, "countries": "India"}], "not a non-empty list of target countries"),
+        # T8.4's own, as T16.1 left them. An EMPTY country list is legal now and
+        # has its own test below — it is the whole task. What is still refused is
+        # a country outside the fifteen, which is a tab this site does not have,
+        # and a string where a list belongs.
+        ("roles", [{**ROLE, "countries": ["Poland"]}], "not a list of target countries"),
+        ("roles", [{**ROLE, "countries": "India"}], "not a list of target countries"),
         # SPEC feature 15: silence is `unknown`, and `unknown` is a word. A null
         # or a blank here would render as an absence the site cannot tell from
         # "we read the posting and it said nothing".
@@ -459,6 +502,105 @@ def test_the_e2e_dataset_is_a_file_this_build_could_have_written():
         (row["salary"] or row["mca"]) and set(row["countries"]) - {"India"}
         for row in shipped["companies"]
     ), "no India-enriched company with a role outside India"
+    # T16.1's two, and they are what the country filter is tested against. The
+    # first is a company that classified to nothing at all — it belongs to no
+    # plate, and the e2e's "an unclassified role appears under no country tab"
+    # has nothing to stand on without it. The second is the harder case and the
+    # one a filter gets wrong: an unclassified role under a company that IS on a
+    # plate, so filtering to that country must drop the role while keeping the
+    # company. Losing either is how "the fifteen still yield exactly the roles
+    # that matched" comes back green over a dataset that cannot fail it.
+    assert any(not row["countries"] for row in shipped["companies"]), "no unclassified company"
+    assert any(
+        row["countries"] and any(not role["countries"] for role in row["roles"])
+        for row in shipped["companies"]
+    ), "no unclassified role under a classified company"
+    # And the company row stays the union of its roles' countries and nothing
+    # else — `errors` enforces the derivation, this says the fixture exercises it
+    # where it can actually go wrong.
+    assert all(
+        row["countries"] == [c for c in COUNTRIES if any(c in r["countries"] for r in row["roles"])]
+        for row in shipped["companies"]
+    )
+
+
+# --- T16.1, what this build counted as a role ---------------------------------
+
+
+def fingerprint() -> str:
+    """The code that decides what a role is and where it says it is, hashed.
+
+    Three sources and no more: the function that reads the places off a posting,
+    the predicate that publishes it, and the whole of the country matcher. A
+    change anywhere in those three can change which postings reach the site or
+    what they claim about their location — and nothing outside them can.
+    """
+    source = "".join(
+        (
+            inspect.getsource(build_module.located),
+            inspect.getsource(build_module.keeps),
+            Path("src/countries.py").read_text(),
+        )
+    )
+    return hashlib.sha256(source.encode()).hexdigest()[:16]
+
+
+def test_the_role_definition_is_pinned_to_the_code_that_decides_it():
+    """`ROLE_DEFINITION` is what stops T16.1's night badging the whole register
+    `New` (src/firstseen.py), and it is a hand-written string — so the one way it
+    fails is silently, by staying `v2` through a change that made it `v3`.
+
+    This is what makes forgetting impossible rather than unlikely. It does NOT
+    decide anything: a red here is a human's question, and it has two honest
+    answers. If what counts as a role moved, bump `ROLE_DEFINITION` and re-pin,
+    and one night confirms nothing. If it was a comment, re-pin alone — the cost
+    of a wrong call in that direction is one night's badges, and the cost in the
+    other is a front page of week-old roles wearing `New`.
+    """
+    assert ROLE_DEFINITION_FINGERPRINT == fingerprint(), (
+        f"the code deciding what a role is has changed since {ROLE_DEFINITION!r} was "
+        f"pinned. If it changed what a POSTING has to be to reach the site, or what "
+        f"it says about where it is, bump src/build.py ROLE_DEFINITION as well — "
+        f"src/firstseen.py reads it to refuse confirming a definitional change as "
+        f"news. Then set ROLE_DEFINITION_FINGERPRINT to {fingerprint()!r}."
+    )
+
+
+def test_the_build_states_its_definition_in_the_report_it_writes():
+    """The seam, and this test says plainly what it can and cannot prove.
+
+    Everything else here drives real functions. This one reads the source,
+    because the line it guards lives in `main` — which reads three data files,
+    calls three live APIs and writes the published artifact, and the smoke path
+    that CAN run offline deliberately writes no report at all. So there is no way
+    to execute this line in the gate, and a mutation sweep found the gap: deleting
+    it left all 605 tests green while the nightly quietly stopped stating what it
+    was looking for, and every night after that would confirm nothing, for ever,
+    with no failure anywhere.
+
+    Asserting the source is worth strictly less than driving it. It is worth more
+    than nothing, and "nothing" was the alternative — the same argument
+    tests/test_nightly.py makes for reading scripts/nightly.sh rather than the
+    behaviour of a build nobody can run in a unit test.
+    """
+    assert 'built["definition"] = ROLE_DEFINITION' in Path("src/build.py").read_text(), (
+        "src/build.py stopped writing the role definition into build-report.json. "
+        "src/firstseen.py reads it from there and confirms nothing without it — "
+        "which is silent, permanent, and looks exactly like a quiet week."
+    )
+
+
+def test_the_definition_reaches_the_report_the_nightly_folds():
+    """The wiring, end to end and in the file the fold actually reads. `advance`
+    takes the definition out of build-report.json and nothing else writes it
+    there, so a build that stopped stating it would leave the nightly confirming
+    nothing, every night, silently."""
+    built = report(["Acme"], {"Acme": Outcome.LISTED})
+    built["definition"] = ROLE_DEFINITION
+
+    first = advance(None, {"snapshot": "2026-08-05", "companies": []}, built)
+
+    assert first["definition"] == ROLE_DEFINITION
 
 
 # --- T8.4, the description pass -----------------------------------------------
@@ -485,21 +627,38 @@ def two_pass(cheap=CHEAP, rich=BOARD):
     return {"greenhouse": PROBES["greenhouse"]._replace(probe=probe, describe=describe)}, calls
 
 
-def test_the_description_pass_runs_only_for_a_board_that_matched():
-    """T8.1's affordable strategy, which is an ordering: 259 of 422 Greenhouse
-    boards have no posting in any target country, and the 13.7x-35.3x payload
-    multiplier must not be paid on them. So the country filter runs on the cheap
-    board, and only a board that will contribute a row is fetched again."""
+def test_the_description_pass_runs_only_for_a_board_that_contributes_a_row():
+    """T8.1's affordable strategy is an ordering, and T16.1 is what it now costs.
+
+    The ordering is unchanged: the cheap board decides who is listed, and only a
+    board that will contribute a row is fetched again with its prose in it. What
+    changed is how many boards that is. T8.1 measured 259 of 422 Greenhouse
+    boards with no posting in any target country and skipped the 13.7x-35.3x
+    payload multiplier on all of them; a board of Warsaw roles now contributes a
+    row, so it is fetched twice, and the measurement of what that costs is
+    recorded in TASKS.md T16.1 rather than guessed at here.
+
+    The boards that still skip the second pass are the ones that will not be a
+    row at all: an empty board, and a board whose postings state no place.
+    """
     probes, calls = two_pass()
     build(CORPUS[:1], {"Acme": GREENHOUSE}, probes)
     assert calls == ["probe", "describe"]
 
-    nowhere = json.loads(board("Warsaw, Poland"))["jobs"]
-    probes, calls = two_pass(cheap=nowhere)
+    abroad = json.loads(board("Warsaw, Poland"))["jobs"]
+    probes, calls = two_pass(cheap=abroad, rich=abroad)
     rows, outcomes = build(CORPUS[:1], {"Acme": GREENHOUSE}, probes)
 
-    assert outcomes == {"Acme": Outcome.NO_TARGET_ROLES}
-    assert calls == ["probe"], "a board with nothing for us was fetched a second time"
+    assert outcomes == {"Acme": Outcome.LISTED}
+    assert calls == ["probe", "describe"], "a board that contributes a row pays for its prose"
+    assert rows[0]["roles"][0]["locations"] == ["Warsaw, Poland"]
+
+    placeless = json.loads(board("", "   "))["jobs"]
+    probes, calls = two_pass(cheap=placeless)
+    rows, outcomes = build(CORPUS[:1], {"Acme": GREENHOUSE}, probes)
+
+    assert outcomes == {"Acme": Outcome.NO_LOCATED_ROLES}
+    assert calls == ["probe"], "a board with nothing to publish was fetched a second time"
     assert rows == []
 
 
@@ -511,7 +670,9 @@ def test_openness_comes_from_the_second_pass_not_the_first():
     rows, _ = build(CORPUS[:1], {"Acme": GREENHOUSE}, probes)
     assert [(r["visa"], r["hire_from_abroad"]) for r in rows[0]["roles"]] == [
         ("yes", "unknown"),
+        ("unknown", "unknown"),  # the Warsaw role, whose posting says neither
         ("no", "no"),
+        ("unknown", "unknown"),  # and the In-Office one
     ]
 
     # The same build with the second pass returning the cheap board: same rows,
@@ -520,8 +681,7 @@ def test_openness_comes_from_the_second_pass_not_the_first():
     silent, _ = build(CORPUS[:1], {"Acme": GREENHOUSE}, probes)
     assert [(r["visa"], r["hire_from_abroad"]) for r in silent[0]["roles"]] == [
         ("unknown", "unknown"),
-        ("unknown", "unknown"),
-    ]
+    ] * 4
 
 
 @pytest.mark.parametrize(
@@ -541,7 +701,7 @@ def test_a_failed_description_pass_costs_the_openness_never_the_company(rich, be
     rows, outcomes = build(CORPUS[:1], {"Acme": GREENHOUSE}, probes)
 
     assert outcomes == {"Acme": Outcome.LISTED}, because
-    assert len(rows[0]["roles"]) == 2
+    assert len(rows[0]["roles"]) == 4
     assert all(role["visa"] == "unknown" for role in rows[0]["roles"])
     assert errors(rows[0]) == []
 
@@ -616,26 +776,82 @@ def test_the_two_halves_of_slug_unresolved_are_counted_apart():
     }
 
 
-def test_no_target_roles_is_a_finding_not_a_gap():
-    """The one honest exclusion: we read their whole board and none of it was in
-    a country we cover. Note what that board contains — `In-Office` must not
-    rescue it, and neither must a place that merely sounds like one of ours
-    (`Cambridge, MA` is not the UK, `Perth` is not Australia)."""
-    empty = json.loads(
+def test_a_board_that_names_no_country_we_cover_is_listed_anyway():
+    """T16.1, and it is this test that used to say the opposite.
+
+    Every string here classifies to no country — Warsaw is a country we do not
+    cover, `In-Office` is a workplace where a place goes, and `Cambridge, MA` and
+    `Perth` are the named traps that must not rescue anybody into the UK or
+    Australia. Until T16.1 that made the whole board a finding and the company
+    left as `no-target-roles`; five real jobs on a live board were deleted by
+    this register rather than absent from it.
+
+    They are published now, each carrying the place its own board stated and no
+    country at all. The traps still behave exactly as `src/countries.py` measured
+    them to — nothing here is filed under a country, which is the difference
+    between publishing a place and guessing at one.
+    """
+    elsewhere = json.loads(
         board("Warsaw, Poland", "In-Office", "Indianapolis, Indiana", "Cambridge, MA", "Perth")
     )["jobs"]
 
-    rows, outcomes = build(CORPUS[:1], {"Acme": GREENHOUSE}, answering(acme=empty))
+    rows, outcomes = build(CORPUS[:1], {"Acme": GREENHOUSE}, answering(acme=elsewhere))
 
-    assert outcomes == {"Acme": Outcome.NO_TARGET_ROLES}
+    assert outcomes == {"Acme": Outcome.LISTED}
+    assert [role["locations"] for role in rows[0]["roles"]] == [
+        ["Warsaw, Poland"], ["In-Office"], ["Indianapolis, Indiana"], ["Cambridge, MA"], ["Perth"]
+    ]
+    assert [role["countries"] for role in rows[0]["roles"]] == [[]] * 5
+    # The company's own country row is the union of its roles', which is empty —
+    # and legal. It is NOT a bucket: the site files this company under no plate.
+    assert rows[0]["countries"] == []
+    assert errors(rows[0]) == []
+
+
+def test_a_sao_paulo_role_survives_the_build_with_its_location_intact():
+    """T16.1's acceptance, in the words the task used. The reader this register
+    was failing is in São Paulo: every role in it was remote-or-relocation for
+    them by definition, and no page said so, because the pipeline deleted the
+    only role that was next door.
+    """
+    brazil = json.loads(board("Sao Paulo, Brazil"))["jobs"]
+
+    rows, outcomes = build(CORPUS[:1], {"Acme": GREENHOUSE}, answering(acme=brazil))
+
+    assert outcomes == {"Acme": Outcome.LISTED}
+    assert rows[0]["roles"][0]["locations"] == ["Sao Paulo, Brazil"]
+    assert rows[0]["roles"][0]["countries"] == []
+    assert errors(rows[0]) == [], "an unclassified role is a publishable role"
+
+
+def test_no_located_roles_is_a_finding_not_a_gap():
+    """The one honest exclusion left, and the reason the outcome was renamed
+    (`no-target-roles` until T16.1, `no-india-roles` until T8.4): we read the
+    whole board and not one posting on it said where the job is.
+
+    A blank location field is silence, not a place — and it is the one thing
+    T16.1 deliberately did not change. Publishing a role with nowhere to render
+    its location would break SPEC feature 7 against a board that told us nothing,
+    which is a different task from not deleting the boards that told us plenty.
+    """
+    silent = json.loads(board("", "   "))["jobs"]
+
+    rows, outcomes = build(CORPUS[:1], {"Acme": GREENHOUSE}, answering(acme=silent))
+
+    assert outcomes == {"Acme": Outcome.NO_LOCATED_ROLES}
     assert rows == []
 
 
 def test_a_company_hiring_only_outside_india_is_now_listed():
     """T8.4 is the widening, and this is what widened: a board with no India role
     on it at all used to leave as a finding, and now leaves as a row. The India
-    behaviour is preserved as one country of fifteen rather than re-litigated —
-    `no-target-roles` still means we read the whole board and found nothing."""
+    behaviour is preserved as one country of fifteen rather than re-litigated.
+
+    T16.1 widened it once more, in the row rather than the outcome: the Warsaw
+    role is published too. The company's country row is still the union of what
+    CLASSIFIED, so Poland appears nowhere — a role can be published under no
+    country without putting its company under a country tab that reveals nothing.
+    """
     abroad = json.loads(board("London, United Kingdom", "Tokyo, Japan", "Warsaw, Poland"))["jobs"]
 
     rows, outcomes = build(CORPUS[:1], {"Acme": GREENHOUSE}, answering(acme=abroad))
@@ -645,7 +861,11 @@ def test_a_company_hiring_only_outside_india_is_now_listed():
     assert [role["locations"] for role in rows[0]["roles"]] == [
         ["London, United Kingdom"],
         ["Tokyo, Japan"],
-    ], "the Warsaw role is not a role this site has anything to say about"
+        ["Warsaw, Poland"],
+    ]
+    assert [role["countries"] for role in rows[0]["roles"]] == [
+        ["United Kingdom"], ["Japan"], []
+    ], "the Warsaw role names a place and no country of ours; both are said"
     # The India-only fields degrade to absence rather than to a guess: there are
     # no India cities to filter on, and the enrichments never run (SPEC v2 keeps
     # AmbitionBox and the MCA register India's).
@@ -685,7 +905,9 @@ def test_the_board_department_is_carried_verbatim_and_never_mapped():
 
     # The fixture states a department and its parent, the way the live payload
     # does. The specific one ships; `R&D` is the parent and says less.
-    assert [role["department"] for role in rows[0]["roles"]] == ["R&D: Platform", "Data Platform"]
+    assert [role["department"] for role in rows[0]["roles"]] == [
+        "R&D: Platform", "Field Sales", "Data Platform", None
+    ]
 
 
 @pytest.mark.parametrize(
@@ -1021,10 +1243,10 @@ def test_a_carried_figure_that_no_longer_conforms_is_dropped_not_carried(tmp_pat
 def test_a_company_that_stopped_hiring_departs_under_its_outcome():
     """Not a new kind of loss and not reported as one: `report` already assigned
     it a reason, and this only says which of the published rows wore it."""
-    assigned = {"Acme": Outcome.NO_TARGET_ROLES.value, "Beta": Outcome.LISTED.value}
+    assigned = {"Acme": Outcome.NO_LOCATED_ROLES.value, "Beta": Outcome.LISTED.value}
 
     assert departures([{"name": "Acme"}, {"name": "Beta"}], assigned) == {
-        "Acme": "no-target-roles"
+        "Acme": "no-located-roles"
     }
 
 

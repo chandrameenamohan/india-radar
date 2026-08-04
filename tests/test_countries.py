@@ -11,6 +11,7 @@ knows where the job is. So NO_COUNTRY is longer than the positive fixture, and
 every entry in it is a string a matcher with one more "helpful" city in its list
 would get wrong.
 """
+import hashlib
 import re
 from pathlib import Path
 
@@ -268,3 +269,34 @@ def test_every_country_has_exactly_one_site_plate():
     # own typesetting, which this says nothing about.
     named = [_quoted(row)[0] for row in re.findall(r"\[(.*?)\]", plates.group(1)) if _quoted(row)]
     assert sorted(named) == sorted(SPEC_COUNTRIES)
+
+
+# --- T16.1, the terms that were NOT added --------------------------------------
+
+
+def test_t16_1_added_no_term_to_any_list():
+    """T16.1's second unit check, and it is a guard on an ABSENCE.
+
+    The task that put a São Paulo role on this site is also the task with the
+    obvious wrong fix — reach into `_TERMS`, add Brazil, and reproduce the same
+    defect one ring out for Chile. It costs a measurement per country (26,880
+    real strings, zero false positives) and buys nothing the enrichment does not
+    already give: a role is published for stating a place, and a country is what
+    we say about it when we can.
+
+    An absence cannot be deleted, only violated, so this is mutation-tested by
+    ADDING the forbidden thing: put one term in any list and both assertions go
+    red. The count is the readable half and the hash is the honest half — a
+    swap that keeps the count would pass the first alone.
+    """
+    from src.countries import _TERMS
+
+    assert sum(len(terms) for terms in _TERMS.values()) == 125
+    assert hashlib.sha256(repr(_TERMS).encode()).hexdigest()[:16] == "d6aa0e97dd3edbd3", (
+        "src/countries.py's term lists changed. They are measured over 26,880 real "
+        "location strings with zero false positives and T16.1 pinned them: a role "
+        "in a country these lists do not name is published under no country, not "
+        "classified by a new term. Adding one is a decision with a measurement "
+        "attached (SPEC: probe data showing real volume, per country) — make it "
+        "deliberately, then re-pin here."
+    )

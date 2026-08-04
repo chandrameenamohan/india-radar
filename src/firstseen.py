@@ -26,6 +26,29 @@ The first snapshot that carries roles at all is the baseline, and nothing in it
 is confirmed: there is no previous side to have observed. `advance` derives that
 from the artifact rather than being told — an empty artifact can confirm nothing.
 
+**And a third state, which the both-sides rule is blind to on its own: a night
+when the build changed what it was looking for.** T15.2 measured it in this
+project's own history — folding this function over 26 commits confirms 1,728
+roles, of which 1,604 land on the night T8.4's fifteen-country radar reached a
+nightly and 1,032 on the night T12.1 added 135 boards. Every one of those roles
+was open the day before. The company was `listed` on both sides, both sides were
+genuinely observed, and the rule says "new" because inside this artifact **a
+definitional change is indistinguishable from a real one**.
+
+Nothing in the artifact can tell them apart, so the build states it instead: the
+report carries `definition` (`build.ROLE_DEFINITION`), the artifact carries the
+one it was folded under, and **a snapshot may confirm only against a previous
+snapshot built to the same definition**. A definition that is absent on either
+side is not a match — a build that did not say what it was looking for cannot be
+shown to have been looking for the same thing, and this module's whole job is to
+refuse exactly that inference. The cost of getting it wrong is asymmetric and the
+default follows the asymmetry: a spurious unconfirmed night loses a badge on a
+handful of genuinely new roles, and a spurious confirmed night badges thousands
+of week-old roles `New` on the front page.
+
+The rule needs no history and no table of which builds changed the definition —
+one string in tonight's report, one carried in last night's artifact.
+
 **Closures are not here, deliberately.** A role that disappears is where 98% of
 that measurement's noise lives, and the honest version of it needs the same
 both-sides rule plus a policy for the 176. Out of scope; see TASKS.md T15.2.
@@ -50,6 +73,14 @@ from typing import Any
 #: know rather than reading fields that may have moved — the same rule the site
 #: keeps against companies.json, for the same reason: this file outlives the
 #: build that wrote it.
+#:
+#: T16.1 added `definition` and did NOT bump this, which is a decision rather than
+#: an oversight. No field moved; the new one is optional, and its absence has a
+#: defined meaning that is the conservative one — a v1 artifact confirms nothing
+#: on the night this lands, which is exactly what the widening night needs. A bump
+#: would make `load` refuse the committed artifact, and the only way out of that
+#: is deleting 6,650 dates and re-backfilling them, which this module's own `load`
+#: docstring names as the disaster to avoid.
 SCHEMA_VERSION = 1
 
 ARTIFACT = "data/first-seen.json"
@@ -60,9 +91,10 @@ ARTIFACT = "data/first-seen.json"
 NOTE = (
     "first_seen is the snapshot date a role's URL first appeared in a build. A "
     "role is confirmed only where its company's board was read on the previous "
-    "snapshot AND on this one — both sides genuinely observed. Everything else "
-    "is unconfirmed: we saw it for the first time, which is not the same as it "
-    "being new. Only confirmed roles may be called new."
+    "snapshot AND on this one — both sides genuinely observed — AND both builds "
+    "were looking for the same thing, which is what `definition` records. "
+    "Everything else is unconfirmed: we saw it for the first time, which is not "
+    "the same as it being new. Only confirmed roles may be called new."
 )
 
 
@@ -87,6 +119,11 @@ def advance(
     # six are absences of knowledge wearing different names.
     observed = set(report.get("listed") or ())
     before = set(prev.get("observed") or ()) if prev else set()
+    # What tonight's build counted as a role, and what last night's did. Equal is
+    # the only readable case, and equal-and-stated at that: two builds that both
+    # declined to say are not two builds we know agreed.
+    definition = report.get("definition")
+    unchanged = bool(definition) and (prev or {}).get("definition") == definition
     dates: dict[str, dict[str, list[str]]] = {
         day: {kind: list(urls) for kind, urls in buckets.items()}
         for day, buckets in ((prev or {}).get("dates") or {}).items()
@@ -106,7 +143,15 @@ def advance(
     baseline = not known
 
     for company in published["companies"]:
-        both_sides = not baseline and company["name"] in observed and company["name"] in before
+        # Three questions, and a role is confirmed only on three yeses: was there
+        # a previous snapshot at all, was it looking for the same thing, and did
+        # we genuinely read THIS company's board on both sides of the gap.
+        both_sides = (
+            not baseline
+            and unchanged
+            and company["name"] in observed
+            and company["name"] in before
+        )
         # `.get` rather than `[...]`: the backfill folds over schema v1–v3 too,
         # and a role was not a thing this project published until v4 (T4.1). A
         # snapshot with no roles contributes no URLs and is not an error.
@@ -126,6 +171,11 @@ def advance(
         # is the "previous side" of tomorrow's both-sides rule, and dropping it
         # would silently make every tomorrow a baseline.
         "observed": sorted(observed),
+        # The other half of the previous side, and the one that survives a build
+        # changing its mind about what a role is. Written even when it is None:
+        # an artifact that states no definition is a real state, it is what every
+        # artifact written before T16.1 says, and it confirms nothing.
+        "definition": definition,
         "dates": {day: {k: sorted(v) for k, v in dates[day].items()} for day in sorted(dates)},
     }
 
@@ -162,7 +212,10 @@ def main() -> None:
     committed artifact, writes it back. No arguments and no git."""
     published = json.loads(Path("data/companies.json").read_text())
     report = json.loads(Path("data/build-report.json").read_text())
-    art = advance(load(), published, report)
+    # Held rather than re-read after the write, which would compare the new file
+    # with itself and never print the one line this exists to print.
+    prev = load()
+    art = advance(prev, published, report)
     write(ARTIFACT, art)
     # The date's whole bucket, not this run's delta: two builds on one day are
     # one day's worth of first sightings, and the bucket is what the page reads.
@@ -172,6 +225,14 @@ def main() -> None:
         f"{len(today.get('confirmed', ()))} confirmed new, "
         f"{len(today.get('unconfirmed', ()))} unconfirmed"
     )
+    # Said out loud on the night it happens, because a run that confirms nothing
+    # looks identical to a quiet night in the numbers above and is not one.
+    if prev is not None and art["definition"] != (was := prev.get("definition")):
+        print(
+            f"first-seen: this build counted roles as {art['definition']!r} and the "
+            f"last one as {was!r} — nothing tonight can be confirmed, because a "
+            f"change in what the build looks for is not anybody hiring"
+        )
 
 
 if __name__ == "__main__":

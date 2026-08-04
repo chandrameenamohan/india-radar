@@ -11,6 +11,15 @@ this one. Every test below that names both_sides fails if that line is removed;
 the mutation sweep in the T15.2 note records which, and it is not one test but
 four, because the rule has four sides (previous-observed, currently-observed,
 already-known, and the baseline that has no previous at all).
+
+T16.1 added the fifth: **both builds must have been looking for the same thing.**
+That is the one the four cannot see. The night T16.1 lands, every role this
+register used to delete for being in São Paulo appears as a brand-new URL under a
+company that was `listed` on both sides — and the four sides above all say yes.
+It is the 1,604-roles-in-one-night failure T15.2 measured in this project's own
+history, arriving a second time through a door the guard does not cover. So the
+build states what it counted as a role (`build.ROLE_DEFINITION`), the artifact
+carries it, and a night where the two disagree confirms nothing at all.
 """
 from __future__ import annotations
 
@@ -38,9 +47,16 @@ def snapshot(day: str, roles: dict[str, list[str]]) -> dict[str, Any]:
     }
 
 
-def report(*listed: str) -> dict[str, Any]:
-    """A build-report.json: the companies whose board this build actually read."""
-    return {"listed": sorted(listed)}
+def report(*listed: str, definition: str | None = "v2-any-stated-location") -> dict[str, Any]:
+    """A build-report.json: the companies whose board this build actually read,
+    and what that build counted as a role.
+
+    The default is a real `build.ROLE_DEFINITION` value rather than a token,
+    because every report the pipeline writes now carries one — a fixture that
+    omitted it would exercise the transition path in every test and never the
+    ordinary night. `definition=None` is the report a pre-T16.1 build wrote.
+    """
+    return {"listed": sorted(listed), **({} if definition is None else {"definition": definition})}
 
 
 def dates(art: dict[str, Any], day: str) -> dict[str, list[str]]:
@@ -139,6 +155,119 @@ def test_a_snapshot_predating_roles_is_folded_without_dating_anything() -> None:
     art = advance(art, snapshot("2026-07-29", {"Acme": ["u1"]}), report("Acme"))
 
     assert art["dates"] == {"2026-07-29": {"confirmed": [], "unconfirmed": ["u1"]}}
+
+
+# --- T16.1, the night the build changes what it is looking for ----------------
+
+
+def test_the_night_the_definition_changes_confirms_nothing() -> None:
+    """The landmine T16.1 walks onto, in miniature.
+
+    Acme's board was read last night and again tonight, and tonight it publishes
+    two URLs it did not publish yesterday. Every side of the both-sides rule says
+    yes. They are still not new: last night's build was deleting every role
+    outside the fifteen and tonight's is not, so u2 and u3 are roles that were
+    open all along and that this register was refusing to look at.
+
+    Zero confirmed is the whole acceptance. The site badges nothing that night.
+    """
+    yesterday = snapshot("2026-08-04", {"Acme": ["u1"]})
+    before = advance(None, yesterday, report("Acme", definition="v1"))
+    widened = advance(
+        before,
+        snapshot("2026-08-05", {"Acme": ["u1", "u2", "u3"]}),
+        report("Acme", definition="v2-any-stated-location"),
+    )
+
+    assert dates(widened, "2026-08-05")["confirmed"] == []
+    assert dates(widened, "2026-08-05")["unconfirmed"] == ["u2", "u3"]
+
+
+def test_the_night_after_a_widening_confirms_normally_again() -> None:
+    """One night, not forever. The guard is about a BOUNDARY between two
+    definitions — once both sides were built the same way there is nothing wrong
+    with the diff, and a rule that kept refusing would be a badge that never
+    comes back.
+    """
+    yesterday = snapshot("2026-08-04", {"Acme": ["u1"]})
+    before = advance(None, yesterday, report("Acme", definition="v1"))
+    widened = advance(before, snapshot("2026-08-05", {"Acme": ["u1", "u2"]}), report("Acme"))
+    after = advance(widened, snapshot("2026-08-06", {"Acme": ["u1", "u2", "u3"]}), report("Acme"))
+
+    assert dates(after, "2026-08-06")["confirmed"] == ["u3"]
+
+
+def test_an_artifact_that_states_no_definition_confirms_nothing() -> None:
+    """The production path, exactly as it runs the night T16.1 lands: the
+    committed artifact was written before this field existed. Absent is not a
+    match — a build that never said what it was looking for cannot be shown to
+    have been looking for the same thing, and this module refuses that inference
+    everywhere else already.
+    """
+    old = advance(None, snapshot("2026-08-04", {"Acme": ["u1"]}), report("Acme", definition=None))
+    assert old["definition"] is None, "a pre-T16.1 artifact states nothing here"
+
+    tonight = advance(old, snapshot("2026-08-05", {"Acme": ["u1", "u2"]}), report("Acme"))
+
+    assert dates(tonight, "2026-08-05")["confirmed"] == []
+    assert dates(tonight, "2026-08-05")["unconfirmed"] == ["u2"]
+
+
+def test_a_build_that_states_no_definition_confirms_nothing_either() -> None:
+    """The other side of the same absence, and the one that matters for a change
+    to the pipeline rather than to the artifact: a build that stopped stating its
+    definition would otherwise silently resume confirming against an artifact
+    that states one, which is the failure this whole field exists to prevent.
+    """
+    first = advance(None, snapshot("2026-08-04", {"Acme": ["u1"]}), report("Acme"))
+    art = advance(
+        first, snapshot("2026-08-05", {"Acme": ["u1", "u2"]}), report("Acme", definition=None)
+    )
+
+    assert dates(art, "2026-08-05")["confirmed"] == []
+
+
+def test_the_definition_survives_in_the_artifact() -> None:
+    """The nightly's only memory of it, for the same reason `observed` is there:
+    CI checks out at depth 1, so tomorrow can compare against tonight only if
+    tonight wrote it down.
+    """
+    art = advance(None, snapshot("2026-08-04", {"Acme": ["u1"]}), report("Acme"))
+
+    assert art["definition"] == "v2-any-stated-location"
+
+
+def test_the_real_committed_artifact_confirms_nothing_across_this_boundary() -> None:
+    """The same rule against the real files rather than a fixture, because the
+    numbers are the argument. `data/first-seen.json` is the artifact production is
+    holding tonight; `data/companies.json` is the register as published. Fold a
+    build that widened the definition over both, with every listed company
+    carrying roles it did not publish before, and nothing may be confirmed.
+
+    Deleting the definition check turns this red with thousands of confirmed
+    roles — which is precisely the front page badging a week-old register `New`.
+    """
+    prev = load()
+    if prev is None:
+        pytest.skip("no data/first-seen.json committed yet")
+    published = json.loads(Path("data/companies.json").read_text())
+    listed = [company["name"] for company in published["companies"]]
+    # Every listed company gains a role, which is what a widening looks like from
+    # inside the artifact: URLs nobody has seen, under companies read both nights.
+    widened = {
+        **published,
+        "snapshot": "2999-01-01",
+        "companies": [
+            {**company, "roles": [*company["roles"], {"url": f"https://widened/{company['name']}"}]}
+            for company in published["companies"]
+        ],
+    }
+    art = advance(prev, widened, {"listed": listed, "definition": "v2-any-stated-location"})
+
+    fresh = dates(art, "2999-01-01")
+    badged = len(fresh["confirmed"])
+    assert fresh["confirmed"] == [], f"{badged} roles badged by a definition change"
+    assert len(fresh["unconfirmed"]) == len(listed), "the dates are still facts and still recorded"
 
 
 def test_load_refuses_an_artifact_from_a_schema_it_does_not_know(tmp_path: Path) -> None:

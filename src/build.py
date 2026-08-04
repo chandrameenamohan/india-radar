@@ -64,7 +64,15 @@ from src.slugs import Slug, key, states_company
 #: different questions (MCA's slice is subsidiaries of foreign-incorporated
 #: parents; Companies House covers every UK company), so a row can carry one,
 #: both or neither, and each is said in its own register's words.
-SCHEMA_VERSION = 10
+#: v11 stopped deleting the rest of the world (T16.1). No field moved and none
+#: was added — what changed is a value rule the renderer relies on: a role's
+#: `countries` may now be EMPTY, and so may a company's. It is a version bump
+#: rather than a quiet loosening because the site indexes that list (`COORD[
+#: c.countries[0]]` is a real line), and a page that reads v10 rules over a v11
+#: file would put a São Paulo role under whichever plate came first. Refusing to
+#: render is the honest failure; guessing a country is the one this repo exists
+#: not to ship.
+SCHEMA_VERSION = 11
 
 Probe = Callable[[str], Roles | Outcome]
 Row = dict[str, Any]
@@ -262,6 +270,30 @@ COMPANY_NUMBER = re.compile(r"\d{8}|[A-Z]{2}\d{6}")
 #: looks like — the same history T7.1 is blocked on.
 COLLAPSE = 0.5
 
+#: What this build counted as a role, stated in the build report so that anything
+#: differencing two snapshots can ask the second question T15.2's both-sides rule
+#: cannot ask on its own: not "did we observe both nights" but "were we looking
+#: for the same thing". `src/firstseen.py` is the reader, and the reason is
+#: measured — folding the both-sides rule over this project's own history calls
+#: 1,604 week-old roles new on the night T8.4 widened the radar, because the
+#: company was `listed` either way. A definitional change is indistinguishable
+#: from a real one INSIDE the artifact; the only place it is visible is here.
+#:
+#:   v1 — a role was published for naming a place in one of the fifteen (T8.4).
+#:   v2 — a role is published for naming a place at all; a country of the fifteen
+#:        enriches it rather than admitting it (T16.1).
+#:
+#: Bumped by hand, and `tests/test_build.py` is what makes that reliable: it
+#: recomputes the fingerprint below from the code that decides, and goes red when
+#: the two disagree. So the choice is a human's — this changed what a role IS, or
+#: it was a comment — and forgetting to make it is not one of the options.
+ROLE_DEFINITION = "v2-any-stated-location"
+
+#: sha256 of the source of `located` and `keeps` plus the whole of
+#: `src/countries.py`, truncated. The three together are every line that decides
+#: whether a posting reaches the site and what it says about where it is.
+ROLE_DEFINITION_FINGERPRINT = "a9aa0b2510180bc8"
+
 
 def _shape(found: Mapping[str, Any], names: Iterable[str]) -> list[str]:
     """Fields the schema names and this mapping doesn't, and the reverse.
@@ -280,11 +312,16 @@ def role_errors(role: Any) -> list[str]:
     """Every way one role fails the schema. Empty means it may ship.
 
     The location list is required to be non-empty, and that is the deterministic
-    form of SPEC feature 7's "no company displays an empty location": a role
-    became a kept role by naming a place in a target country, so a role here with
-    nothing to render its location from is a contradiction, not a gap. `countries`
-    is refused empty for the same reason and one step further along — it is what
-    put the role here.
+    form of SPEC feature 7's "no company displays an empty location": naming a
+    place is now the whole of what made this a kept role (T16.1), so a role here
+    with nothing to render its location from is a contradiction, not a gap.
+
+    `countries` is NOT refused empty, and that inversion is the task. It used to
+    be what put a role here, so an empty list was the same contradiction; it is
+    now an enrichment, and `[]` means "we did not classify this place", which is
+    what it has always actually meant. What is still refused is a country outside
+    the fifteen — that would be a tab the site does not have and a claim
+    `src/countries.py` never made.
 
     The two openness verdicts are refused unless they are one of the three words
     `openness` emits. A role that reached the site carrying `null` or `""` there
@@ -305,8 +342,8 @@ def role_errors(role: Any) -> list[str]:
     if not (isinstance(places, list) and places and all(isinstance(p, str) and p for p in places)):
         problems.append(f"locations {places!r} is not a non-empty list of place names")
     where = role.get("countries")
-    if not (isinstance(where, list) and where and all(c in COUNTRIES for c in where)):
-        problems.append(f"countries {where!r} is not a non-empty list of target countries")
+    if not (isinstance(where, list) and all(c in COUNTRIES for c in where)):
+        problems.append(f"countries {where!r} is not a list of target countries")
     if role.get("workplace") not in (*WORKPLACES, None):
         problems.append(f"workplace {role.get('workplace')!r} is not one of {WORKPLACES} or None")
     said = role.get("department")
@@ -457,12 +494,13 @@ def errors(row: Mapping[str, Any]) -> list[str]:
         if field in row and not isinstance(row[field], types)
     ]
 
-    # A listed company is one whose board we read and found target-country roles
-    # on. An empty list here would be a row saying "listed, hiring nobody" — the
+    # A listed company is one whose board we read and found roles on that said
+    # where they are (T16.1 — until then, roles in one of the fifteen). An empty
+    # list here would be a row saying "listed, hiring nobody", which is the
     # ambiguous zero this project exists to refuse.
     if isinstance(roles := row.get("roles"), list):
         if not roles:
-            problems.append("roles is empty: a listed company has at least one target-country role")
+            problems.append("roles is empty: a listed company has at least one located role")
         problems += [f"roles[{i}]: {p}" for i, role in enumerate(roles) for p in role_errors(role)]
         # The country set is derived, so the only thing to check is that it is
         # still the derivation. A row whose tabs and roles disagree would put a
@@ -497,30 +535,48 @@ def errors(row: Mapping[str, Any]) -> list[str]:
     return problems
 
 
-def matched(role: Mapping[str, Any], provider: Provider) -> tuple[list[str], list[str]]:
-    """The places this role names in a target country, and the countries they name.
+def located(role: Mapping[str, Any], provider: Provider) -> tuple[list[str], list[str]]:
+    """Every place this role names, and the target countries those places name.
 
-    Both lists are empty for a role we do not keep, so `if matched(...)[0]` is the
-    filter. A role can genuinely be in two of the fifteen — "London, UK; Sydney,
-    Australia" is one posting — and both countries come back, in COUNTRIES order.
+    The two lists answer different questions and only the first one is a filter.
+    Places are what the board stated, all of them, verbatim; countries are the
+    enrichment `src/countries.py` could read off those places, in COUNTRIES order,
+    and `[]` is an ordinary answer meaning we did not classify this.
 
-    The places a role names OUTSIDE the fifteen are dropped here and never reach
-    the row, which is T4.1's rule widened rather than changed: a Bengaluru-and-
-    Warsaw posting is listed for its Bengaluru half, because "also Warsaw" answers
-    a question nobody came here with. Poland is not on the map; it is not a place
-    this site has anything to say about.
+    **T16.1 stopped this function deleting the rest of the world.** It used to
+    return only the places that sat in one of the fifteen, so a São Paulo role was
+    not absent from this register — it was deleted by it, rendering identically to
+    a board we could not read. That is the one place the repo violated its own
+    doctrine, and the fix is to stop discarding rather than to add countries: a
+    Bengaluru-and-Warsaw posting is now listed with both places on it, because
+    Warsaw is where that job partly is, whatever this site can say about Poland.
+
+    A blank string is not a place. Providers hand back what the board put in the
+    location field, and `""` or `"   "` there is silence — dropping it is what
+    keeps SPEC feature 7's "no company displays an empty location" true now that
+    the location list is what admits a role rather than something it arrived with.
 
     Called twice per kept role — once to decide whether to keep it, once to build
     it — because a pure function called twice reads better here than its result
     threaded through the spine's loop. It is a regex over a handful of short
-    strings, and the roles it runs on twice are the few that reach a row.
+    strings.
     """
-    found = [(place, countries(place)) for place in provider.locations(role)]
-    keep = [(place, where) for place, where in found if where]
-    return (
-        [place for place, _ in keep],
-        [c for c in COUNTRIES if any(c in where for _, where in keep)],
-    )
+    places = [place.strip() for place in provider.locations(role) if place.strip()]
+    where = [countries(place) for place in places]
+    return places, [c for c in COUNTRIES if any(c in found for found in where)]
+
+
+def keeps(role: Mapping[str, Any], provider: Provider) -> bool:
+    """Whether this posting is published at all — and it is one axis, deliberately.
+
+    Before T16.1: the role names a place in one of the fifteen target countries.
+    After: the role names a place. Nothing else about the predicate moved — a
+    board that states no location for a posting still contributes nothing, which
+    is the same behaviour it had yesterday and is out of T16.1's scope. What
+    changed is "classified" to "stated": we publish where a job is when the board
+    says where it is, and we say which of the fifteen it is in when we can tell.
+    """
+    return bool(located(role, provider)[0])
 
 
 def described(provider: Provider, slug: str, roles: Roles) -> Roles:
@@ -529,10 +585,21 @@ def described(provider: Provider, slug: str, roles: Roles) -> Roles:
     Two of the three providers ship prose whether we ask or not, so for them this
     is the identity and the whole function is one branch. Greenhouse charges for
     it — 13.7x-35.3x the bytes, under 2x the latency, on the same single call —
-    so it is fetched here, AFTER the country filter has proved the board can
-    contribute a row. T8.1 measured that ordering: 259 of 422 Greenhouse boards
-    have no posting in any target country, and paying the multiplier on those is
-    the whole avoidable cost.
+    so it is fetched here, AFTER the build has proved the board contributes a row.
+
+    **T16.1 bought most of that avoided cost back, and the ordering is still
+    right.** T8.1 measured 259 of 422 Greenhouse boards with no posting in any
+    target country and skipped the second pass on all of them; those boards
+    contribute rows now, so they pay. Re-measured over a sample of 47 Greenhouse
+    boards (2026-08-04): the second pass runs on 47 rather than 26, the 21 new
+    ones are SMALL — 0.23MB and 0.71s each against 0.79MB and 0.83s for the
+    boards that already paid — and the whole sample's bytes go 37MB to 41MB
+    (x1.13) and its wall time 122s to 137s (x1.12). Scaled to 428 Greenhouse
+    slugs that is ~191 extra second passes, +136s and +43MB on a ~14-minute
+    nightly with a 90-minute timeout. The cheap boards were cheap because they
+    were small, which is why the number is a tenth of what T8.1's headline
+    suggests. The ordering still earns its keep on the boards that contribute
+    nothing at all — an empty board, and a board whose postings name no place.
 
     Roles are re-identified by their apply URL, which every one of 1,112 measured
     roles carries and which is unique per posting. A role the second pass does not
@@ -560,8 +627,13 @@ def described(provider: Provider, slug: str, roles: Roles) -> Roles:
 
 def posting(role: Mapping[str, Any], provider: Provider) -> Row:
     """One kept role as the site renders it: what it's called, where to apply, the
-    places it names in countries we cover, how it says it's worked, and what its
-    description says about hiring someone who is not already there.
+    places its board named, which of the fifteen countries those places are in if
+    we could tell, how it says it's worked, and what its description says about
+    hiring someone who is not already there.
+
+    `countries` is `[]` for a role in a country we do not classify, and the site
+    renders that as nothing at all (T16.1). It is not an "Other" bucket and must
+    never become one: "we did not classify this" is not a place.
 
     The openness pair is `unknown`/`unknown` for the large majority of roles and
     that is the measured normal case (92.32% of 4,311 postings say nothing at
@@ -576,7 +648,7 @@ def posting(role: Mapping[str, Any], provider: Provider) -> Row:
     `India - Remote` stating `OnSite`), which is the company contradicting
     itself; the string carries the other 939, where Greenhouse states nothing.
     """
-    places, where = matched(role, provider)
+    places, where = located(role, provider)
     said = role.get(provider.workplace) if provider.workplace else None
     title = role.get(provider.title)
     return {
@@ -643,7 +715,7 @@ def build(
     probes: Mapping[str, Provider] = PROBES,
     shared: Mapping[str, str] | None = None,
 ) -> tuple[list[Row], dict[str, Outcome]]:
-    """The spine: corpus → slug → board → country filter → descriptions → rows.
+    """The spine: corpus → slug → board → located roles → descriptions → rows.
 
     Returns the listed rows and one outcome per company. Every `continue` below
     is a company leaving with a reason attached; none of them can fall through
@@ -682,9 +754,9 @@ def build(
         # A role, not a location string: one Ashby posting open in Bengaluru and
         # Mumbai is one role in two cities, and counting the strings would
         # report it as two jobs.
-        kept = [role for role in result if matched(role, provider)[0]]
+        kept = [role for role in result if keeps(role, provider)]
         if not kept:
-            outcomes[name] = Outcome.NO_TARGET_ROLES
+            outcomes[name] = Outcome.NO_LOCATED_ROLES
             continue
 
         # The descriptions are fetched only now, for a board that has already
@@ -1004,6 +1076,14 @@ def main(argv: list[str]) -> None:
     # not check (T5.3), and those numbers are the report's, copied rather than
     # counted twice.
     built = report([c["name"] for c in corpus], outcomes)
+    # What this build counted as a role. It rides in the report because the report
+    # is where this project states facts about the build rather than about a
+    # company — and because `src/firstseen.py` already reads this file and needs
+    # exactly one thing from it that companies.json cannot give: whether tonight's
+    # register and last night's were looking for the same thing. A night where
+    # they were not confirms nothing, which is the only reason T16.1 does not
+    # badge the whole site `New` the evening it lands.
+    built["definition"] = ROLE_DEFINITION
     # Read off the file the write is about to replace, so it is the set the site
     # is serving right now rather than the set some earlier run listed.
     left = departures(published(out), built["companies"])
@@ -1064,6 +1144,13 @@ def main(argv: list[str]) -> None:
         if count:
             print(f"  {count:4d}  listed with a role in {country}")
     posted = sum(len(row["roles"]) for row in rows)
+    # T16.1's own number, and the one to watch: roles this build published with no
+    # country read off their location string. Before T16.1 it was zero by
+    # construction — those roles were deleted — so a run printing zero now is a
+    # run where the widening did nothing, which on a corpus this size means the
+    # predicate came back.
+    unclassified = sum(1 for row in rows for role in row["roles"] if not role["countries"])
+    print(f"  {unclassified:4d}  of {posted} roles state a place in no country we classify")
     for field in ("visa", "hire_from_abroad"):
         said = sum(1 for row in rows for role in row["roles"] if role[field] != "unknown")
         print(f"  {said:4d}  of {posted} roles state {field}")

@@ -20,7 +20,11 @@ def test_outcomes_are_exhaustive():
     """
     assert {o.value for o in Outcome} == {
         "listed",
-        "no-target-roles",
+        # `no-india-roles` (T6.1) -> `no-target-roles` (T8.4) -> this (T16.1).
+        # Each rename followed a widening of what the build looks for, and the
+        # name is part of the vocabulary precisely because the site renders it:
+        # a stale one states a finding the pipeline no longer makes.
+        "no-located-roles",
         "slug-unresolved",
         "probe-failed",
         "empty-board-unverified",
@@ -35,7 +39,7 @@ def test_counts_sum_to_corpus():
         CORPUS,
         {
             "Acme": Outcome.LISTED,
-            "Bolt": Outcome.NO_TARGET_ROLES,
+            "Bolt": Outcome.NO_LOCATED_ROLES,
             "Cog": Outcome.NOT_QUALIFIED,
         },
     )

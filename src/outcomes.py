@@ -7,10 +7,19 @@ have no roles in any country we cover") are different outcomes and must never
 collapse into one.
 
 `no-india-roles` became `no-target-roles` in T8.4, when the radar widened from
-India to fifteen countries (SPEC "Expansion — ROLE·ATLAS"). The meaning is
-unchanged and so is its place in `CHECKED`: we read the whole board and none of
+India to fifteen countries (SPEC "Expansion — ROLE·ATLAS"). The meaning was
+unchanged and so was its place in `CHECKED`: we read the whole board and none of
 it was anywhere we cover. Only the name got wider, because the old one would now
 say "no India roles" about a company excluded for having no Berlin role either.
+
+`no-target-roles` became `no-located-roles` in T16.1, and this time the MEANING
+moved, which is why the name had to move with it. A role is now published for
+naming a place at all — the fifteen enrich a role rather than admit it — so the
+only board that leaves under this outcome is one where not a single posting
+stated a location we could read. The old name would now say "no target roles"
+about a company whose whole board is in São Paulo, which is a claim about São
+Paulo that this register never made and cannot support. Same argument as T8.4's,
+one ring out.
 """
 from __future__ import annotations
 
@@ -23,7 +32,10 @@ from typing import Any
 
 class Outcome(StrEnum):
     LISTED = "listed"
-    NO_TARGET_ROLES = "no-target-roles"
+    #: We read the whole board and no posting on it stated a place we could read
+    #: (T16.1). NOT "no roles in the fifteen" — that stopped being a reason to
+    #: exclude anybody when a matched country became an enrichment.
+    NO_LOCATED_ROLES = "no-located-roles"
     SLUG_UNRESOLVED = "slug-unresolved"
     PROBE_FAILED = "probe-failed"
     EMPTY_BOARD_UNVERIFIED = "empty-board-unverified"  # Lever's 200-with-empty-array
@@ -38,7 +50,7 @@ class Outcome(StrEnum):
 #: The only outcomes that mean we actually read the company's board. Everything
 #: else is an absence of knowledge, and the site must say so rather than imply
 #: the company isn't hiring.
-CHECKED = frozenset({Outcome.LISTED, Outcome.NO_TARGET_ROLES})
+CHECKED = frozenset({Outcome.LISTED, Outcome.NO_LOCATED_ROLES})
 
 
 def report(corpus: Iterable[str], outcomes: Mapping[str, Outcome]) -> dict[str, Any]:

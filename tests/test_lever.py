@@ -54,7 +54,7 @@ def test_empty_array_is_unverified_not_zero(monkeypatch):
 
     Lever's empty array is the one answer we cannot read: an abandoned board, a
     renamed company and a firm that isn't hiring all produce it, and Lever has
-    no name lookup to ask a second question of. `no-target-roles` would claim we
+    no name lookup to ask a second question of. `no-located-roles` would claim we
     checked — it counts as CHECKED and would let the site imply "not hiring".
     """
     fake_get, calls = answering(200, "[]")

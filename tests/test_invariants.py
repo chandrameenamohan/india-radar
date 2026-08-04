@@ -24,7 +24,7 @@ def test_unchecked_never_listed():
     assert r["companies"]["Never"] == "probe-failed"
     assert "Never" not in r["listed"]
     # The failure mode this guards: a missing answer quietly becoming a finding.
-    assert r["counts"]["no-target-roles"] == 0
+    assert r["counts"]["no-located-roles"] == 0
     assert r["checked"] == 1 and r["unchecked"] == 1
 
 
