@@ -1430,17 +1430,23 @@ check "an unclassified role shows the location its own board stated" \
        .join("|")')"
 
 # The other half of "its country row is empty rather than guessed": no code in
-# the gutter, and no tooltip standing in for one. A page that inferred "Brazil"
-# from the string, or reached for the company's countries the way the row used
-# to, breaks this before it breaks anything a reader would notice.
+# the gutter, no tooltip standing in for one, and no separator left dangling
+# where the code would have gone. The last of the three is the status line's
+# `seps()` rule one column over -- "006·" with nothing after it reads as a value
+# that failed to load, which is a different lie from "we did not classify this".
+# A page that inferred "Brazil" from the string, or reached for the company's
+# countries the way this row used to, breaks the first two before a reader would
+# notice anything at all.
 check "an unclassified role prints no country, and nothing stands in for one" \
-  "$UNCL 0 0" \
+  "$UNCL 0 0 0" \
   "$(val '(() => {
        const rows = [...document.querySelectorAll(".jrow")]
          .filter((n) => n.dataset.countries === "");
        return [rows.length,
                rows.reduce((n, r) => n + r.querySelectorAll(".igc").length, 0),
-               rows.filter((r) => r.querySelector(".iref").title).length].join(" ") })()')"
+               rows.filter((r) => r.querySelector(".iref").title).length,
+               rows.filter((r) => /·\s*$/.test(r.querySelector(".iref").textContent))
+                 .length].join(" ") })()')"
 
 # THE GUARD, and the one this task turns on: fifteen plates in one pass, on the
 # roles register. Both failure directions are counted per plate — a role that
@@ -1586,14 +1592,22 @@ check "an entry with no plate reference prints none, rather than an empty one" \
 # way every register line is, and kept whole where a mode word makes the string
 # one idiom. `wherePieces` reached for `c.countries` on a remote company and
 # would print "Remote — " here, with the country deleted after the em dash.
+# Its gutter is the bare ref, and a classified neighbour's is the ref, the
+# separator and the code — both read off the same page, so the assertion is that
+# the separator belongs to the code rather than to the ref.
 check "its register line names places and cites no plate" \
-  "Kappa Analytics|0|Sao Paulo · Remote — Warsaw, Poland" \
+  "Kappa Analytics|0|006|Sao Paulo · Remote — Warsaw, Poland" \
   "$(val '(() => { const r = [...document.querySelectorAll(".irow")].find((n) =>
          n.querySelector(".iname").firstChild.textContent === "Kappa Analytics");
        return [r.querySelector(".iname").firstChild.textContent,
                r.querySelectorAll(".igc").length,
+               r.querySelector(".iref").textContent,
                (r.querySelector(".iwhere").dataset.places || "").split("|").join(" · ")
               ].join("|") })()')"
+check "a classified line still carries the separator its code hangs on" "003·IE·SG" \
+  "$(val '[...document.querySelectorAll(".irow")].find((n) =>
+       n.querySelector(".iname").firstChild.textContent === "Lambda Bridge")
+         .querySelector(".iref").textContent')"
 # The page says what that empty gutter MEANS, for the same reason it says what a
 # missing CIN and a missing openness badge mean. Prose in the apparatus, never a
 # facet in the filter bank — the difference between explaining an absence and

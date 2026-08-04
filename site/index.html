@@ -2220,7 +2220,11 @@ function indexRow(c, repeated, hits) {
   // ink prints only where the reference CHANGES from the line above — B3 a
   // hundred times is wallpaper — but the value stays in the markup on every
   // line for hover, selection, and the pointer's title.
-  const iref = el('span', 'iref', ref + '·');
+  // T16.1: the interpunct is a SEPARATOR and separates the ref from the plate
+  // code beside it, so a row filed under no plate prints "006" rather than
+  // "006·" — the status line's `seps()` rule, applied one column over. A
+  // dangling separator reads as a value that failed to load.
+  const iref = el('span', 'iref', ref + (c.countries.length ? '·' : ''));
   // Round 3: the citation resolves, like a real atlas index. Each country
   // code in the gutter is a live cross-reference — clicking ·GB turns the
   // page to Plate 03 with this company held — so the apparatus stops being
@@ -2304,7 +2308,7 @@ function roleRow(c, r) {
   const row = el('div', 'irow jrow');
   row.dataset.countries = r.countries.join('|');   // the plate preview reads this
   row.dataset.ref = ref;
-  const iref = el('span', 'iref', ref + '·');
+  const iref = el('span', 'iref', ref + (r.countries.length ? '·' : ''));
   const igr = el('span', 'igr');
   r.countries.map((x) => [x, CODE[x]]).filter(([, cd]) => cd).slice(0, 2)
     .forEach(([nation, cd], i) => {
