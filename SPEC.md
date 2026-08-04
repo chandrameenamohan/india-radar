@@ -224,7 +224,7 @@ The single scenario that proves the whole thing works:
 3. Pick any company in it. It has ≥1 open India role, and that role's apply URL
    returns 200 on the company's real posting.
 4. Pick a company NOT in it that has a resolved slug. `build-report.json` states
-   why — `no-target-roles`, not `unchecked`.
+   why — `no-located-roles`, not `unchecked`.
 5. Open the site. Zero console errors, zero failed requests.
 6. Filter to "Bengaluru". Every result has a Bengaluru role; none has only, say,
    a Warsaw role.
@@ -326,6 +326,12 @@ errors.
 ### Outcome vocabulary change
 `no-india-roles` generalizes to `no-target-roles`. Build report gains per-country
 listed counts. Everything else in feature 12 stands.
+
+T16.1 renamed it once more, to `no-located-roles`, on the same argument: the
+radar's width stopped being the admission ticket, so the outcome now fires only
+where no posting on a board states a place at all. A company whose whole board is
+in Brazil is `listed`, and the register says which of the fifteen it is in by
+saying nothing.
 
 ### v2 non-goals
 - No per-country corporate registries or salary benchmarks.

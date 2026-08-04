@@ -166,8 +166,10 @@ def countries(location: str | None) -> list[str]:
 
     Zero or more, and zero is the common honest answer: "Warsaw, Poland" is a
     real posting in a country we do not target, "Newcastle" is a place we cannot
-    identify, and both come back empty. A caller that needs "is this worth
-    keeping" asks whether the list is non-empty.
+    identify, and both come back empty. The two zeros are different and this
+    function cannot tell them apart, which is why T16.1 stopped letting it decide
+    what gets published: no caller asks "is this worth keeping" any more. It
+    answers "which of the fifteen, if any", and an empty answer keeps its role.
 
     More than one is real too — "London, UK; Sydney, Australia" is a single
     posting open in two of our countries, and (like india.cities) it needs no

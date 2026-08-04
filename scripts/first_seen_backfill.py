@@ -82,6 +82,16 @@ def main(argv: list[str]) -> None:
     # gives no badges. Confirmation starts with the first nightly after this
     # lands: one build definition, two consecutive observations, which is the
     # only shape the both-sides rule was ever measured against.
+    # T16.1 made this loop redundant and it is KEPT rather than deleted, which is
+    # a decision this repo requires to be written down. `advance` now confirms
+    # only where both snapshots state the same `definition`, and no historical
+    # build report states one at all, so a fold over history already confirms
+    # nothing and this demotes an empty set. Two guards against one failure mean
+    # neither can be shown to work — the honest half is that the general rule is
+    # the guard, and the loop below is a one-time script's belt to a brace it
+    # cannot see. It stays because a hand run nobody repeats is the worst place
+    # to discover the rule was wrong, and it is documented because an
+    # undocumented redundant guard is the thing the lesson actually forbids.
     for day in art["dates"].values():
         day["unconfirmed"] = sorted(day["unconfirmed"] + day["confirmed"])
         day["confirmed"] = []

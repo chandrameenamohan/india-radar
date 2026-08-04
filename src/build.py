@@ -292,7 +292,7 @@ ROLE_DEFINITION = "v2-any-stated-location"
 #: sha256 of the source of `located` and `keeps` plus the whole of
 #: `src/countries.py`, truncated. The three together are every line that decides
 #: whether a posting reaches the site and what it says about where it is.
-ROLE_DEFINITION_FINGERPRINT = "a9aa0b2510180bc8"
+ROLE_DEFINITION_FINGERPRINT = "330114ed6ffb6a6e"
 
 
 def _shape(found: Mapping[str, Any], names: Iterable[str]) -> list[str]:
