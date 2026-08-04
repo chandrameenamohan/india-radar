@@ -327,6 +327,10 @@ def test_the_e2e_artifact_is_a_file_this_module_could_have_written() -> None:
 
     assert art["schema_version"] == SCHEMA_VERSION
     assert art["snapshot"] in art["dates"] or art["dates"], "an artifact dates something"
+    # Every artifact `advance` writes states the definition it was folded under,
+    # even when that is null (T16.1). A fixture without the key is a file this
+    # module could not have written, which is the whole bar this test holds.
+    assert "definition" in art, "no definition: the real module always states one"
     for day, buckets in art["dates"].items():
         assert sorted(buckets) == ["confirmed", "unconfirmed"], day
         for kind, listed in buckets.items():

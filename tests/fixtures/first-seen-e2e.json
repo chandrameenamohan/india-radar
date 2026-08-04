@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "snapshot": "2026-07-28",
-  "note": "first_seen is the snapshot date a role's URL first appeared in a build. A role is confirmed only where its company's board was read on the previous snapshot AND on this one — both sides genuinely observed. Everything else is unconfirmed: we saw it for the first time, which is not the same as it being new. Only confirmed roles may be called new.",
+  "note": "first_seen is the snapshot date a role's URL first appeared in a build. A role is confirmed only where its company's board was read on the previous snapshot AND on this one \u2014 both sides genuinely observed. Everything else is unconfirmed: we saw it for the first time, which is not the same as it being new. Only confirmed roles may be called new.",
   "observed": [
     "Acme Cloud",
     "Beta Logistics",
@@ -12,6 +12,7 @@
     "Theta Global",
     "Zeta Placeless"
   ],
+  "definition": "v2-any-stated-location",
   "dates": {
     "2026-07-10": {
       "confirmed": [],
