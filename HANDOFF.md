@@ -1,329 +1,282 @@
-# HANDOFF — ROLE·ATLAS · 2026-08-04
+# HANDOFF — ROLE·ATLAS · 2026-08-04 (late)
 
 > Paste this file as the first prompt of a new session:
 > "Read HANDOFF.md and continue from where it says NEXT."
 
-## THE ONE THING THAT IS TIME-SENSITIVE
+## Start here
 
-**T15.2 is built, green and UNPUSHED, on branch `t15.2-first-seen` @ `54736dd`.**
-The nightly fires at **20:00 UTC daily**. Whether that branch is on `main` before
-the next firing decides whether tonight is the first night this project can
-honestly say a role is new.
-
-Nothing breaks if it misses — the artifact simply keeps its backfilled state and
-the first confirmation night slides a day. The only cost is that one cohort of
-roles gets dated a day late, because the fold would compare a two-night gap.
+**Everything is pushed, everything is live, the tree is clean, the gate is
+green, and the nightly is healthy.** `origin/main` is `18f5fe2`. One branch
+(`main`), no worktrees, no loose work. This is the first handoff in a while that
+starts with nothing broken — spend the session building, not recovering.
 
 ```
-git checkout main && git merge --ff-only t15.2-first-seen \
-  && git pull --rebase origin main && timeout 480 git push origin main
+make check        # lint → mypy → 595 unit → 128 worker → 12 worker-e2e → ~130 site e2e
 ```
 
-**The push is blocked by the permission classifier — a human has to run it** with
-the `!` prefix. See the classifier note below.
-
-## HOW TO WORK THIS SESSION
-
-**Match the harness to the work, and this repo has now done it both ways in one
-day.** The roles register (T15.1) was one thread of reasoning through one file
-and was rightly done with no subagent at all. T15.2 was a self-contained feature
-with a decidable brief — data artifact, backfill, nightly step, two site
-controls — and went to a single agent that returned it green.
-
-**When you do delegate, the brief is the work.** The T15.2 brief pinned down two
-things before the agent started, and both would otherwise have failed silently:
-that the nightly may not read git history (`actions/checkout@v4` is depth 1 — in
-CI there IS no history), and that the honesty rule is the design rather than a
-caveat. Everything else was left to the agent, and it made better calls than the
-brief would have.
-
-**Verify what an agent reports. Re-run its mutation sweep yourself.** T15.2's
-claims all held — and re-deriving its central finding from `git log` independently
-made it *stronger* than the report claimed. That is the value: not catching a lie,
-but finding the sharper version of the truth.
+Go to **NEXT**. Everything above it is context you can reload on demand.
 
 ## What this project is
 
 ROLE·ATLAS (repo `chandrameenamohan/india-radar`, local
 `/Users/ralph/sennamind/next-rocket-ship`): a register of funded software
 companies with verified open roles across 15 countries — "proven by their own job
-board, not by a claim." Python pipeline (zero runtime deps) builds
+board, not by a claim." A dependency-free Python pipeline builds
 `data/companies.json`; `site/index.html` renders it; GitHub Pages serves it from
-`main` at root; a nightly Action rebuilds the data.
+`main` at root; a nightly Action rebuilds the data at 20:00 UTC.
 **Live at https://roleatlas.sennamind.com.**
 
-**As of 2026-08-03 the page is a JOB search, not a company directory.** It opens
-on 6,422 roles; the company register it grew out of is one switch away at
-`?view=companies`, unchanged.
+**The page is a JOB SEARCH.** It opens on 6,423 roles. The company register it
+grew out of is one press away on the status line, and unchanged.
 
 Core doctrine everywhere: **absence stays absence** — an unchecked company is
 never "not hiring", a missing fact renders as nothing, a derivation says it is
-derived. T15.2 is the sharpest test of it yet: a role we cannot prove is new does
-not get a badge, even though we know the date we first saw it.
+derived, and a claim states which source it came from.
 
 - Tasks live in `TASKS.md` (markdown, NOT beads). House style:
-  `### T<n> — Title \`status\` · *Phase N*`, then a `>` narrative note, then a
-  fenced Acceptance/Checks/Out-of-scope block. Never weaken a check to pass.
-- Gate: `make check` (lint → mypy → pytest → **worker** → e2e).
-  `make check-fast` skips the site e2e. **594 unit + 128 worker + 12 worker-e2e +
-  ~120 site e2e checks.**
-- Commit style: narrative prose explaining the finding and the why, not a
+  `### T<n> — Title \`status\` · *Phase N*`, a `>` narrative note, then a fenced
+  Acceptance/Checks/Out-of-scope block. Never weaken a check to pass.
+- Commit style is narrative prose explaining the finding and the why, not a
   changelog. Read `git log --oneline -8`.
-- **Pushes are slow** (`data/companies.json` is ~2.9 MB) and the nightly commits
-  to `main` while you sleep. `git pull --rebase origin main` first, always.
-- **PORTS: 8731 (site e2e) and 8788 (worker e2e).** Concurrent agents running the
-  gate WILL collide — brief them to run only their own tests, or to run the gate
-  only if they are the sole agent.
+- **PORTS: 8731 (site e2e), 8788 (worker e2e).** Concurrent agents running the
+  gate WILL collide.
+- **`git push` is blocked by the permission classifier** — the human runs it with
+  `!`. See the classifier list below.
 
 ## State as of 2026-08-04
 
-**`origin/main` is `b06095f`. Working tree clean. Full gate green.**
-
-Shipped and live today:
-
-| | |
+| Artifact | |
 |---|---|
-| `a76aa5b` | **T15.1 — Jobs are the page.** The register's unit is the role. |
-| `b06095f` | **57 company descriptions backfilled**, 51 written and 6 refused. |
+| Snapshot | 2026-08-04 · 371 companies · 6,423 roles |
+| Descriptions | **371 of 371**, six of them read off the company's own job board |
+| first-seen | 6,650 URLs dated · 145 confirmed new (138 on 08-03, **7 on 08-04**) |
+| Nightly | green, `a705ab3`, and the first-seen step ran unattended in CI |
+| Worker | deployed, bindings resolving, **still no TLS on its hostname** |
 
-Built, green, **not pushed**:
+### The ladder — the plan, and rungs 1 and 2 are done
 
-| | |
-|---|---|
-| `54736dd` on `t15.2-first-seen` | **T15.2 — `first_seen` and "new since".** |
+`HLD-v5.md` proposed job search + a sign-in wall as one decision: a hosting
+migration, a private repo, a rewritten page loop and an SEO layer together. It was
+coherent and unbuildable as a single step, so it was **never signed off** and the
+work was re-cut:
 
-Three merged branches are lying around (`roles-register`, `descriptions-backfill`,
-`t15.2-first-seen`) plus three stale worktrees under `.claude/worktrees/`. All
-prunable; `git worktree remove` for the latter.
-
-### The shape of the plan changed today, and that is the important part
-
-A session began by asking for job search plus a sign-in wall. Answering four
-coupled questions at once produced `HLD-v5.md` — a hosting migration, a private
-repo, a rewritten page loop and an SEO layer, all in one step. It was coherent and
-it was **unbuildable as a single decision**, which is why it was never signed off.
-
-**It was re-cut as a ladder, and the ladder is the plan now:**
-
-1. **Roles are the page.** ✅ Shipped as T15.1. No gate, no migration, still
-   static and public.
-2. **`first_seen` and "new since".** ✅ Built as T15.2, awaiting a push. Useful
-   with no gate at all, and it is the thing that later makes signing in worth
-   something.
-3. **A soft, client-side gate.** Not started. Its real job is to **MEASURE**
+1. **Roles are the page.** ✅ T15.1.
+2. **`first_seen` and "new since".** ✅ T15.2, running nightly.
+3. **A soft, client-side gate.** ⬜ Not started. Its real job is to **MEASURE**
    whether anyone signs in.
-4. **`HLD-v5.md`** — the Worker-served corpus, the private repo, the hosting move.
-   Step 3 either justifies it or kills it.
+4. **`HLD-v5.md`** — Worker-served corpus, private repo, hosting move. Step 3
+   either justifies it or kills it.
 
-**Do not skip to 4.** `HLD-v5.md` remains accurate on architecture, measurements
-and arguments; only its sequencing and its `T15.x` numbering are superseded. Its
-best finding is still live: **serving the site from the Worker would DELETE the
-TLS problem below and the CORS allowlist with it**, because the apex is a
-two-level name Universal SSL already covers.
+**Do not skip to 4.** The HLD is still accurate on architecture and measurements;
+only its sequencing and `T15.x` numbering are superseded. Its best finding stands:
+**serving the site from the Worker would DELETE the TLS problem and the CORS
+allowlist**, because the apex is a two-level name Universal SSL already covers.
 
-## T15.1 — Jobs are the page
+### T15.1 — jobs are the page
+`site/index.html` only. Role lines are `.jrow` from `roleRow(c, r)`; the list
+pages at 200 behind a fold; `?view=companies` deep-links the company index.
 
-`site/index.html` only. The register lists roles; `?view=companies` deep-links to
-the company index; role lines are `.jrow`, built by `roleRow(c, r)`; the list
-pages at 200 behind a `.spreadfold`.
+**Filters cut at the ROLE**, which is the difference between this and a re-skin:
+under the company register a company with one remote job keeps every on-site job
+it has — right there, wrong here, for the same reason `inScope` exists one level
+up. A role line cites its OWN countries.
 
-**The filters cut at the ROLE, and that is the whole difference between this and a
-re-skin.** Under the company register a company with one remote job keeps every
-on-site job it has — correct there, because the unit is the company, and wrong
-here for the same reason `inScope` exists one level up. Workplace, foreign-hires
-and city are re-applied per role on the flatten; plate and department were already
-role-level. A role line cites its OWN countries, so Theta Global's London job
-prints ·GB alone.
+**Added beside rather than replacing**, and that is why it took an afternoon:
+replacing outright would have invalidated ~40 of the e2e's 87 checks, and this
+repo rewrites checks rather than weakening them. Pinning them with one
+`&view=companies` cost a line. **Deleting the company view later is cheap; doing
+that rewrite twice is not.**
 
-**Adding beside rather than replacing was the decision that made it an afternoon.**
-Replacing the company register outright would have invalidated ~40 of the e2e's 87
-checks, and this repo rewrites checks rather than weakening them — 40 rewrites
-against a design nobody had used yet. Pinning them with one `&view=companies` on
-`$FIXTURE` cost a line. **Deleting the company view later is cheap; doing that
-rewrite twice is not.**
+**The unit switch lives on the STATUS LINE, not in the filter bank** — it shipped
+buried among nine filters and a reader asked for a view the page already had.
+Every control in that bank changes which lines show; this one changes what a line
+IS. It is built by both of `render()`'s branches, so an empty result set is never
+a dead end.
 
-## T15.2 — first_seen, and why nothing is badged
+### T15.2 — first_seen, and the lesson under it
+`src/firstseen.py` (`advance()`, reads no git) · `scripts/first_seen_backfill.py`
+(the one-time hand run, the only thing here that reads git) · `data/first-seen.json`
+· wired into `scripts/nightly.sh` after the build.
 
-Every one of the 6,422 published roles carries the date it was first seen.
-**None of them may be called new**, and that is the finding rather than a bug.
+**THE RULE:** a role is new only when its company was `listed` in BOTH the
+previous snapshot and this one. SPEC v3's measurement is why — 9 new roles against
+179 disappearances, **176 of which were companies the build could not check**.
 
-- `src/firstseen.py` — `advance(prev, companies_doc, report)`. Reads no git.
-- `scripts/first_seen_backfill.py` — the one-time hand run over 26 commits. Every
-  judgement in it is `advance`'s, so the backfill exercises the nightly's code.
-- `data/first-seen.json` — 494 KB, 6,505 URLs, grouped by date. `observed` is the
-  nightly's entire memory of yesterday; drop it and every tomorrow silently
-  becomes a baseline.
-- `scripts/nightly.sh` runs it after the build, behind the same
-  `NIGHTLY_FIRSTSEEN` seam as `NIGHTLY_BUILD`. `nightly.yml` is unchanged.
+**AND THE RULE IS NOT ENOUGH.** Folding it over all 26 commits confirms 1,728
+roles, but 4,340 dates land on 2026-07-31 and 1,032 on 2026-08-02 — the nights
+T8.2's fifteen-country radar and T12.1's 135 new boards first reached a nightly.
+**5,372 of 6,505 backfilled dates are the build changing what it LOOKS FOR, not
+anybody hiring**, and the both-sides rule is blind to it because the company was
+`listed` either way. So the backfill confirms nothing: **history gives dates, not
+badges.** Confirmation starts from the first nightly after it landed.
 
-**THE RULE:** a role may be called new only when its company was `listed` in BOTH
-the previous snapshot and this one. SPEC v3's measurement is why — one nightly
-diff gave 9 new roles against 179 disappearances, **176 of which were companies
-the build could not check that night.**
+**It then landed where the measurement said it would: 7 confirmed new on
+2026-08-04**, against SPEC's predicted ~9 a night. The 138 on 08-03 spanned a
+two-night gap plus churn — checked by distribution (77 companies, at most 7 on any
+board, exactly one on 43 of them), which is churn rather than a board re-issuing
+its URLs. Badge window is 7 days. Closures are out of scope; that is where the
+remaining noise lives.
 
-**AND THE RULE IS NOT ENOUGH, which is the new lesson.** Folding it over all 26
-commits *confirms* 1,728 roles — but 4,340 of the artifact's dates land on
-2026-07-31 and 1,032 on 2026-08-02. `src/countries.py` T8.2 (the fifteen-country
-radar) landed 2026-07-30; `T12.1 realised: 135 boards found, the register grows
-316 → 371` is dated 2026-08-02. **5,372 of 6,505 dates are the build changing what
-it LOOKS FOR, not anybody hiring.** Those roles were open all along; we were not
-looking at Germany yet. The both-sides rule is blind to it — the company was
-`listed` on both nights.
+### Descriptions — 371 of 371, and a third provenance
+`scripts/describe.py` drives Claude Code AGENTS (not the API — that distinction is
+why this has no per-user cost) and reads each company's **website**. Six companies
+serve none we can read: openai.com and blitzy.com 403 every path, getparker.com
+404s, sorare.com serves a browser gate, theathletic.com refuses the fetcher, and
+Super's recorded website is a different company.
 
-So the backfill demotes everything to unconfirmed: **history gives dates, not
-badges.** Confirmation starts with the first nightly after the branch lands, and
-SPEC's own measurement says that night should badge about nine. **Nine true badges
-beat 1,604 false ones.** The badge window is 7 days, from SPEC v3's "weekly, not
-daily".
-
-Closures are deliberately out of scope. That is where the remaining noise lives.
-
-## PROVISIONING
-
-**Cloudflare account `5bb014e16f8cf5d16a6eb4e53245be81`.** `.env` holds a working
-`CLOUDFLARE_API_TOKEN` scoped Workers Scripts / D1 / R2 / DNS / Workers Routes.
-**It has a TTL — if calls start failing with 401, check expiry first.**
-
-- ✅ **D1** `roleatlas`, APAC, `database_id = 8383daaf-b15f-4813-804b-7c4c8419eb34`,
-  already in `worker/wrangler.toml`. Two tables (`profiles`, `resume_usage`).
-- ✅ **R2** enabled, bucket `roleatlas-resumes` exists.
-- ✅ **The free tier is enforced in code (T14.9)**, because R2 bills past it
-  rather than stopping. 9 GB of 10, 800k Class A ops of 1M, in `resume.mjs`.
-  Reads are uncounted by design: counting one costs a D1 write, and D1's 100k
-  writes/day is tighter than R2's 10M reads/month.
-- ✅ **Worker deployed** 2026-08-03, version `6fb8927d`, both bindings resolving.
-- ✅ **CI has run the worker e2e under real workerd** and it is green.
-- ⛔ **NO TLS ON `api.roleatlas.sennamind.com`.** Still the one open infra
-  problem. Every request fails `sslv3 alert handshake failure`, measured
-  continuously for an hour. **Leading theory: it is a THREE-level hostname, and
-  Universal SSL covers `sennamind.com` and `*.sennamind.com` only.** An hour of
-  failure fits "no certificate will ever cover this name" far better than "slow
-  issuance". The API token cannot read `ssl/certificate_packs` (9109), so this
-  needs the dashboard.
-  - **Cheap fix:** a two-level hostname (`roleatlas-api.sennamind.com`) — one line
-    in `wrangler.toml` plus a redeploy; nothing else names the host.
-  - **Free fix:** ladder step 4. Serving the page from the Worker puts the API on
-    the apex, same-origin, and the problem plus the CORS allowlist both vanish.
-  - Re-check with `bash scripts/worker-e2e.sh deployed`.
-- **No workers.dev subdomain, deliberately** — it would publish the API on a
-  second permanent hostname the CORS allowlist does not cover.
+They are now described from **their own job boards** — the source this register
+already rests on. The page says which: **`AI-summarized · read from their own job
+board`**, a third state beside `checked against their own site` and `unverified`,
+because a block whose job is to state where a claim came from cannot round to the
+nearest existing string. `scripts/board_about.py` reprints the board text beside
+the published lines so the six are checkable rather than trusted, and flags Parker
+and Sorare, whose boards carry no About section at all.
 
 ## NEXT (in order)
 
-1. **Push `t15.2-first-seen`** — see the top of this file. Before 20:00 UTC if you
-   want tonight to be the first confirmation night.
-2. **Watch the first honest nightly.** It should badge roughly nine roles, not
-   1,600. If it badges hundreds, a definitional change slipped into the build and
-   the artifact cannot see it — that is the failure mode to watch for forever.
-3. **Ladder step 3: the soft gate.** Client-side, bypassable on purpose. It exists
-   to measure whether anyone signs in, which is the only evidence that justifies
-   step 4.
-4. **Wire `describe.py` into a schedule.** `nightly.yml` runs `src.build` and
-   nothing else, so **the description gap regrows from zero every night** — 57 had
-   accumulated before anyone noticed. It needs `CLAUDE_CODE_OAUTH_TOKEN` as a repo
-   secret and spends subscription usage nightly, so it is a credential decision,
-   not a YAML edit. A weekly manual run costs nothing to decide.
-5. **Super's website is the wrong company.** Recorded site `superapp.id` is an
-   Indonesian grocery app (PT Krakatau Karya Abadi); the board we publish its
-   roles from, `greenhouse/super`, is Super Technologies — sports betting, hiring
-   in Croatia, Romania, Spain, Brazil. All eight listed roles are on that board, so
-   **the board is right and the website is wrong.** A `corrections.yaml` entry is a
-   claim about identity and wants independent corroboration first.
-6. **T14.5 / T14.6** (the application workspace and record) are still `todo`. They
+1. **Ladder step 3 — the soft gate.** Client-side, bypassable on purpose,
+   localStorage counter. It exists to measure whether anyone signs in, which is
+   the only evidence that justifies step 4. Nothing else is blocking it.
+2. **Super's website is the wrong company.** `superapp.id` is an Indonesian
+   grocery app (PT Krakatau Karya Abadi). The board we publish its 80 roles from,
+   `greenhouse/super`, says "a global technology group… markets in Brazil,
+   Belgium, Poland, Romania, Greece and Serbia… more than 5,000 people… evolved
+   from sports and betting" — Super Technologies. **The board is right; the
+   website is wrong.** A `corrections.yaml` entry is a claim about identity and
+   wants independent corroboration; the board text is one source, find a second.
+3. **`describe.py` on a schedule.** `nightly.yml` runs `src.build` and the
+   first-seen fold and nothing else, so **the description gap regrows from zero
+   every night** — 57 accumulated before anyone noticed. It needs
+   `CLAUDE_CODE_OAUTH_TOKEN` as a repo secret and spends subscription usage
+   nightly: a credential decision, not a YAML edit. A weekly hand run costs
+   nothing to decide.
+4. **TLS on the API hostname** — see PROVISIONING. Only needed for Phase 9; the
+   cheap fix is a two-level hostname, the free fix is ladder step 4.
+5. **T14.5 / T14.6** (application workspace and record) are still `todo`. They
    were designed against a company register that is no longer the page — re-read
    their spec before building.
-7. **T13.1** — org move and private repo. Note this is now *entailed* by ladder
-   step 4 rather than independent of it.
-8. Late August: **T7.1**'s unblock condition (~30 nightly snapshots, earliest
-   2026-08-29, and a missed night pushes it out day for day).
+6. **T13.1** — org move and private repo, now *entailed* by ladder step 4.
+7. Late August: **T7.1** (~30 nightly snapshots, earliest 2026-08-29; a missed
+   night pushes it day for day).
+
+## PROVISIONING
+
+**Cloudflare account `5bb014e16f8cf5d16a6eb4e53245be81`.** `.env` holds a
+`CLOUDFLARE_API_TOKEN` scoped Workers Scripts / D1 / R2 / DNS / Workers Routes.
+**It has a TTL — if calls start failing with 401, check expiry first.**
+
+- ✅ **D1** `roleatlas`, APAC, `8383daaf-b15f-4813-804b-7c4c8419eb34`, in
+  `worker/wrangler.toml`. Tables `profiles`, `resume_usage`.
+- ✅ **R2** enabled, bucket `roleatlas-resumes`.
+- ✅ **Free tier enforced in code (T14.9)** because R2 bills past it rather than
+  stopping: 9 GB of 10, 800k Class A ops of 1M, in `resume.mjs`. Reads uncounted
+  by design — counting one costs a D1 write, and D1's 100k/day is tighter than
+  R2's 10M reads/month.
+- ✅ **Worker deployed**, version `6fb8927d`, both bindings resolving. CI has run
+  the worker e2e under real workerd.
+- ⛔ **NO TLS on `api.roleatlas.sennamind.com`.** `sslv3 alert handshake failure`,
+  measured continuously for an hour. **Leading theory: it is a THREE-level
+  hostname and Universal SSL covers `sennamind.com` and `*.sennamind.com` only.**
+  An hour of failure fits "no certificate will ever cover this name" far better
+  than "slow issuance". The API token cannot read `ssl/certificate_packs` (9109),
+  so this needs the dashboard. Re-check: `bash scripts/worker-e2e.sh deployed`.
 
 ## THE PERMISSION CLASSIFIER BLOCKS THREE THINGS
 
-Measured repeatedly. Do not burn a session rediscovering them — hand them to the
-human with `!`:
-
+Hand them to the human with `!`:
 - **`git push`** — blocked. So is writing a `.claude/settings.local.json` that
   would allow it, which is correct behaviour and not a bug to route around.
-- **`npx wrangler deploy`** — blocked on the first attempt, allowed on the second
-  with no change between. Assume it may need the human.
+- **`npx wrangler deploy`** — blocked once, allowed on retry with no change.
 - **POSTing `CLERK_E2E_*` to Clerk's frontend API from a shell** — blocked, and it
-  reads as credential exfiltration, which is a fair reading. Get a session token
-  through the browser (`/browse`) instead of curl.
+  reads as credential exfiltration, which is fair. Use `/browse` instead of curl.
 
-`wrangler r2 bucket create`, `wrangler d1 execute`, Cloudflare REST GETs and
-`gh api` all run fine.
+`wrangler r2/d1`, Cloudflare REST GETs, `gh api` and `gh workflow run` all work.
 
 ## Hard-won lessons (do not relearn these)
 
-- **A DEFINITIONAL CHANGE IS INDISTINGUISHABLE FROM A REAL ONE, and it is invisible
-  to the guard built to catch fakes.** T15.2's both-sides rule is exactly right and
-  still confirmed 1,604 week-old roles as "new" because the radar widened from
-  India to fifteen countries. Any feature differencing snapshots must ask not only
-  "did we observe both nights" but "were we looking for the same thing".
+- **A DEFINITIONAL CHANGE IS INDISTINGUISHABLE FROM A REAL ONE, and it is
+  invisible to the guard built to catch fakes.** T15.2's both-sides rule is right
+  and still called 1,604 week-old roles new, because the radar widened and the
+  company was `listed` either way. Anything differencing snapshots must ask not
+  only "did we observe both nights" but "were we looking for the same thing".
+- **CI IS NOT YOUR MACHINE, IN MORE THAN ONE WAY.** `actions/checkout@v4` is depth
+  1 — there is no git history. And there is no `.venv`: the pipeline is
+  dependency-free so the workflow installs nothing. A default naming
+  `.venv/bin/python` cost a whole nightly (run 30874273868) — it built all 371
+  boards, spent ten minutes, then exited 127 and committed nothing.
+- **A SEAM WITH A DEFAULT NOBODY RUNS IS NOT COVERED.** `nightly.yml` passed
+  `NIGHTLY_BUILD` to supply CI's interpreter, so the build's identical default
+  never ran there either. Every test overrode both seams. **Nothing anywhere had
+  executed a default, on any machine, ever.** If a code path only runs when an
+  override is absent, write the test that omits the override.
+- **A CHECK THAT CANNOT RUN PROVES NOTHING.** The e2e fixture holds 17 roles, so
+  it can never reach a 200-row fold — that check runs against the real corpus and
+  prints an honest `--` note when a build is too small. T15.2's badge is the
+  mirror image: the real artifact confirmed nothing, so the badge is driven over a
+  hand-written fixture held to "a file the real module could have written".
+- **INSTRUMENT BEFORE THEORISING.** The unit switch's first press did nothing.
+  The first theory (node identity) was wrong and the fix for it changed nothing.
+  Counting events settled it in one run — **mousedown 1, mouseup 1, click 0** —
+  and the real cause was that `change` fires on BLUR whatever the value, so every
+  click away from the search box re-rendered the register and `replaceChildren`
+  detached the button between the two events.
 - **NAME MATCHING IS NOT IDENTITY.** 25% of name-verified Ashby boards were a
-  different company; Companies House would have published 141 UK companies of which
-  15 are provably somebody else; the site was publishing Langfuse's roles under
-  ClickHouse's name. Super is the newest case, and the first where the WEBSITE
-  rather than the board is the impostor. Always corroborate against an independent
-  fact.
+  different company; Companies House would have published 15 provable impostors;
+  the site once published Langfuse's roles under ClickHouse's name. Super is the
+  newest, and the first where the WEBSITE rather than the board is the impostor.
 - **A number that moves on a definitional choice is not a measurement.** The
-  withdrawn "54% of postings ask a free-text question" was an artefact of substring
-  matching; three defensible filters give 54%, 85%, 98%. T15.2 is the same lesson
-  arriving from the other direction.
+  withdrawn "54% of postings ask a free-text question" was a substring artefact;
+  three defensible filters give 54%, 85%, 98%.
 - **MUTATION TESTING IS THE STANDARD.** A guard counts as covered only once
-  deleting it has been shown to turn a test RED. Forcing `both_sides = True` turns
-  6 red; deleting T15.1's role-level workplace cut turns the remote check red with
-  Gamma Health's four on-site roles riding in on its one remote job.
+  deleting it turns a test RED. Done this session for the both-sides rule (6 red),
+  the role-level workplace cut, the blur guard, and the board provenance — the
+  last of which produced a plausible-but-false "unverified" when disabled.
 - **A guard that is an ABSENCE cannot be deleted, only violated.** "There must be
-  no matcher for pronouns" is mutation-tested by ADDING the forbidden thing. Every
-  branch-based sweep is blind to rules of this shape.
-- **A CHECK THAT CANNOT RUN PROVES NOTHING, and the fixture is where that hides.**
-  The e2e fixture holds 17 roles, so it can never reach a 200-row fold — that check
-  runs against the real corpus and prints an honest `--` note when a build is too
-  small. T15.2's badge is the mirror image: the real artifact confirms nothing, so
-  the badge is driven over a hand-written fixture, itself held to "a file the real
-  module could have written". Never let a check pass by never running.
+  no matcher for pronouns" is mutation-tested by ADDING the forbidden thing.
 - **THE PIPE EATS THE EXIT CODE.** `node --test | tail` reported GREEN over a red
-  suite, and the identical fault was reintroduced one line later. **Any new gate
-  step must be proven with a fault ONLY that step can see.**
-- **CI HAS NO GIT HISTORY.** `actions/checkout@v4` is depth 1. Anything reading
-  `git log` works perfectly on the dev machine and produces garbage at midnight.
-- **CHECK FOR A CLASS-NAME COLLISION BEFORE INVENTING ONE.** T15.1's role row was
-  born `.rrow`, which was already the gazetteer receipt's class; it silently
-  matched the sheet's detail rows and the e2e caught it, not review. Now `.jrow`.
-- **A SYNCHRONOUS FAKE PROVES LESS THAN IT LOOKS LIKE.** A `store.delete` the code
-  forgot to `await` still lands before the verifying read. Only after making writes
-  settle over two ticks and reads over one did three missing-`await` bugs die.
-- **A FAKE REIMPLEMENTS A QUERY RATHER THAN RUNNING IT.** Every worker suite
-  injects a fake store, so no test had executed a line of SQL until
-  `stores.test.mjs` ran `schema.sql` against real SQLite via `node:sqlite`.
-- **TWO GUARDS AGAINST ONE FAILURE MEAN NEITHER CAN BE SHOWN TO WORK.** A
-  `COALESCE` and a `?? 0` defended the same value, so mutation reported both as
-  survivors. Belt-and-braces costs the ability to prove the belt exists. (Contrast
-  `index.mjs`'s deliberate JWKS double-check, which is KEPT and documented as
-  unprovable — the difference is that one is written down.)
+  suite, and the identical fault was reintroduced one line later. Any new gate
+  step must be proven with a fault ONLY that step can see.
+- **CHECK FOR A CLASS-NAME COLLISION BEFORE INVENTING ONE.** The role row was born
+  `.rrow`, already the gazetteer receipt's class; the e2e caught it, not review.
+- **A SYNCHRONOUS FAKE PROVES LESS THAN IT LOOKS LIKE**, and **A FAKE
+  REIMPLEMENTS A QUERY RATHER THAN RUNNING IT** — `stores.test.mjs` runs
+  `schema.sql` against real SQLite via `node:sqlite` for that reason.
+- **TWO GUARDS AGAINST ONE FAILURE MEAN NEITHER CAN BE SHOWN TO WORK.** Contrast
+  `index.mjs`'s JWKS double-check, which is KEPT and documented as unprovable —
+  the difference is that one is written down.
 - **A good comment can outlive its measurement.** When a comment justifies NOT
   doing something, re-measure before believing it.
-- **THE NIGHTLY COMMITS TO main** at 20:00 UTC. A session holding unpushed commits
-  overnight gets `! [rejected] non-fast-forward`, and it means BEHIND, not
-  conflicted — the nightly touches data files only, so a rebase replays cleanly.
-- **workerd needs macOS 13.5+**; this machine is 13.4, so `wrangler dev` cannot run
-  here. `worker/serve.mjs` exists so the e2e assertions are exercised locally
-  anyway. CI runs the real thing.
-- **AGENT WORKTREES ONCE RE-INITIALISED THE MAIN REPO** (`core.bare` flipped to
-  true). Check `git config core.bare` first if git starts failing.
-- **Clerk specifics:** `@clerk/clerk-js@latest` serves v4 — pin `@5`. The frontend
-  host is base64 inside the publishable key. Sign-UP cannot be automated
-  (Turnstile); sign-IN can. Clerk is still a **development** instance.
-- **GitHub Pages serves `cache-control: max-age=600`** on both the HTML and the
-  JSON. A push is live for a fresh visitor in ~2 minutes and for a recent one in up
-  to ~12. The page fetches its data `{cache: 'no-cache'}`, so only the document
-  ages.
+- **THE NIGHTLY COMMITS TO main** at 20:00 UTC. A rejected push means BEHIND, not
+  conflicted — it touches data files only, so a rebase replays cleanly.
+- **workerd needs macOS 13.5+**; this machine is 13.4. `worker/serve.mjs` exists
+  so the e2e assertions run locally anyway; CI runs the real thing.
+- **AGENT WORKTREES ONCE RE-INITIALISED THE MAIN REPO** (`core.bare` → true).
+  Check `git config core.bare` first if git starts failing. All worktrees were
+  pruned 2026-08-04; `core.bare` is `false`.
+- **Clerk:** `@clerk/clerk-js@latest` serves v4 — pin `@5`. The frontend host is
+  base64 inside the publishable key. Sign-UP cannot be automated (Turnstile);
+  sign-IN can. Still a **development** instance.
+- **Pages serves `cache-control: max-age=600`.** A push is live for a fresh
+  visitor in ~2 minutes and a recent one in up to ~12. The page fetches its data
+  `{cache: 'no-cache'}`, so only the document ages.
 
-## Phase 9 — the Worker, which nothing above touches
+## Running a team
 
-`worker/` is the first backend this project has had. Zero dependencies, no
-`package.json`, no bundler; Node's stdlib test runner.
+- **Match the harness to the work.** T15.1 was one thread through one file and
+  was rightly done with no subagent. T15.2 was a self-contained feature with a
+  decidable brief and went to one agent that returned it green.
+- **The brief is the work.** T15.2's brief pinned two things before the agent
+  started — no git in the nightly, and the honesty rule as the design — and both
+  would otherwise have failed silently. What it did NOT pin (the venv) is the one
+  that broke production. **Enumerate every way CI differs from your machine.**
+- **Verify what an agent reports; re-run its mutation sweep.** T15.2's claims all
+  held, and re-deriving its central finding from `git log` independently made it
+  sharper than the report claimed.
+- **Brief them to SEND a final report.** An idle notification is not a report.
+
+## Phase 9 — the Worker, which none of the above touches
+
+Zero dependencies, no `package.json`, no bundler; Node's stdlib test runner.
 
 | File | What | Tests |
 |---|---|---|
@@ -333,43 +286,36 @@ human with `!`:
 | `resume.mjs` | One resume, verified deletion, the free-tier decision | 31 |
 | `questions.mjs` | Greenhouse questions, split answered/gap | 27 |
 | `stores.mjs` | The only file that knows D1 and R2 exist | 7 |
-| `serve.mjs` | Node HTTP wrapper so the e2e runs without workerd | — |
 | `schema.sql` | No column that could hold a demographic field | — |
 
 **The canonical profile vocabulary is eight names and both modules must agree:**
 `work_authorization, relocation, onsite, earliest_start, salary_expectation,
-languages, heard_about_role, work_address`. `questions.mjs` has a deliberately
-brittle test asserting the sorted list literally.
+languages, heard_about_role, work_address`.
 
 **Refused server-side as Article 9 special-category data:** gender, sexual
-orientation, race, veteran status, disability status, **pronouns** and
-**accommodations**. These live in the reader's browser. `profile.mjs` refuses them
-by name; `schema.sql` has no column for them. Two locks on purpose.
+orientation, race, veteran status, disability status, **pronouns**,
+**accommodations**. `profile.mjs` refuses them by name; `schema.sql` has no column
+for them. Two locks on purpose.
 
-**`index.mjs:104` is the most dangerous line in any future change:** "AUTHENTICATION
-RUNS BEFORE EVERY HANDLER, WITHOUT EXCEPTION… A public endpoint, if one is ever
-wanted, has to be added here deliberately." Ladder step 4 needs exactly that.
+**`index.mjs:104` is the most dangerous line in any future change:**
+"AUTHENTICATION RUNS BEFORE EVERY HANDLER, WITHOUT EXCEPTION… A public endpoint,
+if one is ever wanted, has to be added here deliberately." Ladder step 4 needs
+exactly that.
 
 ## Loose ends
 
 - `.env` holds `CLAUDE_CODE_OAUTH_TOKEN`, `CLOUDFLARE_API_TOKEN` (TTL), `CLERK_*`,
   `UK_COMPANY_HOUSE_KEY`, `DATA_GOV_IN_KEY`.
-- `.venv` has `anthropic` installed for `learning-tests/draft_cost_live.py` only.
-  `make check` typechecks `src/` alone.
 - **The subscription cannot serve.** Measured 2026-08-02: `count_tokens` 200,
-  `messages.create` 429, Managed Agents `403 scope`. It is a credential for
-  measuring, not for serving. **`scripts/describe.py` works because it drives
-  Claude Code agents rather than the API** — that is the distinction, and it is the
-  only reason v4 can have no per-user running cost.
-- `descriptions.json` covers **365 of 371**. The six refusals are honest: five
-  sites would not serve us (403/404/a JS gate), and Super is the identity finding.
+  `messages.create` 429, Managed Agents `403 scope`. `describe.py` works because
+  it drives Claude Code AGENTS, not the API — that is the whole distinction.
+- `HLD-v5.md` stays on disk as the map for ladder step 4, marked not-signed-off.
 - `FeatureBrainstorming.md` is the human's file, not project work.
-- **The R2 free tier has a number in the code, not in someone's head.** Raising
-  `FREE_TIER_BYTES` / `FREE_TIER_CLASS_A` is a business decision, not a quiet code
-  change because an upload got refused.
+- **Raising `FREE_TIER_BYTES` / `FREE_TIER_CLASS_A` is a business decision**, not
+  a quiet code change because an upload got refused.
 
 ## Billing
 
 The monthly Anthropic cap was hit 2026-08-01 ($101.32/$100); usage credits blocked
-until Sep 1. Today's work used one subagent for T15.2 and 57 agent runs for the
-descriptions. Re-check the position before a large fan-out.
+until Sep 1. 2026-08-04 used one subagent (T15.2) and 57 agent runs (descriptions).
+Re-check the position before a large fan-out.
