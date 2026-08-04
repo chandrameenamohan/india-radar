@@ -62,3 +62,10 @@ Next Caller: board Pindrop
 # in it. Found by the description pass (T8.7): the writer read the website,
 # described a coaching programme, and the board was hiring a Business Reporter.
 Insider: board Business Insider
+
+# TechCrunch states no address for Granola — the only link in the round article
+# points at granola.ai/blog/series-c, whose anchor text is not the company name,
+# so `websites.from_page` correctly declines to guess. With no website the slug
+# guess falls back to granola.com, which is not theirs, and the row resolves to
+# `no-website` while the board sits at ashby/granola with London roles on it.
+Granola: website https://www.granola.ai

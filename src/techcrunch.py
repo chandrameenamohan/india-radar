@@ -33,14 +33,24 @@ from src.record import Record
 
 API = "https://techcrunch.com/wp-json/wp/v2/posts"
 
-#: TechCrunch's "venture" category. Numeric because slugs are not addressable
-#: here — the API filters posts by term id.
-CATEGORY = 577030455
+#: TechCrunch's "venture" AND "fundraising" categories, comma-joined — the API
+#: reads that as OR. Numeric because slugs are not addressable here.
+#:
+#: `venture` alone was the source for a year and it is not where TechCrunch files
+#: a startup's round: "Granola raises $125M, hits $1.5B valuation" (2026-03-25)
+#: is tagged AI + Apps + Fundraising and nothing else, so the corpus never saw a
+#: company with fifteen open roles and a UK office. Measured 2026-08-04 over the
+#: same window: venture alone yields 71 funding records, venture+fundraising 217,
+#: and 108 of the added names are companies venture never mentioned — Cursor,
+#: Anthropic, Deepgram, Cerebras, Granola.
+CATEGORY = "577030455,577234943"
 
-#: 100 posts a call, and measured 1,000 posts ≈ 17 months of venture coverage.
-#: The same horizon EDGAR's QUARTERS buys: recent enough to be news, long enough
-#: that last spring's round is still in the corpus.
-PAGES = 10
+#: 100 posts a call. Measured 2026-08-04: 1,400 posts of both categories ≈ 17
+#: months, the horizon 1,000 venture-only posts used to buy and the same one
+#: EDGAR's QUARTERS buys — recent enough to be news, long enough that last
+#: spring's round is still in the corpus. Adding the second category doubled the
+#: posts per month, so this went 10 -> 14 to hold the window still.
+PAGES = 14
 
 # The verbs a TechCrunch funding headline actually uses, sentence-case rather
 # than title-case. `raising` is deliberately absent: "reportedly raising funding
@@ -70,7 +80,7 @@ _PROPER = re.compile(r"^[A-Z0-9][\w.&'’+-]*$")
 
 
 def download() -> list[str]:
-    """The newest PAGES pages of the venture category.
+    """The newest PAGES pages of the funding categories.
 
     Failures are retried once and then skipped rather than ending the walk:
     measured, the API serves an isolated 403 roughly one page in ten and the

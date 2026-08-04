@@ -662,13 +662,24 @@
     },
     {
       "name": "Agentio",
-      "amount": 39999933,
+      "amount": 40000000,
       "currency": "USD",
-      "date": "2025-10-29",
+      "date": "2025-11-18",
       "round_letter": null,
-      "source_url": "https://www.sec.gov/Archives/edgar/data/2045903/000204590325000002/0002045903-25-000002-index.htm",
+      "source_url": "https://techcrunch.com/2025/11/18/agentio-secures-40m-from-forerunner-as-it-scales-its-creator-marketplace-beyond-youtube/",
       "stage": null,
-      "website": null,
+      "website": "https://www.agentio.com",
+      "qualified_by": "amount"
+    },
+    {
+      "name": "AgentMail",
+      "amount": 6000000,
+      "currency": "USD",
+      "date": "2026-03-10",
+      "round_letter": null,
+      "source_url": "https://techcrunch.com/2026/03/10/agentmail-raises-6m-to-build-an-email-service-for-ai-agents/",
+      "stage": null,
+      "website": "https://agentmail.to",
       "qualified_by": "amount"
     },
     {
@@ -1079,6 +1090,17 @@
       "qualified_by": "amount"
     },
     {
+      "name": "Aletiq",
+      "amount": 6500000,
+      "currency": "USD",
+      "date": "2025-03-19",
+      "round_letter": null,
+      "source_url": "https://techcrunch.com/2025/03/19/aletiq-secures-65m-for-its-saas-tool-focused-on-product-lifecycle-management/",
+      "stage": null,
+      "website": "https://www.aletiq.com",
+      "qualified_by": "amount"
+    },
+    {
       "name": "Alex",
       "amount": 17000000,
       "currency": "USD",
@@ -1168,14 +1190,14 @@
     },
     {
       "name": "Alpaca",
-      "amount": null,
-      "currency": null,
-      "date": null,
-      "round_letter": null,
-      "source_url": "https://www.ycombinator.com/companies/alpaca",
-      "stage": "growth",
+      "amount": 52000000,
+      "currency": "USD",
+      "date": "2025-04-23",
+      "round_letter": "C",
+      "source_url": "https://techcrunch.com/2025/04/23/alpaca-a-developer-of-api-brokerage-platform-raises-52m-in-series-c/",
+      "stage": null,
       "website": "https://alpaca.markets",
-      "qualified_by": "stage"
+      "qualified_by": "letter"
     },
     {
       "name": "AlphaSense",
@@ -1187,6 +1209,17 @@
       "stage": "growth",
       "website": null,
       "qualified_by": "stage"
+    },
+    {
+      "name": "Also",
+      "amount": 200000000,
+      "currency": "USD",
+      "date": "2025-07-08",
+      "round_letter": null,
+      "source_url": "https://techcrunch.com/2025/07/08/rivian-spinoff-also-raises-another-200m-to-build-e-bikes-and-more/",
+      "stage": null,
+      "website": null,
+      "qualified_by": "amount"
     },
     {
       "name": "Altana AI",
@@ -1453,6 +1486,17 @@
       "qualified_by": "amount"
     },
     {
+      "name": "Anduril",
+      "amount": 5000000000,
+      "currency": "USD",
+      "date": "2026-05-13",
+      "round_letter": null,
+      "source_url": "https://techcrunch.com/2026/05/13/anduril-raises-5b-doubles-valuation-to-61b/",
+      "stage": null,
+      "website": null,
+      "qualified_by": "amount"
+    },
+    {
       "name": "Angle Health",
       "amount": null,
       "currency": null,
@@ -1497,15 +1541,26 @@
       "qualified_by": "stage"
     },
     {
-      "name": "Anthropic",
-      "amount": null,
-      "currency": null,
-      "date": null,
+      "name": "Antares",
+      "amount": 96000000,
+      "currency": "USD",
+      "date": "2025-12-02",
       "round_letter": null,
-      "source_url": "https://www.forbes.com/companies/anthropic/",
-      "stage": "growth",
+      "source_url": "https://techcrunch.com/2025/12/02/microreactor-startup-antares-raises-96m-for-land-sea-and-space-based-nuclear-power/",
+      "stage": null,
+      "website": null,
+      "qualified_by": "amount"
+    },
+    {
+      "name": "Anthropic",
+      "amount": 13000000000,
+      "currency": "USD",
+      "date": "2025-09-02",
+      "round_letter": "F",
+      "source_url": "https://techcrunch.com/2025/09/02/anthropic-raises-13b-series-f-at-183b-valuation/",
+      "stage": null,
       "website": "http://anthropic.com",
-      "qualified_by": "stage"
+      "qualified_by": "letter"
     },
     {
       "name": "Antithesis",
@@ -1517,17 +1572,6 @@
       "stage": "growth",
       "website": null,
       "qualified_by": "stage"
-    },
-    {
-      "name": "Antora Energy",
-      "amount": 550000000,
-      "currency": "USD",
-      "date": "2026-07-31",
-      "round_letter": "C",
-      "source_url": "https://www.finsmes.com/2026/07/antora-energy-raises-550m-in-series-c-funding.html",
-      "stage": null,
-      "website": "https://www.antora.com",
-      "qualified_by": "letter"
     },
     {
       "name": "Anyscale",
@@ -1652,14 +1696,14 @@
     },
     {
       "name": "Applied Intuition",
-      "amount": null,
-      "currency": null,
-      "date": null,
+      "amount": 600000000,
+      "currency": "USD",
+      "date": "2025-06-17",
       "round_letter": null,
-      "source_url": "https://www.forbes.com/companies/applied-intuition/",
-      "stage": "growth",
+      "source_url": "https://techcrunch.com/2025/06/17/applied-intuition-raises-600-million-as-it-pushes-further-into-defense/",
+      "stage": null,
       "website": "https://appliedintuition.com",
-      "qualified_by": "stage"
+      "qualified_by": "amount"
     },
     {
       "name": "AppsFlyer",
@@ -2982,6 +3026,17 @@
       "qualified_by": "amount"
     },
     {
+      "name": "Base Power",
+      "amount": 1000000000,
+      "currency": "USD",
+      "date": "2025-10-08",
+      "round_letter": null,
+      "source_url": "https://techcrunch.com/2025/10/08/base-power-raises-1b-to-deploy-home-batteries-everywhere/",
+      "stage": null,
+      "website": null,
+      "qualified_by": "amount"
+    },
+    {
       "name": "Baseten",
       "amount": null,
       "currency": null,
@@ -3345,6 +3400,17 @@
       "qualified_by": "amount"
     },
     {
+      "name": "Bill Gates-backed Type One Energy",
+      "amount": 87000000,
+      "currency": "USD",
+      "date": "2026-01-14",
+      "round_letter": "B",
+      "source_url": "https://techcrunch.com/2026/01/14/bill-gates-backed-type-one-energy-raises-87m-ahead-of-250m-series-b/",
+      "stage": null,
+      "website": null,
+      "qualified_by": "letter"
+    },
+    {
       "name": "BillionToOne",
       "amount": null,
       "currency": null,
@@ -3544,14 +3610,14 @@
     },
     {
       "name": "Black Forest Labs",
-      "amount": null,
-      "currency": null,
-      "date": null,
+      "amount": 300000000,
+      "currency": "USD",
+      "date": "2025-12-01",
       "round_letter": null,
-      "source_url": "https://www.forbes.com/companies/black-forest-labs/",
-      "stage": "growth",
-      "website": "https://blackforestlabs.ai",
-      "qualified_by": "stage"
+      "source_url": "https://techcrunch.com/2025/12/01/black-forest-labs-raises-300m-at-3-25b-valuation/",
+      "stage": null,
+      "website": "https://bfl.ai",
+      "qualified_by": "amount"
     },
     {
       "name": "Black Lake Technologies",
@@ -3650,6 +3716,17 @@
       "source_url": "https://www.sec.gov/Archives/edgar/data/1735677/000181455426000037/0001814554-26-000037-index.htm",
       "stage": null,
       "website": null,
+      "qualified_by": "amount"
+    },
+    {
+      "name": "Blinq",
+      "amount": 25000000,
+      "currency": "USD",
+      "date": "2025-05-06",
+      "round_letter": null,
+      "source_url": "https://techcrunch.com/2025/05/06/blinq-grabs-25m-series-a-for-its-digital-business-card-platform/",
+      "stage": null,
+      "website": "https://blinq.me",
       "qualified_by": "amount"
     },
     {
@@ -3785,6 +3862,17 @@
       "qualified_by": "amount"
     },
     {
+      "name": "Blue Energy",
+      "amount": 380000000,
+      "currency": "USD",
+      "date": "2026-04-21",
+      "round_letter": null,
+      "source_url": "https://techcrunch.com/2026/04/21/blue-energy-raises-380m-to-build-grid-scale-nuclear-reactors-in-shipyards/",
+      "stage": null,
+      "website": "https://blueenergy.co",
+      "qualified_by": "amount"
+    },
+    {
       "name": "BlueFlag Security",
       "amount": 7499999,
       "currency": "USD",
@@ -3871,6 +3959,17 @@
       "stage": "growth",
       "website": "http://bodyport.com",
       "qualified_by": "stage"
+    },
+    {
+      "name": "Bolna",
+      "amount": 6300000,
+      "currency": "USD",
+      "date": "2026-01-20",
+      "round_letter": null,
+      "source_url": "https://techcrunch.com/2026/01/20/bolna-nabs-6-3-million-from-general-catalyst-for-its-india-focused-voice-orchestration-platform/",
+      "stage": null,
+      "website": "https://www.bolna.ai",
+      "qualified_by": "amount"
     },
     {
       "name": "Bolt",
@@ -4093,6 +4192,17 @@
       "qualified_by": "amount"
     },
     {
+      "name": "Breathe",
+      "amount": 21000000,
+      "currency": "USD",
+      "date": "2025-05-07",
+      "round_letter": "B",
+      "source_url": "https://techcrunch.com/2025/05/07/breathe-lands-21m-series-b-to-predict-battery-performance/",
+      "stage": null,
+      "website": null,
+      "qualified_by": "letter"
+    },
+    {
       "name": "Breathe Well-being",
       "amount": null,
       "currency": null,
@@ -4104,6 +4214,17 @@
       "qualified_by": "stage"
     },
     {
+      "name": "Bret Taylor\u2019s Sierra",
+      "amount": 350000000,
+      "currency": "USD",
+      "date": "2025-09-04",
+      "round_letter": null,
+      "source_url": "https://techcrunch.com/2025/09/04/bret-taylors-sierra-raises-350m-at-a-10b-valuation/",
+      "stage": null,
+      "website": null,
+      "qualified_by": "amount"
+    },
+    {
       "name": "Bretton AI",
       "amount": null,
       "currency": null,
@@ -4113,6 +4234,17 @@
       "stage": "growth",
       "website": "https://www.bretton.com",
       "qualified_by": "stage"
+    },
+    {
+      "name": "Brevo",
+      "amount": 583000000,
+      "currency": "USD",
+      "date": "2025-12-03",
+      "round_letter": null,
+      "source_url": "https://techcrunch.com/2025/12/03/new-unicorn-brevo-raises-583m-to-challenge-crm-giants/",
+      "stage": null,
+      "website": "https://www.brevo.com",
+      "qualified_by": "amount"
     },
     {
       "name": "Brex",
@@ -4203,6 +4335,17 @@
       "qualified_by": "stage"
     },
     {
+      "name": "Brisk",
+      "amount": 15000000,
+      "currency": "USD",
+      "date": "2025-03-26",
+      "round_letter": null,
+      "source_url": "https://techcrunch.com/2025/03/26/ais-coming-to-the-classroom-brisk-raises-15m-after-a-quick-start-in-school/",
+      "stage": null,
+      "website": "https://www.briskteaching.com",
+      "qualified_by": "amount"
+    },
+    {
       "name": "Brite",
       "amount": null,
       "currency": null,
@@ -4255,6 +4398,17 @@
       "source_url": "https://www.sec.gov/Archives/edgar/data/1847827/000184782725000002/0001847827-25-000002-index.htm",
       "stage": null,
       "website": null,
+      "qualified_by": "amount"
+    },
+    {
+      "name": "Buildots",
+      "amount": 45000000,
+      "currency": "USD",
+      "date": "2025-05-29",
+      "round_letter": null,
+      "source_url": "https://techcrunch.com/2025/05/29/buildots-raises-45m-to-help-companies-track-construction-progress/",
+      "stage": null,
+      "website": "https://buildots.com",
       "qualified_by": "amount"
     },
     {
@@ -4509,6 +4663,17 @@
       "stage": null,
       "website": null,
       "qualified_by": "amount"
+    },
+    {
+      "name": "Calo",
+      "amount": 39000000,
+      "currency": "USD",
+      "date": "2025-07-29",
+      "round_letter": "B",
+      "source_url": "https://techcrunch.com/2025/07/29/food-delivery-service-calo-scores-39-million-in-series-b-extension-as-it-sets-eyes-on-the-uk/",
+      "stage": null,
+      "website": null,
+      "qualified_by": "letter"
     },
     {
       "name": "Camber",
@@ -4951,6 +5116,17 @@
       "qualified_by": "amount"
     },
     {
+      "name": "Cast AI",
+      "amount": 108000000,
+      "currency": "USD",
+      "date": "2025-04-30",
+      "round_letter": null,
+      "source_url": "https://techcrunch.com/2025/04/30/cast-ai-raises-108m-to-get-the-max-out-of-ai-kubernetes-and-other-workloads/",
+      "stage": null,
+      "website": "https://cast.ai",
+      "qualified_by": "amount"
+    },
+    {
       "name": "CAST AI Group",
       "amount": 71509964,
       "currency": "USD",
@@ -5171,6 +5347,17 @@
       "qualified_by": "stage"
     },
     {
+      "name": "Cerebras Systems",
+      "amount": 1100000000,
+      "currency": "USD",
+      "date": "2025-09-30",
+      "round_letter": null,
+      "source_url": "https://techcrunch.com/2025/09/30/a-year-after-filing-to-ipo-still-private-cerebras-systems-raises-1-1b/",
+      "stage": null,
+      "website": "https://www.cerebras.ai",
+      "qualified_by": "amount"
+    },
+    {
       "name": "Cerebro Capital",
       "amount": 5000000,
       "currency": "USD",
@@ -5279,6 +5466,17 @@
       "stage": "growth",
       "website": "http://chaldal.com",
       "qualified_by": "stage"
+    },
+    {
+      "name": "Chamath Palihapitiya",
+      "amount": 135000000,
+      "currency": "USD",
+      "date": "2026-06-29",
+      "round_letter": "A",
+      "source_url": "https://techcrunch.com/2026/06/29/chamath-palihapitiya-raises-135m-series-a-for-his-ai-coding-startup-takes-ceo-role/",
+      "stage": null,
+      "website": null,
+      "qualified_by": "letter"
     },
     {
       "name": "Channing Street Copper",
@@ -5600,6 +5798,17 @@
       "qualified_by": "stage"
     },
     {
+      "name": "Citymall",
+      "amount": 47000000,
+      "currency": "USD",
+      "date": "2025-09-01",
+      "round_letter": null,
+      "source_url": "https://techcrunch.com/2025/09/01/indian-grocery-startup-citymall-raises-47m-to-challenge-ultra-fast-delivery-giants/",
+      "stage": null,
+      "website": "https://citymall.live",
+      "qualified_by": "amount"
+    },
+    {
       "name": "Clair",
       "amount": null,
       "currency": null,
@@ -5653,6 +5862,17 @@
       "stage": null,
       "website": null,
       "qualified_by": "amount"
+    },
+    {
+      "name": "Claris Biotherapeutics",
+      "amount": 118000000,
+      "currency": "USD",
+      "date": "2026-08-03",
+      "round_letter": "B",
+      "source_url": "https://www.finsmes.com/2026/08/claris-biotherapeutics-raises-118m-in-series-b-funding.html",
+      "stage": null,
+      "website": null,
+      "qualified_by": "letter"
     },
     {
       "name": "Claroty",
@@ -5805,7 +6025,7 @@
       "round_letter": null,
       "source_url": "https://www.forbes.com/companies/clickhouse/",
       "stage": "growth",
-      "website": null,
+      "website": "https://clickhouse.com",
       "qualified_by": "stage"
     },
     {
@@ -5887,13 +6107,13 @@
     },
     {
       "name": "Cloaked",
-      "amount": 116741972,
+      "amount": 375000000,
       "currency": "USD",
-      "date": "2026-02-09",
+      "date": "2026-03-19",
       "round_letter": null,
-      "source_url": "https://www.sec.gov/Archives/edgar/data/1921354/000192135426000004/0001921354-26-000004-index.htm",
+      "source_url": "https://techcrunch.com/2026/03/19/consumer-focused-privacy-company-cloaked-raises-375m-as-it-expands-to-enterprise/",
       "stage": null,
-      "website": null,
+      "website": "https://www.cloaked.com",
       "qualified_by": "amount"
     },
     {
@@ -7174,14 +7394,14 @@
     },
     {
       "name": "Cursor",
-      "amount": null,
-      "currency": null,
-      "date": null,
+      "amount": 2300000000,
+      "currency": "USD",
+      "date": "2025-11-13",
       "round_letter": null,
-      "source_url": "https://www.forbes.com/companies/cursor/",
-      "stage": "growth",
+      "source_url": "https://techcrunch.com/2025/11/13/coding-assistant-cursor-raises-2-3b-5-months-after-its-previous-round/",
+      "stage": null,
       "website": null,
-      "qualified_by": "stage"
+      "qualified_by": "amount"
     },
     {
       "name": "Curtsy",
@@ -7448,6 +7668,17 @@
       "qualified_by": "amount"
     },
     {
+      "name": "Dash Bio",
+      "amount": 30000000,
+      "currency": "USD",
+      "date": "2026-08-03",
+      "round_letter": "A",
+      "source_url": "https://www.finsmes.com/2026/08/dash-bio-raises-30m-in-series-a-funding.html",
+      "stage": null,
+      "website": "https://www.dash.bio",
+      "qualified_by": "letter"
+    },
+    {
       "name": "DASTA",
       "amount": 26275695,
       "currency": "USD",
@@ -7457,17 +7688,6 @@
       "stage": null,
       "website": null,
       "qualified_by": "amount"
-    },
-    {
-      "name": "DataBahn",
-      "amount": 40000000,
-      "currency": "USD",
-      "date": "2026-07-30",
-      "round_letter": "B",
-      "source_url": "https://www.finsmes.com/2026/07/databahn-raises-40m-in-series-b-funding.html",
-      "stage": null,
-      "website": "https://www.databahn.ai",
-      "qualified_by": "letter"
     },
     {
       "name": "DataBahn, Inc. \\DE",
@@ -7724,14 +7944,14 @@
     },
     {
       "name": "Deepgram",
-      "amount": null,
-      "currency": null,
-      "date": null,
+      "amount": 130000000,
+      "currency": "USD",
+      "date": "2026-01-13",
       "round_letter": null,
-      "source_url": "https://www.ycombinator.com/companies/deepgram",
-      "stage": "growth",
+      "source_url": "https://techcrunch.com/2026/01/13/deepgram-raises-130m-at-1-3b-valuation-and-buys-a-yc-ai-startup/",
+      "stage": null,
       "website": "https://www.deepgram.com",
-      "qualified_by": "stage"
+      "qualified_by": "amount"
     },
     {
       "name": "DeepL",
@@ -7899,6 +8119,17 @@
       "qualified_by": "stage"
     },
     {
+      "name": "Dessn",
+      "amount": 6000000,
+      "currency": "USD",
+      "date": "2026-05-12",
+      "round_letter": null,
+      "source_url": "https://techcrunch.com/2026/05/12/dessn-raises-6m-for-its-production-focused-design-tool/",
+      "stage": null,
+      "website": "https://www.dessn.ai",
+      "qualified_by": "amount"
+    },
+    {
       "name": "DevCycle",
       "amount": null,
       "currency": null,
@@ -7977,13 +8208,13 @@
     },
     {
       "name": "DG Matrix",
-      "amount": 29999988,
+      "amount": 60000000,
       "currency": "USD",
       "date": "2026-02-18",
       "round_letter": null,
-      "source_url": "https://www.sec.gov/Archives/edgar/data/2059108/000205910826000001/0002059108-26-000001-index.htm",
+      "source_url": "https://techcrunch.com/2026/02/18/dg-matrix-raises-60m-to-make-data-center-power-smarter/",
       "stage": null,
-      "website": null,
+      "website": "https://www.dgmatrix.com",
       "qualified_by": "amount"
     },
     {
@@ -8098,14 +8329,14 @@
     },
     {
       "name": "Dili",
-      "amount": 15000000,
+      "amount": 21700000,
       "currency": "USD",
       "date": "2026-07-30",
-      "round_letter": "A",
-      "source_url": "https://www.finsmes.com/2026/07/dili-raises-15m-in-series-a-funding.html",
+      "round_letter": null,
+      "source_url": "https://techcrunch.com/2026/07/30/dili-raises-15-million-to-bring-ai-compliance-to-the-infrastructure-boom/",
       "stage": null,
       "website": "https://www.dili.com",
-      "qualified_by": "letter"
+      "qualified_by": "amount"
     },
     {
       "name": "DiligenceSquared",
@@ -8161,17 +8392,6 @@
       "stage": "growth",
       "website": "https://directshifts.com",
       "qualified_by": "stage"
-    },
-    {
-      "name": "Discern Security",
-      "amount": 13000000,
-      "currency": "USD",
-      "date": "2026-07-31",
-      "round_letter": "A",
-      "source_url": "https://www.finsmes.com/2026/07/discern-security-raises-13m-in-series-a-funding.html",
-      "stage": null,
-      "website": "https://www.discernsecurity.com",
-      "qualified_by": "letter"
     },
     {
       "name": "Discord",
@@ -8336,6 +8556,17 @@
       "source_url": "https://www.sec.gov/Archives/edgar/data/1707127/000170712725000003/0001707127-25-000003-index.htm",
       "stage": null,
       "website": null,
+      "qualified_by": "amount"
+    },
+    {
+      "name": "Doji",
+      "amount": 14000000,
+      "currency": "USD",
+      "date": "2025-05-15",
+      "round_letter": null,
+      "source_url": "https://techcrunch.com/2025/05/15/doji-raises-14m-to-make-virtual-try-ons-fun-through-ai-avatars/",
+      "stage": null,
+      "website": "https://www.doji.com",
       "qualified_by": "amount"
     },
     {
@@ -8978,14 +9209,25 @@
     },
     {
       "name": "Eight Sleep",
-      "amount": null,
-      "currency": null,
-      "date": null,
+      "amount": 100000000,
+      "currency": "USD",
+      "date": "2025-08-19",
       "round_letter": null,
-      "source_url": "https://www.ycombinator.com/companies/eight-sleep",
-      "stage": "growth",
+      "source_url": "https://techcrunch.com/2025/08/19/eight-sleep-grabs-100m-to-bring-ai-into-your-bed/",
+      "stage": null,
       "website": "http://eightsleep.com",
-      "qualified_by": "stage"
+      "qualified_by": "amount"
+    },
+    {
+      "name": "Einride",
+      "amount": 113000000,
+      "currency": "USD",
+      "date": "2026-02-26",
+      "round_letter": null,
+      "source_url": "https://techcrunch.com/2026/02/26/self-driving-truck-startup-einride-raises-113m-pipe-ahead-of-public-debut/",
+      "stage": null,
+      "website": "https://www.einride.tech",
+      "qualified_by": "amount"
     },
     {
       "name": "EJJ HealthTech",
@@ -9197,23 +9439,23 @@
       "qualified_by": "amount"
     },
     {
-      "name": "Ellis",
-      "amount": 10000000,
-      "currency": "USD",
-      "date": "2026-07-31",
-      "round_letter": null,
-      "source_url": "https://www.finsmes.com/2026/07/ellis-raises-10m-in-seed-funding.html",
-      "stage": null,
-      "website": "https://ellis.ai",
-      "qualified_by": "amount"
-    },
-    {
       "name": "ELO LIFE SYSTEMS",
       "amount": 5406221,
       "currency": "USD",
       "date": "2026-01-28",
       "round_letter": null,
       "source_url": "https://www.sec.gov/Archives/edgar/data/1899946/000189994626000001/0001899946-26-000001-index.htm",
+      "stage": null,
+      "website": null,
+      "qualified_by": "amount"
+    },
+    {
+      "name": "Elon Musk\u2019s Neuralink",
+      "amount": 600000000,
+      "currency": "USD",
+      "date": "2025-05-28",
+      "round_letter": null,
+      "source_url": "https://techcrunch.com/2025/05/28/elon-musks-neuralink-raises-600m-at-9b-valuation/",
       "stage": null,
       "website": null,
       "qualified_by": "amount"
@@ -9308,14 +9550,14 @@
     },
     {
       "name": "Emergent",
-      "amount": null,
-      "currency": null,
-      "date": null,
+      "amount": 23000000,
+      "currency": "USD",
+      "date": "2025-09-24",
       "round_letter": null,
-      "source_url": "https://www.ycombinator.com/companies/emergent",
-      "stage": "growth",
+      "source_url": "https://techcrunch.com/2025/09/24/emergent-raises-23m-from-lightspeed-to-let-consumers-build-apps/",
+      "stage": null,
       "website": "https://emergent.sh",
-      "qualified_by": "stage"
+      "qualified_by": "amount"
     },
     {
       "name": "Emi Labs",
@@ -9395,6 +9637,17 @@
       "qualified_by": "stage"
     },
     {
+      "name": "Encore AI",
+      "amount": 30000000,
+      "currency": "USD",
+      "date": "2026-07-29",
+      "round_letter": null,
+      "source_url": "https://techcrunch.com/2026/07/29/encore-ai-raises-30m-to-build-ai-agents-that-learn-from-customer-calls/",
+      "stage": null,
+      "website": "https://www.gainencore.ai",
+      "qualified_by": "amount"
+    },
+    {
       "name": "Endless",
       "amount": null,
       "currency": null,
@@ -9415,6 +9668,17 @@
       "stage": "growth",
       "website": "https://endpointhealth.com",
       "qualified_by": "stage"
+    },
+    {
+      "name": "Endurance Energy",
+      "amount": 54000000,
+      "currency": "USD",
+      "date": "2026-06-11",
+      "round_letter": null,
+      "source_url": "https://techcrunch.com/2026/06/11/endurance-energy-raises-54m-to-harness-a-massive-untapped-energy-source/",
+      "stage": null,
+      "website": "https://www.enduranceenergy.com",
+      "qualified_by": "amount"
     },
     {
       "name": "ENERSOFT",
@@ -9571,6 +9835,17 @@
       "qualified_by": "stage"
     },
     {
+      "name": "Equal AI",
+      "amount": 30000000,
+      "currency": "USD",
+      "date": "2026-06-11",
+      "round_letter": null,
+      "source_url": "https://techcrunch.com/2026/06/11/equal-ai-raises-30m-to-screen-calls-so-indians-dont-have-to/",
+      "stage": null,
+      "website": "https://www.myequal.ai",
+      "qualified_by": "amount"
+    },
+    {
       "name": "Equatic",
       "amount": 17786436,
       "currency": "USD",
@@ -9580,17 +9855,6 @@
       "stage": null,
       "website": null,
       "qualified_by": "amount"
-    },
-    {
-      "name": "EquipmentShare",
-      "amount": null,
-      "currency": null,
-      "date": null,
-      "round_letter": null,
-      "source_url": "https://www.ycombinator.com/companies/equipmentshare",
-      "stage": "growth",
-      "website": "https://www.equipmentshare.com",
-      "qualified_by": "stage"
     },
     {
       "name": "Erebor",
@@ -9681,6 +9945,17 @@
       "qualified_by": "stage"
     },
     {
+      "name": "Ethos",
+      "amount": 22750000,
+      "currency": "USD",
+      "date": "2026-05-06",
+      "round_letter": null,
+      "source_url": "https://techcrunch.com/2026/05/06/ethos-raises-22-75m-from-a16z-for-its-expert-network-with-voice-onboarding/",
+      "stage": null,
+      "website": "https://agent.askethos.com",
+      "qualified_by": "amount"
+    },
+    {
       "name": "Eve",
       "amount": null,
       "currency": null,
@@ -9769,6 +10044,28 @@
       "qualified_by": "stage"
     },
     {
+      "name": "Evotrex",
+      "amount": 30000000,
+      "currency": "USD",
+      "date": "2026-06-09",
+      "round_letter": null,
+      "source_url": "https://techcrunch.com/2026/06/09/anker-backed-evotrex-raises-30m-to-build-its-off-grid-rv/",
+      "stage": null,
+      "website": "https://www.evotrex.com",
+      "qualified_by": "amount"
+    },
+    {
+      "name": "Evroc",
+      "amount": 55000000,
+      "currency": "USD",
+      "date": "2025-03-20",
+      "round_letter": null,
+      "source_url": "https://techcrunch.com/2025/03/20/amid-calls-for-sovereign-eu-tech-stack-evroc-raises-55m-to-build-a-hyperscale-cloud-in-europe/",
+      "stage": null,
+      "website": "https://evroc.com",
+      "qualified_by": "amount"
+    },
+    {
       "name": "Evry Health",
       "amount": null,
       "currency": null,
@@ -9791,6 +10088,17 @@
       "qualified_by": "stage"
     },
     {
+      "name": "Exaforce",
+      "amount": 125000000,
+      "currency": "USD",
+      "date": "2026-05-12",
+      "round_letter": "B",
+      "source_url": "https://techcrunch.com/2026/05/12/exaforce-raises-125m-series-b-to-build-ai-for-catching-and-stopping-cyberattacks-as-they-happen/",
+      "stage": null,
+      "website": "https://www.exaforce.com",
+      "qualified_by": "letter"
+    },
+    {
       "name": "Exa Labs",
       "amount": 81367515,
       "currency": "USD",
@@ -9800,6 +10108,17 @@
       "stage": null,
       "website": null,
       "qualified_by": "amount"
+    },
+    {
+      "name": "Exclusive Positron",
+      "amount": 230000000,
+      "currency": "USD",
+      "date": "2026-02-04",
+      "round_letter": "B",
+      "source_url": "https://techcrunch.com/2026/02/04/exclusive-positron-raises-230m-series-b-to-take-on-nvidias-ai-chips/",
+      "stage": null,
+      "website": null,
+      "qualified_by": "letter"
     },
     {
       "name": "Expel",
@@ -10154,6 +10473,17 @@
       "qualified_by": "stage"
     },
     {
+      "name": "Fervo Energy",
+      "amount": 206000000,
+      "currency": "USD",
+      "date": "2025-06-11",
+      "round_letter": null,
+      "source_url": "https://techcrunch.com/2025/06/11/fervo-energy-lands-206m-in-financing-to-build-massive-geothermal-power-plant/",
+      "stage": null,
+      "website": null,
+      "qualified_by": "amount"
+    },
+    {
       "name": "Fictions",
       "amount": 16727778,
       "currency": "USD",
@@ -10297,12 +10627,34 @@
       "qualified_by": "amount"
     },
     {
+      "name": "Find Your Grind",
+      "amount": 5000000,
+      "currency": "USD",
+      "date": "2025-11-25",
+      "round_letter": null,
+      "source_url": "https://techcrunch.com/2025/11/25/find-your-grind-raises-5m-to-grow-platform-empowering-students-to-explore-unique-career-paths/",
+      "stage": null,
+      "website": "https://findyourgrind.com",
+      "qualified_by": "amount"
+    },
+    {
       "name": "Finerpoint",
       "amount": 9999996,
       "currency": "USD",
       "date": "2025-10-08",
       "round_letter": null,
       "source_url": "https://www.sec.gov/Archives/edgar/data/1920482/000192048225000003/0001920482-25-000003-index.htm",
+      "stage": null,
+      "website": null,
+      "qualified_by": "amount"
+    },
+    {
+      "name": "Finland\u2019s NestAI",
+      "amount": 100000000,
+      "currency": "EUR",
+      "date": "2025-11-20",
+      "round_letter": null,
+      "source_url": "https://techcrunch.com/2025/11/20/finlands-nestai-lands-e100m-partners-with-nokia-to-build-ai-for-defense-applications/",
       "stage": null,
       "website": null,
       "qualified_by": "amount"
@@ -10539,6 +10891,17 @@
       "qualified_by": "amount"
     },
     {
+      "name": "Fish Audio",
+      "amount": 52000000,
+      "currency": "USD",
+      "date": "2026-07-28",
+      "round_letter": null,
+      "source_url": "https://techcrunch.com/2026/07/28/fish-audio-raises-50m-seed-to-build-ai-voice-models-for-creators-and-enterprises/",
+      "stage": null,
+      "website": null,
+      "qualified_by": "amount"
+    },
+    {
       "name": "FitHub",
       "amount": null,
       "currency": null,
@@ -10671,15 +11034,15 @@
       "qualified_by": "amount"
     },
     {
-      "name": "Fleetworks",
-      "amount": null,
-      "currency": null,
-      "date": null,
+      "name": "FleetWorks",
+      "amount": 17000000,
+      "currency": "USD",
+      "date": "2025-10-14",
       "round_letter": null,
-      "source_url": "https://www.forbes.com/companies/fleetworks/",
-      "stage": "growth",
+      "source_url": "https://techcrunch.com/2025/10/14/fleetworks-raises-17m-to-match-truckers-with-cargo-faster/",
+      "stage": null,
       "website": "https://fleetworks.ai",
-      "qualified_by": "stage"
+      "qualified_by": "amount"
     },
     {
       "name": "Fleetzero",
@@ -10826,14 +11189,14 @@
     },
     {
       "name": "Flock Safety",
-      "amount": 275000000,
-      "currency": "USD",
-      "date": "2025-03-13",
+      "amount": null,
+      "currency": null,
+      "date": null,
       "round_letter": null,
-      "source_url": "https://techcrunch.com/2025/03/13/y-combinators-police-surveillance-darling-flock-safety-raises-275m-at-7-5b-valuation/",
-      "stage": null,
+      "source_url": "https://www.ycombinator.com/companies/flock-safety",
+      "stage": "growth",
       "website": "http://www.flocksafety.com",
-      "qualified_by": "amount"
+      "qualified_by": "stage"
     },
     {
       "name": "FloQast",
@@ -10848,14 +11211,14 @@
     },
     {
       "name": "Flora",
-      "amount": null,
-      "currency": null,
-      "date": null,
+      "amount": 42000000,
+      "currency": "USD",
+      "date": "2026-01-27",
       "round_letter": null,
-      "source_url": "https://www.forbes.com/companies/flora/",
-      "stage": "growth",
-      "website": null,
-      "qualified_by": "stage"
+      "source_url": "https://techcrunch.com/2026/01/27/node-based-design-tool-flora-raises-42m-from-redpoint-ventures/",
+      "stage": null,
+      "website": "https://flora.ai",
+      "qualified_by": "amount"
     },
     {
       "name": "Flo Recruit",
@@ -10999,6 +11362,17 @@
       "stage": "growth",
       "website": "http://www.focal.systems",
       "qualified_by": "stage"
+    },
+    {
+      "name": "Focused Energy",
+      "amount": 240000000,
+      "currency": "USD",
+      "date": "2026-06-02",
+      "round_letter": "A",
+      "source_url": "https://techcrunch.com/2026/06/02/focused-energy-raises-whopping-240m-series-a-for-laser-powered-fusion-tech/",
+      "stage": null,
+      "website": "https://www.focused-energy.co",
+      "qualified_by": "letter"
     },
     {
       "name": "Fold",
@@ -11177,6 +11551,17 @@
       "qualified_by": "stage"
     },
     {
+      "name": "Foundational Industries",
+      "amount": 25000000,
+      "currency": "USD",
+      "date": "2026-08-03",
+      "round_letter": null,
+      "source_url": "https://www.finsmes.com/2026/08/foundational-industries-raises-25m-in-seed-funding.html",
+      "stage": null,
+      "website": "https://foundational.industries",
+      "qualified_by": "amount"
+    },
+    {
       "name": "Foundation Devices",
       "amount": 13380000,
       "currency": "USD",
@@ -11276,6 +11661,17 @@
       "qualified_by": "amount"
     },
     {
+      "name": "Freeform",
+      "amount": 67000000,
+      "currency": "USD",
+      "date": "2026-02-19",
+      "round_letter": "B",
+      "source_url": "https://techcrunch.com/2026/02/19/freeform-raises-67m-series-b-to-scale-up-laser-ai-manufacturing/",
+      "stage": null,
+      "website": "https://freeform.co",
+      "qualified_by": "letter"
+    },
+    {
       "name": "Freeform Future",
       "amount": 58882689,
       "currency": "USD",
@@ -11320,6 +11716,17 @@
       "qualified_by": "amount"
     },
     {
+      "name": "Froda",
+      "amount": 23000000,
+      "currency": "USD",
+      "date": "2025-04-23",
+      "round_letter": "B",
+      "source_url": "https://techcrunch.com/2025/04/23/froda-secures-23m-series-b-for-its-debt-financing-platform-for-smes/",
+      "stage": null,
+      "website": "https://www.froda.se",
+      "qualified_by": "letter"
+    },
+    {
       "name": "Front",
       "amount": null,
       "currency": null,
@@ -11351,6 +11758,17 @@
       "stage": "growth",
       "website": "https://fullstory.com",
       "qualified_by": "stage"
+    },
+    {
+      "name": "Function Health",
+      "amount": 298000000,
+      "currency": "USD",
+      "date": "2025-11-19",
+      "round_letter": "B",
+      "source_url": "https://techcrunch.com/2025/11/19/function-health-closes-298m-series-b-at-a-2-5b-valuation-launches-medical-intelligence/",
+      "stage": null,
+      "website": "https://www.functionhealth.com",
+      "qualified_by": "letter"
     },
     {
       "name": "Fundamental",
@@ -11568,6 +11986,17 @@
       "date": "2025-11-06",
       "round_letter": null,
       "source_url": "https://www.sec.gov/Archives/edgar/data/2036281/000203628125000004/0002036281-25-000004-index.htm",
+      "stage": null,
+      "website": null,
+      "qualified_by": "amount"
+    },
+    {
+      "name": "General Intuition",
+      "amount": 134000000,
+      "currency": "USD",
+      "date": "2025-10-16",
+      "round_letter": null,
+      "source_url": "https://techcrunch.com/2025/10/16/general-intuition-lands-134m-seed-to-teach-agents-spatial-reasoning-using-video-game-clips/",
       "stage": null,
       "website": null,
       "qualified_by": "amount"
@@ -12178,6 +12607,17 @@
       "qualified_by": "amount"
     },
     {
+      "name": "Grace",
+      "amount": 5900000,
+      "currency": "EUR",
+      "date": "2025-04-03",
+      "round_letter": null,
+      "source_url": "https://techcrunch.com/2025/04/03/grace-raises-e5-9-million-seed-to-offer-insurance-to-luxury-goods/",
+      "stage": null,
+      "website": null,
+      "qualified_by": "amount"
+    },
+    {
       "name": "Gradium",
       "amount": 100000000,
       "currency": "USD",
@@ -12208,6 +12648,17 @@
       "source_url": "https://www.sec.gov/Archives/edgar/data/2033975/000203397525000006/0002033975-25-000006-index.htm",
       "stage": null,
       "website": "http://www.grammarly.com",
+      "qualified_by": "amount"
+    },
+    {
+      "name": "Granola",
+      "amount": 125000000,
+      "currency": "USD",
+      "date": "2026-03-25",
+      "round_letter": null,
+      "source_url": "https://techcrunch.com/2026/03/25/granola-raises-125m-hits-1-5b-valuation-as-it-expands-from-meeting-notetaker-to-enterprise-ai-app/",
+      "stage": null,
+      "website": "https://www.granola.ai",
       "qualified_by": "amount"
     },
     {
@@ -12520,14 +12971,14 @@
     },
     {
       "name": "H1",
-      "amount": null,
-      "currency": null,
-      "date": null,
+      "amount": 40000000,
+      "currency": "USD",
+      "date": "2026-05-28",
       "round_letter": null,
-      "source_url": "https://www.ycombinator.com/companies/h1",
-      "stage": "growth",
+      "source_url": "https://techcrunch.com/2026/05/28/h1-secures-40m-from-cvs-proving-saas-startups-can-still-attract-investment/",
+      "stage": null,
       "website": "https://www.h1.co",
-      "qualified_by": "stage"
+      "qualified_by": "amount"
     },
     {
       "name": "H2O.ai",
@@ -12629,6 +13080,17 @@
       "qualified_by": "amount"
     },
     {
+      "name": "HaloBraid",
+      "amount": 7000000,
+      "currency": "USD",
+      "date": "2026-06-23",
+      "round_letter": null,
+      "source_url": "https://techcrunch.com/2026/06/23/halobraid-raises-7m-from-seven-seven-six-to-end-the-six-hour-hair-salon-appointment/",
+      "stage": null,
+      "website": "https://www.halobraid.com",
+      "qualified_by": "amount"
+    },
+    {
       "name": "Halter",
       "amount": null,
       "currency": null,
@@ -12706,15 +13168,26 @@
       "qualified_by": "stage"
     },
     {
-      "name": "Hark",
-      "amount": null,
-      "currency": null,
-      "date": null,
+      "name": "Harbinger",
+      "amount": 160000000,
+      "currency": "USD",
+      "date": "2025-11-13",
       "round_letter": null,
-      "source_url": "https://www.cbinsights.com/company/hark",
-      "stage": "growth",
-      "website": "https://harkapp.co.uk",
-      "qualified_by": "stage"
+      "source_url": "https://techcrunch.com/2025/11/13/harbinger-raises-160m-will-build-trucks-for-fedex/",
+      "stage": null,
+      "website": null,
+      "qualified_by": "amount"
+    },
+    {
+      "name": "Hark",
+      "amount": 700000000,
+      "currency": "USD",
+      "date": "2026-05-21",
+      "round_letter": "A",
+      "source_url": "https://techcrunch.com/2026/05/21/hark-raises-700m-series-a-for-its-secretive-universal-ai-interface/",
+      "stage": null,
+      "website": null,
+      "qualified_by": "letter"
     },
     {
       "name": "Hark Labs",
@@ -12729,14 +13202,14 @@
     },
     {
       "name": "Harmattan AI",
-      "amount": null,
-      "currency": null,
-      "date": null,
-      "round_letter": null,
-      "source_url": "https://www.cbinsights.com/company/harmattan",
-      "stage": "growth",
-      "website": null,
-      "qualified_by": "stage"
+      "amount": 200000000,
+      "currency": "USD",
+      "date": "2026-01-12",
+      "round_letter": "B",
+      "source_url": "https://techcrunch.com/2026/01/12/harmattan-ai-raises-200m-series-b-led-by-dassault-aviation-becomes-defense-unicorn/",
+      "stage": null,
+      "website": "https://www.harmattan.ai",
+      "qualified_by": "letter"
     },
     {
       "name": "Harmonic",
@@ -13003,15 +13476,15 @@
       "qualified_by": "stage"
     },
     {
-      "name": "Here",
-      "amount": null,
-      "currency": null,
-      "date": null,
+      "name": "Hermeus",
+      "amount": 350000000,
+      "currency": "USD",
+      "date": "2026-04-07",
       "round_letter": null,
-      "source_url": "https://www.ycombinator.com/companies/here",
-      "stage": "growth",
-      "website": "https://here.fm",
-      "qualified_by": "stage"
+      "source_url": "https://techcrunch.com/2026/04/07/hermeus-raises-350m-to-build-unmanned-hypersonic-fighters/",
+      "stage": null,
+      "website": "https://www.hermeus.com",
+      "qualified_by": "amount"
     },
     {
       "name": "Heroic Labs",
@@ -13034,6 +13507,17 @@
       "stage": "growth",
       "website": "http://heroku.com",
       "qualified_by": "stage"
+    },
+    {
+      "name": "Heron Power",
+      "amount": 140000000,
+      "currency": "USD",
+      "date": "2026-02-18",
+      "round_letter": null,
+      "source_url": "https://techcrunch.com/2026/02/18/heron-power-raises-140m-to-ramp-production-of-grid-altering-tech/",
+      "stage": null,
+      "website": "https://heronpower.com",
+      "qualified_by": "amount"
     },
     {
       "name": "Hetal Retail",
@@ -13331,6 +13815,17 @@
       "stage": null,
       "website": null,
       "qualified_by": "amount"
+    },
+    {
+      "name": "Horizon3",
+      "amount": 250000000,
+      "currency": "USD",
+      "date": "2026-08-03",
+      "round_letter": "E",
+      "source_url": "https://www.finsmes.com/2026/08/horizon3-raises-250m-in-series-e-funding.html",
+      "stage": null,
+      "website": "https://www.horizon3.ai",
+      "qualified_by": "letter"
     },
     {
       "name": "Horizon 3 AI",
@@ -13894,6 +14389,17 @@
       "qualified_by": "stage"
     },
     {
+      "name": "Incident.io",
+      "amount": 62000000,
+      "currency": "USD",
+      "date": "2025-04-10",
+      "round_letter": null,
+      "source_url": "https://techcrunch.com/2025/04/10/incident-io-raises-62m-at-a-400m-valuation-to-help-it-teams-move-fast-when-things-break/",
+      "stage": null,
+      "website": null,
+      "qualified_by": "amount"
+    },
+    {
       "name": "Inclined Technologies",
       "amount": 7880032,
       "currency": "USD",
@@ -14180,6 +14686,17 @@
       "qualified_by": "amount"
     },
     {
+      "name": "Inocras",
+      "amount": 31000000,
+      "currency": "USD",
+      "date": "2026-08-03",
+      "round_letter": "B",
+      "source_url": "https://www.finsmes.com/2026/08/inocras-closes-31m-series-b-3-financing.html",
+      "stage": null,
+      "website": null,
+      "qualified_by": "letter"
+    },
+    {
       "name": "InScope",
       "amount": 14500000,
       "currency": "USD",
@@ -14222,6 +14739,17 @@
       "stage": "growth",
       "website": "http://insightdatascience.com",
       "qualified_by": "stage"
+    },
+    {
+      "name": "InsightFinder",
+      "amount": 15000000,
+      "currency": "USD",
+      "date": "2026-04-16",
+      "round_letter": null,
+      "source_url": "https://techcrunch.com/2026/04/16/insightfinder-raises-15m-to-help-companies-figure-out-where-ai-agents-go-wrong/",
+      "stage": null,
+      "website": null,
+      "qualified_by": "amount"
     },
     {
       "name": "Inspectify",
@@ -14466,6 +14994,17 @@
       "qualified_by": "amount"
     },
     {
+      "name": "Isembard",
+      "amount": 9000000,
+      "currency": "USD",
+      "date": "2025-04-24",
+      "round_letter": null,
+      "source_url": "https://techcrunch.com/2025/04/24/british-startup-isembard-lands-9m-to-reshore-manufacturing-for-critical-industries/",
+      "stage": null,
+      "website": "https://www.isembard.com",
+      "qualified_by": "amount"
+    },
+    {
       "name": "Island",
       "amount": null,
       "currency": null,
@@ -14532,6 +15071,17 @@
       "qualified_by": "amount"
     },
     {
+      "name": "IXI",
+      "amount": 36500000,
+      "currency": "USD",
+      "date": "2025-04-28",
+      "round_letter": null,
+      "source_url": "https://techcrunch.com/2025/04/28/ixi-raises-36-5m-from-amazon-and-more-to-bring-the-concept-of-autofocus-to-prescription-glasses/",
+      "stage": null,
+      "website": "https://ixieyewear.com",
+      "qualified_by": "amount"
+    },
+    {
       "name": "Jasper",
       "amount": null,
       "currency": null,
@@ -14552,6 +15102,17 @@
       "stage": "growth",
       "website": "https://jasper.ai",
       "qualified_by": "stage"
+    },
+    {
+      "name": "Jedify",
+      "amount": 24000000,
+      "currency": "USD",
+      "date": "2026-06-10",
+      "round_letter": null,
+      "source_url": "https://techcrunch.com/2026/06/10/jedify-raises-24m-to-help-companies-arm-ai-agents-with-context-on-their-business/",
+      "stage": null,
+      "website": "https://jedify.com",
+      "qualified_by": "amount"
     },
     {
       "name": "Jeeva AI",
@@ -14618,6 +15179,17 @@
       "stage": "growth",
       "website": "https://jimu.com",
       "qualified_by": "stage"
+    },
+    {
+      "name": "Jobandtalent",
+      "amount": 103000000,
+      "currency": "USD",
+      "date": "2025-04-10",
+      "round_letter": null,
+      "source_url": "https://techcrunch.com/2025/04/10/jobandtalent-raises-103m-on-a-down-round-1-5b-valuation-as-it-looks-to-ai-to-recruit-temps/",
+      "stage": null,
+      "website": "https://www.jobandtalent.com",
+      "qualified_by": "amount"
     },
     {
       "name": "Job&Talent",
@@ -14695,6 +15267,17 @@
       "stage": "growth",
       "website": "https://www.junction.com",
       "qualified_by": "stage"
+    },
+    {
+      "name": "June AI",
+      "amount": 20000000,
+      "currency": "USD",
+      "date": "2026-08-03",
+      "round_letter": null,
+      "source_url": "https://www.finsmes.com/2026/08/june-ai-raises-20m-in-pre-seed-funding.html",
+      "stage": null,
+      "website": "https://www.june.ai",
+      "qualified_by": "amount"
     },
     {
       "name": "Juniper Square",
@@ -14794,17 +15377,6 @@
       "stage": "growth",
       "website": "https://justworks.com",
       "qualified_by": "stage"
-    },
-    {
-      "name": "K2 Space",
-      "amount": 500000000,
-      "currency": "USD",
-      "date": "2026-07-30",
-      "round_letter": "D",
-      "source_url": "https://www.finsmes.com/2026/07/k2-space-raises-500m-in-series-d-funding-at-6-8-billion-valuation.html",
-      "stage": null,
-      "website": "https://www.k2space.com",
-      "qualified_by": "letter"
     },
     {
       "name": "Kable",
@@ -15566,6 +16138,17 @@
       "qualified_by": "stage"
     },
     {
+      "name": "Last Energy",
+      "amount": 100000000,
+      "currency": "USD",
+      "date": "2025-12-16",
+      "round_letter": null,
+      "source_url": "https://techcrunch.com/2025/12/16/nuclear-startup-last-energy-raises-100m-for-its-steel-encased-micro-reactor/",
+      "stage": null,
+      "website": null,
+      "qualified_by": "amount"
+    },
+    {
       "name": "Latchel",
       "amount": null,
       "currency": null,
@@ -15751,6 +16334,17 @@
       "stage": "growth",
       "website": "http://www.lemonbox.com",
       "qualified_by": "stage"
+    },
+    {
+      "name": "Lemon Slice",
+      "amount": 10500000,
+      "currency": "USD",
+      "date": "2025-12-23",
+      "round_letter": null,
+      "source_url": "https://techcrunch.com/2025/12/23/lemon-slice-nabs-10-5m-from-yc-and-matrix-to-build-out-its-digital-avatar-tech/",
+      "stage": null,
+      "website": "https://www.lemonslice.com",
+      "qualified_by": "amount"
     },
     {
       "name": "Lendable",
@@ -16094,15 +16688,26 @@
       "qualified_by": "amount"
     },
     {
-      "name": "Linear",
+      "name": "Limrun",
       "amount": null,
       "currency": null,
       "date": null,
       "round_letter": null,
-      "source_url": "https://www.cbinsights.com/company/linear-1",
+      "source_url": "https://www.ycombinator.com/companies/limrun",
       "stage": "growth",
-      "website": "https://linear.app",
+      "website": "https://lim.run",
       "qualified_by": "stage"
+    },
+    {
+      "name": "Linear",
+      "amount": 82000000,
+      "currency": "USD",
+      "date": "2025-06-10",
+      "round_letter": null,
+      "source_url": "https://techcrunch.com/2025/06/10/atlassian-rival-linear-raises-82m-at-1-25b-valuation/",
+      "stage": null,
+      "website": "https://linear.app",
+      "qualified_by": "amount"
     },
     {
       "name": "LinearB",
@@ -16248,6 +16853,17 @@
       "qualified_by": "amount"
     },
     {
+      "name": "Littlebird",
+      "amount": 11000000,
+      "currency": "USD",
+      "date": "2026-03-23",
+      "round_letter": null,
+      "source_url": "https://techcrunch.com/2026/03/23/littlebird-raises-11m-to-capture-context-from-your-computer-so-you-can-query-your-data/",
+      "stage": null,
+      "website": "https://littlebird.ai",
+      "qualified_by": "amount"
+    },
+    {
       "name": "LiveFlow",
       "amount": null,
       "currency": null,
@@ -16386,6 +17002,17 @@
       "date": "2025-05-16",
       "round_letter": null,
       "source_url": "https://www.sec.gov/Archives/edgar/data/1732312/000173231225000003/0001732312-25-000003-index.htm",
+      "stage": null,
+      "website": null,
+      "qualified_by": "amount"
+    },
+    {
+      "name": "Loop",
+      "amount": 95000000,
+      "currency": "USD",
+      "date": "2026-04-17",
+      "round_letter": null,
+      "source_url": "https://techcrunch.com/2026/04/17/loop-raises-95m-to-build-supply-chain-ai-that-predicts-disruptions/",
       "stage": null,
       "website": null,
       "qualified_by": "amount"
@@ -17106,6 +17733,17 @@
       "qualified_by": "stage"
     },
     {
+      "name": "Mate Security",
+      "amount": 35000000,
+      "currency": "USD",
+      "date": "2026-08-03",
+      "round_letter": "A",
+      "source_url": "https://www.finsmes.com/2026/08/mate-security-raises-35m-in-series-a-funding.html",
+      "stage": null,
+      "website": "https://mate.security",
+      "qualified_by": "letter"
+    },
+    {
       "name": "Matic Robots",
       "amount": 77317154,
       "currency": "USD",
@@ -17744,6 +18382,17 @@
       "qualified_by": "stage"
     },
     {
+      "name": "Milestone",
+      "amount": 10000000,
+      "currency": "USD",
+      "date": "2025-11-13",
+      "round_letter": null,
+      "source_url": "https://techcrunch.com/2025/11/13/milestone-raises-10m-to-make-sure-ai-rhymes-with-roi/",
+      "stage": null,
+      "website": "https://mstone.ai",
+      "qualified_by": "amount"
+    },
+    {
       "name": "MilkRun",
       "amount": null,
       "currency": null,
@@ -17775,6 +18424,17 @@
       "stage": "growth",
       "website": "https://mindee.com",
       "qualified_by": "stage"
+    },
+    {
+      "name": "Mind Robotics",
+      "amount": 500000000,
+      "currency": "USD",
+      "date": "2026-03-11",
+      "round_letter": null,
+      "source_url": "https://techcrunch.com/2026/03/11/rivian-mind-robotics-series-a-500m-fund-raise-industrial-ai-powered-robots/",
+      "stage": null,
+      "website": "https://www.mindrobotics.com",
+      "qualified_by": "amount"
     },
     {
       "name": "Mindset Health",
@@ -17885,6 +18545,28 @@
       "stage": "growth",
       "website": "http://m.io",
       "qualified_by": "stage"
+    },
+    {
+      "name": "Mirage",
+      "amount": 75000000,
+      "currency": "USD",
+      "date": "2026-03-24",
+      "round_letter": null,
+      "source_url": "https://techcrunch.com/2026/03/24/mirage-raises-75m-to-continue-building-models-for-its-ai-video-editing-app-captions/",
+      "stage": null,
+      "website": "https://mirage.app",
+      "qualified_by": "amount"
+    },
+    {
+      "name": "Mirelo",
+      "amount": 41000000,
+      "currency": "USD",
+      "date": "2025-12-15",
+      "round_letter": null,
+      "source_url": "https://techcrunch.com/2025/12/15/mirelo-raises-41m-from-index-and-a16z-to-solve-ai-videos-silent-problem/",
+      "stage": null,
+      "website": "https://www.mirelo.ai",
+      "qualified_by": "amount"
     },
     {
       "name": "Miro",
@@ -18317,14 +18999,14 @@
     },
     {
       "name": "Moonvalley",
-      "amount": null,
-      "currency": null,
-      "date": null,
+      "amount": 53000000,
+      "currency": "USD",
+      "date": "2025-05-16",
       "round_letter": null,
-      "source_url": "https://www.ycombinator.com/companies/moonvalley",
-      "stage": "growth",
+      "source_url": "https://techcrunch.com/2025/05/16/ai-video-startup-moonvalley-lands-53m-according-to-filing/",
+      "stage": null,
       "website": "https://www.moonvalley.com",
-      "qualified_by": "stage"
+      "qualified_by": "amount"
     },
     {
       "name": "Moonvalley AI",
@@ -18523,6 +19205,17 @@
       "stage": "growth",
       "website": "http://www.playmultiverse.com",
       "qualified_by": "stage"
+    },
+    {
+      "name": "Multiverse Computing",
+      "amount": 215000000,
+      "currency": "USD",
+      "date": "2025-06-12",
+      "round_letter": null,
+      "source_url": "https://techcrunch.com/2025/06/12/multiverse-computing-raises-215m-for-tech-that-could-radically-slim-ai-costs/",
+      "stage": null,
+      "website": null,
+      "qualified_by": "amount"
     },
     {
       "name": "Mundo AI",
@@ -18888,6 +19581,17 @@
       "qualified_by": "amount"
     },
     {
+      "name": "Neko Health",
+      "amount": 700000000,
+      "currency": "USD",
+      "date": "2026-07-15",
+      "round_letter": null,
+      "source_url": "https://techcrunch.com/2026/07/15/daniel-eks-body-scanning-startup-neko-health-raises-another-700m/",
+      "stage": null,
+      "website": "https://www.nekohealth.com",
+      "qualified_by": "amount"
+    },
+    {
       "name": "Neo4j",
       "amount": null,
       "currency": null,
@@ -18897,6 +19601,17 @@
       "stage": "growth",
       "website": "https://neotechnologysolutions.com",
       "qualified_by": "stage"
+    },
+    {
+      "name": "Neocloud Together AI",
+      "amount": 800000000,
+      "currency": "USD",
+      "date": "2026-07-01",
+      "round_letter": null,
+      "source_url": "https://techcrunch.com/2026/07/01/neocloud-together-ai-raises-800m-leaps-to-8-3b-valuation/",
+      "stage": null,
+      "website": null,
+      "qualified_by": "amount"
     },
     {
       "name": "Neon",
@@ -18988,13 +19703,13 @@
     },
     {
       "name": "Neurophos",
-      "amount": 109171214,
+      "amount": 110000000,
       "currency": "USD",
-      "date": "2025-11-26",
+      "date": "2026-01-22",
       "round_letter": null,
-      "source_url": "https://www.sec.gov/Archives/edgar/data/2119031/000211903126000002/0002119031-26-000002-index.htm",
+      "source_url": "https://techcrunch.com/2026/01/22/from-invisibility-cloaks-to-ai-chips-neurophos-raises-110m-to-build-tiny-optical-processors-for-inferencing/",
       "stage": null,
-      "website": null,
+      "website": "https://www.neurophos.com",
       "qualified_by": "amount"
     },
     {
@@ -19062,6 +19777,17 @@
       "stage": "growth",
       "website": "https://ngt.academy",
       "qualified_by": "stage"
+    },
+    {
+      "name": "Nexos AI",
+      "amount": 30000000,
+      "currency": "EUR",
+      "date": "2025-10-20",
+      "round_letter": null,
+      "source_url": "https://techcrunch.com/2025/10/20/european-ai-rising-star-nexos-ai-raises-30m-to-unlock-enterprise-ai-adoption/",
+      "stage": null,
+      "website": "http://nexos.ai",
+      "qualified_by": "amount"
     },
     {
       "name": "Next Caller",
@@ -19215,6 +19941,17 @@
       "source_url": "https://www.sec.gov/Archives/edgar/data/2071590/000207159025000002/0002071590-25-000002-index.htm",
       "stage": null,
       "website": null,
+      "qualified_by": "amount"
+    },
+    {
+      "name": "Nimble",
+      "amount": 47000000,
+      "currency": "USD",
+      "date": "2026-02-24",
+      "round_letter": null,
+      "source_url": "https://techcrunch.com/2026/02/24/nimble-way-raises-47m-to-give-ai-agents-better-cleaner-data/",
+      "stage": null,
+      "website": "http://www.hirenimble.com",
       "qualified_by": "amount"
     },
     {
@@ -19449,6 +20186,17 @@
       "qualified_by": "amount"
     },
     {
+      "name": "Northwood Space",
+      "amount": 100000000,
+      "currency": "USD",
+      "date": "2026-01-27",
+      "round_letter": "B",
+      "source_url": "https://techcrunch.com/2026/01/27/northwood-space-secures-a-100m-series-b-and-a-50m-space-force-contract/",
+      "stage": null,
+      "website": null,
+      "qualified_by": "letter"
+    },
+    {
       "name": "Notabene",
       "amount": null,
       "currency": null,
@@ -19576,6 +20324,17 @@
       "date": "2024-12-12",
       "round_letter": null,
       "source_url": "https://www.sec.gov/Archives/edgar/data/1898516/000123191925000089/0001231919-25-000089-index.htm",
+      "stage": null,
+      "website": null,
+      "qualified_by": "amount"
+    },
+    {
+      "name": "Noxtua",
+      "amount": 92000000,
+      "currency": "USD",
+      "date": "2025-04-22",
+      "round_letter": null,
+      "source_url": "https://techcrunch.com/2025/04/22/noxtua-raises-92m-for-its-sovereign-ai-tuned-for-the-german-legal-system/",
       "stage": null,
       "website": null,
       "qualified_by": "amount"
@@ -20219,6 +20978,17 @@
       "qualified_by": "stage"
     },
     {
+      "name": "On Me",
+      "amount": 6000000,
+      "currency": "USD",
+      "date": "2025-12-11",
+      "round_letter": null,
+      "source_url": "https://techcrunch.com/2025/12/11/on-me-raises-6m-to-shake-up-the-gift-card-industry/",
+      "stage": null,
+      "website": "https://onme.com",
+      "qualified_by": "amount"
+    },
+    {
       "name": "Onos Health",
       "amount": 6324999,
       "currency": "USD",
@@ -20249,6 +21019,17 @@
       "source_url": "https://www.sec.gov/Archives/edgar/data/1808654/000180865425000004/0001808654-25-000004-index.htm",
       "stage": null,
       "website": null,
+      "qualified_by": "amount"
+    },
+    {
+      "name": "Onton",
+      "amount": 7500000,
+      "currency": "USD",
+      "date": "2025-11-26",
+      "round_letter": null,
+      "source_url": "https://techcrunch.com/2025/11/26/onton-raises-7-5m-to-expand-its-ai-powered-shopping-site-beyond-furniture/",
+      "stage": null,
+      "website": "https://onton.com",
       "qualified_by": "amount"
     },
     {
@@ -20330,14 +21111,14 @@
     },
     {
       "name": "OpenAI",
-      "amount": null,
-      "currency": null,
-      "date": null,
+      "amount": 110000000000,
+      "currency": "USD",
+      "date": "2026-02-27",
       "round_letter": null,
-      "source_url": "https://www.forbes.com/companies/openai/",
-      "stage": "growth",
+      "source_url": "https://techcrunch.com/2026/02/27/openai-raises-110b-in-one-of-the-largest-private-funding-rounds-in-history/",
+      "stage": null,
       "website": "http://openai.com",
-      "qualified_by": "stage"
+      "qualified_by": "amount"
     },
     {
       "name": "Opencall",
@@ -20549,6 +21330,17 @@
       "qualified_by": "amount"
     },
     {
+      "name": "Oratomic",
+      "amount": 300000000,
+      "currency": "USD",
+      "date": "2026-07-10",
+      "round_letter": null,
+      "source_url": "https://techcrunch.com/2026/07/10/oratomic-raises-300m-to-build-a-viable-quantum-computer-that-needs-only-20k-qubits/",
+      "stage": null,
+      "website": "https://www.oratomic.com",
+      "qualified_by": "amount"
+    },
+    {
       "name": "Orbillion Bio",
       "amount": null,
       "currency": null,
@@ -20613,6 +21405,17 @@
       "stage": "growth",
       "website": "http://ossiumhealth.com",
       "qualified_by": "stage"
+    },
+    {
+      "name": "Oura",
+      "amount": 900000000,
+      "currency": "USD",
+      "date": "2025-10-14",
+      "round_letter": null,
+      "source_url": "https://techcrunch.com/2025/10/14/smart-ring-maker-oura-raises-900m-from-fidelity/",
+      "stage": null,
+      "website": null,
+      "qualified_by": "amount"
     },
     {
       "name": "Outreach",
@@ -20764,6 +21567,17 @@
       "date": "2025-12-12",
       "round_letter": null,
       "source_url": "https://www.sec.gov/Archives/edgar/data/1694304/000169430425000002/0001694304-25-000002-index.htm",
+      "stage": null,
+      "website": null,
+      "qualified_by": "amount"
+    },
+    {
+      "name": "Ox Security",
+      "amount": 60000000,
+      "currency": "USD",
+      "date": "2025-05-07",
+      "round_letter": null,
+      "source_url": "https://techcrunch.com/2025/05/07/ox-security-lands-a-fresh-60m-to-scan-for-vulnerabilities-in-code/",
       "stage": null,
       "website": null,
       "qualified_by": "amount"
@@ -20943,6 +21757,17 @@
       "stage": "growth",
       "website": "https://pandadoc.com",
       "qualified_by": "stage"
+    },
+    {
+      "name": "Pangram",
+      "amount": 9000000,
+      "currency": "USD",
+      "date": "2026-07-29",
+      "round_letter": null,
+      "source_url": "https://techcrunch.com/2026/07/29/as-ai-content-floods-the-internet-pangram-raises-9m-to-detect-it/",
+      "stage": null,
+      "website": "http://pangram.com",
+      "qualified_by": "amount"
     },
     {
       "name": "Panorama Artificial Intelligence",
@@ -21151,6 +21976,17 @@
       "source_url": "https://www.sec.gov/Archives/edgar/data/1987011/000198701125000001/0001987011-25-000001-index.htm",
       "stage": null,
       "website": null,
+      "qualified_by": "amount"
+    },
+    {
+      "name": "Passionfroot",
+      "amount": 15000000,
+      "currency": "USD",
+      "date": "2026-07-22",
+      "round_letter": null,
+      "source_url": "https://techcrunch.com/2026/07/22/passionfroot-raises-15m-to-expand-its-b2b-creator-marketplace-to-the-us/",
+      "stage": null,
+      "website": "https://www.passionfroot.me",
       "qualified_by": "amount"
     },
     {
@@ -21394,6 +22230,17 @@
       "stage": "growth",
       "website": "http://getpebble.com",
       "qualified_by": "stage"
+    },
+    {
+      "name": "Peec AI",
+      "amount": 21000000,
+      "currency": "USD",
+      "date": "2025-11-17",
+      "round_letter": null,
+      "source_url": "https://techcrunch.com/2025/11/17/as-consumers-ditch-google-for-chatgpt-peec-ai-raises-21m-to-help-brands-adapt/",
+      "stage": null,
+      "website": "https://peec.ai",
+      "qualified_by": "amount"
     },
     {
       "name": "Peer Global",
@@ -21968,6 +22815,17 @@
       "qualified_by": "amount"
     },
     {
+      "name": "PixVerse",
+      "amount": 2000000000,
+      "currency": "USD",
+      "date": "2026-07-13",
+      "round_letter": null,
+      "source_url": "https://techcrunch.com/2026/07/13/video-generation-startup-pixverse-raises-439m-valuation-soars-past-2b/",
+      "stage": null,
+      "website": "https://pixverse.ai",
+      "qualified_by": "amount"
+    },
+    {
       "name": "PLACE",
       "amount": null,
       "currency": null,
@@ -22133,6 +22991,17 @@
       "qualified_by": "stage"
     },
     {
+      "name": "Pocket",
+      "amount": 11000000,
+      "currency": "USD",
+      "date": "2026-06-29",
+      "round_letter": null,
+      "source_url": "https://techcrunch.com/2026/06/29/pocket-raises-11m-in-bet-on-rising-demand-for-ai-note-taking-devices/",
+      "stage": null,
+      "website": "https://heypocket.com",
+      "qualified_by": "amount"
+    },
+    {
       "name": "PocketSuite",
       "amount": null,
       "currency": null,
@@ -22207,6 +23076,17 @@
       "source_url": "https://www.sec.gov/Archives/edgar/data/2068517/000206851725000001/0002068517-25-000001-index.htm",
       "stage": null,
       "website": null,
+      "qualified_by": "amount"
+    },
+    {
+      "name": "Polars",
+      "amount": 21000000,
+      "currency": "USD",
+      "date": "2025-09-29",
+      "round_letter": null,
+      "source_url": "https://techcrunch.com/2025/09/29/the-startup-behind-open-source-tool-polars-raises-21m-from-accel/",
+      "stage": null,
+      "website": "https://pola.rs",
       "qualified_by": "amount"
     },
     {
@@ -23123,6 +24003,17 @@
       "qualified_by": "stage"
     },
     {
+      "name": "Quercus Biosolutions",
+      "amount": 5000000,
+      "currency": "USD",
+      "date": "2026-08-03",
+      "round_letter": null,
+      "source_url": "https://www.finsmes.com/2026/08/quercus-biosolutions-closes-5m-seed-financing.html",
+      "stage": null,
+      "website": "https://quercusbio.com",
+      "qualified_by": "amount"
+    },
+    {
       "name": "Quero Education",
       "amount": null,
       "currency": null,
@@ -23154,6 +24045,17 @@
       "stage": "growth",
       "website": "https://www.quicknode.com",
       "qualified_by": "stage"
+    },
+    {
+      "name": "Quilt",
+      "amount": 20000000,
+      "currency": "USD",
+      "date": "2025-12-08",
+      "round_letter": "B",
+      "source_url": "https://techcrunch.com/2025/12/08/heat-pump-startup-quilt-raises-20m-series-b-to-expand-sales/",
+      "stage": null,
+      "website": null,
+      "qualified_by": "letter"
     },
     {
       "name": "Quince",
@@ -23266,6 +24168,17 @@
       "qualified_by": "stage"
     },
     {
+      "name": "Radiant Nuclear",
+      "amount": 300000000,
+      "currency": "USD",
+      "date": "2025-12-17",
+      "round_letter": null,
+      "source_url": "https://techcrunch.com/2025/12/17/radiant-nuclear-raises-300m-for-its-semi-sized-1-mw-reactor/",
+      "stage": null,
+      "website": "https://www.radiantnuclear.com",
+      "qualified_by": "amount"
+    },
+    {
       "name": "Radix Labs",
       "amount": null,
       "currency": null,
@@ -23344,14 +24257,14 @@
     },
     {
       "name": "Ramp",
-      "amount": null,
-      "currency": null,
-      "date": null,
+      "amount": 750000000,
+      "currency": "USD",
+      "date": "2026-06-04",
       "round_letter": null,
-      "source_url": "https://www.forbes.com/companies/ramp/",
-      "stage": "growth",
+      "source_url": "https://techcrunch.com/2026/06/04/ramp-raises-750m-at-44b-valuation-as-investors-hunger-for-fintechs-with-an-ai-story/",
+      "stage": null,
       "website": "http://ramp.com",
-      "qualified_by": "stage"
+      "qualified_by": "amount"
     },
     {
       "name": "Ramp Business",
@@ -23384,6 +24297,17 @@
       "source_url": "https://www.sec.gov/Archives/edgar/data/1981363/000198136326000002/0001981363-26-000002-index.htm",
       "stage": null,
       "website": null,
+      "qualified_by": "amount"
+    },
+    {
+      "name": "Rapido",
+      "amount": 240000000,
+      "currency": "USD",
+      "date": "2026-05-15",
+      "round_letter": null,
+      "source_url": "https://techcrunch.com/2026/05/15/indian-uber-rival-rapido-raises-240m-at-3b-valuation/",
+      "stage": null,
+      "website": "https://www.rapido.bike",
       "qualified_by": "amount"
     },
     {
@@ -23913,6 +24837,17 @@
       "stage": "growth",
       "website": "https://reliaquest.com",
       "qualified_by": "stage"
+    },
+    {
+      "name": "Remark",
+      "amount": 16000000,
+      "currency": "USD",
+      "date": "2025-07-01",
+      "round_letter": null,
+      "source_url": "https://techcrunch.com/2025/07/01/remark-raises-16-million-in-to-build-out-human-powered-expert-models-for-e-commerce/",
+      "stage": null,
+      "website": "https://www.withremark.com",
+      "qualified_by": "amount"
     },
     {
       "name": "Rembrand",
@@ -24653,14 +25588,14 @@
     },
     {
       "name": "Runway",
-      "amount": null,
-      "currency": null,
-      "date": null,
+      "amount": 315000000,
+      "currency": "USD",
+      "date": "2026-02-10",
       "round_letter": null,
-      "source_url": "https://www.forbes.com/companies/runway/",
-      "stage": "growth",
+      "source_url": "https://techcrunch.com/2026/02/10/ai-video-startup-runway-raises-315m-at-5-3b-valuation-eyes-more-capable-world-models/",
+      "stage": null,
       "website": "https://runway.team",
-      "qualified_by": "stage"
+      "qualified_by": "amount"
     },
     {
       "name": "Rutter",
@@ -24752,14 +25687,14 @@
     },
     {
       "name": "Sakana AI",
-      "amount": null,
-      "currency": null,
-      "date": null,
-      "round_letter": null,
-      "source_url": "https://www.cbinsights.com/company/sakana",
-      "stage": "growth",
+      "amount": 135000000,
+      "currency": "USD",
+      "date": "2025-11-17",
+      "round_letter": "B",
+      "source_url": "https://techcrunch.com/2025/11/17/sakana-ai-raises-135m-series-b-at-a-2-65b-valuation-to-continue-building-ai-models-for-japan/",
+      "stage": null,
       "website": "https://sakana.ai",
-      "qualified_by": "stage"
+      "qualified_by": "letter"
     },
     {
       "name": "Saleswhale",
@@ -24807,14 +25742,14 @@
     },
     {
       "name": "SambaNova",
-      "amount": null,
-      "currency": null,
-      "date": null,
+      "amount": 1000000000,
+      "currency": "USD",
+      "date": "2026-07-08",
       "round_letter": null,
-      "source_url": "https://www.forbes.com/companies/sambanova/",
-      "stage": "growth",
+      "source_url": "https://techcrunch.com/2026/07/08/sambanova-draws-1b-at-11b-valuation-in-series-f-first-close/",
+      "stage": null,
       "website": null,
-      "qualified_by": "stage"
+      "qualified_by": "amount"
     },
     {
       "name": "SambaNova Systems",
@@ -25098,6 +26033,17 @@
       "date": "2026-02-26",
       "round_letter": null,
       "source_url": "https://www.sec.gov/Archives/edgar/data/1873836/000187383626000001/0001873836-26-000001-index.htm",
+      "stage": null,
+      "website": null,
+      "qualified_by": "amount"
+    },
+    {
+      "name": "Science Corp",
+      "amount": 230000000,
+      "currency": "USD",
+      "date": "2026-03-05",
+      "round_letter": null,
+      "source_url": "https://techcrunch.com/2026/03/05/science-corp-closes-230m-round-as-it-pushes-to-get-its-brain-implant-to-patients/",
       "stage": null,
       "website": null,
       "qualified_by": "amount"
@@ -25950,6 +26896,17 @@
       "qualified_by": "stage"
     },
     {
+      "name": "Simile",
+      "amount": 200000000,
+      "currency": "USD",
+      "date": "2026-07-30",
+      "round_letter": "A",
+      "source_url": "https://techcrunch.com/2026/07/30/synthetic-user-startup-simile-raises-200m-at-2b-valuation-5-months-after-100m-series-a/",
+      "stage": null,
+      "website": "https://www.simile.com",
+      "qualified_by": "letter"
+    },
+    {
       "name": "SimpleLegal",
       "amount": null,
       "currency": null,
@@ -26027,6 +26984,17 @@
       "qualified_by": "stage"
     },
     {
+      "name": "Siro",
+      "amount": 50000000,
+      "currency": "USD",
+      "date": "2025-05-21",
+      "round_letter": null,
+      "source_url": "https://techcrunch.com/2025/05/21/siro-lands-50m-from-signalfire-to-expand-its-ai-powered-coaching-solution-for-on-ground-sales-reps/",
+      "stage": null,
+      "website": "https://www.siro.ai",
+      "qualified_by": "amount"
+    },
+    {
       "name": "Sisense",
       "amount": null,
       "currency": null,
@@ -26036,6 +27004,17 @@
       "stage": "growth",
       "website": "https://sisense.com",
       "qualified_by": "stage"
+    },
+    {
+      "name": "SixSense",
+      "amount": 8500000,
+      "currency": "USD",
+      "date": "2025-07-31",
+      "round_letter": null,
+      "source_url": "https://techcrunch.com/2025/07/31/female-founded-semiconductor-ai-startup-sixsense-raises-funding/",
+      "stage": null,
+      "website": "https://www.sixsense.ai",
+      "qualified_by": "amount"
     },
     {
       "name": "SIZABLE ENERGY",
@@ -26069,6 +27048,17 @@
       "stage": "growth",
       "website": "http://skydropx.com",
       "qualified_by": "stage"
+    },
+    {
+      "name": "SkyFi",
+      "amount": 12700000,
+      "currency": "USD",
+      "date": "2026-01-14",
+      "round_letter": null,
+      "source_url": "https://techcrunch.com/2026/01/14/skyfi-raises-12-7m-to-turn-satellite-images-into-insights/",
+      "stage": null,
+      "website": "https://skyfi.com",
+      "qualified_by": "amount"
     },
     {
       "name": "Sky Mavis",
@@ -26185,11 +27175,11 @@
       "amount": 13000000,
       "currency": "USD",
       "date": "2026-07-31",
-      "round_letter": "A",
-      "source_url": "https://www.finsmes.com/2026/07/smallest-ai-raises-13m-in-series-a-funding.html",
+      "round_letter": null,
+      "source_url": "https://techcrunch.com/2026/07/31/smallest-ai-raises-13m-to-build-ultra-fast-voice-ai-that-sounds-genuinely-human/",
       "stage": null,
       "website": "https://smallest.ai",
-      "qualified_by": "letter"
+      "qualified_by": "amount"
     },
     {
       "name": "SmartAsset",
@@ -26412,6 +27402,17 @@
       "qualified_by": "stage"
     },
     {
+      "name": "SoftBank-backed LegalOn",
+      "amount": 50000000,
+      "currency": "USD",
+      "date": "2025-07-24",
+      "round_letter": null,
+      "source_url": "https://techcrunch.com/2025/07/24/softbank-backed-legalon-fuels-ai-for-in-house-legal-team-with-50m-series-e/",
+      "stage": null,
+      "website": null,
+      "qualified_by": "amount"
+    },
+    {
       "name": "Sohar Health",
       "amount": null,
       "currency": null,
@@ -26512,14 +27513,14 @@
     },
     {
       "name": "Solve Intelligence",
-      "amount": null,
-      "currency": null,
-      "date": null,
+      "amount": 12000000,
+      "currency": "USD",
+      "date": "2025-04-09",
       "round_letter": null,
-      "source_url": "https://www.ycombinator.com/companies/solve-intelligence",
-      "stage": "growth",
+      "source_url": "https://techcrunch.com/2025/04/09/microsoft-backs-solve-intelligence-in-12m-series-a-funding/",
+      "stage": null,
       "website": "https://www.solveintelligence.com",
-      "qualified_by": "stage"
+      "qualified_by": "amount"
     },
     {
       "name": "SonarSource",
@@ -26610,17 +27611,6 @@
       "qualified_by": "stage"
     },
     {
-      "name": "SoundHealth",
-      "amount": 12250000,
-      "currency": "USD",
-      "date": "2026-07-31",
-      "round_letter": "A",
-      "source_url": "https://www.finsmes.com/2026/07/soundhealth-raises-12-25m-in-series-a-funding.html",
-      "stage": null,
-      "website": "https://www.soundhealth.life",
-      "qualified_by": "letter"
-    },
-    {
       "name": "Sourcegraph",
       "amount": null,
       "currency": null,
@@ -26654,6 +27644,17 @@
       "qualified_by": "stage"
     },
     {
+      "name": "Space Forge",
+      "amount": 30000000,
+      "currency": "USD",
+      "date": "2025-05-31",
+      "round_letter": "A",
+      "source_url": "https://techcrunch.com/2025/05/31/space-forge-raises-30m-series-a-to-make-chip-materials-in-space/",
+      "stage": null,
+      "website": "https://www.spaceforge.com",
+      "qualified_by": "letter"
+    },
+    {
       "name": "Spade",
       "amount": null,
       "currency": null,
@@ -26673,6 +27674,17 @@
       "source_url": "https://www.sec.gov/Archives/edgar/data/1763476/000176347626000001/0001763476-26-000001-index.htm",
       "stage": null,
       "website": null,
+      "qualified_by": "amount"
+    },
+    {
+      "name": "SparkCharge",
+      "amount": 30000000,
+      "currency": "USD",
+      "date": "2025-05-20",
+      "round_letter": null,
+      "source_url": "https://techcrunch.com/2025/05/20/sparkcharge-raises-30m-to-help-fleets-electrify-without-commitments/",
+      "stage": null,
+      "website": "https://www.sparkcharge.io",
       "qualified_by": "amount"
     },
     {
@@ -26852,6 +27864,17 @@
       "qualified_by": "amount"
     },
     {
+      "name": "Spur",
+      "amount": 200000000,
+      "currency": "USD",
+      "date": "2026-07-28",
+      "round_letter": null,
+      "source_url": "https://techcrunch.com/2026/07/28/bot-detection-startup-spur-nabs-200m-from-insight/",
+      "stage": null,
+      "website": "https://www.spurtest.com",
+      "qualified_by": "amount"
+    },
+    {
       "name": "Sqreen",
       "amount": null,
       "currency": null,
@@ -26982,6 +28005,17 @@
       "stage": "growth",
       "website": "https://standard.ai",
       "qualified_by": "stage"
+    },
+    {
+      "name": "Standard Nuclear",
+      "amount": 140000000,
+      "currency": "USD",
+      "date": "2026-01-28",
+      "round_letter": null,
+      "source_url": "https://techcrunch.com/2026/01/28/standard-nuclear-raises-140m-as-nuclear-power-enters-its-gold-rush-era/",
+      "stage": null,
+      "website": "https://www.standardnuclear.com",
+      "qualified_by": "amount"
     },
     {
       "name": "Starbridge.ai",
@@ -27193,17 +28227,6 @@
       "qualified_by": "amount"
     },
     {
-      "name": "Stoke Space",
-      "amount": null,
-      "currency": null,
-      "date": null,
-      "round_letter": null,
-      "source_url": "https://www.ycombinator.com/companies/stoke-space",
-      "stage": "growth",
-      "website": "https://www.stokespace.com",
-      "qualified_by": "stage"
-    },
-    {
       "name": "Stoke Space Technologies",
       "amount": 409999965,
       "currency": "USD",
@@ -27315,14 +28338,14 @@
     },
     {
       "name": "Substack",
-      "amount": null,
-      "currency": null,
-      "date": null,
+      "amount": 100000000,
+      "currency": "USD",
+      "date": "2025-07-17",
       "round_letter": null,
-      "source_url": "https://www.ycombinator.com/companies/substack",
-      "stage": "growth",
+      "source_url": "https://techcrunch.com/2025/07/17/substack-raises-100m-from-chernin-group-andreessen-horowitz-skims-ceo-and-more/",
+      "stage": null,
       "website": "https://substack.com",
-      "qualified_by": "stage"
+      "qualified_by": "amount"
     },
     {
       "name": "Subtotal",
@@ -27586,6 +28609,17 @@
       "source_url": "https://www.sec.gov/Archives/edgar/data/1680930/000168093025000002/0001680930-25-000002-index.htm",
       "stage": null,
       "website": null,
+      "qualified_by": "amount"
+    },
+    {
+      "name": "Sword Health",
+      "amount": 40000000,
+      "currency": "USD",
+      "date": "2025-06-17",
+      "round_letter": null,
+      "source_url": "https://techcrunch.com/2025/06/17/sword-health-nabs-40m-at-4b-valuation-pushes-ipo-plans-to-at-least-2028/",
+      "stage": null,
+      "website": "https://swordhealth.com",
       "qualified_by": "amount"
     },
     {
@@ -28095,6 +29129,17 @@
       "qualified_by": "stage"
     },
     {
+      "name": "Tem",
+      "amount": 75000000,
+      "currency": "USD",
+      "date": "2026-02-09",
+      "round_letter": null,
+      "source_url": "https://techcrunch.com/2026/02/09/tem-raises-75m-to-remake-electricity-markets-using-ai/",
+      "stage": null,
+      "website": "https://www.tem.energy",
+      "qualified_by": "amount"
+    },
+    {
       "name": "Temelio",
       "amount": 6999999,
       "currency": "USD",
@@ -28175,11 +29220,11 @@
       "name": "TensorWave",
       "amount": 100000000,
       "currency": "USD",
-      "date": "2025-04-08",
+      "date": "2025-05-14",
       "round_letter": null,
-      "source_url": "https://www.sec.gov/Archives/edgar/data/2066342/000206634225000003/0002066342-25-000003-index.htm",
+      "source_url": "https://techcrunch.com/2025/05/14/tensorwave-raises-100m-for-its-amd-powered-ai-cloud/",
       "stage": null,
-      "website": null,
+      "website": "https://tensorwave.com",
       "qualified_by": "amount"
     },
     {
@@ -28359,17 +29404,6 @@
       "qualified_by": "stage"
     },
     {
-      "name": "The Farmer Companies",
-      "amount": 17000000,
-      "currency": "USD",
-      "date": "2026-07-30",
-      "round_letter": "A",
-      "source_url": "https://www.finsmes.com/2026/07/the-farmer-companies-raises-17m-in-series-a-funding.html",
-      "stage": null,
-      "website": "https://www.thefarmercompanies.com",
-      "qualified_by": "letter"
-    },
-    {
       "name": "The Flex Company",
       "amount": null,
       "currency": null,
@@ -28412,6 +29446,17 @@
       "stage": "growth",
       "website": "http://themuse.com",
       "qualified_by": "stage"
+    },
+    {
+      "name": "The Nuclear Company",
+      "amount": 51000000,
+      "currency": "USD",
+      "date": "2025-05-16",
+      "round_letter": null,
+      "source_url": "https://techcrunch.com/2025/05/16/the-nuclear-company-raises-51m-to-develop-massive-reactor-sites/",
+      "stage": null,
+      "website": "https://www.thenuclearcompany.com",
+      "qualified_by": "amount"
     },
     {
       "name": "The Open Platform",
@@ -29316,6 +30361,17 @@
       "qualified_by": "stage"
     },
     {
+      "name": "Turkey\u2019s Sipay",
+      "amount": 78000000,
+      "currency": "USD",
+      "date": "2025-04-08",
+      "round_letter": null,
+      "source_url": "https://techcrunch.com/2025/04/08/turkeys-sipay-raises-78m-to-expand-its-stripe-like-services-into-emerging-markets/",
+      "stage": null,
+      "website": null,
+      "qualified_by": "amount"
+    },
+    {
       "name": "Turnstile Software",
       "amount": 22810000,
       "currency": "USD",
@@ -29724,14 +30780,14 @@
     },
     {
       "name": "Upwind",
-      "amount": null,
-      "currency": null,
-      "date": null,
+      "amount": 250000000,
+      "currency": "USD",
+      "date": "2026-01-29",
       "round_letter": null,
-      "source_url": "https://www.cbinsights.com/company/upwind",
-      "stage": "growth",
-      "website": "https://upwind.io",
-      "qualified_by": "stage"
+      "source_url": "https://techcrunch.com/2026/01/29/upwind-raises-250m-at-1-5b-valuation-to-continue-building-runtime-cloud-security/",
+      "stage": null,
+      "website": null,
+      "qualified_by": "amount"
     },
     {
       "name": "URX",
@@ -29962,17 +31018,6 @@
       "source_url": "https://www.sec.gov/Archives/edgar/data/2067621/000206762125000002/0002067621-25-000002-index.htm",
       "stage": null,
       "website": null,
-      "qualified_by": "amount"
-    },
-    {
-      "name": "Vector Legal",
-      "amount": 5190000,
-      "currency": "USD",
-      "date": "2026-07-30",
-      "round_letter": null,
-      "source_url": "https://www.finsmes.com/2026/07/vector-legal-closes-5-19m-seed-funding-round.html",
-      "stage": null,
-      "website": "https://vectorlegal.com",
       "qualified_by": "amount"
     },
     {
@@ -30801,12 +31846,12 @@
       "qualified_by": "stage"
     },
     {
-      "name": "Waydev AI",
+      "name": "Waydev",
       "amount": null,
       "currency": null,
       "date": null,
       "round_letter": null,
-      "source_url": "https://www.ycombinator.com/companies/waydev-ai",
+      "source_url": "https://www.ycombinator.com/companies/waydev",
       "stage": "growth",
       "website": "https://waydev.co",
       "qualified_by": "stage"
@@ -31120,6 +32165,17 @@
       "qualified_by": "amount"
     },
     {
+      "name": "Wirestock",
+      "amount": 23000000,
+      "currency": "USD",
+      "date": "2026-05-14",
+      "round_letter": null,
+      "source_url": "https://techcrunch.com/2026/05/14/wirestock-raises-23m-to-supply-multi-modal-data-to-ai-labs/",
+      "stage": null,
+      "website": "https://wirestock.io",
+      "qualified_by": "amount"
+    },
+    {
       "name": "Wisetack",
       "amount": 14300001,
       "currency": "USD",
@@ -31137,6 +32193,17 @@
       "date": "2025-05-02",
       "round_letter": null,
       "source_url": "https://www.sec.gov/Archives/edgar/data/2068507/000123191925000052/0001231919-25-000052-index.htm",
+      "stage": null,
+      "website": null,
+      "qualified_by": "amount"
+    },
+    {
+      "name": "Wispr",
+      "amount": 25000000,
+      "currency": "USD",
+      "date": "2025-11-20",
+      "round_letter": null,
+      "source_url": "https://techcrunch.com/2025/11/20/as-its-voice-dectation-app-takes-off-wispr-secures-25m-from-notable-capital/",
       "stage": null,
       "website": null,
       "qualified_by": "amount"
@@ -31165,14 +32232,14 @@
     },
     {
       "name": "Wonderful",
-      "amount": null,
-      "currency": null,
-      "date": null,
-      "round_letter": null,
-      "source_url": "https://www.cbinsights.com/company/wonderful",
-      "stage": "growth",
-      "website": "https://wonderful.co.uk",
-      "qualified_by": "stage"
+      "amount": 150000000,
+      "currency": "USD",
+      "date": "2026-03-12",
+      "round_letter": "B",
+      "source_url": "https://techcrunch.com/2026/03/12/wonderful-raises-150m-series-b-at-2b-valuation/",
+      "stage": null,
+      "website": "https://www.wonderful.ai",
+      "qualified_by": "letter"
     },
     {
       "name": "WooLee IDC I",
@@ -31308,14 +32375,14 @@
     },
     {
       "name": "World Labs",
-      "amount": null,
-      "currency": null,
-      "date": null,
+      "amount": 1000000000,
+      "currency": "USD",
+      "date": "2026-02-18",
       "round_letter": null,
-      "source_url": "https://www.forbes.com/companies/world-labs/",
-      "stage": "growth",
+      "source_url": "https://techcrunch.com/2026/02/18/world-labs-lands-200m-from-autodesk-to-bring-world-models-into-3d-workflows/",
+      "stage": null,
       "website": null,
-      "qualified_by": "stage"
+      "qualified_by": "amount"
     },
     {
       "name": "World View Enterprises",
@@ -31404,6 +32471,17 @@
       "stage": "growth",
       "website": "https://www.xendit.co",
       "qualified_by": "stage"
+    },
+    {
+      "name": "X-energy",
+      "amount": 1000000000,
+      "currency": "USD",
+      "date": "2026-04-24",
+      "round_letter": null,
+      "source_url": "https://techcrunch.com/2026/04/24/nuclear-startup-x-energy-raises-1b-in-data-center-driven-ipo/",
+      "stage": null,
+      "website": "https://x-energy.com",
+      "qualified_by": "amount"
     },
     {
       "name": "XForcePlus",
@@ -31516,6 +32594,17 @@
       "qualified_by": "amount"
     },
     {
+      "name": "Yann LeCun\u2019s AMI Labs",
+      "amount": 1030000000,
+      "currency": "USD",
+      "date": "2026-03-09",
+      "round_letter": null,
+      "source_url": "https://techcrunch.com/2026/03/09/yann-lecuns-ami-labs-raises-1-03-billion-to-build-world-models/",
+      "stage": null,
+      "website": null,
+      "qualified_by": "amount"
+    },
+    {
       "name": "Yassir",
       "amount": null,
       "currency": null,
@@ -31601,6 +32690,17 @@
       "source_url": "https://www.sec.gov/Archives/edgar/data/1865148/000186514825000004/0001865148-25-000004-index.htm",
       "stage": null,
       "website": null,
+      "qualified_by": "amount"
+    },
+    {
+      "name": "Yope",
+      "amount": 12300000,
+      "currency": "USD",
+      "date": "2026-07-22",
+      "round_letter": null,
+      "source_url": "https://techcrunch.com/2026/07/22/yope-raises-12-3m-to-build-a-private-social-network-without-algorithms-or-ads/",
+      "stage": null,
+      "website": "https://yope.app",
       "qualified_by": "amount"
     },
     {
@@ -31833,6 +32933,17 @@
       "stage": "growth",
       "website": "http://zenflow.com",
       "qualified_by": "stage"
+    },
+    {
+      "name": "Zeno",
+      "amount": 25000000,
+      "currency": "USD",
+      "date": "2026-03-05",
+      "round_letter": null,
+      "source_url": "https://techcrunch.com/2026/03/05/zeno-raises-25m-to-speed-up-production-of-its-battery-swap-motorbikes/",
+      "stage": null,
+      "website": "https://zeno.earth",
+      "qualified_by": "amount"
     },
     {
       "name": "Zeno Power Systems",
@@ -32341,7 +33452,6 @@
     "AesculaTech",
     "Aesthetic",
     "Aetheon",
-    "Aether",
     "Aevius Labs",
     "Affil.ai",
     "Affinity",
@@ -32355,7 +33465,6 @@
     "Agency",
     "Agency Tool Company",
     "AgentCollect",
-    "AgentMail",
     "AgentPhone",
     "AgentSmyth",
     "Agentcard",
@@ -33173,7 +34282,6 @@
     "Callback",
     "Calltree",
     "Calypso Curate",
-    "CambioML",
     "Camlist",
     "Camp",
     "Campusknot",
@@ -33201,6 +34309,7 @@
     "Capy",
     "Car Capital Technologies",
     "CarDash",
+    "CarSignal",
     "CarWoo",
     "Carbic",
     "Carbon Crusher",
@@ -33255,6 +34364,7 @@
     "Catch Bio",
     "CatchBack Cards",
     "Caucus",
+    "Caution",
     "Cavalry Intelligence",
     "Cedalio",
     "Cedana",
@@ -33712,7 +34822,7 @@
     "Darmiyan",
     "Darsel",
     "Dart",
-    "Dartboard Energy",
+    "Dartboard",
     "Dashblock",
     "Dashdive",
     "Dashlabs.ai",
@@ -33811,6 +34921,7 @@
     "Detect Auto",
     "Detection Innovation Group",
     "Dev Tools AI",
+    "DevAlly",
     "DevColor",
     "DevFlight",
     "Devyce",
@@ -33912,6 +35023,7 @@
     "Drafted",
     "Dragoneye",
     "Drapr",
+    "Dreach",
     "Dream Trainer",
     "Dream3D",
     "DreamRP",
@@ -34066,6 +35178,7 @@
     "Endla",
     "Endless Adventures",
     "Endstack",
+    "Energent AI",
     "Enerjazz",
     "Enflux",
     "Engage Bio",
@@ -34102,6 +35215,7 @@
     "Equal Edge U",
     "Equestrian World",
     "Equipifi",
+    "EquipmentShare",
     "Equipt Health",
     "Equity Quotient",
     "Equity Risk Sciences",
@@ -34215,6 +35329,7 @@
     "Federacy",
     "Feedcoyote",
     "Fegmo",
+    "Feldy",
     "Felix Biotechnology",
     "Fello",
     "Female Invest",
@@ -34243,6 +35358,7 @@
     "Figments",
     "Figure",
     "Fiix",
+    "Fika Jobs",
     "Filadd",
     "FileStack",
     "Fileforge",
@@ -34281,6 +35397,7 @@
     "Firebender",
     "Firezone",
     "First Touch",
+    "First Voyage",
     "FirstClose",
     "FirstHive Tech",
     "FirstIgnite",
@@ -34311,7 +35428,6 @@
     "Flick",
     "FlightCar",
     "Flightcaster",
-    "Flightcontrol",
     "Flightfox",
     "Flike",
     "Flinto",
@@ -34742,6 +35858,7 @@
     "Heptabase",
     "Herald",
     "Herd Labs",
+    "Here",
     "Hermes Robotics",
     "HeroUI",
     "Heron Data",
@@ -34868,6 +35985,7 @@
     "Hyrex",
     "IDCXS CRYPTG GROUP",
     "IDCXS CRYPTO GROUP",
+    "IMPACT Drones",
     "IMT Care",
     "INCENTIV",
     "INEO Tech",
@@ -35168,6 +36286,7 @@
     "Khabri",
     "Khoj",
     "Khona Scientific Holdings",
+    "Khotan (formerly Pollinate)",
     "Kickpay",
     "Kicksend",
     "Kidato",
@@ -35352,7 +36471,6 @@
     "Legionfarm",
     "Lemma",
     "LemonLime",
-    "LemonSlice",
     "Lenco",
     "LendEDU",
     "LenderSquared",
@@ -35416,7 +36534,6 @@
     "Lilac Labs",
     "Lilia",
     "Limbic Labs",
-    "Limrun",
     "Linc.",
     "Line.Build",
     "Linectra",
@@ -35654,6 +36771,7 @@
     "Marktic",
     "Markupwand",
     "Maroo",
+    "Marquee",
     "Marr Labs",
     "Martini",
     "Marvix AI",
@@ -36060,14 +37178,12 @@
     "Nextop",
     "Nextstore",
     "Nexus",
-    "Nexus Power",
     "Nexxt MedTech",
     "Ngentix",
     "Nightingale",
     "Nightowl Digital",
     "Niles",
     "Nimbic AI",
-    "Nimble",
     "Nimble Technologies",
     "Nimbus",
     "Nine Fives",
@@ -36175,7 +37291,6 @@
     "OfOne",
     "Offbeast",
     "Officely",
-    "Offscript Worldwide",
     "Offstream",
     "OhLife",
     "Ohanafy",
@@ -36196,6 +37311,7 @@
     "Olive Legal",
     "Olympian Motors",
     "Oma Care",
+    "Omanta",
     "Omega Project",
     "Omnara",
     "Omni Instrument",
@@ -36303,6 +37419,7 @@
     "OrbiSharp Robotics",
     "Orbio Earth",
     "Orbital Operations",
+    "Orbital Sentry",
     "Orbital Sidekick",
     "OrbitalRx",
     "Orbiter",
@@ -36666,7 +37783,6 @@
     "Pluto.markets",
     "Plutto",
     "Plutus Technology Solutions",
-    "Pocket",
     "Point API",
     "PointOne",
     "Pointhound",
@@ -36678,7 +37794,6 @@
     "PolicyFly",
     "Polished",
     "Pollground",
-    "Pollinate",
     "Polly",
     "PoloTab",
     "Poly",
@@ -36855,6 +37970,7 @@
     "QUIK",
     "QWERKY AI",
     "QodeX Quantum",
+    "Qokedas",
     "Qonscious Health",
     "Quad",
     "Quadrant Eye",
@@ -36956,9 +38072,11 @@
     "Rarebird",
     "Rarely",
     "Rastro",
+    "Rasyn",
     "Rational",
     "RaveWave",
     "Raven",
+    "Ravion",
     "Ravn",
     "Ravti",
     "Raycaster",
@@ -37293,6 +38411,7 @@
     "Saffron",
     "Safire Technology Group",
     "Saga AI",
+    "Sagaland",
     "Sage AI",
     "Sage Care",
     "Saida",
@@ -37439,7 +38558,6 @@
     "Servo7",
     "SetSale",
     "Seva Coffee",
-    "SevnAI",
     "Shadeform",
     "Shadow Shifts",
     "Shake Escrow",
@@ -37551,6 +38669,7 @@
     "Sixa",
     "Sixty",
     "Sixtyfour",
+    "Sizl",
     "Skeema",
     "SketchDeck",
     "Sketchbox",
@@ -37674,6 +38793,7 @@
     "Sourcify",
     "Southern Block Capital",
     "Space DOTS",
+    "SpaceFlow Technologies, Inc.",
     "SpaceRyde",
     "Spaceium Inc",
     "Spaces Life",
@@ -37727,7 +38847,6 @@
     "Sprout Labs",
     "Sproutfi",
     "SpruceID",
-    "Spur",
     "Squad",
     "Squid",
     "Squire.ai",
@@ -37793,6 +38912,7 @@
     "Stock Unlock",
     "StockSight",
     "Stockline",
+    "Stoke Space",
     "Stonepeak Claremont Holdings",
     "Storia AI",
     "Stormy",
@@ -38178,6 +39298,7 @@
     "Tipjoy",
     "Tire Swing",
     "TireTutor",
+    "Tiriel AI",
     "Titipku",
     "Tivara",
     "ToDesktop",
@@ -38223,7 +39344,6 @@
     "Traceloop",
     "Tracer",
     "Traces",
-    "TrackChain",
     "Trackingplan",
     "Trackstar",
     "Traction",
@@ -38476,6 +39596,7 @@
     "VaycayHero",
     "Vector",
     "Vector Health AI",
+    "Vector Legal",
     "Vector Research Group",
     "VectorShift",
     "Vectordash",
@@ -38676,6 +39797,7 @@
     "Wayline",
     "Waypoint",
     "Waypoint Transit",
+    "Wayy.ai",
     "Waza",
     "WeReno",
     "Wealor",
@@ -38786,6 +39908,7 @@
     "Xobni",
     "Y Combinator",
     "Y/n",
+    "YC-backed Oway",
     "YOJO (Your Journey)",
     "Yard",
     "Yardbook",
@@ -39177,6 +40300,7 @@
     "Uncommon Therapeutics": "therapeutics",
     "Valink Therapeutics": "therapeutics",
     "Velorum Therapeutics": "therapeutics",
+    "Venus Aerospace": "aerospace",
     "Verge Genomics": "genomics",
     "VINEBOX (Usual Beverage Co.)": "beverage",
     "Visibl Semiconductors": "semiconductors",
@@ -39195,7 +40319,6 @@
     "Allotrope Medical": "medical",
     "ANDROMEDA ROBOTICS": "robotics",
     "Andromeda Surgical": "surgical",
-    "Antora Energy": "energy",
     "Applied Impact Robotics": "robotics",
     "Arkea Bio": "bio",
     "Arpeggio Bio": "bio",
@@ -39212,8 +40335,10 @@
     "Barnwell Bio": "bio",
     "Bear Flag Robotics": "robotics",
     "Benchmark Space Systems": "space",
+    "Bill Gates-backed Type One Energy": "energy",
     "Blank Bio": "bio",
     "Bluecore Energy": "energy",
+    "Blue Energy": "energy",
     "Blue Sky Robotics": "robotics",
     "Boost Robotics": "robotics",
     "Boundless Devices": "devices",
@@ -39235,7 +40360,7 @@
     "Cosmoserve Space": "space",
     "CVector Energy": "energy",
     "Cyan Robotics": "robotics",
-    "Dartboard Energy": "energy",
+    "Dash Bio": "bio",
     "DeepAware AI (Robotics Center of Silicon Valley)": "robotics",
     "Diffuse Bio": "bio",
     "Discovered Materials": "materials",
@@ -39248,11 +40373,14 @@
     "Elementium Materials": "materials",
     "eLux Medical": "medical",
     "Ember Robotics": "robotics",
+    "Endurance Energy": "energy",
     "Engage Bio": "bio",
     "Event Space Booker": "space",
     "Evolved Robotics": "robotics",
     "Exodys Energy": "energy",
+    "Fervo Energy": "energy",
     "Fleet Device Management": "device",
+    "Focused Energy": "energy",
     "Folia Materials": "materials",
     "Forge Robotics": "robotics",
     "Foundation Devices": "devices",
@@ -39281,11 +40409,11 @@
     "Inversion Space": "space",
     "InVision Medical Technology": "medical",
     "Jasmine Energy": "energy",
-    "K2 Space": "space",
     "Katalyst Space Holdings": "space",
     "Keda Robotics": "robotics",
     "Kopra Bio": "bio",
     "Lambda Robotics": "robotics",
+    "Last Energy": "energy",
     "Latent Space": "space",
     "Lhotse Medical": "medical",
     "Libra Robotics": "robotics",
@@ -39298,6 +40426,7 @@
     "Maple Materials": "materials",
     "Matic Robots": "robots",
     "Maven Bio": "bio",
+    "Mind Robotics": "robotics",
     "Mindwave Medical": "medical",
     "Mobius Materials": "materials",
     "Modular Medical": "medical",
@@ -39310,6 +40439,7 @@
     "Nextera Robotics": "robotics",
     "Nira Energy": "energy",
     "Nomic Bio": "bio",
+    "Northwood Space": "space",
     "Ochre Bio": "bio",
     "Okami Medical": "medical",
     "Onyx Bio": "bio",
@@ -39357,6 +40487,7 @@
     "Sophia Space": "space",
     "Sorting Robotics": "robotics",
     "Space DOTS": "space",
+    "Space Forge": "space",
     "spotLESS Materials": "materials",
     "Starsky Robotics": "robotics",
     "Stoke Space": "space",
@@ -39379,6 +40510,7 @@
     "Wand Solar": "solar",
     "Wearable Devices": "devices",
     "Weave Robotics": "robotics",
+    "X-energy": "energy",
     "Zeit Medical": "medical",
     "ZETA SURGICAL": "surgical"
   }
