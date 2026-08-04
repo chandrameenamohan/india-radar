@@ -96,7 +96,7 @@ def repo(tmp_path: Path) -> Path:
 
 
 def nightly(
-    repo: Path, build: str, seconds: str = "30", firstseen: str = "true"
+    repo: Path, build: str, seconds: str = "30", firstseen: str | None = "true"
 ) -> subprocess.CompletedProcess[str]:
     """Run the script with `build` standing in for the real build.
 
@@ -117,7 +117,11 @@ def nightly(
             **CLEAN_ENV,
             "NIGHTLY_BUILD": str(stub),
             "NIGHTLY_TIMEOUT": seconds,
-            "NIGHTLY_FIRSTSEEN": firstseen,
+            # None omits the variable, which is the only way to exercise the
+            # script's own DEFAULT. Every other test here supplies both seams,
+            # and that is exactly how a default naming .venv/bin/python reached
+            # production unrun.
+            **({} if firstseen is None else {"NIGHTLY_FIRSTSEEN": firstseen}),
             "PYTHONPATH": str(Path.cwd()),
         },
         capture_output=True,
@@ -313,3 +317,41 @@ def test_one_schedule_because_a_second_would_be_a_slower_tier() -> None:
         f"{scheduled}: a second schedule refreshes part of the corpus less often "
         "than the snapshot date the site publishes"
     )
+
+
+def test_the_first_seen_step_runs_without_any_seam_set(repo: Path) -> None:
+    """The DEFAULT interpreter, on a machine with no .venv — which is CI.
+
+    This is the test that did not exist, and its absence cost a full nightly.
+    `nightly.yml` supplies NIGHTLY_BUILD to give CI an interpreter, so the
+    build's `.venv/bin/python` default never ran there; T15.2 copied that seam
+    without the caller-side half, and every test overrode both. The result was a
+    step that worked on every laptop and exited 127 at 03:26, after the build had
+    already spent ten minutes and thrown the result away (run 30874273868).
+
+    The fixture repo has no .venv, so omitting the override is the whole test:
+    the script must resolve an interpreter that exists rather than name one.
+    """
+    (repo / "fresh.json").write_text(
+        json.dumps(
+            {
+                "schema_version": 10,
+                "snapshot": "2026-08-05",
+                "companies": [{"name": "Acme", "roles": [{"url": "https://boards/9"}]}],
+            }
+        )
+    )
+    (repo / "fresh-report.json").write_text(json.dumps({"listed": ["Acme"]}))
+
+    done = nightly(
+        repo,
+        "cp fresh.json data/companies.json\ncp fresh-report.json data/build-report.json",
+        firstseen=None,
+    )
+
+    assert "No such file or directory" not in done.stderr, done.stderr
+    assert done.returncode == 0, done.stderr
+    # Not merely "it did not die": the artifact has to have been written, or a
+    # step that silently no-opped would pass this too.
+    art = json.loads(git(repo, "show", "HEAD:data/first-seen.json"))
+    assert art["dates"]["2026-08-05"]["unconfirmed"] == ["https://boards/9"]

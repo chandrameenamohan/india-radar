@@ -19,6 +19,21 @@
 set -euo pipefail
 cd "$(dirname "$0")/.."
 
+# The interpreter for both steps below, RESOLVED rather than assumed.
+#
+# CI has no .venv and never will: the pipeline is dependency-free, so
+# nightly.yml deliberately carries no setup-python and no install step. A default
+# naming `.venv/bin/python` is therefore a line that works on every laptop and
+# exits 127 in the only place it runs unattended — measured, run 30874273868,
+# which spent ten minutes building all 371 boards and threw the result away on
+# `.venv/bin/python: No such file or directory`.
+#
+# The seam that hid it is worth naming: nightly.yml passed NIGHTLY_BUILD to
+# supply CI's interpreter, so the build's identical default never ran there
+# either. A second step copied the pattern without the caller-side half, and
+# every test overrode both seams, so nothing anywhere exercised a default.
+PY=$([ -x .venv/bin/python ] && echo .venv/bin/python || echo python3)
+
 # The bound. Measured full build: 11m26s, of which ~8.6 is Greenhouse's 429
 # sequential calls at 1.2s each (re-measured 2026-07-29 — FINDINGS §1's 0.35s no
 # longer holds). 90 minutes is eight times the measured run and a quarter of
@@ -29,7 +44,7 @@ cd "$(dirname "$0")/.."
 # so the dry-run test can substitute a stub for the real build — the gate does
 # not do full-corpus builds (VERIFICATION.md).
 # shellcheck disable=SC2086
-timeout "${NIGHTLY_TIMEOUT:-5400}" ${NIGHTLY_BUILD:-.venv/bin/python -m src.build}
+timeout "${NIGHTLY_TIMEOUT:-5400}" ${NIGHTLY_BUILD:-$PY -m src.build}
 
 # T15.2. Dates every role URL the build just published that the artifact has not
 # seen before, and marks it new ONLY where the company's board was read on the
@@ -49,7 +64,7 @@ timeout "${NIGHTLY_TIMEOUT:-5400}" ${NIGHTLY_BUILD:-.venv/bin/python -m src.buil
 # Same seam as NIGHTLY_BUILD above, for the same reason and unquoted for the
 # same reason: it is a command line, and the dry-run test substitutes one.
 # shellcheck disable=SC2086
-${NIGHTLY_FIRSTSEEN:-.venv/bin/python -m src.firstseen}
+${NIGHTLY_FIRSTSEEN:-$PY -m src.firstseen}
 
 git add -- data/companies.json data/build-report.json data/first-seen.json
 if git diff --cached --quiet; then
