@@ -2224,7 +2224,7 @@
  "Bitstack": {
   "what": "A bitcoin savings app with automatic purchase round-ups",
   "for_whom": "Everyday savers across twenty European countries",
-  "why_them": "over 350,000 users and \u20ac350 million invested in bitcoin",
+  "why_them": "over 350,000 users and €350 million invested in bitcoin",
   "ai": true
  },
  "Cambly": {
@@ -2337,7 +2337,7 @@
  },
  "Lendable": {
   "what": "Online personal loans with rates quoted before applying",
-  "for_whom": "UK consumers borrowing between \u00a31,000 and \u00a325,000",
+  "for_whom": "UK consumers borrowing between £1,000 and £25,000",
   "why_them": "Site claims a new customer approved every 30 seconds",
   "ai": true
  },
@@ -2488,7 +2488,49 @@
  "Zilch": {
   "what": "A credit card with pay-now or instalment repayment options",
   "for_whom": "UK shoppers aged 18 and over",
-  "why_them": "States over 6 million customers, credit \u00a350\u2013\u00a34,500",
+  "why_them": "States over 6 million customers, credit £50–£4,500",
   "ai": true
+ },
+ "Blitzy": {
+  "what": "An agentic platform that writes production software from requirements",
+  "for_whom": "Enterprises building custom software",
+  "why_them": "Aims to execute 80% of the development work autonomously",
+  "ai": true,
+  "source": "board"
+ },
+ "OpenAI": {
+  "what": "AI research deployed as products and an API",
+  "for_whom": "Anyone using general-purpose AI, from consumers to developers",
+  "why_them": "Builds general-purpose AI with safety as the stated constraint",
+  "ai": true,
+  "source": "board"
+ },
+ "Parker": {
+  "what": "A corporate card with profitability software for online sellers",
+  "for_whom": "eCommerce merchants managing their margins",
+  "why_them": "Financial tooling built around profit rather than spend",
+  "ai": true,
+  "source": "board"
+ },
+ "Sorare": {
+  "what": "Fantasy sports played with officially licensed digital player cards",
+  "for_whom": "Sports fans who collect, trade and compete",
+  "why_them": "Licensed by 300+ clubs and leagues, 5M users across 180 countries",
+  "ai": true,
+  "source": "board"
+ },
+ "Super": {
+  "what": "A technology group behind sports betting and online entertainment",
+  "for_whom": "Consumers in its European and Brazilian markets",
+  "why_them": "5,000 staff across a dozen countries, grown out of sports betting",
+  "ai": true,
+  "source": "board"
+ },
+ "The Athletic": {
+  "what": "In-depth sports journalism from a 500-strong newsroom",
+  "for_whom": "Fans following specific teams, leagues and athletes",
+  "why_them": "Covers hundreds of teams across 47 markets and all 20 Premier League clubs",
+  "ai": true,
+  "source": "board"
  }
 }

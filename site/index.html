@@ -1880,10 +1880,24 @@ function descBlock(d) {
   // started, and their three lines looked exactly like the ones somebody had
   // read. An unverified description is not a wrong one. It is one nobody has
   // stood behind, and the page has to be able to say which it is showing.
+  // A THIRD provenance, because a third source now exists. Six companies serve
+  // no readable website — openai.com answers 403 to every path, getparker.com
+  // 404s, sorare.com serves a browser gate — and were blank for it. Their own
+  // job BOARD describes them plainly, and the board is the source this whole
+  // register rests on ("proven by their own job board"), so it is a first-party
+  // source rather than a fallback to hearsay.
+  //
+  // It gets its own line rather than borrowing one. "Checked against their own
+  // site" would be false — no site was read. "Unverified" would be untrue in the
+  // other direction: it was read, off a first-party source, just not the one the
+  // audit uses. A page that prints where a claim came from cannot round the
+  // answer to the nearest existing string.
   if (d.ai) {
-    block.append(el('p', 'prov', d.checked
-      ? 'AI-summarized · checked against their own site'
-      : 'AI-summarized · unverified'));
+    block.append(el('p', 'prov', d.source === 'board'
+      ? 'AI-summarized · read from their own job board'
+      : d.checked
+        ? 'AI-summarized · checked against their own site'
+        : 'AI-summarized · unverified'));
   }
   return block;
 }

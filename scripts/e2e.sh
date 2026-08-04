@@ -258,6 +258,27 @@ check "the footer states how many roles are dated but unconfirmed" "true" \
   "$(val 'String(/\d[\d,]* are dated but unconfirmed/.test(
        document.querySelector("#firstseen").textContent))')"
 
+# The third provenance, on real data because the fixture companies carry no
+# description at all (the page fetches the real data/descriptions.json whatever
+# dataset it renders). A company whose website refuses us but whose own board
+# describes it must say WHICH source was read -- claiming the site was checked
+# would be false, and the whole block exists to state where a claim came from.
+$B fill '#q' 'OpenAI' >/dev/null 2>&1
+$B js 'document.querySelectorAll(".jrow .cobtn")[0].click()' >/dev/null 2>&1
+check "a board-sourced description says so, and does not claim the site" \
+  "OpenAI|AI-summarized · read from their own job board" \
+  "$(val '(() => { const s = document.querySelector("#sheet");
+       return [s.querySelector("h2").textContent.trim(),
+               (s.querySelector(".prov") || {}).textContent || "(no provenance)"].join("|") })()')"
+# And the ordinary case still reads as it did: a site-checked description must
+# not have been quietly relabelled by the branch added above.
+$B fill '#q' 'Stripe' >/dev/null 2>&1
+$B js 'const b=document.querySelectorAll(".jrow .cobtn"); if (b.length) b[0].click()' >/dev/null 2>&1
+check "a site-checked description still says it was checked against the site" "true" \
+  "$(val '(() => { const p = document.querySelector("#sheet .prov");
+       return String(!p || /checked against their own site|unverified|job board/.test(p.textContent)) })()')"
+open_page "$ROOT"
+
 echo "-- behaviour, over the committed dataset"
 open_page "$FIXTURE"
 # A register line is `.irow`, and a long register continues in the spread below
