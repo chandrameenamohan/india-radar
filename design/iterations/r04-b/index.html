@@ -1,0 +1,371 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>789 companies hiring tonight — the shortlist instrument</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%231436e0'/%3E%3C/svg%3E">
+<link rel="preload" as="fetch" href="../../fixture-v2/cards.json" crossorigin>
+<link rel="modulepreload" href="./taxonomy.js">
+<link rel="modulepreload" href="./app.js">
+<style>
+:root{
+  --paper:#fff; --panel:#f7f7f4; --sunk:#f1f1ed;
+  --ink:#121216; --mid:#55555f; --faint:#8a8a94; --rule:#e5e5df; --rule2:#d6d6ce;
+  --accent:#1436e0; --accent-soft:#eef1ff;
+  --keep:#b4460c; --keep-soft:#fdf1e7;
+  --warn:#8e2f10; --warn-soft:#fbeee9;
+  --mono:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:var(--paper); color:var(--ink); font-family:var(--sans);
+  font-size:14px; line-height:1.35; -webkit-font-smoothing:antialiased;
+  padding-bottom:44px;
+}
+a{color:inherit}
+.wrap{max-width:1180px;margin:0 auto;padding:0 26px}
+
+/* ── masthead-less header ─────────────────────────────────────────────── */
+header{padding:11px 0 0}
+.h1{font-size:14.5px;font-weight:600;letter-spacing:-.005em}
+.h1 b{font-family:var(--mono);font-weight:600;font-size:14px}
+.h2{font-size:13px;color:var(--mid);margin-top:3px}
+.h2 b{font-family:var(--mono);font-weight:600;color:var(--ink)}
+.how{
+  font:inherit;font-size:12.5px;color:var(--accent);background:none;border:0;
+  padding:0 0 0 4px;cursor:pointer;text-decoration:underline;text-underline-offset:2px;
+  text-decoration-style:dotted;
+}
+.how:hover{background:var(--accent-soft)}
+.h3{
+  font-size:12px;color:var(--faint);margin-top:3px;
+  display:flex;flex-wrap:wrap;gap:0 10px;align-items:baseline;
+}
+.h3 .g{white-space:nowrap}
+.h3 .g b{font-family:var(--mono);color:var(--mid);font-weight:600}
+
+/* ── the one control row ──────────────────────────────────────────────── */
+.ctl{
+  display:flex;align-items:center;gap:8px;flex-wrap:wrap;
+  margin:8px 0 0;padding:7px 0 8px;border-top:1px solid var(--rule);
+  font-size:15px;
+}
+.ctl .lead{color:var(--mid);font-size:14px}
+.sel{position:relative;display:inline-flex;align-items:center}
+.sel select{
+  appearance:none;-webkit-appearance:none;
+  font-family:var(--sans);font-size:15px;font-weight:600;color:var(--ink);
+  background:var(--sunk);border:1px solid var(--rule2);border-radius:5px;
+  padding:4px 26px 4px 9px;cursor:pointer;letter-spacing:-.01em;
+}
+.sel select:focus{outline:2px solid var(--accent);outline-offset:1px;background:var(--accent-soft)}
+.sel::after{content:"▾";position:absolute;right:9px;color:var(--faint);pointer-events:none;font-size:11px}
+.tog{
+  display:inline-flex;align-items:center;gap:6px;margin-left:auto;
+  font-size:13.5px;color:var(--ink);cursor:pointer;user-select:none;
+  padding:4px 9px;border:1px solid var(--rule2);border-radius:5px;background:var(--sunk);
+}
+.tog input{margin:0;accent-color:var(--accent)}
+.tog kbd{margin-left:2px}
+kbd{
+  font-family:var(--mono);font-size:10.5px;line-height:1;color:var(--mid);
+  background:var(--paper);border:1px solid var(--rule2);border-bottom-width:2px;
+  border-radius:3px;padding:2px 4px;
+}
+
+/* ── yield line ───────────────────────────────────────────────────────── */
+.yield{
+  font-size:13px;color:var(--mid);padding:0 0 6px;border-bottom:1px solid var(--rule);
+}
+.yield b{font-family:var(--mono);color:var(--ink);font-weight:600}
+.yield .pend{color:var(--faint)}
+
+/* ── shortlist strip ──────────────────────────────────────────────────── */
+.strip{
+  position:sticky;top:0;z-index:30;background:var(--paper);
+  border-bottom:1px solid var(--rule);padding:5px 0 6px;margin-bottom:0;
+}
+.strip.empty .chips{color:var(--faint);font-size:12.5px}
+.striplabel{
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--faint);margin-right:8px;
+}
+.chips{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.chip{
+  display:inline-flex;align-items:baseline;gap:6px;font-size:12.5px;
+  background:var(--keep-soft);border:1px solid #f0d6c2;border-radius:4px;
+  padding:3px 6px 3px 8px;color:var(--ink);
+}
+.chip.witness{background:var(--sunk);border-color:var(--rule2);color:var(--mid)}
+.chip .n{font-family:var(--mono);font-size:11px;color:var(--keep)}
+.chip.witness .n{color:var(--faint)}
+.chip button{
+  border:0;background:none;cursor:pointer;color:var(--faint);font-size:12px;padding:0 0 0 2px;
+}
+.chip button:hover{color:var(--warn)}
+.ask{
+  display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;
+  font-size:13px;padding:6px 9px;margin:5px 0 0;
+  background:var(--accent-soft);border:1px solid #ccd5fb;border-radius:5px;
+}
+.ask b{font-family:var(--mono);font-weight:600}
+.ask .btns{display:flex;gap:5px;margin-left:auto}
+.ask button{
+  font:inherit;font-size:12.5px;background:var(--paper);border:1px solid var(--rule2);
+  border-radius:4px;padding:2px 9px;cursor:pointer;
+}
+.ask button:hover{border-color:var(--accent);color:var(--accent)}
+
+/* ── company cards ────────────────────────────────────────────────────── */
+#list{margin-top:2px}
+.card{
+  position:relative;padding:8px 14px 9px 46px;border-bottom:1px solid var(--rule);
+  scroll-margin-top:96px;
+}
+.card::before{
+  content:"";position:absolute;left:0;top:-1px;bottom:-1px;width:3px;background:transparent;
+}
+.rank{
+  position:absolute;left:0;top:10px;width:36px;text-align:right;
+  font-family:var(--mono);font-size:11px;color:#c2c2c9;font-variant-numeric:tabular-nums;
+}
+.card.cur .rank{color:var(--accent);font-weight:600}
+.card.kept .rank{color:var(--keep)}
+.card.cur{background:#fafaf8}
+.card.cur::before{background:var(--accent)}
+.card.kept{background:#fdf7f2}
+.card.kept.cur{background:#fdf1e9}
+.card.kept::before{background:var(--keep)}
+.name{
+  font-size:18.5px;font-weight:640;letter-spacing:-.017em;margin:0;flex:1 1 auto;line-height:1.25;
+  display:flex;align-items:baseline;gap:10px;
+}
+.name .nm{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:0 1 auto}
+.name .cnt{
+  margin-left:auto;font-family:var(--mono);font-size:12px;font-weight:600;
+  color:var(--mid);letter-spacing:0;white-space:nowrap;
+}
+.name .cnt em{font-style:normal;color:var(--faint);font-weight:400}
+.row2{display:flex;align-items:baseline;gap:8px;margin-top:2px;flex-wrap:wrap}
+.gate{
+  font-size:13px;color:var(--accent);text-decoration:none;
+  border-bottom:1px solid #c3ccf7;
+}
+.gate:hover{background:var(--accent-soft);border-bottom-color:var(--accent)}
+.gate .arw{font-size:10px;opacity:.75}
+.badge{
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.03em;
+  border:1px solid var(--rule2);border-radius:3px;padding:1.5px 5px;color:var(--mid);
+  text-decoration:none;white-space:nowrap;
+}
+.badge.status{background:var(--warn-soft);border-color:#eccfc3;color:var(--warn)}
+.badge.tc{background:var(--accent-soft);border-color:#ccd5fb;color:var(--accent)}
+.slot{margin-left:auto}
+.facts{
+  font-size:12.5px;color:var(--faint);margin-top:4px;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.facts .k{color:var(--mid)}
+.facts .v{font-family:var(--mono);font-size:11.5px;color:var(--ink)}
+.facts .on{color:var(--ink);font-weight:600}
+.facts .more{color:var(--faint)}
+.row4{display:flex;align-items:center;gap:10px;margin-top:5px}
+.row4 .facts{margin-top:0;flex:1 1 auto;min-width:0}
+.act{display:flex;align-items:center;gap:6px;flex:0 0 auto}
+.btn{
+  font:inherit;font-size:12.5px;background:var(--paper);color:var(--ink);
+  border:1px solid var(--rule2);border-radius:5px;padding:3px 10px;cursor:pointer;
+  display:inline-flex;align-items:center;gap:6px;white-space:nowrap;
+}
+.btn:hover{border-color:var(--ink)}
+.btn.keep:hover{border-color:var(--keep);color:var(--keep)}
+.btn.keep.on{background:var(--keep);border-color:var(--keep);color:#fff}
+.btn.keep.on kbd{background:transparent;color:#fbe6d8;border-color:#d98a58}
+.btn.pri{background:var(--ink);border-color:var(--ink);color:#fff;font-weight:600}
+.btn.pri:hover{background:var(--accent);border-color:var(--accent)}
+.btn.pri kbd{background:transparent;color:#c9cbd4;border-color:#4a4a55}
+.btn .num{font-family:var(--mono);font-weight:700}
+
+/* ── expanded roles ───────────────────────────────────────────────────── */
+.roles{margin:9px 0 2px;border-top:1px dashed var(--rule2);padding-top:7px}
+.what{
+  font-size:12.5px;color:var(--mid);margin:0 0 7px;
+}
+.what a{
+  font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--faint);text-decoration:none;border-bottom:1px dotted var(--rule2);margin-right:7px;
+}
+.what a:hover{color:var(--accent)}
+.role{
+  display:flex;align-items:baseline;gap:10px;padding:4px 6px;border-radius:4px;
+  text-decoration:none;color:inherit;font-size:13px;
+}
+.role:hover{background:var(--accent-soft)}
+.role.rcur{background:var(--accent-soft);box-shadow:inset 0 0 0 1px #ccd5fb}
+.role .k{
+  font-family:var(--mono);font-size:10.5px;color:var(--faint);width:15px;flex:0 0 15px;
+  text-align:right;
+}
+.role .t{flex:1 1 auto;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.role .p{color:var(--faint);font-size:12px;flex:0 0 auto;max-width:230px;overflow:hidden;
+  text-overflow:ellipsis;white-space:nowrap}
+.role .visa{font-size:11px;color:var(--accent);flex:0 0 auto}
+.role .d{font-size:11px;color:var(--faint);flex:0 0 auto;max-width:150px;overflow:hidden;
+  text-overflow:ellipsis;white-space:nowrap;font-family:var(--mono)}
+.role .go{font-size:11.5px;color:var(--accent);flex:0 0 auto;width:96px;text-align:right;white-space:nowrap}
+.role.opened{color:var(--faint)}
+.role.opened .t{text-decoration:none}
+.role.opened .go{color:var(--keep);font-family:var(--mono);font-size:10.5px}
+.rest{
+  font-size:12px;color:var(--faint);padding:5px 6px 0;display:flex;gap:12px;align-items:baseline;
+  flex-wrap:wrap;
+}
+.rest button{font:inherit;font-size:12px;background:none;border:0;color:var(--accent);
+  cursor:pointer;text-decoration:underline;text-underline-offset:2px;padding:0}
+
+/* ── giants + footer ──────────────────────────────────────────────────── */
+.held{margin:22px 0 0;border-top:2px solid var(--rule2);padding-top:10px}
+.held>summary{
+  cursor:pointer;font-size:13px;color:var(--mid);list-style:none;padding:2px 0;
+}
+.held>summary::-webkit-details-marker{display:none}
+.held>summary b{font-family:var(--mono);color:var(--ink)}
+.held>summary::before{content:"▸ ";color:var(--faint)}
+.held[open]>summary::before{content:"▾ "}
+.tail{padding:26px 0 10px;font-size:12.5px;color:var(--faint);line-height:1.6}
+.tail b{font-family:var(--mono);color:var(--mid)}
+
+/* ── the key bar ──────────────────────────────────────────────────────── */
+.keybar{
+  position:fixed;left:0;right:0;bottom:0;z-index:40;background:var(--panel);
+  border-top:1px solid var(--rule2);font-size:12px;color:var(--mid);
+}
+.keybar .wrap{display:flex;gap:14px;align-items:center;padding:7px 26px;flex-wrap:wrap}
+.keybar span{white-space:nowrap;display:inline-flex;align-items:center;gap:4px}
+.keybar .st{margin-left:auto;font-family:var(--mono);font-size:11px;color:var(--faint)}
+
+/* ── the how panel ────────────────────────────────────────────────────── */
+.veil{
+  position:fixed;inset:0;z-index:60;background:rgba(18,18,22,.34);
+  display:flex;align-items:flex-start;justify-content:center;padding:40px 20px;overflow:auto;
+}
+.veil[hidden]{display:none}
+.sheet{
+  background:var(--paper);border-radius:8px;max-width:760px;width:100%;
+  padding:22px 26px 24px;box-shadow:0 20px 60px rgba(0,0,0,.24);
+}
+.sheet h2{font-size:17px;margin:0 0 3px;letter-spacing:-.015em}
+.sheet .sub{font-size:12.5px;color:var(--faint);margin:0 0 16px}
+.funnel{font-family:var(--mono);font-size:12.5px;line-height:1.75;margin:0 0 14px}
+.funnel .n{display:inline-block;width:76px;text-align:right;font-weight:600}
+.funnel .lab{color:var(--mid)}
+.funnel .in{color:var(--faint)}
+.funnel a{color:var(--accent)}
+.sheet table{border-collapse:collapse;width:100%;font-size:12.5px;margin:0 0 14px}
+.sheet td,.sheet th{text-align:left;padding:4px 8px 4px 0;border-bottom:1px solid var(--rule)}
+.sheet th{font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--faint);font-weight:500}
+.sheet td.n{font-family:var(--mono);text-align:right;width:60px}
+.sheet p{font-size:12.5px;color:var(--mid);line-height:1.55}
+.sheet .keys{display:grid;grid-template-columns:repeat(2,1fr);gap:4px 22px;font-size:12.5px;margin:0 0 14px}
+.sheet .keys div{display:flex;gap:8px;align-items:baseline}
+.sheet .keys kbd{flex:0 0 auto;min-width:20px;text-align:center}
+.sheet .close{
+  font:inherit;font-size:12.5px;background:var(--ink);color:#fff;border:0;border-radius:5px;
+  padding:5px 12px;cursor:pointer;
+}
+@media (max-width:900px){
+  .wrap{padding:0 14px}
+  .keybar{display:none}
+  .name{font-size:17px}
+  .role .p{max-width:130px}
+  .role .d{display:none}
+  body{padding-bottom:8px}
+}
+/* Narrow: the loop is the same, the row just stops being a row. */
+@media (max-width:760px){
+  .card{padding:9px 12px 10px 15px}
+  .rank{display:none}
+  .name{flex-wrap:wrap;font-size:18px}
+  .name .nm{flex:1 1 100%;white-space:normal}
+  .name .cnt{margin-left:0;margin-top:1px}
+  .facts{white-space:normal}
+  .row4{flex-direction:column;align-items:stretch;gap:7px}
+  .act{justify-content:flex-end}
+  .ctl{font-size:14px;gap:6px}
+  .sel select{font-size:14px}
+  .tog{margin-left:0}
+  .role{flex-wrap:wrap}
+  .role .t{flex:1 1 100%}
+  .role .p{max-width:none;flex:1 1 auto}
+  .sheet .keys{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+<header>
+  <div class="h1"><b>789</b> companies hiring · <b>27,689</b> roles open on their own boards · read Aug 4, 2026</div>
+  <div class="h2">We read <b>10,125</b> companies to get here. <b>6,895</b> didn't qualify. <b>2,076</b> more qualified but had no job board we could resolve. <button class="how" id="how" type="button">↗ how</button></div>
+  <div class="h3"><span class="g">Every card below names its own gate:</span><span class="g"><b>298</b> Y Combinator</span><span class="g"><b>291</b> CB Insights</span><span class="g"><b>101</b> SEC Form D</span><span class="g"><b>78</b> Forbes</span><span class="g"><b>20</b> TechCrunch</span><span class="g"><b>1</b> FinSMEs</span></div>
+
+  <div class="ctl">
+    <span class="lead">I'm in</span>
+    <span class="sel"><select id="field" aria-label="field"><option value="all">any field</option><option value="engineering">Engineering — 6,971 roles</option><option value="sales">Sales &amp; GTM — 4,442 roles</option><option value="other">Other — 3,132 roles</option><option value="customer">Customer — 2,498 roles</option><option value="marketing">Marketing &amp; Growth — 2,338 roles</option><option value="operations">Operations — 1,991 roles</option><option value="finance">Finance &amp; Legal — 1,959 roles</option><option value="product">Product — 1,227 roles</option><option value="data">Data &amp; Research — 1,021 roles</option><option value="people">People — 648 roles</option><option value="security">Security &amp; IT — 559 roles</option><option value="design">Design — 498 roles</option><option value="clinical">Clinical &amp; Care — 198 roles</option></select></span>
+    <span class="lead">looking in</span>
+    <span class="sel"><select id="place" aria-label="place"><option value="all">anywhere</option><option value="Remote">Remote — 4,666 roles</option><option value="San Francisco">San Francisco — 4,316 roles</option><option value="New York">New York — 2,918 roles</option><option value="London">London — 1,362 roles</option><option value="United States">United States — 908 roles</option><option value="Seoul">Seoul — 603 roles</option><option value="Bengaluru">Bengaluru — 585 roles</option><option value="Austin">Austin — 438 roles</option><option value="Seattle">Seattle — 433 roles</option><option value="Singapore">Singapore — 410 roles</option><option value="Toronto">Toronto — 353 roles</option><option value="Chicago">Chicago — 328 roles</option><option value="Long Beach">Long Beach — 320 roles</option><option value="São Paulo">São Paulo — 284 roles</option><option value="Sunnyvale">Sunnyvale — 252 roles</option><option value="Berlin">Berlin — 246 roles</option><option value="Mountain View">Mountain View — 241 roles</option><option value="Boston">Boston — 222 roles</option><option value="Munich">Munich — 212 roles</option><option value="Denver">Denver — 210 roles</option><option value="Washington DC">Washington DC — 205 roles</option><option value="United Kingdom">United Kingdom — 203 roles</option><option value="Dublin">Dublin — 195 roles</option><option value="Paris">Paris — 191 roles</option><option value="Tokyo">Tokyo — 189 roles</option><option value="Palo Alto">Palo Alto — 189 roles</option><option value="Sydney">Sydney — 180 roles</option><option value="Montreal">Montreal — 173 roles</option><option value="San Mateo">San Mateo — 163 roles</option><option value="Spain">Spain — 150 roles</option><option value="Barcelona">Barcelona — 149 roles</option><option value="India">India — 149 roles</option><option value="Portugal">Portugal — 144 roles</option><option value="Canada">Canada — 141 roles</option><option value="Hong Kong">Hong Kong — 139 roles</option><option value="Amsterdam">Amsterdam — 130 roles</option><option value="Los Angeles">Los Angeles — 128 roles</option><option value="Madrid">Madrid — 126 roles</option><option value="Stockholm">Stockholm — 122 roles</option><option value="Atlanta">Atlanta — 119 roles</option><option value="Vancouver">Vancouver — 119 roles</option><option value="Salt Lake City">Salt Lake City — 119 roles</option><option value="Miami">Miami — 117 roles</option><option value="Raleigh">Raleigh — 117 roles</option><option value="Hyderabad">Hyderabad — 110 roles</option><option value="Everett">Everett — 109 roles</option><option value="San Jose">San Jose — 106 roles</option><option value="Milan">Milan — 104 roles</option><option value="Mexico City">Mexico City — 101 roles</option><option value="Ireland">Ireland — 95 roles</option><option value="Lisbon">Lisbon — 94 roles</option><option value="Brazil">Brazil — 90 roles</option><option value="Germany">Germany — 88 roles</option><option value="Dallas">Dallas — 84 roles</option><option value="Bellevue">Bellevue — 83 roles</option><option value="Poland">Poland — 82 roles</option><option value="Auckland">Auckland — 82 roles</option><option value="Tel Aviv">Tel Aviv — 81 roles</option><option value="Mexico">Mexico — 78 roles</option><option value="Foster City">Foster City — 76 roles</option><option value="Menlo Park">Menlo Park — 73 roles</option><option value="Romania">Romania — 70 roles</option><option value="Espoo">Espoo — 70 roles</option><option value="Redwood City">Redwood City — 69 roles</option><option value="Playa Vista">Playa Vista — 68 roles</option><option value="Oakland">Oakland — 64 roles</option><option value="Melbourne">Melbourne — 63 roles</option><option value="Croatia">Croatia — 62 roles</option><option value="Santa Clara">Santa Clara — 62 roles</option><option value="Colombia">Colombia — 59 roles</option><option value="Bulgaria">Bulgaria — 57 roles</option><option value="Arlington">Arlington — 56 roles</option><option value="Dubai">Dubai — 56 roles</option><option value="Cambridge">Cambridge — 55 roles</option><option value="Pune">Pune — 54 roles</option><option value="Charlotte">Charlotte — 54 roles</option><option value="Japan">Japan — 53 roles</option><option value="Tel Aviv District">Tel Aviv District — 53 roles</option><option value="Budapest">Budapest — 52 roles</option><option value="Ann Arbor">Ann Arbor — 51 roles</option><option value="Hungary">Hungary — 51 roles</option><option value="Cary">Cary — 51 roles</option><option value="Argentina">Argentina — 49 roles</option><option value="Warsaw">Warsaw — 48 roles</option><option value="Houston">Houston — 48 roles</option><option value="EMEA">EMEA — 45 roles</option><option value="Almaty">Almaty — 45 roles</option><option value="Buenos Aires">Buenos Aires — 44 roles</option><option value="Sofia">Sofia — 44 roles</option><option value="France">France — 43 roles</option><option value="Netherlands">Netherlands — 43 roles</option><option value="Pittsburgh">Pittsburgh — 43 roles</option><option value="BLANK">BLANK — 43 roles</option><option value="North America">North America — 42 roles</option><option value="Somerville">Somerville — 42 roles</option><option value="Research Triangle Park">Research Triangle Park — 42 roles</option><option value="Australia">Australia — 41 roles</option><option value="Zurich">Zurich — 41 roles</option><option value="Brasil">Brasil — 41 roles</option><option value="Vienna">Vienna — 40 roles</option><option value="Orlando">Orlando — 37 roles</option><option value="Betterment HQ - New York City">Betterment HQ - New York City — 36 roles</option><option value="Shanghai">Shanghai — 36 roles</option><option value="Belgrade">Belgrade — 36 roles</option><option value="Czech Republic">Czech Republic — 35 roles</option><option value="Taipei">Taipei — 35 roles</option><option value="Milpitas">Milpitas — 35 roles</option><option value="Cape Canaveral">Cape Canaveral — 35 roles</option><option value="Las Vegas">Las Vegas — 34 roles</option><option value="Valencia">Valencia — 34 roles</option><option value="Europe">Europe — 34 roles</option><option value="Lithuania">Lithuania — 34 roles</option><option value="Phoenix">Phoenix — 33 roles</option><option value="California">California — 32 roles</option><option value="Cape Town">Cape Town — 32 roles</option><option value="Greenwich">Greenwich — 31 roles</option><option value="San Francisco Office (Fremont St)">San Francisco Office (Fremont St) — 31 roles</option><option value="Kent">Kent — 31 roles</option><option value="Italy">Italy — 30 roles</option><option value="Texas">Texas — 29 roles</option><option value="APAC">APAC — 29 roles</option><option value="Mumbai">Mumbai — 28 roles</option><option value="Sweden">Sweden — 28 roles</option><option value="Any location">Any location — 28 roles</option><option value="Lehi">Lehi — 28 roles</option><option value="Porto">Porto — 28 roles</option><option value="Irvine">Irvine — 28 roles</option><option value="Athens">Athens — 28 roles</option><option value="South Africa">South Africa — 27 roles</option><option value="Switzerland">Switzerland — 27 roles</option><option value="Fort Lee">Fort Lee — 27 roles</option><option value="San Jose Office (First St)">San Jose Office (First St) — 27 roles</option><option value="Philadelphia">Philadelphia — 26 roles</option><option value="Latin America">Latin America — 26 roles</option><option value="Denmark">Denmark — 25 roles</option><option value="Columbus">Columbus — 25 roles</option><option value="Luxembourg">Luxembourg — 25 roles</option><option value="Delhi">Delhi — 24 roles</option><option value="Nashville">Nashville — 24 roles</option><option value="Hayward CA">Hayward CA — 24 roles</option><option value="Riyadh">Riyadh — 24 roles</option><option value="Herzliya">Herzliya — 23 roles</option><option value="Portland">Portland — 23 roles</option><option value="Belgium">Belgium — 23 roles</option><option value="Copenhagen">Copenhagen — 23 roles</option><option value="Greece">Greece — 23 roles</option><option value="Stennis Space Center">Stennis Space Center — 23 roles</option><option value="Americas">Americas — 22 roles</option><option value="Calgary">Calgary — 22 roles</option><option value="Estonia">Estonia — 22 roles</option><option value="Boulder">Boulder — 22 roles</option><option value="San Diego">San Diego — 22 roles</option><option value="United States &amp; Canada">United States &amp; Canada — 22 roles</option><option value="Virginia">Virginia — 21 roles</option><option value="Cyprus">Cyprus — 21 roles</option><option value="China">China — 20 roles</option><option value="Bay">Bay — 20 roles</option><option value="United Arab Emirates">United Arab Emirates — 20 roles</option><option value="Chile">Chile — 20 roles</option><option value="Peru">Peru — 20 roles</option><option value="HQ - Sunnyvale (Office)">HQ - Sunnyvale (Office) — 20 roles</option><option value="Lindon">Lindon — 19 roles</option><option value="Tampa">Tampa — 19 roles</option><option value="Porto Alegre">Porto Alegre — 19 roles</option><option value="Hybrid in Bangalore">Hybrid in Bangalore — 19 roles</option><option value="Serbia">Serbia — 19 roles</option><option value="Malmö">Malmö — 19 roles</option><option value="Florida">Florida — 18 roles</option><option value="Jakarta">Jakarta — 18 roles</option><option value="Chennai">Chennai — 18 roles</option><option value="Prague">Prague — 18 roles</option><option value="Stuttgart">Stuttgart — 17 roles</option><option value="Manchester">Manchester — 17 roles</option><option value="Austria">Austria — 17 roles</option><option value="Santiago">Santiago — 16 roles</option><option value="Boston Hub">Boston Hub — 16 roles</option><option value="San Jose Office (Zanker)">San Jose Office (Zanker) — 16 roles</option><option value="Lagos">Lagos — 16 roles</option><option value="Slovenia">Slovenia — 16 roles</option><option value="N/A">N/A — 16 roles</option><option value="Ukraine">Ukraine — 15 roles</option><option value="Helsinki">Helsinki — 15 roles</option><option value="Norway">Norway — 15 roles</option><option value="Rochester">Rochester — 15 roles</option><option value="Chariot">Chariot — 15 roles</option><option value="San Franscisco Hub">San Franscisco Hub — 15 roles</option><option value="USA - Austin (dbt)">USA - Austin (dbt) — 15 roles</option><option value="Belfast">Belfast — 14 roles</option><option value="Hybrid">Hybrid — 14 roles</option><option value="Detroit">Detroit — 14 roles</option><option value="Geneva">Geneva — 14 roles</option><option value="England">England — 14 roles</option><option value="SF Bay">SF Bay — 14 roles</option><option value="Herndon">Herndon — 14 roles</option><option value="Frankfurt">Frankfurt — 14 roles</option><option value="Seasonal Hiring">Seasonal Hiring — 14 roles</option><option value="HQ - San Francisco">HQ - San Francisco — 14 roles</option><option value="Addison">Addison — 14 roles</option><option value="Beijing">Beijing — 13 roles</option><option value="Finland">Finland — 13 roles</option><option value="Kitchener-Waterloo">Kitchener-Waterloo — 13 roles</option><option value="El Segundo">El Segundo — 13 roles</option><option value="Kuala Lumpur">Kuala Lumpur — 13 roles</option><option value="San Francisco (Klarity HQ)">San Francisco (Klarity HQ) — 13 roles</option><option value="San Francisco Office (Second St)">San Francisco Office (Second St) — 13 roles</option><option value="Slovakia">Slovakia — 13 roles</option><option value="Bangkok">Bangkok — 12 roles</option><option value="México">México — 12 roles</option><option value="Curitiba">Curitiba — 12 roles</option><option value="Doha">Doha — 12 roles</option><option value="Riga">Riga — 12 roles</option><option value="Scottsdale">Scottsdale — 12 roles</option><option value="Munich - Berlin">Munich - Berlin — 12 roles</option><option value="Massy - France">Massy - France — 12 roles</option><option value="Royal Oak">Royal Oak — 12 roles</option><option value="Zilch UK">Zilch UK — 12 roles</option></select></span>
+    <label class="tog" for="giants">
+      <input type="checkbox" id="giants" checked>
+      hide the giants <kbd>g</kbd>
+    </label>
+  </div>
+  <div class="yield" id="yield"><b>732</b> companies are hiring tonight. <b>57</b> have 100 or more roles open and are held back below.</div>
+</header>
+
+<div class="strip empty" id="strip">
+  <div class="chips" id="chips"><span class="striplabel">shortlist</span><span id="chipsempty">empty — press <kbd>x</kbd> on any company, or open a role and it lands here</span></div>
+  <div id="asks"></div>
+</div>
+
+<main id="list"><article class="card" data-slug="billiontoone"><span class="rank">1</span><h3 class="name"><span class="nm" elementtiming="first-card">BillionToOne</span><span class="cnt">98 roles open <em>· YC lists 300 people</em></span></h3><div class="row2"><a class="gate" href="https://www.ycombinator.com/companies/billiontoone" target="_blank" rel="noopener">Y Combinator, Summer 2017 <span class="arw">↗</span></a><span class="slot"></span><a class="badge status" href="https://www.ycombinator.com/companies/billiontoone" target="_blank" rel="noopener">YC says Public ↗</a></div><div class="facts"><span class="k">Sales &amp; GTM <span class="v">67</span></span> <span class="sep">·</span> <span class="k">Operations <span class="v">9</span></span> <span class="sep">·</span> <span class="k">Engineering <span class="v">7</span></span> <span class="sep">·</span> <span class="k">Security &amp; IT <span class="v">3</span></span> <span class="more">· 6 more fields, 12 roles</span></div><div class="row4"><div class="facts"><span class="k">Menlo Park <span class="v">19</span></span> <span class="sep">·</span> <span class="k">Union City <span class="v">8</span></span> <span class="sep">·</span> <span class="k">Remote <span class="v">7</span></span> <span class="sep">·</span> <span class="k">Minnesota <span class="v">2</span></span> <span class="more">· 62 more places, 62 roles</span></div><div class="act"><button class="btn keep" data-act="keep">◇ keep <kbd>x</kbd></button><button class="btn pri" data-act="expand"><span class="num">98</span> roles <kbd>↵</kbd></button></div></div><div class="roles" hidden></div></article><script>requestAnimationFrame(()=>requestAnimationFrame(()=>{window.__firstCardPainted=performance.now()}))</script><article class="card" data-slug="langchain"><span class="rank">2</span><h3 class="name"><span class="nm">LangChain</span><span class="cnt">97 roles open</span></h3><div class="row2"><a class="gate" href="https://www.cbinsights.com/company/langchain" target="_blank" rel="noopener">Listed by CB Insights <span class="arw">↗</span></a><span class="slot"></span></div><div class="facts"><span class="k">Engineering <span class="v">36</span></span> <span class="sep">·</span> <span class="k">Sales &amp; GTM <span class="v">35</span></span> <span class="sep">·</span> <span class="k">Customer <span class="v">12</span></span> <span class="sep">·</span> <span class="k">Marketing &amp; Growth <span class="v">5</span></span> <span class="more">· 3 more fields, 9 roles</span></div><div class="row4"><div class="facts"><span class="k">San Francisco <span class="v">40</span></span> <span class="sep">·</span> <span class="k">New York <span class="v">24</span></span> <span class="sep">·</span> <span class="k">London <span class="v">13</span></span> <span class="sep">·</span> <span class="k">Boston <span class="v">8</span></span> <span class="more">· 22 more places, 42 roles</span></div><div class="act"><button class="btn keep" data-act="keep">◇ keep <kbd>x</kbd></button><button class="btn pri" data-act="expand"><span class="num">97</span> roles <kbd>↵</kbd></button></div></div><div class="roles" hidden></div></article><article class="card" data-slug="pigment"><span class="rank">3</span><h3 class="name"><span class="nm">Pigment</span><span class="cnt">97 roles open</span></h3><div class="row2"><a class="gate" href="https://www.cbinsights.com/company/pigment-1" target="_blank" rel="noopener">Listed by CB Insights <span class="arw">↗</span></a><span class="slot"></span></div><div class="facts"><span class="k">Operations <span class="v">49</span></span> <span class="sep">·</span> <span class="k">Customer <span class="v">21</span></span> <span class="sep">·</span> <span class="k">Engineering <span class="v">16</span></span> <span class="sep">·</span> <span class="k">People <span class="v">10</span></span> <span class="more">· 1 more field, 1 role</span></div><div class="row4"><div class="facts"><span class="k">Paris <span class="v">23</span></span> <span class="sep">·</span> <span class="k">London <span class="v">16</span></span> <span class="sep">·</span> <span class="k">United States <span class="v">15</span></span> <span class="sep">·</span> <span class="k">Toronto <span class="v">13</span></span> <span class="more">· 12 more places, 48 roles</span></div><div class="act"><button class="btn keep" data-act="keep">◇ keep <kbd>x</kbd></button><button class="btn pri" data-act="expand"><span class="num">97</span> roles <kbd>↵</kbd></button></div></div><div class="roles" hidden></div></article><article class="card" data-slug="harnessinc"><span class="rank">4</span><h3 class="name"><span class="nm">Harness</span><span class="cnt">96 roles open</span></h3><div class="row2"><a class="gate" href="https://www.forbes.com/companies/harness/" target="_blank" rel="noopener">On a Forbes list <span class="arw">↗</span></a><span class="slot"></span></div><div class="facts"><span class="k">Sales &amp; GTM <span class="v">51</span></span> <span class="sep">·</span> <span class="k">Engineering <span class="v">20</span></span> <span class="sep">·</span> <span class="k">Customer <span class="v">6</span></span> <span class="sep">·</span> <span class="k">Product <span class="v">4</span></span> <span class="more">· 5 more fields, 15 roles</span></div><div class="row4"><div class="facts"><span class="k">Remote <span class="v">20</span></span> <span class="sep">·</span> <span class="k">Bengaluru <span class="v">18</span></span> <span class="sep">·</span> <span class="k">San Francisco <span class="v">10</span></span> <span class="sep">·</span> <span class="k">Austin <span class="v">5</span></span> <span class="more">· 23 more places, 43 roles</span></div><div class="act"><button class="btn keep" data-act="keep">◇ keep <kbd>x</kbd></button><button class="btn pri" data-act="expand"><span class="num">96</span> roles <kbd>↵</kbd></button></div></div><div class="roles" hidden></div></article><article class="card" data-slug="astranis"><span class="rank">5</span><h3 class="name"><span class="nm">Astranis</span><span class="cnt">95 roles open <em>· YC lists 500 people</em></span></h3><div class="row2"><a class="gate" href="https://www.ycombinator.com/companies/astranis" target="_blank" rel="noopener">Y Combinator, Winter 2016 <span class="arw">↗</span></a><span class="slot"></span></div><div class="facts"><span class="k">Engineering <span class="v">31</span></span> <span class="sep">·</span> <span class="k">Other <span class="v">27</span></span> <span class="sep">·</span> <span class="k">Operations <span class="v">22</span></span> <span class="sep">·</span> <span class="k">Finance &amp; Legal <span class="v">4</span></span> <span class="more">· 5 more fields, 11 roles</span></div><div class="row4"><div class="facts"><span class="k">San Francisco <span class="v">95</span></span></div><div class="act"><button class="btn keep" data-act="keep">◇ keep <kbd>x</kbd></button><button class="btn pri" data-act="expand"><span class="num">95</span> roles <kbd>↵</kbd></button></div></div><div class="roles" hidden></div></article><article class="card" data-slug="horizon3ai"><span class="rank">6</span><h3 class="name"><span class="nm">Horizon 3 AI</span><span class="cnt">95 roles open</span></h3><div class="row2"><a class="gate" href="https://www.sec.gov/Archives/edgar/data/1801975/000180197525000001/0001801975-25-000001-index.htm" target="_blank" rel="noopener">Filed a Form D for $73.0M on May 8, 2025 <span class="arw">↗</span></a><span class="slot"></span></div><div class="facts"><span class="k">Sales &amp; GTM <span class="v">44</span></span> <span class="sep">·</span> <span class="k">Engineering <span class="v">21</span></span> <span class="sep">·</span> <span class="k">Marketing &amp; Growth <span class="v">11</span></span> <span class="sep">·</span> <span class="k">Customer <span class="v">5</span></span> <span class="more">· 4 more fields, 14 roles</span></div><div class="row4"><div class="facts"><span class="k">Remote <span class="v">58</span></span> <span class="sep">·</span> <span class="k">Chicago <span class="v">7</span></span> <span class="sep">·</span> <span class="k">Amsterdam <span class="v">7</span></span> <span class="sep">·</span> <span class="k">New York <span class="v">6</span></span> <span class="more">· 17 more places, 24 roles</span></div><div class="act"><button class="btn keep" data-act="keep">◇ keep <kbd>x</kbd></button><button class="btn pri" data-act="expand"><span class="num">95</span> roles <kbd>↵</kbd></button></div></div><div class="roles" hidden></div></article><article class="card" data-slug="justworks"><span class="rank">7</span><h3 class="name"><span class="nm">Justworks</span><span class="cnt">93 roles open</span></h3><div class="row2"><a class="gate" href="https://www.cbinsights.com/company/justworks" target="_blank" rel="noopener">Listed by CB Insights <span class="arw">↗</span></a><span class="slot"></span></div><div class="facts"><span class="k">Sales &amp; GTM <span class="v">15</span></span> <span class="sep">·</span> <span class="k">Finance &amp; Legal <span class="v">15</span></span> <span class="sep">·</span> <span class="k">Engineering <span class="v">12</span></span> <span class="sep">·</span> <span class="k">Marketing &amp; Growth <span class="v">11</span></span> <span class="more">· 7 more fields, 40 roles</span></div><div class="row4"><div class="facts"><span class="k">New York <span class="v">73</span></span> <span class="sep">·</span> <span class="k">Remote <span class="v">7</span></span> <span class="sep">·</span> <span class="k">Mexico City <span class="v">4</span></span> <span class="sep">·</span> <span class="k">Tampa <span class="v">4</span></span> <span class="more">· 3 more places, 5 roles</span></div><div class="act"><button class="btn keep" data-act="keep">◇ keep <kbd>x</kbd></button><button class="btn pri" data-act="expand"><span class="num">93</span> roles <kbd>↵</kbd></button></div></div><div class="roles" hidden></div></article><article class="card" data-slug="gusto"><span class="rank">8</span><h3 class="name"><span class="nm">Gusto</span><span class="cnt">92 roles open <em>· YC lists 2,400 people</em></span></h3><div class="row2"><a class="gate" href="https://www.ycombinator.com/companies/gusto" target="_blank" rel="noopener">Y Combinator, Winter 2012 <span class="arw">↗</span></a><span class="slot"></span><a class="badge tc" href="https://www.ycombinator.com/companies/gusto" target="_blank" rel="noopener">YC top company ↗</a></div><div class="facts"><span class="k">Engineering <span class="v">26</span></span> <span class="sep">·</span> <span class="k">Customer <span class="v">20</span></span> <span class="sep">·</span> <span class="k">Sales &amp; GTM <span class="v">11</span></span> <span class="sep">·</span> <span class="k">Finance &amp; Legal <span class="v">8</span></span> <span class="more">· 6 more fields, 27 roles</span></div><div class="row4"><div class="facts"><span class="k">Denver <span class="v">43</span></span> <span class="sep">·</span> <span class="k">San Francisco <span class="v">19</span></span> <span class="sep">·</span> <span class="k">Remote <span class="v">9</span></span> <span class="sep">·</span> <span class="k">New York <span class="v">8</span></span> <span class="more">· 4 more places, 13 roles</span></div><div class="act"><button class="btn keep" data-act="keep">◇ keep <kbd>x</kbd></button><button class="btn pri" data-act="expand"><span class="num">92</span> roles <kbd>↵</kbd></button></div></div><div class="roles" hidden></div></article><article class="card" data-slug="socure"><span class="rank">9</span><h3 class="name"><span class="nm">Socure</span><span class="cnt">92 roles open</span></h3><div class="row2"><a class="gate" href="https://www.forbes.com/companies/socure/" target="_blank" rel="noopener">On a Forbes list <span class="arw">↗</span></a><span class="slot"></span></div><div class="facts"><span class="k">Sales &amp; GTM <span class="v">30</span></span> <span class="sep">·</span> <span class="k">Engineering <span class="v">19</span></span> <span class="sep">·</span> <span class="k">Marketing &amp; Growth <span class="v">19</span></span> <span class="sep">·</span> <span class="k">Data &amp; Research <span class="v">13</span></span> <span class="more">· 2 more fields, 11 roles</span></div><div class="row4"><div class="facts"><span class="k">New York <span class="v">60</span></span> <span class="sep">·</span> <span class="k">San Francisco <span class="v">60</span></span> <span class="sep">·</span> <span class="k">Seattle <span class="v">54</span></span> <span class="sep">·</span> <span class="k">Miami <span class="v">34</span></span> <span class="more">· 5 more places, 63 roles</span></div><div class="act"><button class="btn keep" data-act="keep">◇ keep <kbd>x</kbd></button><button class="btn pri" data-act="expand"><span class="num">92</span> roles <kbd>↵</kbd></button></div></div><div class="roles" hidden></div></article><article class="card" data-slug="kong"><span class="rank">10</span><h3 class="name"><span class="nm">Kong</span><span class="cnt">91 roles open</span></h3><div class="row2"><a class="gate" href="https://www.cbinsights.com/company/mashape" target="_blank" rel="noopener">Listed by CB Insights <span class="arw">↗</span></a><span class="slot"></span></div><div class="facts"><span class="k">Other <span class="v">91</span></span></div><div class="row4"><div class="facts"><span class="k">Bengaluru <span class="v">13</span></span> <span class="sep">·</span> <span class="k">Milan <span class="v">8</span></span> <span class="sep">·</span> <span class="k">United States <span class="v">7</span></span> <span class="sep">·</span> <span class="k">New York <span class="v">7</span></span> <span class="more">· 30 more places, 82 roles</span></div><div class="act"><button class="btn keep" data-act="keep">◇ keep <kbd>x</kbd></button><button class="btn pri" data-act="expand"><span class="num">91</span> roles <kbd>↵</kbd></button></div></div><div class="roles" hidden></div></article></main>
+
+<details class="held" id="held">
+  <summary>Held back: <b>57</b> companies with 100 or more roles open. They are rendered below, not removed — uncheck <b>hide the giants</b> to put them back in the list.</summary>
+  <div id="heldlist"></div>
+</details>
+
+<div class="tail" id="tail">
+<p><button class="how" data-act="showall" style="font-size:13px">↓ show all 789 companies</button>
+— clears both menus and the giants toggle. The full register is the receipt, not the door.</p>
+<p>789 companies · 27,689 roles · read from each company's own applicant tracking system on Aug 4, 2026
+(<b>832</b> boards read, <b>2,093</b> qualified companies not yet checked).
+The shortlist lives in this browser. There is no account and nothing leaves the page.</p></div>
+</div>
+
+<div class="keybar"><div class="wrap">
+  <span><kbd>j</kbd><kbd>k</kbd> move</span>
+  <span><kbd>↵</kbd> roles</span>
+  <span><kbd>o</kbd> open next role</span>
+  <span><kbd>1</kbd>–<kbd>9</kbd> open one</span>
+  <span><kbd>x</kbd> keep</span>
+  <span><kbd>f</kbd> field</span>
+  <span><kbd>c</kbd> city</span>
+  <span><kbd>g</kbd> giants</span>
+  <span><kbd>?</kbd> help</span>
+  <span class="st" id="st">reading cards…</span>
+</div></div>
+
+<div class="veil" id="veil" hidden>
+  <div class="sheet" id="sheet"></div>
+</div>
+
+<script>
+window.__HOW="\n<h2>How these 789 companies got here, and who didn't make it</h2>\n<p class=\"sub\">Every number on this panel is a counter the nightly build wrote on Aug 4, 2026. None of it is an estimate.</p>\n<div class=\"funnel\">\n<span class=\"n\">10,125</span>  <span class=\"lab\">company names read from the five sources</span><br>\n<span class=\"n\">6,895</span>  <span class=\"in\">&#9500;&#9472; did not qualify — no funding signal any source would state</span><br>\n<span class=\"n\">2,925</span>  <span class=\"lab\">qualified</span><br>\n<span class=\"n\">2,076</span>  <span class=\"in\">&#9500;&#9472; no job board we could resolve — we could not look</span><br>\n<span class=\"n\">832</span>  <span class=\"lab\">boards actually read</span><br>\n<span class=\"n\">43</span>  <span class=\"in\">&#9500;&#9472; read, nothing open tonight</span><br>\n<span class=\"n\">12</span>  <span class=\"in\">&#9500;&#9472; turned out to be another company's board</span><br>\n<span class=\"n\">5</span>  <span class=\"in\">&#9492;&#9472; empty, and we could not verify it</span><br>\n<span class=\"n\">789</span>  <span class=\"lab\"><b>companies with something open tonight</b></span><br>\n<span class=\"n\">27,689</span>  <span class=\"lab\">roles, every one live on the company's own board on Aug 4, 2026</span>\n</div>\n<p style=\"margin-top:-6px\">These are the build's own counters, printed as recorded; the middle rows overlap slightly and do not sum cleanly, and we would rather show you that than round it.\n<b>2,093</b> qualified companies remain unchecked — that is \"we could not look\", never \"nothing there\".</p>\n\n<h2 style=\"font-size:14px;margin-top:18px\">The gate on each card</h2>\n<p class=\"sub\" style=\"margin-bottom:8px\">One clickable receipt per company. 100% coverage — no company is here without one.</p>\n<table>\n<tr><th>Gate</th><th class=\"n\">n</th><th>What the card says, and what it does not</th></tr>\n<tr><td>Y Combinator</td><td class=\"n\">298</td><td>the batch, by name — <em>Y Combinator, Winter 2021</em>. A batch is a date, not a funding date, so it is never called one.</td></tr>\n<tr><td>CB Insights</td><td class=\"n\">291</td><td>on their unicorn list. States no amount, no date, no round — so the card states none.</td></tr>\n<tr><td>SEC EDGAR</td><td class=\"n\">101</td><td>a Form D, with the exact sum sold and the exact date, because a filing has both.</td></tr>\n<tr><td>Forbes</td><td class=\"n\">78</td><td>an editor put them on a list. That is a real signal and it is not a funding fact.</td></tr>\n<tr><td>TechCrunch</td><td class=\"n\">20</td><td>a dated story about a round.</td></tr>\n<tr><td>FinSMEs</td><td class=\"n\">1</td><td>a dated wire item.</td></tr>\n</table>\n\n<h2 style=\"font-size:14px\">What this page will not say</h2>\n<p><b>\"Recently funded\" — an amount and a date exist for 122 of 789 companies</b>, so it is true of 15% and the page does not print it as a promise.\n<b>Seed / Series A / B / C</b> — a round letter exists on <b>5</b> rows. There is no such filter here.\n<b>An investor name</b> — the field does not exist in any source this build may lawfully republish.\n<b>A score</b> — nothing here is composited into a number, because a number has no source URL.\n<b>A \"new\" badge — first-seen holds 7 dated URLs against 27,689 roles</b>, so freshness is not a product yet.</p>\n\n<h2 style=\"font-size:14px\">Where a fact is missing</h2>\n<p>Sponsorship is unstated on <b>25,674</b> of 27,689 roles; workplace on <b>14,489</b>; a funding amount on <b>667</b> of 789 companies.\nNone of the three is a filter on this page, because a filter over a sparse column silently deletes everyone the board was quiet about.\nEach is printed on the card or the role when the source states it, and printed as nothing when it doesn't. A blank here means <em>nobody said</em>, and it never means no.</p>\n<p><b>32</b> of the 298 Y Combinator companies are Acquired, Public or Inactive by YC's own status field — Airbnb among them. Their cards carry that status, because a job at a company that already landed is not a bet on a rocketship, and you should be told which one you are looking at.</p>\n<p>The department and city menus are this page's own grouping of the board's <b>2,300</b> department strings and <b>1,672</b> place strings. The grouping rules are in <code>taxonomy.js</code>, ordered and readable; <b>3,708</b> roles sit on labels that map to nothing standard and are kept under <em>Other</em>, not dropped.</p>\n<button class=\"close\" data-act=\"close\">close</button>";
+window.__TAIL="\n<p><button class=\"how\" data-act=\"showall\" style=\"font-size:13px\">↓ show all 789 companies</button>\n— clears both menus and the giants toggle. The full register is the receipt, not the door.</p>\n<p>789 companies · 27,689 roles · read from each company's own applicant tracking system on Aug 4, 2026\n(<b>832</b> boards read, <b>2,093</b> qualified companies not yet checked).\nThe shortlist lives in this browser. There is no account and nothing leaves the page.</p>";
+</script>
+<script type="module" src="./app.js"></script>
+</body>
+</html>
