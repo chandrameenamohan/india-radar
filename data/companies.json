@@ -92945,20 +92945,6 @@
           "hire_from_abroad": "unknown"
         },
         {
-          "title": "Customer Support Associate - L2",
-          "url": "https://job-boards.greenhouse.io/tide/jobs/6234225003",
-          "locations": [
-            "India, Hyderabad"
-          ],
-          "countries": [
-            "India"
-          ],
-          "workplace": null,
-          "department": "UK/ Europe Region",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
           "title": "Customer Support Specialist (Paid Plans)",
           "url": "https://job-boards.greenhouse.io/tide/jobs/5943791003",
           "locations": [
@@ -92988,20 +92974,6 @@
         },
         {
           "title": "Engineering Manager",
-          "url": "https://job-boards.greenhouse.io/tide/jobs/6643198003",
-          "locations": [
-            "India, Bengaluru"
-          ],
-          "countries": [
-            "India"
-          ],
-          "workplace": null,
-          "department": "One Platform",
-          "visa": "unknown",
-          "hire_from_abroad": "yes"
-        },
-        {
-          "title": "Engineering Manager",
           "url": "https://job-boards.greenhouse.io/tide/jobs/6643188003",
           "locations": [
             "India, Hyderabad"
@@ -93019,6 +92991,20 @@
           "url": "https://job-boards.greenhouse.io/tide/jobs/6643197003",
           "locations": [
             "India, Delhi NCR"
+          ],
+          "countries": [
+            "India"
+          ],
+          "workplace": null,
+          "department": "One Platform",
+          "visa": "unknown",
+          "hire_from_abroad": "yes"
+        },
+        {
+          "title": "Engineering Manager",
+          "url": "https://job-boards.greenhouse.io/tide/jobs/6643198003",
+          "locations": [
+            "India, Bengaluru"
           ],
           "countries": [
             "India"
@@ -93352,9 +93338,9 @@
         },
         {
           "title": "Security Engineer 3 - Vulnerability Management",
-          "url": "https://job-boards.greenhouse.io/tide/jobs/7820212003",
+          "url": "https://job-boards.greenhouse.io/tide/jobs/7820211003",
           "locations": [
-            "India, Delhi NCR"
+            "India, Bengaluru"
           ],
           "countries": [
             "India"
@@ -93380,9 +93366,9 @@
         },
         {
           "title": "Security Engineer 3 - Vulnerability Management",
-          "url": "https://job-boards.greenhouse.io/tide/jobs/7820211003",
+          "url": "https://job-boards.greenhouse.io/tide/jobs/7820212003",
           "locations": [
-            "India, Bengaluru"
+            "India, Delhi NCR"
           ],
           "countries": [
             "India"
@@ -93548,14 +93534,12 @@
         },
         {
           "title": "Senior Staff Software Engineer, Agentic Platform",
-          "url": "https://job-boards.greenhouse.io/tide/jobs/7703992003",
+          "url": "https://job-boards.greenhouse.io/tide/jobs/7702549003",
           "locations": [
-            "Berlin, Germany; Bulgaria; India, Bengaluru; India, Delhi NCR; India, Hyderabad; Lithuania; Serbia; United Kingdom"
+            "India, Delhi NCR; India, Hyderabad"
           ],
           "countries": [
-            "India",
-            "United Kingdom",
-            "Germany"
+            "India"
           ],
           "workplace": null,
           "department": "One Platform",
@@ -93578,12 +93562,14 @@
         },
         {
           "title": "Senior Staff Software Engineer, Agentic Platform",
-          "url": "https://job-boards.greenhouse.io/tide/jobs/7702549003",
+          "url": "https://job-boards.greenhouse.io/tide/jobs/7703992003",
           "locations": [
-            "India, Delhi NCR; India, Hyderabad"
+            "Berlin, Germany; Bulgaria; India, Bengaluru; India, Delhi NCR; India, Hyderabad; Lithuania; Serbia; United Kingdom"
           ],
           "countries": [
-            "India"
+            "India",
+            "United Kingdom",
+            "Germany"
           ],
           "workplace": null,
           "department": "One Platform",
@@ -93620,12 +93606,14 @@
         },
         {
           "title": "Staff Software Engineer, Agentic Platform",
-          "url": "https://job-boards.greenhouse.io/tide/jobs/7701767003",
+          "url": "https://job-boards.greenhouse.io/tide/jobs/7703991003",
           "locations": [
-            "United Kingdom"
+            "Berlin, Germany; Bulgaria; India, Bengaluru; India, Delhi NCR; India, Hyderabad; Lithuania; Serbia; United Kingdom"
           ],
           "countries": [
-            "United Kingdom"
+            "India",
+            "United Kingdom",
+            "Germany"
           ],
           "workplace": null,
           "department": "One Platform",
@@ -93648,14 +93636,12 @@
         },
         {
           "title": "Staff Software Engineer, Agentic Platform",
-          "url": "https://job-boards.greenhouse.io/tide/jobs/7703991003",
+          "url": "https://job-boards.greenhouse.io/tide/jobs/7701767003",
           "locations": [
-            "Berlin, Germany; Bulgaria; India, Bengaluru; India, Delhi NCR; India, Hyderabad; Lithuania; Serbia; United Kingdom"
+            "United Kingdom"
           ],
           "countries": [
-            "India",
-            "United Kingdom",
-            "Germany"
+            "United Kingdom"
           ],
           "workplace": null,
           "department": "One Platform",
