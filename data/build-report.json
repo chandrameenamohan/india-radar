@@ -1,13 +1,13 @@
 {
   "corpus_size": 2925,
-  "checked": 834,
-  "unchecked": 2091,
+  "checked": 833,
+  "unchecked": 2092,
   "counts": {
     "listed": 371,
-    "no-target-roles": 463,
+    "no-target-roles": 462,
     "slug-unresolved": 2075,
     "probe-failed": 0,
-    "empty-board-unverified": 4,
+    "empty-board-unverified": 5,
     "not-qualified": 0,
     "another-companys-board": 12
   },
@@ -1022,7 +1022,7 @@
     "Cube Security": "slug-unresolved",
     "Cue": "slug-unresolved",
     "CueZen": "slug-unresolved",
-    "Culdesac": "no-target-roles",
+    "Culdesac": "empty-board-unverified",
     "Culture Amp": "listed",
     "Cura OS": "slug-unresolved",
     "Curative": "no-target-roles",
