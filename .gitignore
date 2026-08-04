@@ -45,3 +45,5 @@ data/*.json.tmp
 # half-written code and fails the gate on a file this checkout does not own.
 # Measured that way -- a lint error in a sibling agent's src/net.py.
 .claude/worktrees/
+
+design/iterations/*/screenshots/
