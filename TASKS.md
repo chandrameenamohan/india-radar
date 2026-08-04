@@ -3106,3 +3106,189 @@ Out of scope:
     registrable mark is a lawyer's opinion, and this task produces the shortlist
     that makes paying for one worthwhile.
   - Renaming anything in the codebase. Nothing in src/ carries the brand.
+
+---
+
+### T16.2 — The nightly refreshes discovery, not only the boards `todo` · *Phase 11*
+> **The corpus and the slug map are hand-run, and nothing says so out loud.**
+> `scripts/nightly.sh` runs `src.build` and `src.firstseen`. It does not run
+> `src.corpus` and it does not run `src.slugs`. `src/build.py:933` reads
+> `data/slugs.json` as a FILE, so a company absent from it is `slug-unresolved`
+> before a single fetch happens — the build never asks.
+>
+> **Measured, 2026-08-04.** Granola raised $125M in March 2026 with ten open UK
+> roles on `ashby/granola`. It could not have appeared on the site on any night
+> between then and today, however many nightlies ran, because it was in neither
+> file. Fixing it took three hand-runs in sequence: `src.corpus`, then a
+> correction, then `src.slugs --gained`. The next company that raises hits the
+> same wall, and nothing goes red — a stale corpus produces a complete,
+> schema-valid, entirely plausible build. That is precisely the failure
+> `scripts/nightly.sh`'s own header warns about: "nothing in this script can
+> tell that from a quiet week."
+>
+> **The hard part is not the wiring, it is what failure means.** Three guards in
+> the discovery path are written for a HUMAN at a terminal and become a hard stop
+> when a robot runs them nightly:
+>   - `corpus.main` raises `SystemExit` if ANY of its six sources is unreachable
+>     (deliberate: a corpus that shrank silently is indistinguishable from a
+>     company that stopped hiring).
+>   - `corrections.check` raises if a corrected name has left the corpus.
+>   - `slugs.load_overrides` raises if a hand-written slug's board has gone dead.
+> Under `set -e` every one of those kills the run before the build, so a night
+> when FinSMEs is down would publish NOTHING — strictly worse than today, where
+> the boards refresh regardless. The policy this task must choose and state: a
+> discovery step that fails leaves yesterday's `corpus.json`/`slugs.json` in
+> place, says so loudly in the log AND in the build report, and the build runs
+> anyway on what it has. Refreshing the boards is the site's floor; refreshing
+> discovery is its ceiling, and the ceiling failing must not take the floor down.
+>
+> **Budget.** Measured 2026-08-04: build 11m26s, `src.corpus` ~4m,
+> `src.slugs --gained` ~2m on 125 names (full resolution is ~30m and is NOT what
+> this task should run nightly). Total ~18m against `NIGHTLY_TIMEOUT`'s 5400s and
+> GitHub's 6h cap — room to spare, but state the new measured total in the script
+> where the old one is stated.
+Acceptance:
+  scripts/nightly.sh runs discovery before the build: `src.corpus`, then
+    `src.slugs --gained`, then `src.build`, then `src.firstseen`.
+  A discovery step that fails does NOT stop the build. Yesterday's corpus.json
+    and slugs.json stand, the build runs on them, and the failure is stated in
+    the log and carried into data/build-report.json so a reader of the site's
+    own report can see that discovery is stale and how stale.
+  The three human-facing guards above are handled explicitly, each with a
+    written reason: which ones stay fatal to the DISCOVERY step (and so leave
+    yesterday's file), and which must not fire at all under an unattended run.
+    Do not weaken a guard to make it pass; decide what it means here.
+  The nightly's `git add` grows to carry what discovery writes: data/corpus.json,
+    data/slugs.json, data/unresolved.json beside the three files it already
+    commits. A regenerated corpus that never reaches a commit is the same bug
+    with more steps.
+  `--gained` and not a full re-resolution: the corpus's NEW names plus the ones
+    whose website or override changed. Full resolution is a hand-run and stays
+    one; say so where the flag is used.
+  The measured runtime is re-stated in scripts/nightly.sh, replacing the 11m26s
+    figure that no longer describes the run.
+Checks:
+  lint -> typecheck -> unit -> worker -> e2e (full gate)
+  + unit: a nightly whose corpus step fails still reaches the build and still
+    commits — over the throwaway git repo tests/test_nightly.py already builds,
+    with the discovery step stubbed to exit non-zero
+  + unit: the same for the slugs step
+  + unit: the build report names discovery as stale when a step failed, and does
+    not when both succeeded
+  + unit: the committed file list includes corpus.json, slugs.json and
+    unresolved.json, asserted against scripts/nightly.sh's `git add` line
+  + unit: nightly.sh calls `src.slugs` with `--gained` (a full run nightly is a
+    30-minute regression nothing else would catch)
+  + mutation: making the corpus step fatal again turns the first check red;
+    dropping the report field turns the third red
+Out of scope:
+  - Changing what any source does or how the corpus qualifies a company. This
+    task moves WHEN discovery runs, never what it decides.
+  - A separate schedule or tier for discovery. T6.3's measurement (one schedule,
+    stated in tests/test_nightly.py) still holds and a second cron would reverse
+    it without new evidence.
+  - Backfilling the companies the stale files have already cost. They arrive on
+    their own the first night this runs.
+  - Making corpus.json's own all-or-nothing rule any weaker. It is right; this
+    task only decides what the NIGHTLY does when it fires.
+
+---
+
+### T16.3 — A talent pool is not a job `todo` · *Phase 11*
+> **The site publishes "Join our Talent Pool" as an open role.** Granola's row
+> carries it beside nine real ones; it is an Ashby feature — an open expression
+> of interest with no position behind it — and the register counts it in the
+> tally a reader trusts. SPEC's whole claim is that a company appears because it
+> has a real open role proven by its own board. A talent pool is the one posting
+> on that board that is not one.
+>
+> **Find the structural signal before reaching for the title.** The Ashby posting
+> API states `department`, `team`, `employmentType`, `isListed`, `workplaceType`
+> and `location` per posting; check whether talent-pool entries are marked in any
+> of those before matching on the words in the title, because a title match is a
+> guess about English and this corpus hires in fifteen countries. If no
+> structural signal exists, a title rule is acceptable — but then it is measured
+> across every Ashby board in the corpus and its false positives are counted in
+> the task, not assumed to be zero.
+>
+> **Ashby first, but ask the same question of Greenhouse and Lever.** They have
+> equivalents ("General Application", "Talent Community"). Whatever this task
+> does, it does per provider with evidence from that provider, and it says which
+> providers it looked at.
+Acceptance:
+  A talent pool / general-application posting is not published as a role, on
+    every provider where it was measured to exist.
+  The rule is stated where the roles are filtered, with the evidence it came
+    from — the field and value, or the title pattern and the count it matched
+    across the real corpus.
+  A company left with NO real roles after the filter leaves the site as
+    `no-target-roles` like any other, never as an empty row.
+  The number of postings removed is counted and stated, so the change to the
+    site's role tally is a known figure rather than a surprise.
+Checks:
+  lint -> typecheck -> unit -> worker -> e2e (full gate)
+  + unit: a fixture board carrying one talent pool and two real roles publishes
+    two, over a real Ashby response shape
+  + unit: a board carrying ONLY a talent pool yields no row at all
+  + unit: the filter is measured against the real corpus and its matches are
+    asserted as a number, so a rule that starts eating real roles shows up
+  + e2e: Granola's row, or whichever board the fixture uses, prints its real
+    roles and not the pool
+Out of scope:
+  - Evergreen or pipeline reqs that ARE real roles ("Software Engineer, all
+    levels"). A company genuinely hiring against one is hiring.
+  - Any change to the country filter or to how a role's locations are read.
+  - Removing the companies that lose their only role. They leave through the
+    outcome that already exists for it.
+
+---
+
+### T16.4 — The override verifier learns the boards that already exist `todo` · *Phase 11*
+> **`src/slugs.py:365` refuses every non-Greenhouse override, and its own error
+> message is out of date.** It says "ashby probes land with T3.2/T3.3" — they
+> did, long ago, and `ashby.probe` and the Lever probe are in the build's
+> `PROBES` today. So the one file where a human can correct the machine can only
+> correct a third of it.
+>
+> **The cost is already written down in the repo.** `data/overrides.yaml`'s
+> ClickHouse entry says it: their careers page links `jobs.ashbyhq.com/langfuse`,
+> so the site published Langfuse's roles under ClickHouse's name. The correct
+> board is `ashby/clickhouse`, the file holds `greenhouse/clickhouse` instead,
+> and the comment explains that the greenhouse slug was chosen only because the
+> verifier refuses the right answer. That comment ends "widening the verifier is
+> a task, not a line to sneak into a merge." This is that task.
+>
+> **What the verifier is FOR must survive the widening.** A dead override is the
+> one failure this project cannot absorb quietly: an override asserts a human
+> already checked, so silence reads as "we looked, they aren't hiring" — and on
+> Lever that is literally a 200 with an empty array. The rule stays: a slug whose
+> board does not exist stops the run. A probe that failed for any OTHER reason
+> (an outage) is deliberately not an error, and must not become one.
+Acceptance:
+  An override naming an ashby or lever board is verified against that board,
+    the same way a greenhouse one is.
+  A non-existent ashby or lever slug raises, naming the company and the slug.
+  A provider outage does NOT raise; the company reaches the build holding its
+    slug and is counted `probe-failed` there, exactly as today.
+  An ATS with no probe still raises, with a message that names the ATSes that
+    CAN be verified rather than a task number — the message this task is fixing
+    is the one that rotted.
+  data/overrides.yaml's ClickHouse entry moves to `ashby/clickhouse` with its
+    comment rewritten to say what is now true, since it is the worked example
+    and leaving it wrong would leave the file arguing against itself.
+Checks:
+  lint -> typecheck -> unit -> worker -> e2e (full gate)
+  + unit: a live ashby slug verifies, a dead one raises, over fixtures
+  + unit: the same for lever, including the 200-with-empty-array case that makes
+    a dead Lever slug invisible
+  + unit: an outage (a 5xx, a timeout) raises nothing for any provider
+  + unit: an unknown ATS raises and its message names the verifiable ones
+  + unit: every entry in the real overrides.yaml verifies, which is the check
+    that catches the ClickHouse move being half-done
+Out of scope:
+  - Adding overrides for companies that are merely unresolved. This task makes
+    the file able to hold an ashby answer; deciding which companies deserve one
+    is a different judgment and a different diff.
+  - Changing slug discovery, guessing, or `states_company`. The verifier checks
+    a HUMAN's answer; how the machine reaches its own is untouched.
+  - A new provider. Ashby and Lever, because their probes exist.
