@@ -27,9 +27,25 @@ open http://127.0.0.1:8732/design/gallery.html
 The gallery links every variant, live and interactive, with its score. Rerun
 `python3 design/gallery.py` after any round to pick up new work.
 
-Each variant is a **complete self-contained page** reading the real corpus —
-371 companies, 6,423 roles — through `iterations/data`, a symlink to `../data`
-that makes the original's `../data/…` paths resolve one directory deeper.
+Each variant is a **complete self-contained page** reading the corpus through
+`iterations/data`, a symlink that makes the original's `../data/…` paths resolve
+one directory deeper.
+
+**It points at `design/fixture/`, a pinned snapshot, and that is deliberate.**
+It first pointed at the live `data/`, and during round 2 the nightly rewrote it —
+schema 10 → 11, 371 → 789 companies, 6,423 → 27,687 roles. Every variant refused
+to render, and any evaluator running after that moment would have fired the
+render hard gate against six pages that were fine. A score is a claim about a
+page *and* the corpus under it: a variant graded on 6,423 roles and re-opened on
+27,687 is not the same artifact, and the round-over-round comparison this harness
+exists to make would be measuring the data instead of the design.
+
+So the fixture is `HEAD:data/*` at schema 10 — 371 companies, 6,423 roles — and
+every variant in every round reads the same bytes. To grade against a newer
+corpus, snapshot it into a new fixture directory deliberately rather than letting
+it change underneath a round.
+
+The live pipeline is untouched by any of this; `data/` is still `data/`.
 
 ## The rounds
 
