@@ -1,0 +1,6 @@
+{
+  "_what_this_is": "Not corpus data. A three-line stand-in for the night the build changes shape under this page, so the morning-after band can be seen without waiting for a real schema bump. Open index.html?data=tomorrow.json — this page reads schema 10, this file says 11, so the register refuses it and prints the last sheet it did render, dated. Read a normal night first or there will be no sheet to fall back on, which is its own honest state and also worth seeing.",
+  "schema_version": 11,
+  "snapshot": "2026-08-05",
+  "companies": []
+}
