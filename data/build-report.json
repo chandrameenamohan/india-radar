@@ -1,11 +1,11 @@
 {
   "corpus_size": 3026,
-  "checked": 861,
-  "unchecked": 2165,
+  "checked": 860,
+  "unchecked": 2166,
   "counts": {
-    "listed": 383,
-    "no-target-roles": 478,
-    "slug-unresolved": 2147,
+    "listed": 380,
+    "no-target-roles": 480,
+    "slug-unresolved": 2148,
     "probe-failed": 0,
     "empty-board-unverified": 5,
     "not-qualified": 0,
@@ -46,7 +46,6 @@
     "Assembled",
     "AssemblyAI",
     "Astronomer",
-    "AtoB",
     "Attentive",
     "Attotude",
     "Aviatrix",
@@ -138,7 +137,6 @@
     "Foundational Industries",
     "FourKites",
     "Front",
-    "FullStory",
     "Fundamental",
     "FurtherAI",
     "Gather AI",
@@ -254,7 +252,6 @@
     "OKX",
     "Observe.AI",
     "Odyssey",
-    "Oklo",
     "Oleria",
     "OneTrust",
     "Onebrief",
@@ -316,7 +313,6 @@
     "Scandit",
     "SeekOut",
     "Semperis",
-    "Sendbird",
     "Sentry",
     "Shift",
     "Sigma Computing",
@@ -374,6 +370,7 @@
     "Vercel",
     "Veriff",
     "Verkada",
+    "Vest",
     "VidMob",
     "Vivodyne",
     "Wayflyer",
@@ -617,7 +614,7 @@
     "Atlas": "slug-unresolved",
     "Atmo": "slug-unresolved",
     "Atmosphere": "slug-unresolved",
-    "AtoB": "listed",
+    "AtoB": "no-target-roles",
     "Atolio": "no-target-roles",
     "Atrium": "slug-unresolved",
     "Atropos Group": "no-target-roles",
@@ -1449,7 +1446,7 @@
     "Froda": "slug-unresolved",
     "Front": "listed",
     "Frubana Inc": "slug-unresolved",
-    "FullStory": "listed",
+    "FullStory": "no-target-roles",
     "Function Health": "slug-unresolved",
     "Fundamental": "listed",
     "Fundamental Research Labs": "no-target-roles",
@@ -2255,7 +2252,7 @@
     "Offchain Labs": "no-target-roles",
     "OkCredit": "slug-unresolved",
     "Okami Medical": "slug-unresolved",
-    "Oklo": "listed",
+    "Oklo": "no-target-roles",
     "Okteto": "slug-unresolved",
     "Olden Labs": "slug-unresolved",
     "Oleria": "listed",
@@ -2783,7 +2780,7 @@
     "Semantix": "slug-unresolved",
     "Semperis": "listed",
     "SendHub": "slug-unresolved",
-    "Sendbird": "listed",
+    "Sendbird": "no-target-roles",
     "Sendwave": "slug-unresolved",
     "Sensera Systems": "slug-unresolved",
     "Sentry": "listed",
@@ -2883,7 +2880,7 @@
     "Sourceress": "slug-unresolved",
     "Soylent": "slug-unresolved",
     "Space Forge": "slug-unresolved",
-    "Spade": "no-target-roles",
+    "Spade": "slug-unresolved",
     "Span.IO": "slug-unresolved",
     "SparkCharge": "slug-unresolved",
     "SparkCognition": "listed",
@@ -3209,7 +3206,7 @@
     "Verse Medical": "no-target-roles",
     "Verve Cloud": "slug-unresolved",
     "Veryfi, Inc.": "slug-unresolved",
-    "Vest": "no-target-roles",
+    "Vest": "listed",
     "Vestwell": "no-target-roles",
     "Vestwell Holdings": "slug-unresolved",
     "Vetcove": "no-target-roles",
@@ -3424,10 +3421,15 @@
     "xLight": "slug-unresolved",
     "zeroheight": "slug-unresolved"
   },
-  "departed": {},
+  "departed": {
+    "AtoB": "no-target-roles",
+    "FullStory": "no-target-roles",
+    "Oklo": "no-target-roles",
+    "Sendbird": "no-target-roles"
+  },
   "websites": {
     "with_website": 1928,
-    "slug_unresolved_with_website": 1167,
+    "slug_unresolved_with_website": 1168,
     "slug_unresolved_without_website": 980
   },
   "shared_boards": {
@@ -3446,19 +3448,19 @@
     "Insider": "Business Insider"
   },
   "countries": {
-    "India": 131,
-    "United Kingdom": 270,
+    "India": 130,
+    "United Kingdom": 265,
     "Ireland": 55,
-    "Germany": 113,
-    "Netherlands": 50,
+    "Germany": 112,
+    "Netherlands": 49,
     "France": 60,
-    "Spain": 65,
+    "Spain": 66,
     "Sweden": 32,
     "Denmark": 17,
     "Norway": 7,
     "Finland": 7,
     "Japan": 65,
-    "Singapore": 80,
+    "Singapore": 81,
     "Australia": 84,
     "New Zealand": 3
   },
@@ -4400,23 +4402,6 @@
             "name": "BENCHLING UK LTD",
             "status": "active",
             "incorporated": "2021-12-06",
-            "locality": "",
-            "postcode": "",
-            "sic": [],
-            "kind": ""
-          }
-        ]
-      },
-      {
-        "name": "Bitmovin",
-        "confidence": "exact",
-        "why": "unreachable; one exact-tier name match",
-        "candidates": [
-          {
-            "number": "11066428",
-            "name": "BITMOVIN UK LIMITED",
-            "status": "active",
-            "incorporated": "2017-11-15",
             "locality": "",
             "postcode": "",
             "sic": [],
@@ -5683,23 +5668,6 @@
         ]
       },
       {
-        "name": "HackerRank",
-        "confidence": "exact",
-        "why": "silent; one exact-tier name match",
-        "candidates": [
-          {
-            "number": "11102907",
-            "name": "HACKERRANK UK LIMITED",
-            "status": "active",
-            "incorporated": "2017-12-08",
-            "locality": "",
-            "postcode": "",
-            "sic": [],
-            "kind": ""
-          }
-        ]
-      },
-      {
         "name": "HappyRobot",
         "confidence": "exact",
         "why": "silent; one exact-tier name match",
@@ -6810,33 +6778,6 @@
         ]
       },
       {
-        "name": "Oklo",
-        "confidence": "exact",
-        "why": "unreachable; 2 companies reach the exact tier",
-        "candidates": [
-          {
-            "number": "12419700",
-            "name": "OKLO LTD",
-            "status": "dissolved",
-            "incorporated": "2020-01-22",
-            "locality": "",
-            "postcode": "",
-            "sic": [],
-            "kind": ""
-          },
-          {
-            "number": "07894704",
-            "name": "OKLO LIMITED",
-            "status": "dissolved",
-            "incorporated": "2012-01-03",
-            "locality": "",
-            "postcode": "",
-            "sic": [],
-            "kind": ""
-          }
-        ]
-      },
-      {
         "name": "OKX",
         "confidence": "exact",
         "why": "unreachable; one exact-tier name match",
@@ -7503,23 +7444,6 @@
         ]
       },
       {
-        "name": "Sendbird",
-        "confidence": "exact",
-        "why": "silent; one exact-tier name match",
-        "candidates": [
-          {
-            "number": "13526706",
-            "name": "SENDBIRD UK, LTD",
-            "status": "active",
-            "incorporated": "2021-07-23",
-            "locality": "",
-            "postcode": "",
-            "sic": [],
-            "kind": ""
-          }
-        ]
-      },
-      {
         "name": "Shift",
         "confidence": "exact",
         "why": "silent; 2 companies reach the exact tier",
@@ -7927,33 +7851,6 @@
             "name": "THE ATHLETIC NETWORK LTD",
             "status": "dissolved",
             "incorporated": "2016-04-07",
-            "locality": "",
-            "postcode": "",
-            "sic": [],
-            "kind": ""
-          }
-        ]
-      },
-      {
-        "name": "ThreatLocker",
-        "confidence": "exact",
-        "why": "no website; 2 companies reach the exact tier",
-        "candidates": [
-          {
-            "number": "17362714",
-            "name": "THREATLOCKER (GB) LIMITED",
-            "status": "active",
-            "incorporated": "2026-07-27",
-            "locality": "",
-            "postcode": "",
-            "sic": [],
-            "kind": ""
-          },
-          {
-            "number": "13929871",
-            "name": "THREATLOCKER (UK) LTD",
-            "status": "dissolved",
-            "incorporated": "2022-02-21",
             "locality": "",
             "postcode": "",
             "sic": [],
