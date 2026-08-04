@@ -3087,37 +3087,71 @@ Out of scope:
     It reads this task's output; it is design work and lives in design/rounds.
 ```
 
-**Measured — the pipeline half, 2026-08-04.** A sample, and it says so: 90 real
-boards over the live network, 45 of the 371 `listed` companies and 45 of the 462
-that left as `no-target-roles`, picked every k-th name alphabetically. One fetch
-per board answers both predicates, so the delta is exact on the sample rather
-than two runs apart.
+**Measured — the pipeline half, 2026-08-04.** A real full build against the live
+boards, 2,925 corpus companies, **17m03s** wall. Not a sample; the sample that
+preceded it is kept below because an estimator that missed is worth more written
+down than quietly replaced.
 
-| | before | after (sampled) | scaled to the corpus |
+| | before | after | |
 |---|---|---|---|
-| companies listed | 371 | 44 of 45 excluded boards now list | **~823** |
-| roles published | 6,423 | listed boards x3.27; +680 from the 45 | **~28,000** |
-| roles with no country | 0 by construction | 2,266 of 2,964 | **~69%** |
+| companies listed | 371 | **789** | x2.13 |
+| roles published | 6,423 | **27,687** | x4.31 |
+| roles stating no country we classify | 0 by construction | **21,254** | 76.8% |
+| companies whose roles classify to nothing | 0 by construction | **418** | of 789 |
+| `no-target-roles` -> `no-located-roles` | 462 | **44** | 418 of them now list |
+| `data/companies.json` | 3.03MB | **11.90MB** | 430 bytes a role |
 
-The 45th excluded board still leaves: its postings name no place at all, which
-is `no-located-roles` and is the outcome doing the only job it has left.
+**The register was publishing 23.2% of what the boards it already reads hold.**
+The 44 that still leave are boards where not one posting names a place at all,
+which is `no-located-roles` doing the only job it has left. Nobody was lost:
+`0 listed by the last build and not by this one`.
 
-**Cost.** Greenhouse is the only provider that charges for prose, and the second
-pass now runs on boards that used to skip it. Over the 47 Greenhouse boards in
-the sample: 26 second passes become 47, but the newly-contributing boards are
-small — 0.23MB / 0.71s each against 0.79MB / 0.83s for the ones that already
-paid — so the whole sample goes 37MB to 41MB (x1.13) and 122s to 137s (x1.12).
-Scaled to 428 Greenhouse slugs: **~191 extra second passes, +136s, +43MB**, on a
-~14-minute nightly with a 90-minute timeout. **The 20:00 UTC nightly is not at
-risk** and nothing was reordered or skipped to make that true.
+The pre-flight sample (90 boards, 45 of each group, every k-th name) called
+~823 companies against 789 — **+4.3%** — and ~28,000 roles against 27,687,
+**+1.1%**. It called 69% unclassified against the real 76.8%, **7.8 points low**,
+because it sampled the two outcome groups evenly and the corpus is not even:
+the previously-excluded boards are entirely unclassified and there are more of
+them than the sample's weighting implied. Company count was the estimator that
+missed most and the one drawn from the smaller flip rate. The shape held; the
+weighting is where a stratified sample costs you.
+
+**Cost — measured on the real build, not modelled.** **17m03s against the ~14
+minutes the nightly took before, and a 90-minute timeout.** Greenhouse is the
+only provider that charges for prose and the second pass now runs on the boards
+T8.1 taught us to skip; the sample said +136s and the build came in at about
++3 minutes, which is that number plus the ordinary variance of 880 live probes.
+**The 20:00 UTC nightly is not at risk** — it has 73 minutes of headroom — and
+nothing was reordered or skipped to make that true. The reason it is cheap is
+worth keeping: the boards that used to skip the second pass were cheap to fetch
+because they were SMALL (0.23MB and 0.71s each, against 0.79MB and 0.83s for the
+boards that already paid), so T8.1's 259-of-422 headline was large in board
+count and small in bytes.
 
 **The cost that is NOT in the nightly, and is not this task's to decide.**
-`data/companies.json` is 471 bytes a role, so ~28,000 roles is **3.03MB ->
-~13.2MB, fetched by every visitor on every page load** (`{cache: 'no-cache'}`,
-and Pages does not compress it any harder for us). `data/first-seen.json` goes
-0.51MB -> ~2.1MB the same way. That is a product decision about what the page
-downloads, not a build one — HLD-v5's Worker-served corpus is the standing
-answer to it and ladder step 4 is where it lives.
+`data/companies.json` is **3.03MB -> 11.90MB on disk, fetched by every visitor
+on every page load** (`{cache: 'no-cache'}`, and Pages does not compress it any
+harder for us). `data/first-seen.json` is 0.51MB -> 2.11MB the same way. The
+projection said ~13.2MB at 471 bytes a role; the real file is 430 bytes a role,
+because the roles this task added carry no country and often no department.
+That is a product decision about what the page downloads, not a build one —
+HLD-v5's Worker-served corpus is the standing answer and ladder step 4 is where
+it lives. **The rebuilt data files are deliberately NOT committed** while that
+decision is open; the register on the site is still the 371-company v10 one.
+
+**The first-seen boundary, executed for real rather than in a fixture.** The
+build was followed by `python -m src.firstseen`, which is `scripts/nightly.sh`'s
+own order. The committed artifact stated no `definition`; this build's report
+stated `v2-any-stated-location`; **21,296 URLs were dated and ZERO confirmed.**
+The artifact's confirmed-ever count is 145 before and 145 after, and the 7
+confirmations already sitting in today's bucket — this morning's real nightly —
+are byte-identical and untouched, which is `advance`'s set-once rule holding
+across the largest single change this register has ever made. Had the guard not
+been there, this is the night 21,296 roles wear `New` on the front page.
+
+One readability trap worth knowing: the step prints the DAY's whole bucket, so
+its first line reads `7 confirmed new, 21296 unconfirmed` — the 7 are this
+morning's and none of them is this fold's. The second line it prints on a
+boundary night says so outright.
 
 **Mutation sweep** (unit suite, 606 tests): restoring the drop in `located()`
 turns **11** red; restoring the country admission ticket in `keeps()` **10**;
@@ -3127,3 +3161,15 @@ it from the build report **1** (a source-level check — that line is in `main`,
 which no offline test can execute, and the sweep is how the gap was found);
 adding "Brazil" to `src/countries.py` **6**, that one being an absence and so
 mutation-tested by committing the forbidden act rather than by deleting a guard.
+
+**And one check the real corpus caught, which no fixture could have.**
+`test_the_real_committed_artifact_confirms_nothing_across_this_boundary` passed
+for the wrong reason: it folded a report stating the definition of the day and
+asserted zero confirmed, which held only while the committed artifact stated
+none. The moment the artifact was advanced — the moment the thing the test
+describes actually happened — the same call became an ordinary night and
+confirmed 789. The test was measuring the ambient state, not the rule. It now
+derives a definition that differs from whatever the artifact holds, and asserts
+BOTH directions over the real files: unchanged confirms all 789, changed
+confirms none. Asserting only the zero leaves a test that passes just as well
+when nothing is being confirmed for some entirely different reason.

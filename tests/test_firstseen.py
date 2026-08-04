@@ -237,15 +237,25 @@ def test_the_definition_survives_in_the_artifact() -> None:
     assert art["definition"] == "v2-any-stated-location"
 
 
-def test_the_real_committed_artifact_confirms_nothing_across_this_boundary() -> None:
-    """The same rule against the real files rather than a fixture, because the
-    numbers are the argument. `data/first-seen.json` is the artifact production is
-    holding tonight; `data/companies.json` is the register as published. Fold a
-    build that widened the definition over both, with every listed company
-    carrying roles it did not publish before, and nothing may be confirmed.
+def test_the_real_committed_artifact_confirms_nothing_across_a_definition_change() -> None:
+    """The same rule against the real files rather than a fixture, because at this
+    scale the numbers are the argument: `data/first-seen.json` is the artifact
+    production is holding and `data/companies.json` is the register as published.
 
-    Deleting the definition check turns this red with thousands of confirmed
-    roles — which is precisely the front page badging a week-old register `New`.
+    Both directions are asserted, and that is the point. The same fold, the same
+    real files, the same URLs nobody has seen — changed in ONE respect, the
+    definition the build states — must confirm every one of them and then none of
+    them. Asserting only the zero would leave a test that passes just as well
+    when nothing is being confirmed for some other reason entirely.
+
+    **This test was wrong when it was written and the real corpus is what caught
+    it.** The first version folded a report stating the definition of the day and
+    asserted zero, which held only while the committed artifact happened to state
+    none. The moment the artifact was advanced — which is to say, the moment the
+    thing this test describes actually happened — the same call became an
+    ordinary night, confirmed 789 roles, and the test failed for being right.
+    A check that depends on which side of a migration its fixtures are on is
+    measuring the ambient state, not the rule.
     """
     prev = load()
     if prev is None:
@@ -262,12 +272,28 @@ def test_the_real_committed_artifact_confirms_nothing_across_this_boundary() -> 
             for company in published["companies"]
         ],
     }
-    art = advance(prev, widened, {"listed": listed, "definition": "v2-any-stated-location"})
+    # Whatever the artifact states, this is a build that states something else.
+    # Derived rather than hardcoded, so the test keeps naming a boundary however
+    # many times the definition moves after this one.
+    changed = f"{prev.get('definition')}-and-then-something-else"
 
-    fresh = dates(art, "2999-01-01")
-    badged = len(fresh["confirmed"])
-    assert fresh["confirmed"] == [], f"{badged} roles badged by a definition change"
-    assert len(fresh["unconfirmed"]) == len(listed), "the dates are still facts and still recorded"
+    ordinary = advance(prev, widened, {"listed": listed, "definition": prev.get("definition")})
+    boundary = advance(prev, widened, {"listed": listed, "definition": changed})
+
+    if prev.get("definition"):
+        assert len(dates(ordinary, "2999-01-01")["confirmed"]) == len(listed), (
+            "a night with the definition unchanged confirms a genuinely new URL under "
+            "every company read on both sides — without this the zero below proves nothing"
+        )
+    badged = len(dates(boundary, "2999-01-01")["confirmed"])
+    assert dates(boundary, "2999-01-01")["confirmed"] == [], (
+        f"{badged} of {len(listed)} roles badged by a definition change alone — this is "
+        f"the front page calling a week-old register New, and it is the failure T15.2 "
+        f"measured at 1,604 roles in one night"
+    )
+    assert len(dates(boundary, "2999-01-01")["unconfirmed"]) == len(listed), (
+        "the dates are still facts about us and still recorded"
+    )
 
 
 def test_load_refuses_an_artifact_from_a_schema_it_does_not_know(tmp_path: Path) -> None:
