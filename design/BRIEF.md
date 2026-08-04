@@ -1,8 +1,22 @@
 # BRIEF — the loving portal
 
 The one thing this page has to become: **the website a job seeker loves.**
-Not "a good data site". Loved. Someone in São Paulo or Bengaluru or Warsaw
-opens it at 11pm, and stays.
+Not "a good data site". Loved. Someone opens it at 11pm, anxious about their
+next job, and stays.
+
+**Where that someone actually is, corrected.** This brief first named readers in
+São Paulo and Warsaw. The register covers fifteen countries and neither Brazil
+nor Poland is one of them:
+
+> Australia · Denmark · Finland · France · Germany · India · Ireland · Japan ·
+> Netherlands · New Zealand · Norway · Singapore · Spain · Sweden · United Kingdom
+
+So a Warsaw reader translating the page into Polish still finds no Polish job.
+For everyone outside those fifteen, **every role here is remote-or-relocation by
+definition** — and nothing on the page says so. That is the difference between
+*multilingual* and *worldwide*, and it was a factual error in this brief rather
+than a failing of the variants graded against it. Flow 3 is both: translate the
+chrome, and tell a reader outside the register what is actually open to them.
 
 Three flows, in order of importance.
 
