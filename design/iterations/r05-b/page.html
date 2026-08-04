@@ -1,0 +1,586 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>789 companies hiring tonight — what each one is, who vouched, and how hard they are hiring</title>
+<!-- Inter, loaded the way the live register loads it, but non-blocking: M1 is a
+     first-card measurement and a stylesheet on a third-party host is a
+     render-blocking round trip. Helvetica Neue holds the page until Inter
+     lands, which on a Swiss sheet is not a fallback so much as the ancestor. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" media="print" onload="this.media='all'"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+<style>
+/* r05-b — "the memo", set on the live register's own grid.
+ *
+ * The founder's baseline is site/index.html and he likes it: Swiss /
+ * International Typographic — one twelve-column grid, hairline rules, 11px
+ * uppercase micro-labels, tabular numerals, crop marks, one red. This page
+ * takes that identity wholesale and spends it on a different object: not a
+ * register of rows but 789 one-paragraph investment memos.
+ *
+ * The one structural idea: ONE GUTTER runs down the whole sheet, and every
+ * micro-label lives in it — the card's index, WHAT, FOR WHOM, WHY THEM,
+ * VOUCHED. A memo is a form, and a form has a label column. The register's
+ * anatomy, pointed at prose.
+ *
+ * Red discipline, copied from the register's round 10: at rest a count is INK.
+ * Red marks the masthead's one number, the snapshot stamp, and LIVE state — a
+ * control that has left its default, a company you have kept, the row under
+ * the hand. Nowhere else, and never as a judgement about a company.
+ */
+:root{
+  --paper:#ffffff;
+  --ink:#111111;
+  --ink-2:#4a4a4a;      /* secondary prose */
+  --ink-3:#8a8a8a;      /* micro-labels, absent-ish things */
+  --rule:#d5d5d5;       /* hairline */
+  --rule-2:#111111;     /* structural rule */
+  --wash:#f4f4f4;       /* the only fill on the page */
+  --red:#E30613;        /* the masthead number, and live state. Nowhere else. */
+  --gut:2rem;
+  --lab:5.25rem;        /* THE gutter: every micro-label on the sheet sits in it */
+  --rail:17.5rem;       /* the card's right rail, where the counts are stamped */
+  --col:repeat(12,minmax(0,1fr));
+  --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,monospace;
+}
+*{box-sizing:border-box;min-width:0}   /* no grid item may out-shrink its track */
+html{-webkit-text-size-adjust:100%;overflow-x:clip}
+body{
+  margin:0;padding:0 0 4rem;background:var(--paper);color:var(--ink);
+  position:relative;overflow-x:clip;
+  font-family:Inter,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size:15px;line-height:1.45;
+  font-variant-numeric:tabular-nums;    /* every count is a column, not a word */
+  font-feature-settings:"tnum" 1,"cv05" 1,"ss01" 1;
+  letter-spacing:-0.006em;
+  -webkit-font-smoothing:antialiased;
+}
+header,#controls,#status,main,footer{
+  max-width:78rem;margin-inline:auto;padding-inline:var(--gut);
+}
+a{color:inherit}
+button{font:inherit;color:inherit;background:none;border:0;border-radius:0;
+  margin:0;padding:0;cursor:pointer}
+:focus-visible{outline:2px solid var(--red);outline-offset:3px}
+
+/* ---- micro-label: 11px, uppercase, wide. The page's smallest voice. -------- */
+.micro,.mk,.cref,.lbl,.rk,.rhead,dialog h3,.slhead,.gcap-k{
+  font-size:11px;line-height:1.1;text-transform:uppercase;
+  letter-spacing:0.11em;font-weight:600;
+}
+
+/* ------------------------------ registration marks ------------------------- */
+/* The sheet corners. A plate is a printed thing and printed things carry crop
+   marks: four hairline corners registering the sheet, in the margin gray so
+   they read as apparatus, never as content. */
+header,footer{position:relative}
+header::before,header::after,footer::before,footer::after{
+  content:"";position:absolute;width:.7rem;height:.7rem;
+  border:0 solid var(--ink-3);pointer-events:none}
+header::before{top:.8rem;left:.55rem;border-left-width:1px;border-top-width:1px}
+header::after{top:.8rem;right:.55rem;border-right-width:1px;border-top-width:1px}
+footer::before{bottom:-2.4rem;left:.55rem;border-left-width:1px;border-bottom-width:1px}
+footer::after{bottom:-2.4rem;right:.55rem;border-right-width:1px;border-bottom-width:1px}
+
+/* ----------------------------------- masthead ------------------------------ */
+header{padding-top:1.5rem}
+.masthead{display:grid;grid-template-columns:var(--col);gap:0 1.25rem;
+  align-items:end;padding-bottom:.5rem}
+h1{grid-column:1/9;margin:0;
+  font-size:clamp(1.7rem,3.2vw,2.4rem);font-weight:800;
+  letter-spacing:-0.038em;line-height:.96;text-transform:uppercase}
+h1 .n{color:var(--red)}
+.aside{grid-column:9/-1;display:flex;flex-direction:column;
+  align-items:flex-end;gap:.6rem;min-width:0}
+.snapshot{margin:0;display:flex;flex-direction:column;gap:.2rem;
+  text-align:right;align-items:flex-end}
+.snapshot .k{color:var(--ink-3)}
+.snapshot time{font-size:1.05rem;font-weight:600;letter-spacing:-0.01em;
+  white-space:nowrap}
+/* The stamp: the sheet's one number, struck in a hairline red frame the way an
+   atlas plate carries its designation in the margin. */
+.stamp{border:1.5px solid var(--red);padding:.5rem .75rem .45rem;
+  display:flex;flex-direction:column;gap:.18rem;align-items:flex-end;
+  text-align:right}
+.stamp .snum{color:var(--red);font-weight:800;font-size:1.35rem;line-height:1;
+  letter-spacing:-0.02em;white-space:nowrap}
+.stamp .sname{font-size:10px;text-transform:uppercase;letter-spacing:.12em;
+  font-weight:600;color:var(--ink)}
+/* The thesis: the register's own masthead sentence, at the register's own
+   setting. This is the page's most authored line of type and the memo's
+   values below are set to match it exactly — the argument and the evidence
+   in one voice. */
+.thesis{display:grid;grid-template-columns:var(--col);gap:0 1.25rem;
+  margin:0;padding:.25rem 0 .65rem}
+.thesis span{grid-column:1/8;font-size:1.0625rem;line-height:1.35;
+  letter-spacing:-0.017em;font-weight:500}
+.lede{display:grid;grid-template-columns:var(--col);gap:0 1.25rem;margin:0}
+/* The provenance argument, folded into two ruled columns the way the register
+   folds its plate index. Eight lines of small type across a 46rem measure is a
+   wall and it costs the first card its place on the fold; four is a caption. */
+.ledefold{grid-column:1/9}
+.ledefold summary{display:none}   /* the wide sheet has room; it is never folded */
+#lede2{margin:0;font-size:.8125rem;line-height:1.5;
+  color:var(--ink-2);column-count:2;column-gap:2.25rem;
+  column-rule:1px solid var(--rule)}
+.lede .n{font-weight:700;color:var(--ink)}
+.sheets{grid-column:9/-1;display:flex;flex-direction:column;
+  align-items:flex-start;gap:.35rem;margin:0}
+.sheets button{text-align:left;color:var(--ink);
+  border-bottom:1px solid var(--ink-3);padding-bottom:.08rem}
+.sheets button:hover{color:var(--red);border-bottom-color:var(--red)}
+
+/* ----------------------------------- controls ------------------------------ */
+/* The register's bank: no boxes, no radii — a label in the gutter voice and a
+   hairline under the value. A control that has left its default prints red,
+   so a narrowing is visible from across the sheet. */
+#controls{position:sticky;top:0;z-index:6;background:var(--paper);
+  display:grid;grid-template-columns:var(--col);gap:.9rem 1.25rem;
+  padding-top:.75rem;padding-bottom:.7rem;
+  border-top:2px solid var(--rule-2);border-bottom:2px solid var(--rule-2);
+  margin-top:.8rem}
+#controls label{display:flex;flex-direction:column;gap:.35rem;min-width:0}
+#controls .lbl{color:var(--ink-3)}
+label.f-field{grid-column:1/5}
+label.f-place{grid-column:5/9}
+label.f-order{grid-column:9/-1}
+select{appearance:none;-webkit-appearance:none;font:inherit;font-size:.9375rem;
+  font-weight:500;letter-spacing:-0.012em;color:var(--ink);background:transparent;
+  border:0;border-bottom:1px solid var(--rule-2);border-radius:0;
+  padding:.3rem 1.2rem .35rem 0;width:100%;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='7'%3E%3Cpath d='M1 1l4.5 4.5L10 1' fill='none' stroke='%238a8a8a' stroke-width='1.25'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right .1rem center}
+select:hover{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='7'%3E%3Cpath d='M1 1l4.5 4.5L10 1' fill='none' stroke='%23111111' stroke-width='1.25'/%3E%3C/svg%3E")}
+select.set{color:var(--red);border-bottom-color:var(--red);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='7'%3E%3Cpath d='M1 1l4.5 4.5L10 1' fill='none' stroke='%23E30613' stroke-width='1.25'/%3E%3C/svg%3E")}
+select:focus{border-bottom-color:var(--red)}
+/* `hide the giants` is not a filter, it is what a line IS — so it sets as the
+   register's unit switch rather than as a checkbox: two struck words, the open
+   one in red over its own rule. Its off-state is a word you can read from
+   across the room, which is what "make turning it off obvious" means. */
+.giants{grid-column:1/-1;display:flex;flex-wrap:wrap;align-items:baseline;
+  gap:.3rem .9rem;margin-top:-.15rem}
+.giants .gsw{display:inline-flex;gap:0 .8rem;white-space:nowrap}
+.giants .gsw button{font-size:11px;text-transform:uppercase;letter-spacing:.11em;
+  font-weight:600;color:var(--ink-3);padding-bottom:.12rem;
+  border-bottom:1px solid transparent}
+.giants .gsw button:hover{color:var(--red)}
+.giants .gsw button[aria-pressed="true"]{color:var(--red);font-weight:800;
+  border-bottom-color:var(--red);cursor:default}
+.giants .gnote{font-size:.75rem;color:var(--ink-3)}
+
+/* ---------------------------------- the yield ------------------------------ */
+#status{padding-top:.8rem;padding-bottom:.2rem}
+.yield{margin:0;font-size:1.0625rem;line-height:1.35;letter-spacing:-0.017em;
+  font-weight:500;max-width:52rem}
+.yield .n{font-weight:800}
+.yield .second{display:block;margin-top:.35rem;font-size:.8125rem;
+  line-height:1.5;font-weight:400;letter-spacing:0;color:var(--ink-2)}
+.yield .second .n{font-weight:700;color:var(--ink)}
+/* The set-aside giants, named — the whole promise of "hidden, but named and one
+   click back". Fifty-seven names wrapped to five lines pushed the first card
+   off the fold, so they run as one scrolling rule instead: a marginal strip,
+   which is what apparatus is. */
+.gstrip{margin:.5rem 0 0;font-family:var(--mono);font-size:10px;
+  letter-spacing:.05em;color:var(--ink-3);
+  white-space:nowrap;overflow-x:auto;padding-bottom:.2rem}
+.gstrip .gk{font-size:11px;font-family:inherit;text-transform:uppercase;
+  letter-spacing:.11em;font-weight:600;margin-right:.7rem}
+.gstrip button{font-family:inherit;font-size:inherit;letter-spacing:inherit;
+  color:inherit;border-bottom:1px solid var(--rule);margin-right:.85rem}
+.gstrip button:hover{color:var(--red);border-bottom-color:var(--red)}
+.residue{margin:.55rem 0 0;font-size:.75rem;line-height:1.5;color:var(--ink-3);
+  max-width:56rem}
+
+/* --------------------------------- the shortlist --------------------------- */
+/* The deliverable, and it is the only block on the sheet with a fill. It sits
+   above the register because it is the session's output, not its furniture. */
+.deliver{margin:1.1rem 0 0;border-top:2px solid var(--rule-2);
+  border-bottom:1px solid var(--rule-2);background:var(--wash);
+  padding:.85rem 1rem 1rem}
+.deliver[hidden]{display:none}
+.slhead{margin:0 0 .5rem;color:var(--ink-3)}
+.slrow{display:grid;grid-template-columns:2.2rem minmax(0,1fr) auto auto;
+  gap:0 1rem;align-items:baseline;padding:.42rem 0 .4rem;
+  border-top:1px solid var(--rule)}
+.slrow:first-of-type{border-top:0}
+.slrow .sn{font-family:var(--mono);font-size:10px;letter-spacing:.05em;
+  color:var(--ink-3)}
+.slrow .nm{font-weight:700;letter-spacing:-0.018em;font-size:.9375rem}
+.slrow .meta{font-family:var(--mono);font-size:10px;letter-spacing:.04em;
+  color:var(--ink-2);text-align:right}
+.slrow .drop{font-size:10px;text-transform:uppercase;letter-spacing:.12em;
+  font-weight:600;color:var(--ink-3)}
+.slrow .drop:hover{color:var(--red)}
+.slempty{margin:0;font-size:.8125rem;color:var(--ink-2)}
+/* One honest line of arithmetic over the reader's own record. */
+.record{margin:.7rem 0 0;padding-top:.6rem;border-top:1px solid var(--rule-2);
+  font-size:1.0625rem;line-height:1.35;letter-spacing:-0.017em;font-weight:500}
+.record .n{font-weight:800;color:var(--red)}
+.record:empty{display:none;border:0;padding:0;margin:0}
+.acts{margin:.75rem 0 0;display:flex;gap:.6rem;flex-wrap:wrap;align-items:center}
+.acts button{font-size:10px;text-transform:uppercase;letter-spacing:.12em;
+  font-weight:600;border:1px solid var(--rule-2);padding:.45rem .75rem .4rem;
+  background:var(--paper)}
+.acts button:hover{background:var(--ink);color:var(--paper)}
+.acts .said{font-size:.75rem;color:var(--red);font-weight:600}
+.ask{margin:.7rem 0 0;padding-top:.6rem;border-top:1px solid var(--rule)}
+.ask .q{margin:0;font-size:.9375rem;font-weight:600;letter-spacing:-0.018em}
+.ask .why{margin:.2rem 0 0;font-size:.75rem;color:var(--ink-2);line-height:1.5}
+.ask .btns{margin:.5rem 0 0;display:flex;gap:.5rem}
+.ask button{font-size:10px;text-transform:uppercase;letter-spacing:.12em;
+  font-weight:600;border:1px solid var(--rule);padding:.35rem .65rem .3rem}
+.ask button:hover{border-color:var(--red);color:var(--red)}
+
+/* ------------------------------------ the card ----------------------------- */
+/* Left, the memo — a label gutter and one column of prose. Right, the rail:
+   everything somebody else counted, stamped in the register's mono voice. The
+   split IS the honesty device: nothing in the left column is a number, nothing
+   in the right column is a claim. */
+main{padding-top:.4rem}
+.card{display:grid;grid-template-columns:minmax(0,1fr) var(--rail);
+  column-gap:1.6rem;align-items:start;
+  border-top:1px solid var(--rule);padding:1.05rem 0 1.15rem;
+  scroll-margin-top:7.5rem}
+.card:first-child{border-top:2px solid var(--rule-2)}
+/* The keyboard cursor and the kept mark are the same grammar as the register's
+   open row: a red spine on the left edge, nothing else moves. */
+.card.on{box-shadow:inset 3px 0 0 var(--red)}
+.card.on .cmain,.card.on .cref{padding-left:.75rem}
+.cmain{display:grid;grid-template-columns:var(--lab) minmax(0,1fr);
+  column-gap:1.25rem;row-gap:.26rem;align-items:baseline;min-width:0}
+.cref{font-family:var(--mono);font-weight:500;letter-spacing:.05em;
+  color:var(--ink-3);align-self:baseline}
+.chead{display:flex;flex-wrap:wrap;align-items:baseline;gap:.25rem .7rem;
+  min-width:0}
+.cname{margin:0;font-size:1.45rem;font-weight:800;letter-spacing:-0.032em;
+  line-height:1.05;overflow-wrap:anywhere}
+.card.kept .cname{color:var(--red)}
+/* The status chip. Round 5, signal 2: a young public company is attractive,
+   not a warning. All four YC statuses get this same frame, this same ink and
+   this same sentence shape — the fact, and who states it. No colour varies by
+   status; grep this file for `Public` and you will find it nowhere. */
+.chip{font-family:var(--mono);font-size:9.5px;letter-spacing:.06em;
+  text-transform:uppercase;border:1px solid var(--rule-2);color:var(--ink);
+  padding:.16rem .34rem .12rem;white-space:nowrap}
+/* ---- the memo. Its values are set to the masthead thesis, exactly. -------- */
+/* The memo block and each of its lines dissolve into the card's own grid, so a
+   label and its value are grid siblings rather than a nested table. This is
+   what puts WHAT, FOR WHOM, WHY THEM, VOUCHED and the card's index in one
+   column down the whole sheet. */
+.memo,.ml{display:contents}
+.mk{color:var(--ink-3);padding-top:.34rem}
+.mv{font-size:1.0625rem;line-height:1.35;letter-spacing:-0.017em;font-weight:500;
+  overflow-wrap:anywhere}
+.memo.absent .mk{color:var(--ink-3)}
+.memo.absent .mv{color:var(--ink-2);font-weight:400}
+/* An absent memo is a job I have not done. It is set as apparatus — the board's
+   own unedited words, in the mono voice reserved for things somebody else
+   wrote — so it reads as an honest gap in the page, never as a broken card and
+   never as a company with nothing to say. */
+.bwords{font-family:var(--mono);font-size:.75rem;line-height:1.5;
+  letter-spacing:.02em;color:var(--ink-2);overflow-wrap:anywhere}
+/* Every row of the card is a label cell and a value cell — the provenance line
+   and the credential included, which is why both carry an empty or a real
+   micro-label rather than an explicit column. Auto-placement then puts every
+   label on the sheet in the same gutter with no help from me. */
+.prov{margin:.28rem 0 0;font-size:9.5px;text-transform:uppercase;
+  letter-spacing:.11em;font-weight:600;color:var(--ink-3)}
+.gate{margin:.5rem 0 0}
+.gate a{color:var(--ink);text-decoration:none;
+  border-bottom:1px solid var(--ink-3);font-weight:600;font-size:.9375rem;
+  letter-spacing:-0.018em}
+.gate a:hover{color:var(--red);border-bottom-color:var(--red)}
+.gcap{display:block;margin-top:.18rem;font-size:.75rem;line-height:1.45;
+  color:var(--ink-2)}
+
+/* ---- the rail: the receipt stamp, one per company ------------------------ */
+/* The register's own verification stamp, re-cut for hiring. Every line is a
+   number the build counted or a source stated; the hairline red edge is the
+   struck side of a hand stamp. The register tilts its one stamp by a degree;
+   789 tilted stamps would be a texture, so this one sits square. */
+.receipt{border:1px solid var(--rule-2);border-left:3px solid var(--ink);
+  padding:.5rem .65rem .45rem;font-family:var(--mono);font-size:10px;
+  line-height:1.35;letter-spacing:.03em;color:var(--ink)}
+.rhead{display:flex;justify-content:space-between;gap:.6rem;margin:0 0 .28rem;
+  padding-bottom:.3rem;border-bottom:1px solid var(--rule-2);
+  font-size:8.5px;letter-spacing:.16em;font-weight:700;font-family:inherit}
+.rhead .rno{font-weight:800;font-size:11px;letter-spacing:.02em}
+/* At rest a count is ink — 789 red totals would turn the accent into texture,
+   which is the mistake the live register spent its round 10 undoing. Red marks
+   the LIVE card: the one under the hand, the one the keyboard is on, the one
+   you have kept. */
+.card:hover .receipt,.card.on .receipt,.card.kept .receipt{border-left-color:var(--red)}
+.card:hover .rno,.card.on .rno,.card.kept .rno{color:var(--red)}
+.rrow{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:0 .55rem;
+  margin:0;padding:.17rem 0 .14rem}
+.rrow+.rrow{border-top:1px solid var(--rule)}
+.rk{font-size:8.5px;letter-spacing:.12em;color:var(--ink-3);padding-top:1px;
+  font-family:inherit;overflow-wrap:anywhere}
+.rv{text-align:right;font-weight:700;white-space:nowrap}
+.rrow.wide{grid-template-columns:3.1rem minmax(0,1fr)}
+.rrow.wide .rv{text-align:left;font-weight:500;white-space:normal;
+  overflow-wrap:anywhere}
+.rmore{padding:.2rem 0 0;font-size:8.5px;letter-spacing:.12em;color:var(--ink-3);
+  text-transform:uppercase}
+/* The two hands. Keep is the reader's mark on the sheet; open is the door to
+   the company's own board. Neither ever writes `applied`. */
+.act{margin:.6rem 0 0;display:flex;gap:.45rem;flex-wrap:wrap}
+.act button{font-size:10px;text-transform:uppercase;letter-spacing:.12em;
+  font-weight:600;border:1px solid var(--rule-2);padding:.42rem .6rem .38rem}
+.act .keep{color:var(--ink-3);border-color:var(--rule)}
+.act .keep:hover{color:var(--red);border-color:var(--red)}
+.card.kept .act .keep{background:var(--red);border-color:var(--red);color:#fff}
+.act .open{flex:1 1 auto;text-align:center;background:var(--ink);color:var(--paper)}
+.act .open:hover{background:var(--red)}
+
+/* ---- role rows: the register's line, a different unit --------------------- */
+.roles{grid-column:1/-1;margin:.9rem 0 0}
+.roles[hidden]{display:none}
+.rnote{margin:0 0 .35rem;font-size:.75rem;color:var(--ink-2);
+  border-bottom:1px solid var(--rule-2);padding-bottom:.3rem}
+a.role{display:grid;
+  grid-template-columns:var(--lab) minmax(0,1fr) 9rem 4.5rem;
+  column-gap:1.25rem;align-items:baseline;padding:.4rem 0 .38rem;
+  border-bottom:1px solid var(--rule);text-decoration:none;color:inherit}
+a.role:hover{background:var(--wash)}
+a.role:hover .rt,a.role:hover .ra{color:var(--red)}
+a.role .rn{font-family:var(--mono);font-size:10px;letter-spacing:.05em;
+  color:var(--ink-3)}
+a.role .rt{font-weight:600;letter-spacing:-0.018em;font-size:.9375rem;
+  overflow-wrap:anywhere}
+/* The board's own word for the team, printed under every title — so a reader
+   can see when my eleven fields have put a role in the wrong drawer. */
+a.role .rb{grid-column:2;font-size:.75rem;color:var(--ink-3);letter-spacing:0;
+  overflow-wrap:anywhere}
+a.role .rl{font-family:var(--mono);font-size:10px;letter-spacing:.04em;
+  color:var(--ink-2);overflow-wrap:anywhere}
+a.role .ra{font-size:10px;text-transform:uppercase;letter-spacing:.12em;
+  font-weight:600;text-align:right;color:var(--ink-3)}
+a.role .vchip{margin-left:.4rem;font-family:var(--mono);font-size:9px;
+  letter-spacing:.05em;text-transform:uppercase;border:1px solid var(--rule);
+  padding:0 .2rem;color:var(--ink-2);white-space:nowrap}
+.rmorelink{margin:.45rem 0 0;font-size:.75rem;color:var(--ink-2)}
+.rmorelink a{color:var(--ink);border-bottom:1px solid var(--ink-3)}
+.rmorelink a:hover{color:var(--red);border-bottom-color:var(--red)}
+.splitnote{margin:1.1rem 0 .2rem;padding:.5rem 0 0;
+  border-top:1px solid var(--rule-2)}
+
+/* ------------------------------------- sheets ------------------------------ */
+dialog{border:2px solid var(--rule-2);border-radius:0;background:var(--paper);
+  color:var(--ink);max-width:44rem;width:calc(100% - 2rem);padding:1.6rem 1.7rem}
+dialog::backdrop{background:rgba(17,17,17,.45)}
+dialog h2{margin:0 0 .6rem;font-size:1.6rem;font-weight:800;
+  letter-spacing:-0.032em;line-height:1.05;text-transform:uppercase}
+dialog h3{margin:1.1rem 0 .35rem;color:var(--ink-3)}
+dialog p{margin:0 0 .5rem;font-size:.8125rem;line-height:1.55;color:var(--ink-2)}
+dialog p .n,dialog li .n{font-weight:700;color:var(--ink)}
+dialog ul{margin:0 0 .5rem;padding-left:1.1rem;font-size:.8125rem;
+  line-height:1.55;color:var(--ink-2)}
+dialog li{margin:0 0 .35rem}
+.ladder{font-family:var(--mono);font-size:11px;line-height:1.7;white-space:pre;
+  overflow-x:auto;color:var(--ink);margin:0 0 .6rem;
+  border-top:1px solid var(--rule-2);border-bottom:1px solid var(--rule-2);
+  padding:.5rem 0}
+dialog .close{position:absolute;top:1rem;right:1.1rem;font-size:10px;
+  text-transform:uppercase;letter-spacing:.12em;font-weight:600;
+  color:var(--ink-3)}
+dialog .close:hover{color:var(--red)}
+.keys{font-family:var(--mono);font-size:11px;line-height:2;color:var(--ink)}
+.keys kbd{border:1px solid var(--rule-2);padding:.1rem .3rem;font-family:inherit;
+  font-size:10px}
+
+/* -------------------------------------- foot ------------------------------- */
+footer{margin-top:2.5rem;border-top:2px solid var(--rule-2);padding-top:1rem}
+footer p{font-size:.75rem;color:var(--ink-3);max-width:52rem;line-height:1.55}
+footer .n{font-weight:700;color:var(--ink-2)}
+details.reg{margin-top:.8rem}
+details.reg summary{font-size:11px;text-transform:uppercase;letter-spacing:.11em;
+  font-weight:600;color:var(--ink);cursor:pointer;list-style:none}
+details.reg summary::-webkit-details-marker{display:none}
+details.reg summary:hover{color:var(--red)}
+.reglist{margin-top:.5rem;max-height:22rem;overflow-y:auto;
+  border-top:1px solid var(--rule-2)}
+.regrow{display:grid;grid-template-columns:2.6rem minmax(0,1fr) 4.5rem 8rem 6rem;
+  gap:0 1rem;font-family:var(--mono);font-size:10px;letter-spacing:.04em;
+  color:var(--ink-2);padding:.22rem 0;border-bottom:1px solid var(--rule)}
+.regrow .rgn{color:var(--ink);overflow:hidden;text-overflow:ellipsis;
+  white-space:nowrap}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:1.6rem;
+  background:var(--ink);color:var(--paper);font-size:.75rem;padding:.5rem .9rem;
+  z-index:20}
+
+/* ---------------------------------- the fold ------------------------------- */
+/* At a hand's width the rail leaves the card's side and files itself under the
+   memo, and the label gutter goes above its value — a form on a phone is a
+   stack of labelled lines, not two thin columns. */
+@media (max-width:62rem){
+  :root{--gut:1.1rem}
+  /* A hand's width has no twelfth column and no room for a two-page header:
+     the masthead states the argument, the thesis states the card's anatomy,
+     and the provenance paragraph drops to the apparatus size it is. */
+  header{padding-top:1rem}
+  h1{grid-column:1/-1;font-size:clamp(1.5rem,7vw,2.1rem)}
+  .thesis span{font-size:1rem}
+  #lede2{font-size:.75rem;line-height:1.45}
+  .stamp{flex:none;padding:.4rem .55rem .35rem}
+  .stamp .snum{font-size:1.15rem}
+  /* Side by side, the nowrap date and the stamp's own caption both refuse to
+     shrink and the two overlap at 390px. Stacked, each gets the full measure:
+     one line of date, one framed count. */
+  .aside{grid-column:1/-1;margin-top:.7rem;align-items:stretch;gap:.45rem}
+  .snapshot{flex-direction:row;align-items:baseline;gap:.5rem;text-align:left}
+  .stamp{align-items:flex-start;text-align:left;flex-direction:row;
+    align-items:baseline;gap:.6rem}
+  .thesis span,.ledefold{grid-column:1/-1}
+  #lede2{column-count:1;margin-top:.5rem}
+  .yield{font-size:1rem}
+  /* At 390px the provenance paragraph is four hundred pixels of small type
+     standing between the reader and the first company. It folds to one line
+     that names it, and app.js closes it at boot below this measure — the wide
+     sheet never sees the fold, and no reader loses the argument, only the
+     scroll. */
+  .ledefold summary{display:block;color:var(--ink);cursor:pointer;list-style:none;
+    border-bottom:1px solid var(--ink-3);padding-bottom:.25rem}
+  .ledefold summary::-webkit-details-marker{display:none}
+  .ledefold summary::after{content:" ▾";color:var(--ink-3)}
+  .ledefold[open] summary::after{content:" ▴"}
+  .sheets{grid-column:1/-1;flex-direction:row;flex-wrap:wrap;gap:.3rem 1.2rem;
+    margin-top:.7rem}
+  label.f-field,label.f-place,label.f-order{grid-column:1/-1}
+  .card{grid-template-columns:minmax(0,1fr);row-gap:.8rem}
+  .cmain{grid-template-columns:minmax(0,1fr);row-gap:.1rem}
+  .cref{display:none}      /* the number is register apparatus; the phone has no gutter */
+  .mk{padding-top:.5rem}
+  .mk:empty{display:none}
+  a.role{grid-template-columns:minmax(0,1fr) 4.5rem}
+  a.role .rn{display:none}
+  a.role .rt{grid-column:1}
+  a.role .rb,a.role .rl{grid-column:1}
+  .regrow{grid-template-columns:minmax(0,1fr) 4rem}
+  .regrow .rgg,.regrow .rgm{display:none}
+  .slrow{grid-template-columns:minmax(0,1fr) auto;row-gap:.15rem}
+  .slrow .sn{display:none}
+  .slrow .meta{grid-column:1;text-align:left}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="masthead">
+    <h1>I read <span class="n">10,125</span> companies to find these
+      <span class="n">789</span></h1>
+    <div class="aside">
+      <p class="snapshot"><span class="k micro">Snapshot</span>
+        <time id="snapshot">—</time></p>
+      <div class="stamp">
+        <span class="snum" id="rolecount">—</span>
+        <span class="sname">roles, on the companies' own boards</span>
+      </div>
+    </div>
+  </div>
+  <p class="thesis"><span>Every card below is one paragraph: what the company
+    is, who it is for, why them — then who vouched for it, with the receipt,
+    and how hard it is hiring tonight.</span></p>
+  <div class="lede">
+    <details class="ledefold" id="ledefold" open>
+      <summary class="micro">how these 789 were found, and who wrote the three lines</summary>
+      <p id="lede2"></p>
+    </details>
+    <p class="sheets">
+      <button type="button" id="fbtn" class="micro">the whole funnel, 10,125 → 789</button>
+      <button type="button" id="nbtn" class="micro">what this page will not say</button>
+      <button type="button" id="kbtn" class="micro">keyboard</button>
+    </p>
+  </div>
+</header>
+
+<div id="controls">
+  <label class="f-field"><span class="lbl">I'm in</span>
+    <select id="field" aria-label="field of work"></select></label>
+  <label class="f-place"><span class="lbl">Looking in</span>
+    <select id="place" aria-label="where"></select></label>
+  <label class="f-order"><span class="lbl">Ordered by</span>
+    <select id="order" aria-label="ordering">
+      <option value="match">most roles for me</option>
+      <option value="size">hiring hardest for their size</option>
+      <option value="read">the ones I have read, first</option>
+      <option value="all">most roles open, any field</option>
+    </select></label>
+  <div class="giants">
+    <span class="gsw" role="group" aria-label="which companies this page shows">
+      <button type="button" id="ghide" aria-pressed="true">hiding the giants</button>
+      <button type="button" id="gshow" aria-pressed="false">showing all 789</button>
+    </span>
+    <span class="gnote" id="gnote"></span>
+  </div>
+</div>
+
+<div id="status">
+  <p class="yield" id="yield"></p>
+  <div class="gstrip" id="gstrip"></div>
+  <p class="residue" id="residue"></p>
+
+  <section class="deliver" id="deliver" hidden>
+    <h2 class="slhead">My shortlist — kept in this browser, nowhere else</h2>
+    <div id="slrows"></div>
+    <div id="askbox"></div>
+    <p class="record" id="record"></p>
+    <div class="acts">
+      <button id="copyList" type="button">copy my shortlist</button>
+      <button id="copyLink" type="button">copy a link that reopens it</button>
+      <span class="said" id="said"></span>
+    </div>
+  </section>
+</div>
+
+<main id="list">__FOLD_HTML__</main>
+<script>window.__firstCardPainted=performance.now();</script>
+
+<footer>
+  <p id="foot"></p>
+  <details class="reg"><summary id="regsum">the register — every company, in one list</summary>
+    <div class="reglist" id="reglist"></div>
+  </details>
+</footer>
+
+<dialog id="funnel"><button class="close" data-close>close</button>
+  <h2>10,125 companies read. 789 are hiring tonight.</h2>
+  <pre class="ladder" id="ladder"></pre>
+  <h3>Three things this ladder does not mean</h3>
+  <ul id="ladderNotes"></ul>
+</dialog>
+
+<dialog id="never"><button class="close" data-close>close</button>
+  <h2>What this page will not say</h2>
+  <div id="neverBody"></div>
+</dialog>
+
+<dialog id="keysheet"><button class="close" data-close>close</button>
+  <h2>Keyboard</h2>
+  <p class="keys">
+    <kbd>j</kbd> <kbd>k</kbd> next / previous company &nbsp;·&nbsp;
+    <kbd>o</kbd> or <kbd>↵</kbd> open its roles<br>
+    <kbd>1</kbd>–<kbd>9</kbd> open the n-th role in a new tab &nbsp;·&nbsp;
+    <kbd>x</kbd> keep / unkeep<br>
+    <kbd>g</kbd> show or hide the giants &nbsp;·&nbsp;
+    <kbd>f</kbd> field menu &nbsp;·&nbsp; <kbd>p</kbd> place menu<br>
+    <kbd>c</kbd> copy my shortlist &nbsp;·&nbsp; <kbd>?</kbd> this sheet &nbsp;·&nbsp;
+    <kbd>esc</kbd> close
+  </p>
+  <p>Keys pressed before the other 771 companies land are queued, not dropped —
+    the page replays them the moment the data is in.</p>
+</dialog>
+
+<script>
+const HEAD = __HEAD_JSON__;
+</script>
+<script src="app.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,586 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>789 companies hiring tonight — what each one is, who vouched, and how hard they are hiring</title>
+<!-- Inter, loaded the way the live register loads it, but non-blocking: M1 is a
+     first-card measurement and a stylesheet on a third-party host is a
+     render-blocking round trip. Helvetica Neue holds the page until Inter
+     lands, which on a Swiss sheet is not a fallback so much as the ancestor. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" media="print" onload="this.media='all'"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+<style>
+/* r05-b — "the memo", set on the live register's own grid.
+ *
+ * The founder's baseline is site/index.html and he likes it: Swiss /
+ * International Typographic — one twelve-column grid, hairline rules, 11px
+ * uppercase micro-labels, tabular numerals, crop marks, one red. This page
+ * takes that identity wholesale and spends it on a different object: not a
+ * register of rows but 789 one-paragraph investment memos.
+ *
+ * The one structural idea: ONE GUTTER runs down the whole sheet, and every
+ * micro-label lives in it — the card's index, WHAT, FOR WHOM, WHY THEM,
+ * VOUCHED. A memo is a form, and a form has a label column. The register's
+ * anatomy, pointed at prose.
+ *
+ * Red discipline, copied from the register's round 10: at rest a count is INK.
+ * Red marks the masthead's one number, the snapshot stamp, and LIVE state — a
+ * control that has left its default, a company you have kept, the row under
+ * the hand. Nowhere else, and never as a judgement about a company.
+ */
+:root{
+  --paper:#ffffff;
+  --ink:#111111;
+  --ink-2:#4a4a4a;      /* secondary prose */
+  --ink-3:#8a8a8a;      /* micro-labels, absent-ish things */
+  --rule:#d5d5d5;       /* hairline */
+  --rule-2:#111111;     /* structural rule */
+  --wash:#f4f4f4;       /* the only fill on the page */
+  --red:#E30613;        /* the masthead number, and live state. Nowhere else. */
+  --gut:2rem;
+  --lab:5.25rem;        /* THE gutter: every micro-label on the sheet sits in it */
+  --rail:17.5rem;       /* the card's right rail, where the counts are stamped */
+  --col:repeat(12,minmax(0,1fr));
+  --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,monospace;
+}
+*{box-sizing:border-box;min-width:0}   /* no grid item may out-shrink its track */
+html{-webkit-text-size-adjust:100%;overflow-x:clip}
+body{
+  margin:0;padding:0 0 4rem;background:var(--paper);color:var(--ink);
+  position:relative;overflow-x:clip;
+  font-family:Inter,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size:15px;line-height:1.45;
+  font-variant-numeric:tabular-nums;    /* every count is a column, not a word */
+  font-feature-settings:"tnum" 1,"cv05" 1,"ss01" 1;
+  letter-spacing:-0.006em;
+  -webkit-font-smoothing:antialiased;
+}
+header,#controls,#status,main,footer{
+  max-width:78rem;margin-inline:auto;padding-inline:var(--gut);
+}
+a{color:inherit}
+button{font:inherit;color:inherit;background:none;border:0;border-radius:0;
+  margin:0;padding:0;cursor:pointer}
+:focus-visible{outline:2px solid var(--red);outline-offset:3px}
+
+/* ---- micro-label: 11px, uppercase, wide. The page's smallest voice. -------- */
+.micro,.mk,.cref,.lbl,.rk,.rhead,dialog h3,.slhead,.gcap-k{
+  font-size:11px;line-height:1.1;text-transform:uppercase;
+  letter-spacing:0.11em;font-weight:600;
+}
+
+/* ------------------------------ registration marks ------------------------- */
+/* The sheet corners. A plate is a printed thing and printed things carry crop
+   marks: four hairline corners registering the sheet, in the margin gray so
+   they read as apparatus, never as content. */
+header,footer{position:relative}
+header::before,header::after,footer::before,footer::after{
+  content:"";position:absolute;width:.7rem;height:.7rem;
+  border:0 solid var(--ink-3);pointer-events:none}
+header::before{top:.8rem;left:.55rem;border-left-width:1px;border-top-width:1px}
+header::after{top:.8rem;right:.55rem;border-right-width:1px;border-top-width:1px}
+footer::before{bottom:-2.4rem;left:.55rem;border-left-width:1px;border-bottom-width:1px}
+footer::after{bottom:-2.4rem;right:.55rem;border-right-width:1px;border-bottom-width:1px}
+
+/* ----------------------------------- masthead ------------------------------ */
+header{padding-top:1.5rem}
+.masthead{display:grid;grid-template-columns:var(--col);gap:0 1.25rem;
+  align-items:end;padding-bottom:.5rem}
+h1{grid-column:1/9;margin:0;
+  font-size:clamp(1.7rem,3.2vw,2.4rem);font-weight:800;
+  letter-spacing:-0.038em;line-height:.96;text-transform:uppercase}
+h1 .n{color:var(--red)}
+.aside{grid-column:9/-1;display:flex;flex-direction:column;
+  align-items:flex-end;gap:.6rem;min-width:0}
+.snapshot{margin:0;display:flex;flex-direction:column;gap:.2rem;
+  text-align:right;align-items:flex-end}
+.snapshot .k{color:var(--ink-3)}
+.snapshot time{font-size:1.05rem;font-weight:600;letter-spacing:-0.01em;
+  white-space:nowrap}
+/* The stamp: the sheet's one number, struck in a hairline red frame the way an
+   atlas plate carries its designation in the margin. */
+.stamp{border:1.5px solid var(--red);padding:.5rem .75rem .45rem;
+  display:flex;flex-direction:column;gap:.18rem;align-items:flex-end;
+  text-align:right}
+.stamp .snum{color:var(--red);font-weight:800;font-size:1.35rem;line-height:1;
+  letter-spacing:-0.02em;white-space:nowrap}
+.stamp .sname{font-size:10px;text-transform:uppercase;letter-spacing:.12em;
+  font-weight:600;color:var(--ink)}
+/* The thesis: the register's own masthead sentence, at the register's own
+   setting. This is the page's most authored line of type and the memo's
+   values below are set to match it exactly — the argument and the evidence
+   in one voice. */
+.thesis{display:grid;grid-template-columns:var(--col);gap:0 1.25rem;
+  margin:0;padding:.25rem 0 .65rem}
+.thesis span{grid-column:1/8;font-size:1.0625rem;line-height:1.35;
+  letter-spacing:-0.017em;font-weight:500}
+.lede{display:grid;grid-template-columns:var(--col);gap:0 1.25rem;margin:0}
+/* The provenance argument, folded into two ruled columns the way the register
+   folds its plate index. Eight lines of small type across a 46rem measure is a
+   wall and it costs the first card its place on the fold; four is a caption. */
+.ledefold{grid-column:1/9}
+.ledefold summary{display:none}   /* the wide sheet has room; it is never folded */
+#lede2{margin:0;font-size:.8125rem;line-height:1.5;
+  color:var(--ink-2);column-count:2;column-gap:2.25rem;
+  column-rule:1px solid var(--rule)}
+.lede .n{font-weight:700;color:var(--ink)}
+.sheets{grid-column:9/-1;display:flex;flex-direction:column;
+  align-items:flex-start;gap:.35rem;margin:0}
+.sheets button{text-align:left;color:var(--ink);
+  border-bottom:1px solid var(--ink-3);padding-bottom:.08rem}
+.sheets button:hover{color:var(--red);border-bottom-color:var(--red)}
+
+/* ----------------------------------- controls ------------------------------ */
+/* The register's bank: no boxes, no radii — a label in the gutter voice and a
+   hairline under the value. A control that has left its default prints red,
+   so a narrowing is visible from across the sheet. */
+#controls{position:sticky;top:0;z-index:6;background:var(--paper);
+  display:grid;grid-template-columns:var(--col);gap:.9rem 1.25rem;
+  padding-top:.75rem;padding-bottom:.7rem;
+  border-top:2px solid var(--rule-2);border-bottom:2px solid var(--rule-2);
+  margin-top:.8rem}
+#controls label{display:flex;flex-direction:column;gap:.35rem;min-width:0}
+#controls .lbl{color:var(--ink-3)}
+label.f-field{grid-column:1/5}
+label.f-place{grid-column:5/9}
+label.f-order{grid-column:9/-1}
+select{appearance:none;-webkit-appearance:none;font:inherit;font-size:.9375rem;
+  font-weight:500;letter-spacing:-0.012em;color:var(--ink);background:transparent;
+  border:0;border-bottom:1px solid var(--rule-2);border-radius:0;
+  padding:.3rem 1.2rem .35rem 0;width:100%;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='7'%3E%3Cpath d='M1 1l4.5 4.5L10 1' fill='none' stroke='%238a8a8a' stroke-width='1.25'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right .1rem center}
+select:hover{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='7'%3E%3Cpath d='M1 1l4.5 4.5L10 1' fill='none' stroke='%23111111' stroke-width='1.25'/%3E%3C/svg%3E")}
+select.set{color:var(--red);border-bottom-color:var(--red);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='7'%3E%3Cpath d='M1 1l4.5 4.5L10 1' fill='none' stroke='%23E30613' stroke-width='1.25'/%3E%3C/svg%3E")}
+select:focus{border-bottom-color:var(--red)}
+/* `hide the giants` is not a filter, it is what a line IS — so it sets as the
+   register's unit switch rather than as a checkbox: two struck words, the open
+   one in red over its own rule. Its off-state is a word you can read from
+   across the room, which is what "make turning it off obvious" means. */
+.giants{grid-column:1/-1;display:flex;flex-wrap:wrap;align-items:baseline;
+  gap:.3rem .9rem;margin-top:-.15rem}
+.giants .gsw{display:inline-flex;gap:0 .8rem;white-space:nowrap}
+.giants .gsw button{font-size:11px;text-transform:uppercase;letter-spacing:.11em;
+  font-weight:600;color:var(--ink-3);padding-bottom:.12rem;
+  border-bottom:1px solid transparent}
+.giants .gsw button:hover{color:var(--red)}
+.giants .gsw button[aria-pressed="true"]{color:var(--red);font-weight:800;
+  border-bottom-color:var(--red);cursor:default}
+.giants .gnote{font-size:.75rem;color:var(--ink-3)}
+
+/* ---------------------------------- the yield ------------------------------ */
+#status{padding-top:.8rem;padding-bottom:.2rem}
+.yield{margin:0;font-size:1.0625rem;line-height:1.35;letter-spacing:-0.017em;
+  font-weight:500;max-width:52rem}
+.yield .n{font-weight:800}
+.yield .second{display:block;margin-top:.35rem;font-size:.8125rem;
+  line-height:1.5;font-weight:400;letter-spacing:0;color:var(--ink-2)}
+.yield .second .n{font-weight:700;color:var(--ink)}
+/* The set-aside giants, named — the whole promise of "hidden, but named and one
+   click back". Fifty-seven names wrapped to five lines pushed the first card
+   off the fold, so they run as one scrolling rule instead: a marginal strip,
+   which is what apparatus is. */
+.gstrip{margin:.5rem 0 0;font-family:var(--mono);font-size:10px;
+  letter-spacing:.05em;color:var(--ink-3);
+  white-space:nowrap;overflow-x:auto;padding-bottom:.2rem}
+.gstrip .gk{font-size:11px;font-family:inherit;text-transform:uppercase;
+  letter-spacing:.11em;font-weight:600;margin-right:.7rem}
+.gstrip button{font-family:inherit;font-size:inherit;letter-spacing:inherit;
+  color:inherit;border-bottom:1px solid var(--rule);margin-right:.85rem}
+.gstrip button:hover{color:var(--red);border-bottom-color:var(--red)}
+.residue{margin:.55rem 0 0;font-size:.75rem;line-height:1.5;color:var(--ink-3);
+  max-width:56rem}
+
+/* --------------------------------- the shortlist --------------------------- */
+/* The deliverable, and it is the only block on the sheet with a fill. It sits
+   above the register because it is the session's output, not its furniture. */
+.deliver{margin:1.1rem 0 0;border-top:2px solid var(--rule-2);
+  border-bottom:1px solid var(--rule-2);background:var(--wash);
+  padding:.85rem 1rem 1rem}
+.deliver[hidden]{display:none}
+.slhead{margin:0 0 .5rem;color:var(--ink-3)}
+.slrow{display:grid;grid-template-columns:2.2rem minmax(0,1fr) auto auto;
+  gap:0 1rem;align-items:baseline;padding:.42rem 0 .4rem;
+  border-top:1px solid var(--rule)}
+.slrow:first-of-type{border-top:0}
+.slrow .sn{font-family:var(--mono);font-size:10px;letter-spacing:.05em;
+  color:var(--ink-3)}
+.slrow .nm{font-weight:700;letter-spacing:-0.018em;font-size:.9375rem}
+.slrow .meta{font-family:var(--mono);font-size:10px;letter-spacing:.04em;
+  color:var(--ink-2);text-align:right}
+.slrow .drop{font-size:10px;text-transform:uppercase;letter-spacing:.12em;
+  font-weight:600;color:var(--ink-3)}
+.slrow .drop:hover{color:var(--red)}
+.slempty{margin:0;font-size:.8125rem;color:var(--ink-2)}
+/* One honest line of arithmetic over the reader's own record. */
+.record{margin:.7rem 0 0;padding-top:.6rem;border-top:1px solid var(--rule-2);
+  font-size:1.0625rem;line-height:1.35;letter-spacing:-0.017em;font-weight:500}
+.record .n{font-weight:800;color:var(--red)}
+.record:empty{display:none;border:0;padding:0;margin:0}
+.acts{margin:.75rem 0 0;display:flex;gap:.6rem;flex-wrap:wrap;align-items:center}
+.acts button{font-size:10px;text-transform:uppercase;letter-spacing:.12em;
+  font-weight:600;border:1px solid var(--rule-2);padding:.45rem .75rem .4rem;
+  background:var(--paper)}
+.acts button:hover{background:var(--ink);color:var(--paper)}
+.acts .said{font-size:.75rem;color:var(--red);font-weight:600}
+.ask{margin:.7rem 0 0;padding-top:.6rem;border-top:1px solid var(--rule)}
+.ask .q{margin:0;font-size:.9375rem;font-weight:600;letter-spacing:-0.018em}
+.ask .why{margin:.2rem 0 0;font-size:.75rem;color:var(--ink-2);line-height:1.5}
+.ask .btns{margin:.5rem 0 0;display:flex;gap:.5rem}
+.ask button{font-size:10px;text-transform:uppercase;letter-spacing:.12em;
+  font-weight:600;border:1px solid var(--rule);padding:.35rem .65rem .3rem}
+.ask button:hover{border-color:var(--red);color:var(--red)}
+
+/* ------------------------------------ the card ----------------------------- */
+/* Left, the memo — a label gutter and one column of prose. Right, the rail:
+   everything somebody else counted, stamped in the register's mono voice. The
+   split IS the honesty device: nothing in the left column is a number, nothing
+   in the right column is a claim. */
+main{padding-top:.4rem}
+.card{display:grid;grid-template-columns:minmax(0,1fr) var(--rail);
+  column-gap:1.6rem;align-items:start;
+  border-top:1px solid var(--rule);padding:1.05rem 0 1.15rem;
+  scroll-margin-top:7.5rem}
+.card:first-child{border-top:2px solid var(--rule-2)}
+/* The keyboard cursor and the kept mark are the same grammar as the register's
+   open row: a red spine on the left edge, nothing else moves. */
+.card.on{box-shadow:inset 3px 0 0 var(--red)}
+.card.on .cmain,.card.on .cref{padding-left:.75rem}
+.cmain{display:grid;grid-template-columns:var(--lab) minmax(0,1fr);
+  column-gap:1.25rem;row-gap:.26rem;align-items:baseline;min-width:0}
+.cref{font-family:var(--mono);font-weight:500;letter-spacing:.05em;
+  color:var(--ink-3);align-self:baseline}
+.chead{display:flex;flex-wrap:wrap;align-items:baseline;gap:.25rem .7rem;
+  min-width:0}
+.cname{margin:0;font-size:1.45rem;font-weight:800;letter-spacing:-0.032em;
+  line-height:1.05;overflow-wrap:anywhere}
+.card.kept .cname{color:var(--red)}
+/* The status chip. Round 5, signal 2: a young public company is attractive,
+   not a warning. All four YC statuses get this same frame, this same ink and
+   this same sentence shape — the fact, and who states it. No colour varies by
+   status; grep this file for `Public` and you will find it nowhere. */
+.chip{font-family:var(--mono);font-size:9.5px;letter-spacing:.06em;
+  text-transform:uppercase;border:1px solid var(--rule-2);color:var(--ink);
+  padding:.16rem .34rem .12rem;white-space:nowrap}
+/* ---- the memo. Its values are set to the masthead thesis, exactly. -------- */
+/* The memo block and each of its lines dissolve into the card's own grid, so a
+   label and its value are grid siblings rather than a nested table. This is
+   what puts WHAT, FOR WHOM, WHY THEM, VOUCHED and the card's index in one
+   column down the whole sheet. */
+.memo,.ml{display:contents}
+.mk{color:var(--ink-3);padding-top:.34rem}
+.mv{font-size:1.0625rem;line-height:1.35;letter-spacing:-0.017em;font-weight:500;
+  overflow-wrap:anywhere}
+.memo.absent .mk{color:var(--ink-3)}
+.memo.absent .mv{color:var(--ink-2);font-weight:400}
+/* An absent memo is a job I have not done. It is set as apparatus — the board's
+   own unedited words, in the mono voice reserved for things somebody else
+   wrote — so it reads as an honest gap in the page, never as a broken card and
+   never as a company with nothing to say. */
+.bwords{font-family:var(--mono);font-size:.75rem;line-height:1.5;
+  letter-spacing:.02em;color:var(--ink-2);overflow-wrap:anywhere}
+/* Every row of the card is a label cell and a value cell — the provenance line
+   and the credential included, which is why both carry an empty or a real
+   micro-label rather than an explicit column. Auto-placement then puts every
+   label on the sheet in the same gutter with no help from me. */
+.prov{margin:.28rem 0 0;font-size:9.5px;text-transform:uppercase;
+  letter-spacing:.11em;font-weight:600;color:var(--ink-3)}
+.gate{margin:.5rem 0 0}
+.gate a{color:var(--ink);text-decoration:none;
+  border-bottom:1px solid var(--ink-3);font-weight:600;font-size:.9375rem;
+  letter-spacing:-0.018em}
+.gate a:hover{color:var(--red);border-bottom-color:var(--red)}
+.gcap{display:block;margin-top:.18rem;font-size:.75rem;line-height:1.45;
+  color:var(--ink-2)}
+
+/* ---- the rail: the receipt stamp, one per company ------------------------ */
+/* The register's own verification stamp, re-cut for hiring. Every line is a
+   number the build counted or a source stated; the hairline red edge is the
+   struck side of a hand stamp. The register tilts its one stamp by a degree;
+   789 tilted stamps would be a texture, so this one sits square. */
+.receipt{border:1px solid var(--rule-2);border-left:3px solid var(--ink);
+  padding:.5rem .65rem .45rem;font-family:var(--mono);font-size:10px;
+  line-height:1.35;letter-spacing:.03em;color:var(--ink)}
+.rhead{display:flex;justify-content:space-between;gap:.6rem;margin:0 0 .28rem;
+  padding-bottom:.3rem;border-bottom:1px solid var(--rule-2);
+  font-size:8.5px;letter-spacing:.16em;font-weight:700;font-family:inherit}
+.rhead .rno{font-weight:800;font-size:11px;letter-spacing:.02em}
+/* At rest a count is ink — 789 red totals would turn the accent into texture,
+   which is the mistake the live register spent its round 10 undoing. Red marks
+   the LIVE card: the one under the hand, the one the keyboard is on, the one
+   you have kept. */
+.card:hover .receipt,.card.on .receipt,.card.kept .receipt{border-left-color:var(--red)}
+.card:hover .rno,.card.on .rno,.card.kept .rno{color:var(--red)}
+.rrow{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:0 .55rem;
+  margin:0;padding:.17rem 0 .14rem}
+.rrow+.rrow{border-top:1px solid var(--rule)}
+.rk{font-size:8.5px;letter-spacing:.12em;color:var(--ink-3);padding-top:1px;
+  font-family:inherit;overflow-wrap:anywhere}
+.rv{text-align:right;font-weight:700;white-space:nowrap}
+.rrow.wide{grid-template-columns:3.1rem minmax(0,1fr)}
+.rrow.wide .rv{text-align:left;font-weight:500;white-space:normal;
+  overflow-wrap:anywhere}
+.rmore{padding:.2rem 0 0;font-size:8.5px;letter-spacing:.12em;color:var(--ink-3);
+  text-transform:uppercase}
+/* The two hands. Keep is the reader's mark on the sheet; open is the door to
+   the company's own board. Neither ever writes `applied`. */
+.act{margin:.6rem 0 0;display:flex;gap:.45rem;flex-wrap:wrap}
+.act button{font-size:10px;text-transform:uppercase;letter-spacing:.12em;
+  font-weight:600;border:1px solid var(--rule-2);padding:.42rem .6rem .38rem}
+.act .keep{color:var(--ink-3);border-color:var(--rule)}
+.act .keep:hover{color:var(--red);border-color:var(--red)}
+.card.kept .act .keep{background:var(--red);border-color:var(--red);color:#fff}
+.act .open{flex:1 1 auto;text-align:center;background:var(--ink);color:var(--paper)}
+.act .open:hover{background:var(--red)}
+
+/* ---- role rows: the register's line, a different unit --------------------- */
+.roles{grid-column:1/-1;margin:.9rem 0 0}
+.roles[hidden]{display:none}
+.rnote{margin:0 0 .35rem;font-size:.75rem;color:var(--ink-2);
+  border-bottom:1px solid var(--rule-2);padding-bottom:.3rem}
+a.role{display:grid;
+  grid-template-columns:var(--lab) minmax(0,1fr) 9rem 4.5rem;
+  column-gap:1.25rem;align-items:baseline;padding:.4rem 0 .38rem;
+  border-bottom:1px solid var(--rule);text-decoration:none;color:inherit}
+a.role:hover{background:var(--wash)}
+a.role:hover .rt,a.role:hover .ra{color:var(--red)}
+a.role .rn{font-family:var(--mono);font-size:10px;letter-spacing:.05em;
+  color:var(--ink-3)}
+a.role .rt{font-weight:600;letter-spacing:-0.018em;font-size:.9375rem;
+  overflow-wrap:anywhere}
+/* The board's own word for the team, printed under every title — so a reader
+   can see when my eleven fields have put a role in the wrong drawer. */
+a.role .rb{grid-column:2;font-size:.75rem;color:var(--ink-3);letter-spacing:0;
+  overflow-wrap:anywhere}
+a.role .rl{font-family:var(--mono);font-size:10px;letter-spacing:.04em;
+  color:var(--ink-2);overflow-wrap:anywhere}
+a.role .ra{font-size:10px;text-transform:uppercase;letter-spacing:.12em;
+  font-weight:600;text-align:right;color:var(--ink-3)}
+a.role .vchip{margin-left:.4rem;font-family:var(--mono);font-size:9px;
+  letter-spacing:.05em;text-transform:uppercase;border:1px solid var(--rule);
+  padding:0 .2rem;color:var(--ink-2);white-space:nowrap}
+.rmorelink{margin:.45rem 0 0;font-size:.75rem;color:var(--ink-2)}
+.rmorelink a{color:var(--ink);border-bottom:1px solid var(--ink-3)}
+.rmorelink a:hover{color:var(--red);border-bottom-color:var(--red)}
+.splitnote{margin:1.1rem 0 .2rem;padding:.5rem 0 0;
+  border-top:1px solid var(--rule-2)}
+
+/* ------------------------------------- sheets ------------------------------ */
+dialog{border:2px solid var(--rule-2);border-radius:0;background:var(--paper);
+  color:var(--ink);max-width:44rem;width:calc(100% - 2rem);padding:1.6rem 1.7rem}
+dialog::backdrop{background:rgba(17,17,17,.45)}
+dialog h2{margin:0 0 .6rem;font-size:1.6rem;font-weight:800;
+  letter-spacing:-0.032em;line-height:1.05;text-transform:uppercase}
+dialog h3{margin:1.1rem 0 .35rem;color:var(--ink-3)}
+dialog p{margin:0 0 .5rem;font-size:.8125rem;line-height:1.55;color:var(--ink-2)}
+dialog p .n,dialog li .n{font-weight:700;color:var(--ink)}
+dialog ul{margin:0 0 .5rem;padding-left:1.1rem;font-size:.8125rem;
+  line-height:1.55;color:var(--ink-2)}
+dialog li{margin:0 0 .35rem}
+.ladder{font-family:var(--mono);font-size:11px;line-height:1.7;white-space:pre;
+  overflow-x:auto;color:var(--ink);margin:0 0 .6rem;
+  border-top:1px solid var(--rule-2);border-bottom:1px solid var(--rule-2);
+  padding:.5rem 0}
+dialog .close{position:absolute;top:1rem;right:1.1rem;font-size:10px;
+  text-transform:uppercase;letter-spacing:.12em;font-weight:600;
+  color:var(--ink-3)}
+dialog .close:hover{color:var(--red)}
+.keys{font-family:var(--mono);font-size:11px;line-height:2;color:var(--ink)}
+.keys kbd{border:1px solid var(--rule-2);padding:.1rem .3rem;font-family:inherit;
+  font-size:10px}
+
+/* -------------------------------------- foot ------------------------------- */
+footer{margin-top:2.5rem;border-top:2px solid var(--rule-2);padding-top:1rem}
+footer p{font-size:.75rem;color:var(--ink-3);max-width:52rem;line-height:1.55}
+footer .n{font-weight:700;color:var(--ink-2)}
+details.reg{margin-top:.8rem}
+details.reg summary{font-size:11px;text-transform:uppercase;letter-spacing:.11em;
+  font-weight:600;color:var(--ink);cursor:pointer;list-style:none}
+details.reg summary::-webkit-details-marker{display:none}
+details.reg summary:hover{color:var(--red)}
+.reglist{margin-top:.5rem;max-height:22rem;overflow-y:auto;
+  border-top:1px solid var(--rule-2)}
+.regrow{display:grid;grid-template-columns:2.6rem minmax(0,1fr) 4.5rem 8rem 6rem;
+  gap:0 1rem;font-family:var(--mono);font-size:10px;letter-spacing:.04em;
+  color:var(--ink-2);padding:.22rem 0;border-bottom:1px solid var(--rule)}
+.regrow .rgn{color:var(--ink);overflow:hidden;text-overflow:ellipsis;
+  white-space:nowrap}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:1.6rem;
+  background:var(--ink);color:var(--paper);font-size:.75rem;padding:.5rem .9rem;
+  z-index:20}
+
+/* ---------------------------------- the fold ------------------------------- */
+/* At a hand's width the rail leaves the card's side and files itself under the
+   memo, and the label gutter goes above its value — a form on a phone is a
+   stack of labelled lines, not two thin columns. */
+@media (max-width:62rem){
+  :root{--gut:1.1rem}
+  /* A hand's width has no twelfth column and no room for a two-page header:
+     the masthead states the argument, the thesis states the card's anatomy,
+     and the provenance paragraph drops to the apparatus size it is. */
+  header{padding-top:1rem}
+  h1{grid-column:1/-1;font-size:clamp(1.5rem,7vw,2.1rem)}
+  .thesis span{font-size:1rem}
+  #lede2{font-size:.75rem;line-height:1.45}
+  .stamp{flex:none;padding:.4rem .55rem .35rem}
+  .stamp .snum{font-size:1.15rem}
+  /* Side by side, the nowrap date and the stamp's own caption both refuse to
+     shrink and the two overlap at 390px. Stacked, each gets the full measure:
+     one line of date, one framed count. */
+  .aside{grid-column:1/-1;margin-top:.7rem;align-items:stretch;gap:.45rem}
+  .snapshot{flex-direction:row;align-items:baseline;gap:.5rem;text-align:left}
+  .stamp{align-items:flex-start;text-align:left;flex-direction:row;
+    align-items:baseline;gap:.6rem}
+  .thesis span,.ledefold{grid-column:1/-1}
+  #lede2{column-count:1;margin-top:.5rem}
+  .yield{font-size:1rem}
+  /* At 390px the provenance paragraph is four hundred pixels of small type
+     standing between the reader and the first company. It folds to one line
+     that names it, and app.js closes it at boot below this measure — the wide
+     sheet never sees the fold, and no reader loses the argument, only the
+     scroll. */
+  .ledefold summary{display:block;color:var(--ink);cursor:pointer;list-style:none;
+    border-bottom:1px solid var(--ink-3);padding-bottom:.25rem}
+  .ledefold summary::-webkit-details-marker{display:none}
+  .ledefold summary::after{content:" ▾";color:var(--ink-3)}
+  .ledefold[open] summary::after{content:" ▴"}
+  .sheets{grid-column:1/-1;flex-direction:row;flex-wrap:wrap;gap:.3rem 1.2rem;
+    margin-top:.7rem}
+  label.f-field,label.f-place,label.f-order{grid-column:1/-1}
+  .card{grid-template-columns:minmax(0,1fr);row-gap:.8rem}
+  .cmain{grid-template-columns:minmax(0,1fr);row-gap:.1rem}
+  .cref{display:none}      /* the number is register apparatus; the phone has no gutter */
+  .mk{padding-top:.5rem}
+  .mk:empty{display:none}
+  a.role{grid-template-columns:minmax(0,1fr) 4.5rem}
+  a.role .rn{display:none}
+  a.role .rt{grid-column:1}
+  a.role .rb,a.role .rl{grid-column:1}
+  .regrow{grid-template-columns:minmax(0,1fr) 4rem}
+  .regrow .rgg,.regrow .rgm{display:none}
+  .slrow{grid-template-columns:minmax(0,1fr) auto;row-gap:.15rem}
+  .slrow .sn{display:none}
+  .slrow .meta{grid-column:1;text-align:left}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="masthead">
+    <h1>I read <span class="n">10,125</span> companies to find these
+      <span class="n">789</span></h1>
+    <div class="aside">
+      <p class="snapshot"><span class="k micro">Snapshot</span>
+        <time id="snapshot">—</time></p>
+      <div class="stamp">
+        <span class="snum" id="rolecount">—</span>
+        <span class="sname">roles, on the companies' own boards</span>
+      </div>
+    </div>
+  </div>
+  <p class="thesis"><span>Every card below is one paragraph: what the company
+    is, who it is for, why them — then who vouched for it, with the receipt,
+    and how hard it is hiring tonight.</span></p>
+  <div class="lede">
+    <details class="ledefold" id="ledefold" open>
+      <summary class="micro">how these 789 were found, and who wrote the three lines</summary>
+      <p id="lede2"></p>
+    </details>
+    <p class="sheets">
+      <button type="button" id="fbtn" class="micro">the whole funnel, 10,125 → 789</button>
+      <button type="button" id="nbtn" class="micro">what this page will not say</button>
+      <button type="button" id="kbtn" class="micro">keyboard</button>
+    </p>
+  </div>
+</header>
+
+<div id="controls">
+  <label class="f-field"><span class="lbl">I'm in</span>
+    <select id="field" aria-label="field of work"></select></label>
+  <label class="f-place"><span class="lbl">Looking in</span>
+    <select id="place" aria-label="where"></select></label>
+  <label class="f-order"><span class="lbl">Ordered by</span>
+    <select id="order" aria-label="ordering">
+      <option value="match">most roles for me</option>
+      <option value="size">hiring hardest for their size</option>
+      <option value="read">the ones I have read, first</option>
+      <option value="all">most roles open, any field</option>
+    </select></label>
+  <div class="giants">
+    <span class="gsw" role="group" aria-label="which companies this page shows">
+      <button type="button" id="ghide" aria-pressed="true">hiding the giants</button>
+      <button type="button" id="gshow" aria-pressed="false">showing all 789</button>
+    </span>
+    <span class="gnote" id="gnote"></span>
+  </div>
+</div>
+
+<div id="status">
+  <p class="yield" id="yield"></p>
+  <div class="gstrip" id="gstrip"></div>
+  <p class="residue" id="residue"></p>
+
+  <section class="deliver" id="deliver" hidden>
+    <h2 class="slhead">My shortlist — kept in this browser, nowhere else</h2>
+    <div id="slrows"></div>
+    <div id="askbox"></div>
+    <p class="record" id="record"></p>
+    <div class="acts">
+      <button id="copyList" type="button">copy my shortlist</button>
+      <button id="copyLink" type="button">copy a link that reopens it</button>
+      <span class="said" id="said"></span>
+    </div>
+  </section>
+</div>
+
+<main id="list"><article class="card" id="c-billiontoone" data-s="billiontoone"><div class="cmain"><span class="cref">001</span><div class="chead"><h2 class="cname">BillionToOne</h2><span class="chip">Public · per YC · S17</span></div><div class="memo absent"><p class="ml"><span class="mk">not yet read</span><span class="mv">I have their gate and their board. I have not read their own site, so this card does not say what they do.</span></p><p class="ml"><span class="mk">their teams</span><span class="bwords">Field Sales, Oncology · Field Sales, Prenatal · Lab Operations · Field Sales Manager, Prenatal · IT · Service Engineering</span></p><p class="ml"><span class="mk"></span><span class="prov">a backlog in scripts/describe.py — not a judgement about them</span></p></div><p class="ml"><span class="mk">vouched</span><span class="mv gate"><a href="https://www.ycombinator.com/companies/billiontoone" target="_blank" rel="noopener">Y Combinator backed them, Summer 2017 ↗</a><span class="gcap">YC&#x27;s own directory entry — the batch, the status and the 300 people it lists are YC&#x27;s numbers, not mine</span></span></p></div><div class="crail"><aside class="receipt"><p class="rhead"><span>open roles</span><span class="rno">98</span></p><p class="rrow"><span class="rk">Sales &amp; Partnerships</span><span class="rv">68</span></p><p class="rrow"><span class="rk">Engineering</span><span class="rv">11</span></p><p class="rrow"><span class="rk">Operations &amp; Admin</span><span class="rv">10</span></p><p class="rrow"><span class="rk">Customer &amp; Support</span><span class="rv">3</span></p><p class="rmore">+4 more fields</p><p class="rrow wide"><span class="rk">team</span><span class="rv">300 people, per YC</span></p><p class="rrow wide"><span class="rk">rate</span><span class="rv">300 ÷ 98 = one opening per 3.1 people</span></p><p class="rrow wide"><span class="rk">where</span><span class="rv">San Francisco / Bay Area · Remote · Detroit / Minneapolis / Ohio</span></p></aside><div class="act"><button class="keep" type="button">keep</button><button class="open" type="button">all 98 roles →</button></div></div><div class="roles" hidden></div></article><article class="card" id="c-langchain" data-s="langchain"><div class="cmain"><span class="cref">002</span><div class="chead"><h2 class="cname">LangChain</h2></div><div class="memo"><p class="ml"><span class="mk">what</span><span class="mv">Tools for building and monitoring AI agents</span></p><p class="ml"><span class="mk">for whom</span><span class="mv">Developers putting AI features into production</span></p><p class="ml"><span class="mk">why them</span><span class="mv">Its open-source library is downloaded everywhere</span></p><p class="ml"><span class="mk"></span><span class="prov">checked against their own site</span></p></div><p class="ml"><span class="mk">vouched</span><span class="mv gate"><a href="https://www.cbinsights.com/company/langchain" target="_blank" rel="noopener">CB Insights tracks them at a $1B+ valuation ↗</a><span class="gcap">a tracker&#x27;s call on size, not a funding fact — their own board says 97 roles tonight</span></span></p></div><div class="crail"><aside class="receipt"><p class="rhead"><span>open roles</span><span class="rno">97</span></p><p class="rrow"><span class="rk">Engineering</span><span class="rv">48</span></p><p class="rrow"><span class="rk">Sales &amp; Partnerships</span><span class="rv">35</span></p><p class="rrow"><span class="rk">Marketing</span><span class="rv">5</span></p><p class="rrow"><span class="rk">Finance</span><span class="rv">4</span></p><p class="rmore">+2 more fields</p><p class="rrow wide"><span class="rk">where</span><span class="rv">San Francisco / Bay Area · New York · London</span></p></aside><div class="act"><button class="keep" type="button">keep</button><button class="open" type="button">all 97 roles →</button></div></div><div class="roles" hidden></div></article><article class="card" id="c-pigment" data-s="pigment"><div class="cmain"><span class="cref">003</span><div class="chead"><h2 class="cname">Pigment</h2></div><div class="memo"><p class="ml"><span class="mk">what</span><span class="mv">Software for planning budgets, sales and headcount</span></p><p class="ml"><span class="mk">for whom</span><span class="mv">Finance and operations teams outgrowing giant spreadsheets</span></p><p class="ml"><span class="mk">why them</span><span class="mv">Spreadsheet-like flexibility that still runs fast</span></p><p class="ml"><span class="mk"></span><span class="prov">checked against their own site</span></p></div><p class="ml"><span class="mk">vouched</span><span class="mv gate"><a href="https://www.cbinsights.com/company/pigment-1" target="_blank" rel="noopener">CB Insights tracks them at a $1B+ valuation ↗</a><span class="gcap">a tracker&#x27;s call on size, not a funding fact — their own board says 97 roles tonight</span></span></p></div><div class="crail"><aside class="receipt"><p class="rhead"><span>open roles</span><span class="rno">97</span></p><p class="rrow"><span class="rk">Operations &amp; Admin</span><span class="rv">49</span></p><p class="rrow"><span class="rk">Customer &amp; Support</span><span class="rv">21</span></p><p class="rrow"><span class="rk">Engineering</span><span class="rv">16</span></p><p class="rrow"><span class="rk">People &amp; Recruiting</span><span class="rv">10</span></p><p class="rmore">+1 more field</p><p class="rrow wide"><span class="rk">where</span><span class="rv">Paris · London · United States — city not stated</span></p></aside><div class="act"><button class="keep" type="button">keep</button><button class="open" type="button">all 97 roles →</button></div></div><div class="roles" hidden></div></article><article class="card" id="c-harnessinc" data-s="harnessinc"><div class="cmain"><span class="cref">004</span><div class="chead"><h2 class="cname">Harness</h2></div><div class="memo"><p class="ml"><span class="mk">what</span><span class="mv">Automates software delivery from commit to production</span></p><p class="ml"><span class="mk">for whom</span><span class="mv">Engineering teams tired of slow releases</span></p><p class="ml"><span class="mk">why them</span><span class="mv">CI/CD platform from the AppDynamics founder</span></p><p class="ml"><span class="mk"></span><span class="prov">checked against their own site</span></p></div><p class="ml"><span class="mk">vouched</span><span class="mv gate"><a href="https://www.forbes.com/companies/harness/" target="_blank" rel="noopener">A Forbes editor put them on a list ↗</a><span class="gcap">an editor&#x27;s call; there is no funding number behind it and I will not invent one</span></span></p></div><div class="crail"><aside class="receipt"><p class="rhead"><span>open roles</span><span class="rno">96</span></p><p class="rrow"><span class="rk">Sales &amp; Partnerships</span><span class="rv">40</span></p><p class="rrow"><span class="rk">Engineering</span><span class="rv">38</span></p><p class="rrow"><span class="rk">Customer &amp; Support</span><span class="rv">7</span></p><p class="rrow"><span class="rk">Product</span><span class="rv">5</span></p><p class="rmore">+3 more fields</p><p class="rrow wide"><span class="rk">where</span><span class="rv">Remote · Bengaluru · San Francisco / Bay Area</span></p></aside><div class="act"><button class="keep" type="button">keep</button><button class="open" type="button">all 96 roles →</button></div></div><div class="roles" hidden></div></article><article class="card" id="c-astranis" data-s="astranis"><div class="cmain"><span class="cref">005</span><div class="chead"><h2 class="cname">Astranis</h2><span class="chip">Active · per YC · W16</span></div><div class="memo absent"><p class="ml"><span class="mk">not yet read</span><span class="mv">I have their gate and their board. I have not read their own site, so this card does not say what they do.</span></p><p class="ml"><span class="mk">their teams</span><span class="bwords">Production &amp; Manufacturing Internships · 3411 Hardware Testing · Payload Internships · Software Internships · 3302 Power · Orbital Mechanics &amp; Mission Operations Internships</span></p><p class="ml"><span class="mk"></span><span class="prov">a backlog in scripts/describe.py — not a judgement about them</span></p></div><p class="ml"><span class="mk">vouched</span><span class="mv gate"><a href="https://www.ycombinator.com/companies/astranis" target="_blank" rel="noopener">Y Combinator backed them, Winter 2016 ↗</a><span class="gcap">YC&#x27;s own directory entry — the batch, the status and the 500 people it lists are YC&#x27;s numbers, not mine</span></span></p></div><div class="crail"><aside class="receipt"><p class="rhead"><span>open roles</span><span class="rno">95</span></p><p class="rrow"><span class="rk">Engineering</span><span class="rv">72</span></p><p class="rrow"><span class="rk">Something else</span><span class="rv">5</span></p><p class="rrow"><span class="rk">Operations &amp; Admin</span><span class="rv">4</span></p><p class="rrow"><span class="rk">Design</span><span class="rv">3</span></p><p class="rmore">+5 more fields</p><p class="rrow wide"><span class="rk">team</span><span class="rv">500 people, per YC</span></p><p class="rrow wide"><span class="rk">rate</span><span class="rv">500 ÷ 95 = one opening per 5.3 people</span></p><p class="rrow wide"><span class="rk">where</span><span class="rv">San Francisco / Bay Area</span></p></aside><div class="act"><button class="keep" type="button">keep</button><button class="open" type="button">all 95 roles →</button></div></div><div class="roles" hidden></div></article><article class="card" id="c-horizon3ai" data-s="horizon3ai"><div class="cmain"><span class="cref">006</span><div class="chead"><h2 class="cname">Horizon 3 AI</h2></div><div class="memo"><p class="ml"><span class="mk">what</span><span class="mv">Software that continuously attacks your own network</span></p><p class="ml"><span class="mk">for whom</span><span class="mv">Security teams wanting to find exploitable weaknesses</span></p><p class="ml"><span class="mk">why them</span><span class="mv">Automated penetration testing you can run anytime</span></p><p class="ml"><span class="mk"></span><span class="prov">checked against their own site</span></p></div><p class="ml"><span class="mk">vouched</span><span class="mv gate"><a href="https://www.sec.gov/Archives/edgar/data/1801975/000180197525000001/0001801975-25-000001-index.htm" target="_blank" rel="noopener">They filed a Form D with the SEC for $72,999,996 on May 8, 2025 ↗</a><span class="gcap">a filing signed by their own counsel, not a press release</span></span></p></div><div class="crail"><aside class="receipt"><p class="rhead"><span>open roles</span><span class="rno">95</span></p><p class="rrow"><span class="rk">Sales &amp; Partnerships</span><span class="rv">44</span></p><p class="rrow"><span class="rk">Engineering</span><span class="rv">25</span></p><p class="rrow"><span class="rk">Marketing</span><span class="rv">11</span></p><p class="rrow"><span class="rk">Customer &amp; Support</span><span class="rv">5</span></p><p class="rmore">+4 more fields</p><p class="rrow wide"><span class="rk">where</span><span class="rv">Remote · Chicago · Amsterdam</span></p></aside><div class="act"><button class="keep" type="button">keep</button><button class="open" type="button">all 95 roles →</button></div></div><div class="roles" hidden></div></article></main>
+<script>window.__firstCardPainted=performance.now();</script>
+
+<footer>
+  <p id="foot"></p>
+  <details class="reg"><summary id="regsum">the register — every company, in one list</summary>
+    <div class="reglist" id="reglist"></div>
+  </details>
+</footer>
+
+<dialog id="funnel"><button class="close" data-close>close</button>
+  <h2>10,125 companies read. 789 are hiring tonight.</h2>
+  <pre class="ladder" id="ladder"></pre>
+  <h3>Three things this ladder does not mean</h3>
+  <ul id="ladderNotes"></ul>
+</dialog>
+
+<dialog id="never"><button class="close" data-close>close</button>
+  <h2>What this page will not say</h2>
+  <div id="neverBody"></div>
+</dialog>
+
+<dialog id="keysheet"><button class="close" data-close>close</button>
+  <h2>Keyboard</h2>
+  <p class="keys">
+    <kbd>j</kbd> <kbd>k</kbd> next / previous company &nbsp;·&nbsp;
+    <kbd>o</kbd> or <kbd>↵</kbd> open its roles<br>
+    <kbd>1</kbd>–<kbd>9</kbd> open the n-th role in a new tab &nbsp;·&nbsp;
+    <kbd>x</kbd> keep / unkeep<br>
+    <kbd>g</kbd> show or hide the giants &nbsp;·&nbsp;
+    <kbd>f</kbd> field menu &nbsp;·&nbsp; <kbd>p</kbd> place menu<br>
+    <kbd>c</kbd> copy my shortlist &nbsp;·&nbsp; <kbd>?</kbd> this sheet &nbsp;·&nbsp;
+    <kbd>esc</kbd> close
+  </p>
+  <p>Keys pressed before the other 771 companies land are queued, not dropped —
+    the page replays them the moment the data is in.</p>
+</dialog>
+
+<script>
+const HEAD = {"meta":{"snapshot":"2026-08-04","companies":789,"roles":27689,"roles_open_sum":27689,"giants":57,"funnel":{"read":10125,"not_qualified":6895,"not_software":109,"ambiguous":196,"qualified":2925,"no_board":2076,"boards_read":832,"nothing_open":43,"wrong_board":12,"empty":5,"listed":789},"gates":{"SEC EDGAR":101,"Forbes":78,"Y Combinator":298,"CB Insights":291,"TechCrunch":20,"FinSMEs":1},"memo":{"have":371,"absent":418,"checked":272,"unchecked":93,"board":6},"yc":{"n":298,"top":35,"status":{"Active":266,"Acquired":16,"Public":13,"Inactive":3}},"intensity":{"n":294,"tiny":12,"missing":495,"top":[["Clear",37,2],["Assembled",22,2],["Finni Health",111,40],["Inversion Space",68,28],["Nash",24,11]]},"hype":{"n":8,"words":{"new":8},"examples":["“Site claims a new customer approved every 30 seconds”","“App makers and marketplaces buying new users”","“Sales and marketing teams hunting new customers”"]},"no_amount":667,"visa":{"yes":1891,"no":947,"unknown":24851},"residue":{"roles":1063,"pct":3.8},"first_seen":{"dated":7,"observed":371}},"depts":[{"k":"design","l":"Design","c":164,"r":580},{"k":"research","l":"Research & AI","c":143,"r":1025},{"k":"product","l":"Product","c":389,"r":2057},{"k":"eng","l":"Engineering","c":622,"r":9063},{"k":"sales","l":"Sales & Partnerships","c":575,"r":6170},{"k":"marketing","l":"Marketing","c":330,"r":1216},{"k":"cs","l":"Customer & Support","c":344,"r":2260},{"k":"finance","l":"Finance","c":274,"r":1090},{"k":"legal","l":"Legal & Compliance","c":173,"r":684},{"k":"people","l":"People & Recruiting","c":246,"r":686},{"k":"ops","l":"Operations & Admin","c":362,"r":1795},{"k":"other","l":"Something else","c":203,"r":1063}],"places":[{"k":"remote","l":"Remote","c":418,"r":4696,"g":"The big four"},{"k":"sf","l":"San Francisco / Bay Area","c":338,"r":5855,"g":"The big four"},{"k":"nyc","l":"New York","c":287,"r":3064,"g":"The big four"},{"k":"london","l":"London","c":201,"r":1423,"g":"The big four"},{"k":"us_any","l":"United States — city not stated","c":123,"r":887,"g":"United States"},{"k":"chicago","l":"Chicago","c":72,"r":349,"g":"United States"},{"k":"austin","l":"Austin","c":70,"r":457,"g":"United States"},{"k":"seattle","l":"Seattle","c":60,"r":636,"g":"United States"},{"k":"boston","l":"Boston","c":60,"r":350,"g":"United States"},{"k":"la","l":"Los Angeles","c":55,"r":583,"g":"United States"},{"k":"dc","l":"Washington DC","c":54,"r":292,"g":"United States"},{"k":"dallas","l":"Dallas / Houston","c":50,"r":162,"g":"United States"},{"k":"denver","l":"Denver","c":47,"r":241,"g":"United States"},{"k":"atlanta","l":"Atlanta","c":38,"r":125,"g":"United States"},{"k":"miami","l":"Miami","c":36,"r":173,"g":"United States"},{"k":"midwest","l":"Detroit / Minneapolis / Ohio","c":35,"r":127,"g":"United States"},{"k":"raleigh","l":"Raleigh / Durham","c":31,"r":264,"g":"United States"},{"k":"philly","l":"Philadelphia","c":26,"r":71,"g":"United States"},{"k":"phoenix","l":"Phoenix","c":21,"r":55,"g":"United States"},{"k":"slc","l":"Salt Lake City","c":19,"r":147,"g":"United States"},{"k":"sandiego","l":"San Diego","c":19,"r":27,"g":"United States"},{"k":"nashville","l":"Nashville / Denver South","c":15,"r":28,"g":"United States"},{"k":"portland","l":"Portland","c":11,"r":23,"g":"United States"},{"k":"eu_any","l":"Europe — city not stated","c":70,"r":423,"g":"Europe"},{"k":"uk_any","l":"United Kingdom — city not stated","c":57,"r":257,"g":"Europe"},{"k":"paris","l":"Paris","c":42,"r":224,"g":"Europe"},{"k":"berlin","l":"Berlin","c":41,"r":296,"g":"Europe"},{"k":"es_any","l":"Spain / Portugal — city not stated","c":38,"r":234,"g":"Europe"},{"k":"munich","l":"Munich","c":32,"r":254,"g":"Europe"},{"k":"de_any","l":"Germany — city not stated","c":32,"r":117,"g":"Europe"},{"k":"amsterdam","l":"Amsterdam","c":28,"r":132,"g":"Europe"},{"k":"dublin","l":"Dublin","c":28,"r":205,"g":"Europe"},{"k":"stockholm","l":"Stockholm / Nordics","c":26,"r":256,"g":"Europe"},{"k":"madrid","l":"Madrid","c":23,"r":135,"g":"Europe"},{"k":"barcelona","l":"Barcelona","c":23,"r":154,"g":"Europe"},{"k":"milan","l":"Milan / Rome","c":18,"r":112,"g":"Europe"},{"k":"vienna","l":"Vienna / Zurich-adjacent","c":17,"r":104,"g":"Europe"},{"k":"bucharest","l":"Bucharest / Sofia","c":16,"r":97,"g":"Europe"},{"k":"warsaw","l":"Warsaw / Kraków","c":16,"r":71,"g":"Europe"},{"k":"lisbon","l":"Lisbon","c":15,"r":135,"g":"Europe"},{"k":"zurich","l":"Zurich","c":14,"r":58,"g":"Europe"},{"k":"bengaluru","l":"Bengaluru","c":76,"r":618,"g":"Asia-Pacific & Middle East"},{"k":"singapore","l":"Singapore","c":67,"r":422,"g":"Asia-Pacific & Middle East"},{"k":"sydney","l":"Sydney / Melbourne","c":62,"r":327,"g":"Asia-Pacific & Middle East"},{"k":"apac_any","l":"Asia-Pacific — city not stated","c":57,"r":199,"g":"Asia-Pacific & Middle East"},{"k":"tokyo","l":"Tokyo","c":42,"r":209,"g":"Asia-Pacific & Middle East"},{"k":"in_any","l":"India — city not stated","c":36,"r":133,"g":"Asia-Pacific & Middle East"},{"k":"indiaother","l":"Mumbai / Delhi / Hyderabad","c":34,"r":253,"g":"Asia-Pacific & Middle East"},{"k":"hongkong","l":"Hong Kong","c":28,"r":248,"g":"Asia-Pacific & Middle East"},{"k":"telaviv","l":"Tel Aviv","c":25,"r":179,"g":"Asia-Pacific & Middle East"},{"k":"dubai","l":"Dubai","c":24,"r":63,"g":"Asia-Pacific & Middle East"},{"k":"seoul","l":"Seoul","c":22,"r":603,"g":"Asia-Pacific & Middle East"},{"k":"toronto","l":"Toronto","c":57,"r":386,"g":"The Americas & Africa"},{"k":"latam_any","l":"Latin America — city not stated","c":47,"r":269,"g":"The Americas & Africa"},{"k":"ca_any","l":"Canada — city not stated","c":37,"r":150,"g":"The Americas & Africa"},{"k":"mexico","l":"Mexico City","c":34,"r":138,"g":"The Americas & Africa"},{"k":"saopaulo","l":"São Paulo","c":28,"r":314,"g":"The Americas & Africa"},{"k":"bogota","l":"Bogotá / Buenos Aires","c":20,"r":89,"g":"The Americas & Africa"},{"k":"montreal","l":"Montreal","c":18,"r":181,"g":"The Americas & Africa"},{"k":"vancouver","l":"Vancouver","c":17,"r":122,"g":"The Americas & Africa"},{"k":"lagos","l":"Lagos / Nairobi","c":11,"r":82,"g":"The Americas & Africa"},{"k":"elsewhere","l":"Somewhere not in this list","c":272,"r":2874,"g":"Stated, but not as a place"}],"dept_labels":{"design":"Design","research":"Research & AI","product":"Product","eng":"Engineering","sales":"Sales & Partnerships","marketing":"Marketing","cs":"Customer & Support","finance":"Finance","legal":"Legal & Compliance","people":"People & Recruiting","ops":"Operations & Admin","other":"Something else"},"place_labels":{"remote":"Remote","sf":"San Francisco / Bay Area","nyc":"New York","london":"London","seattle":"Seattle","la":"Los Angeles","boston":"Boston","austin":"Austin","chicago":"Chicago","denver":"Denver","dc":"Washington DC","atlanta":"Atlanta","dallas":"Dallas / Houston","miami":"Miami","raleigh":"Raleigh / Durham","slc":"Salt Lake City","phoenix":"Phoenix","sandiego":"San Diego","philly":"Philadelphia","midwest":"Detroit / Minneapolis / Ohio","nashville":"Nashville / Denver South","portland":"Portland","toronto":"Toronto","vancouver":"Vancouver","montreal":"Montreal","dublin":"Dublin","berlin":"Berlin","munich":"Munich","paris":"Paris","amsterdam":"Amsterdam","barcelona":"Barcelona","madrid":"Madrid","lisbon":"Lisbon","zurich":"Zurich","stockholm":"Stockholm / Nordics","warsaw":"Warsaw / Kraków","milan":"Milan / Rome","vienna":"Vienna / Zurich-adjacent","bucharest":"Bucharest / Sofia","telaviv":"Tel Aviv","dubai":"Dubai","bengaluru":"Bengaluru","indiaother":"Mumbai / Delhi / Hyderabad","singapore":"Singapore","tokyo":"Tokyo","seoul":"Seoul","hongkong":"Hong Kong","sydney":"Sydney / Melbourne","saopaulo":"São Paulo","mexico":"Mexico City","bogota":"Bogotá / Buenos Aires","lagos":"Lagos / Nairobi","us_any":"United States — city not stated","uk_any":"United Kingdom — city not stated","in_any":"India — city not stated","ca_any":"Canada — city not stated","de_any":"Germany — city not stated","es_any":"Spain / Portugal — city not stated","eu_any":"Europe — city not stated","latam_any":"Latin America — city not stated","apac_any":"Asia-Pacific — city not stated","unstated":"Their board did not say where","elsewhere":"Somewhere not in this list"},"giants_list":[["Databricks",808,"databricks"],["OpenAI",735,"openai"],["Stripe",546,"stripe"],["Toss",515,"tosscareers"],["Anthropic",394,"anthropic"],["SumUp",371,"sumup"],["Relativity Space",363,"relativity"],["OKX",334,"okx"],["Brex",302,"brex"],["Halter",287,"halter"],["Legora",279,"legora"],["Verkada",274,"verkada"],["Applied Intuition",264,"applied"],["Celonis",249,"celonis"],["Braze",244,"braze"],["Scale AI",216,"scaleai"],["AlphaSense",211,"alphasense"],["iCapital",199,"icapitalnetwork"],["Fivetran",198,"fivetran"],["Airbnb",189,"airbnb"],["GitLab",187,"gitlab"],["Super",186,"super"],["ClickHouse",167,"clickhouse"],["Coinbase",163,"coinbase"],["Workato",159,"workato"],["C6 Bank",157,"c6bank"],["ICEYE",157,"iceye"],["MaintainX",153,"maintainx"],["Epic Games",152,"epicgames"],["Flexport",152,"flexport"],["Quince",147,"quince"],["Netskope",141,"netskope"],["Grafana Labs",140,"grafanalabs"],["Helsing",135,"helsing"],["Ripple",133,"ripple"],["Handshake",132,"handshake"],["Teya",128,"teya"],["Cato Networks",124,"catonetworks"],["Zip",124,"zip"],["Intercom",123,"intercom"],["Ramp",123,"ramp"],["TensTorrent",122,"tenstorrent"],["Instacart",116,"instacart"],["Pennylane",115,"pennylane"],["Cursor",114,"cursor"],["Moniepoint",112,"moniepoint"],["Plaid",112,"plaid"],["Finni Health",111,"finni-health"],["Notion",110,"notion"],["Wayve",110,"wayve"],["Helion Energy",109,"helion"],["Glean",108,"gleanwork"],["Postman",106,"postman"],["EliseAI",102,"eliseai"],["Tide",102,"tide"],["Cresta",100,"cresta"],["Vanta",100,"vanta"]],"starts":[["eng","sf",201],["eng","remote",204],["sales","nyc",174]],"companies":[{"s":"billiontoone","n":"BillionToOne","r":98,"g":{"who":"Y Combinator","kind":"yc","url":"https://www.ycombinator.com/companies/billiontoone","line":"Y Combinator backed them, Summer 2017","status":"Public","team":300,"batch_short":"S17","top":false},"gc":"YC's own directory entry — the batch, the status and the 300 people it lists are YC's numbers, not mine","m":null,"bw":["Field Sales, Oncology","Field Sales, Prenatal","Lab Operations","Field Sales Manager, Prenatal","IT","Service Engineering"],"t":300,"d":{"ops":10,"eng":11,"cs":3,"research":3,"product":1,"sales":68,"design":1,"finance":1},"p":{"elsewhere":48,"sf":24,"remote":7,"dc":1,"atlanta":1,"boston":2,"midwest":4,"dallas":4,"miami":1,"portland":1,"philly":1,"seattle":1,"phoenix":1,"slc":1,"la":1},"x":[["ops","elsewhere",5],["eng","sf",10],["ops","sf",5],["cs","elsewhere",2],["research","sf",3],["product","remote",1],["sales","remote",5],["cs","remote",1],["design","sf",1],["sales","dc",1],["sales","elsewhere",40],["sales","sf",4],["sales","atlanta",1],["sales","boston",2],["sales","midwest",4],["sales","dallas",4],["sales","miami",1],["sales","portland",1],["sales","philly",1],["sales","seattle",1],["sales","phoenix",1],["sales","slc",1],["sales","la",1],["eng","elsewhere",1],["finance","sf",1]],"vy":0,"vn":0},{"s":"langchain","n":"LangChain","r":97,"g":{"who":"CB Insights","kind":"cbi","url":"https://www.cbinsights.com/company/langchain","line":"CB Insights tracks them at a $1B+ valuation"},"gc":"a tracker's call on size, not a funding fact — their own board says 97 roles tonight","m":{"w":"Tools for building and monitoring AI agents","f":"Developers putting AI features into production","y":"Its open-source library is downloaded everywhere","p":"checked"},"bw":null,"t":null,"d":{"eng":48,"sales":35,"product":2,"people":3,"marketing":5,"finance":4},"p":{"boston":8,"sf":40,"midwest":2,"nyc":24,"austin":4,"chicago":2,"la":3,"sandiego":1,"seattle":5,"miami":1,"atlanta":2,"nashville":1,"amsterdam":3,"london":13,"dallas":5,"eu_any":2,"raleigh":2,"dc":2,"denver":1,"slc":1,"remote":4},"x":[["eng","boston",7],["eng","sf",24],["sales","midwest",2],["sales","sf",6],["eng","nyc",16],["eng","austin",4],["eng","chicago",1],["eng","la",2],["eng","sandiego",1],["eng","seattle",4],["sales","miami",1],["sales","atlanta",1],["sales","nashville",1],["eng","amsterdam",2],["product","boston",1],["product","nyc",1],["product","sf",2],["eng","london",3],["people","nyc",2],["people","sf",2],["sales","nyc",3],["sales","chicago",1],["sales","dallas",2],["sales","london",10],["sales","eu_any",2],["eng","dallas",3],["eng","atlanta",1],["marketing","sf",4],["eng","raleigh",2],["sales","dc",2],["eng","denver",1],["eng","slc",1],["finance","sf",2],["finance","nyc",2],["sales","la",1],["eng","remote",2],["sales","remote",1],["marketing","remote",1],["sales","seattle",1],["sales","amsterdam",1]],"vy":0,"vn":0},{"s":"pigment","n":"Pigment","r":97,"g":{"who":"CB Insights","kind":"cbi","url":"https://www.cbinsights.com/company/pigment-1","line":"CB Insights tracks them at a $1B+ valuation"},"gc":"a tracker's call on size, not a funding fact — their own board says 97 roles tonight","m":{"w":"Software for planning budgets, sales and headcount","f":"Finance and operations teams outgrowing giant spreadsheets","y":"Spreadsheet-like flexibility that still runs fast","p":"checked"},"bw":null,"t":null,"d":{"ops":49,"cs":21,"eng":16,"people":10,"other":1},"p":{"nyc":11,"toronto":13,"sf":9,"london":20,"austin":9,"eu_any":7,"elsewhere":5,"paris":26,"uk_any":1,"us_any":15,"munich":1,"remote":1,"chicago":1},"x":[["ops","nyc",6],["cs","toronto",3],["cs","sf",3],["cs","nyc",2],["cs","london",2],["cs","austin",2],["eng","eu_any",6],["ops","elsewhere",5],["ops","toronto",5],["ops","austin",5],["ops","paris",13],["ops","uk_any",1],["ops","us_any",10],["ops","london",11],["ops","sf",6],["eng","paris",4],["eng","toronto",4],["eng","london",5],["ops","munich",1],["cs","remote",1],["cs","paris",4],["cs","us_any",3],["people","paris",5],["people","london",1],["people","nyc",3],["cs","eu_any",1],["other","london",1],["people","austin",2],["people","us_any",2],["people","chicago",1],["people","toronto",1]],"vy":0,"vn":0},{"s":"harnessinc","n":"Harness","r":96,"g":{"who":"Forbes","kind":"forbes","url":"https://www.forbes.com/companies/harness/","line":"A Forbes editor put them on a list"},"gc":"an editor's call; there is no funding number behind it and I will not invent one","m":{"w":"Automates software delivery from commit to production","f":"Engineering teams tired of slow releases","y":"CI/CD platform from the AppDynamics founder","p":"checked"},"bw":null,"t":null,"d":{"eng":38,"cs":7,"sales":40,"people":1,"product":5,"finance":3,"marketing":2},"p":{"sf":14,"atlanta":3,"miami":2,"raleigh":2,"remote":20,"chicago":2,"bengaluru":18,"austin":5,"dc":1,"berlin":1,"london":5,"sydney":2,"amsterdam":2,"nyc":5,"boston":3,"saopaulo":1,"la":2,"denver":1,"midwest":1,"elsewhere":2,"dubai":1,"stockholm":2,"singapore":1},"x":[["eng","sf",5],["eng","atlanta",1],["eng","miami",1],["eng","raleigh",1],["eng","remote",10],["cs","remote",3],["cs","chicago",1],["eng","bengaluru",13],["cs","bengaluru",2],["sales","austin",5],["sales","dc",1],["sales","berlin",1],["sales","london",3],["sales","sydney",2],["sales","amsterdam",1],["sales","nyc",4],["sales","sf",3],["people","bengaluru",1],["sales","boston",3],["sales","saopaulo",1],["product","sf",2],["cs","london",1],["eng","amsterdam",1],["eng","la",1],["eng","london",1],["sales","atlanta",2],["sales","chicago",1],["sales","denver",1],["sales","remote",5],["sales","miami",1],["sales","midwest",1],["sales","la",1],["sales","raleigh",1],["sales","elsewhere",1],["sales","dubai",1],["sales","stockholm",1],["eng","nyc",1],["finance","sf",3],["product","remote",1],["eng","singapore",1],["eng","stockholm",1],["marketing","sf",1],["product","bengaluru",2],["eng","elsewhere",1],["marketing","remote",1]],"vy":0,"vn":0},{"s":"astranis","n":"Astranis","r":95,"g":{"who":"Y Combinator","kind":"yc","url":"https://www.ycombinator.com/companies/astranis","line":"Y Combinator backed them, Winter 2016","status":"Active","team":500,"batch_short":"W16","top":false},"gc":"YC's own directory entry — the batch, the status and the 500 people it lists are YC's numbers, not mine","m":null,"bw":["Production & Manufacturing Internships","3411 Hardware Testing","Payload Internships","Software Internships","3302 Power","Orbital Mechanics & Mission Operations Internships"],"t":500,"d":{"other":5,"eng":72,"marketing":2,"ops":4,"legal":2,"design":3,"finance":2,"product":2,"people":3},"p":{"sf":95},"x":[["other","sf",5],["eng","sf",72],["marketing","sf",2],["ops","sf",4],["legal","sf",2],["design","sf",3],["finance","sf",2],["product","sf",2],["people","sf",3]],"vy":0,"vn":0},{"s":"horizon3ai","n":"Horizon 3 AI","r":95,"g":{"who":"SEC EDGAR","kind":"sec","url":"https://www.sec.gov/Archives/edgar/data/1801975/000180197525000001/0001801975-25-000001-index.htm","line":"They filed a Form D with the SEC for $72,999,996 on May 8, 2025","amount":"$72,999,996","date":"May 8, 2025"},"gc":"a filing signed by their own counsel, not a press release","m":{"w":"Software that continuously attacks your own network","f":"Security teams wanting to find exploitable weaknesses","y":"Automated penetration testing you can run anytime","p":"checked"},"bw":null,"t":null,"d":{"eng":25,"sales":44,"marketing":11,"product":3,"people":2,"cs":5,"finance":3,"legal":2},"p":{"remote":58,"elsewhere":9,"chicago":7,"nyc":6,"dc":3,"sf":2,"de_any":2,"singapore":1,"es_any":1,"amsterdam":7,"seattle":1,"london":1,"apac_any":2},"x":[["eng","remote",25],["sales","elsewhere",9],["sales","remote",17],["marketing","chicago",2],["sales","nyc",3],["sales","chicago",5],["product","nyc",3],["people","remote",2],["product","dc",2],["product","sf",2],["marketing","remote",6],["sales","de_any",2],["cs","remote",4],["finance","remote",3],["sales","singapore",1],["sales","es_any",1],["marketing","amsterdam",3],["sales","seattle",1],["marketing","london",1],["sales","apac_any",2],["legal","remote",1],["sales","amsterdam",3],["cs","dc",1],["legal","amsterdam",1]],"vy":0,"vn":1},{"s":"justworks","n":"Justworks","r":93,"g":{"who":"CB Insights","kind":"cbi","url":"https://www.cbinsights.com/company/justworks","line":"CB Insights tracks them at a $1B+ valuation"},"gc":"a tracker's call on size, not a funding fact — their own board says 93 roles tonight","m":{"w":"Payroll, benefits, and HR handled for you","f":"Small US businesses without HR staff","y":"Pools small firms to get big-company benefits","p":"checked"},"bw":null,"t":null,"d":{"sales":15,"ops":4,"legal":6,"design":5,"cs":11,"finance":9,"marketing":11,"product":8,"people":2,"eng":22},"p":{"phoenix":2,"remote":7,"nyc":73,"mexico":4,"miami":4,"london":1,"toronto":2},"x":[["sales","phoenix",1],["sales","remote",4],["ops","nyc",3],["legal","nyc",4],["sales","nyc",9],["design","nyc",5],["cs","nyc",7],["cs","mexico",2],["finance","nyc",5],["marketing","nyc",11],["product","nyc",8],["cs","remote",1],["people","nyc",2],["cs","miami",1],["eng","nyc",19],["ops","remote",1],["sales","miami",1],["eng","mexico",1],["eng","phoenix",1],["finance","london",1],["finance","toronto",1],["finance","mexico",1],["finance","remote",1],["legal","miami",2],["eng","toronto",1]],"vy":0,"vn":0},{"s":"gusto","n":"Gusto","r":92,"g":{"who":"Y Combinator","kind":"yc","url":"https://www.ycombinator.com/companies/gusto","line":"Y Combinator backed them, Winter 2012","status":"Active","team":2400,"batch_short":"W12","top":true},"gc":"YC's own directory entry — the batch, the status and the 2,400 people it lists are YC's numbers, not mine","m":null,"bw":["Engineering","Customer Experience","Sales","Marketing","Design","Product Management"],"t":2400,"d":{"cs":20,"marketing":6,"legal":4,"eng":32,"sales":11,"design":6,"people":3,"finance":4,"product":6},"p":{"denver":44,"phoenix":9,"remote":9,"sf":19,"nyc":8,"chicago":3},"x":[["cs","denver",14],["cs","phoenix",3],["marketing","remote",1],["legal","denver",4],["eng","sf",13],["marketing","phoenix",3],["eng","remote",4],["sales","denver",7],["eng","nyc",4],["sales","remote",3],["cs","chicago",3],["eng","denver",11],["design","denver",2],["sales","phoenix",1],["people","phoenix",1],["people","denver",1],["finance","nyc",1],["product","sf",2],["product","denver",2],["design","sf",2],["design","nyc",2],["marketing","denver",2],["finance","sf",1],["product","nyc",1],["product","phoenix",1],["finance","denver",1],["finance","remote",1],["people","sf",1]],"vy":0,"vn":0},{"s":"socure","n":"Socure","r":92,"g":{"who":"Forbes","kind":"forbes","url":"https://www.forbes.com/companies/socure/","line":"A Forbes editor put them on a list"},"gc":"an editor's call; there is no funding number behind it and I will not invent one","m":{"w":"Checks people are who they claim online","f":"Banks, fintechs, marketplaces, and government agencies","y":"Huge identity dataset means fewer wrong rejections","p":"checked"},"bw":null,"t":null,"d":{"sales":30,"eng":32,"marketing":19,"product":8,"ops":3},"p":{"miami":34,"nyc":60,"seattle":54,"sf":60,"dc":21,"elsewhere":37,"toronto":1,"london":4},"x":[["sales","miami",14],["sales","nyc",22],["sales","seattle",17],["sales","sf",20],["sales","dc",16],["eng","nyc",18],["eng","seattle",17],["eng","sf",18],["eng","miami",8],["eng","elsewhere",11],["eng","toronto",1],["marketing","miami",8],["marketing","nyc",10],["marketing","seattle",10],["marketing","sf",11],["marketing","elsewhere",8],["product","sf",8],["sales","elsewhere",14],["eng","london",4],["marketing","dc",4],["ops","miami",3],["ops","nyc",3],["ops","seattle",3],["ops","sf",3],["product","nyc",7],["product","seattle",7],["ops","dc",1],["ops","elsewhere",1],["product","elsewhere",3],["product","miami",1]],"vy":1,"vn":1},{"s":"kong","n":"Kong","r":91,"g":{"who":"CB Insights","kind":"cbi","url":"https://www.cbinsights.com/company/mashape","line":"CB Insights tracks them at a $1B+ valuation"},"gc":"a tracker's call on size, not a funding fact — their own board says 91 roles tonight","m":{"w":"Manages and secures APIs at scale","f":"Platform teams running many services","y":"The most widely adopted open-source API gateway","p":"checked"},"bw":null,"t":null,"d":{"other":14,"eng":42,"sales":26,"cs":3,"design":2,"ops":1,"people":1,"marketing":2},"p":{"apac_any":5,"toronto":4,"us_any":7,"milan":8,"bengaluru":13,"dc":7,"nyc":7,"elsewhere":16,"es_any":3,"uk_any":4,"indiaother":2,"hongkong":5,"eu_any":4,"ca_any":2,"singapore":6,"sydney":1,"london":6,"chicago":1,"sf":3,"de_any":1,"paris":2},"x":[["other","apac_any",1],["eng","toronto",4],["eng","us_any",1],["eng","milan",7],["sales","bengaluru",3],["eng","dc",3],["eng","nyc",1],["eng","elsewhere",3],["sales","es_any",2],["sales","uk_any",1],["sales","indiaother",1],["other","bengaluru",2],["other","indiaother",1],["eng","hongkong",4],["sales","elsewhere",10],["eng","bengaluru",7],["other","elsewhere",2],["cs","eu_any",1],["design","ca_any",1],["design","nyc",1],["design","us_any",1],["eng","es_any",1],["sales","singapore",2],["sales","nyc",5],["other","us_any",3],["sales","sydney",1],["ops","dc",1],["ops","us_any",1],["eng","apac_any",1],["other","london",3],["other","uk_any",2],["sales","eu_any",1],["sales","chicago",1],["sales","dc",3],["cs","apac_any",1],["cs","singapore",1],["people","hongkong",1],["eng","uk_any",1],["eng","sf",2],["marketing","bengaluru",1],["sales","de_any",1],["sales","us_any",1],["eng","eu_any",2],["eng","paris",2],["eng","singapore",2],["other","singapore",1],["cs","london",1],["marketing","elsewhere",1],["eng","london",2],["eng","ca_any",1],["sales","apac_any",2],["design","sf",1],["sales","milan",1]],"vy":0,"vn":0},{"s":"replit","n":"Replit","r":90,"g":{"who":"Y Combinator","kind":"yc","url":"https://www.ycombinator.com/companies/replit","line":"Y Combinator backed them, Winter 2018","status":"Active","team":65,"batch_short":"W18","top":false},"gc":"YC's own directory entry — the batch, the status and the 65 people it lists are YC's numbers, not mine","m":{"w":"An AI agent that builds apps from prompts","f":"Non-coders, product teams and enterprises building internal software","y":"Databricks, Zillow and Gusto are named as customers","p":"unchecked"},"bw":null,"t":65,"d":{"eng":50,"sales":29,"design":3,"product":1,"cs":1,"ops":6},"p":{"sf":72,"nyc":5,"remote":8,"slc":3,"latam_any":1,"in_any":1},"x":[["eng","sf",48],["sales","sf",14],["design","sf",3],["product","sf",1],["sales","nyc",5],["cs","remote",1],["sales","slc",3],["sales","remote",5],["eng","remote",2],["ops","sf",6],["sales","latam_any",1],["sales","in_any",1]],"vy":0,"vn":0},{"s":"satispay","n":"Satispay","r":88,"g":{"who":"CB Insights","kind":"cbi","url":"https://www.cbinsights.com/company/satispay","line":"CB Insights tracks them at a $1B+ valuation"},"gc":"a tracker's call on size, not a funding fact — their own board says 88 roles tonight","m":{"w":"A mobile payments and money management app","f":"Consumers, merchants and companies in Italy and Europe","y":"Over 6.5 million active users, 450,000 affiliated merchants","p":"unchecked"},"bw":null,"t":null,"d":{"product":18,"sales":14,"ops":1,"finance":5,"legal":46,"other":1,"people":2,"marketing":1},"p":{"milan":45,"elsewhere":7,"barcelona":6,"eu_any":25,"de_any":3,"uk_any":2},"x":[["product","milan",18],["sales","milan",11],["sales","elsewhere",3],["ops","milan",1],["finance","milan",3],["legal","milan",9],["legal","barcelona",6],["legal","eu_any",23],["legal","de_any",3],["legal","uk_any",2],["finance","eu_any",2],["other","milan",1],["people","milan",2],["legal","elsewhere",3],["marketing","elsewhere",1]],"vy":82,"vn":0},{"s":"quintoandar","n":"QuintoAndar","r":87,"g":{"who":"CB Insights","kind":"cbi","url":"https://www.cbinsights.com/company/quintoandar","line":"CB Insights tracks them at a $1B+ valuation"},"gc":"a tracker's call on size, not a funding fact — their own board says 87 roles tonight","m":null,"bw":["B2B Brasil","Pre-Contract B2C","Engineering","Marketing","Classifieds MX","Data"],"t":null,"d":{"sales":10,"other":42,"ops":3,"marketing":5,"people":3,"finance":6,"legal":1,"eng":16,"product":1},"p":{"saopaulo":38,"latam_any":35,"bogota":5,"mexico":9},"x":[["sales","saopaulo",5],["other","saopaulo",22],["other","latam_any",13],["sales","bogota",2],["ops","saopaulo",3],["sales","latam_any",2],["marketing","mexico",1],["other","mexico",6],["people","latam_any",2],["people","mexico",1],["finance","saopaulo",4],["legal","saopaulo",1],["finance","latam_any",1],["marketing","saopaulo",3],["sales","mexico",1],["marketing","bogota",1],["other","bogota",1],["eng","latam_any",16],["product","latam_any",1],["finance","bogota",1]],"vy":0,"vn":0},{"s":"onetrust","n":"OneTrust","r":86,"g":{"who":"Forbes","kind":"forbes","url":"https://www.forbes.com/companies/onetrust/","line":"A Forbes editor put them on a list"},"gc":"an editor's call; there is no funding number behind it and I will not invent one","m":{"w":"Software for privacy consent and data compliance","f":"Companies subject to privacy and disclosure rules","y":"Grew fast when GDPR forced everyone to comply","p":"checked"},"bw":null,"t":null,"d":{"sales":26,"finance":1,"legal":5,"cs":19,"marketing":1,"eng":28,"product":6},"p":{"nyc":2,"amsterdam":2,"munich":2,"denver":1,"elsewhere":5,"madrid":13,"atlanta":28,"bengaluru":24,"sf":6,"london":2,"chicago":1},"x":[["sales","nyc",1],["sales","amsterdam",2],["sales","munich",2],["sales","denver",1],["sales","elsewhere",4],["sales","madrid",6],["sales","atlanta",7],["finance","madrid",1],["legal","atlanta",3],["cs","bengaluru",6],["marketing","atlanta",1],["cs","madrid",5],["cs","atlanta",5],["legal","sf",2],["cs","elsewhere",1],["eng","bengaluru",17],["sales","sf",1],["eng","atlanta",9],["sales","london",2],["eng","sf",1],["cs","nyc",1],["cs","chicago",1],["eng","madrid",1],["product","bengaluru",1],["product","atlanta",3],["product","sf",2]],"vy":0,"vn":0},{"s":"dialpad","n":"Dialpad","r":85,"g":{"who":"Forbes","kind":"forbes","url":"https://www.forbes.com/companies/dialpad/","line":"A Forbes editor put them on a list"},"gc":"an editor's call; there is no funding number behind it and I will not invent one","m":{"w":"Business phone and support lines with live transcription","f":"Sales and support teams replacing old phone systems","y":"Built its own speech recognition in house","p":"unchecked"},"bw":null,"t":null,"d":{"sales":23,"finance":4,"eng":34,"legal":3,"cs":10,"people":3,"product":3,"marketing":2,"design":3},"p":{"austin":16,"phoenix":5,"london":5,"tokyo":4,"bengaluru":4,"elsewhere":22,"vancouver":12,"bogota":7,"remote":1,"sf":3,"denver":3,"sydney":2,"nyc":1},"x":[["sales","austin",10],["sales","phoenix",5],["sales","london",2],["sales","tokyo",1],["finance","bengaluru",1],["finance","elsewhere",3],["eng","elsewhere",9],["eng","vancouver",9],["eng","bogota",5],["legal","bogota",1],["legal","elsewhere",1],["cs","austin",2],["cs","elsewhere",6],["cs","tokyo",1],["people","remote",1],["eng","london",3],["eng","sf",3],["product","bogota",1],["product","elsewhere",1],["marketing","austin",2],["sales","denver",2],["eng","bengaluru",3],["sales","elsewhere",1],["eng","tokyo",1],["eng","austin",1],["sales","sydney",1],["legal","austin",1],["cs","sydney",1],["product","vancouver",1],["sales","nyc",1],["people","vancouver",1],["design","elsewhere",1],["design","vancouver",1],["design","denver",1],["people","tokyo",1]],"vy":0,"vn":0},{"s":"psiquantum","n":"PsiQuantum","r":83,"g":{"who":"SEC EDGAR","kind":"sec","url":"https://www.sec.gov/Archives/edgar/data/2070804/000199636625000006/0001996366-25-000006-index.htm","line":"They filed a Form D with the SEC for $22,000,008 on May 15, 2025","amount":"$22,000,008","date":"May 15, 2025"},"gc":"a filing signed by their own counsel, not a press release","m":{"w":"Building a large quantum computer using light","f":"Governments and enterprises needing quantum-scale computation later","y":"Bets on photonics and existing chip factories","p":"checked"},"bw":null,"t":null,"d":{"eng":77,"other":2,"sales":1,"ops":2,"finance":1},"p":{"elsewhere":42,"sf":28,"sydney":2,"remote":9,"chicago":2},"x":[["eng","elsewhere",40],["eng","sf",27],["eng","sydney",1],["eng","remote",8],["other","sydney",1],["other","sf",1],["sales","remote",1],["eng","chicago",1],["ops","elsewhere",2],["finance","chicago",1]],"vy":0,"vn":0},{"s":"clara","n":"Clara","r":82,"g":{"who":"CB Insights","kind":"cbi","url":"https://www.cbinsights.com/company/clara-2","line":"CB Insights tracks them at a $1B+ valuation"},"gc":"a tracker's call on size, not a funding fact — their own board says 82 roles tonight","m":null,"bw":["Sales Outbound","Engineering/ Builders","Operations","KAM","Product","Marketing"],"t":null,"d":{"sales":42,"ops":6,"other":2,"legal":5,"cs":5,"marketing":5,"eng":7,"people":4,"product":6},"p":{"saopaulo":14,"latam_any":49,"mexico":19,"bogota":1},"x":[["sales","saopaulo",9],["sales","latam_any",23],["sales","mexico",9],["ops","mexico",3],["ops","saopaulo",1],["other","mexico",1],["other","saopaulo",1],["ops","latam_any",2],["sales","bogota",1],["legal","latam_any",4],["cs","saopaulo",2],["cs","latam_any",3],["marketing","mexico",1],["marketing","latam_any",4],["eng","latam_any",7],["people","latam_any",3],["legal","mexico",1],["people","mexico",1],["product","mexico",3],["product","latam_any",3],["product","saopaulo",1]],"vy":0,"vn":0},{"s":"apptronik","n":"Apptronik","r":81,"g":{"who":"SEC EDGAR","kind":"sec","url":"https://www.sec.gov/Archives/edgar/data/1918029/000191802925000006/0001918029-25-000006-index.htm","line":"They filed a Form D with the SEC for $331,397,787 on Oct 21, 2025","amount":"$331,397,787","date":"Oct 21, 2025"},"gc":"a filing signed by their own counsel, not a press release","m":null,"bw":["Hardware","Software Engineering","Product","People","Advanced Technologies","Supply Chain"],"t":null,"d":{"eng":56,"finance":2,"product":11,"people":5,"ops":4,"cs":2,"design":1},"p":{"austin":68,"sf":13},"x":[["eng","austin",49],["finance","austin",2],["product","austin",7],["product","sf",4],["people","austin",4],["ops","austin",3],["cs","austin",2],["eng","sf",7],["ops","sf",1],["design","austin",1],["people","sf",1]],"vy":0,"vn":0}]};
+</script>
+<script src="app.js" defer></script>
+</body>
+</html>
