@@ -262,6 +262,27 @@ def test_workflow_runs_the_tested_script_nightly() -> None:
     assert "contents: write" in workflow, "the job commits; without this it 403s"
 
 
+def test_the_publish_survives_a_commit_landing_during_the_build() -> None:
+    """A bare `git push` discards an 11-minute build if main moved meanwhile.
+
+    Measured 2026-08-04, run 30886602588: the build resolved 383 companies and
+    then died on `! [rejected] main -> main (fetch first)`, because a source
+    commit landed while it ran. Nothing wrong was published — it fails in the
+    safe direction — but the run goes red, and a red nightly is read as a broken
+    build rather than as a race nobody needs to act on.
+
+    The rebase is safe for what this step commits and only for that: the three
+    files `scripts/nightly.sh` adds are each rewritten whole every run, so there
+    is no line-level merge to get wrong.
+    """
+    workflow = WORKFLOW.read_text()
+
+    assert "git pull --rebase && git push" in workflow, (
+        "the publish must rebase: a bare push throws away the whole build "
+        "whenever any commit lands on main during it"
+    )
+
+
 def test_the_nightly_probes_every_resolved_provider() -> None:
     """T6.3. The nightly runs the build, so the build's providers ARE the refresh
     tiering: an ATS the corpus holds slugs for but the build cannot probe is a

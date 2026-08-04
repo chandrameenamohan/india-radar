@@ -60,5 +60,17 @@ jobs:
 
       # Outside the script deliberately: a hand run of scripts/nightly.sh must
       # not publish. No-op when the build changed nothing.
+      #
+      # Rebased, because the build takes ~11 minutes and a bare push throws all
+      # of it away if ANY commit lands on main meanwhile — measured 2026-08-04,
+      # run 30886602588, which built 383 companies and died on `! [rejected]
+      # main -> main (fetch first)`. Red, and indistinguishable at a glance from
+      # a build that actually broke.
+      #
+      # Safe to rebase specifically because of WHAT this commits: the three
+      # files in scripts/nightly.sh's `git add` are each rewritten whole every
+      # run. There is no line-level merge to get wrong — a conflict here would
+      # mean two builds racing, which one runner cannot do. A rebase that fails
+      # anyway still exits non-zero and publishes nothing.
       - name: Publish
-        run: git push
+        run: git pull --rebase && git push
