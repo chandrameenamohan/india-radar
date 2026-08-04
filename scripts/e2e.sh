@@ -545,14 +545,20 @@ echo "-- country plates and openness badges (T8.5)"
 # straight through the quotes of a command substitution, which turned this check
 # into eight failed subprocesses whose empty output matched an empty expectation.
 # A vacuous green check is the failure mode worth naming.
+#
+# An EMPTY scope is Plate 01, and T16.1 made that stop meaning "the fifteen".
+# The world index is the register — every role on every board we read, including
+# the ones no target country classified — so it is written as None rather than as
+# set(COUNTRIES). Restoring the union here is one of the two ways this file could
+# be made to agree with a page that had gone back to deleting them.
 expect_in() { $PY -c "
 import json
-from src.countries import COUNTRIES
 named = '''$1'''
-scope = set(named.split('|')) if named else set(COUNTRIES)
+scope = set(named.split('|')) if named else None
 keep = []
 for r in json.load(open('tests/fixtures/companies-e2e.json'))['companies']:
-    roles = [role for role in r['roles'] if scope & set(role['countries'])]
+    roles = [role for role in r['roles']
+             if scope is None or scope & set(role['countries'])]
     if roles and (${2:-True}):
         keep.append((r, roles))
 print('|'.join(r['name'] for r, _ in sorted(keep, key=lambda k: (-len(k[1]), k[0]['name']))))"; }
@@ -1126,6 +1132,14 @@ import json
 data = json.load(open('tests/fixtures/companies-e2e.json'))
 cs = sorted(data['companies'], key=lambda c: (-len(c['roles']), c['name']))
 print('|'.join(r['title'] for c in cs for r in c['roles'] if $1))"; }
+# How many roles the fixture publishes. Read once and reused rather than written
+# down: the three checks below used to hardcode 17, and T16.1 added five roles to
+# the fixture — a hardcoded total is a check that fails for the wrong reason and
+# gets "fixed" by editing the expectation.
+NROLES=$($PY -c "
+import json
+print(sum(len(c['roles'])
+          for c in json.load(open('tests/fixtures/companies-e2e.json'))['companies']))")
 
 # Asserted where a reader meets it: no parameter, no click, no preference --
 # the page a stranger lands on lists jobs.
@@ -1136,9 +1150,9 @@ console_clean "roles register"
 
 open_page "$ROLES"
 check "the roles register prints one line per role" "$(xroles True)" "$(rows)"
-# Eight companies, seventeen roles. A tally still counting companies would be
-# the header describing the other register.
-check "the tally counts roles" "17 of 17 roles" \
+# A tally still counting companies would be the header describing the other
+# register.
+check "the tally counts roles" "$NROLES of $NROLES roles" \
   "$(val '(document.querySelector("#status").textContent.match(/\d+ of \d+ roles/) || [""])[0]')"
 
 # THE role-level cut. Under the company register a company with one remote job
@@ -1158,9 +1172,22 @@ $B select '#openness' 'any' >/dev/null 2>&1
 
 # The gutter cites the ROLE's countries, never its company's: Theta Global hires
 # in India and the UK, so built off c.countries both its rows would say both.
-check "a role line cites its own country, not its company's" "true" \
+#
+# Asserted as the whole citation column rather than as "every row cites exactly
+# one country", which is what this check used to say. T16.1 made that form
+# unfalsifiable in the case that matters: a role with no country cites the empty
+# string, and `"".split("|")` is a list of length one, so an unclassified row
+# would have passed a rule it cannot satisfy. Derived per role instead, so a
+# blank citation is asserted as blank and a wrong one cannot hide behind a count.
+check "each role line cites its own countries, and only those" \
+  "$($PY -c "
+import json
+data = json.load(open('tests/fixtures/companies-e2e.json'))
+cs = sorted(data['companies'], key=lambda c: (-len(c['roles']), c['name']))
+print('|'.join('+'.join(r['countries']) for c in cs for r in c['roles']))")" \
   "$(val '[...document.querySelectorAll(".jrow")]
-       .every((n) => n.dataset.countries.split("|").length === 1) + ""')"
+       .map((n) => n.dataset.countries.split("|").filter(Boolean).join("+"))
+       .join("|")')"
 
 # A plate cuts roles now. Theta keeps its London job here and its Bengaluru one
 # on India's plate -- the same rule inScope follows, one level down.
@@ -1171,7 +1198,7 @@ plate
 
 # The title IS the apply link, the rule the gazetteer entry already follows, so
 # the register reaches the posting without a detour through the company.
-check "every role line links to its own posting" "17" \
+check "every role line links to its own posting" "$NROLES" \
   "$(val 'document.querySelectorAll(".jrow .iname a[href^=\"http\"]").length')"
 # The second affordance, and why the line is not a button: a job has two
 # destinations. Both halves are read off the page rather than off the fixture,
@@ -1291,7 +1318,7 @@ check "and clears itself rather than ordering by an invisible control" "reqs" \
 # a failed request, and a page that asked for a file that is not there is what
 # is being proved. Every other page in this run is held to zero.
 open_page "$ROLES&seen=../tests/fixtures/no-such-artifact.json"
-check "a missing artifact costs the badge and nothing else" "17 0" \
+check "a missing artifact costs the badge and nothing else" "$NROLES 0" \
   "$(val '`${document.querySelectorAll(".jrow").length} `
         + `${document.querySelectorAll(".jrow .tag.fresh").length}`')"
 check "and takes the Newest sort off the bank with it" "true" \
@@ -1351,6 +1378,222 @@ check "the unit switch is not in the filter bank" "true" \
   "$(val 'String(!document.querySelector("#controls #viewsw, #controls #view"))')"
 check "the fold's tally does not count it as a filter" "" \
   "$(val 'document.querySelector("#fcount").textContent')"
+
+# ---------------------------------------------------------------------------
+# T16.1 — THE REST OF THE WORLD.
+#
+# The build used to DELETE a role in Sao Paulo rather than record it: a place
+# outside the fifteen was dropped on the way in, so `countries` was an admission
+# ticket and not an enrichment. It is an enrichment now and legitimately EMPTY,
+# and this section is about the single decision that makes that safe:
+#
+#   a country plate is a CLAIM  — these roles named this country — and must
+#     never yield a role that named none of them;
+#   Plate 01 is the REGISTER    — every role on every board we read — and must
+#     yield all of them.
+#
+# The asymmetry is the design, so it is checked from both sides. There is no
+# third state and the last check in this section is what says so.
+echo "-- the rest of the world (T16.1)"
+
+# The fixture's own arithmetic. Every expectation below that counts moves with
+# the data rather than freezing today's answer.
+unclassified() { $PY -c "
+import json
+rows = json.load(open('tests/fixtures/companies-e2e.json'))['companies']
+print(sum(1 for r in rows for x in r['roles'] if not x['countries']))"; }
+UNCL=$(unclassified)
+
+open_page "$ROLES"
+# THE ACCEPTANCE, half one: the role is built, published and PRINTED. Stated as
+# a count against the fixture rather than as "more than none", so a fixture that
+# lost its unclassified rows fails here instead of passing with nothing to show.
+check "an unclassified role is on the register, not deleted from it" "$UNCL" \
+  "$(val '[...document.querySelectorAll(".jrow")]
+       .filter((n) => n.dataset.countries === "").length')"
+
+# ...and it shows the location string its OWN board stated, which is the only
+# thing anybody knows about where it is. Named rather than derived, because what
+# is under test is the exact text a reader meets where a country would otherwise
+# be: the board's words, put through the page's one typesetting idiom (a leading
+# mode word becomes "Mode — Place") and invented nowhere. "Remote — Warsaw,
+# Poland" is the case that rendered as a dangling "Remote — " with the country
+# deleted behind it, because the em dash's right-hand side was `countries`.
+# Read off the full place list rather than the printed cell: the cell elides to
+# fit its column, and what is being asserted is what the row HOLDS.
+check "an unclassified role shows the location its own board stated" \
+  "Field Operations Lead :: Toronto, Canada|Infrastructure Engineer :: Sao Paulo, Brazil|Account Executive :: Remote — Warsaw, Poland" \
+  "$(val '[...document.querySelectorAll(".jrow")]
+       .filter((n) => n.dataset.countries === "")
+       .map((n) => n.querySelector(".iname").firstChild.textContent + " :: "
+                 + (n.querySelector(".iwhere").dataset.places || "").split("|").join(" · "))
+       .join("|")')"
+
+# The other half of "its country row is empty rather than guessed": no code in
+# the gutter, and no tooltip standing in for one. A page that inferred "Brazil"
+# from the string, or reached for the company's countries the way the row used
+# to, breaks this before it breaks anything a reader would notice.
+check "an unclassified role prints no country, and nothing stands in for one" \
+  "$UNCL 0 0" \
+  "$(val '(() => {
+       const rows = [...document.querySelectorAll(".jrow")]
+         .filter((n) => n.dataset.countries === "");
+       return [rows.length,
+               rows.reduce((n, r) => n + r.querySelectorAll(".igc").length, 0),
+               rows.filter((r) => r.querySelector(".iref").title).length].join(" ") })()')"
+
+# THE GUARD, and the one this task turns on: fifteen plates in one pass, on the
+# roles register. Both failure directions are counted per plate — a role that
+# named no country appearing under one, and a role that named a DIFFERENT one —
+# because a filter that leaked would most likely leak both. Reported as a tally
+# rather than as a list of offenders: an empty list is what a selector matching
+# nothing also produces, and it reads green.
+check "no country plate ever yields an unclassified role" \
+  "$($PY -c 'from src.countries import COUNTRIES; print(len(COUNTRIES), "plates clean")')" \
+  "$(val '(() => {
+       const chips = [...document.querySelectorAll("#plate .mk")];
+       const bad = [];
+       for (const chip of chips) {
+         chip.click();
+         const rows = [...document.querySelectorAll(".jrow")];
+         const loose = rows.filter((r) => r.dataset.countries === "").length;
+         const off = rows.filter((r) => !r.dataset.countries.split("|")
+                                          .includes(chip.dataset.country)).length;
+         if (loose || off) {
+           bad.push(`${chip.dataset.country}: ${loose} unclassified, ${off} off-plate`);
+         }
+       }
+       document.querySelector("#p01").click();          // back to Plate 01
+       return bad.length ? bad.join("; ") : `${chips.length} plates clean`;
+     })()')"
+
+# And the reader who cleared the filter gets everything back. This is the check
+# the whole task is FOR, and it is the plain one: the register under no plate is
+# the register, unclassified roles and all, in the order it always prints them.
+check "clearing the country filter brings every role back, unclassified included" \
+  "$(xroles True)" "$(rows)"
+
+# One posting naming a target country AND another one — "Singapore, Singapore"
+# beside "Jakarta, Indonesia", which is one job on one board. Singapore is what
+# classified it, so Singapore is the only plate it is filed under; Indonesia is
+# not a plate and Jakarta is claimed as nowhere.
+plate Singapore
+check "a posting naming a target country and another is filed under the target alone" \
+  "Solutions Architect|Singapore" \
+  "$(val '(() => { const rows = [...document.querySelectorAll(".jrow")];
+       return [rows.map((n) => n.querySelector(".iname").firstChild.textContent).join(" "),
+               rows.map((n) => n.dataset.countries).join(" ")].join("|") })()')"
+# ...and the plate cuts ROLES, never the strings inside one. The line still
+# prints the place outside the fifteen that its board named, because deleting it
+# is the behaviour this whole task removed — one level further in.
+check "and it still prints the place outside the fifteen that its board named" "true" \
+  "$(val '(() => { const cell = document.querySelector(".jrow .iwhere");
+       return String(((cell || {}).dataset || {}).places
+                       .split("|").includes("Jakarta, Indonesia")) })()')"
+plate
+
+# The gazetteer this repo refuses to own, checked from the page's side. The city
+# parser takes a place only where the board itself put a country we cover beside
+# it, so Jakarta under a Singapore role, Sao Paulo, Warsaw and Toronto contribute
+# no city at all — on the widest list the page ever builds, Plate 01's.
+check "no city option is read out of a place outside the fifteen" "" \
+  "$(val '[...document.querySelectorAll("#city option")].map((o) => o.value)
+       .filter((v) => ["Jakarta", "Sao Paulo", "Warsaw", "Toronto"].includes(v))
+       .join(",")')"
+
+# The status line's scope, which is where the count is stated. It read "All
+# countries", and after this task that is false in both directions: we classify
+# fifteen, and we print roles from more than fifteen countries' worth of boards.
+# What is true of every line under this tally is that we read the board it came
+# from, so that is what it now says.
+check "the tally states the scope it actually has" "Every board we read — " \
+  "$(val 'document.querySelector("#status .pscope").textContent')"
+plate Germany
+check "and a country plate still states its country exactly" "Germany — " \
+  "$(val 'document.querySelector("#status .pscope").textContent')"
+plate
+# The negative, over every line the reader meets ABOVE the register — the
+# masthead stamp, the plate strip and the status line. Rewording one of the
+# three and leaving the others is how this claim would come back.
+check "nothing above the register still claims all countries" "" \
+  "$(val '["#status", "#platestamp", "#p01"]
+       .map((s) => (document.querySelector(s) || {}).textContent || "")
+       .filter((t) => /all countries|fifteen countries/i.test(t)).join("|")')"
+
+# A GUARD THAT IS AN ABSENCE, so it is mutation-tested by ADDING the forbidden
+# thing rather than by deleting this. There is no Other / Worldwide / Rest of
+# world plate, chip, facet or filter option, and there must never be one: none of
+# them is a place, and a bucket labelled "we did not classify this" is the exact
+# claim T16.1 removed, wearing a different hat. Checked over every control the
+# page builds FROM THE DATA plus the whole plate navigation, because that is
+# where such a bucket would have to appear to be usable. The department control's
+# own "Unclassified" is a different thing and stays: it is a bucket of role
+# TITLES we could not place, not a place.
+check "no Other / Worldwide / Rest of world bucket exists anywhere" "" \
+  "$(val '(() => {
+       const banned = /\b(other|worldwide|rest of (the )?world|elsewhere|unclassified country|no country|not stated country)\b/i;
+       return [...document.querySelectorAll(
+           "#controls option, #plate .mk, #pindex .pirow, #status .pscope, .jrow .igc")]
+         .map((n) => n.textContent.trim())
+         .filter((t) => banned.test(t)).join(",") })()')"
+console_clean "the rest of the world"
+
+# The company half. A company whose roles are ALL unclassified has an empty
+# `countries` of its own — the union of its roles' — so it belongs under no
+# plate. It is still a company whose board we read, which is the whole basis of
+# this register, so Plate 01 must list it.
+open_page "$FIXTURE"
+check "a company with only unclassified roles is on Plate 01" "true" \
+  "$(val 'String([...document.querySelectorAll(".irow .iname")]
+       .some((n) => n.firstChild.textContent === "Kappa Analytics"))')"
+check "and appears under none of the fifteen plates" "15 plates, 0 sightings" \
+  "$(val '(() => { const chips = [...document.querySelectorAll("#plate .mk")];
+       let seen = 0;
+       for (const chip of chips) {
+         chip.click();
+         seen += [...document.querySelectorAll(".irow .iname")]
+           .filter((n) => n.firstChild.textContent === "Kappa Analytics").length;
+       }
+       document.querySelector("#p01").click();
+       return `${chips.length} plates, ${seen} sightings` })()')"
+
+# And its gazetteer entry says NOTHING where it has no reference, rather than
+# stamping a blank one: no plate ref, no coordinate, no locator map highlighting
+# nowhere, no "Ref" label with its value deleted. The receipt stays, and that is
+# the point of checking it in the same breath — the board we read is a fact this
+# company still has, and it is the one the register rests on.
+check "an entry with no plate reference prints none, rather than an empty one" \
+  "Kappa Analytics 0 0 0 1" \
+  "$(val '(() => { [...document.querySelectorAll(".irow")].find((n) =>
+         n.querySelector(".iname").firstChild.textContent === "Kappa Analytics").click();
+       const s = document.querySelector("#sheet");
+       return [s.querySelector("h2").textContent,
+               s.querySelectorAll(".sheetref").length,
+               s.querySelectorAll(".locator").length,
+               [...s.querySelectorAll(".entrymeta .micro")]
+                 .filter((x) => /^Ref\b/.test(x.textContent)).length,
+               s.querySelectorAll(".receipt").length].join(" ") })()')"
+# The register line for that company: no country code in the gutter, and its
+# places are the ones its own boards typed — shortened to their leading name the
+# way every register line is, and kept whole where a mode word makes the string
+# one idiom. `wherePieces` reached for `c.countries` on a remote company and
+# would print "Remote — " here, with the country deleted after the em dash.
+check "its register line names places and cites no plate" \
+  "Kappa Analytics|0|Sao Paulo · Remote — Warsaw, Poland" \
+  "$(val '(() => { const r = [...document.querySelectorAll(".irow")].find((n) =>
+         n.querySelector(".iname").firstChild.textContent === "Kappa Analytics");
+       return [r.querySelector(".iname").firstChild.textContent,
+               r.querySelectorAll(".igc").length,
+               (r.querySelector(".iwhere").dataset.places || "").split("|").join(" · ")
+              ].join("|") })()')"
+# The page says what that empty gutter MEANS, for the same reason it says what a
+# missing CIN and a missing openness badge mean. Prose in the apparatus, never a
+# facet in the filter bank — the difference between explaining an absence and
+# inventing a place for it.
+check "the site explains that a role outside the fifteen is filed under no plate" "1" \
+  "$(val '[...document.querySelectorAll("footer p")]
+       .filter((p) => /filed\s+under no plate/i.test(p.textContent)).length')"
+console_clean "the rest of the world, company register"
 
 # 4c visual regression is NOT here. It needs baseline screenshots a human
 # approves once (VERIFICATION.md 4c), and an agent approving its own baselines

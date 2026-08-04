@@ -1027,7 +1027,7 @@
            page turn, so the header always says which plate is open. -->
       <div class="platestamp" id="platestamp" aria-live="polite">
         <span class="pnum" id="pnum">Plate 01</span>
-        <span class="pname" id="pname">World — all countries</span>
+        <span class="pname" id="pname">World — every board we read</span>
       </div>
     </div>
   </div>
@@ -1160,9 +1160,24 @@
          count of roles we cannot call new is the honest half of this feature,
          so it prints beside the register rather than sitting in the file. -->
     <p id="firstseen"></p>
-    <p>Every company here showed at least one open role, in one of the countries this radar covers,
-      on its own job board on the snapshot date. A company we could not check is excluded
-      rather than shown as "not hiring".</p>
+    <p>Every company here showed at least one open role on its own job board on the snapshot
+      date. A company we could not check is excluded rather than shown as "not hiring".</p>
+    <!-- T16.1. The absence this page had been filling in: the fifteen lists are a
+         radar width, and until this task a role they did not classify was deleted
+         rather than recorded. It is now published, and this note is where the page
+         says what a role with no plate reference means — the same job the "missing
+         CIN" and "missing badge" notes do for their own absences. It is prose and
+         not a facet on purpose: an "Other" tab would be the page naming a place
+         that does not exist. -->
+    <p>The fifteen countries this radar covers are what we <b>classify</b>, not what we
+      publish. A role whose board named somewhere else — São Paulo, Warsaw, Toronto — is
+      on this register showing the location string its own board stated, and is filed
+      under no plate: its reference column is empty, because "Newcastle" is a real city
+      in three of these countries and in the United States besides, and guessing which
+      is the one wrongness this register exists not to ship. Turn to a country's plate
+      and you get that country's roles and nothing else. Return to Plate 01 and you get
+      every role on every board we read. There is no "Other" plate, because that is not
+      a place.</p>
     <p>The visa and hiring-from-abroad badges are read from what a posting says, and most
       postings say nothing at all — 92% of the ones we measured. A role with no badge is one
       whose posting did not say, which is not the same as a no; where a posting does say no,
@@ -1195,7 +1210,11 @@
 // The site is a renderer and nothing else: it reads the JSON the build wrote and
 // never recomputes a fact. The snapshot date in particular ships with the data,
 // because a date taken at render time would claim a freshness the JSON lacks.
-const SCHEMA = 10;                                 // src/build.py SCHEMA_VERSION
+// v11 (T16.1) is a VALUE rule, not a field: a role's `countries` may now be
+// empty, and so may a company's. The version had to move anyway — this page
+// indexes that list (`COORD[c.countries[0]]` is a real line), so a v10 renderer
+// over a v11 file would file a Sao Paulo role under whichever plate came first.
+const SCHEMA = 11;                                 // src/build.py SCHEMA_VERSION
 const DEFAULT_SRC = '../data/companies.json';
 
 // Test seam: e2e drives this same page over a fixture dataset (data/companies.json
@@ -1429,8 +1448,13 @@ const opensToForeignHires = (c) =>
 // ways -- one elided to a single line with its remainder counted off to the
 // side, one run as a sentence -- so they share the list and part company at
 // the typesetting.
+// T16.1 put a fourth state under the second branch: a company whose boards named
+// no country we classify can be REMOTE and still have nothing to print after the
+// em dash. "Remote — " is a label with its value deleted, which is the exact
+// shape of absence this page refuses. It falls through to the strings its own
+// boards typed, which is what the third branch is for.
 const wherePieces = (c) => c.cities.length ? canonPlaces(c.cities)
-  : isRemote(c) ? [`Remote — ${c.countries.join(' · ')}`]
+  : isRemote(c) && c.countries.length ? [`Remote — ${c.countries.join(' · ')}`]
   : canonPlaces(c.roles.flatMap((r) => r.locations));
 const where = (c, max = 3) => {
   const all = wherePieces(c);
@@ -1902,10 +1926,36 @@ function descBlock(d) {
   return block;
 }
 
-// The countries the open plate covers, and what to call them in a sentence.
+// The countries the open plate covers. This is the answer to every question
+// that is genuinely ABOUT a country — which chip lights, which plate's range
+// the status line states, whether the India-only enrichments are in view — and
+// for Plate 01 that is all fifteen.
 const scope = () => (activeCountry ? [activeCountry] : COUNTRIES);
+
+// Which ROLES the open plate prints, and T16.1 is the finding that these are
+// two different questions. A country plate is a claim — these roles named this
+// country — so it prints the roles that matched it and nothing else. Plate 01
+// is not a claim about anywhere: it is the register, every role on every board
+// we read, including the ones no target country classified.
+//
+// The fifteen are a radar width, never a truth claim. A role in Sao Paulo is
+// not absent from this register; the build used to DELETE it, and a page that
+// intersected Plate 01 with the fifteen would delete it a second time — the one
+// place this project said "absence stays absence" and then filled the absence
+// in. `countries: []` means "we did not classify this", which is what it has
+// always actually meant.
+//
+// THE ASYMMETRY IS THE DESIGN. Filter to Germany and you see Germany; clear the
+// filter and you see everything, unclassified roles included. There is no third
+// state — no Other, no Worldwide, no Rest of world — because none of those is a
+// place, and this register does not name absences.
+const onPlate = (r) => !activeCountry || r.countries.includes(activeCountry);
+
+// What to call the open scope in a sentence, carrying its own preposition.
+// "in Germany" names a place; Plate 01 is not one, so it says what it actually
+// is — every board we read — and that phrase takes "on".
 const scopeName = () =>
-  activeCountry || 'any of the fifteen countries we cover';
+  activeCountry ? `in ${activeCountry}` : 'on any board we read';
 
 // A company as one country view shows it: the roles in that scope, and every
 // derived fact recomputed off THOSE roles. A row under the UK tab that counted
@@ -1915,7 +1965,11 @@ const scopeName = () =>
 // inventing a fact, which is why the build attaches them to India rows only
 // (SPEC v2). Returns null for a company with nothing in this scope.
 function inScope(c, covers) {
-  const roles = c.roles.filter((r) => r.countries.some((x) => covers.includes(x)));
+  // The roles come from `onPlate`, not from `covers`, and the difference is
+  // T16.1: on Plate 01 the register keeps every role, and a role no country
+  // classified belongs to exactly one plate — the one that is not a country.
+  // `covers` still governs the enrichments below, which really are per-country.
+  const roles = c.roles.filter(onPlate);
   if (!roles.length) return null;
   const india = covers.includes('India');
   return {
@@ -2182,7 +2236,9 @@ function indexRow(c, repeated, hits) {
   });
   if (pairs.length > 2) igr.append('+');
   iref.append(igr);
-  iref.title = c.countries.join(' · ');
+  // An empty title attribute is a tooltip that opens onto nothing, so a row
+  // with no plate reference carries none at all (T16.1).
+  if (c.countries.length) iref.title = c.countries.join(' · ');
   const namecell = el('span', 'iname', c.name);
   // The places, set as a registry entry rather than as prose: the list holds
   // one line and elides where it must, and the "+N" saying how many more is
@@ -2262,7 +2318,7 @@ function roleRow(c, r) {
       igr.append(cite);
     });
   iref.append(igr);
-  iref.title = r.countries.join(' · ');
+  if (r.countries.length) iref.title = r.countries.join(' · ');
   const namecell = el('span', 'iname');
   namecell.append(link(r.url, r.title));
   // Absent is absent, the rule roleItem states at the other scale: 822 of the
@@ -2368,43 +2424,56 @@ function entry(c, q) {
   // carries under every sort — never its position in today's ordering.
   meta.append(
     el('span', 'micro',
-      `Gazetteer entry ${REFS[c.name] || '—'} of ${count(companies.length)}`),
-    el('span', 'micro', `Ref ${gridref(c.countries)}`));
+      `Gazetteer entry ${REFS[c.name] || '—'} of ${count(companies.length)}`));
+  // T16.1: a company whose boards named no country we classify has no plate
+  // reference, and "Ref" with nothing after it is a field pretending to a
+  // value. It says nothing there, the way it says nothing for a missing CIN.
+  if (gridref(c.countries)) {
+    meta.append(el('span', 'micro', `Ref ${gridref(c.countries)}`));
+  }
 
   const head = el('div', 'plateline');
-  const refbox = el('div', 'sheetref');
-  refbox.append(el('span', 'sc', gridref(c.countries)));
-  // The coordinate stamp: the country's chart anchor, in degrees and minutes.
-  // An anchor places a marker on the chart, never an office — the footer says
-  // so — and a second country prints as "+", a count, not a claim.
-  const cd = COORD[c.countries[0]];
-  if (cd) {
-    refbox.append(el('span', 'scoord',
-      dms(cd[0], cd[1]) + (c.countries.length > 1 ? ' +' : '')));
-  }
-  refbox.append(el('span', 'sn', c.countries.join(' · ')));
-  // The reciprocal citation (round 3): the index's ·GB resolves to this
-  // sheet, so the sheet answers back — every plate the company is filed
-  // under, as working cross-references. Only multi-plate entries carry the
-  // line; a single country is already said above. The full country list
-  // comes from the unscoped register — a UK view must still cite India.
-  const filedIn = (companies.find((x) => x.name === c.name) || c).countries;
-  if (filedIn.length > 1) {
-    const fu = el('p', 'filed');
-    fu.append(el('span', 'fk micro', 'Filed under'));
-    for (const nation of filedIn) {
-      const b = el('button', 'fplate' + (activeCountry === nation ? ' here' : ''));
-      b.type = 'button';
-      b.textContent = `Plate ${plateNo(nation)} · ${CODE[nation] || nation}`;
-      b.title = activeCountry === nation
-        ? `${nation} — this plate`
-        : `Turn to Plate ${plateNo(nation)} — ${nation}`;
-      b.addEventListener('click', () => {
-        selectedName = c.name; activeCountry = nation; wantScroll = true; render();
-      });
-      fu.append(b);
+  // The locator map and the plate reference both answer WHERE, and an entry
+  // filed under no plate has no answer to give: the thumbnail would highlight
+  // nothing and the stamp would be blank apparatus. Both stay away. The
+  // receipt below does not — the board we read is a fact this company still
+  // has, and it is the one the whole register rests on.
+  if (c.countries.length) {
+    const refbox = el('div', 'sheetref');
+    refbox.append(el('span', 'sc', gridref(c.countries)));
+    // The coordinate stamp: the country's chart anchor, in degrees and minutes.
+    // An anchor places a marker on the chart, never an office — the footer says
+    // so — and a second country prints as "+", a count, not a claim.
+    const cd = COORD[c.countries[0]];
+    if (cd) {
+      refbox.append(el('span', 'scoord',
+        dms(cd[0], cd[1]) + (c.countries.length > 1 ? ' +' : '')));
     }
-    refbox.append(fu);
+    refbox.append(el('span', 'sn', c.countries.join(' · ')));
+    // The reciprocal citation (round 3): the index's ·GB resolves to this
+    // sheet, so the sheet answers back — every plate the company is filed
+    // under, as working cross-references. Only multi-plate entries carry the
+    // line; a single country is already said above. The full country list
+    // comes from the unscoped register — a UK view must still cite India.
+    const filedIn = (companies.find((x) => x.name === c.name) || c).countries;
+    if (filedIn.length > 1) {
+      const fu = el('p', 'filed');
+      fu.append(el('span', 'fk micro', 'Filed under'));
+      for (const nation of filedIn) {
+        const b = el('button', 'fplate' + (activeCountry === nation ? ' here' : ''));
+        b.type = 'button';
+        b.textContent = `Plate ${plateNo(nation)} · ${CODE[nation] || nation}`;
+        b.title = activeCountry === nation
+          ? `${nation} — this plate`
+          : `Turn to Plate ${plateNo(nation)} — ${nation}`;
+        b.addEventListener('click', () => {
+          selectedName = c.name; activeCountry = nation; wantScroll = true; render();
+        });
+        fu.append(b);
+      }
+      refbox.append(fu);
+    }
+    head.append(locator(c.countries), refbox);
   }
   // The verification receipt (round 5): the sheet's right half was the page's
   // one dead zone, sitting under its strongest claim — "proven by the board,
@@ -2453,7 +2522,7 @@ function entry(c, q) {
   const ledger = el('a', null, 'build report ↗');
   ledger.href = '../data/build-report.json';
   rrow('Ledger', ledger);
-  head.append(locator(c.countries), refbox, rcpt);
+  head.append(rcpt);
 
   const body = el('div', 'detail');
   // Three absences in one line ("undisclosed · not stated · not stated") is
@@ -2562,9 +2631,12 @@ function render() {
   // The header restamps, the way an atlas page carries its number: the strip
   // and the masthead stamp both say which plate is open.
   $('#pnum').textContent = `Plate ${plateNo(activeCountry)}`;
+  // T16.1: Plate 01 stopped being "all countries" the moment a role could be on
+  // the register without being in one of the fifteen. It is not the union of
+  // the other fifteen plates and never was — it is the register itself.
   $('#pname').textContent = activeCountry
     ? `${activeCountry} — ${CODE[activeCountry]}`
-    : 'World — all countries';
+    : 'World — every board we read';
   const strip = $('#p01');
   if (strip) {
     strip.setAttribute('aria-pressed', String(!activeCountry));
@@ -2573,16 +2645,17 @@ function render() {
     if (activeCountry) {
       lft.append(el('span', null, '↩ Return to '),
                  el('span', 'no', 'Plate 01'),
-                 el('span', null, ' · all countries'));
+                 el('span', null, ' · every board we read'));
       hint.textContent = `Open — plate ${plateNo(activeCountry)} `
         + `· ${activeCountry}`;
     } else {
       lft.append(el('span', 'no', 'Plate 01'),
-                 el('span', null, ' · Index — all countries'));
+                 el('span', null, ' · Index — every board we read'));
       hint.textContent = '16 plates · click a country to turn the page';
     }
     strip.setAttribute('aria-label', activeCountry
-      ? 'Return to Plate 01 — all countries' : 'Plate 01 — all countries, open');
+      ? 'Return to Plate 01 — every board we read'
+      : 'Plate 01 — every board we read, open');
   }
   // The MCA filter follows the India-only enrichment it reads: on a plate with
   // no India in it, it is hidden AND cleared here, because a filter holding a
@@ -2718,14 +2791,14 @@ function render() {
   if (!openN) {
     if (openSel.value !== 'any') openSel.value = 'any';
     openSel.closest('label').hidden = true;
-    notes.push('Foreign-hires filter withdrawn: no posting in '
+    notes.push('Foreign-hires filter withdrawn: no posting '
       + `${scopeName()} said yes to visa sponsorship or hiring from abroad on `
       + 'this snapshot — and silence is not a no (note 03).');
   } else {
     openSel.closest('label').hidden = false;
   }
   if (!cityOpts.length) {
-    notes.push(`City filter withdrawn: no posting in ${scopeName()} named a `
+    notes.push(`City filter withdrawn: no posting ${scopeName()} named a `
       + 'city on this snapshot — the boards state the country and nothing '
       + 'finer, and a city list is read, never invented (note 06).');
   }
@@ -2998,7 +3071,15 @@ function render() {
     // make the fold's own count unreadable and the register look smaller than
     // the snapshot it is reporting.
     const corpusRoles = companies.reduce((n, c) => n + c.roles.length, 0);
-    tally.append(el('span', 'pscope', `${activeCountry || 'All countries'} — `),
+    // T16.1 — the scope the count is stated under. It read "All countries",
+    // which under the old build meant the fifteen and now means neither: Plate
+    // 01 holds roles in no country this radar classifies, so "all countries"
+    // both overclaims (we cover fifteen) and underclaims (we print more than
+    // fifteen countries' worth). What is true of every line under this tally is
+    // that we read the board it came from — so that is what it says. A country
+    // plate still states its country, because there the claim is exact.
+    tally.append(el('span', 'pscope',
+                    `${activeCountry || 'Every board we read'} — `),
                  el('span', null, roleView
                    ? `${count(total)} of ${count(corpusRoles)} roles`
                    : `${shown.length} of ${companies.length} companies`));
@@ -3024,7 +3105,7 @@ function render() {
     $('#status').replaceChildren(el('span', null, !companies.length
       ? 'This snapshot listed no companies. The build report says why for each one.'
       : !here.length
-        ? `No company we could check had an open role in ${scopeName()} on this `
+        ? `No company we could check had an open role ${scopeName()} on this `
           + `snapshot — a plate we read, with nobody hiring.`
           + (tops.length
              ? ` Most of the register sits on Plate ${plateNo(tops[0][0])} · `
@@ -3032,7 +3113,7 @@ function render() {
                + `${count(companies.length)} companies.`
              : '')
         : $('#openness').value !== 'any' && !openN
-          ? `No posting in ${scopeName()} said yes to visa sponsorship or `
+          ? `No posting ${scopeName()} said yes to visa sponsorship or `
             + `hiring from abroad. 92% of the postings we measured say nothing `
             + `at all, and a posting that says nothing is not a no — note 03.`
           : roleView ? 'No role matches these filters.'
@@ -3184,8 +3265,7 @@ function load(data) {
     `Checked ${count(counted.checked)} of the ${count(counted.corpus_size)} funded companies in `
     + `our corpus. The other ${count(counted.unchecked)} could not be checked — no job board we `
     + `could find, or one we could not read — so they are left off rather than shown as not `
-    + `hiring. This is not every funded company hiring across the fifteen countries we watch; it `
-    + `is every one we could prove.`;
+    + `hiring. This is not every funded company hiring; it is every one we could prove.`;
   // The footer closes the loop the masthead opens: the same snapshot date,
   // stated where the integrity claims are made. From the data, never Date.now.
   $('.sources').append(el('span', null, ` · snapshot ${snapshot}`));
