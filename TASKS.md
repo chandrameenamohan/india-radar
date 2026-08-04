@@ -3088,7 +3088,8 @@ Out of scope:
 ```
 
 **Measured — the pipeline half, 2026-08-04.** A real full build against the live
-boards, 2,925 corpus companies, **17m03s** wall. Not a sample; the sample that
+boards, 2,925 corpus companies, **15m28s** wall (15:01:09 to 15:16:37, taken
+from the log's creation and the artifact's mtime). Not a sample; the sample that
 preceded it is kept below because an estimator that missed is worth more written
 down than quietly replaced.
 
@@ -3115,12 +3116,13 @@ them than the sample's weighting implied. Company count was the estimator that
 missed most and the one drawn from the smaller flip rate. The shape held; the
 weighting is where a stratified sample costs you.
 
-**Cost — measured on the real build, not modelled.** **17m03s against the ~14
+**Cost — measured on the real build, not modelled.** **15m28s against the ~14
 minutes the nightly took before, and a 90-minute timeout.** Greenhouse is the
 only provider that charges for prose and the second pass now runs on the boards
-T8.1 taught us to skip; the sample said +136s and the build came in at about
-+3 minutes, which is that number plus the ordinary variance of 880 live probes.
-**The 20:00 UTC nightly is not at risk** — it has 73 minutes of headroom — and
+T8.1 taught us to skip; the sample predicted +136s and the real overhead is
+about +90s, which is inside the variance of an approximate baseline and 880
+live probes — the prediction was the right order and slightly high.
+**The 20:00 UTC nightly is not at risk** — it has 74 minutes of headroom — and
 nothing was reordered or skipped to make that true. The reason it is cheap is
 worth keeping: the boards that used to skip the second pass were cheap to fetch
 because they were SMALL (0.23MB and 0.71s each, against 0.79MB and 0.83s for the
