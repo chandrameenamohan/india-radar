@@ -1,0 +1,945 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>789 companies are hiring tonight — and every one shows you why it's here</title>
+<style>
+:root{
+  --bg:#12100e; --bg2:#191612; --card:#1b1713; --card2:#221d18;
+  --line:#2e271f; --line2:#3d342a;
+  --ink:#f0e8db; --ink2:#c9bdab; --dim:#9a8b79; --dimmer:#6f6355;
+  --amber:#f0a93b; --amber-d:#c8842a; --teal:#6fb7ab; --warn:#e0705a;
+  --serif:'Iowan Old Style','Palatino Linotype',Palatino,'Book Antiqua',Georgia,serif;
+  --sans:ui-sans-serif,-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:var(--bg); color:var(--ink); font-family:var(--sans);
+  font-size:15px; line-height:1.5; -webkit-font-smoothing:antialiased;
+  background-image:radial-gradient(120% 60% at 50% -10%, #1e1913 0%, #12100e 60%);
+  background-repeat:no-repeat; background-attachment:fixed;
+}
+.wrap{max-width:920px;margin:0 auto;padding:0 24px 120px}
+a{color:inherit}
+b,strong{font-weight:600}
+.num{font-variant-numeric:tabular-nums}
+
+/* ---------------------------------------------------------------- receipts */
+/* Every link that points at the evidence behind a sentence looks the same. */
+.rcpt{color:var(--amber);text-decoration:none;border-bottom:1px solid rgba(240,169,59,.32);
+  padding-bottom:1px;white-space:normal}
+.rcpt:hover{border-bottom-color:var(--amber);background:rgba(240,169,59,.08)}
+.rcpt .arw{font-size:.82em;opacity:.75;margin-left:.18em}
+
+/* ------------------------------------------------------------------- opener */
+header.op{padding:20px 0 0}
+.stamp{font-family:var(--mono);font-size:11px;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--dimmer)}
+.stamp .dot{color:var(--amber);}
+h1{font-family:var(--serif);font-weight:400;font-size:30px;line-height:1.2;
+  margin:9px 0 0;letter-spacing:-.01em;max-width:28em}
+h1 .n{color:var(--amber);font-variant-numeric:tabular-nums}
+h1 .q{color:var(--ink)}
+.lede{font-family:var(--serif);font-size:15.5px;line-height:1.5;color:var(--ink2);
+  margin:10px 0 0}
+.lede .g{color:var(--ink);white-space:nowrap}
+.funnelbtn{background:none;border:0;padding:0;margin:0;font:inherit;font-size:14px;
+  color:var(--amber);cursor:pointer;border-bottom:1px solid rgba(240,169,59,.32)}
+.funnelbtn:hover{background:rgba(240,169,59,.08)}
+
+/* ------------------------------------------------------------------- funnel */
+.funnel{display:none;margin:16px 0 0;background:var(--bg2);border:1px solid var(--line);
+  border-radius:3px;padding:18px 20px}
+.funnel.on{display:block}
+.funnel h3{font-family:var(--serif);font-weight:400;font-size:17px;margin:0 0 10px}
+.fl{display:grid;grid-template-columns:88px 1fr;gap:2px 14px;align-items:baseline;
+  font-size:13.5px;padding:5px 0;border-top:1px solid var(--line)}
+.fl:first-of-type{border-top:0}
+.fl .v{font-family:var(--mono);font-size:15px;color:var(--amber);text-align:right;
+  font-variant-numeric:tabular-nums}
+.fl.sub .v{color:var(--dim);font-size:13px}
+.fl.sub{padding-left:22px}
+.fl .k{color:var(--ink2)}
+.fl.win .v{color:var(--teal);font-weight:600}
+.fnote{font-size:13.5px;color:var(--dim);margin:14px 0 0;line-height:1.6}
+.fnote + .fnote{margin-top:8px}
+
+/* ------------------------------------------------------------------ shortlist */
+.shortlist{margin:26px 0 0;border:1px solid var(--line2);border-radius:3px;
+  background:linear-gradient(180deg,#221c15,#1a1612);padding:14px 18px 16px}
+.shortlist h2,.funnel h3{letter-spacing:0}
+.slhead{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--amber);margin:0 0 10px}
+.slrow{display:flex;gap:12px;align-items:baseline;padding:7px 0;border-top:1px solid var(--line);
+  font-size:14px;flex-wrap:wrap}
+.slrow:first-of-type{border-top:0}
+.slrow .nm{font-weight:600;min-width:150px}
+.slrow .mt{color:var(--dim);font-size:13px}
+.slrow .drop{margin-left:auto;background:none;border:0;color:var(--dimmer);cursor:pointer;
+  font-size:12px;font-family:var(--sans)}
+.slrow .drop:hover{color:var(--warn)}
+.ask{margin:10px 0 0;padding:12px 14px;background:#241d14;border:1px solid #4a3a20;
+  border-radius:3px;font-size:14px;line-height:1.5}
+.ask .q{font-family:var(--serif);font-size:15.5px}
+.ask .btns{margin-top:9px;display:flex;gap:8px;flex-wrap:wrap}
+.ask button{font:inherit;font-size:13px;background:#2c2419;color:var(--ink);
+  border:1px solid var(--line2);border-radius:2px;padding:5px 13px;cursor:pointer}
+.ask button:hover{border-color:var(--amber);color:var(--amber)}
+.ask .why{display:block;margin-top:9px;font-size:12px;color:var(--dimmer)}
+
+/* -------------------------------------------------------------------- narrow */
+.narrow{margin:18px 0 0;padding:13px 0 0;border-top:1px solid var(--line)}
+.sent{font-family:var(--serif);font-size:18px;line-height:1.9;color:var(--ink2)}
+.sent select{
+  font-family:var(--sans);font-size:15px;font-weight:600;color:var(--ink);
+  background:var(--card2);border:1px solid var(--line2);border-radius:2px;
+  padding:5px 8px;margin:0 3px;cursor:pointer;max-width:min(320px,42vw);text-overflow:ellipsis;
+}
+.sent select:hover{border-color:var(--amber-d)}
+.sent select:focus{outline:2px solid var(--amber-d);outline-offset:1px}
+.giants{display:inline-flex;align-items:center;gap:8px;margin-left:14px;font-family:var(--sans);
+  font-size:14px;color:var(--ink2);cursor:pointer;user-select:none;vertical-align:2px}
+.giants input{width:16px;height:16px;accent-color:var(--amber);cursor:pointer;margin:0}
+
+/* --------------------------------------------------------------------- yield */
+.yield{margin:10px 0 0;font-size:14px;line-height:1.55;color:var(--ink2)}
+.yield .lead{color:var(--ink)}
+.yield .n{font-variant-numeric:tabular-nums;color:var(--amber)}
+.starts{display:block;margin-bottom:5px;color:var(--dim)}
+.linkish{background:none;border:0;padding:0;font:inherit;color:var(--amber);cursor:pointer;
+  border-bottom:1px solid rgba(240,169,59,.32)}
+.linkish:hover{background:rgba(240,169,59,.08)}
+.asidewrap{position:relative;margin:7px 0 0;border-bottom:1px solid var(--line)}
+.asidewrap:after{content:"";position:absolute;right:0;top:0;bottom:6px;width:56px;
+  background:linear-gradient(90deg,rgba(18,16,14,0),#12100e 78%);pointer-events:none}
+.asidewrap.empty{border-bottom:0}
+.asidewrap.empty:after{display:none}
+.setaside{display:flex;gap:0;overflow-x:auto;padding-bottom:6px;
+  scrollbar-width:thin;align-items:baseline}
+.setaside .pre{flex:0 0 auto;font-family:var(--mono);font-size:10px;letter-spacing:.09em;
+  text-transform:uppercase;color:var(--dimmer);padding-right:11px;white-space:nowrap}
+.setaside button{flex:0 0 auto;font:inherit;font-size:12.5px;background:none;border:0;
+  border-right:1px solid var(--line);color:var(--dim);cursor:pointer;padding:2px 11px;
+  white-space:nowrap;font-variant-numeric:tabular-nums}
+.setaside button:hover{color:var(--amber)}
+.setaside button:last-child{border-right:0;padding-right:64px}
+
+/* ---------------------------------------------------------------------- cards */
+.cards{margin:4px 0 0}
+.card{border-bottom:1px solid var(--line);padding:13px 2px 12px;scroll-margin-top:12px}
+.card.kept{background:linear-gradient(90deg,rgba(111,183,171,.07),transparent 62%);
+  box-shadow:inset 3px 0 0 var(--teal)}
+.card.kept{padding-left:13px}
+.chead{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.cname{font-family:var(--serif);font-size:22px;line-height:1.15;letter-spacing:-.01em}
+.slot{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;
+  padding:2px 7px;border-radius:2px;border:1px solid var(--line2);color:var(--dim)}
+.slot.warn{color:var(--warn);border-color:#5a3229;background:rgba(224,112,90,.07)}
+.slot.teal{color:var(--teal);border-color:#2f4d47}
+.slot.amber{color:var(--amber);border-color:#4a3a20}
+.copen{margin-left:auto;font-family:var(--mono);font-size:13px;color:var(--ink2);
+  font-variant-numeric:tabular-nums;white-space:nowrap}
+.copen b{color:var(--ink);font-size:15px;font-weight:600}
+.gate{margin:7px 0 0;font-family:var(--serif);font-size:15px;line-height:1.45;color:var(--ink)}
+.gate .aside{font-family:var(--sans);font-size:13px;color:var(--dim);line-height:1.5}
+.facts{margin:6px 0 0;font-size:13px;color:var(--dim);line-height:1.55;
+  font-variant-numeric:tabular-nums}
+.facts .row{display:block}
+.facts .lbl{color:var(--dimmer);display:inline-block;min-width:52px}
+.facts b{color:var(--ink2);font-weight:600}
+.facts .hit{color:var(--amber)}
+.act{margin:9px 0 0;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.keep{font:inherit;font-size:13px;background:none;border:1px solid var(--line2);
+  border-radius:2px;color:var(--dim);padding:5px 12px;cursor:pointer}
+.keep:hover{border-color:var(--teal);color:var(--teal)}
+.keep.on{border-color:var(--teal);color:var(--teal);background:rgba(111,183,171,.09)}
+.open{margin-left:auto;font:inherit;font-size:14px;font-weight:600;font-family:var(--sans);
+  background:rgba(240,169,59,.1);border:1px solid var(--amber-d);border-radius:2px;
+  color:var(--amber);padding:7px 15px;cursor:pointer}
+.open:hover{background:var(--amber);color:#191410;border-color:var(--amber)}
+.open.on{background:none;color:var(--dim);border-color:var(--line2)}
+.open.on:hover{color:var(--amber);border-color:var(--amber-d);background:none}
+
+/* --------------------------------------------------------------------- roles */
+.roles{margin:14px 0 2px;border-top:1px solid var(--line);padding-top:11px}
+.rnote{font-size:12.5px;color:var(--dim);margin:0 0 8px;line-height:1.55}
+a.role{display:flex;gap:14px;align-items:baseline;text-decoration:none;color:inherit;
+  padding:7px 8px;border-radius:2px;font-size:14px}
+a.role:hover{background:var(--card2)}
+a.role .t{flex:1 1 auto;min-width:0}
+a.role .loc{color:var(--dim);font-size:12.5px;text-align:right;flex:0 0 auto;max-width:38%}
+a.role .go{color:var(--amber);font-size:12.5px;font-weight:600;flex:0 0 auto;white-space:nowrap}
+a.role.seen{background:rgba(111,183,171,.06)}
+a.role.seen .go{color:var(--teal)}
+.vchip{font-family:var(--mono);font-size:10px;color:var(--teal);border:1px solid #2f4d47;
+  border-radius:2px;padding:1px 5px;margin-left:7px;white-space:nowrap}
+.vchip.no{color:var(--warn);border-color:#5a3229}
+.more{background:none;border:0;font:inherit;font-size:13px;color:var(--amber);cursor:pointer;
+  padding:8px 8px 2px}
+.more:hover{text-decoration:underline}
+
+/* -------------------------------------------------------------------- footer */
+.tail{margin:46px 0 0;padding-top:22px;border-top:1px solid var(--line);font-size:13.5px;
+  color:var(--dim);line-height:1.65}
+.tail h3{font-family:var(--serif);font-weight:400;font-size:18px;color:var(--ink);margin:0 0 8px}
+details.reg summary{cursor:pointer;color:var(--amber);font-size:14px;padding:6px 0;
+  list-style:none}
+details.reg summary::-webkit-details-marker{display:none}
+details.reg summary:hover{text-decoration:underline}
+.regtable{max-height:520px;overflow:auto;margin:10px 0 0;border:1px solid var(--line);
+  border-radius:2px}
+.regrow{display:grid;grid-template-columns:1fr 190px 84px;gap:12px;padding:6px 12px;
+  border-top:1px solid var(--line);font-size:12.5px;align-items:baseline}
+.regrow:first-child{border-top:0}
+.regrow .rn{color:var(--ink2)}
+.regrow .rg{color:var(--dim);font-size:11.5px;overflow:hidden;text-overflow:ellipsis;
+  white-space:nowrap}
+.regrow .rr{text-align:right;font-family:var(--mono);color:var(--dim);
+  font-variant-numeric:tabular-nums}
+.loading{padding:14px 2px;color:var(--dimmer);font-size:13px}
+
+@media (max-width:720px){
+  .wrap{padding:0 16px 90px}
+  h1{font-size:26px}
+  .sent{font-size:17px;line-height:2.2}
+  .sent select{max-width:100%}
+  .copen{margin-left:0;flex-basis:100%}
+  .open{margin-left:0;width:100%;text-align:center}
+  a.role{flex-wrap:wrap;gap:4px 10px;padding:9px 8px}
+  a.role .t{flex:1 1 100%}
+  a.role .loc{max-width:none;text-align:left;flex:1 1 auto}
+  a.role .go{margin-left:auto}
+  .regrow{grid-template-columns:1fr 70px}
+  .regrow .rg{display:none}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div id="shortlist"></div>
+
+  <header class="op">
+    <div class="stamp">Read from 789 job boards on Aug 4, 2026 <span class="dot">·</span> nothing here is older than that</div>
+    <h1 id="h1">I read <span class="n">10,125</span> companies to build this.
+      <span class="q">6,895 didn't qualify. These <span class="n">789</span> are hiring right now.</span></h1>
+    <p class="lede" id="lede"></p>
+    <div class="funnel" id="funnel"></div>
+  </header>
+
+  <div class="narrow">
+    <div class="sent">
+      I'm in <select id="dept" aria-label="field of work"></select>
+      looking in <select id="place" aria-label="place"></select>
+      <label class="giants"><input type="checkbox" id="giants" checked> hide the giants</label>
+    </div>
+    <div class="yield" id="yield"></div>
+    <div class="asidewrap empty" id="asidewrap"><div class="setaside" id="setaside"></div></div>
+  </div>
+
+  <div class="cards" id="cards"><div class="loading">Pulling the cards up…</div></div>
+
+  <div class="tail" id="tail"></div>
+
+</div>
+
+<script id="head-data" type="application/json">__HEAD_JSON__</script>
+<script>
+(function(){
+"use strict";
+
+var HEAD = JSON.parse(document.getElementById('head-data').textContent);
+var META = HEAD.meta, DL = HEAD.dept_labels, PL = HEAD.place_labels;
+var ALL = HEAD.companies.slice();     // grows to all 789 when index.json lands
+var FULL = false;
+var TODAY = META.snapshot;
+
+// ---------------------------------------------------------------- small utils
+function el(t,c,x){var e=document.createElement(t);if(c)e.className=c;
+  if(x!==undefined&&x!==null)e.textContent=x;return e;}
+function n(v){return (v||0).toLocaleString('en-US');}
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){
+  return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+function pretty(d){ // 2026-08-04 -> Aug 4, 2026
+  if(!d) return '';
+  var M=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  var p=d.split('-'); return M[+p[1]-1]+' '+(+p[2])+', '+p[0];
+}
+function plural(k,one,many){return k===1?one:many;}
+
+// -------------------------------------------------------------------- state
+// keys on the company, never on the posting: the endgame is a referral and the
+// unit of a referral is company + person.  PRODUCT-1 §5.1.
+var SKEY='roleatlas.r04c.v1';
+var SESSION=String(Date.now());
+var S;
+try{S=JSON.parse(localStorage.getItem(SKEY))||{}}catch(e){S={}}
+if(!S.keeps) S.keeps={};
+function save(){try{localStorage.setItem(SKEY,JSON.stringify(S))}catch(e){}}
+function entry(slug){
+  if(!S.keeps[slug]) S.keeps[slug]={kept_at:null,opened:[],applied:null,answered_at:null};
+  if(!S.keeps[slug].opened) S.keeps[slug].opened=[];
+  return S.keeps[slug];
+}
+function isKept(slug){var e=S.keeps[slug];return !!(e&&e.kept_at);}
+
+// ------------------------------------------------------------------ controls
+var dept=null, place=null, hideGiants=true;
+
+function fillMenus(){
+  var ds=document.getElementById('dept'), ps=document.getElementById('place');
+  var o=el('option',null,'any field — all '+n(META.companies)+' companies'); o.value='';
+  ds.appendChild(o);
+  HEAD.depts.forEach(function(d){
+    if(d.k==='other') return;   // reachable, but not a field anyone calls theirs
+    var op=el('option',null,d.l.toLowerCase()+' — '+n(d.c)+' companies');
+    op.value=d.k; ds.appendChild(op);
+  });
+  var oa=el('option',null,'anywhere — 789 companies'); oa.value=''; ps.appendChild(oa);
+  var group=null,og=null;
+  HEAD.places.forEach(function(p){
+    if(p.g!==group){group=p.g;og=document.createElement('optgroup');og.label=group;ps.appendChild(og);}
+    var op=el('option',null,p.l+' — '+n(p.c)+' companies');
+    op.value=p.k; og.appendChild(op);
+  });
+  ds.addEventListener('change',function(){dept=ds.value||null;render();});
+  ps.addEventListener('change',function(){place=ps.value||null;render();});
+  document.getElementById('giants').addEventListener('change',function(e){
+    hideGiants=e.target.checked;render();});
+}
+
+// --------------------------------------------------------------------- lede
+function lede(){
+  var g=META.gates||{};
+  var parts=[['Y Combinator',g['Y Combinator']],['the SEC',g['SEC EDGAR']],
+             ['CB Insights',g['CB Insights']],['Forbes',g['Forbes']],
+             ['TechCrunch',g['TechCrunch']]]
+    .filter(function(p){return p[1];})
+    .map(function(p){return '<span class="g">'+esc(p[0])+' '+n(p[1])+'</span>';});
+  document.getElementById('lede').innerHTML =
+    'Every one of them is on this page because somebody with a name put it on a list — '+
+    parts.join(' · ')+
+    ' — and I kept the receipt. It is the second line of every card and it is a link you can click. '+
+    n(META.roles_open_sum)+' roles, every one of them read off the company\'s own job board on '+
+    pretty(TODAY)+'. '+
+    '<button class="funnelbtn" id="fbtn">Show me the whole funnel, including who didn\'t make it →</button>';
+  document.getElementById('fbtn').addEventListener('click',function(){
+    var f=document.getElementById('funnel');
+    f.classList.toggle('on');
+    this.textContent = f.classList.contains('on')
+      ? 'Hide the funnel ↑'
+      : 'Show me the whole funnel, including who didn\'t make it →';
+    if(f.classList.contains('on')) f.scrollIntoView({block:'nearest',behavior:'smooth'});
+  });
+}
+
+function funnelBlock(){
+  var f=META.funnel, box=document.getElementById('funnel');
+  box.innerHTML='';
+  box.appendChild(el('h3',null,'Where the other 9,336 went'));
+  function row(v,k,cls){
+    var r=el('div','fl'+(cls?' '+cls:''));
+    r.appendChild(el('div','v',n(v)));
+    r.appendChild(el('div','k',k));
+    box.appendChild(r);
+  }
+  row(f.read,'company names read out of Y Combinator, CB Insights, Forbes, SEC EDGAR filings, TechCrunch and FinSMEs');
+  row(f.not_qualified,'did not qualify — no round, no stage, nothing a source would stand behind','sub');
+  row(f.not_software,'were not software companies','sub');
+  row(f.ambiguous,'were too ambiguous to tell apart from another company of the same name','sub');
+  row(f.qualified,'qualified');
+  row(f.no_board,'of those, I could not resolve a job board — that is "I could not look", never "they are not hiring"','sub');
+  row(f.boards_read,'boards actually read last night');
+  row(f.nothing_open,'were read and had nothing open','sub');
+  row(f.wrong_board,'turned out to be a different company\'s board','sub');
+  row(f.empty,'came back empty and I could not verify it','sub');
+  row(f.listed,'companies with something open tonight. Those are the cards below.','win');
+
+  var a=el('p','fnote');
+  a.innerHTML='The '+n(f.no_board)+' I could not resolve are the honest hole in this. '+
+    'They are not absent because nobody is hiring there; they are absent because I could not '+
+    'find the board. I would rather show you a smaller page than a page that says "nothing" '+
+    'when it means "I did not look".';
+  box.appendChild(a);
+  var b=el('p','fnote');
+  b.innerHTML='And one thing I cannot do for you: tell you which roles went up this week. '+
+    'The corpus was rebuilt on Aug 3, so only '+n(META.first_seen.dated)+' role URLs have been '+
+    'seen on two consecutive nights and '+n(META.first_seen.observed)+' boards have been read twice. '+
+    'A freshness badge on that evidence would be an invention. Around Aug 29 there will be '+
+    'about thirty clean snapshots and it becomes a real number.';
+  box.appendChild(b);
+  if(META.no_amount!==undefined){
+    var c=el('p','fnote');
+    c.innerHTML='You will notice most cards do not carry a dollar amount. '+
+      n(META.no_amount)+' of the '+n(META.companies)+' have no round on file that I can cite. '+
+      'That is a silence, not a zero, and it is not a reason to hide a company from you — '+
+      'so those cards state what they can state and say nothing about what they cannot. '+
+      'Same for visas: '+n(META.visa?META.visa.yes:0)+' roles say on the posting that they will '+
+      'hire from abroad and '+n(META.visa?META.visa.no:0)+' say they will not. The other '+
+      n(META.visa?META.visa.unknown:0)+' say nothing at all, and nothing is what I print.';
+    box.appendChild(c);
+  }
+  if(META.yc){
+    var d2=el('p','fnote');
+    d2.innerHTML='One warning I will repeat on the cards themselves: '+n(META.yc.not_active)+
+      ' of the '+n(META.yc.n)+' Y Combinator companies here are ones YC now lists as Acquired, '+
+      'Public or Inactive — Airbnb is on this page, and it went public in 2020. They are still '+
+      'hiring, so I am not going to delete them, but a job at a public company is not the bet '+
+      'you came here to make and every one of those cards says so beside its name.';
+    box.appendChild(d2);
+  }
+}
+
+// -------------------------------------------------------------------- match
+function matching(c){
+  if(!dept && !place) return c.r;
+  if(dept && !place) return c.d[dept]||0;
+  if(!dept && place) return c.p[place]||0;
+  var t=0,x=c.x,i;
+  for(i=0;i<x.length;i++) if(x[i][0]===dept && x[i][1]===place) t+=x[i][2];
+  return t;
+}
+function selection(){
+  var hit=[],giants=[],i,c,m;
+  for(i=0;i<ALL.length;i++){
+    c=ALL[i]; m=matching(c);
+    if(!m) continue;
+    if(c.r>=100){giants.push([m,c]); if(hideGiants) continue;}
+    hit.push([m,c]);
+  }
+  hit.sort(function(a,b){return b[0]-a[0] || b[1].r-a[1].r || (a[1].n<b[1].n?-1:1);});
+  giants.sort(function(a,b){return b[1].r-a[1].r;});
+  // Before the rest of the register lands, ALL holds only the first screenful.
+  // Counting it and printing the answer as if it were the whole thing is the
+  // one lie this page could tell without noticing, so it does not: with no
+  // narrowing applied, the counts come from the build's own totals.
+  var shown=hit.length, gcount=giants.length, gl=giants;
+  if(!FULL && !dept && !place){
+    shown=META.companies-META.giants;
+    gcount=META.giants;
+    gl=(HEAD.giants_list||[]).map(function(g){return [g[1],{n:g[0],r:g[1],s:g[2]}];});
+  }
+  return {hit:hit,giants:gl,shown:shown,gcount:gcount,partial:!FULL};
+}
+
+// -------------------------------------------------------------------- yield
+function phrase(){
+  var f=dept?DL[dept].toLowerCase():null;
+  var p=place?PL[place]:null;
+  if(f&&p) return 'hiring in '+f+' in '+p;
+  if(f) return 'hiring in '+f;
+  if(p) return 'hiring in '+p;
+  return 'hiring tonight';
+}
+function drawYield(sel){
+  var y=document.getElementById('yield'), aside=document.getElementById('setaside');
+  var awrap=document.getElementById('asidewrap');
+  y.innerHTML=''; aside.innerHTML=''; awrap.className='asidewrap empty';
+  var shown=sel.shown, gi=sel.gcount;
+
+  if(sel.partial && (dept||place)){
+    y.innerHTML='<span class="lead">One moment — I am still reading in the other '+
+      n(Math.max(0,META.companies-ALL.length))+' companies.</span> '+
+      'I would rather make you wait a second than answer you out of half the register.';
+    return;
+  }
+  if(shown===0){
+    y.innerHTML='<span class="lead">Nobody on these '+n(ALL.length)+' boards is '+phrase()+
+      ' tonight.</span> That is what '+n(ALL.length)+' boards said on '+pretty(TODAY)+
+      ', not a claim about the world — widen one of the two menus and I will show you who is.';
+    return;
+  }
+  var s='';
+  if(!dept && !place) s+='<span class="starts" id="starts"></span>';
+  s+='<span class="lead"><span class="n">'+n(shown)+'</span> '+
+        plural(shown,'company is','companies are')+' '+phrase()+'.</span>';
+  if(hideGiants && gi){
+    s+=' I have set aside <span class="n">'+n(gi)+'</span> of them with 100 or more roles open — '+
+       'you have heard of those, and hearing about them again is not what you came for. '+
+       '<button class="linkish" id="showg">Put them back →</button>';
+  } else if(!hideGiants && gi){
+    s+=' <span class="n">'+n(gi)+'</span> of them have 100 or more roles open and are in the list. '+
+       '<button class="linkish" id="hideg">Set the giants aside →</button>';
+  }
+  y.innerHTML=s;
+  drawStarts();
+  var sg=document.getElementById('showg'), hg=document.getElementById('hideg');
+  if(sg) sg.addEventListener('click',function(){
+    document.getElementById('giants').checked=false;hideGiants=false;render();});
+  if(hg) hg.addEventListener('click',function(){
+    document.getElementById('giants').checked=true;hideGiants=true;render();});
+
+  if(hideGiants && gi){
+    awrap.className='asidewrap';
+    aside.appendChild(el('div','pre','set aside — click any to put it back'));
+    sel.giants.forEach(function(pair){
+      var c=pair[1];
+      var b=el('button',null,c.n+'  '+n(c.r));
+      b.title='Put the giants back and jump to '+c.n;
+      b.addEventListener('click',function(){
+        document.getElementById('giants').checked=false;hideGiants=false;render();
+        var t=document.getElementById('c-'+c.s);
+        if(t){t.scrollIntoView({block:'center',behavior:'smooth'});}
+      });
+      aside.appendChild(b);
+    });
+  }
+}
+
+// Three openers, offered because a blank page is the worst thing to hand
+// somebody who is tired. Each one is one click and each prints what it costs.
+var STARTS=HEAD.starts||[];
+function drawStarts(){
+  var host=document.getElementById('starts');
+  if(!host) return;
+  host.appendChild(document.createTextNode('Not sure where to start? '));
+  STARTS.forEach(function(pair,i){
+    var d=pair[0],p=pair[1];
+    if(!DL[d]||!PL[p]) return;
+    var b=el('button','linkish');
+    b.textContent=DL[d].toLowerCase().replace(' & partnerships','').replace(' & data','')+
+      (p==='remote'?', remote':' in '+PL[p])+' ('+n(pair[2])+')';
+    b.addEventListener('click',function(){
+      dept=d;place=p;
+      document.getElementById('dept').value=d;
+      document.getElementById('place').value=p;
+      render();
+    });
+    if(i) host.appendChild(document.createTextNode(' · '));
+    host.appendChild(b);
+  });
+  host.appendChild(document.createTextNode('. '));
+}
+
+// --------------------------------------------------------------------- card
+function gateNode(c){
+  var g=c.g, d=el('div','gate');
+  var a=el('a','rcpt'); a.href=g.url; a.target='_blank'; a.rel='noopener noreferrer';
+  a.textContent=g.line; a.appendChild(el('span','arw','↗'));
+  d.appendChild(a);
+  var aside=el('span','aside'), t='';
+  if(g.kind==='yc'){
+    if(g.status==='Active'){
+      t=' — still independent';
+      if(g.team) t+='; YC lists '+n(g.team)+' people, their own board lists '+n(c.r)+' roles';
+      t+='.';
+    } else {
+      t=' — but YC now lists them as '+g.status+'. A job at a '+g.status.toLowerCase()+
+        ' company, not a bet on one.';
+    }
+  } else if(g.kind==='sec'){
+    t=' — a filing signed by their own counsel, not a press release.';
+  } else if(g.kind==='cbi'){
+    t=' — a tracker\'s call on size, not a funding fact. $1B means the launch already '+
+      'happened; the '+n(c.r)+' open roles are what I would go on.';
+  } else if(g.kind==='forbes'){
+    t=' — an editor\'s call. No funding number behind it, and I will not invent one.';
+  } else if(g.kind==='tc'){
+    t=' — a reporter\'s account of a round, dated.';
+  }
+  if(t){aside.textContent=t; d.appendChild(aside);}
+  return d;
+}
+
+// "somewhere not in this list" and "their board did not say where" are true
+// counts and they stay on the card — but they are the least useful thing a
+// reader can be told, so they never take a slot from a real place.
+var VAGUE={elsewhere:1,unstated:1,other:1};
+function topPairs(obj,labels,limit,hi){
+  var ks=Object.keys(obj).sort(function(a,b){
+    var va=VAGUE[a]?1:0, vb=VAGUE[b]?1:0;
+    return va-vb || obj[b]-obj[a];
+  });
+  var out=[],extra=0,i;
+  for(i=0;i<ks.length;i++){
+    if(i<limit) out.push([ks[i],obj[ks[i]]]);
+    else extra+=obj[ks[i]];
+  }
+  if(hi && obj[hi]!==undefined && !out.some(function(p){return p[0]===hi;})){
+    out.pop(); out.unshift([hi,obj[hi]]);
+  }
+  return {top:out,extra:extra,rest:Math.max(0,ks.length-limit)};
+}
+
+function factsNode(c){
+  var f=el('div','facts');
+  function line(label,obj,labels,hi,lim){
+    var t=topPairs(obj,labels,lim,hi);
+    if(!t.top.length) return;
+    var row=el('div','row');
+    row.appendChild(el('span','lbl',label));
+    t.top.forEach(function(p,i){
+      var s=el('span',p[0]===hi?'hit':null);
+      s.textContent=(i?' · ':'')+labels[p[0]]+' ';
+      var bb=el('b',null,n(p[1])); s.appendChild(bb);
+      row.appendChild(s);
+    });
+    if(t.rest>0) row.appendChild(el('span',null,' · and '+n(t.rest)+' more'));
+    f.appendChild(row);
+  }
+  line('fields',c.d,DL,dept,4);
+  line('places',c.p,PL,place,3);
+  if(c.vy||c.vn){
+    var row=el('div','row');
+    row.appendChild(el('span','lbl','visa'));
+    var bits=[];
+    if(c.vy) bits.push(n(c.vy)+' '+plural(c.vy,'role says','roles say')+' they will hire from abroad');
+    if(c.vn) bits.push(n(c.vn)+' '+plural(c.vn,'says','say')+' they will not');
+    row.appendChild(el('span',null,bits.join(' · ')));
+    f.appendChild(row);
+  }
+  return f;
+}
+
+function makeCard(c,m){
+  var card=el('div','card'); card.id='c-'+c.s;
+  if(isKept(c.s)) card.className='card kept';
+
+  var head=el('div','chead');
+  head.appendChild(el('div','cname',c.n));
+  // the reserved chip slot, right of the name (PRODUCT-1 §5.4)
+  if(c.g.kind==='yc'&&c.g.status&&c.g.status!=='Active'){
+    var lbl={Public:'public company',Acquired:'acquired',Inactive:'no longer active'}[c.g.status]
+            || c.g.status;
+    head.appendChild(el('span','slot warn',lbl));
+  }
+  if(c.g.kind==='yc'&&c.g.top){
+    // YC's editorial call, rendered as YC's claim and linked to YC's own page —
+    // never as ours.
+    var tc=el('a','slot amber'); tc.textContent="on YC's own Top Company list ↗";
+    tc.href=c.g.url; tc.target='_blank'; tc.rel='noopener noreferrer';
+    tc.style.textDecoration='none';
+    head.appendChild(tc);
+  }
+  if(isKept(c.s)) head.appendChild(el('span','slot teal','on your shortlist'));
+  var open=el('div','copen');
+  open.appendChild(el('b',null,n(c.r)));
+  open.appendChild(document.createTextNode(' '+plural(c.r,'role','roles')+' open'));
+  head.appendChild(open);
+  card.appendChild(head);
+
+  card.appendChild(gateNode(c));
+  card.appendChild(factsNode(c));
+
+  var act=el('div','act');
+  var k=el('button','keep'+(isKept(c.s)?' on':''));
+  k.textContent=isKept(c.s)?('◆ kept '+pretty(S.keeps[c.s].kept_at)):'♢ keep';
+  k.addEventListener('click',function(){toggleKeep(c);});
+  act.appendChild(k);
+
+  var label = dept ? n(m)+' '+DL[dept].toLowerCase()+' '+plural(m,'role','roles')
+                   : n(m)+' '+plural(m,'role','roles');
+  if(place && dept) label += ' in '+PL[place];
+  else if(place) label += ' in '+PL[place];
+  var b=el('button','open'); b.textContent=label+'  →';
+  b.setAttribute('data-slug',c.s);
+  b.addEventListener('click',function(){toggleRoles(card,c,b);});
+  act.appendChild(b);
+  card.appendChild(act);
+  return card;
+}
+
+// Keeping a company must never cost you the role list you already opened, so
+// this repaints the one card and the strip, and leaves the page where it is.
+function toggleKeep(c){
+  var e=entry(c.s);
+  if(e.kept_at){ e.kept_at=null; if(!e.opened.length) delete S.keeps[c.s]; }
+  else { e.kept_at=TODAY; }
+  save(); refreshCard(c.s); drawShortlist();
+}
+function refreshCard(slug){
+  var card=document.getElementById('c-'+slug);
+  if(!card) return;
+  var kept=isKept(slug);
+  card.className='card'+(kept?' kept':'');
+  var k=card.querySelector('.keep');
+  if(k){
+    k.className='keep'+(kept?' on':'');
+    k.textContent=kept?('◆ kept '+pretty(S.keeps[slug].kept_at)):'♢ keep';
+  }
+  var chip=card.querySelector('.slot.teal');
+  if(kept&&!chip){
+    card.querySelector('.chead').insertBefore(el('span','slot teal','on your shortlist'),
+                                             card.querySelector('.copen'));
+  } else if(!kept&&chip){ chip.remove(); }
+}
+
+// -------------------------------------------------------------------- roles
+var roleCache={};
+function fetchRoles(slug,cb){
+  if(roleCache[slug]) return cb(roleCache[slug]);
+  fetch('data/roles/'+slug+'.json').then(function(r){return r.json();})
+    .then(function(j){roleCache[slug]=j;cb(j);})
+    .catch(function(){cb({roles:[]});});
+}
+
+function toggleRoles(card,c,btn){
+  var open=card.querySelector('.roles');
+  if(open){
+    open.remove();
+    btn.textContent=btn.getAttribute('data-label')||btn.textContent;
+    btn.classList.remove('on');
+    return;
+  }
+  btn.setAttribute('data-label',btn.textContent);
+  btn.textContent='▲ close the list';
+  btn.classList.add('on');
+  var box=el('div','roles');
+  box.appendChild(el('div','rnote','opening their board…'));
+  card.appendChild(box);
+  fetchRoles(c.s,function(j){ drawRoles(box,c,j); });
+}
+
+function drawRoles(box,c,j){
+  box.innerHTML='';
+  var all=j.roles||[];
+  var mine=all.filter(function(r){
+    return (!dept || r.d===dept) && (!place || r.p.indexOf(place)>=0);
+  });
+  var rest=all.length-mine.length;
+  var e=S.keeps[c.s];
+  var seen={}; if(e) e.opened.forEach(function(o){seen[o.url]=1;});
+
+  var unknown=mine.filter(function(r){return !r.v;}).length;
+  var note=el('div','rnote');
+  var txt=n(mine.length)+' '+plural(mine.length,'role','roles')+
+          ' on '+c.n+'’s own board';
+  if(dept||place) txt+=' that '+plural(mine.length,'matches','match')+' what you asked for';
+  txt+='. ';
+  if(unknown===mine.length) txt+='Their board says nothing about visa sponsorship on any of them — that is silence, not a no.';
+  else if(unknown) txt+='Their board says nothing about visa sponsorship on '+n(unknown)+' of them — that is silence, not a no.';
+  else txt+='Every one of them states something about hiring from abroad.';
+  note.textContent=txt;
+  box.appendChild(note);
+
+  var LIMIT=25, shown=0;
+  function row(r){
+    var a=el('a','role'+(seen[r.u]?' seen':''));
+    a.href=r.u; a.target='_blank'; a.rel='noopener noreferrer';
+    var t=el('span','t',r.t);
+    if(r.v==='yes'){var v=el('span','vchip','says it will hire from abroad');t.appendChild(v);}
+    else if(r.v==='no'){var v2=el('span','vchip no','says it will not hire from abroad');t.appendChild(v2);}
+    a.appendChild(t);
+    a.appendChild(el('span','loc',(r.l||'')+(r.w?' · '+r.w:'')));
+    a.appendChild(el('span','go',seen[r.u]?'opened ↗':'Apply ↗'));
+    a.addEventListener('click',function(){witness(c,r);});
+    box.appendChild(a);
+  }
+  function paint(upto){
+    for(;shown<Math.min(upto,mine.length);shown++) row(mine[shown]);
+    var mb=box.querySelector('.more'); if(mb) mb.remove();
+    if(shown<mine.length){
+      var b=el('more','more');
+      b=el('button','more','Show the other '+n(mine.length-shown)+' →');
+      b.addEventListener('click',function(){paint(shown+50);});
+      box.appendChild(b);
+    } else if(rest>0 && (dept||place)){
+      var b2=el('button','more',
+        'They have '+n(rest)+' more '+plural(rest,'role','roles')+' open in other fields or places — clear a menu to see them');
+      b2.addEventListener('click',function(){
+        dept=null;place=null;
+        document.getElementById('dept').value='';document.getElementById('place').value='';
+        render();
+      });
+      box.appendChild(b2);
+    }
+  }
+  paint(LIMIT);
+  var col=el('button','more','▲ close the list');
+  col.addEventListener('click',function(){
+    var card=box.parentNode, b=card.querySelector('.open');
+    box.remove();
+    if(b){ b.textContent=b.getAttribute('data-label')||b.textContent;
+           b.classList.remove('on'); b.scrollIntoView({block:'nearest'}); b.focus(); }
+  });
+  box.appendChild(col);
+}
+
+// `applied` never comes out of this handler. The page may witness that it
+// handed you a door; only you can say whether you walked through it.
+function witness(c,r){
+  var e=entry(c.s);
+  if(!e.opened.some(function(o){return o.url===r.u;}))
+    e.opened.push({url:r.u,title:r.t,at:TODAY,session:SESSION});
+  save();
+  drawShortlist();
+}
+
+// ---------------------------------------------------------------- shortlist
+function drawShortlist(){
+  var box=document.getElementById('shortlist');
+  box.innerHTML='';
+  var kept=Object.keys(S.keeps).filter(function(s){return S.keeps[s].kept_at;});
+  var asks=Object.keys(S.keeps).filter(function(s){
+    var e=S.keeps[s];
+    return e.applied===null && e.opened.length &&
+           e.opened.some(function(o){return o.session!==SESSION;});
+  });
+  if(!kept.length && !asks.length) return;
+  var w=el('div','shortlist');
+
+  if(kept.length){
+    w.appendChild(el('div','slhead','Your shortlist — '+n(kept.length)+' '+
+      plural(kept.length,'company','companies')+', kept on this device, no account'));
+    kept.forEach(function(s){
+      var e=S.keeps[s], c=byslug(s);
+      var r=el('div','slrow');
+      r.appendChild(el('span','nm',c?c.n:s));
+      var m=el('span','mt');
+      var bits=['kept '+pretty(e.kept_at)];
+      if(c) bits.push(n(c.r)+' roles open');
+      if(e.opened.length) bits.push('you opened '+n(e.opened.length)+' of them');
+      if(e.applied) bits.push('you said: '+({yes:'applied',no:'did not apply',not_yet:'not yet'}[e.applied]));
+      m.textContent=bits.join(' · ');
+      r.appendChild(m);
+      // The one thing this page can truthfully say about the passage of time:
+      // a URL you opened is either still on tonight's board or it is not.
+      if(e.opened.length) checkStillLive(s,e,m);
+      var d=el('button','drop','drop');
+      d.addEventListener('click',function(){
+        e.kept_at=null; if(!e.opened.length) delete S.keeps[s];
+        save(); refreshCard(s); drawShortlist();});
+      r.appendChild(d);
+      w.appendChild(r);
+    });
+  }
+
+  asks.forEach(function(s){
+    var e=S.keeps[s], c=byslug(s);
+    var k=el('div','ask');
+    var q=el('div','q');
+    var when=e.opened[0].at;
+    q.textContent='On '+pretty(when)+' you opened '+n(e.opened.length)+' '+
+      plural(e.opened.length,'role','roles')+' at '+(c?c.n:s)+'. Did you apply?';
+    k.appendChild(q);
+    var bs=el('div','btns');
+    [['yes','yes'],['no','no'],['not_yet','not yet']].forEach(function(p){
+      var b=el('button',null,p[1]);
+      b.addEventListener('click',function(){
+        e.applied=p[0]; e.answered_at=TODAY; save(); drawShortlist();});
+      bs.appendChild(b);
+    });
+    k.appendChild(bs);
+    k.appendChild(el('span','why',
+      'I am asking because I cannot know. I watched this page hand you '+n(e.opened.length)+' '+
+      plural(e.opened.length,'link','links')+' — that is the page\'s hand, not yours. '+
+      'I will ask this once and then never again.'));
+    w.appendChild(k);
+  });
+
+  box.appendChild(w);
+}
+function checkStillLive(slug,e,host){
+  fetchRoles(slug,function(j){
+    var live={}, i;
+    (j.roles||[]).forEach(function(r){live[r.u]=1;});
+    var gone=e.opened.filter(function(o){return !live[o.url];});
+    var span=el('span',null,'');
+    if(!gone.length){
+      span.textContent=' · '+(e.opened.length===1?'it is':(e.opened.length===2?'both are':
+        'all '+n(e.opened.length)+' are'))+' still on their board on '+pretty(TODAY);
+      span.style.color='var(--teal)';
+    } else {
+      span.textContent=' · '+n(gone.length)+' of them '+plural(gone.length,'is','are')+
+        ' gone from their board: '+gone.map(function(o){return o.title;}).join(', ');
+      span.style.color='var(--warn)';
+      span.style.textDecoration='line-through';
+    }
+    host.appendChild(span);
+  });
+}
+
+var _by=null;
+function byslug(s){
+  if(!_by){_by={};ALL.forEach(function(c){_by[c.s]=c;});}
+  return _by[s];
+}
+
+// ------------------------------------------------------------------- render
+function render(){
+  _by=null;
+  var sel=selection();
+  drawYield(sel);
+  drawShortlist();
+  var box=document.getElementById('cards');
+  box.innerHTML='';
+  if(sel.partial && (dept||place)){
+    box.appendChild(el('div','loading','reading in the rest of the register…'));
+    drawTail(); return;
+  }
+  var frag=document.createDocumentFragment();
+  sel.hit.forEach(function(p){ frag.appendChild(makeCard(p[1],p[0])); });
+  box.appendChild(frag);
+  drawTail();
+}
+
+function drawTail(){
+  var t=document.getElementById('tail');
+  if(t.getAttribute('data-done')==='1'+(FULL?'f':'h')) return;
+  t.setAttribute('data-done','1'+(FULL?'f':'h'));
+  t.innerHTML='';
+  t.appendChild(el('h3',null,'The whole register, if you want to check my work'));
+  var p=el('p',null,'');
+  p.innerHTML='Every one of the '+n(META.companies)+' companies I read is in the list below with '+
+    'its role count and the source that admitted it. The menus above are there to save you time, '+
+    'not to hide anything: nothing is ever dropped from this page for having no funding number, '+
+    'no stated city, or no answer about visas.';
+  t.appendChild(p);
+  var d=el('details','reg');
+  var sm=el('summary',null,'Open the register — all '+n(META.companies)+' companies, alphabetically');
+  d.appendChild(sm);
+  var tb=el('div','regtable');
+  if(!FULL){
+    tb.appendChild(el('div','loading','still loading the other '+n(META.companies-ALL.length)+' — one moment'));
+  } else {
+    var frag=document.createDocumentFragment();
+    ALL.slice().sort(function(a,b){return a.n.toLowerCase()<b.n.toLowerCase()?-1:1;})
+      .forEach(function(c){
+        var r=el('div','regrow');
+        var a=el('a','rn'); a.href='#c-'+c.s; a.textContent=c.n;
+        a.style.textDecoration='none';
+        r.appendChild(a);
+        var g=el('a','rg'); g.href=c.g.url; g.target='_blank'; g.rel='noopener noreferrer';
+        g.textContent=c.g.who; g.style.color='';
+        r.appendChild(g);
+        r.appendChild(el('div','rr',n(c.r)+' open'));
+        frag.appendChild(r);
+      });
+    tb.appendChild(frag);
+  }
+  d.appendChild(tb);
+  t.appendChild(d);
+  var f=el('p',null,'');
+  f.innerHTML='Built from a pinned snapshot dated '+pretty(TODAY)+'. Nothing on this page is '+
+    'computed into a score: there is no ranking number, no grade, no composite. The order is '+
+    'simply how many roles match what you asked for, and every other judgement on the page '+
+    'belongs to whoever is named beside it.';
+  f.style.marginTop='16px';
+  t.appendChild(f);
+}
+
+// --------------------------------------------------------------------- boot
+fillMenus();
+lede();
+funnelBlock();
+render();
+
+// the rest of the 789 arrive after first paint
+fetch('data/index.json').then(function(r){return r.json();}).then(function(j){
+  META=j.meta; ALL=j.companies; FULL=true; DL=j.meta.dept_labels; PL=j.meta.place_labels;
+  funnelBlock();
+  render();
+}).catch(function(){
+  var y=document.getElementById('yield');
+  var w=el('p',null,'I could not load the rest of the register just now — what you see is the '+
+    'first '+n(ALL.length)+' of '+n(META.companies)+'. Reload and I will try again.');
+  w.style.color='#e0705a'; y.appendChild(w);
+});
+
+})();
+</script>
+</body>
+</html>

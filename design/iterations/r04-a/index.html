@@ -1,0 +1,939 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>789 companies hiring · read Aug 4, 2026</title>
+<!-- A missing favicon is a 404, and a 404 is a request the load has to pay for. -->
+<link rel="icon" href="data:,">
+<!--
+  r04-a — THE DOSSIER
+
+  One idea: the card is a dossier entry someone typed after doing the
+  diligence, and the first sentence on the page is the diligence, counted.
+
+  Everything here is set in one typographic voice — a text face for the
+  things a person wrote (the sieve, the company's name, the credential) and
+  a monospaced face for the things a machine counted (roles, cities,
+  departments, dates, dollars). Nothing is chrome: there is no masthead, no
+  card border, no shadow, no icon that is not a link. What is left on the
+  page is type, hairlines, and two numbers per company.
+
+  The doctrine this inherits, unchanged from three register rounds:
+    · absence stays absence — a null amount is printed as nothing, never as
+      0, never as "—", never as a reason to drop a row;
+    · a claim states its source, and the source is one click away;
+    · `applied` never comes out of a click handler. The page may witness
+      that you opened a posting. Only you can say that you applied.
+-->
+<script src="seed.js"></script>
+<style>
+:root{
+  --paper:#fbf9f5;
+  --ink:#1a1714;
+  --mute:#6d675c;
+  --faint:#918a7d;
+  --rule:#ddd6c7;
+  --rule-hard:#b8b0a0;
+  --red:#93221a;
+  --serif:'Iowan Old Style','Charter','Bitstream Charter','Sitka Text',Cambria,Georgia,'Times New Roman',serif;
+  --mono:ui-monospace,'SF Mono',SFMono-Regular,Menlo,Consolas,'Liberation Mono',monospace;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:var(--serif);font-size:16px;line-height:1.45;
+  font-variant-numeric:tabular-nums;
+  -webkit-font-smoothing:antialiased;
+}
+main{max-width:1120px;margin:0 auto;padding:26px 40px 90px}
+a{color:inherit}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer}
+
+/* ── the lede ─────────────────────────────────────────────────────────── */
+.lede{margin:0;max-width:94ch}
+.lede p{margin:0;font-size:18.5px;line-height:1.38;letter-spacing:-.003em}
+.lede b{font-weight:600}
+.sieve-open{
+  font-family:var(--mono);font-size:11.5px;letter-spacing:.09em;
+  text-transform:uppercase;color:var(--red);border-bottom:1px solid currentColor;
+  padding-bottom:1px;white-space:nowrap;
+}
+.census{
+  margin:8px 0 0;font-family:var(--mono);font-size:11px;line-height:1.6;
+  color:var(--mute);letter-spacing:.005em;
+}
+.census b{color:var(--ink);font-weight:500}
+.stamp{
+  margin:2px 0 0;font-family:var(--mono);font-size:11px;color:var(--faint);
+  letter-spacing:.005em;line-height:1.6;
+}
+
+/* ── the sieve ────────────────────────────────────────────────────────── */
+#sieve[hidden]{display:none}
+#sieve{
+  margin:16px 0 4px;padding:18px 22px 16px;border:1px solid var(--rule-hard);
+  background:#f6f2e9;max-width:70ch;
+}
+#sieve h2{margin:0 0 10px;font-size:15px;font-weight:600;letter-spacing:.01em}
+.funnel{font-family:var(--mono);font-size:12.5px;line-height:1.85;margin:0}
+.funnel div{white-space:pre-wrap}
+.funnel .n{display:inline-block;min-width:7ch;text-align:right;font-weight:600}
+.funnel .sub{color:var(--mute)}
+.funnel .out{color:var(--red)}
+#sieve footer{
+  margin:12px 0 0;font-size:13px;color:var(--mute);line-height:1.5;
+  border-top:1px solid var(--rule);padding-top:9px;
+}
+
+/* ── the keeps strip ──────────────────────────────────────────────────── */
+#keeps:empty{display:none}
+#keeps{margin:18px 0 0;border-top:2px solid var(--ink);border-bottom:1px solid var(--rule-hard);padding:9px 0 10px}
+.keeps-h{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--red);margin:0 0 6px}
+.kept{display:flex;align-items:baseline;gap:12px;padding:2px 0}
+.kept .kn{font-size:17px;font-weight:500;min-width:16ch}
+.kept .kd{font-family:var(--mono);font-size:11.5px;color:var(--mute);flex:1}
+.kept .drop{font-family:var(--mono);font-size:11px;color:var(--faint);text-decoration:underline;text-underline-offset:2px}
+.kept .drop:hover{color:var(--red)}
+.ask{
+  display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;
+  margin:5px 0 3px;padding:7px 10px;background:#f2ede1;border-left:2px solid var(--red);
+}
+.ask span{font-size:14.5px}
+.ask button{
+  font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;
+  border:1px solid var(--rule-hard);padding:2px 9px;background:var(--paper);
+}
+.ask button:hover{border-color:var(--ink);background:var(--ink);color:var(--paper)}
+.answered{font-family:var(--mono);font-size:11.5px;color:var(--mute)}
+
+/* ── the two controls ─────────────────────────────────────────────────── */
+.controls{margin:14px 0 0;padding:0 0 2px}
+.row{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;margin:0 0 4px}
+.row .say{font-size:15px;color:var(--mute);font-style:italic}
+.chip{
+  font-family:var(--mono);font-size:11.5px;letter-spacing:.005em;
+  border-bottom:1px solid transparent;padding:1px 0;color:var(--ink);white-space:nowrap;
+}
+.chip .c{color:var(--faint);font-size:10.5px;margin-left:3px}
+.chip:hover{border-bottom-color:var(--rule-hard)}
+.chip[aria-pressed="true"]{
+  background:var(--ink);color:var(--paper);padding:1px 6px;border-bottom-color:transparent;
+}
+.chip[aria-pressed="true"] .c{color:#bfb7a6}
+.sep{color:var(--rule-hard);font-family:var(--mono);font-size:11.5px}
+details.more{display:inline-block;position:relative}
+details.more>summary{
+  list-style:none;font-family:var(--mono);font-size:11.5px;color:var(--red);
+  cursor:pointer;border-bottom:1px solid currentColor;
+}
+details.more>summary::-webkit-details-marker{display:none}
+.popover{
+  position:absolute;z-index:9;top:22px;left:0;width:560px;max-height:320px;overflow:auto;
+  background:var(--paper);border:1px solid var(--rule-hard);padding:12px 14px;
+  box-shadow:0 10px 30px rgba(26,23,20,.13);
+  display:flex;flex-wrap:wrap;gap:2px 14px;
+}
+.giants{display:flex;align-items:center;gap:7px;margin-left:auto;white-space:nowrap}
+.giants label{font-family:var(--mono);font-size:11.5px;letter-spacing:.01em;cursor:pointer}
+.giants input{accent-color:var(--red);width:14px;height:14px;cursor:pointer}
+.giants .why{font-family:var(--mono);font-size:10.5px;color:var(--faint)}
+
+/* ── the yield ────────────────────────────────────────────────────────── */
+.yield{margin:11px 0 0;font-size:15.5px;line-height:1.5;max-width:78ch}
+.yield .hid{color:var(--mute)}
+.ungrouped{margin:3px 0 0;font-size:13px;color:var(--mute);max-width:82ch;line-height:1.45}
+.ungrouped code{font-family:var(--mono);font-size:11.5px}
+
+/* ── the cards ────────────────────────────────────────────────────────── */
+#cards{list-style:none;margin:8px 0 0;padding:0;border-top:1px solid var(--rule-hard)}
+.card{padding:9px 0 8px;border-bottom:1px solid var(--rule);position:relative}
+.card.open{background:#f6f2e9;padding-left:14px;padding-right:14px;margin:0 -14px;border-bottom-color:var(--rule-hard)}
+.top{display:flex;align-items:baseline;gap:10px}
+.name{font-size:21px;font-weight:600;letter-spacing:-.012em;line-height:1.15}
+.slot{
+  font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+  border:1px solid var(--red);color:var(--red);padding:1px 5px;white-space:nowrap;
+}
+.count{margin-left:auto;font-family:var(--mono);font-size:12px;color:var(--mute);white-space:nowrap}
+.count b{font-family:var(--serif);font-size:19px;font-weight:600;color:var(--ink);margin-right:4px}
+.gate{margin:2px 0 0;font-size:15px;font-style:italic;line-height:1.35}
+.gate a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--rule-hard)}
+.gate a:hover{border-bottom-color:var(--red);color:var(--red)}
+.gate .arr{font-style:normal;color:var(--faint);font-size:11px;margin-left:2px}
+.mix{
+  margin:3px 0 0;font-family:var(--mono);font-size:11.5px;color:var(--mute);
+  line-height:1.45;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;
+}
+.mix .k{color:var(--faint)}
+.foot{display:flex;align-items:center;gap:14px;margin:5px 0 0}
+.places{font-family:var(--mono);font-size:11.5px;color:var(--mute);flex:1}
+.keep{
+  font-family:var(--mono);font-size:11.5px;letter-spacing:.04em;color:var(--mute);
+  border-bottom:1px solid transparent;white-space:nowrap;
+}
+.keep:hover{color:var(--red);border-bottom-color:var(--red)}
+.keep[aria-pressed="true"]{color:var(--red)}
+.act{
+  font-family:var(--mono);font-size:12.5px;letter-spacing:.02em;
+  background:var(--ink);color:var(--paper);padding:5px 12px;white-space:nowrap;
+}
+.act:hover{background:var(--red)}
+.act b{font-family:var(--serif);font-size:15px;font-weight:600;margin-right:2px}
+.act.none{background:none;color:var(--faint);border:1px solid var(--rule);cursor:default}
+
+/* ── expanded roles ───────────────────────────────────────────────────── */
+.roles{list-style:none;margin:9px 0 0;padding:8px 0 0;border-top:1px solid var(--rule-hard)}
+.role{
+  display:flex;align-items:baseline;gap:12px;padding:3px 0;
+  border-bottom:1px dotted var(--rule);
+}
+.role .t{font-size:15px;flex:0 1 auto}
+.role .l{font-family:var(--mono);font-size:11px;color:var(--faint);flex:1}
+.role .v{font-family:var(--mono);font-size:10.5px;color:var(--red)}
+.role .apply{
+  font-family:var(--mono);font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;
+  color:var(--red);text-decoration:none;border-bottom:1px solid currentColor;white-space:nowrap;
+}
+.role .apply:hover{background:var(--red);color:var(--paper);border-bottom-color:var(--red)}
+.role.opened .apply{color:var(--mute);border-bottom-style:dotted}
+.rfoot{
+  display:flex;gap:16px;align-items:baseline;margin:8px 0 2px;
+  font-size:13px;color:var(--mute);line-height:1.45;
+}
+.rfoot .more,.rfoot .collapse{
+  font-family:var(--mono);font-size:11.5px;letter-spacing:.04em;color:var(--red);
+  border-bottom:1px solid currentColor;white-space:nowrap;
+}
+.loading{font-family:var(--mono);font-size:12px;color:var(--faint);padding:8px 0}
+
+/* ── the tail ─────────────────────────────────────────────────────────── */
+.tail{margin:26px 0 0;font-size:14px;color:var(--mute);line-height:1.55;max-width:74ch}
+.tail b{color:var(--ink);font-weight:600}
+
+@media (max-width:820px){
+  main{padding:24px 18px 70px}
+  .lede p{font-size:17px}
+  .count{margin-left:0;width:100%}
+  .top{flex-wrap:wrap}
+  .foot{flex-wrap:wrap}
+  .popover{width:min(90vw,460px)}
+  .role{flex-wrap:wrap;gap:4px 10px}
+}
+</style>
+</head>
+<body>
+<main>
+
+<header class="lede">
+  <p>We read <b id="l-read">10,125</b> companies to get here. <b id="l-out">6,895</b> didn&rsquo;t qualify;
+  <b id="l-noboard">2,076</b> more had no job board we could find. These <b id="l-co">789</b> are hiring tonight,
+  and every one is here because a named gatekeeper put it on a list &mdash; receipt on the card.
+  <button class="sieve-open" id="sieve-toggle" aria-expanded="false" aria-controls="sieve">the whole sieve, counted &rarr;</button></p>
+</header>
+<p class="census" id="census"></p>
+<p class="stamp" id="stamp"></p>
+
+<section id="sieve" hidden aria-label="How 10,125 companies became 789"></section>
+
+<section id="keeps" aria-label="Companies you kept"></section>
+
+<div class="controls">
+  <div class="row" id="row-dept"></div>
+  <div class="row" id="row-city"></div>
+</div>
+
+<p class="yield" id="yield"></p>
+<p class="ungrouped" id="ungrouped"></p>
+
+<ol id="cards"></ol>
+
+<p class="tail" id="tail"></p>
+
+</main>
+
+<script>
+"use strict";
+(function () {
+/* ═══════════════════════════════════════════════════════════════════════
+   0 · the shards
+   seed.js painted the first screen. cards.json is all 789. grid.json is the
+   joint (department × city) count the two controls need — a company with 48
+   engineering roles and 20 San Francisco roles may have none in both, and
+   the honest count of that is per company. companies.json (9.8MB) is only
+   ever needed for role rows, so it is fetched last and never blocks a card.
+   ═══════════════════════════════════════════════════════════════════════ */
+const FIX = "../../fixture-v2/";
+const S = window.SEED;
+let CARDS = null;           // slug -> card, all 789
+let ORDER = null;           // the full slug list, unsorted
+let GRID = null;            // slug -> {"fam|city": n}
+let ROLES = null;           // slug -> [role]
+let rolesWanted = false;
+
+const $ = (id) => document.getElementById(id);
+
+/* ── formatting ───────────────────────────────────────────────────────── */
+const MON = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+const n = (x) => x.toLocaleString("en-US");
+const money = (a, c) => (c === "USD" || !c ? "$" : c + " ") + n(a);
+function date(iso) {
+  if (!iso) return "";
+  const p = iso.split("-");
+  return MON[+p[1] - 1] + " " + +p[2] + ", " + p[0];
+}
+function esc(s) {
+  return String(s).replace(/[&<>"]/g, (ch) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[ch]));
+}
+function el(tag, cls, text) {
+  const e = document.createElement(tag);
+  if (cls) e.className = cls;
+  if (text != null) e.textContent = text;
+  return e;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   1 · the gate line
+   The one line that separates this from a job board. Every company has
+   exactly one, it names the gatekeeper, and it links the receipt. Where the
+   record holds an amount and a date they are printed exactly as filed; where
+   it does not — 667 of 789 — the sentence simply does not contain a number.
+   That is what absence looks like. It is never a 0 and never a dash.
+   ═══════════════════════════════════════════════════════════════════════ */
+function gate(c) {
+  const url = c.source_url || "";
+  if (c.yc) {
+    let t = "Y Combinator, " + (c.yc.batch || "batch not stated");
+    if (c.yc.team_size) t += " · YC's directory lists " + n(c.yc.team_size) + " people";
+    if (c.yc.top_company) t += " · one of the companies YC itself flags as a top company";
+    return t;
+  }
+  if (url.indexOf("sec.gov") > -1)
+    return c.amount
+      ? "Filed a Form D with the SEC for " + money(c.amount, c.currency) + " on " + date(c.date)
+      : "Filed a Form D with the SEC";
+  if (url.indexOf("techcrunch.com") > -1)
+    return "TechCrunch reported a " + money(c.amount, c.currency) + " round on " + date(c.date);
+  if (url.indexOf("finsmes.com") > -1)
+    return "FinSMEs reported a " + money(c.amount, c.currency) + " round on " + date(c.date);
+  if (url.indexOf("cbinsights.com") > -1)
+    return "On CB Insights’ unicorn tracker — their list of companies valued at $1B or more";
+  if (url.indexOf("forbes.com") > -1) return "An editor at Forbes put it on a list";
+  return "Admitted on " + (c.qualified_by || "a rule") + ", source linked";
+}
+
+/* YC's own status, on the 32 companies where it is not Active. A register of
+   companies to bet on that lists Airbnb without saying `Public` is lying by
+   omission about the job. It gets the chip slot right of the name — the same
+   slot problem #2's status will want later. */
+function chip(c) {
+  if (!c.yc || !c.yc.status || c.yc.status === "Active") return null;
+  return c.yc.status;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   2 · state
+   Keys on the company. `opened_role_urls` is witnessed at click time —
+   the only thing problem #2 cannot reconstruct later. `applied` starts null
+   and is only ever written by the reader answering the question.
+   ═══════════════════════════════════════════════════════════════════════ */
+const KEY = "roleatlas.r04a.keeps.v1";
+let keeps = {};
+try { keeps = JSON.parse(localStorage.getItem(KEY) || "{}"); } catch (e) { keeps = {}; }
+const save = () => { try { localStorage.setItem(KEY, JSON.stringify(keeps)); } catch (e) {} };
+
+/* "Today" is the snapshot date, unless the URL says otherwise. `?today=` and
+   __atlas.simulateNextVisit() exist so the second-visit question can be
+   tested without waiting a night; they move the clock, never the data. */
+const qs = new URLSearchParams(location.search);
+let TODAY = qs.get("today") || S.snapshot;
+
+const state = {
+  fam: null,
+  city: null,
+  hideGiants: true,
+  open: null,       // slug of the expanded card
+  showAll: {},      // slug -> true, "+N more" pressed
+};
+
+/* ═══════════════════════════════════════════════════════════════════════
+   3 · counting
+   ═══════════════════════════════════════════════════════════════════════ */
+function matchCount(slug, card) {
+  if (!state.fam && !state.city) return card.roles_open;
+  if (!GRID) return card.roles_open;
+  const g = GRID[slug] || {};
+  return g[(state.fam || "*") + "|" + (state.city || "*")] || 0;
+}
+
+/* The seed is 24 of 789 cards. Until cards.json and grid.json land, the page
+   knows the totals but not the members — so it prints the totals and says it
+   is still reading, and never prints a count of what it happens to hold. A
+   first paint that says "24 companies" would be the fastest lie on the page. */
+const ready = () => !!(CARDS && (GRID || (!state.fam && !state.city)));
+
+function visible() {
+  const slugs = ORDER || S.slugs;
+  const out = [];
+  for (let i = 0; i < slugs.length; i++) {
+    const slug = slugs[i];
+    const card = (CARDS || S.cards)[slug];
+    if (!card) continue;
+    if (state.hideGiants && card.roles_open >= 100) continue;
+    const m = matchCount(slug, card);
+    if ((state.fam || state.city) && m === 0) continue;
+    out.push([slug, card, m]);
+  }
+  out.sort((a, b) => b[2] - a[2] || b[1].roles_open - a[1].roles_open || (a[1].name > b[1].name ? 1 : -1));
+  return out;
+}
+
+/* What the giants cut costs, counted over exactly the same query. */
+function hiddenGiants() {
+  const slugs = ORDER || S.slugs;
+  let k = 0;
+  for (let i = 0; i < slugs.length; i++) {
+    const card = (CARDS || S.cards)[slugs[i]];
+    if (!card || card.roles_open < 100) continue;
+    if ((state.fam || state.city) && matchCount(slugs[i], card) === 0) continue;
+    k++;
+  }
+  return k;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   4 · the controls
+   Two rows of words, not two dropdowns: every common answer is one click,
+   which is what buys the six-click path to three applications. Each option
+   prints what it holds before it is pressed — r02-b's rule, applied to the
+   control instead of to the result.
+   ═══════════════════════════════════════════════════════════════════════ */
+const FAM_LABEL = {
+  engineering: "engineering", sales: "sales", operations: "operations",
+  product: "product", support: "customer-facing", marketing: "marketing",
+  finance: "finance", legal: "legal & risk", people: "people", data: "data",
+  design: "design", research: "research", security: "security", clinical: "clinical",
+};
+
+function chipBtn(label, count, pressed, onClick) {
+  const b = el("button", "chip");
+  b.type = "button";
+  b.setAttribute("aria-pressed", pressed ? "true" : "false");
+  b.appendChild(document.createTextNode(label));
+  if (count != null) b.appendChild(el("span", "c", n(count)));
+  b.addEventListener("click", onClick);
+  return b;
+}
+
+function drawControls() {
+  const rd = $("row-dept");
+  rd.textContent = "";
+  rd.appendChild(el("span", "say", "I’m in"));
+  rd.appendChild(chipBtn("anything", S.roles, !state.fam, () => { state.fam = null; draw(); }));
+  S.families.forEach(([f, k]) => {
+    rd.appendChild(el("span", "sep", "·"));
+    rd.appendChild(chipBtn(FAM_LABEL[f] || f, k, state.fam === f, () => {
+      state.fam = state.fam === f ? null : f; draw();
+    }));
+  });
+
+  const rc = $("row-city");
+  rc.textContent = "";
+  rc.appendChild(el("span", "say", "looking in"));
+  rc.appendChild(chipBtn("anywhere", null, !state.city, () => { state.city = null; draw(); }));
+  const head = S.cities.slice(0, 9), tail = S.cities.slice(9);
+  head.forEach(([c, k]) => {
+    rc.appendChild(el("span", "sep", "·"));
+    rc.appendChild(chipBtn(c, k, state.city === c, () => {
+      state.city = state.city === c ? null : c; draw();
+    }));
+  });
+  if (state.city && !head.some((h) => h[0] === state.city)) {
+    const k = (S.cities.find((x) => x[0] === state.city) || [null, 0])[1];
+    rc.appendChild(el("span", "sep", "·"));
+    rc.appendChild(chipBtn(state.city, k, true, () => { state.city = null; draw(); }));
+  }
+  const d = el("details", "more");
+  const sm = el("summary", null, tail.length + " more cities ▾");
+  d.appendChild(sm);
+  const pop = el("div", "popover");
+  tail.forEach(([c, k]) => {
+    pop.appendChild(chipBtn(c, k, state.city === c, () => {
+      state.city = state.city === c ? null : c; d.removeAttribute("open"); draw();
+    }));
+  });
+  d.appendChild(pop);
+  rc.appendChild(el("span", "sep", "·"));
+  rc.appendChild(d);
+
+  const g = el("div", "giants");
+  const cb = document.createElement("input");
+  cb.type = "checkbox"; cb.id = "giants"; cb.checked = state.hideGiants;
+  cb.addEventListener("change", () => { state.hideGiants = cb.checked; draw(); });
+  const lb = el("label", null, "hide the giants");
+  lb.htmlFor = "giants";
+  g.appendChild(cb); g.appendChild(lb);
+  g.appendChild(el("span", "why", "(100 or more roles open)"));
+  rc.appendChild(g);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   5 · the yield line — say what the narrowing cost before asking to be
+   believed. Including the cost this page's own department grouping imposes:
+   4,852 roles carry a department string that matched no family, and a
+   department cut is not entitled to pretend they do not exist.
+   ═══════════════════════════════════════════════════════════════════════ */
+function drawYield(rows) {
+  const y = $("yield");
+  y.textContent = "";
+  if (!ready()) {
+    if (state.fam || state.city) {
+      y.appendChild(document.createTextNode("Reading the index for all " + n(S.companies) + " companies before counting this cut…"));
+      return;
+    }
+    y.appendChild(el("b", null, n(S.companies - (state.hideGiants ? S.giants : 0))));
+    y.appendChild(document.createTextNode(
+      " companies are hiring tonight" + (state.hideGiants ? ", the " + n(S.giants) + " with 100 or more roles open aside" : "") +
+      ". Reading the register…"));
+    return;
+  }
+  const hid = hiddenGiants();
+  const what = state.fam ? " hiring in " + (FAM_LABEL[state.fam] || state.fam) : " hiring";
+  const where = state.city ? " in " + state.city : "";
+  y.appendChild(el("b", null, n(rows.length)));
+  y.appendChild(document.createTextNode(" companies" + what + where + (state.city || state.fam ? "" : " tonight") + ". "));
+  if (hid) {
+    const s = el("span", "hid");
+    s.textContent = n(hid) + (hid === 1 ? " has" : " of them have") + " 100 or more roles open and " + (hid === 1 ? "is" : "are") + " hidden.";
+    y.appendChild(s);
+  }
+  const u = $("ungrouped");
+  u.textContent = "";
+  if (state.fam) {
+    u.appendChild(document.createTextNode(
+      n(S.ungrouped) + " of " + n(S.roles) + " roles carry a department their own board typed that we could not group into any of these fourteen — "
+    ));
+    const names = S.ungrouped_top.map((x) => x[0]).slice(0, 4).join(", ");
+    const code = el("code", null, names);
+    u.appendChild(code);
+    u.appendChild(document.createTextNode(" and 746 others. They are in no department cut, including this one."));
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   6 · the card
+   ═══════════════════════════════════════════════════════════════════════ */
+function topPairs(obj, k) {
+  const e = Object.entries(obj);
+  return [e.slice(0, k), e.length - k];
+}
+
+function drawCard(slug, c, m) {
+  const li = el("li", "card");
+  li.dataset.slug = slug;
+  if (state.open === slug) li.className = "card open";
+
+  const top = el("div", "top");
+  top.appendChild(el("span", "name", c.name));
+  const ch = chip(c);
+  if (ch) {
+    const a = document.createElement("a");
+    a.className = "slot"; a.href = c.source_url; a.target = "_blank"; a.rel = "noopener";
+    a.textContent = ch + " — per YC ↗";
+    top.appendChild(a);
+  }
+  const cnt = el("span", "count");
+  cnt.appendChild(el("b", null, n(c.roles_open)));
+  cnt.appendChild(document.createTextNode(c.roles_open === 1 ? "role open" : "roles open"));
+  top.appendChild(cnt);
+  li.appendChild(top);
+
+  const g = el("p", "gate");
+  const a = document.createElement("a");
+  a.href = c.source_url; a.target = "_blank"; a.rel = "noopener";
+  a.textContent = gate(c);
+  a.appendChild(el("span", "arr", "↗"));
+  g.appendChild(a);
+  li.appendChild(g);
+
+  const mix = el("div", "mix");
+  const [dp, dmore] = topPairs(c.depts, 4);
+  dp.forEach(([k, v], i) => {
+    if (i) mix.appendChild(el("span", "k", "·"));
+    mix.appendChild(document.createTextNode(k + " " + n(v)));
+  });
+  if (dmore > 0) mix.appendChild(el("span", "k", "· " + dmore + " more"));
+  li.appendChild(mix);
+
+  const foot = el("div", "foot");
+  const pl = el("span", "places");
+  const [pp, pmore] = topPairs(c.places, 5);
+  pl.textContent = pp.map(([k, v]) => k + " " + n(v)).join("  ·  ") + (pmore > 0 ? "  ·  " + pmore + " more" : "");
+  foot.appendChild(pl);
+
+  const kb = el("button", "keep");
+  const kept = !!keeps[slug];
+  kb.type = "button";
+  kb.setAttribute("aria-pressed", kept ? "true" : "false");
+  kb.textContent = kept ? "◆ kept" : "◇ keep";
+  kb.addEventListener("click", () => toggleKeep(slug, c));
+  foot.appendChild(kb);
+
+  const act = el("button", "act");
+  act.type = "button";
+  if (m === 0) {
+    act.className = "act none";
+    act.textContent = "nothing matching";
+    act.disabled = true;
+  } else {
+    act.appendChild(el("b", null, n(m)));
+    act.appendChild(document.createTextNode(
+      " " + (state.fam ? (FAM_LABEL[state.fam] || state.fam) + " " : "") +
+      (m === 1 ? "role" : "roles") + (state.city ? " in " + state.city : "") +
+      (state.open === slug ? " ▴" : " →")
+    ));
+    act.addEventListener("click", () => {
+      state.open = state.open === slug ? null : slug;
+      if (state.open) wantRoles();
+      draw();
+      const node = document.querySelector('[data-slug="' + CSS.escape(slug) + '"]');
+      if (node && state.open) node.scrollIntoView({ block: "nearest" });
+    });
+  }
+  foot.appendChild(act);
+  li.appendChild(foot);
+
+  if (state.open === slug) li.appendChild(drawRoles(slug, c));
+  return li;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   7 · roles, in place
+   No navigation. The shortlist stays on screen behind you. `Apply` opens
+   the company's own board in a new tab and the page writes down only that
+   it witnessed the click.
+   ═══════════════════════════════════════════════════════════════════════ */
+const FAM_RE = [
+  ["engineering", /engineer|software|infrastructure|platform|devops|sre|technolog|technical|developer|backend|frontend|full ?stack|mobile|ios|android|architec|\bqa\b|quality assurance|firmware|hardware|robotic|machine learning|applied ai|\btech\b|\bit\b|\bepd\b|r&d/i],
+  ["research", /research|scientist|\bscience/i],
+  ["data", /\bdata\b|analytic|analyst|business intelligence/i],
+  ["design", /design|\bux\b|\bui\b|creative|brand/i],
+  ["product", /product/i],
+  ["security", /security|infosec/i],
+  ["clinical", /clinic|medical|health|nurse|physician|pharma/i],
+  ["finance", /financ|accounting|treasur|\btax\b|audit/i],
+  ["legal", /legal|complian|policy|regulat|trust & safety|\brisk\b/i],
+  ["people", /people|talent|recruit|human resource|\bhr\b|workplace/i],
+  ["support", /customer|support|success|experience|community/i],
+  ["marketing", /marketing|communications|content|demand gen/i],
+  ["operations", /operation|\bops\b|supply|logistic|program|project|strateg|manufactur/i],
+  ["sales", /sales|revenue|account|go ?to ?market|\bgtm\b|business development|commercial|partnership|growth|field/i],
+];
+function famOf(d) {
+  if (!d) return null;
+  for (let i = 0; i < FAM_RE.length; i++) if (FAM_RE[i][1].test(d)) return FAM_RE[i][0];
+  return null;
+}
+/* Exactly build.py's fold, and it has to be exactly it: grid.json decides
+   which companies match a city and this decides which of their rows show. The
+   office suffix only comes off when what is left is a place the corpus names
+   on its own — otherwise "Mercor HQ" becomes a city called Mercor. */
+const PRE = /^(hybrid|onsite|remote|on-site|in-office|in office)\s*[-–—:]\s*/i;
+const SUF = /\s+(HQ|Office|Area)$/i;
+const KNOWN = new Set(S.fold_known);
+function cityOf(p) {
+  const s = p.replace(PRE, "").trim();
+  const t = s.replace(SUF, "").trim();
+  return t !== s && KNOWN.has(t) ? t : (s || p);
+}
+
+function drawRoles(slug, c) {
+  const wrap = document.createElement("div");
+  if (!ROLES) {
+    wrap.appendChild(el("p", "loading", "reading " + n(S.roles) + " roles from the build…"));
+    return wrap;
+  }
+  const all = ROLES[slug] || [];
+  const rows = all.filter((r) =>
+    (!state.fam || famOf(r.dept_norm) === state.fam) &&
+    (!state.city || (r.places || []).some((p) => cityOf(p) === state.city))
+  ).sort((a, b) => (a.title > b.title ? 1 : -1));
+
+  const cap = state.showAll[slug] ? rows.length : 12;
+  const ul = el("ul", "roles");
+  const rec = keeps[slug];
+  const seen = rec ? new Set(rec.opened_role_urls.map((o) => o.url)) : new Set();
+
+  rows.slice(0, cap).forEach((r) => {
+    const li = el("li", "role");
+    if (seen.has(r.url)) li.className = "role opened";
+    li.appendChild(el("span", "t", r.title));
+    li.appendChild(el("span", "l", (r.locations || []).join(" · ")));
+    /* Only where the board said something. `unknown` on 93% of postings is
+       silence, and silence is printed as nothing at all. */
+    const stated = r.visa === "yes" || r.hire_from_abroad === "yes" ? "board states it can hire from abroad"
+      : r.visa === "no" || r.hire_from_abroad === "no" ? "board states it cannot sponsor" : null;
+    if (stated) li.appendChild(el("span", "v", stated));
+    if (S.first_seen && S.first_seen[r.url]) li.appendChild(el("span", "v", "first seen " + date(S.first_seen[r.url])));
+    const ap = document.createElement("a");
+    ap.className = "apply"; ap.href = r.url; ap.target = "_blank"; ap.rel = "noopener";
+    ap.textContent = "Apply ↗";
+    ap.addEventListener("click", () => witness(slug, c, r));
+    li.appendChild(ap);
+    ul.appendChild(li);
+  });
+  wrap.appendChild(ul);
+
+  const f = el("div", "rfoot");
+  let yes = 0, no = 0;
+  rows.forEach((r) => {
+    if (r.visa === "yes" || r.hire_from_abroad === "yes") yes++;
+    else if (r.visa === "no" || r.hire_from_abroad === "no") no++;
+  });
+  const say = n(rows.length) + " shown here: " + n(yes) + " state they can hire from abroad, " +
+    n(no) + " state they cannot, and " + n(rows.length - yes - no) +
+    " say nothing that bears on it and are exactly as open as the rest.";
+  f.appendChild(el("span", null, say));
+  if (rows.length > cap) {
+    const b = el("button", "more", n(rows.length - cap) + " more ▾");
+    b.type = "button";
+    b.addEventListener("click", () => { state.showAll[slug] = true; draw(); });
+    f.appendChild(b);
+  }
+  const cl = el("button", "collapse", "collapse ▴");
+  cl.type = "button";
+  cl.addEventListener("click", () => { state.open = null; draw(); });
+  f.appendChild(cl);
+  wrap.appendChild(f);
+  return wrap;
+}
+
+/* The page's hand: it may write down that it opened a tab for you. It may
+   never write down that you applied. */
+function witness(slug, c, r) {
+  const rec = keeps[slug] || newKeep(c);
+  keeps[slug] = rec;
+  if (!rec.opened_role_urls.some((o) => o.url === r.url))
+    rec.opened_role_urls.push({ url: r.url, title: r.title, opened_at: TODAY });
+  save();
+  drawKeeps();
+  const node = document.querySelector('[data-slug="' + CSS.escape(slug) + '"] .keep');
+  if (node) { node.setAttribute("aria-pressed", "true"); node.textContent = "◆ kept"; }
+  const li = document.querySelector('.role a[href="' + r.url.replace(/"/g, "&quot;") + '"]');
+  if (li && li.parentNode) li.parentNode.className = "role opened";
+}
+
+function newKeep(c) {
+  /* The name is stored, not looked up: the strip has to be able to print a
+     kept company before cards.json lands on the next visit, and a slug is not
+     a company's name. */
+  return { name: c.name, kept_at: TODAY, roles_open_at_keep: c.roles_open, opened_role_urls: [], applied: null };
+}
+function toggleKeep(slug, c) {
+  if (keeps[slug]) delete keeps[slug]; else keeps[slug] = newKeep(c);
+  save(); draw();
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   8 · the keeps strip — the deliverable of the session, and the one row
+   problem #2 is built on. It asks; it never infers.
+   ═══════════════════════════════════════════════════════════════════════ */
+function drawKeeps() {
+  const box = $("keeps");
+  box.textContent = "";
+  const slugs = Object.keys(keeps);
+  if (!slugs.length) return;
+  const h = el("p", "keeps-h", "kept · " + slugs.length + " " + (slugs.length === 1 ? "company" : "companies"));
+  box.appendChild(h);
+  slugs.forEach((slug) => {
+    const rec = keeps[slug];
+    const c = (CARDS || S.cards)[slug] || { name: rec.name || slug, roles_open: rec.roles_open_at_keep };
+    const row = el("div", "kept");
+    row.appendChild(el("span", "kn", c.name));
+    const bits = ["kept " + date(rec.kept_at)];
+    bits.push(rec.roles_open_at_keep === c.roles_open
+      ? n(c.roles_open) + " roles open"
+      : n(rec.roles_open_at_keep) + " → " + n(c.roles_open) + " roles open");
+    if (rec.opened_role_urls.length) {
+      const live = ROLES && ROLES[slug]
+        ? rec.opened_role_urls.filter((o) => ROLES[slug].some((r) => r.url === o.url)).length
+        : null;
+      bits.push(live === null
+        ? "you opened " + rec.opened_role_urls.length
+        : "you opened " + rec.opened_role_urls.length + ", " + live + " still on their board");
+    }
+    row.appendChild(el("span", "kd", bits.join("  ·  ")));
+    const d = el("button", "drop", "drop");
+    d.type = "button";
+    d.addEventListener("click", () => { delete keeps[slug]; save(); draw(); });
+    row.appendChild(d);
+    box.appendChild(row);
+
+    /* The question: once per kept company, only where the page genuinely
+       witnessed an opened role on an earlier day, and never again after any
+       answer. */
+    const opened = rec.opened_role_urls.length;
+    const earlier = rec.opened_role_urls.some((o) => o.opened_at < TODAY);
+    if (opened && earlier && rec.applied === null) {
+      const q = el("div", "ask");
+      q.appendChild(el("span", null,
+        "On " + date(rec.opened_role_urls[0].opened_at) + " you opened " + opened +
+        (opened === 1 ? " role at " : " roles at ") + c.name + ". Did you apply?"));
+      ["yes", "no", "not yet"].forEach((ans) => {
+        const b = el("button", null, ans);
+        b.type = "button";
+        b.addEventListener("click", () => { rec.applied = ans; save(); drawKeeps(); });
+        q.appendChild(b);
+      });
+      box.appendChild(q);
+    } else if (rec.applied !== null) {
+      box.appendChild(el("p", "answered", "you said: applied — " + rec.applied));
+    }
+  });
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   9 · the sieve
+   ═══════════════════════════════════════════════════════════════════════ */
+function drawSieve() {
+  const s = $("sieve");
+  if (s.childNodes.length) return;
+  const b = S.report;
+  const rows = [
+    [S.corpus.read, "company names read from the sources", ""],
+    [S.corpus.not_qualified, "did not qualify", "sub out"],
+    [S.corpus.not_software, "not a software company", "sub out"],
+    [S.corpus.ambiguous, "ambiguous name, we could not be sure", "sub out"],
+    [b.corpus_size, "qualified as funded software companies", ""],
+    [b["slug-unresolved"], "we could not resolve a job board for", "sub out"],
+    [b["another-companys-board"], "turned out to be another company’s board", "sub out"],
+    [b["empty-board-unverified"], "board came back empty and we could not verify it", "sub out"],
+    [b["no-located-roles"], "board read, nothing open tonight", "sub out"],
+    [S.companies, "companies with something open tonight", ""],
+    [S.roles, "roles, every one live on the company’s own board on " + date(S.snapshot), ""],
+  ];
+  s.appendChild(el("h2", null, "How " + n(S.corpus.read) + " companies became " + n(S.companies)));
+  const f = el("div", "funnel");
+  rows.forEach(([k, t, cls]) => {
+    const d = document.createElement("div");
+    if (cls) d.className = cls;
+    d.appendChild(el("span", "n" + (cls ? " out" : ""), n(k)));
+    d.appendChild(document.createTextNode("  " + (cls ? "└ " : "") + t));
+    f.appendChild(d);
+  });
+  s.appendChild(f);
+  const ft = el("footer");
+  ft.appendChild(document.createTextNode(
+    "The last seven lines are counted from the build’s own report for this snapshot. The first four are the corpus step’s counts, which this fixture does not carry — they are quoted, not recomputed here. " +
+    "Nothing in this page’s cuts is dropped for missing data: " + n(S.companies - S.with_amount) +
+    " of the " + n(S.companies) + " companies state no funding amount anywhere, and all " + n(S.companies) +
+    " are on this page. Every role carries at least one location string, so no role is lost to the city cut."));
+  s.appendChild(ft);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   10 · draw
+   ═══════════════════════════════════════════════════════════════════════ */
+function draw() {
+  drawControls();
+  /* A cut the index cannot answer yet is not answered with the 24 cards the
+     seed happens to hold. */
+  const rows = (state.fam || state.city) && !GRID ? [] : visible();
+  drawYield(rows);
+  drawKeeps();
+  const ol = $("cards");
+  const frag = document.createDocumentFragment();
+  if ((state.fam || state.city) && !GRID)
+    frag.appendChild(el("li", "loading", "reading the index for all " + n(S.companies) + " companies…"));
+  rows.forEach(([slug, c, m]) => frag.appendChild(drawCard(slug, c, m)));
+  ol.textContent = "";
+  ol.appendChild(frag);
+  $("tail").textContent = CARDS
+    ? "All " + n(S.companies) + " companies are on this page — nothing is cut for missing data, and the " +
+      n(S.giants) + " with 100 or more roles open come back with the checkbox above. " +
+      n(rows.length) + " are printed under the cut you have set."
+    : "reading the other " + n(S.companies - S.slugs.length) + " companies…";
+}
+
+function drawCensus() {
+  const c = $("census");
+  c.textContent = "";
+  c.appendChild(document.createTextNode("How they got in: "));
+  S.gates.forEach(([label, k], i) => {
+    if (i) c.appendChild(document.createTextNode("  ·  "));
+    c.appendChild(el("b", null, label + " " + n(k)));
+  });
+  c.appendChild(document.createTextNode("  ·  each one linked on its card."));
+  $("stamp").textContent = n(S.companies) + " companies · " + n(S.roles) +
+    " roles · read from the companies’ own boards on " + date(S.snapshot);
+  $("l-read").textContent = n(S.corpus.read);
+  $("l-out").textContent = n(S.corpus.not_qualified);
+  $("l-noboard").textContent = n(S.report["slug-unresolved"]);
+  $("l-co").textContent = n(S.companies);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   11 · the shards, fetched in the order the page needs them
+   ═══════════════════════════════════════════════════════════════════════ */
+function wantRoles() {
+  if (rolesWanted) return;
+  rolesWanted = true;
+  fetch(FIX + "companies.json").then((r) => r.json()).then((d) => {
+    ROLES = {};
+    d.companies.forEach((c) => { ROLES[c.slug] = c.roles; });
+    draw();
+  }).catch(() => {});
+}
+
+function boot() {
+  drawCensus();
+  draw();                                    // the seed's 24 cards — first paint
+  /* M1's stopwatch, read off the page rather than off a poll: the frame
+     after the first card exists, in milliseconds since navigation started. */
+  requestAnimationFrame(() => { window.__firstCardPainted = performance.now(); });
+  fetch(FIX + "cards.json").then((r) => r.json()).then((cards) => {
+    CARDS = {}; ORDER = [];
+    cards.forEach((c) => { CARDS[c.slug] = c; ORDER.push(c.slug); });
+    draw();
+    return fetch("grid.json").then((r) => r.json());
+  }).then((g) => { GRID = g; draw(); })
+    .then(() => { (window.requestIdleCallback || setTimeout)(wantRoles, 1); })
+    .catch((e) => { $("tail").textContent = "the shards did not load: " + e; });
+}
+
+$("sieve-toggle").addEventListener("click", () => {
+  const s = $("sieve"), t = $("sieve-toggle");
+  drawSieve();
+  const open = s.hasAttribute("hidden");
+  if (open) s.removeAttribute("hidden"); else s.setAttribute("hidden", "");
+  t.setAttribute("aria-expanded", open ? "true" : "false");
+  t.textContent = open ? "close the sieve ▴" : "the whole sieve, counted →";
+});
+
+/* Test hooks. They move the clock and read state; they never write an
+   answer the reader did not give. */
+window.__atlas = {
+  state: state,
+  keeps: () => keeps,
+  simulateNextVisit: (days) => {
+    const d = new Date(TODAY + "T00:00:00Z");
+    d.setUTCDate(d.getUTCDate() + (days || 1));
+    TODAY = d.toISOString().slice(0, 10);
+    draw();
+    return TODAY;
+  },
+  ready: () => !!(CARDS && GRID),
+  rolesReady: () => !!ROLES,
+  loadRoles: wantRoles,
+  /* exposed so the grid built by build.py and the rows filtered here can be
+     checked against each other — two implementations of one rule is a bug
+     waiting to happen, so it is a test instead */
+  famOf: famOf, cityOf: cityOf, roles: () => ROLES, grid: () => GRID,
+};
+
+boot();
+})();
+</script>
+</body>
+</html>
