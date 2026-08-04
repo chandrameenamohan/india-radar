@@ -1,0 +1,2153 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ROLE·ATLAS</title>
+<!-- A missing favicon is a 404, and a 404 is a failed network request the gate
+     would count as a load error. One data: URI is cheaper than an icon file. -->
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+  /* ===========================================================================
+     r02-c — PASSPORT.  Lane C, wildcard: TEXT-LIGHT.
+
+     The argument: a page that barely uses words cannot strand a reader in an
+     English dead end. So the load-bearing meaning here is carried by numbers,
+     by three marks, by position and by length — not by prose. Every sentence
+     that survived had to earn its place, and each one is translated into all
+     eight locales; there is no orphaned English in the chrome.
+
+     The mark vocabulary is THREE and it never grows:
+        ○   the posting's own word: remote
+        ▮   the posting's own word: it hires from abroad / sponsors a visa
+        ⊠   the posting's own word: it does not
+        (nothing at all)  the posting said nothing, and silence is not a no.
+
+     Absence stays absence is not a rule this page obeys — it is the design.
+     The 93% of postings that say nothing carry no mark, so the register looks
+     the way the corpus actually is: mostly silent.
+     =========================================================================== */
+  :root {
+    --paper:  #ece8e0;      /* bone. Not white: white is r01-a's plate. */
+    --paper2: #f5f2ec;      /* the one lighter fill — open sheets, hover */
+    --ink:    #17140f;
+    /* Three greys, and each one is measured rather than eyeballed: on the bone
+       paper they run 15.0 : 7.9 : 5.1 against it, so the apparatus voice still
+       clears AA at 10px where most of it is set. */
+    --ink2:   #4a453e;      /* secondary */
+    --ink3:   #666056;      /* apparatus, absent-ish things */
+    --rule:   #cfc9bd;
+    --rule2:  #17140f;
+    --stamp:  #17389b;      /* the ONE colour. It means exactly one thing:
+                               the posting itself said you could come. */
+    --gut:    1.6rem;
+    --rowpad: .46rem;
+  }
+  * { box-sizing: border-box; min-width: 0; }
+  html { -webkit-text-size-adjust: 100%; overflow-x: clip; scroll-behavior: auto; }
+  body {
+    margin: 0; padding: 0 0 4rem; background: var(--paper); color: var(--ink);
+    overflow-x: clip;
+    font-family: Inter, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 15px; line-height: 1.4;
+    font-variant-numeric: tabular-nums;   /* every number on this page is a column */
+    font-feature-settings: "tnum" 1;
+    letter-spacing: -0.005em;
+    -webkit-font-smoothing: antialiased;
+  }
+  .mono { font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+          font-variant-numeric: tabular-nums; letter-spacing: 0; }
+  .wrap { max-width: 74rem; margin-inline: auto; padding-inline: var(--gut); }
+  .micro { font-size: 10px; line-height: 1.1; text-transform: uppercase;
+           letter-spacing: .13em; font-weight: 600; color: var(--ink3); }
+  /* Screen-reader text. Every glyph on this page carries one, because a mark
+     that a blind reader cannot resolve is not text-light, it is text-missing. */
+  .sr { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+        overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+
+  a { color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--ink3); }
+  a:hover { color: var(--stamp); border-bottom-color: var(--stamp); }
+  :focus-visible { outline: 2px solid var(--stamp); outline-offset: 2px; }
+  button { font: inherit; color: inherit; }
+
+  /* ------------------------------- masthead -------------------------------- */
+  /* The masthead reserves its own height in CSS before a byte of data lands.
+     r01-c lost half a craft point to Clerk shoving the register 40px down the
+     page 1.4 seconds after first paint; the slot below is 34px tall whether
+     Clerk answers or never does. */
+  header { padding-top: 1.5rem; }
+  .top { display: flex; align-items: flex-start; gap: 1rem;
+         justify-content: space-between; flex-wrap: wrap; }
+  h1 { margin: 0; font-size: clamp(1.5rem, 3.4vw, 2.1rem); font-weight: 800;
+       letter-spacing: -0.03em; line-height: 1; text-transform: uppercase; }
+  h1 .dot { color: var(--stamp); }
+  .topr { display: flex; align-items: center; gap: .55rem; min-height: 46px; }
+  /* The slot Clerk will fill, reserved at its full size before Clerk answers.
+     r01-c lost its largest layout shift to exactly this: the sign-in control
+     arriving 1.4s after first paint and shoving the register 40px down. Here
+     the space is already there, and if Clerk never answers it simply stays
+     empty. */
+  #account { display: flex; align-items: center; justify-content: flex-end;
+             min-height: 46px; min-width: 7.5rem; }
+  #account button {
+    background: none; border: 1px solid var(--rule2); border-radius: 0;
+    padding: .5rem .8rem; min-height: 44px; cursor: pointer;
+    font-size: 10px; text-transform: uppercase; letter-spacing: .12em; font-weight: 600;
+  }
+  #account button:hover { background: var(--ink); color: var(--paper); }
+  select.chrome {
+    appearance: none; -webkit-appearance: none; background: transparent;
+    border: 1px solid var(--rule); border-radius: 0; color: var(--ink);
+    font-size: 11px; font-weight: 600; letter-spacing: .04em;
+    padding: .5rem 1.6rem .5rem .6rem; min-height: 44px; cursor: pointer;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='7'%3E%3Cpath d='M1 1l4.5 4.5L10 1' fill='none' stroke='%238a8378' stroke-width='1.3'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: right .4rem center;
+  }
+  select.chrome:hover { border-color: var(--rule2); }
+
+  /* The reader's own cell. Unset it is a hollow frame with a question mark —
+     the page does not guess where you are, it asks, once, and remembers.
+     Set, it prints the two-letter code you chose, which is the same two
+     letters in all eight locales. */
+  #homebtn {
+    display: inline-flex; align-items: center; gap: .4rem;
+    background: none; border: 1px solid var(--rule2); border-radius: 0;
+    padding: .4rem .6rem; min-height: 44px; min-width: 46px; cursor: pointer;
+  }
+  #homebtn .hc { font-size: 13px; font-weight: 800; letter-spacing: .06em; }
+  #homebtn[data-set] { border-color: var(--stamp); color: var(--stamp); }
+  #homebtn:hover { background: var(--paper2); }
+  #homebtn:not([data-set]) { border-style: dashed; }
+  #homebtn .hq[hidden] { display: none; }
+  #homebtn .hq { display: block; width: 18px; height: 13px;
+    background-image: radial-gradient(var(--ink3) 1.15px, transparent 1.25px);
+    background-size: 4.5px 4.5px; background-position: 1px 1px; }
+
+  /* The four numbers. They are the page's headline and they need no verb. */
+  /* Reserved before the data lands, for the same reason as the account slot:
+     four numbers appearing into a zero-height box is a 64px shove of the whole
+     register, and it is the single largest layout shift a page like this can
+     have. The arithmetic is the number's own clamp, so the reservation tracks
+     the type. */
+  .figs { display: flex; flex-wrap: wrap; gap: .2rem 2.2rem; align-items: flex-end;
+          padding: 1.1rem 0 .9rem; align-content: flex-end; min-height: 96px; }
+  .fig { display: flex; flex-direction: column-reverse; gap: .1rem; min-width: 0; }
+  .fig .n { font-size: clamp(1.9rem, 5vw, 2.9rem); font-weight: 800;
+            letter-spacing: -0.045em; line-height: .95; }
+  .fig .d { font-size: 1.05rem; font-weight: 600; letter-spacing: -0.01em; }
+  #status .since { background: none; border: 1px solid var(--stamp); border-radius: 0;
+                   color: var(--stamp); cursor: pointer; padding: .3rem .6rem;
+                   min-height: 44px; min-width: 44px; font-weight: 800; font-size: .9375rem; }
+  #status .since:hover, #status .since[aria-pressed="true"] {
+                   background: var(--stamp); color: #fff; }
+
+  /* ------------------------------ country strip ---------------------------- */
+  /* One control doing three jobs at once: it is the navigation, it is the
+     histogram of where the register's mass actually is, and (in the picker) it
+     is how a reader states where they can work. Sixteen cells, each carrying a
+     code that is the same string in every locale and a number that is a number.
+     Nothing here is a word. */
+  #strip {
+    display: grid; grid-template-columns: repeat(16, minmax(0, 1fr));
+    gap: 1px; background: var(--rule); border: 1px solid var(--rule2);
+    min-height: 74px;    /* reserved before the data lands — see the masthead note */
+  }
+  .cell {
+    position: relative; display: flex; flex-direction: column; justify-content: flex-end;
+    gap: .1rem; background: var(--paper); border: 0; border-radius: 0;
+    padding: .3rem .25rem .3rem; min-height: 72px; cursor: pointer;
+    text-align: left; overflow: hidden;
+  }
+  .cell:hover { background: var(--paper2); }
+  .cell .fill { position: absolute; left: 0; right: 0; bottom: 0;
+                background: #d9d3c6; border-top: 1px solid #b9b2a3; }
+  .cell .cc { position: relative; font-size: 11.5px; font-weight: 800;
+              letter-spacing: .05em; }
+  .cell.all .cc { font-size: 19px; line-height: .8; }
+  .cell .cn { position: relative; font-size: 10px; font-weight: 600;
+              color: var(--ink2); }
+  .cell[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+  .cell[aria-pressed="true"] .cn { color: var(--paper); }
+  .cell[aria-pressed="true"] .fill { background: #3a352d; }
+  .cell.nil .cc, .cell.nil .cn { color: var(--ink3); font-weight: 600; }
+  /* Your own country wears the one colour, everywhere it appears. */
+  .cell.home::after { content: ""; position: absolute; inset: 0;
+                      border: 2px solid var(--stamp); pointer-events: none; }
+
+  /* The picker: the same sixteen cells, plus the one this register cannot
+     draw — somewhere else. That cell is the corrected brief made a control. */
+  #picker[hidden] { display: none; }
+  #picker { border: 1px solid var(--rule2); border-top: 0; padding: .55rem; }
+  #pickgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(3.4rem, 1fr));
+              gap: .35rem; }
+  .pk { display: flex; flex-direction: column; align-items: center; justify-content: center;
+        gap: .1rem; min-height: 46px; background: var(--paper2);
+        border: 1px solid var(--rule); border-radius: 0; cursor: pointer; padding: .3rem; }
+  .pk:hover { border-color: var(--rule2); }
+  .pk .pc { font-size: 12px; font-weight: 800; letter-spacing: .05em; }
+  .pk .pn { font-size: 9px; font-weight: 600; color: var(--ink3); }
+  .pk[aria-pressed="true"] { border-color: var(--stamp); border-width: 2px; color: var(--stamp); }
+  .pk.else { background: var(--paper); }
+  .pk.clear { background: var(--paper); color: var(--ink3); }
+
+  /* ------------------------------- the marks ------------------------------- */
+  /* The whole vocabulary of this page, printed once at full size with its own
+     counts beside it. That IS the legend, and it is made of the data rather
+     than of sentences: a reader sees at a glance that the fourth state — no
+     mark at all — is most of the register. */
+  .m { display: inline-block; width: 11px; height: 11px; flex: none;
+       vertical-align: -1px; }
+  .m-r { border: 1.6px solid var(--stamp); border-radius: 50%; }
+  .m-a { background: var(--stamp); }
+  .m-n { border: 1.4px solid var(--ink2); position: relative; }
+  .m-n::before, .m-n::after {
+    content: ""; position: absolute; left: -1px; right: -1px; top: 50%;
+    height: 1.4px; background: var(--ink2); }
+  .m-n::before { transform: rotate(45deg); }
+  .m-n::after  { transform: rotate(-45deg); }
+  .m-s { border: 1.4px dotted var(--ink3); }
+  .m-k { width: 7px; height: 13px; background: var(--stamp); }
+
+  #marks { display: flex; flex-wrap: wrap; gap: .4rem; padding: .7rem 0 0;
+           min-height: 51px; align-content: flex-start; }
+  .mk {
+    display: inline-flex; align-items: center; gap: .45rem;
+    background: none; border: 1px solid var(--rule); border-radius: 0;
+    padding: .5rem .6rem; min-height: 40px; cursor: pointer;
+  }
+  .mk:hover { border-color: var(--rule2); background: var(--paper2); }
+  .mk[aria-pressed="true"] { border-color: var(--stamp); border-width: 2px; padding: calc(.5rem - 1px) calc(.6rem - 1px); }
+  .mk .v { font-size: 13px; font-weight: 700; }
+  .mk .v.nil { color: var(--ink3); font-weight: 600; }
+
+  /* ------------------------------- the bar --------------------------------- */
+  /* Three marks drawn to their true share of 6,423. It is 93% empty, and that
+     is the honest shape of the corpus: most boards say nothing about hiring
+     someone from abroad. No sentence states this; the bar is the statement. */
+  #tribar { display: flex; height: 8px; border: 1px solid var(--rule2);
+            margin-top: .55rem; background: var(--paper); }
+  #tribar i { display: block; height: 100%; }
+  #tribar .b-r { background: var(--stamp); opacity: .34; }
+  #tribar .b-a { background: var(--stamp); }
+  #tribar .b-n { background: var(--ink2); }
+
+  /* ------------------------------- the query ------------------------------- */
+  .qline { display: flex; flex-wrap: wrap; gap: .5rem .8rem; align-items: center;
+           padding: .8rem 0 .6rem; border-bottom: 2px solid var(--rule2); }
+  #q {
+    appearance: none; font: inherit; font-size: .9375rem; font-weight: 600;
+    max-width: 26rem;
+    background: var(--paper2); color: var(--ink); border: 1px solid var(--rule);
+    border-radius: 0; padding: .55rem .6rem; min-height: 44px;
+    flex: 1 1 15rem; min-width: 0;
+  }
+  #q::placeholder { color: var(--ink3); font-weight: 400; }
+  #q:focus { border-color: var(--stamp); }
+  #q::-webkit-search-cancel-button { -webkit-appearance: none; }
+  #sort { flex: 0 1 auto; min-height: 44px; }
+  #clear { background: none; border: 1px solid var(--rule); border-radius: 0;
+           min-height: 44px; min-width: 44px; cursor: pointer; color: var(--ink2);
+           font-size: 14px; line-height: 1; }
+  #clear:hover { border-color: var(--rule2); color: var(--ink); }
+  #clear[hidden] { display: none; }
+
+  /* The bridge. A Japanese reader types a Japanese word, the register answers
+     zero, and the page hands back the same idea in the language the boards are
+     actually written in — with the count beside it, so nothing needs
+     explaining. The page never translates a posting; it translates the
+     READER'S word, and shows both numbers so the reader chooses. */
+  #bridge { display: flex; flex-wrap: wrap; gap: .4rem; align-items: center;
+            padding: .55rem 0 0; }
+  #bridge[hidden] { display: none; }
+  .br {
+    display: inline-flex; align-items: baseline; gap: .45rem;
+    background: var(--paper2); border: 1px solid var(--stamp); border-radius: 0;
+    padding: .45rem .6rem; min-height: 40px; cursor: pointer; color: var(--stamp);
+  }
+  .br:hover { background: var(--stamp); color: var(--paper2); }
+  .br .bt { font-weight: 600; font-size: .875rem; }
+  .br .bn { font-weight: 800; font-size: .875rem; }
+  .br .ar { opacity: .6; }
+  /* The script census: how many of the 6,423 titles are written in which
+     alphabet, drawn as two sample glyphs and two numbers. It answers "why did
+     my language return nothing" without a paragraph about it. */
+  #census { display: flex; flex-wrap: wrap; gap: .3rem 1.1rem; align-items: baseline;
+            padding: .5rem 0 0; color: var(--ink2); font-size: .8125rem; }
+  #census b { font-weight: 800; color: var(--ink); }
+  #census .sm { font-size: 1rem; font-weight: 600; }
+
+  /* ------------------------------- the status ------------------------------ */
+  #status { display: flex; flex-wrap: wrap; align-items: center; gap: .3rem .9rem;
+            padding: .35rem 0 .3rem; min-height: 55px; }
+  #status .tally { font-size: 1.05rem; font-weight: 800; letter-spacing: -0.01em; }
+  #status .of { color: var(--ink3); font-weight: 600; }
+  #status .rd { color: var(--stamp); font-weight: 700; }
+
+  /* -------------------------------- register ------------------------------- */
+  main { position: relative; }
+  #log { border-top: 1px solid var(--rule2); }
+  /* Until the corpus lands the register is a reserved screen of empty paper.
+     Without it the footer sits 465px down on first paint and is thrown three
+     thousand pixels when the rows arrive — the largest layout shift this page
+     can have, and the one r01-c never closed. */
+  body.pre #log { min-height: 96vh; }
+  #log:focus-visible { outline: 2px solid var(--stamp); outline-offset: -2px; }
+  /* Chunks of fifty. content-visibility lets the browser skip layout and paint
+     for the ~120 chunks that are off screen, which is what keeps a 6,423-row
+     column smooth without recycling rows out from under the reader — and the
+     `auto` keyword means a chunk that has been rendered once keeps its REAL
+     height, so the scrollbar stops guessing after one pass. */
+  .chunk { content-visibility: auto; contain-intrinsic-size: auto var(--cis, 2100px); }
+
+  .row {
+    display: grid;
+    grid-template-columns: 3.2rem minmax(0, 1fr) 12rem 2.2rem 5.4rem 2.4rem 1.1rem;
+    gap: 0 .8rem; align-items: baseline;
+    padding: var(--rowpad) .2rem var(--rowpad) .55rem;
+    border-bottom: 1px solid var(--rule); position: relative;
+    scroll-margin-top: .5rem;
+  }
+  /* A ruler down the page: every tenth row takes a heavier rule and every
+     fiftieth prints its number in ink. Scrolling six thousand rows without a
+     foothold is the wall the brief warns about; this is the foothold, and it
+     costs no words. */
+  .row.d10 { border-bottom-color: var(--ink3); }
+  .row.d50 { border-bottom: 1.5px solid var(--rule2); }
+  .row.d50 .rn { color: var(--ink); font-weight: 700; }
+  .row:hover { background: var(--paper2); }
+  .row[aria-selected="true"] { background: #e3ded2;
+    box-shadow: inset 3px 0 0 var(--stamp); }
+  #log.nohome .row { grid-template-columns: 3.2rem minmax(0, 1fr) 12rem 2.2rem 2.4rem 1.1rem; }
+  #log.nohome .rd { display: none; }
+  .rn { font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+        font-size: 10.5px; color: var(--ink3); letter-spacing: .02em;
+        align-self: center; }
+  .rt { font-weight: 600; font-size: .9375rem; letter-spacing: -0.012em;
+        overflow-wrap: anywhere; }      /* wraps. It never truncates — see NOTES */
+  .rc { font-size: .8125rem; color: var(--ink2); font-weight: 600;
+        overflow-wrap: anywhere; }
+  .rk { font-size: 11px; font-weight: 800; letter-spacing: .05em; align-self: center; }
+  .rk.home { color: var(--stamp); }
+  .rd { font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+        font-size: 11px; color: var(--ink2); text-align: right; align-self: center;
+        white-space: nowrap; }
+  .rd.zero { color: var(--stamp); font-weight: 700; }
+  .rm { display: flex; gap: .25rem; align-items: center; justify-content: flex-end;
+        align-self: center; min-height: 12px; }
+  .rx { align-self: center; justify-self: end; color: var(--ink3); font-size: 13px;
+        line-height: 1; transform-origin: 50% 50%; }
+  .row:hover .rx { color: var(--ink); }
+  .row[aria-expanded="true"] .rx { transform: rotate(90deg); color: var(--stamp); }
+  /* The keep notch: a page marker on the row's own edge. Not a tab stop — a
+     6,423-stop tab order is the trap r01-c fell into — but it is on the
+     keyboard path (s) and it is a 44px pointer target. */
+  .keep {
+    position: absolute; left: -1.65rem; top: 0; bottom: 0; width: 1.5rem;
+    background: none; border: 0; border-radius: 0; cursor: pointer; padding: 0;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .keep i { display: block; width: 8px; height: 14px; border: 1.4px solid var(--rule);
+            border-right: 0; }
+  .keep:hover i { border-color: var(--ink2); }
+  .row.kept .keep i { background: var(--stamp); border-color: var(--stamp); }
+  .row.kept { background: var(--paper2); }
+
+  /* the evidence sheet, opened in place. Stolen from r01-c outright, which is
+     what round 2's brief asked for: provenance at the row, not at the company.
+     Rewritten to be mostly key-and-number, because half of r01-c's sheet was
+     prose that then had to survive eight locales. */
+  .sheet { background: var(--paper2); border-bottom: 1.5px solid var(--rule2);
+           padding: .8rem .2rem .9rem 0; }
+  .sheet dl { display: grid; grid-template-columns: 7.5rem minmax(0, 1fr);
+              gap: 0; margin: 0; }
+  .sheet dt { grid-column: 1; font-size: 10px; text-transform: uppercase;
+              letter-spacing: .12em; font-weight: 600; color: var(--ink3);
+              padding: .3rem .8rem .3rem 0; border-top: 1px solid var(--rule); }
+  .sheet dd { grid-column: 2; margin: 0; padding: .3rem 0; font-size: .875rem;
+              border-top: 1px solid var(--rule); overflow-wrap: anywhere; }
+  .sheet dd .mono { font-size: .8125rem; }
+  .sheet .foot { margin: .6rem 0 0; font-size: 9.5px; text-transform: uppercase;
+                 letter-spacing: .12em; font-weight: 600; color: var(--ink3); }
+  .sheet .go { display: inline-flex; align-items: center; min-height: 44px;
+               font-weight: 700; }
+  .sheet .derived { color: var(--ink3); }
+
+  /* ------------------------------- the seam -------------------------------- */
+  /* The ask. It sits where the free reading ends — three hundred roles down,
+     not seventy-five thousand pixels down — and it states its own arithmetic
+     in numbers before it says anything in words. Two doors of equal weight. */
+  .seam { border-top: 2px solid var(--rule2); border-bottom: 2px solid var(--rule2);
+          padding: 1.4rem 0 1.5rem; margin: 0; }
+  .seam .big { font-size: clamp(2.2rem, 7vw, 3.6rem); font-weight: 800;
+               letter-spacing: -0.05em; line-height: .95; }
+  .seam .sub { font-size: 1rem; font-weight: 600; color: var(--ink2);
+               margin-top: .15rem; }
+  .seam .scale { display: flex; height: 14px; max-width: 34rem; margin-top: .8rem;
+                 border: 1px solid var(--rule2); background: var(--paper); }
+  .seam .scale i { display: block; height: 100%; }
+  .seam .scale .read { background: var(--ink); }
+  .seam .scale .rest { background: repeating-linear-gradient(-45deg,
+      var(--ink3) 0 1px, transparent 1px 5px); }
+  .seam .kept { margin-top: .9rem; display: flex; align-items: center; gap: .5rem;
+                font-size: .9375rem; font-weight: 600; }
+  .seam p { max-width: 34rem; font-size: .9375rem; line-height: 1.5;
+            color: var(--ink2); margin: .9rem 0 0; }
+  .doors { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 1.1rem; }
+  .door { display: inline-flex; align-items: center; justify-content: center;
+          min-height: 48px; padding: .6rem 1.1rem; border-radius: 0; cursor: pointer;
+          font-size: .875rem; font-weight: 700; letter-spacing: .02em; }
+  .door.in { background: var(--stamp); color: #fff; border: 2px solid var(--stamp); }
+  .door.in:hover { background: #0f2a78; border-color: #0f2a78; }
+  .door.out { background: none; color: var(--ink); border: 2px solid var(--rule2); }
+  .door.out:hover { background: var(--ink); color: var(--paper); }
+  .seam .meter { margin-top: .9rem; display: flex; gap: .9rem; flex-wrap: wrap;
+                 font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+                 font-size: 11px; color: var(--ink3); }
+  .seam .meter b { color: var(--ink); font-weight: 700; }
+
+  /* -------------------------------- the rail ------------------------------- */
+  /* Depth, measured in roles rather than in pixels, and drawn at the register's
+     true scale. Exact: the needle reads the index of the row at the top of the
+     viewport, not a pixel ratio. */
+  #rail { position: fixed; right: .35rem; top: 12vh; bottom: 12vh; width: 30px;
+          display: flex; flex-direction: column; align-items: center; gap: .3rem;
+          pointer-events: none; z-index: 4; }
+  #rail .track { flex: 1; width: 3px; background: var(--rule); position: relative; }
+  #rail .needle { position: absolute; left: -5px; right: -5px; height: 2px;
+                  background: var(--stamp); }
+  #rail .kmark { position: absolute; left: -3px; right: -3px; height: 2px;
+                 background: var(--ink2); opacity: .55; }
+  #rail .n { font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+             font-size: 10px; font-weight: 700; color: var(--ink2);
+             background: var(--paper); padding: 1px 2px; }
+  @media (max-width: 60rem) { #rail { display: none; } }
+
+  /* ------------------------------- kept tray ------------------------------- */
+  #tray { position: fixed; right: 1rem; bottom: 1rem; z-index: 6;
+          display: inline-flex; align-items: center; gap: .5rem;
+          min-height: 46px; padding: .5rem .8rem; cursor: pointer;
+          background: var(--ink); color: var(--paper); border: 0; border-radius: 0; }
+  #tray[hidden] { display: none; }
+  #tray[aria-pressed="true"] { background: var(--stamp); }
+  #tray .n { font-size: 1.05rem; font-weight: 800; }
+  #tray i.m { border-color: var(--paper); background: var(--paper); }
+
+  /* ------------------------------- empty state ----------------------------- */
+  #empty { padding: 1rem 0 2rem; }
+  #empty .outs { display: flex; flex-wrap: wrap; gap: .45rem; margin-top: .8rem; }
+  #empty .out { display: inline-flex; align-items: center; gap: .45rem;
+                background: none; border: 1px solid var(--rule2); border-radius: 0;
+                min-height: 44px; padding: .5rem .7rem; cursor: pointer;
+                font-size: .875rem; font-weight: 600; }
+  #empty .out:hover { background: var(--ink); color: var(--paper); }
+  #empty .out .x { color: var(--ink3); }
+  #empty .out:hover .x { color: var(--paper); }
+  #empty[hidden] { display: none; }
+  #empty .e1 { font-size: 1.1rem; font-weight: 700; }
+
+  /* --------------------------------- keys ---------------------------------- */
+  #keys { position: fixed; inset: auto auto 1rem 1rem; z-index: 7;
+          background: var(--paper); border: 1.5px solid var(--rule2);
+          padding: .7rem .8rem; max-width: 21rem; }
+  #keys[hidden] { display: none; }
+  #keys dl { display: grid; grid-template-columns: auto minmax(0,1fr);
+             gap: .28rem .8rem; margin: .4rem 0 0; font-size: .8125rem; }
+  #keys dt { font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+             font-weight: 700; }
+  #keys dd { margin: 0; color: var(--ink2); }
+  #keyhint { background: none; border: 1px solid var(--rule); border-radius: 0;
+             min-height: 44px; padding: .5rem .7rem; cursor: pointer;
+             font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+             font-size: 12px; color: var(--ink2); }
+  #keyhint:hover { border-color: var(--rule2); color: var(--ink); }
+  @media (hover: none), (max-width: 56rem) { #keyhint { display: none; } }
+
+  /* --------------------------------- footer -------------------------------- */
+  footer { margin-top: 2.5rem; padding-top: 1rem; border-top: 1px solid var(--rule2); }
+  .notes { display: grid; grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+           gap: .8rem 1.6rem; counter-reset: note; }
+  .notes p { position: relative; margin: 0; padding-left: 1.9rem; font-size: .75rem;
+             line-height: 1.5; color: var(--ink2); overflow-wrap: anywhere; }
+  .notes p::before { counter-increment: note; content: counter(note, decimal-leading-zero);
+                     position: absolute; left: 0; top: .1rem; font-size: 10px;
+                     font-weight: 700; letter-spacing: .07em; color: var(--stamp); }
+  .sources { margin: 1.3rem 0 0; padding-top: .7rem; border-top: 1px solid var(--rule);
+             font-size: 10px; text-transform: uppercase; letter-spacing: .12em;
+             font-weight: 600; color: var(--ink3); }
+  .sources a { display: inline-flex; align-items: center; min-height: 44px;
+               margin-right: .9rem; color: var(--ink); }
+
+  /* ------------------------------ narrow board ----------------------------- */
+  /* At a hand's width the row folds to two lines rather than dropping columns.
+     r01-c bought its gauge with a fixed row height and lost 43% of its titles
+     at 380px — six consecutive rows reading "Lakebase Sales Specialist" with
+     nothing but a country code between them. Nothing here truncates: the title
+     wraps, the company keeps its own line, and the gauge is computed from row
+     indices rather than from pixels, so it costs the title nothing. */
+  @media (max-width: 56rem) {
+    :root { --gut: .95rem; }
+    /* Full-bleed: eight cells inside the gutter measured 43px, a pixel under
+       the touch minimum. Run the strip to the sheet's edge and they are 46. */
+    #strip { grid-template-columns: repeat(8, minmax(0, 1fr)); min-height: 148px;
+             margin-inline: calc(var(--gut) * -1); border-inline: 0; }
+    /* Two rows at a hand's width, so the reservation doubles. */
+    .figs { gap: .2rem 1.4rem; min-height: 140px; }
+    .fig .n { font-size: clamp(1.6rem, 9vw, 2.2rem); }
+    .row {
+      grid-template-columns: 2.2rem minmax(0, 1fr) 2.4rem 4.6rem 1.8rem 1rem;
+      grid-template-areas: "n t t t m x" "n c k d m x";
+      gap: .1rem .6rem; padding-left: 0; padding-right: 2.9rem;
+    }
+    #log.nohome .row {
+      grid-template-columns: 2.2rem minmax(0, 1fr) 2.4rem 1.8rem 1rem;
+      grid-template-areas: "n t t m x" "n c k m x";
+    }
+    .rn { grid-area: n; align-self: start; padding-top: .15rem; }
+    .rt { grid-area: t; }
+    .rc { grid-area: c; align-self: center; }
+    .rk { grid-area: k; align-self: center; justify-self: end; }
+    .rd { grid-area: d; align-self: center; }
+    .rm { grid-area: m; align-self: center; }
+    .rx { grid-area: x; }
+    /* The keep notch moves to the row's own right edge and becomes a 44px
+       target, which is the whole reason the row carries 2.9rem of right pad. */
+    .keep { left: auto; right: 0; top: 0; bottom: 0; width: 2.75rem; height: auto; }
+    .keep i { border: 1.4px solid var(--rule); border-left: 0; width: 9px; height: 16px; }
+    .sheet dl { grid-template-columns: minmax(0, 1fr); }
+    .sheet dt { grid-column: 1; border-top: 1px solid var(--rule); padding-bottom: 0; }
+    .sheet dd { grid-column: 1; border-top: 0; padding-top: .1rem; }
+    .mk { min-height: 44px; }
+    #marks { min-height: 55px; }
+    #tray { right: .6rem; bottom: .6rem; }
+    #keys { left: .6rem; right: .6rem; max-width: none; }
+  }
+
+  /* ---------------------------- reduced motion ----------------------------- */
+  /* Duration goes; information stays. Nothing on this page is animated for
+     effect, so there is nothing to make instant — only the two transitions
+     below, and the smooth scroll the cursor uses, which becomes a jump. */
+  .row, .cell, .mk, .door, .br { transition: background-color .1s linear; }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0s !important; animation-iteration-count: 1 !important;
+      transition-duration: 0s !important; transition-delay: 0s !important;
+      scroll-behavior: auto !important;
+    }
+  }
+</style>
+</head>
+<body class="pre">
+
+<header class="wrap">
+  <div class="top">
+    <h1>ROLE<span class="dot">·</span>ATLAS</h1>
+    <div class="topr">
+      <select class="chrome" id="lang"></select>
+      <button type="button" id="homebtn" aria-expanded="false">
+        <span class="hq" id="homeglyph" aria-hidden="true"></span>
+        <span class="hc" id="homecode" aria-hidden="true"></span>
+        <span class="sr" id="homesr"></span>
+      </button>
+      <div id="account"></div>
+    </div>
+  </div>
+  <div class="figs" id="figs"></div>
+</header>
+
+<div class="wrap">
+  <div id="strip" role="group"></div>
+  <div id="picker" hidden>
+    <div id="pickgrid"></div>
+  </div>
+  <div id="marks"></div>
+  <div id="tribar" aria-hidden="true"><i class="b-r"></i><i class="b-a"></i><i class="b-n"></i></div>
+
+  <div class="qline">
+    <input id="q" type="search" autocomplete="off" spellcheck="false">
+    <button type="button" id="clear" hidden aria-label="">✕</button>
+    <select class="chrome" id="sort"></select>
+    <button type="button" id="keyhint">?</button>
+  </div>
+  <div id="bridge" hidden></div>
+  <div id="census" hidden></div>
+  <div id="status"></div>
+</div>
+
+<main class="wrap">
+  <div id="empty" hidden></div>
+  <div id="log" role="listbox" tabindex="0" aria-label=""></div>
+  <div id="seamslot"></div>
+</main>
+
+<div id="rail" aria-hidden="true">
+  <span class="n" id="depthn">0</span>
+  <span class="track"><span class="needle" id="needle"></span></span>
+</div>
+
+<button type="button" id="tray" hidden aria-pressed="false">
+  <i class="m m-a" aria-hidden="true"></i><span class="n" id="trayn">0</span>
+  <span class="sr" id="traysr"></span>
+</button>
+
+<div id="keys" hidden role="dialog" aria-modal="false">
+  <p class="micro" id="keystitle" style="margin:0"></p>
+  <dl id="keyslist"></dl>
+</div>
+
+<footer class="wrap">
+  <div class="notes" id="notes"></div>
+  <p class="sources" id="sources"></p>
+</footer>
+
+<script>
+// ===========================================================================
+// THE STRING TABLE.
+//
+// It is deliberately short. Everything this page could say with a number, a
+// mark, a length or a position, it says that way instead — so the translation
+// surface is roughly a third of what the incumbent carries, and every one of
+// the strings below exists in all eight locales. Fewer strings, no orphans.
+//
+// Nothing in the DATA is in here and nothing in the data is ever translated:
+// company names, role titles, cities and board text print in the language
+// their board published them in. Translating a source claim would be exactly
+// the lie this register exists not to tell.
+// ===========================================================================
+const LOCALES = [
+  ['en', 'English'], ['es', 'Español'], ['pt-BR', 'Português (BR)'],
+  ['fr', 'Français'], ['de', 'Deutsch'], ['ja', '日本語'],
+  ['zh-Hans', '简体中文'], ['hi', 'हिन्दी'],
+];
+// Three lines today, a rewrite later if they are not here. No RTL locale
+// ships; the plumbing that would carry one does.
+const DIRS = { en:'ltr', es:'ltr', 'pt-BR':'ltr', fr:'ltr', de:'ltr', ja:'ltr',
+               'zh-Hans':'ltr', hi:'ltr' };
+
+const S = {
+en: {
+  title:'ROLE·ATLAS', signIn:'Sign in', lang:'Language',
+  home:'Where you can work', homeUnset:'not stated', homeElse:'Somewhere else',
+  homeClear:'Clear', homePick:'{c} — set as where you can work',
+  lRoles:'roles', lCompanies:'companies', lCountries:'countries', lSnapshot:'snapshot',
+  lSince:'new since your last visit',
+  allC:'All countries', plate:'{c} — {n} roles',
+  mRemote:'the posting says remote', mAbroad:'the posting says it hires from abroad',
+  mAbroadNo:'the posting says it does not', mSilent:'the posting says nothing',
+  qPh:'title or company', qAria:'Search titles and companies', clear:'Clear the search',
+  sortAria:'Order', sDeal:'One country after another', sNew:'Newest first',
+  sNear:'Nearest first', sCo:'By company',
+  bridge:'Search {t} instead — {n} roles', bridgeAria:'Your word, in the language the boards use',
+  censusHead:'Of {m} titles:', censusLatin:'in the Latin alphabet',
+  censusOther:'in another script', censusWhy:'Titles print in the language their own board published them in — so a word in your language may find nothing here while the same idea in theirs finds thousands.',
+  tally:'{n} of {m} roles', nearest:'nearest {d}',
+  empty:'Nothing matches.', emptyKept:'You have kept nothing yet.',
+  keepOn:'Keep this role', keepOff:'Stop keeping this role', tray:'{n} kept — show only these',
+  depth:'Depth, in roles',
+  seamSub:'{n} roles at {m} companies lie below this line.',
+  seamBody:'You have read {k} without an account, and nothing above was held back — every role, every mark, every receipt.',
+  seamKeep:'What you keep lives in this browser and nowhere else. An account is what would carry it to your phone.',
+  doorIn:'Sign in', doorOut:'Keep reading',
+  seamNoClerk:'Sign-in cannot be reached from this browser right now. The register opens through the other door, which needs nothing.',
+  seamOpened:'You opened the rest without an account. It stays open.',
+  mAsked:'asked', mIn:'signed in', mOut:'declined',
+  evWhere:'Where', evWork:'Workplace', evAbroad:'From abroad', evVisa:'Visa',
+  evSeen:'First seen', evBoard:'Board read', evFund:'Funding', evQual:'Qualified',
+  evOn:'On this board', evPost:'Open the posting', evCo:'Company', evDist:'Distance',
+  wRemote:'remote', wHybrid:'hybrid', wOnsite:'on-site', yes:'yes', no:'no',
+  qLetter:'a stated round letter', qAmount:'the size of a disclosed round',
+  qStage:'its funding directory’s growth-stage label',
+  roundNone:'round letter not stated', undisc:'undisclosed', dateNone:'date not stated',
+  seriesX:'Series {x}',
+  dWhat:'What', dWhom:'For whom', dWhy:'Why them',
+  prov:'AI-summarised · checked against their own site',
+  note1:'Every company here showed at least one open role, in one of the fifteen countries this register covers, on its own job board, on the snapshot date. A company we could not check is left off rather than shown as not hiring.',
+  note2:'The three marks are read from what a posting itself says. Most say nothing — 93% of the ones we measured carry no mark at all, and a posting that says nothing is not a no.',
+  note3:'Distance is derived, not published: it is measured between one fixed anchor per country, not between offices, and it is marked ≈ wherever it appears.',
+  note4:'The fifteen countries above are the whole register. If you can only work somewhere else, every role here is remote or relocation by definition, and the figure at the top says so as a zero.',
+  note5:'What you keep, where you can work, your language and whether you were asked to sign in are stored in this browser only. Nothing is sent anywhere.',
+  note6:'A first-seen date is the night a role’s URL first appeared in a build. It carries ✻ where we could not read the same board on the night before, so the date is when we first saw it — not that the role is new or old.',
+  srcBuild:'build report', srcData:'the data', srcSeen:'first seen',
+  keysTitle:'Keyboard', kMove:'move', kOpen:'open / close', kKeep:'keep',
+  kFind:'search', kCountry:'country', kHelp:'this card',
+  loadFail:'Could not load {src}: {msg}',
+  schemaFail:'This page reads schema v{want}; {src} is v{got}. Not rendering it.',
+},
+es: {
+  title:'ROLE·ATLAS', signIn:'Iniciar sesión', lang:'Idioma',
+  home:'Dónde puedes trabajar', homeUnset:'sin indicar', homeElse:'En otro sitio',
+  homeClear:'Borrar', homePick:'{c} — fijar como dónde puedes trabajar',
+  lRoles:'vacantes', lCompanies:'empresas', lCountries:'países', lSnapshot:'instantánea',
+  lSince:'nuevas desde tu última visita',
+  allC:'Todos los países', plate:'{c} — {n} vacantes',
+  mRemote:'la publicación dice remoto', mAbroad:'la publicación dice que contrata desde el extranjero',
+  mAbroadNo:'la publicación dice que no', mSilent:'la publicación no dice nada',
+  qPh:'título o empresa', qAria:'Buscar títulos y empresas', clear:'Borrar la búsqueda',
+  sortAria:'Orden', sDeal:'Un país tras otro', sNew:'Más nuevas primero',
+  sNear:'Más cercanas primero', sCo:'Por empresa',
+  bridge:'Buscar {t} en su lugar — {n} vacantes', bridgeAria:'Tu palabra, en el idioma de los portales',
+  censusHead:'De {m} títulos:', censusLatin:'en alfabeto latino',
+  censusOther:'en otra escritura', censusWhy:'Los títulos se imprimen en el idioma en que los publicó su propio portal — así que una palabra en tu idioma puede no encontrar nada aquí mientras la misma idea en el suyo encuentra miles.',
+  tally:'{n} de {m} vacantes', nearest:'más cercana {d}',
+  empty:'No hay coincidencias.', emptyKept:'Aún no has guardado ninguna.',
+  keepOn:'Guardar esta vacante', keepOff:'Dejar de guardarla', tray:'{n} guardadas — mostrar solo estas',
+  depth:'Profundidad, en vacantes',
+  seamSub:'Bajo esta línea hay {n} vacantes en {m} empresas.',
+  seamBody:'Has leído {k} sin cuenta, y no se recortó nada de lo anterior: todas las vacantes, todas las marcas, todos los recibos.',
+  seamKeep:'Lo que guardas vive en este navegador y en ningún otro sitio. Una cuenta es lo que lo llevaría a tu teléfono.',
+  doorIn:'Iniciar sesión', doorOut:'Seguir leyendo',
+  seamNoClerk:'Ahora mismo no se puede acceder al inicio de sesión desde este navegador. El registro se abre por la otra puerta, que no necesita nada.',
+  seamOpened:'Abriste el resto sin cuenta. Se queda abierto.',
+  mAsked:'preguntado', mIn:'con sesión', mOut:'rechazado',
+  evWhere:'Dónde', evWork:'Modalidad', evAbroad:'Desde el extranjero', evVisa:'Visado',
+  evSeen:'Vista por primera vez', evBoard:'Portal leído', evFund:'Financiación', evQual:'Calificada',
+  evOn:'En este portal', evPost:'Abrir la publicación', evCo:'Empresa', evDist:'Distancia',
+  wRemote:'remoto', wHybrid:'híbrido', wOnsite:'presencial', yes:'sí', no:'no',
+  qLetter:'una letra de ronda declarada', qAmount:'el tamaño de una ronda revelada',
+  qStage:'la etiqueta de etapa de su directorio de financiación',
+  roundNone:'letra de ronda no declarada', undisc:'sin revelar', dateNone:'fecha no declarada',
+  seriesX:'Serie {x}',
+  dWhat:'Qué', dWhom:'Para quién', dWhy:'Por qué ellos',
+  prov:'Resumen por IA · contrastado con su propio sitio',
+  note1:'Cada empresa aquí mostró al menos una vacante abierta, en uno de los quince países que cubre este registro, en su propio portal de empleo, en la fecha de la instantánea. Una empresa que no pudimos comprobar se omite en lugar de mostrarse como que no contrata.',
+  note2:'Las tres marcas se leen de lo que dice la propia publicación. La mayoría no dice nada — el 93 % de las que medimos no lleva ninguna marca, y una publicación que calla no es un no.',
+  note3:'La distancia es derivada, no publicada: se mide entre un anclaje fijo por país, no entre oficinas, y lleva ≈ allí donde aparece.',
+  note4:'Los quince países de arriba son todo el registro. Si solo puedes trabajar en otro sitio, cada vacante de aquí es remota o mudanza por definición, y la cifra de arriba lo dice con un cero.',
+  note5:'Lo que guardas, dónde puedes trabajar, tu idioma y si se te pidió iniciar sesión se almacenan solo en este navegador. No se envía nada a ninguna parte.',
+  note6:'La fecha de primera aparición es la noche en que la URL de una vacante apareció por primera vez en un build. Lleva ✻ cuando no pudimos leer el mismo portal la noche anterior, así que la fecha es cuándo la vimos por primera vez — no que la vacante sea nueva o vieja.',
+  srcBuild:'informe del build', srcData:'los datos', srcSeen:'vista por primera vez',
+  keysTitle:'Teclado', kMove:'mover', kOpen:'abrir / cerrar', kKeep:'guardar',
+  kFind:'buscar', kCountry:'país', kHelp:'esta tarjeta',
+  loadFail:'No se pudo cargar {src}: {msg}',
+  schemaFail:'Esta página lee el esquema v{want}; {src} es v{got}. No se renderiza.',
+},
+'pt-BR': {
+  title:'ROLE·ATLAS', signIn:'Entrar', lang:'Idioma',
+  home:'Onde você pode trabalhar', homeUnset:'não informado', homeElse:'Em outro lugar',
+  homeClear:'Limpar', homePick:'{c} — definir como onde você pode trabalhar',
+  lRoles:'vagas', lCompanies:'empresas', lCountries:'países', lSnapshot:'captura',
+  lSince:'novas desde sua última visita',
+  allC:'Todos os países', plate:'{c} — {n} vagas',
+  mRemote:'a vaga diz remoto', mAbroad:'a vaga diz que contrata do exterior',
+  mAbroadNo:'a vaga diz que não', mSilent:'a vaga não diz nada',
+  qPh:'título ou empresa', qAria:'Buscar títulos e empresas', clear:'Limpar a busca',
+  sortAria:'Ordem', sDeal:'Um país após o outro', sNew:'Mais novas primeiro',
+  sNear:'Mais próximas primeiro', sCo:'Por empresa',
+  bridge:'Buscar {t} em vez disso — {n} vagas', bridgeAria:'Sua palavra, no idioma dos portais',
+  censusHead:'De {m} títulos:', censusLatin:'no alfabeto latino',
+  censusOther:'em outra escrita', censusWhy:'Os títulos são impressos no idioma em que o próprio portal os publicou — então uma palavra no seu idioma pode não encontrar nada aqui enquanto a mesma ideia no idioma deles encontra milhares.',
+  tally:'{n} de {m} vagas', nearest:'mais próxima {d}',
+  empty:'Nada corresponde.', emptyKept:'Você ainda não guardou nenhuma.',
+  keepOn:'Guardar esta vaga', keepOff:'Parar de guardar', tray:'{n} guardadas — mostrar só estas',
+  depth:'Profundidade, em vagas',
+  seamSub:'Abaixo desta linha há {n} vagas em {m} empresas.',
+  seamBody:'Você leu {k} sem conta, e nada acima foi retido — todas as vagas, todas as marcas, todos os recibos.',
+  seamKeep:'O que você guarda vive neste navegador e em nenhum outro lugar. Uma conta é o que levaria isso para o seu celular.',
+  doorIn:'Entrar', doorOut:'Continuar lendo',
+  seamNoClerk:'O login não pode ser alcançado a partir deste navegador agora. O registro abre pela outra porta, que não precisa de nada.',
+  seamOpened:'Você abriu o resto sem conta. Fica aberto.',
+  mAsked:'perguntado', mIn:'entrou', mOut:'recusou',
+  evWhere:'Onde', evWork:'Modalidade', evAbroad:'Do exterior', evVisa:'Visto',
+  evSeen:'Vista pela primeira vez', evBoard:'Portal lido', evFund:'Financiamento', evQual:'Qualificada',
+  evOn:'Neste portal', evPost:'Abrir a vaga', evCo:'Empresa', evDist:'Distância',
+  wRemote:'remoto', wHybrid:'híbrido', wOnsite:'presencial', yes:'sim', no:'não',
+  qLetter:'uma letra de rodada declarada', qAmount:'o tamanho de uma rodada divulgada',
+  qStage:'o rótulo de estágio do seu diretório de financiamento',
+  roundNone:'letra da rodada não declarada', undisc:'não divulgado', dateNone:'data não declarada',
+  seriesX:'Série {x}',
+  dWhat:'O quê', dWhom:'Para quem', dWhy:'Por que eles',
+  prov:'Resumido por IA · conferido no próprio site deles',
+  note1:'Cada empresa aqui mostrou pelo menos uma vaga aberta, em um dos quinze países que este registro cobre, no seu próprio portal de empregos, na data da captura. Uma empresa que não conseguimos verificar fica de fora em vez de aparecer como não contratando.',
+  note2:'As três marcas são lidas do que a própria vaga diz. A maioria não diz nada — 93% das que medimos não têm marca alguma, e uma vaga que se cala não é um não.',
+  note3:'A distância é derivada, não publicada: é medida entre uma âncora fixa por país, não entre escritórios, e leva ≈ onde quer que apareça.',
+  note4:'Os quinze países acima são o registro inteiro. Se você só pode trabalhar em outro lugar, cada vaga aqui é remota ou mudança por definição, e o número no topo diz isso com um zero.',
+  note5:'O que você guarda, onde pode trabalhar, seu idioma e se você foi convidado a entrar ficam armazenados apenas neste navegador. Nada é enviado a lugar nenhum.',
+  note6:'A data de primeira aparição é a noite em que a URL de uma vaga apareceu pela primeira vez em um build. Ela leva ✻ quando não conseguimos ler o mesmo portal na noite anterior, então a data é quando a vimos pela primeira vez — não que a vaga seja nova ou velha.',
+  srcBuild:'relatório do build', srcData:'os dados', srcSeen:'vista pela primeira vez',
+  keysTitle:'Teclado', kMove:'mover', kOpen:'abrir / fechar', kKeep:'guardar',
+  kFind:'buscar', kCountry:'país', kHelp:'este cartão',
+  loadFail:'Não foi possível carregar {src}: {msg}',
+  schemaFail:'Esta página lê o esquema v{want}; {src} é v{got}. Não renderizando.',
+},
+fr: {
+  title:'ROLE·ATLAS', signIn:'Se connecter', lang:'Langue',
+  home:'Où vous pouvez travailler', homeUnset:'non précisé', homeElse:'Ailleurs',
+  homeClear:'Effacer', homePick:'{c} — définir comme lieu où vous pouvez travailler',
+  lRoles:'postes', lCompanies:'entreprises', lCountries:'pays', lSnapshot:'instantané',
+  lSince:'nouveaux depuis votre dernière visite',
+  allC:'Tous les pays', plate:'{c} — {n} postes',
+  mRemote:'l’annonce indique le télétravail', mAbroad:'l’annonce indique qu’elle recrute à l’étranger',
+  mAbroadNo:'l’annonce indique que non', mSilent:'l’annonce ne dit rien',
+  qPh:'intitulé ou entreprise', qAria:'Rechercher intitulés et entreprises', clear:'Effacer la recherche',
+  sortAria:'Ordre', sDeal:'Un pays après l’autre', sNew:'Les plus récents d’abord',
+  sNear:'Les plus proches d’abord', sCo:'Par entreprise',
+  bridge:'Rechercher plutôt {t} — {n} postes', bridgeAria:'Votre mot, dans la langue des sites d’emploi',
+  censusHead:'Sur {m} intitulés :', censusLatin:'en alphabet latin',
+  censusOther:'dans une autre écriture', censusWhy:'Les intitulés s’impriment dans la langue où leur propre site les a publiés — un mot dans votre langue peut donc ne rien trouver ici alors que la même idée dans la leur en trouve des milliers.',
+  tally:'{n} sur {m} postes', nearest:'le plus proche {d}',
+  empty:'Aucune correspondance.', emptyKept:'Vous n’avez encore rien gardé.',
+  keepOn:'Garder ce poste', keepOff:'Ne plus le garder', tray:'{n} gardés — n’afficher que ceux-ci',
+  depth:'Profondeur, en postes',
+  seamSub:'Sous cette ligne se trouvent {n} postes dans {m} entreprises.',
+  seamBody:'Vous en avez lu {k} sans compte, et rien au-dessus n’a été retenu — chaque poste, chaque marque, chaque reçu.',
+  seamKeep:'Ce que vous gardez vit dans ce navigateur et nulle part ailleurs. Un compte, c’est ce qui le porterait jusqu’à votre téléphone.',
+  doorIn:'Se connecter', doorOut:'Continuer à lire',
+  seamNoClerk:'La connexion est inaccessible depuis ce navigateur en ce moment. Le registre s’ouvre par l’autre porte, qui n’a besoin de rien.',
+  seamOpened:'Vous avez ouvert la suite sans compte. Elle reste ouverte.',
+  mAsked:'demandé', mIn:'connecté', mOut:'refusé',
+  evWhere:'Où', evWork:'Mode de travail', evAbroad:'Depuis l’étranger', evVisa:'Visa',
+  evSeen:'Vu pour la première fois', evBoard:'Site lu', evFund:'Financement', evQual:'Qualifiée',
+  evOn:'Sur ce site', evPost:'Ouvrir l’annonce', evCo:'Entreprise', evDist:'Distance',
+  wRemote:'télétravail', wHybrid:'hybride', wOnsite:'sur site', yes:'oui', no:'non',
+  qLetter:'une lettre de tour annoncée', qAmount:'la taille d’un tour divulgué',
+  qStage:'l’étiquette de stade de son annuaire de financement',
+  roundNone:'lettre du tour non précisée', undisc:'non divulgué', dateNone:'date non précisée',
+  seriesX:'Série {x}',
+  dWhat:'Quoi', dWhom:'Pour qui', dWhy:'Pourquoi eux',
+  prov:'Résumé par IA · vérifié sur leur propre site',
+  note1:'Chaque entreprise ici a montré au moins un poste ouvert, dans l’un des quinze pays que couvre ce registre, sur son propre site d’emploi, à la date de l’instantané. Une entreprise que nous n’avons pas pu vérifier est omise plutôt qu’affichée comme ne recrutant pas.',
+  note2:'Les trois marques sont lues dans ce que dit l’annonce elle-même. La plupart ne disent rien — 93 % de celles que nous avons mesurées ne portent aucune marque, et une annonce qui se tait n’est pas un non.',
+  note3:'La distance est dérivée, non publiée : elle est mesurée entre un point d’ancrage fixe par pays, non entre bureaux, et elle porte ≈ partout où elle apparaît.',
+  note4:'Les quinze pays ci-dessus sont tout le registre. Si vous ne pouvez travailler qu’ailleurs, chaque poste ici est en télétravail ou en expatriation par définition, et le chiffre en haut le dit par un zéro.',
+  note5:'Ce que vous gardez, où vous pouvez travailler, votre langue et le fait qu’on vous ait proposé de vous connecter sont conservés dans ce navigateur uniquement. Rien n’est envoyé nulle part.',
+  note6:'La date de première apparition est la nuit où l’URL d’un poste est apparue pour la première fois dans un build. Elle porte ✻ lorsque nous n’avons pas pu lire le même site la nuit précédente : la date dit quand nous l’avons vue, pas que le poste est récent ou ancien.',
+  srcBuild:'rapport de build', srcData:'les données', srcSeen:'première apparition',
+  keysTitle:'Clavier', kMove:'se déplacer', kOpen:'ouvrir / fermer', kKeep:'garder',
+  kFind:'rechercher', kCountry:'pays', kHelp:'cette carte',
+  loadFail:'Impossible de charger {src} : {msg}',
+  schemaFail:'Cette page lit le schéma v{want} ; {src} est en v{got}. Pas de rendu.',
+},
+de: {
+  title:'ROLE·ATLAS', signIn:'Anmelden', lang:'Sprache',
+  home:'Wo Sie arbeiten dürfen', homeUnset:'nicht angegeben', homeElse:'Woanders',
+  homeClear:'Löschen', homePick:'{c} — als Arbeitsort festlegen',
+  lRoles:'Stellen', lCompanies:'Unternehmen', lCountries:'Länder', lSnapshot:'Momentaufnahme',
+  lSince:'neu seit Ihrem letzten Besuch',
+  allC:'Alle Länder', plate:'{c} — {n} Stellen',
+  mRemote:'die Anzeige sagt remote', mAbroad:'die Anzeige sagt, sie stellt aus dem Ausland ein',
+  mAbroadNo:'die Anzeige sagt nein', mSilent:'die Anzeige sagt nichts',
+  qPh:'Titel oder Unternehmen', qAria:'Titel und Unternehmen durchsuchen', clear:'Suche löschen',
+  sortAria:'Reihenfolge', sDeal:'Ein Land nach dem anderen', sNew:'Neueste zuerst',
+  sNear:'Nächstgelegene zuerst', sCo:'Nach Unternehmen',
+  bridge:'Stattdessen {t} suchen — {n} Stellen', bridgeAria:'Ihr Wort in der Sprache der Jobboards',
+  censusHead:'Von {m} Titeln:', censusLatin:'in lateinischer Schrift',
+  censusOther:'in einer anderen Schrift', censusWhy:'Titel erscheinen in der Sprache, in der ihr eigenes Jobboard sie veröffentlicht hat — ein Wort in Ihrer Sprache findet hier also womöglich nichts, während derselbe Begriff in deren Sprache Tausende findet.',
+  tally:'{n} von {m} Stellen', nearest:'nächstgelegen {d}',
+  empty:'Nichts passt.', emptyKept:'Sie haben noch nichts gemerkt.',
+  keepOn:'Diese Stelle merken', keepOff:'Nicht mehr merken', tray:'{n} gemerkt — nur diese zeigen',
+  depth:'Tiefe, in Stellen',
+  seamSub:'Unter dieser Linie liegen {n} Stellen bei {m} Unternehmen.',
+  seamBody:'Sie haben {k} davon ohne Konto gelesen, und oben wurde nichts zurückgehalten — jede Stelle, jede Marke, jeder Beleg.',
+  seamKeep:'Was Sie merken, lebt nur in diesem Browser. Ein Konto ist das, was es auf Ihr Telefon tragen würde.',
+  doorIn:'Anmelden', doorOut:'Weiterlesen',
+  seamNoClerk:'Die Anmeldung ist aus diesem Browser gerade nicht erreichbar. Das Register öffnet sich durch die andere Tür, die nichts braucht.',
+  seamOpened:'Sie haben den Rest ohne Konto geöffnet. Er bleibt offen.',
+  mAsked:'gefragt', mIn:'angemeldet', mOut:'abgelehnt',
+  evWhere:'Wo', evWork:'Arbeitsform', evAbroad:'Aus dem Ausland', evVisa:'Visum',
+  evSeen:'Zuerst gesehen', evBoard:'Jobboard gelesen', evFund:'Finanzierung', evQual:'Qualifiziert',
+  evOn:'Auf diesem Board', evPost:'Anzeige öffnen', evCo:'Unternehmen', evDist:'Entfernung',
+  wRemote:'remote', wHybrid:'hybrid', wOnsite:'vor Ort', yes:'ja', no:'nein',
+  qLetter:'ein genannter Rundenbuchstabe', qAmount:'die Größe einer offengelegten Runde',
+  qStage:'das Wachstumsstadium laut seinem Finanzierungsverzeichnis',
+  roundNone:'Rundenbuchstabe nicht genannt', undisc:'nicht offengelegt', dateNone:'Datum nicht genannt',
+  seriesX:'Serie {x}',
+  dWhat:'Was', dWhom:'Für wen', dWhy:'Warum sie',
+  prov:'KI-zusammengefasst · gegen ihre eigene Website geprüft',
+  note1:'Jedes Unternehmen hier zeigte am Stichtag mindestens eine offene Stelle in einem der fünfzehn Länder dieses Registers auf seinem eigenen Jobboard. Ein Unternehmen, das wir nicht prüfen konnten, bleibt weg, statt als nicht einstellend zu erscheinen.',
+  note2:'Die drei Marken werden daraus gelesen, was die Anzeige selbst sagt. Die meisten sagen nichts — 93 % der gemessenen tragen gar keine Marke, und eine Anzeige, die schweigt, ist kein Nein.',
+  note3:'Die Entfernung ist abgeleitet, nicht veröffentlicht: gemessen zwischen einem festen Ankerpunkt je Land, nicht zwischen Büros, und überall mit ≈ gekennzeichnet.',
+  note4:'Die fünfzehn Länder oben sind das ganze Register. Wenn Sie nur woanders arbeiten dürfen, ist jede Stelle hier per Definition remote oder Umzug — und die Zahl oben sagt das als Null.',
+  note5:'Was Sie merken, wo Sie arbeiten dürfen, Ihre Sprache und ob Sie zur Anmeldung gefragt wurden, liegen nur in diesem Browser. Nichts wird irgendwohin gesendet.',
+  note6:'Das Erst-gesehen-Datum ist die Nacht, in der die URL einer Stelle zum ersten Mal in einem Build auftauchte. Es trägt ✻, wo wir dasselbe Jobboard in der Nacht davor nicht lesen konnten — das Datum sagt, wann wir sie zuerst sahen, nicht dass die Stelle neu oder alt ist.',
+  srcBuild:'Build-Bericht', srcData:'die Daten', srcSeen:'zuerst gesehen',
+  keysTitle:'Tastatur', kMove:'bewegen', kOpen:'öffnen / schließen', kKeep:'merken',
+  kFind:'suchen', kCountry:'Land', kHelp:'diese Karte',
+  loadFail:'{src} konnte nicht geladen werden: {msg}',
+  schemaFail:'Diese Seite liest Schema v{want}; {src} ist v{got}. Keine Darstellung.',
+},
+ja: {
+  title:'ROLE·ATLAS', signIn:'サインイン', lang:'言語',
+  home:'働ける場所', homeUnset:'未指定', homeElse:'それ以外の場所',
+  homeClear:'消去', homePick:'{c} — 働ける場所に設定',
+  lRoles:'求人', lCompanies:'企業', lCountries:'か国', lSnapshot:'取得日',
+  lSince:'前回の訪問以降に増えた求人',
+  allC:'すべての国', plate:'{c} — {n} 件の求人',
+  mRemote:'求人票にリモートと書かれている', mAbroad:'求人票に海外からの採用を行うと書かれている',
+  mAbroadNo:'求人票に行わないと書かれている', mSilent:'求人票には何も書かれていない',
+  qPh:'職種名または企業名', qAria:'職種名と企業名を検索', clear:'検索を消去',
+  sortAria:'並び順', sDeal:'国を順ぐりに', sNew:'新しい順',
+  sNear:'近い順', sCo:'企業順',
+  bridge:'代わりに {t} で検索 — {n} 件', bridgeAria:'あなたの言葉を、求人サイトが使う言葉で',
+  censusHead:'{m} 件の職種名のうち:', censusLatin:'ラテン文字',
+  censusOther:'それ以外の文字', censusWhy:'職種名は、それを掲載した求人サイトの言語のまま表示されます。ですから、あなたの言語の語ではここで何も見つからないのに、同じ意味の語を相手の言語で入れると何千件も見つかることがあります。',
+  tally:'{m} 件中 {n} 件', nearest:'最短 {d}',
+  empty:'該当なし。', emptyKept:'まだ何も保存していません。',
+  keepOn:'この求人を保存', keepOff:'保存をやめる', tray:'{n} 件保存 — これだけ表示',
+  depth:'深さ（求人件数）',
+  seamSub:'この線より下に、{m} 社の {n} 件の求人があります。',
+  seamBody:'アカウントなしで {k} 件を読みました。ここまで伏せたものは一つもありません — 求人も、マークも、証跡も。',
+  seamKeep:'保存したものはこのブラウザだけに残ります。アカウントは、それをあなたのスマートフォンへ運ぶためのものです。',
+  doorIn:'サインイン', doorOut:'このまま読む',
+  seamNoClerk:'このブラウザからは今サインインに到達できません。もう一方の扉から登録簿は開きます。そちらは何も必要としません。',
+  seamOpened:'アカウントなしで残りを開きました。開いたままです。',
+  mAsked:'表示', mIn:'サインイン', mOut:'見送り',
+  evWhere:'場所', evWork:'勤務形態', evAbroad:'海外から', evVisa:'ビザ',
+  evSeen:'初出', evBoard:'読んだ求人サイト', evFund:'資金調達', evQual:'採録理由',
+  evOn:'この求人サイト上', evPost:'求人票を開く', evCo:'企業', evDist:'距離',
+  wRemote:'リモート', wHybrid:'ハイブリッド', wOnsite:'出社', yes:'あり', no:'なし',
+  qLetter:'公表されたラウンド記号', qAmount:'公表された調達額の規模',
+  qStage:'資金調達ディレクトリの成長段階ラベル',
+  roundNone:'ラウンド記号の記載なし', undisc:'非公開', dateNone:'日付の記載なし',
+  seriesX:'シリーズ {x}',
+  dWhat:'事業', dWhom:'対象', dWhy:'理由',
+  prov:'AI要約 · 各社サイトと照合済み',
+  note1:'ここに載る企業はすべて、取得日の時点で、この登録簿が対象とする15か国のいずれかで、自社の求人サイトに少なくとも1件の求人を掲載していました。確認できなかった企業は「採用していない」と表示せず、掲載しません。',
+  note2:'3つのマークは求人票自身の記述から読み取ります。ほとんどは何も述べていません — 計測した求人票の93%はマークを持たず、沈黙は「いいえ」ではありません。',
+  note3:'距離は公表値ではなく導出値です。各国に1つの固定基準点の間で測っており、事業所間の距離ではありません。表示される箇所には必ず ≈ が付きます。',
+  note4:'上の15か国がこの登録簿のすべてです。それ以外の場所でしか働けないなら、ここの求人は定義上すべてリモートか移住であり、上の数字がそれをゼロで示します。',
+  note5:'保存した求人、働ける場所、言語、サインインを尋ねられたかどうかは、このブラウザにのみ保存されます。どこにも送信されません。',
+  note6:'初出の日付は、その求人のURLがビルドに初めて現れた夜です。前夜に同じ求人サイトを読めなかった場合は ✻ が付きます。つまりその日付は「私たちが最初に見た日」であり、求人が新しい・古いという意味ではありません。',
+  srcBuild:'ビルドレポート', srcData:'データ', srcSeen:'初出データ',
+  keysTitle:'キーボード', kMove:'移動', kOpen:'開く / 閉じる', kKeep:'保存',
+  kFind:'検索', kCountry:'国', kHelp:'このカード',
+  loadFail:'{src} を読み込めませんでした: {msg}',
+  schemaFail:'このページはスキーマ v{want} を読みます。{src} は v{got} です。描画しません。',
+},
+'zh-Hans': {
+  title:'ROLE·ATLAS', signIn:'登录', lang:'语言',
+  home:'你可以工作的地方', homeUnset:'未填写', homeElse:'其他地方',
+  homeClear:'清除', homePick:'{c} — 设为你可以工作的地方',
+  lRoles:'职位', lCompanies:'公司', lCountries:'个国家', lSnapshot:'快照',
+  lSince:'自上次访问以来新增',
+  allC:'所有国家', plate:'{c} — {n} 个职位',
+  mRemote:'招聘信息写明远程', mAbroad:'招聘信息写明从海外招聘',
+  mAbroadNo:'招聘信息写明不接受', mSilent:'招聘信息未作说明',
+  qPh:'职位名称或公司', qAria:'搜索职位名称和公司', clear:'清除搜索',
+  sortAria:'排序', sDeal:'各国轮流', sNew:'最新在前',
+  sNear:'最近在前', sCo:'按公司',
+  bridge:'改为搜索 {t} — {n} 个职位', bridgeAria:'把你的词换成招聘网站使用的词',
+  censusHead:'在 {m} 个职位名称中:', censusLatin:'使用拉丁字母',
+  censusOther:'使用其他文字', censusWhy:'职位名称按其招聘网站发布时的语言原样显示——所以用你的语言搜索可能一无所获，而同一个意思用他们的语言却能找到数千条。',
+  tally:'{m} 个职位中的 {n} 个', nearest:'最近 {d}',
+  empty:'没有匹配项。', emptyKept:'你还没有收藏任何职位。',
+  keepOn:'收藏这个职位', keepOff:'取消收藏', tray:'已收藏 {n} 个 — 只看这些',
+  depth:'深度（以职位计）',
+  seamSub:'这条线以下还有 {m} 家公司的 {n} 个职位。',
+  seamBody:'你在没有账号的情况下读了 {k} 个，上面没有任何保留——每个职位、每个标记、每份凭据。',
+  seamKeep:'你收藏的内容只存在这个浏览器里。账号正是把它带到你手机上的那样东西。',
+  doorIn:'登录', doorOut:'继续阅读',
+  seamNoClerk:'此浏览器目前无法访问登录。名录可以从另一扇门打开，那扇门什么都不需要。',
+  seamOpened:'你没有账号也打开了其余部分。它会一直开着。',
+  mAsked:'询问', mIn:'已登录', mOut:'已谢绝',
+  evWhere:'地点', evWork:'工作方式', evAbroad:'来自海外', evVisa:'签证',
+  evSeen:'首次出现', evBoard:'已读招聘页', evFund:'融资', evQual:'入选依据',
+  evOn:'在该招聘页', evPost:'打开招聘信息', evCo:'公司', evDist:'距离',
+  wRemote:'远程', wHybrid:'混合', wOnsite:'现场', yes:'是', no:'否',
+  qLetter:'公布的轮次字母', qAmount:'已披露轮次的规模',
+  qStage:'其融资目录的成长阶段标签',
+  roundNone:'未注明轮次字母', undisc:'未披露', dateNone:'未注明日期',
+  seriesX:'{x} 轮',
+  dWhat:'做什么', dWhom:'面向谁', dWhy:'为什么是他们',
+  prov:'AI 摘要 · 已与其官网核对',
+  note1:'此处每家公司都在快照日期当天，于本名录覆盖的十五个国家之一，在其自有招聘页上展示了至少一个空缺职位。我们无法核查的公司会被略去，而不是显示为不在招聘。',
+  note2:'三个标记读自招聘信息本身的措辞。大多数什么也没说——我们统计的招聘信息中有 93% 完全没有标记，而沉默不等于拒绝。',
+  note3:'距离是推导出来的，不是公布的：它测量的是每个国家一个固定锚点之间的距离，而不是办公室之间的距离，出现之处一律标注 ≈。',
+  note4:'上面的十五个国家就是名录的全部。如果你只能在别处工作，这里的每个职位按定义都是远程或搬迁——顶部那个数字用一个零说明了这一点。',
+  note5:'你的收藏、可工作地点、语言，以及是否被邀请登录，都只存放在这个浏览器里。没有任何内容被发送出去。',
+  note6:'首次出现的日期，是该职位链接第一次出现在某次构建中的那一夜。若前一夜我们无法读取同一个招聘页，日期会带 ✻ ——它表示我们第一次看到它的时间，而不是该职位新或旧。',
+  srcBuild:'构建报告', srcData:'数据', srcSeen:'首次出现',
+  keysTitle:'键盘', kMove:'移动', kOpen:'展开 / 收起', kKeep:'收藏',
+  kFind:'搜索', kCountry:'国家', kHelp:'这张卡片',
+  loadFail:'无法加载 {src}：{msg}',
+  schemaFail:'本页读取 schema v{want}；{src} 是 v{got}。不予渲染。',
+},
+hi: {
+  title:'ROLE·ATLAS', signIn:'साइन इन', lang:'भाषा',
+  home:'आप कहाँ काम कर सकते हैं', homeUnset:'नहीं बताया', homeElse:'कहीं और',
+  homeClear:'हटाएँ', homePick:'{c} — इसे अपना कार्यस्थल बनाएँ',
+  lRoles:'पद', lCompanies:'कंपनियाँ', lCountries:'देश', lSnapshot:'स्नैपशॉट',
+  lSince:'पिछली बार के बाद नए',
+  allC:'सभी देश', plate:'{c} — {n} पद',
+  mRemote:'विज्ञापन में रिमोट लिखा है', mAbroad:'विज्ञापन कहता है कि वह विदेश से भर्ती करता है',
+  mAbroadNo:'विज्ञापन कहता है कि नहीं', mSilent:'विज्ञापन कुछ नहीं कहता',
+  qPh:'पद या कंपनी', qAria:'पद और कंपनियाँ खोजें', clear:'खोज हटाएँ',
+  sortAria:'क्रम', sDeal:'एक के बाद एक देश', sNew:'सबसे नए पहले',
+  sNear:'सबसे नज़दीक पहले', sCo:'कंपनी से',
+  bridge:'इसके बजाय {t} खोजें — {n} पद', bridgeAria:'आपका शब्द, जॉब बोर्ड की भाषा में',
+  censusHead:'{m} शीर्षकों में से:', censusLatin:'रोमन लिपि में',
+  censusOther:'किसी और लिपि में', censusWhy:'शीर्षक उसी भाषा में छपते हैं जिसमें उनके अपने जॉब बोर्ड ने उन्हें प्रकाशित किया — इसलिए आपकी भाषा का शब्द यहाँ कुछ न पाए, जबकि उसी विचार का उनकी भाषा वाला शब्द हज़ारों पा ले।',
+  tally:'{m} में से {n} पद', nearest:'निकटतम {d}',
+  empty:'कुछ नहीं मिला।', emptyKept:'आपने अभी कुछ नहीं रखा।',
+  keepOn:'यह पद रखें', keepOff:'रखना बंद करें', tray:'{n} रखे — केवल ये दिखाएँ',
+  depth:'गहराई, पदों में',
+  seamSub:'इस रेखा के नीचे {m} कंपनियों के {n} पद हैं।',
+  seamBody:'आपने बिना खाते के {k} पढ़े, और ऊपर कुछ भी रोका नहीं गया — हर पद, हर चिह्न, हर रसीद।',
+  seamKeep:'आप जो रखते हैं वह केवल इसी ब्राउज़र में रहता है। खाता वही चीज़ है जो उसे आपके फ़ोन तक ले जाएगी।',
+  doorIn:'साइन इन', doorOut:'पढ़ते रहें',
+  seamNoClerk:'इस ब्राउज़र से अभी साइन-इन तक नहीं पहुँचा जा सकता। रजिस्टर दूसरे दरवाज़े से खुलता है, जिसे कुछ नहीं चाहिए।',
+  seamOpened:'आपने बिना खाते के बाक़ी खोल लिया। यह खुला रहेगा।',
+  mAsked:'पूछा', mIn:'साइन इन', mOut:'मना किया',
+  evWhere:'कहाँ', evWork:'कार्यरूप', evAbroad:'विदेश से', evVisa:'वीज़ा',
+  evSeen:'पहली बार देखा', evBoard:'पढ़ा गया बोर्ड', evFund:'फ़ंडिंग', evQual:'योग्यता',
+  evOn:'इस बोर्ड पर', evPost:'विज्ञापन खोलें', evCo:'कंपनी', evDist:'दूरी',
+  wRemote:'रिमोट', wHybrid:'हाइब्रिड', wOnsite:'ऑनसाइट', yes:'हाँ', no:'नहीं',
+  qLetter:'घोषित राउंड अक्षर', qAmount:'सार्वजनिक राउंड का आकार',
+  qStage:'उसकी फ़ंडिंग निर्देशिका का ग्रोथ-स्टेज लेबल',
+  roundNone:'राउंड अक्षर नहीं बताया', undisc:'अघोषित', dateNone:'तारीख़ नहीं बताई',
+  seriesX:'सीरीज़ {x}',
+  dWhat:'क्या', dWhom:'किसके लिए', dWhy:'ये क्यों',
+  prov:'AI-सारांश · उनकी अपनी साइट से मिलान किया',
+  note1:'यहाँ हर कंपनी ने स्नैपशॉट की तारीख़ को, इस रजिस्टर के पंद्रह देशों में से किसी एक में, अपने ही जॉब बोर्ड पर कम से कम एक खुला पद दिखाया था। जिस कंपनी को हम जाँच नहीं सके, उसे “भर्ती नहीं कर रही” दिखाने के बजाय छोड़ दिया गया है।',
+  note2:'तीनों चिह्न वही पढ़ते हैं जो विज्ञापन ख़ुद कहता है। ज़्यादातर कुछ नहीं कहते — हमने जितने मापे उनमें 93% पर कोई चिह्न नहीं है, और चुप्पी “नहीं” नहीं होती।',
+  note3:'दूरी निकाली गई है, प्रकाशित नहीं: यह हर देश के एक तय बिंदु के बीच नापी गई है, दफ़्तरों के बीच नहीं, और जहाँ भी दिखती है ≈ के साथ दिखती है।',
+  note4:'ऊपर के पंद्रह देश ही पूरा रजिस्टर हैं। अगर आप केवल कहीं और काम कर सकते हैं, तो यहाँ का हर पद परिभाषा से रिमोट या स्थानांतरण है — और ऊपर का आँकड़ा यही बात एक शून्य से कहता है।',
+  note5:'आप क्या रखते हैं, कहाँ काम कर सकते हैं, आपकी भाषा और आपसे साइन इन पूछा गया या नहीं — ये सब केवल इसी ब्राउज़र में रहते हैं। कहीं कुछ नहीं भेजा जाता।',
+  note6:'“पहली बार देखा” की तारीख़ वह रात है जब किसी पद का URL पहली बार किसी बिल्ड में आया। जहाँ हम पिछली रात वही बोर्ड नहीं पढ़ सके, वहाँ ✻ लगता है — यानी तारीख़ बताती है कि हमने उसे कब पहली बार देखा, यह नहीं कि पद नया है या पुराना।',
+  srcBuild:'बिल्ड रिपोर्ट', srcData:'डेटा', srcSeen:'पहली बार देखा',
+  keysTitle:'कीबोर्ड', kMove:'चलें', kOpen:'खोलें / बंद करें', kKeep:'रखें',
+  kFind:'खोजें', kCountry:'देश', kHelp:'यह कार्ड',
+  loadFail:'{src} लोड नहीं हो सका: {msg}',
+  schemaFail:'यह पेज schema v{want} पढ़ता है; {src} v{got} है। रेंडर नहीं किया जा रहा।',
+},
+};
+
+// ---------------------------------------------------------------------------
+// THE BRIDGE DICTIONARY.
+//
+// The measured dead end: in ja, `ソフトウェアエンジニア` returns zero while
+// `engineer` returns 2,270, and the page's answer is byte-identical to what
+// typing `zzzzqqq` returns. The reader is eight keystrokes from everything and
+// nothing says so.
+//
+// This table translates the READER'S word into the word the boards use — never
+// the other way round. A posting's title is never rewritten; the page just
+// offers the English term with its count beside it, so the choice is the
+// reader's and the evidence is untouched.
+// ---------------------------------------------------------------------------
+const TERMS = [
+  { en:'engineer',  ja:['エンジニア','技術者','エンジニヤ'], 'zh-Hans':['工程师'], de:['ingenieur'], fr:['ingénieur'], es:['ingeniero','ingeniera'], 'pt-BR':['engenheiro','engenheira'], hi:['इंजीनियर','अभियंता'] },
+  { en:'software engineer', ja:['ソフトウェアエンジニア','ソフトウエアエンジニア','ソフトウェア'], 'zh-Hans':['软件工程师','软件'], de:['softwareentwickler','softwareingenieur'], fr:['ingénieur logiciel'], es:['ingeniero de software'], 'pt-BR':['engenheiro de software'], hi:['सॉफ़्टवेयर इंजीनियर','सॉफ्टवेयर'] },
+  { en:'developer', ja:['開発者','デベロッパー'], 'zh-Hans':['开发','开发者'], de:['entwickler'], fr:['développeur','developpeur'], es:['desarrollador'], 'pt-BR':['desenvolvedor'], hi:['डेवलपर'] },
+  { en:'designer',  ja:['デザイナー','デザイン'], 'zh-Hans':['设计师','设计'], de:['designer','gestalter'], fr:['designer','concepteur'], es:['diseñador'], 'pt-BR':['designer'], hi:['डिज़ाइनर'] },
+  { en:'product',   ja:['プロダクト','製品'], 'zh-Hans':['产品'], de:['produkt'], fr:['produit'], es:['producto'], 'pt-BR':['produto'], hi:['प्रोडक्ट','उत्पाद'] },
+  { en:'manager',   ja:['マネージャー','管理職','マネジャー'], 'zh-Hans':['经理','管理'], de:['manager','leiter'], fr:['responsable','manager'], es:['gerente','responsable'], 'pt-BR':['gerente'], hi:['मैनेजर','प्रबंधक'] },
+  { en:'data',      ja:['データ'], 'zh-Hans':['数据'], de:['daten'], fr:['données','donnees'], es:['datos'], 'pt-BR':['dados'], hi:['डेटा'] },
+  { en:'machine learning', ja:['機械学習','ＡＩ'], 'zh-Hans':['机器学习','人工智能'], de:['maschinelles lernen'], fr:['apprentissage automatique'], es:['aprendizaje automático'], 'pt-BR':['aprendizado de máquina'], hi:['मशीन लर्निंग'] },
+  { en:'sales',     ja:['営業','セールス','販売'], 'zh-Hans':['销售'], de:['vertrieb'], fr:['ventes','commercial'], es:['ventas'], 'pt-BR':['vendas'], hi:['बिक्री','सेल्स'] },
+  { en:'marketing', ja:['マーケティング'], 'zh-Hans':['市场','营销'], de:['marketing'], fr:['marketing'], es:['mercadotecnia','márketing'], 'pt-BR':['marketing'], hi:['मार्केटिंग','विपणन'] },
+  { en:'finance',   ja:['財務','経理','ファイナンス'], 'zh-Hans':['财务','金融'], de:['finanzen'], fr:['finance'], es:['finanzas'], 'pt-BR':['finanças'], hi:['वित्त'] },
+  { en:'legal',     ja:['法務'], 'zh-Hans':['法务','法律'], de:['recht','jurist'], fr:['juridique'], es:['jurídico','legal'], 'pt-BR':['jurídico'], hi:['क़ानूनी','विधि'] },
+  { en:'security',  ja:['セキュリティ','情報セキュリティ'], 'zh-Hans':['安全','信息安全'], de:['sicherheit'], fr:['sécurité','securite'], es:['seguridad'], 'pt-BR':['segurança'], hi:['सुरक्षा'] },
+  { en:'support',   ja:['サポート','カスタマーサポート'], 'zh-Hans':['支持','客服'], de:['support','kundendienst'], fr:['support','assistance'], es:['soporte'], 'pt-BR':['suporte'], hi:['सपोर्ट','सहायता'] },
+  { en:'operations',ja:['オペレーション','運用'], 'zh-Hans':['运营'], de:['betrieb'], fr:['opérations'], es:['operaciones'], 'pt-BR':['operações'], hi:['ऑपरेशंस','संचालन'] },
+  { en:'research',  ja:['研究','リサーチ'], 'zh-Hans':['研究'], de:['forschung'], fr:['recherche'], es:['investigación'], 'pt-BR':['pesquisa'], hi:['अनुसंधान','रिसर्च'] },
+  { en:'analyst',   ja:['アナリスト','分析'], 'zh-Hans':['分析师'], de:['analyst'], fr:['analyste'], es:['analista'], 'pt-BR':['analista'], hi:['विश्लेषक'] },
+  { en:'backend',   ja:['バックエンド','サーバーサイド'], 'zh-Hans':['后端'], de:['backend'], fr:['backend'], es:['backend'], 'pt-BR':['backend'], hi:['बैकएंड'] },
+  { en:'frontend',  ja:['フロントエンド'], 'zh-Hans':['前端'], de:['frontend'], fr:['frontend'], es:['frontend'], 'pt-BR':['frontend'], hi:['फ्रंटएंड'] },
+  { en:'intern',    ja:['インターン','新卒'], 'zh-Hans':['实习'], de:['praktikum','praktikant'], fr:['stage','stagiaire'], es:['prácticas','becario'], 'pt-BR':['estágio','estagiário'], hi:['इंटर्न'] },
+  { en:'senior',    ja:['シニア','上級'], 'zh-Hans':['高级','资深'], de:['senior'], fr:['senior'], es:['senior'], 'pt-BR':['sênior'], hi:['सीनियर','वरिष्ठ'] },
+  { en:'remote',    ja:['リモート','在宅'], 'zh-Hans':['远程'], de:['remote','fernarbeit'], fr:['télétravail','teletravail'], es:['remoto','teletrabajo'], 'pt-BR':['remoto'], hi:['रिमोट'] },
+  { en:'recruiter', ja:['採用','リクルーター','人事'], 'zh-Hans':['招聘','人力资源'], de:['recruiting','personal'], fr:['recrutement'], es:['reclutamiento','selección'], 'pt-BR':['recrutamento'], hi:['भर्ती'] },
+  { en:'customer success', ja:['カスタマーサクセス'], 'zh-Hans':['客户成功'], de:['kundenerfolg'], fr:['succès client'], es:['éxito del cliente'], 'pt-BR':['sucesso do cliente'], hi:['कस्टमर सक्सेस'] },
+];
+
+// ---------------------------------------------------------------------------
+// locale
+// ---------------------------------------------------------------------------
+const LKEY = 'roleatlas.p.lang';
+let LOC = 'en';
+function pickLocale() {
+  let saved = null;
+  try { saved = localStorage.getItem(LKEY); } catch {}
+  if (saved && S[saved]) return saved;
+  const ids = LOCALES.map(([id]) => id);
+  for (const want of (navigator.languages || [navigator.language || 'en'])) {
+    const w = String(want);
+    if (ids.includes(w)) return w;
+    const base = w.toLowerCase().split('-')[0];
+    if (base === 'pt') return 'pt-BR';
+    if (base === 'zh') return 'zh-Hans';
+    const hit = ids.find((id) => id.toLowerCase().split('-')[0] === base);
+    if (hit) return hit;
+  }
+  return 'en';
+}
+// A missing key falls back to English rather than printing the key itself: an
+// untranslated word is a bug, but a raw key is a broken page.
+function t(key, vars) {
+  let s = (S[LOC] && S[LOC][key]) ?? S.en[key] ?? '';
+  if (vars) for (const [k, v] of Object.entries(vars)) s = s.split('{' + k + '}').join(v);
+  return s;
+}
+window.__t = t;
+
+let NF = new Intl.NumberFormat('en');
+let DF = new Intl.DateTimeFormat('en', { year: 'numeric', month: 'short', day: 'numeric' });
+// Every number on the page goes through the reader's locale. The incumbent
+// hardcodes 'en-IN', which is a bug in seven of the eight locales shipped here.
+const num = (n) => NF.format(n);
+const day = (iso) => {
+  if (!iso) return '';
+  const d = new Date(iso + (iso.length === 10 ? 'T00:00:00Z' : ''));
+  return isNaN(d) ? iso : DF.format(d);
+};
+
+// ---------------------------------------------------------------------------
+// the fifteen, and one anchor each
+// ---------------------------------------------------------------------------
+const COUNTRIES = [
+  'India','United Kingdom','Ireland','Germany','Netherlands','France','Spain',
+  'Sweden','Denmark','Norway','Finland','Japan','Singapore','Australia','New Zealand',
+];
+const CODE = { India:'IN','United Kingdom':'GB', Ireland:'IE', Germany:'DE',
+  Netherlands:'NL', France:'FR', Spain:'ES', Sweden:'SE', Denmark:'DK',
+  Norway:'NO', Finland:'FI', Japan:'JP', Singapore:'SG', Australia:'AU',
+  'New Zealand':'NZ' };
+// One fixed anchor per country — its capital, except India, whose anchor is
+// Bengaluru because that is where this dataset's mass actually sits. An anchor
+// places a country on a scale; it never claims to be an office.
+const ANCHOR = { India:[12.97,77.59],'United Kingdom':[51.51,-0.13], Ireland:[53.35,-6.26],
+  Germany:[52.52,13.40], Netherlands:[52.37,4.90], France:[48.86,2.35], Spain:[40.42,-3.70],
+  Sweden:[59.33,18.07], Denmark:[55.68,12.57], Norway:[59.91,10.75], Finland:[60.17,24.94],
+  Japan:[35.68,139.69], Singapore:[1.35,103.82], Australia:[-33.87,151.21],
+  'New Zealand':[-41.29,174.78] };
+const ELSEWHERE = '↗';   // the sixteenth cell: everywhere this register is not
+function greatCircle(a, b) {
+  const R = 6371, r = Math.PI / 180;
+  const [la1, lo1] = a, [la2, lo2] = b;
+  const dla = (la2 - la1) * r, dlo = (lo2 - lo1) * r;
+  const h = Math.sin(dla / 2) ** 2 +
+    Math.cos(la1 * r) * Math.cos(la2 * r) * Math.sin(dlo / 2) ** 2;
+  return Math.round(2 * R * Math.asin(Math.min(1, Math.sqrt(h))));
+}
+
+// ---------------------------------------------------------------------------
+// state
+// ---------------------------------------------------------------------------
+const KEEPK = 'roleatlas.p.keep', HOMEK = 'roleatlas.p.home',
+      GATEK = 'roleatlas.p.gate', VISITK = 'roleatlas.p.visit';
+const PREVIEW = 300;      // roles, free, dealt one country at a time
+const CH = 50;            // rows per chunk
+const REDUCE = matchMedia('(prefers-reduced-motion: reduce)');
+
+const $ = (s) => document.querySelector(s);
+const el = (tag, cls, text) => {
+  const n = document.createElement(tag);
+  if (cls) n.className = cls;
+  if (text != null) n.textContent = text;   // never innerHTML: the data is untrusted
+  return n;
+};
+const store = {
+  get(k, d) { try { const v = localStorage.getItem(k); return v == null ? d : JSON.parse(v); } catch { return d; } },
+  set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} },
+};
+
+let ROLES = [], COS = [], SNAP = '', DESCS = {}, SEEN = new Map();
+let COUNT = {}, TOTALCO = 0;
+let view = [], chunks = [], built = [];
+let cursor = -1, openIdx = -1;
+let home = store.get(HOMEK, null);          // stated, never guessed
+let kept = new Set(store.get(KEEPK, []));
+let gate = store.get(GATEK, { shown: 0, signin: 0, bypass: 0, open: false });
+let lastVisit = store.get(VISITK, null);
+let sinceN = 0;
+const F = { country: null, mark: null, q: '', sort: 'deal', keptOnly: false };
+let scriptLatin = 0, scriptOther = 0;
+
+const norm = (s) => (s || '').toLowerCase();
+const isLatinOnly = (s) => !/[　-鿿＀-￯ऀ-ॿЀ-ӿ가-힯]/.test(s);
+
+// ---------------------------------------------------------------------------
+// data
+// ---------------------------------------------------------------------------
+const SCHEMA = 10;
+const asked = new URLSearchParams(location.search).get('data');
+const src = asked && !/^[a-z]+:|^\/\//i.test(asked) ? asked : '../data/companies.json';
+const askedSeen = new URLSearchParams(location.search).get('seen');
+const seenSrc = askedSeen && !/^[a-z]+:|^\/\//i.test(askedSeen) ? askedSeen : '../data/first-seen.json';
+const soft = (u) => fetch(u, { cache: 'no-cache' })
+  .then((r) => r.ok ? r.json() : null).catch(() => null);
+
+function flatten(data) {
+  SNAP = data.snapshot || '';
+  COS = data.companies || [];
+  TOTALCO = COS.length;
+  let i = 0;
+  for (const c of COS) {
+    for (const r of (c.roles || [])) {
+      const ctry = (r.countries && r.countries[0]) || null;
+      const seen = SEEN.get(r.url);
+      ROLES.push({
+        i: i++, t: r.title || '', u: r.url || '', co: c, ctry,
+        cc: ctry ? (CODE[ctry] || '') : '',
+        wp: r.workplace || null, visa: r.visa || 'unknown',
+        ab: r.hire_from_abroad || 'unknown',
+        loc: r.locations || [], dept: r.department || null,
+        seen: seen ? seen.date : null, conf: seen ? seen.confirmed : false,
+        nt: norm(r.title) + ' ' + norm(c.name),
+      });
+      if (isLatinOnly(r.title || '')) scriptLatin++; else scriptOther++;
+      if (ctry) COUNT[ctry] = (COUNT[ctry] || 0) + 1;
+    }
+  }
+  // The return visit. first-seen carries a date per URL, so "what appeared
+  // since you last looked" is a subtraction, not a promise. Roles that VANISHED
+  // are not counted, because the build does not record them — absence stays
+  // absence, even when it would make a better number.
+  if (lastVisit) sinceN = ROLES.filter((r) => r.seen && r.seen > lastVisit).length;
+}
+
+// ---------------------------------------------------------------------------
+// the ordering
+// ---------------------------------------------------------------------------
+// "One country after another" is this register's own order and its own answer
+// to who is reading. Dealt round-robin from the fifteen, a reader anywhere sees
+// their own country inside the first fifteen rows instead of descending through
+// whichever company happens to be largest — and the free three hundred is
+// automatically a sample of everywhere rather than a sample of Databricks.
+function deal(list) {
+  const by = new Map(COUNTRIES.map((c) => [c, []]));
+  const rest = [];
+  for (const r of list) (by.get(r.ctry) || rest).push(r);
+  const out = []; let more = true;
+  for (let k = 0; more; k++) {
+    more = false;
+    for (const c of COUNTRIES) {
+      const b = by.get(c);
+      if (k < b.length) { out.push(b[k]); more = true; }
+    }
+  }
+  return out.concat(rest);
+}
+function distOf(r) {
+  if (!home || home === ELSEWHERE || !r.ctry) return null;
+  if (r.ctry === home) return 0;
+  const a = ANCHOR[home], b = ANCHOR[r.ctry];
+  return (a && b) ? greatCircle(a, b) : null;
+}
+function order(list) {
+  if (F.sort === 'new') {
+    return list.slice().sort((a, b) => (b.seen || '').localeCompare(a.seen || '') || a.i - b.i);
+  }
+  if (F.sort === 'near' && home && home !== ELSEWHERE) {
+    return list.slice().sort((a, b) => {
+      const x = distOf(a), y = distOf(b);
+      if (x == null && y == null) return a.i - b.i;
+      if (x == null) return 1;
+      if (y == null) return -1;
+      return x - y || a.i - b.i;
+    });
+  }
+  if (F.sort === 'co') {
+    return list.slice().sort((a, b) => a.co.name.localeCompare(b.co.name) || a.i - b.i);
+  }
+  return deal(list);
+}
+function filtered() {
+  let out = ROLES;
+  if (F.keptOnly) out = out.filter((r) => kept.has(r.u));
+  if (F.country) out = out.filter((r) => r.ctry === F.country);
+  if (F.mark === 'r') out = out.filter((r) => r.wp === 'remote');
+  else if (F.mark === 'a') out = out.filter((r) => r.ab === 'yes' || r.visa === 'yes');
+  else if (F.mark === 'n') out = out.filter((r) => (r.ab === 'no' || r.visa === 'no') && !(r.ab === 'yes' || r.visa === 'yes'));
+  else if (F.mark === 's') out = out.filter((r) => r.ab === 'unknown' && r.visa === 'unknown' && r.wp !== 'remote');
+  else if (F.mark === 'since') out = out.filter((r) => r.seen && lastVisit && r.seen > lastVisit);
+  const q = norm(F.q.trim());
+  if (q) out = out.filter((r) => r.nt.includes(q));
+  return order(out);
+}
+function countFor(term) {
+  const q = norm(term);
+  let base = ROLES;
+  if (F.country) base = base.filter((r) => r.ctry === F.country);
+  return base.reduce((n, r) => n + (r.nt.includes(q) ? 1 : 0), 0);
+}
+
+// ---------------------------------------------------------------------------
+// chrome
+// ---------------------------------------------------------------------------
+function markEl(kind) {
+  return el('i', 'm m-' + kind);
+}
+function figure(n, label, cls) {
+  const f = el('div', 'fig' + (cls ? ' ' + cls : ''));
+  f.append(el('span', 'd micro', label), el('span', 'n', num(n)));
+  return f;
+}
+function paintFigs() {
+  const box = $('#figs');
+  box.replaceChildren();
+  box.append(figure(ROLES.length, t('lRoles')), figure(TOTALCO, t('lCompanies')));
+  // The reader's own number. Set your country and the register answers "what is
+  // here for me" with one integer; choose "somewhere else" and the integer is 0,
+  // which is the whole of the corrected brief said without a sentence.
+  if (home) {
+    const n = home === ELSEWHERE ? 0 : (COUNT[home] || 0);
+    const f = figure(n, home === ELSEWHERE ? ELSEWHERE : CODE[home], 'me');
+    f.setAttribute('aria-label', t('home') + ': ' +
+      (home === ELSEWHERE ? t('homeElse') : home) + ' — ' + num(n) + ' ' + t('lRoles'));
+    f.title = home === ELSEWHERE ? t('homeElse') : home;
+    box.append(f);
+  } else {
+    box.append(figure(COUNTRIES.length, t('lCountries')));
+  }
+  const snap = el('div', 'fig');
+  snap.append(el('span', 'd micro', t('lSnapshot')), el('span', 'n', day(SNAP)));
+  snap.querySelector('.n').style.fontSize = '1.35rem';
+  box.append(snap);
+}
+
+function paintStrip() {
+  const strip = $('#strip');
+  strip.replaceChildren();
+  const max = Math.max(1, ...COUNTRIES.map((c) => COUNT[c] || 0));
+  const mk = (name, n, isAll) => {
+    const b = el('button', 'cell' + (isAll ? ' all' : '') + (n ? '' : ' nil') + (name && home === name ? ' home' : ''));
+    b.type = 'button';
+    b.setAttribute('aria-pressed', String(isAll ? !F.country : F.country === name));
+    b.setAttribute('aria-label', isAll ? t('allC') : t('plate', { c: name, n: num(n) }));
+    const fill = el('span', 'fill');
+    fill.style.height = (isAll ? 0 : Math.max(3, Math.round((n / max) * 84))) + '%';
+    b.append(fill, el('span', 'cc', isAll ? '∗' : CODE[name]), el('span', 'cn', num(n)));
+    b.addEventListener('click', () => {
+      F.country = isAll ? null : (F.country === name ? null : name);
+      paintStrip(); writeURL(true); render();
+      window.scrollTo({ top: 0, behavior: 'auto' });
+    });
+    return b;
+  };
+  strip.append(mk(null, ROLES.length, true));
+  for (const c of COUNTRIES) strip.append(mk(c, COUNT[c] || 0, false));
+}
+
+function paintPicker() {
+  const g = $('#pickgrid');
+  g.replaceChildren();
+  const cell = (name, code, n, cls) => {
+    const b = el('button', 'pk' + (cls ? ' ' + cls : ''));
+    b.type = 'button';
+    b.setAttribute('aria-pressed', String(home === name));
+    b.setAttribute('aria-label', t('homePick', { c: name === ELSEWHERE ? t('homeElse') : name }));
+    b.append(el('span', 'pc', code));
+    if (n != null) b.append(el('span', 'pn', num(n)));
+    b.addEventListener('click', () => {
+      home = (home === name) ? null : name;
+      store.set(HOMEK, home);
+      closePicker();
+      paintHome(); paintFigs(); paintStrip(); paintPicker(); paintSort(); render();
+      $('#homebtn').focus();
+    });
+    return b;
+  };
+  for (const c of COUNTRIES) g.append(cell(c, CODE[c], COUNT[c] || 0));
+  g.append(cell(ELSEWHERE, ELSEWHERE, 0, 'else'));
+  if (home) {
+    const b = el('button', 'pk clear');
+    b.type = 'button';
+    b.setAttribute('aria-label', t('homeClear'));
+    b.append(el('span', 'pc', '✕'));
+    b.addEventListener('click', () => {
+      home = null; store.set(HOMEK, null); closePicker();
+      paintHome(); paintFigs(); paintStrip(); paintPicker(); paintSort(); render();
+      $('#homebtn').focus();
+    });
+    g.append(b);
+  }
+}
+function closePicker() {
+  $('#picker').hidden = true;
+  $('#homebtn').setAttribute('aria-expanded', 'false');
+}
+function paintHome() {
+  const b = $('#homebtn');
+  const code = home === ELSEWHERE ? ELSEWHERE : (home ? CODE[home] : '');
+  $('#homecode').textContent = code;
+  $('#homeglyph').hidden = !!home;
+  if (home) b.dataset.set = ''; else delete b.dataset.set;
+  $('#homesr').textContent = t('home') + ': ' +
+    (home ? (home === ELSEWHERE ? t('homeElse') : home) : t('homeUnset'));
+}
+
+function paintMarks() {
+  const box = $('#marks');
+  box.replaceChildren();
+  const nR = ROLES.filter((r) => r.wp === 'remote').length;
+  const nA = ROLES.filter((r) => r.ab === 'yes' || r.visa === 'yes').length;
+  const nN = ROLES.filter((r) => (r.ab === 'no' || r.visa === 'no') && !(r.ab === 'yes' || r.visa === 'yes')).length;
+  const nS = ROLES.length - nR - nA - nN;
+  const chip = (kind, n, label, nil) => {
+    const b = el('button', 'mk');
+    b.type = 'button';
+    b.setAttribute('aria-pressed', String(F.mark === kind));
+    b.setAttribute('aria-label', label + ' — ' + num(n));
+    b.append(markEl(kind === 'r' ? 'r' : kind === 'a' ? 'a' : kind === 'n' ? 'n' : 's'));
+    b.append(el('span', 'v' + (nil ? ' nil' : ''), num(n)));
+    b.addEventListener('click', () => {
+      F.mark = F.mark === kind ? null : kind; paintMarks(); writeURL(true); render();
+      window.scrollTo({ top: 0, behavior: 'auto' });
+    });
+    return b;
+  };
+  box.append(chip('r', nR, t('mRemote')), chip('a', nA, t('mAbroad')),
+             chip('n', nN, t('mAbroadNo')), chip('s', nS, t('mSilent'), true));
+  const bar = $('#tribar'), tot = Math.max(1, ROLES.length);
+  bar.querySelector('.b-r').style.width = (nR / tot * 100) + '%';
+  bar.querySelector('.b-a').style.width = (nA / tot * 100) + '%';
+  bar.querySelector('.b-n').style.width = (nN / tot * 100) + '%';
+}
+
+function paintSort() {
+  const s = $('#sort');
+  const keep = F.sort;
+  s.replaceChildren();
+  const add = (v, label) => { const o = el('option', null, label); o.value = v; s.append(o); };
+  add('deal', t('sDeal'));
+  add('new', t('sNew'));
+  if (home && home !== ELSEWHERE) add('near', t('sNear'));
+  add('co', t('sCo'));
+  if (keep === 'near' && !(home && home !== ELSEWHERE)) F.sort = 'deal';
+  s.value = F.sort;
+  s.setAttribute('aria-label', t('sortAria'));
+}
+
+function paintLang() {
+  const s = $('#lang');
+  s.replaceChildren();
+  for (const [id, name] of LOCALES) {
+    const o = el('option', null, name); o.value = id; s.append(o);
+  }
+  s.value = LOC;
+  s.setAttribute('aria-label', t('lang'));
+}
+
+function paintNotes() {
+  const box = $('#notes');
+  box.replaceChildren();
+  for (const k of ['note1','note2','note3','note4','note5','note6']) box.append(el('p', null, t(k)));
+  const src = $('#sources');
+  src.replaceChildren();
+  const a = (href, label) => { const n = el('a', null, label); n.href = href; return n; };
+  src.append(a('../data/build-report.json', t('srcBuild')),
+             a('../data/companies.json', t('srcData')),
+             a('../data/first-seen.json', t('srcSeen')));
+}
+
+function paintKeys() {
+  $('#keystitle').textContent = t('keysTitle');
+  const dl = $('#keyslist');
+  dl.replaceChildren();
+  const row = (k, v) => { dl.append(el('dt', null, k), el('dd', null, v)); };
+  row('j k ↑ ↓', t('kMove'));
+  row('↵', t('kOpen'));
+  row('s', t('kKeep'));
+  row('/', t('kFind'));
+  row('[ ]', t('kCountry'));
+  row('?', t('kHelp'));
+  $('#keyhint').setAttribute('aria-label', t('keysTitle'));
+}
+
+// ---------------------------------------------------------------------------
+// the register
+// ---------------------------------------------------------------------------
+function marksFor(r) {
+  const box = el('span', 'rm');
+  const yes = r.ab === 'yes' || r.visa === 'yes';
+  const no = !yes && (r.ab === 'no' || r.visa === 'no');
+  if (r.wp === 'remote') box.append(markEl('r'));
+  if (yes) box.append(markEl('a'));
+  else if (no) box.append(markEl('n'));
+  // and nothing at all when the posting said nothing. Absence stays absence.
+  const words = [];
+  if (r.wp === 'remote') words.push(t('mRemote'));
+  if (yes) words.push(t('mAbroad'));
+  else if (no) words.push(t('mAbroadNo'));
+  if (words.length) box.setAttribute('aria-label', words.join(' · '));
+  else box.setAttribute('aria-hidden', 'true');
+  return box;
+}
+
+function rowEl(r, n) {
+  const row = el('div', 'row');
+  row.id = 'r' + n;
+  row.setAttribute('role', 'option');
+  row.setAttribute('aria-selected', 'false');
+  if ((n + 1) % 50 === 0) row.classList.add('d50');
+  else if ((n + 1) % 10 === 0) row.classList.add('d10');
+  if (kept.has(r.u)) row.classList.add('kept');
+  row.dataset.n = String(n);
+
+  const keep = el('button', 'keep');
+  keep.type = 'button'; keep.tabIndex = -1;
+  keep.setAttribute('aria-label', (kept.has(r.u) ? t('keepOff') : t('keepOn')) + ': ' + r.t);
+  keep.append(el('i'));
+  keep.addEventListener('click', (e) => { e.stopPropagation(); toggleKeep(n); });
+
+  row.append(keep, el('span', 'rn', String(n + 1).padStart(4, '0')));
+  row.append(el('span', 'rt', r.t));                 // source language, always
+  row.append(el('span', 'rc', r.co.name));
+  const k = el('span', 'rk' + (home && r.ctry === home ? ' home' : ''), r.cc);
+  k.title = r.ctry || '';
+  row.append(k);
+  const d = distOf(r);
+  const dd = el('span', 'rd' + (d === 0 ? ' zero' : ''));
+  if (d != null) {
+    dd.textContent = d === 0 ? '0' : '≈' + num(d);
+    dd.setAttribute('aria-label', t('evDist') + ' ≈ ' + num(d) + ' km');
+  }
+  row.append(dd, marksFor(r));
+  const x = el('span', 'rx', '›');
+  x.setAttribute('aria-hidden', 'true');
+  row.append(x);
+  row.setAttribute('aria-expanded', 'false');
+  row.addEventListener('click', () => { seat(n); toggleSheet(n); });
+  return row;
+}
+
+function ensureChunk(ci) {
+  if (built[ci] || !chunks[ci]) return;
+  built[ci] = true;
+  const frag = document.createDocumentFragment();
+  const from = ci * CH, to = Math.min(view.length, from + CH);
+  for (let n = from; n < to; n++) frag.append(rowEl(view[n], n));
+  chunks[ci].append(frag);
+  // One measured chunk sets the intrinsic size for every chunk that has not
+  // been drawn yet, so the scrollbar stops guessing after the first screen.
+  if (ci === 0) {
+    requestAnimationFrame(() => {
+      const h = chunks[0].getBoundingClientRect().height;
+      if (h > 100) $('#log').style.setProperty('--cis', Math.round(h) + 'px');
+    });
+  }
+}
+
+// r01-c's row DOM grew 889 → 1,297 in one traversal and never released; the
+// same shape here would end a long session holding sixty thousand nodes. So a
+// chunk that has been left far behind gives its rows back — and before it does,
+// it is pinned to the height it actually had, so nothing under the reader can
+// move when it empties. KEEP is generous on purpose: the reader has to be a
+// long way away before anything is taken back.
+const KEEP = 12;
+function release(ci) {
+  if (!built[ci]) return;
+  const h = chunks[ci].getBoundingClientRect().height;
+  if (h > 0) chunks[ci].style.height = Math.round(h) + 'px';
+  chunks[ci].replaceChildren();
+  built[ci] = false;
+}
+function recycle() {
+  const live = [];
+  for (let i = 0; i < built.length; i++) if (built[i]) live.push(i);
+  if (live.length <= KEEP * 2 + 4) return;
+  const centre = Math.floor(topIndex() / CH);
+  for (const i of live) if (Math.abs(i - centre) > KEEP) release(i);
+}
+
+let io = null;
+function render(keepScroll) {
+  const y = window.scrollY;
+  view = filtered();
+  const log = $('#log');
+  if (io) io.disconnect();
+  log.replaceChildren();
+  chunks = []; built = []; openIdx = -1;
+  log.classList.toggle('nohome', !(home && home !== ELSEWHERE));
+  const gated = !gate.open && !window.__signedIn && view.length > PREVIEW;
+  const shown = gated ? PREVIEW : view.length;
+
+  $('#empty').hidden = view.length > 0;
+  if (view.length === 0) paintEmpty();
+
+  const nch = Math.ceil(shown / CH);
+  for (let ci = 0; ci < nch; ci++) {
+    const c = el('div', 'chunk');
+    c.dataset.ci = String(ci);
+    chunks.push(c); built.push(false);
+    log.append(c);
+  }
+  // A generous root margin: chunks materialise a screen and a half before they
+  // are needed, so the reader never sees a blank band, and nothing is recycled
+  // out from under a scroll that is already moving.
+  io = new IntersectionObserver((es) => {
+    for (const e of es) if (e.isIntersecting) ensureChunk(Number(e.target.dataset.ci));
+    recycle();
+  }, { rootMargin: '1400px 0px' });
+  for (const c of chunks) io.observe(c);
+  ensureChunk(0); ensureChunk(1);
+
+  document.body.classList.remove('pre');
+  paintSeam(gated, shown);
+  paintStatus();
+  paintTray();
+  cursor = -1;
+  log.removeAttribute('aria-activedescendant');
+  if (keepScroll) window.scrollTo({ top: y, behavior: 'auto' });
+  requestAnimationFrame(tick);
+}
+
+function paintStatus() {
+  const box = $('#status');
+  box.replaceChildren();
+  const tal = el('span', 'tally', num(view.length));
+  const of = el('span', 'of', '/ ' + num(ROLES.length));
+  box.append(tal, of);
+  box.setAttribute('aria-label', t('tally', { n: num(view.length), m: num(ROLES.length) }));
+  // The return visit, said as a number in the line that already holds numbers.
+  if (sinceN > 0) {
+    const b = el('button', 'since');
+    b.type = 'button';
+    b.setAttribute('aria-pressed', String(F.mark === 'since'));
+    b.setAttribute('aria-label', t('lSince') + ' — ' + num(sinceN));
+    b.title = t('lSince') + ' · ' + day(lastVisit);
+    b.append(el('span', 'n', '+' + num(sinceN)));
+    b.addEventListener('click', () => {
+      F.mark = F.mark === 'since' ? null : 'since'; writeURL(true); render();
+      window.scrollTo({ top: 0, behavior: 'auto' });
+    });
+    box.append(b);
+  }
+}
+
+function paintEmpty() {
+  const box = $('#empty');
+  box.replaceChildren();
+  box.append(el('p', 'e1', F.keptOnly ? t('emptyKept') : t('empty')));
+  // Every constraint that is on, printed as the thing that turns it off. A
+  // reader who has filtered themselves into nothing should not have to hunt
+  // back up the page for which control did it.
+  const outs = el('div', 'outs');
+  const chip = (body, undo) => {
+    const b = el('button', 'out'); b.type = 'button';
+    b.append(el('span', 'x', '✕'));
+    if (body instanceof Node) b.append(body); else b.append(el('span', null, body));
+    b.addEventListener('click', () => { undo(); writeURL(true); render(); paintBridge(); });
+    outs.append(b);
+  };
+  if (F.q) chip(F.q, () => { F.q = ''; $('#q').value = ''; $('#clear').hidden = true; });
+  if (F.country) chip(CODE[F.country] + ' ' + F.country, () => { F.country = null; paintStrip(); });
+  if (F.mark) {
+    const g = el('span');
+    const kind = F.mark === 'since' ? null : F.mark;
+    if (kind) g.append(markEl(kind));
+    else g.append(el('span', null, '+' + num(sinceN)));
+    chip(g, () => { F.mark = null; paintMarks(); });
+  }
+  if (F.keptOnly) chip(num(kept.size), () => { F.keptOnly = false; paintTray(); });
+  if (outs.childElementCount) box.append(outs);
+}
+
+// The bridge and the census: what the page says instead of shrugging when a
+// reader's own language returns nothing.
+function paintBridge() {
+  const box = $('#bridge'), cen = $('#census');
+  box.replaceChildren(); cen.replaceChildren();
+  const q = F.q.trim();
+  if (!q) { box.hidden = true; cen.hidden = true; return; }
+  const nq = norm(q);
+  const hits = [];
+  for (const e of TERMS) {
+    const words = [];
+    for (const [id] of LOCALES) if (e[id]) words.push(...e[id]);
+    const match = words.some((w) => norm(w).length > 2 &&
+      (nq.includes(norm(w)) || norm(w).includes(nq)));
+    if (!match) continue;
+    if (nq.includes(norm(e.en))) continue;       // already searching the board's word
+    const n = countFor(e.en);
+    if (n > 0) hits.push({ en: e.en, n });
+  }
+  hits.sort((a, b) => b.n - a.n);
+  const here = view.length;
+  const useful = hits.filter((h) => h.n > here).slice(0, 3);
+  if (useful.length) {
+    box.hidden = false;
+    box.setAttribute('aria-label', t('bridgeAria'));
+    for (const h of useful) {
+      const b = el('button', 'br');
+      b.type = 'button';
+      b.setAttribute('aria-label', t('bridge', { t: h.en, n: num(h.n) }));
+      b.append(el('span', 'bt', h.en), el('span', 'ar', '→'), el('span', 'bn', num(h.n)));
+      b.addEventListener('click', () => {
+        $('#q').value = h.en; F.q = h.en; $('#clear').hidden = false;
+        writeURL(true); paintBridge(); render();
+        window.scrollTo({ top: 0, behavior: 'auto' });
+      });
+      box.append(b);
+    }
+  } else box.hidden = true;
+  // The census fires only where the reader actually hit the wall: zero results.
+  // It is two glyphs and two numbers, then one sentence that explains the wall
+  // rather than restating it.
+  if (here === 0) {
+    cen.hidden = false;
+    const g = (glyph, n, label) => {
+      const s = el('span');
+      s.append(el('span', 'sm', glyph), document.createTextNode(' '), el('b', null, num(n)));
+      s.setAttribute('aria-label', label + ' — ' + num(n));
+      return s;
+    };
+    cen.append(el('span', 'micro', t('censusHead', { m: num(ROLES.length) })));
+    cen.append(g('Aa', scriptLatin, t('censusLatin')));
+    cen.append(g('あ漢', scriptOther, t('censusOther')));
+    const why = el('span', null, t('censusWhy'));
+    why.style.flexBasis = '100%';
+    why.style.maxWidth = '46rem';
+    cen.append(why);
+  } else cen.hidden = true;
+}
+
+// ---------------------------------------------------------------------------
+// the evidence sheet — stolen outright from r01-c, per the round-2 brief
+// ---------------------------------------------------------------------------
+function kv(dl, k, v, cls) {
+  if (v == null || v === '') return;          // absence renders as nothing
+  dl.append(el('dt', null, k));
+  const d = el('dd', cls || null);
+  if (v instanceof Node) d.append(v); else d.textContent = v;
+  dl.append(d);
+}
+function sheetEl(r) {
+  const box = el('div', 'sheet');
+  const dl = el('dl');
+  const c = r.co;
+  kv(dl, t('evCo'), c.name);
+  kv(dl, t('evWhere'), (r.loc || []).join(' · ') || r.ctry || null);
+  const d = distOf(r);
+  if (d != null) {
+    const s = el('span', 'derived mono', (d === 0 ? '0' : '≈ ' + num(d)) + ' km');
+    kv(dl, t('evDist'), s);
+  }
+  if (r.wp) kv(dl, t('evWork'), t('w' + r.wp[0].toUpperCase() + r.wp.slice(1)));
+  if (r.ab !== 'unknown') kv(dl, t('evAbroad'), t(r.ab === 'yes' ? 'yes' : 'no'));
+  if (r.visa !== 'unknown') kv(dl, t('evVisa'), t(r.visa === 'yes' ? 'yes' : 'no'));
+  if (r.seen) kv(dl, t('evSeen'), day(r.seen) + (r.conf ? '' : ' ✻'));
+  if (c.ats) {
+    const host = c.ats === 'greenhouse' ? 'job-boards.greenhouse.io/' + (c.slug || '')
+      : c.ats + ' · ' + (c.slug || '');
+    kv(dl, t('evBoard'), el('span', 'mono', host));
+  }
+  kv(dl, t('evOn'), num((c.roles || []).length));
+  // Funding, with every hole in it named rather than filled.
+  if (c.amount || c.round_letter || c.date) {
+    const amt = c.amount
+      ? new Intl.NumberFormat(LOC, { style: 'currency', currency: c.currency || 'USD',
+          notation: 'compact', maximumFractionDigits: 1 }).format(c.amount)
+      : t('undisc');
+    const rnd = c.round_letter ? t('seriesX', { x: c.round_letter }) : t('roundNone');
+    kv(dl, t('evFund'), amt + ' · ' + rnd + ' · ' + (c.date ? day(c.date) : t('dateNone')));
+  }
+  if (c.qualified_by) {
+    kv(dl, t('evQual'), t({ letter:'qLetter', amount:'qAmount', stage:'qStage' }[c.qualified_by] || 'qStage'));
+  }
+  const desc = DESCS[c.name];
+  if (desc) {
+    kv(dl, t('dWhat'), desc.what, 'src');
+    kv(dl, t('dWhom'), desc.for_whom, 'src');
+    kv(dl, t('dWhy'), desc.why_them, 'src');
+    dl.querySelectorAll('dd.src').forEach((d) => d.setAttribute('lang', 'en'));
+  }
+  box.append(dl);
+  if (/^https?:\/\//i.test(r.u)) {
+    const a = el('a', 'go', t('evPost') + ' ↗');
+    a.href = r.u; a.target = '_blank'; a.rel = 'noopener';
+    box.append(a);
+  }
+  if (desc) box.append(el('p', 'foot', t('prov')));
+  return box;
+}
+function toggleSheet(n) {
+  const row = document.getElementById('r' + n);
+  if (!row) return;
+  const open = row.nextElementSibling && row.nextElementSibling.classList.contains('sheet');
+  document.querySelectorAll('#log .sheet').forEach((s) => s.remove());
+  document.querySelectorAll('#log .row[aria-expanded="true"]')
+    .forEach((r) => r.setAttribute('aria-expanded', 'false'));
+  if (open) { openIdx = -1; return; }
+  row.after(sheetEl(view[n]));
+  row.setAttribute('aria-expanded', 'true');
+  openIdx = n;
+}
+
+// ---------------------------------------------------------------------------
+// keeping
+// ---------------------------------------------------------------------------
+function toggleKeep(n) {
+  const r = view[n];
+  if (kept.has(r.u)) kept.delete(r.u); else kept.add(r.u);
+  store.set(KEEPK, [...kept]);
+  const row = document.getElementById('r' + n);
+  if (row) {
+    row.classList.toggle('kept', kept.has(r.u));
+    const b = row.querySelector('.keep');
+    if (b) b.setAttribute('aria-label', (kept.has(r.u) ? t('keepOff') : t('keepOn')) + ': ' + r.t);
+  }
+  paintTray(); paintSeamKept();
+}
+function paintTray() {
+  const tray = $('#tray');
+  tray.hidden = kept.size === 0;
+  $('#trayn').textContent = num(kept.size);
+  $('#traysr').textContent = t('tray', { n: num(kept.size) });
+  tray.setAttribute('aria-pressed', String(F.keptOnly));
+}
+
+// ---------------------------------------------------------------------------
+// the ask
+// ---------------------------------------------------------------------------
+function bump(k) { gate[k] = (gate[k] || 0) + 1; store.set(GATEK, gate); }
+let lastSeam = null;
+function paintSeamKept() {
+  if (lastSeam && lastSeam[0]) paintSeam(lastSeam[0], lastSeam[1]);
+}
+function paintSeam(gated, shown) {
+  lastSeam = [gated, shown];
+  const slot = $('#seamslot');
+  slot.replaceChildren();
+  if (!gated) {
+    if (gate.open && view.length > PREVIEW) {
+      const p = el('p', 'micro');
+      p.style.padding = '1rem 0';
+      p.textContent = t('seamOpened') + '  ·  ' +
+        t('mAsked') + ' ' + num(gate.shown) + '  ·  ' +
+        t('mIn') + ' ' + num(gate.signin) + '  ·  ' + t('mOut') + ' ' + num(gate.bypass);
+      slot.append(p);
+    }
+    return;
+  }
+  const below = view.length - shown;
+  const cos = new Set(view.slice(shown).map((r) => r.co.name)).size;
+  const seam = el('section', 'seam');
+  const big = el('div', 'big', num(below));
+  big.setAttribute('aria-hidden', 'true');
+  seam.append(big);
+  seam.append(el('p', 'sub', t('seamSub', { n: num(below), m: num(cos) })));
+  seam.append(el('p', null, t('seamBody', { k: num(shown) })));
+  // The scale bar: what you have read against what is below, drawn at true
+  // scale rather than described. 300 of 6,423 is a sliver, and a sliver is the
+  // honest picture of it.
+  const scale = el('div', 'scale');
+  const a1 = el('i', 'read'), a2 = el('i', 'rest');
+  a1.style.width = (shown / view.length * 100) + '%';
+  a2.style.width = (below / view.length * 100) + '%';
+  scale.append(a1, a2);
+  scale.setAttribute('aria-hidden', 'true');
+  seam.insertBefore(scale, seam.querySelector('.sub').nextSibling);
+  if (kept.size) {
+    const keptline = el('p', 'kept');
+    keptline.append(markEl('k'), el('b', null, num(kept.size)));
+    keptline.querySelector('b').id = 'seamkept';
+    seam.append(keptline);
+  }
+  seam.append(el('p', null, t('seamKeep')));
+
+  const doors = el('div', 'doors');
+  // The sign-in door only prints if Clerk actually answered. A button that
+  // cannot sign anybody in is worse than no button, and the register has to
+  // open either way — so the second door is the one that always works.
+  if (window.__clerkReady && window.Clerk) {
+    const a = el('button', 'door in', t('doorIn'));
+    a.type = 'button';
+    a.addEventListener('click', () => { bump('signin'); try { window.Clerk.openSignIn(); } catch {} });
+    doors.append(a);
+  }
+  const b = el('button', 'door out', t('doorOut'));
+  b.type = 'button';
+  b.addEventListener('click', () => {
+    bump('bypass'); gate.open = true; store.set(GATEK, gate);
+    const y = window.scrollY;
+    render(); window.scrollTo({ top: y, behavior: 'auto' });
+  });
+  doors.append(b);
+  seam.append(doors);
+  if (!window.__clerkReady) seam.append(el('p', null, t('seamNoClerk')));
+
+  const meter = el('div', 'meter');
+  meter.append(el('span', null, t('mAsked') + ' '), el('b', null, num(gate.shown)));
+  meter.append(el('span', null, t('mIn') + ' '), el('b', null, num(gate.signin)));
+  meter.append(el('span', null, t('mOut') + ' '), el('b', null, num(gate.bypass)));
+  seam.append(meter);
+  slot.append(seam);
+  // Counted once per visit, not once per render: the number has to mean "a
+  // reader was asked", and re-drawing the seam after a filter is not a new ask.
+  if (!window.__askedThisVisit) { window.__askedThisVisit = true; bump('shown'); }
+}
+
+// ---------------------------------------------------------------------------
+// the rail — depth measured in roles, exactly
+// ---------------------------------------------------------------------------
+// r01-c bought an exact gauge with fixed-height rows and paid for it in
+// truncated titles — 43% of them at 380px. The rows here wrap instead, so the
+// needle cannot be a pixel ratio. It reads the INDEX of the row at the top of
+// the viewport: binary search the chunks (always laid out, because they carry
+// an intrinsic size), then the rows inside the one chunk that is on screen.
+function topIndex() {
+  if (!chunks.length) return 0;
+  const y = window.scrollY + 8;
+  let lo = 0, hi = chunks.length - 1, ci = 0;
+  while (lo <= hi) {
+    const mid = (lo + hi) >> 1;
+    if (chunks[mid].offsetTop <= y) { ci = mid; lo = mid + 1; } else hi = mid - 1;
+  }
+  if (!built[ci]) ensureChunk(ci);
+  const rows = chunks[ci].querySelectorAll('.row');
+  let n = ci * CH;
+  for (const r of rows) { if (r.offsetTop <= y) n = Number(r.dataset.n); else break; }
+  return n;
+}
+let ticking = false;
+function tick() {
+  ticking = false;
+  if (!view.length) { $('#depthn').textContent = '0'; return; }
+  const n = topIndex();
+  $('#depthn').textContent = num(n + 1);
+  const track = $('#rail .track');
+  $('#needle').style.top = Math.round((n / Math.max(1, view.length - 1)) * (track.clientHeight - 2)) + 'px';
+  $('#rail').setAttribute('aria-label', t('depth'));
+}
+addEventListener('scroll', () => {
+  if (!ticking) { ticking = true; requestAnimationFrame(tick); }
+}, { passive: true });
+addEventListener('resize', () => {
+  for (const c of chunks) c.style.height = '';
+  if (!ticking) { ticking = true; requestAnimationFrame(tick); }
+});
+
+// ---------------------------------------------------------------------------
+// the cursor — it follows the eye
+// ---------------------------------------------------------------------------
+// Round 1's shared tell: press j after scrolling deep and every variant warped
+// back to a cursor that never moved with the reader. Here, if the cursor is not
+// on screen when you press a key, it is re-seated at the row you are looking at
+// before it steps.
+function seat(n) {
+  const prev = document.getElementById('r' + cursor);
+  if (prev) prev.setAttribute('aria-selected', 'false');
+  cursor = n;
+  const row = document.getElementById('r' + n);
+  if (row) {
+    row.setAttribute('aria-selected', 'true');
+    $('#log').setAttribute('aria-activedescendant', row.id);
+  }
+}
+function onScreen(n) {
+  const row = document.getElementById('r' + n);
+  if (!row) return false;
+  const r = row.getBoundingClientRect();
+  return r.bottom > 0 && r.top < innerHeight;
+}
+function moveCursor(d) {
+  if (cursor < 0 || !onScreen(cursor)) { cursor = topIndex(); }
+  else cursor = Math.min(view.length - 1, Math.max(0, cursor + d));
+  const ci = Math.floor(cursor / CH);
+  ensureChunk(ci); ensureChunk(ci + 1);
+  seat(cursor);
+  const row = document.getElementById('r' + cursor);
+  if (row) row.scrollIntoView({ block: 'nearest', behavior: 'auto' });
+}
+addEventListener('keydown', (e) => {
+  const tag = (e.target.tagName || '').toLowerCase();
+  const typing = tag === 'input' || tag === 'select' || tag === 'textarea';
+  if (e.key === '/' && !typing) { e.preventDefault(); $('#q').focus(); $('#q').select(); return; }
+  if (e.key === 'Escape') {
+    if (!$('#keys').hidden) { $('#keys').hidden = true; return; }
+    if (!$('#picker').hidden) { closePicker(); $('#homebtn').focus(); return; }
+    if (typing) { e.target.blur(); return; }
+    if (openIdx >= 0) { toggleSheet(openIdx); return; }
+  }
+  if (typing) return;
+  if (e.key === 'j' || e.key === 'ArrowDown') { e.preventDefault(); moveCursor(1); }
+  else if (e.key === 'k' || e.key === 'ArrowUp') { e.preventDefault(); moveCursor(-1); }
+  else if (e.key === 'Enter' || e.key === 'o') {
+    if (cursor >= 0) { e.preventDefault(); toggleSheet(cursor); }
+  } else if (e.key === 's') {
+    if (cursor >= 0) { e.preventDefault(); toggleKeep(cursor); }
+  } else if (e.key === '[' || e.key === ']') {
+    e.preventDefault();
+    const list = [null, ...COUNTRIES];
+    let i = list.indexOf(F.country);
+    i = (i + (e.key === ']' ? 1 : -1) + list.length) % list.length;
+    F.country = list[i];
+    paintStrip(); writeURL(true); render();
+    window.scrollTo({ top: 0, behavior: 'auto' });
+    // Focus must land somewhere real. r01-c dropped it on BODY here, which
+    // strands a keyboard reader with nothing focused at all.
+    const cell = $('#strip').children[i];
+    if (cell) cell.focus();
+  } else if (e.key === '?') { e.preventDefault(); $('#keys').hidden = !$('#keys').hidden; }
+});
+
+// ---------------------------------------------------------------------------
+// the session, in the URL
+// ---------------------------------------------------------------------------
+let urlLock = false;
+function writeURL(push) {
+  if (urlLock) return;
+  const p = new URLSearchParams();
+  if (F.country) p.set('c', CODE[F.country]);
+  if (F.mark) p.set('m', F.mark);
+  if (F.q) p.set('q', F.q);
+  if (F.sort !== 'deal') p.set('s', F.sort);
+  if (F.keptOnly) p.set('k', '1');
+  const h = p.toString();
+  const url = location.pathname + location.search + (h ? '#' + h : '');
+  if (url === location.pathname + location.search + location.hash) return;
+  history[push ? 'pushState' : 'replaceState'](null, '', url);
+}
+function readURL() {
+  const p = new URLSearchParams(location.hash.replace(/^#/, ''));
+  const code = p.get('c');
+  F.country = code ? (COUNTRIES.find((n) => CODE[n] === code) || null) : null;
+  F.mark = ['r', 'a', 'n', 's', 'since'].includes(p.get('m')) ? p.get('m') : null;
+  F.q = p.get('q') || '';
+  F.sort = ['deal', 'new', 'near', 'co'].includes(p.get('s')) ? p.get('s') : 'deal';
+  F.keptOnly = p.get('k') === '1';
+}
+addEventListener('popstate', () => {
+  urlLock = true;
+  readURL();
+  $('#q').value = F.q; $('#clear').hidden = !F.q;
+  paintStrip(); paintMarks(); paintSort(); paintTray();
+  render(); paintBridge();
+  urlLock = false;
+});
+
+// ---------------------------------------------------------------------------
+// wiring
+// ---------------------------------------------------------------------------
+let qt = null;
+$('#q').addEventListener('input', (e) => {
+  F.q = e.target.value;
+  $('#clear').hidden = !F.q;
+  clearTimeout(qt);
+  qt = setTimeout(() => { writeURL(false); render(); paintBridge(); }, 110);
+});
+$('#clear').addEventListener('click', () => {
+  $('#q').value = ''; F.q = ''; $('#clear').hidden = true;
+  writeURL(false); render(); paintBridge(); $('#q').focus();
+});
+$('#sort').addEventListener('change', (e) => {
+  F.sort = e.target.value; writeURL(true); render();
+  window.scrollTo({ top: 0, behavior: 'auto' });
+});
+$('#homebtn').addEventListener('click', () => {
+  const p = $('#picker');
+  p.hidden = !p.hidden;
+  $('#homebtn').setAttribute('aria-expanded', String(!p.hidden));
+});
+$('#tray').addEventListener('click', () => {
+  F.keptOnly = !F.keptOnly; paintTray(); writeURL(true); render();
+  window.scrollTo({ top: 0, behavior: 'auto' });
+});
+$('#keyhint').addEventListener('click', () => { $('#keys').hidden = !$('#keys').hidden; });
+$('#lang').addEventListener('change', (e) => setLocale(e.target.value));
+
+function setLocale(id) {
+  LOC = S[id] ? id : 'en';
+  try { localStorage.setItem(LKEY, JSON.stringify(LOC).slice(1, -1)); } catch {}
+  document.documentElement.lang = LOC;
+  document.documentElement.dir = DIRS[LOC] || 'ltr';
+  document.title = t('title');
+  NF = new Intl.NumberFormat(LOC);
+  DF = new Intl.DateTimeFormat(LOC, { year: 'numeric', month: 'short', day: 'numeric' });
+  $('#log').setAttribute('aria-label', t('lRoles'));
+  $('#q').placeholder = t('qPh');
+  $('#q').setAttribute('aria-label', t('qAria'));
+  $('#clear').setAttribute('aria-label', t('clear'));
+  paintLang(); paintHome(); paintNotes(); paintKeys(); paintSort();
+  if (ROLES.length) {
+    paintFigs(); paintStrip(); paintPicker(); paintMarks();
+    const y = window.scrollY;
+    render(); paintBridge();
+    window.scrollTo({ top: y, behavior: 'auto' });
+  }
+  const b = $('#account button');
+  if (b) b.textContent = t('signIn');
+}
+window.__onAuth = () => {
+  const b = $('#account button');
+  if (b) b.textContent = t('signIn');
+  if (window.__signedIn && !gate.open) { const y = window.scrollY; render(); window.scrollTo({ top: y, behavior: 'auto' }); }
+  else if ($('#seamslot').firstChild) { const y = window.scrollY; render(); window.scrollTo({ top: y, behavior: 'auto' }); }
+};
+
+// ---------------------------------------------------------------------------
+// go
+// ---------------------------------------------------------------------------
+LOC = pickLocale();
+setLocale(LOC);
+
+Promise.all([
+  fetch(src, { cache: 'no-cache' }).then((r) => r.ok ? r.json() : Promise.reject(new Error('HTTP ' + r.status))),
+  soft('../data/descriptions.json'),
+  soft(seenSrc),
+]).then(([data, descs, seen]) => {
+  if (data.schema_version !== SCHEMA) {
+    $('#status').textContent = t('schemaFail', { want: SCHEMA, src, got: data.schema_version });
+    return;
+  }
+  DESCS = (descs && typeof descs === 'object' && !Array.isArray(descs)) ? descs : {};
+  SEEN = new Map();
+  for (const [d, buckets] of Object.entries((seen && seen.dates) || {})) {
+    for (const [kind, urls] of Object.entries(buckets || {})) {
+      if (!Array.isArray(urls)) continue;
+      for (const u of urls) SEEN.set(u, { date: d, confirmed: kind === 'confirmed' });
+    }
+  }
+  flatten(data);
+  readURL();
+  $('#q').value = F.q; $('#clear').hidden = !F.q;
+  paintFigs(); paintStrip(); paintPicker(); paintMarks(); paintSort(); paintTray();
+  render(); paintBridge();
+  // The visit is stamped only after the diff has been taken, so a first visit
+  // shows nothing rather than a fabricated zero, and the second visit shows a
+  // real number.
+  store.set(VISITK, SNAP);
+}).catch((e) => {
+  $('#status').textContent = t('loadFail', { src, msg: e.message });
+});
+</script>
+
+<!-- Accounts. Clerk holds the users and the sessions; this project holds none of
+     them. The key below is public by design; the secret key never appears here.
+     Pinned to @5 deliberately — @latest still serves a v4 build.
+
+     Everything about this script is additive. It runs after the register has
+     already rendered, it cannot throw into the page, and if it never loads the
+     masthead simply keeps its reserved 34px of empty space: no control at all,
+     rather than a Sign in that cannot sign anybody in. -->
+<script
+  async crossorigin="anonymous"
+  data-clerk-publishable-key="pk_test_cmVndWxhci10cm9sbC01MC5jbGVyay5hY2NvdW50cy5kZXYk"
+  src="https://regular-troll-50.clerk.accounts.dev/npm/@clerk/clerk-js@5/dist/clerk.browser.js"
+></script>
+<script>
+window.addEventListener('load', async () => {
+  const slot = document.getElementById('account');
+  if (!slot || !window.Clerk) return;
+  try {
+    await window.Clerk.load({ afterSignOutUrl: location.href });
+  } catch { return; }
+  window.__clerkReady = true;
+  const paint = () => {
+    slot.replaceChildren();
+    if (window.Clerk.user) {
+      const mount = document.createElement('div');
+      slot.append(mount);
+      window.Clerk.mountUserButton(mount);
+      window.__signedIn = true;
+    } else {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.textContent = window.__t ? window.__t('signIn') : 'Sign in';
+      b.addEventListener('click', () => window.Clerk.openSignIn());
+      slot.append(b);
+      window.__signedIn = false;
+    }
+    if (window.__onAuth) window.__onAuth();
+  };
+  paint();
+  window.Clerk.addListener(paint);
+});
+</script>
+</body>
+</html>
