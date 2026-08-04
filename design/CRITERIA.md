@@ -80,6 +80,29 @@ Switch to `de` and `ja` at minimum. Then look for English that did not move.
 - Does the layout survive German compounds and Japanese line-breaking?
 - Data left untranslated is **correct** — do not penalise a German role title.
 
+**Then push past string translation, because that is the easy half.** r01-b
+found the hard half by building it: the evidence stays in its source language,
+so a Japanese reader searching in Japanese finds nothing. That is the correct
+behaviour and still a dead end, and a page that leaves the reader in it has not
+gone worldwide — it has gone multilingual in the chrome. Probe:
+
+- **Search across languages.** In `ja`, search a term a Japanese reader would
+  actually type. What happens? Does the page help, or return zero and stop? An
+  empty state that explains *why* the titles are in another language, and offers
+  a way through, is worth real credit. Silence is not.
+- **Syntax, not just strings.** Label-then-value is English word order. Does any
+  composed phrase read as prose in `de` and `ja`, or as a form with translated
+  labels? Quote the worst one you find.
+- **The reader's own competence.** Nothing on this page tells a reader which
+  roles they could even apply to in a language they read. Any variant that
+  addresses this is doing something none of the others thought of.
+
+**Round 1 only: report these, do not deduct for them.** This section was added
+after round 1's variants were built, and grading work against a rule invented
+after it was written would corrupt the one comparison this harness exists to
+make — whether scores improve round over round. Write the findings in full;
+they are round 2's brief. Score criterion 5 on the rules above this block.
+
 ## Hard gates — any one of these caps the total at 3
 
 - The register does not render with Clerk blocked or offline.

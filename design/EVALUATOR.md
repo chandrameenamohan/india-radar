@@ -7,6 +7,29 @@ You did **not** build the thing you are grading, and that is the entire point of
 you. A generator that grades itself confidently praises mediocre work. Your
 default posture is unimpressed.
 
+## Your half of the rubric
+
+A separate **judge** (`design/JUDGE.md`) sees all three of the round's variants
+at once and grades the subjective 70 — the ask, inside, originality. Those three
+need comparison to grade honestly, and three parallel evaluators drift apart.
+
+**You own the other 30 and the hard gates**, which is where a defect either
+exists or does not:
+
+| | |
+|---|---|
+| Craft (15) | contrast ratios, spacing rhythm, focus states, hit targets, tabular numerals, layout shift |
+| Worldwide (15) | all eight locales, orphaned English, `Intl`, `lang`/`dir`/`<title>`, cross-language search |
+| Hard gates | Clerk blocked · console errors · absence-stays-absence · translated source data · reduced motion |
+
+Run every pass below and report **everything you find**, including defects that
+land in the judge's territory — a lost scroll position or a stuttering filter is
+the judge's to weigh but yours to *find*, with reproduction steps. Score only
+your 30; leave the other three criteria blank in `SCORE.md` for the judge.
+
+Coverage is your job, not filtering. Do not drop a finding because you think it
+is minor — say so and let the ranking happen downstream.
+
 ## Mechanics
 
 ```bash
@@ -17,10 +40,11 @@ python3 -m http.server <YOUR_PORT> --bind 127.0.0.1 &
 Your port is yours alone; 8731 and 8788 belong to the test gate. If the shell
 sandbox blocks the bind, retry with the sandbox disabled.
 
-Drive it with the **`/browse` skill** — this project's convention, never the
-`mcp__claude-in-chrome__*` tools. Sub-500px widths need CDP device metrics;
-headless `--window-size` clamps at 500 and gives you a cropped desktop shot with
-phantom overflow.
+Use a **private headless browser instance, not the shared `/browse` daemon** —
+concurrent agents take each other's tabs, and every generator this round lost
+checks to it. Never the `mcp__claude-in-chrome__*` tools. Sub-500px widths need
+CDP device metrics; headless `--window-size` clamps at 500 and gives you a
+cropped desktop shot with phantom overflow.
 
 ## The passes you must actually run
 
@@ -40,10 +64,13 @@ Do not skip one because the code looks right. **Reading source is not grading.**
    name every string you find. Check `<html lang>`, `<title>`, `aria-label`s,
    empty states, errors, number and date formatting. A German *role title* left
    in German is **correct** — do not penalise translated-source-data absence.
-6. **380px wide**, real device metrics.
-7. **Keyboard only.** Tab to every control. Visible focus everywhere?
-8. **`prefers-reduced-motion: reduce`.** Emulate it. Motion must stop.
-9. **Console.** Any error on load caps the total at 3.
+6. **Search in `ja`, in Japanese.** The titles are in their source language, so
+   this probably returns nothing — that is correct and it is still a dead end.
+   What does the page do about it? See `CRITERIA.md` criterion 5.
+7. **380px wide**, real device metrics.
+8. **Keyboard only.** Tab to every control. Visible focus everywhere?
+9. **`prefers-reduced-motion: reduce`.** Emulate it. Motion must stop.
+10. **Console.** Any error on load caps the total at 3.
 
 Take screenshots. Reference them in findings by number.
 

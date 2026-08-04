@@ -1,0 +1,2868 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ROLE·ATLAS</title>
+<!-- A missing favicon is a 404, and a 404 is a failed request the gate would
+     have to explain. One data: URI is cheaper than an icon file. -->
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  /* ===========================================================================
+     r01-c — THE CORE.
+     6,423 roles is not a wall to paginate. It is a distance, and this page is
+     the instrument you travel it with: a drill log read off a depth gauge.
+     Every rule below exists to make scrolling legible — position, scale,
+     rate — and nothing here decorates.
+
+     THE MOTION CONTRACT, and it is a contract because motion that costs
+     performance loses more than it gains:
+       · exactly one rAF loop, alive only while the page is moving;
+       · it writes two custom properties and one text node, never a style
+         that lays out;
+       · every transition is transform or opacity — nothing animates a box;
+       · rows are a FIXED height, so depth-in-roles and depth-in-pixels are
+         the same number and the gauge can be exact without measuring;
+       · off-screen role lists are skipped by content-visibility and reserve
+         their exact height, so nothing shifts as they materialise.
+     `prefers-reduced-motion` is not a fallback here. It is a second, designed
+     state: the gauge, the strata and the depth readout all state their facts
+     as text and hold them still.
+     ======================================================================== */
+  :root {
+    --void:  #0a0c0e;    /* the ground */
+    --pit:   #06080a;    /* the rail's track, and the open sheet */
+    --deck:  #11161a;    /* the one raised surface */
+    --bone:  #e9e6df;    /* primary type            — 15.9:1 on void */
+    --ash:   #9aa0a6;    /* secondary type          —  7.5:1 */
+    --dim:   #7c848b;    /* micro labels, apparatus —  5.2:1 */
+    --rule:  #1b2126;
+    --rule2: #2b3239;
+    /* One colour, one meaning: WHERE YOU ARE. The needle, the open stratum,
+       the focused row, the seam. It appears nowhere else, so a spot of orange
+       anywhere on this page answers the same question. 7.5:1 on the ground. */
+    --sig:   #ff7a1a;
+    --face: Inter, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+    --rowh: 2.5rem;      /* the log's line pitch — see the motion contract */
+    --railw: 6rem;
+    --gut: 1.7rem;
+    --sticktop: 0px;     /* what the sticky strata clear (the mobile bar) */
+    --pos: 0;            /* scroll position 0…1  — written once per frame */
+    --lens: 0.1;         /* viewport as a fraction of the column */
+  }
+  @media (pointer: coarse) { :root { --rowh: 2.85rem; } }  /* 45.6px, ≥44 */
+
+  * { box-sizing: border-box; min-width: 0; }
+  html { -webkit-text-size-adjust: 100%; overflow-x: clip; background: var(--void); }
+  body {
+    margin: 0; padding: 0 0 0 var(--railw); overflow-x: clip;
+    background: var(--void); color: var(--bone);
+    font-family: var(--face); font-size: 15px; line-height: 1.45;
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: "tnum" 1, "cv05" 1;
+    letter-spacing: -0.006em;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 72rem; padding-inline: var(--gut); margin-inline: auto; }
+
+  /* The page's smallest voice. Used for every label that names a thing rather
+     than being one. */
+  .micro {
+    font-size: 10px; line-height: 1.2; text-transform: uppercase;
+    letter-spacing: .17em; font-weight: 600; color: var(--dim);
+  }
+  .num { font-family: var(--mono); font-variant-numeric: tabular-nums;
+         letter-spacing: 0; }
+
+  a { color: var(--bone); text-decoration: none;
+      border-bottom: 1px solid var(--rule2); }
+  a:hover { color: var(--sig); border-bottom-color: var(--sig); }
+  :focus-visible { outline: 2px solid var(--sig); outline-offset: 2px; }
+  button { font: inherit; color: inherit; }
+
+  /* ============================== THE GAUGE ================================
+     Fixed to the left edge, the full height of the viewport, always there.
+     It is the page's one instrument and it answers three questions without
+     being asked: how deep am I, how deep does this go, and what is below me.
+     One element's transform moves per frame; nothing here lays out. */
+  #rail {
+    position: fixed; inset: 0 auto 0 0; width: var(--railw); z-index: 40;
+    background: var(--pit); border-right: 1px solid var(--rule2);
+    display: flex; flex-direction: column; padding: 1rem .75rem 1rem 1rem;
+    user-select: none;
+  }
+  .rk-head { flex: none; }
+  .rk-head .micro { display: block; }
+  /* The depth readout. The largest type on the page is a number that changes
+     as you move — the type IS the instrument, not a caption on one. It leans
+     on --v (rate of travel) for a hair of weight and scale: the needle of a
+     dial kicks when the hand moves fast. Composite-only. */
+  #depth {
+    display: block; font-family: var(--mono); font-weight: 600;
+    font-size: 1.85rem; line-height: 1; letter-spacing: -0.03em;
+    color: var(--sig); margin: .3rem 0 .1rem;
+    transform: scale(calc(1 + var(--v) * 0.06)); transform-origin: left center;
+    transition: transform .18s cubic-bezier(.22,.61,.36,1);
+    will-change: transform;
+  }
+  #depthtot { display: block; font-family: var(--mono); font-size: .8125rem;
+              color: var(--ash); letter-spacing: .02em; }
+  /* The track: the whole register drawn to scale, top to bottom. */
+  .rk-track { position: relative; flex: 1 1 auto; margin: 1.1rem 0 .4rem 0;
+              min-height: 4rem; }
+  .rk-line { position: absolute; left: .55rem; top: 0; bottom: 0; width: 1px;
+             background: var(--rule2); }
+  /* Travelled. scaleY of one element — the cheapest possible progress bar. */
+  .rk-fill { position: absolute; left: .55rem; top: 0; bottom: 0; width: 1px;
+             background: var(--sig); transform: scaleY(var(--pos));
+             transform-origin: top center; will-change: transform; }
+  /* The needle, and the lens beside it: the lens is how much of the column
+     fits on your screen at once. At 6,423 roles it is a hairline, and that is
+     the point — the scale is felt rather than stated. */
+  .rk-mark { position: absolute; left: 0; right: 0; top: 0; height: 100%;
+             pointer-events: none;
+             transform: translateY(calc(var(--pos) * 100%)); }
+  .rk-needle { position: absolute; left: 0; top: 0; width: 1.5rem; height: 1px;
+               background: var(--sig); }
+  .rk-lens { position: absolute; left: .3rem; top: 0; width: .5rem;
+             height: calc(var(--lens) * 100%); min-height: 2px;
+             border: 1px solid var(--sig); border-left: 0; opacity: .55; }
+  /* The seam: where the free log stops. Drawn at its true depth from the
+     first frame, so the reader can see the ask coming and see how much of
+     the column lies past it. A threshold you can measure is not a wall. */
+  .rk-seam { position: absolute; left: 0; right: -.75rem; height: 0;
+             border-top: 1px dashed var(--sig); }
+  /* Below the seam the column is drawn but not logged: hatching, not blur.
+     Nothing is hidden from the reader — it is simply not on the sheet yet. */
+  .rk-unlogged { position: absolute; left: .3rem; width: .5rem;
+                 background: repeating-linear-gradient(
+                   -45deg, var(--rule2) 0 1px, transparent 1px 4px); }
+  /* The bands. Under the register's own order the open-role count falls
+     monotonically, so these are real horizons in the rock, not decoration —
+     and they are the landmarks that make a 6,423-line descent navigable. */
+  .rk-band { position: absolute; left: .55rem; right: -.5rem; height: 0;
+             border-top: 1px solid var(--rule2); }
+  .rk-band span { position: absolute; left: .55rem; top: .18rem;
+                  font-family: var(--mono); font-size: 9px; color: var(--dim);
+                  letter-spacing: .04em; white-space: nowrap; }
+  .rk-foot { flex: none; font-family: var(--mono); font-size: 8.5px;
+             line-height: 1.35; color: var(--dim); letter-spacing: .04em;
+             padding-top: .5rem; }
+  /* The last band label must not land on the foot line. The track stops a
+     line short of it rather than the two overprinting. */
+  .rk-track { padding-bottom: .2rem; }
+
+  /* The gauge, rotated. At a hand's width the instrument does not disappear;
+     it lies down across the top of the screen and keeps every part it had. */
+  @media (max-width: 64rem) {
+    :root { --railw: 0px; --sticktop: 3.35rem; }   /* replaced by the measured value in measure() */
+    #rail {
+      position: sticky; inset: 0 auto auto 0; width: 100%; height: auto;
+      flex-direction: row; align-items: center; gap: .8rem;
+      padding: .45rem var(--gut); border-right: 0;
+      border-bottom: 1px solid var(--rule2);
+    }
+    .rk-head { display: flex; align-items: baseline; gap: .45rem; }
+    .rk-head .micro { display: none; }
+    #depth { font-size: 1.15rem; margin: 0; }
+    #depthtot { font-size: .75rem; }
+    .rk-track { margin: 0; min-height: 0; height: 1.5rem; }
+    .rk-line, .rk-fill { left: 0; right: 0; top: 50%; bottom: auto;
+                         width: auto; height: 1px; }
+    .rk-fill { transform: scaleX(var(--pos)); transform-origin: left center; }
+    .rk-mark { transform: translateX(calc(var(--pos) * 100%));
+               width: 100%; height: 100%; }
+    .rk-needle { width: 1px; height: 100%; top: 0; }
+    .rk-lens { left: 0; top: 50%; transform: translateY(-50%);
+               width: calc(var(--lens) * 100%); min-width: 2px; height: .5rem;
+               border: 1px solid var(--sig); border-left: 1px solid var(--sig);
+               border-bottom: 0; }
+    .rk-seam { left: auto; right: auto; top: 0; bottom: 0; height: auto;
+               width: 0; border-top: 0; border-left: 1px dashed var(--sig); }
+    .rk-seam::after { display: none; }
+    .rk-unlogged { top: 50%; transform: translateY(-50%); height: .5rem;
+                   width: auto; }
+    .rk-band, .rk-foot { display: none; }
+  }
+
+  /* ============================== MASTHEAD ================================= */
+  header { padding: 2.4rem 0 0; }
+  @media (max-width: 64rem) { header { padding-top: 1.2rem; } }
+  .mast { display: flex; flex-wrap: wrap; align-items: flex-end;
+          justify-content: space-between; gap: 1rem 1.5rem; }
+  h1 { margin: 0; font-size: clamp(2rem, 5.5vw, 3.4rem); font-weight: 800;
+       letter-spacing: -0.05em; line-height: .9; text-transform: uppercase; }
+  h1 .mid { color: var(--sig); }
+  .mast-r { display: flex; flex-direction: column; align-items: flex-end;
+            gap: .5rem; text-align: right; }
+  .stamp { display: flex; align-items: baseline; gap: .45rem; }
+  .stamp time { font-family: var(--mono); font-size: .8125rem; color: var(--ash); }
+  .thesis { margin: 1.1rem 0 0; max-width: 34rem; font-size: 1.0625rem;
+            line-height: 1.4; color: var(--ash); letter-spacing: -0.014em; }
+  .thesis b { color: var(--bone); font-weight: 600; }
+
+  /* The account slot and the language picker share a line. The account is
+     hidden until Clerk answers: a page whose auth never loads shows no
+     control at all, which is honest, rather than a Sign in that signs nobody
+     in. The language picker is never hidden — it owes Clerk nothing. */
+  .tools { display: flex; align-items: center; justify-content: flex-end;
+           flex-wrap: wrap; gap: .5rem; }
+  .account { display: none; }
+  /* flex: none on both, or a long label (ANMELDEN, サインイン) shrinks its own
+     box below its text and prints over the picker beside it. Measured in de. */
+  .account[data-ready] { display: flex; align-items: center; flex: none; }
+  .account button {
+    font: inherit; font-size: 10px; text-transform: uppercase;
+    letter-spacing: .14em; font-weight: 600; color: var(--bone);
+    background: none; border: 1px solid var(--rule2); border-radius: 0;
+    padding: .42rem .7rem; cursor: pointer; min-height: 2rem;
+    white-space: nowrap;
+  }
+  .account button:hover { border-color: var(--sig); color: var(--sig); }
+  #lang {
+    flex: none;
+    appearance: none; -webkit-appearance: none; font: inherit; font-size: 11px;
+    font-weight: 600; letter-spacing: .04em; color: var(--bone);
+    background: transparent; border: 1px solid var(--rule2); border-radius: 0;
+    padding: .42rem 1.5rem .42rem .55rem; min-height: 2rem; cursor: pointer;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='9' height='6'%3E%3Cpath d='M1 1l3.5 3.5L8 1' fill='none' stroke='%237c848b' stroke-width='1.2'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: right .5rem center;
+  }
+  #lang:hover, #lang:focus { border-color: var(--sig); }
+  #lang option { background: var(--deck); color: var(--bone); }
+
+  /* ========================== THE SECTION BAR =============================
+     Fifteen countries as one bar, each segment's width its share of the open
+     roles — the register's own shape, used as its navigation. A control
+     invented for this data: you cannot read it without learning how the
+     corpus is distributed, and you cannot navigate without reading it.
+     Widths are floored so a 18-role country is still a hit target; the
+     apparatus line under the bar says so, because a scale that lies quietly
+     is worse than one that states its floor. */
+  #sections { margin: 1.7rem 0 0; }
+  .barhead { display: flex; justify-content: space-between; align-items: baseline;
+             gap: 1rem; padding-bottom: .5rem; }
+  #bar { display: flex; width: 100%; gap: 2px; }
+  /* Fifteen segments at a hit-target minimum need 528px, and a phone has 380.
+     Measured at 380: five countries ran off the right edge and were simply
+     unreachable — navigation lost to a graphic. The bar wraps instead. Widths
+     stay proportional within each line, which is what a reader compares
+     anyway, and every country stays a thing you can press. */
+  @media (max-width: 46rem) { #bar { flex-wrap: wrap; } .seg { min-width: 3.6rem; } }
+  .seg { position: relative; appearance: none; background: var(--deck);
+         border: 0; border-radius: 0; margin: 0; padding: 0;
+         height: 2.75rem; cursor: pointer; min-width: 2.2rem;
+         display: flex; flex-direction: column; justify-content: flex-end;
+         overflow: hidden; text-align: left;
+         transition: flex-grow .42s cubic-bezier(.22,.61,.36,1),
+                     background-color .18s linear; }
+  .seg .sgc { position: absolute; inset: auto 0 0 0; padding: .18rem .3rem;
+              font-family: var(--mono); font-size: 9.5px; font-weight: 500;
+              color: var(--dim); letter-spacing: .02em; white-space: nowrap; }
+  .seg .sgn { position: absolute; inset: .22rem .3rem auto auto;
+              font-family: var(--mono); font-size: 9.5px; color: var(--dim); }
+  .seg:hover { background: #182026; }
+  .seg:hover .sgc, .seg:hover .sgn { color: var(--bone); }
+  .seg[aria-pressed="true"] { background: var(--sig); }
+  .seg[aria-pressed="true"] .sgc, .seg[aria-pressed="true"] .sgn {
+    color: #140800; font-weight: 700; }
+  .seg.nil { background: transparent; box-shadow: inset 0 0 0 1px var(--rule); }
+  .seg.nil .sgc, .seg.nil .sgn { color: var(--rule2); }
+  .seg.nil:hover { background: var(--deck); }
+  .barnote { margin: .5rem 0 0; }
+  #allbtn { appearance: none; background: none; border: 0; border-radius: 0;
+            padding: 0; margin: 0; cursor: pointer; font: inherit;
+            font-size: 10px; text-transform: uppercase; letter-spacing: .17em;
+            font-weight: 600; color: var(--dim);
+            border-bottom: 1px solid var(--rule2); }
+  #allbtn:hover, #allbtn[aria-pressed="true"] { color: var(--sig);
+                                                border-bottom-color: var(--sig); }
+
+  /* ============================== CONTROLS ================================ */
+  #controls {
+    margin: 1.6rem 0 0; padding: 1.1rem 0 1.2rem;
+    border-top: 1px solid var(--rule2); border-bottom: 1px solid var(--rule2);
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr));
+    gap: 1rem 1.1rem;
+  }
+  #controls label { display: flex; flex-direction: column; gap: .35rem; }
+  #controls label[hidden] { display: none; }
+  input, select {
+    appearance: none; -webkit-appearance: none; font: inherit; font-size: .9375rem;
+    font-weight: 500; color: var(--bone); background: transparent;
+    border: 0; border-bottom: 1px solid var(--rule2); border-radius: 0;
+    padding: .35rem 0 .4rem; width: 100%; min-height: 2.2rem;
+  }
+  select { padding-right: 1.2rem;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='9' height='6'%3E%3Cpath d='M1 1l3.5 3.5L8 1' fill='none' stroke='%237c848b' stroke-width='1.2'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: right .1rem center; }
+  select option { background: var(--deck); color: var(--bone); }
+  input::placeholder { color: var(--dim); font-weight: 400; }
+  input[type="search"]::-webkit-search-cancel-button { -webkit-appearance: none; }
+  input:focus, select:focus { border-bottom-color: var(--sig); }
+  /* A set filter is a live state, and live states are orange on this page. */
+  #controls .set { color: var(--sig); border-bottom-color: var(--sig); }
+  #ffold { display: none; }
+  @media (max-width: 52rem) {
+    #controls { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    #ffold { display: flex; grid-column: 1 / -1; align-items: baseline;
+             gap: .8rem; appearance: none; background: none; border: 0;
+             border-bottom: 1px solid var(--rule2); border-radius: 0;
+             margin: 0; padding: 0 0 .55rem; cursor: pointer; text-align: left;
+             min-height: 2.2rem; }
+    #ffold .fc { margin-left: auto; color: var(--sig); }
+    #controls.folded label:not(.q-always) { display: none; }
+    #controls.folded #fchip { display: none; }
+  }
+  @media (max-width: 32rem) { #controls { grid-template-columns: minmax(0,1fr); } }
+  #fchip { grid-column: 1 / -1; margin: 0; color: var(--dim);
+           font-size: .75rem; line-height: 1.5; }
+  #fchip p { margin: 0; }
+  #fchip p + p { margin-top: .3rem; }
+  #fchip[hidden] { display: none; }
+
+  /* =============================== STATUS ================================= */
+  #status { display: flex; flex-wrap: wrap; align-items: baseline;
+            gap: .4rem .9rem; padding: .9rem 0 .8rem; margin: 0;
+            border-bottom: 1px solid var(--rule2); }
+  #status .tally { font-size: .9375rem; font-weight: 600; letter-spacing: -0.01em; }
+  #status .tally .live { color: var(--sig); font-weight: 700; }
+  /* The unit switch is not a filter and does not sit with them: every control
+     up there changes which lines show, and this one changes what a line IS. */
+  .vsw { display: inline-flex; gap: 0 .5rem; margin-left: auto; }
+  .vsw button { appearance: none; background: none; border: 0; border-radius: 0;
+                margin: 0; padding: .2rem 0; cursor: pointer;
+                font-size: 10px; text-transform: uppercase; letter-spacing: .17em;
+                font-weight: 600; color: var(--dim);
+                border-bottom: 1px solid transparent; min-height: 1.9rem; }
+  .vsw button:hover { color: var(--bone); }
+  .vsw button[aria-pressed="true"] { color: var(--sig);
+                                     border-bottom-color: var(--sig);
+                                     cursor: default; }
+  #keyhint { appearance: none; background: none; border: 0; padding: 0;
+             margin: 0; cursor: pointer; }
+  #keyhint:hover { color: var(--bone); }
+
+  /* ================================ THE LOG ===============================
+     Strata, each one a company, each holding its roles. The header is sticky,
+     so a stratum you are inside stays named at the top of the screen and the
+     next one PUSHES it out — where you are is never a thing you have to
+     scroll back for. That push is the whole navigation model, and it costs
+     nothing: `position: sticky` is the browser's own compositor. */
+  #log { padding-bottom: 4rem; }
+  .stratum { border-bottom: 1px solid var(--rule); }
+  .sh {
+    position: sticky; top: var(--sticktop); z-index: 3; margin: 0;
+    display: flex; align-items: center; gap: .6rem;
+    background: var(--void); border-bottom: 1px solid var(--rule2);
+    box-shadow: 0 1px 0 var(--void);
+  }
+  .shb {
+    flex: 1 1 auto; min-width: 0;
+    display: grid; grid-template-columns: 3.6rem minmax(0,1fr) auto auto;
+    gap: 0 .9rem; align-items: center;
+    appearance: none; background: none; border: 0; border-radius: 0;
+    padding: .62rem 0 .6rem; margin: 0; cursor: pointer; text-align: left;
+    min-height: 2.75rem;
+  }
+  .shb > * { min-width: 0; }
+  .shb .sref { font-family: var(--mono); font-size: 10px; color: var(--dim);
+               letter-spacing: .04em; padding-left: .1rem; }
+  .shb .snm { font-size: 1rem; font-weight: 700; letter-spacing: -0.022em;
+              white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .shb .sct { font-family: var(--mono); font-size: 10px; color: var(--dim);
+              letter-spacing: .06em; white-space: nowrap; }
+  .shb .snn { font-family: var(--mono); font-size: .8125rem; font-weight: 500;
+              color: var(--ash); white-space: nowrap; }
+  .sh:hover .snm { color: var(--sig); }
+  .shb:focus-visible { outline: 2px solid var(--sig); outline-offset: -2px; }
+  /* The stratum you are inside. Written by the same frame loop that moves the
+     needle, so the gauge and the log always agree about where you are. */
+  .stratum.here > .sh { background: var(--deck); }
+  .stratum.here > .sh .snm { color: var(--sig); }
+  .stratum.here > .sh .snn { color: var(--bone); }
+  .she { flex: none; appearance: none; background: none;
+         border: 1px solid var(--rule2); border-radius: 0; margin-right: .1rem;
+         padding: .28rem .45rem; cursor: pointer;
+         font-size: 9px; text-transform: uppercase; letter-spacing: .13em;
+         font-weight: 600; color: var(--dim); white-space: nowrap;
+         min-height: 2rem; }
+  .she:hover { color: var(--sig); border-color: var(--sig); }
+  @media (max-width: 40rem) {
+    .shb { grid-template-columns: 2.6rem minmax(0,1fr) auto; gap: 0 .55rem; }
+    .shb .sct { display: none; }
+  }
+
+  /* The role list. content-visibility skips everything off-screen; the
+     reserved height is EXACT because every row is one pitch tall, so the
+     scrollbar is honest from the first paint and nothing shifts as the rows
+     materialise. This is the whole reason the rows are a fixed height. */
+  .rlist {
+    content-visibility: auto;
+    contain-intrinsic-size: auto calc(var(--n, 0) * var(--rowh));
+  }
+  .rlist[data-pending] { min-height: calc(var(--n, 0) * var(--rowh)); }
+  .stratum[data-fold] > .rlist { display: none; }
+
+  .rrow {
+    display: grid; grid-template-columns: 3.6rem minmax(0,1fr) minmax(0,11rem) 2.2rem;
+    gap: 0 .9rem; align-items: center; width: 100%; height: var(--rowh);
+    appearance: none; background: none; border: 0; border-radius: 0;
+    border-bottom: 1px solid var(--rule); margin: 0; padding: 0 .1rem;
+    text-align: left; cursor: pointer; overflow: hidden;
+  }
+  .rrow > * { min-width: 0; overflow: hidden; text-overflow: ellipsis;
+              white-space: nowrap; }
+  .rd { font-family: var(--mono); font-size: 10px; color: var(--dim);
+        letter-spacing: .04em; }
+  .rt { font-size: .875rem; font-weight: 500; letter-spacing: -0.012em; }
+  .rp { font-size: .75rem; color: var(--ash); }
+  .rg { font-family: var(--mono); font-size: 10px; color: var(--dim);
+        text-align: right; letter-spacing: .05em; }
+  .rrow:hover { background: var(--deck); }
+  .rrow:hover .rt { color: var(--sig); }
+  .rrow[aria-expanded="true"] { background: var(--deck); }
+  .rrow[aria-expanded="true"] .rt, .rrow[aria-expanded="true"] .rd { color: var(--sig); }
+  .rrow:focus-visible { outline: 2px solid var(--sig); outline-offset: -2px; }
+  .rw { display: none; }
+  @media (min-width: 58rem) {
+    .rrow { grid-template-columns: 3.6rem minmax(0,1fr) minmax(0,10rem) 8.5rem 2.2rem; }
+    .rw { display: flex; gap: .25rem; align-items: center; text-align: left; }
+    .tag { flex: none; white-space: nowrap; font-family: var(--mono);
+           font-size: 9px; letter-spacing: .06em; color: var(--dim);
+           border: 1px solid var(--rule2); padding: .08rem .28rem; }
+    /* A stated yes is the only tag that leaves the margin gray: a stated no is
+       a fact the company published and gets no warning colour, and a silence
+       gets no tag at all. */
+    .tag.on { color: var(--bone); border-color: var(--ash); }
+  }
+  @media (max-width: 40rem) {
+    .rrow { grid-template-columns: 2.6rem minmax(0,1fr) auto; gap: 0 .55rem; }
+    .rp { display: none; }
+  }
+
+  /* THE RATE OF TRAVEL, made useful. Above a threshold the page stops
+     pretending you can read the secondary columns and gives the space back to
+     the titles and to the strata you are passing. It is a CLASS on the root,
+     toggled at most twice per gesture — a custom property read by six
+     thousand rows would be a style recalculation sixty times a second, which
+     is exactly the kind of motion that costs more than it gives. */
+  .rp, .rg, .rw, .rrow { transition: opacity .16s linear, border-color .16s linear; }
+  html.moving .rp, html.moving .rg, html.moving .rw { opacity: .18; }
+  html.moving .rrow { border-bottom-color: transparent; }
+
+  /* =============================== THE SHEET ==============================
+     A role opens where it is. Nothing above it moves, so the scroll is never
+     lost; the rows below are displaced, which is what "in place" means when
+     the thing has to go somewhere. The open/close is a grid-row animation on
+     ONE subtree — not on a list of six thousand — and reduced motion turns it
+     into an instant state change that reads identically. */
+  .sheet { display: grid; grid-template-rows: 0fr;
+           transition: grid-template-rows .26s cubic-bezier(.22,.61,.36,1);
+           background: var(--pit); border-left: 2px solid var(--sig); }
+  .sheet.open { grid-template-rows: 1fr; }
+  .sheet > .sinner { overflow: hidden; min-height: 0; }
+  .sbody { padding: 1rem 1.2rem 1.3rem; }
+  .sbody h3 { margin: 0 0 .2rem; font-size: 1.2rem; font-weight: 700;
+              letter-spacing: -0.026em; line-height: 1.2;
+              overflow-wrap: anywhere; }
+  .sbody .swho { margin: 0 0 .8rem; font-size: .8125rem; color: var(--ash);
+                 overflow-wrap: anywhere; }
+  .apply { display: inline-flex; align-items: center; gap: .4rem;
+           border: 1px solid var(--sig); color: var(--sig); background: none;
+           padding: .5rem .8rem; min-height: 2.4rem;
+           font-size: 11px; text-transform: uppercase; letter-spacing: .14em;
+           font-weight: 700; }
+  .apply:hover { background: var(--sig); color: #140800; border-color: var(--sig); }
+  .sgrid { display: grid; grid-template-columns: 7.5rem minmax(0,1fr);
+           gap: 0 1rem; margin: 1rem 0 0; }
+  .sgrid dt { grid-column: 1; padding: .34rem 0; font-size: 10px;
+              text-transform: uppercase; letter-spacing: .15em; font-weight: 600;
+              color: var(--dim); border-top: 1px solid var(--rule); }
+  .sgrid dd { grid-column: 2; margin: 0; padding: .34rem 0; font-size: .8125rem;
+              color: var(--bone); border-top: 1px solid var(--rule);
+              overflow-wrap: anywhere; }
+  .sgrid dd .mono { font-family: var(--mono); font-size: .9em; letter-spacing: 0;
+                    user-select: all; }
+  @media (max-width: 40rem) {
+    .sgrid { grid-template-columns: minmax(0,1fr); }
+    .sgrid dt { border-bottom: 0; padding-bottom: 0; }
+    .sgrid dd { border-top: 0; padding-top: .1rem; }
+  }
+  .prov { margin: .7rem 0 0; font-size: 9.5px; text-transform: uppercase;
+          letter-spacing: .14em; font-weight: 600; color: var(--dim); }
+
+  /* =============================== THE SEAM ===============================
+     Where the free log stops, and the one place on this page that asks the
+     reader for anything. It is a horizon, not a gate: everything above it was
+     complete, everything below it is stated at its true size, and there are
+     always two doors — one of which needs no account and no Clerk. */
+  .seam { position: relative; margin: 0; padding: 2.6rem 0 2.8rem;
+          border-top: 1px solid var(--sig); }
+  .seam::before { content: ""; position: absolute; left: 0; right: 0; top: 0;
+                  height: 7rem; pointer-events: none;
+                  background: linear-gradient(180deg,
+                    rgba(255,122,26,.09), transparent); }
+  .seam .eyebrow { margin: 0 0 .8rem; color: var(--sig); }
+  .seam h2 { margin: 0 0 .7rem; font-size: clamp(1.35rem, 3.4vw, 2rem);
+             font-weight: 700; letter-spacing: -0.032em; line-height: 1.1;
+             max-width: 26rem; }
+  .seam h2 .n { font-family: var(--mono); font-weight: 600; color: var(--sig); }
+  .seam p { margin: 0 0 1.3rem; max-width: 34rem; color: var(--ash);
+            font-size: .9375rem; line-height: 1.55; }
+  .doors { display: flex; flex-wrap: wrap; gap: .7rem; }
+  .door {
+    appearance: none; border-radius: 0; cursor: pointer;
+    padding: .7rem 1.1rem; min-height: 2.75rem;
+    font-size: 11px; text-transform: uppercase; letter-spacing: .14em;
+    font-weight: 700;
+  }
+  .door.pri { background: var(--sig); color: #140800; border: 1px solid var(--sig); }
+  .door.pri:hover { background: #ff8f3f; border-color: #ff8f3f; }
+  .door.sec { background: none; color: var(--bone); border: 1px solid var(--rule2); }
+  .door.sec:hover { border-color: var(--bone); }
+  .seam .note { margin: 1.2rem 0 0; font-size: .75rem; color: var(--dim);
+                max-width: 34rem; }
+  /* The column below the seam, drawn to scale. The reader can see exactly how
+     far it goes — that is the argument for signing in, and it is made with
+     the data rather than with a word like "unlock". */
+  .belowbar { display: flex; align-items: center; gap: .7rem; margin: 1.4rem 0 1.6rem; }
+  /* The read part of the column, drawn to the same scale beside the unread
+     part: the ratio is the argument, so it is drawn rather than asserted. */
+  .belowbar .bbr { flex: none; height: .5rem; background: var(--sig);
+                   border: 1px solid var(--sig); }
+  .belowbar .bb { flex: 1 1 auto; height: .5rem; min-width: 4rem;
+                  background: repeating-linear-gradient(
+                    -45deg, var(--rule2) 0 1px, transparent 1px 4px);
+                  border: 1px solid var(--rule2); }
+  .belowbar .bbn { font-family: var(--mono); font-size: .75rem; color: var(--ash);
+                   white-space: nowrap; }
+
+  /* ============================== EMPTY / FOOT ============================ */
+  .empty { padding: 3rem 0; color: var(--ash); max-width: 40rem;
+           font-size: .9375rem; line-height: 1.6; }
+  footer { border-top: 1px solid var(--rule2); padding: 1.6rem 0 5rem;
+           color: var(--dim); }
+  .notes { display: grid; grid-template-columns: repeat(auto-fit, minmax(17rem,1fr));
+           gap: 1rem 2rem; counter-reset: note; }
+  .notes p { position: relative; margin: 0; padding-left: 2rem;
+             font-size: .75rem; line-height: 1.55; overflow-wrap: anywhere; }
+  .notes p:empty { display: none; }
+  .notes p::before { counter-increment: note;
+                     content: counter(note, decimal-leading-zero);
+                     position: absolute; left: 0; top: .1rem;
+                     font-family: var(--mono); font-size: 10px; color: var(--sig); }
+  .sources { margin: 1.5rem 0 0; padding-top: .9rem;
+             border-top: 1px solid var(--rule); font-size: 10px;
+             text-transform: uppercase; letter-spacing: .15em; font-weight: 600; }
+  .sources a { color: var(--ash); }
+
+  /* The keyboard legend. Someone who lives here for an hour should not have to
+     touch a mouse, and a page with a keyboard model has to say what it is. */
+  #keys[hidden] { display: none; }
+  #keys { position: fixed; right: 1rem; bottom: 1rem; z-index: 60;
+          background: var(--deck); border: 1px solid var(--rule2);
+          padding: .9rem 1rem 1rem; max-width: 20rem; }
+  #keys dl { display: grid; grid-template-columns: auto minmax(0,1fr);
+             gap: .3rem .8rem; margin: .6rem 0 0; }
+  #keys dt { font-family: var(--mono); font-size: 11px; color: var(--sig); }
+  #keys dd { margin: 0; font-size: .75rem; color: var(--ash); }
+  #keys .kclose { position: absolute; top: .4rem; right: .5rem; background: none;
+                  border: 0; cursor: pointer; color: var(--dim); font-size: 14px;
+                  line-height: 1; padding: .3rem; }
+
+  /* ====================== THE SECOND DESIGNED STATE =======================
+     Not a fallback. Everything the motion said is said by something that
+     holds still: the gauge still reads the depth, the strata still name
+     themselves at the top of the screen, the sheet still opens, the section
+     bar still shows the register's shape. What goes is duration. */
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      animation-duration: .001ms !important; animation-delay: 0s !important;
+      transition-duration: .001ms !important;
+    }
+    /* --v is never written in this state (the loop does not run), but the
+       transform would still be composited on every property change; pinned. */
+    #depth { transform: none; }
+    /* The rate-of-travel fade is a motion, and it is the one piece of this
+       design that would still "work" without duration. It is removed anyway:
+       a reader who asked for less motion did not ask for the page to start
+       hiding columns from them. */
+    html.moving .rp, html.moving .rg, html.moving .rw { opacity: 1; }
+    html.moving .rrow { border-bottom-color: var(--rule); }
+  }
+  /* Belt and braces: the settle animation is added by class, and the class is
+     never added when the loop is off — but a stylesheet that only works
+     because the script agreed with it is a stylesheet with a bug waiting. */
+  .settle { animation: settle .3s cubic-bezier(.22,.61,.36,1) both; }
+  @keyframes settle { from { opacity: 0; transform: translate3d(0, 6px, 0); }
+                      to   { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) { .settle { animation: none; } }
+  .vh { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+        overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+</style>
+</head>
+<body>
+
+<!-- THE GAUGE. Built in markup rather than by the script so it exists before
+     any fetch resolves: an instrument that appears after the data would be one
+     more thing to wait for, and this page's contract is that it never makes
+     anyone wait. Its numbers are dashes until there is something to read.
+     aria-hidden because it is a dial: every fact it draws is stated in words
+     in the status line below, which is what a screen reader is given. -->
+<div id="rail" aria-hidden="true">
+  <div class="rk-head">
+    <span class="micro" id="depthlbl">Depth</span>
+    <span id="depth" class="num">—</span>
+    <span id="depthtot">—</span>
+  </div>
+  <div class="rk-track" id="track">
+    <span class="rk-line"></span>
+    <span class="rk-fill"></span>
+    <span class="rk-mark"><span class="rk-needle"></span><span class="rk-lens"></span></span>
+  </div>
+  <span class="rk-foot" id="railfoot"></span>
+</div>
+
+<div class="wrap">
+<header>
+  <div class="mast">
+    <div>
+      <h1>Role<span class="mid">·</span>Atlas</h1>
+    </div>
+    <div class="mast-r">
+      <div class="tools">
+        <!-- Empty on purpose. The script fills it once Clerk has answered
+             which of the two states the reader is in; if Clerk never answers
+             it stays empty, and the seam below prints its no-account door
+             alone. Nothing under this header reads it. -->
+        <div class="account" id="account"></div>
+        <label class="vh" for="lang" id="langlbl">Language</label>
+        <select id="lang"></select>
+      </div>
+      <p class="stamp"><span class="micro" id="snaplbl">Snapshot</span><time id="snapshot">—</time></p>
+    </div>
+  </div>
+  <p class="thesis" id="thesis"></p>
+</header>
+
+<!-- The register's own shape, used as its navigation. Built from the data in
+     load(), because every segment states a count and a bar drawn before the
+     fetch would be fifteen widths with no build behind them. -->
+<nav id="sections" aria-labelledby="barlbl">
+  <div class="barhead">
+    <span class="micro" id="barlbl"></span>
+    <button id="allbtn" type="button" aria-pressed="true"></button>
+  </div>
+  <div id="bar"></div>
+  <p class="micro barnote" id="barnote"></p>
+</nav>
+
+<div id="controls">
+  <button id="ffold" type="button" aria-expanded="true">
+    <span class="micro" id="ffoldlbl"></span>
+    <span class="micro fc" id="fcount"></span>
+    <span class="micro chev" aria-hidden="true">▴</span>
+  </button>
+  <label class="q-always"><span class="micro lbl" id="l-q"></span><input id="q" type="search" autocomplete="off"></label>
+  <label><span class="micro lbl" id="l-city"></span><select id="city"></select></label>
+  <label><span class="micro lbl" id="l-dept"></span><select id="dept"></select></label>
+  <label><span class="micro lbl" id="l-remote"></span><select id="remote"></select></label>
+  <label><span class="micro lbl" id="l-openness"></span><select id="openness"></select></label>
+  <label class="india-only"><span class="micro lbl" id="l-mca"></span><select id="mca"></select></label>
+  <label><span class="micro lbl" id="l-bracket"></span><select id="bracket"></select></label>
+  <label><span class="micro lbl" id="l-recency"></span><select id="recency"></select></label>
+  <label><span class="micro lbl" id="l-sort"></span><select id="sort"></select></label>
+  <div id="fchip" hidden></div>
+</div>
+
+<p id="status" role="status"></p>
+
+<main id="log"></main>
+
+<footer>
+  <div class="notes" id="notes"></div>
+  <p class="sources" id="sources"></p>
+</footer>
+</div>
+
+<div id="keys" hidden role="dialog" aria-modal="false" aria-labelledby="keystitle">
+  <button class="kclose" type="button" id="kclose" aria-label="Close">✕</button>
+  <span class="micro" id="keystitle"></span>
+  <dl id="keylist"></dl>
+</div>
+<script>
+// ===========================================================================
+// FLOW 3 — worldwide. Every string the PAGE owns lives in this table; every
+// string the DATA owns (a company name, a role title, a board's own word for a
+// city or a registration status) never enters it. A Berlin company's role title
+// is German because that is what its board says, and translating a source claim
+// would be exactly the lie this register exists not to tell.
+//
+// Keys ending _1 are the singular form. `t()` picks between them on the count,
+// which is enough for the eight locales shipped here (ja and zh-Hans simply
+// carry the same string in both slots, because they do not inflect for it).
+// ===========================================================================
+const LOCALES = [
+  ['en',      'English'],
+  ['es',      'Español'],
+  ['pt-BR',   'Português (Brasil)'],
+  ['fr',      'Français'],
+  ['de',      'Deutsch'],
+  ['ja',      '日本語'],
+  ['zh-Hans', '简体中文'],
+  ['hi',      'हिन्दी'],
+];
+// Three lines today, and a rewrite later if they are not here. No RTL locale
+// ships yet; the plumbing that would carry one does.
+const DIRS = { en: 'ltr', es: 'ltr', 'pt-BR': 'ltr', fr: 'ltr', de: 'ltr',
+               ja: 'ltr', 'zh-Hans': 'ltr', hi: 'ltr' };
+
+const STRINGS = {
+en: {
+  title: 'ROLE·ATLAS — funded companies hiring, proven by their own job board',
+  tagline: 'Funded software companies with an open role on their own job board — <b>proven by the board, not by a claim.</b>',
+  snapshot: 'Snapshot', language: 'Language', signIn: 'Sign in',
+  depth: 'Depth', depthOf: 'of {n}', railFoot: 'The whole column, to scale',
+  sections: 'Countries — share of open roles', allCountries: 'All countries',
+  barNote: 'Segment width is that country’s share of the open roles, floored so a small one stays reachable. A hollow segment is a country whose boards we read and found nobody hiring in.',
+  filters: 'Filters & sort', nSet: '{n} set',
+  lq: 'Search', lqPh: 'company or role title',
+  lcity: 'Hiring city', anycity: 'Any city',
+  ldept: 'Department', anydept: 'Any department',
+  lremote: 'Workplace', anyremote: 'Any', remoteonly: 'Remote roles',
+  lopen: 'Foreign hires', anyopen: 'Any', openyes: 'Open to foreign hires — {n}',
+  lmca: 'MCA register', anymca: 'Any', mcamatched: 'Has an India registration',
+  lraised: 'Raised', anyamount: 'Any amount', bsmall: 'Under $10M', bmid: '$10M – $50M', blarge: '$50M and up',
+  lfunded: 'Funded', anytime: 'Any time', d90: 'Last 90 days', d365: 'Last 12 months',
+  lsort: 'Sort by', sreqs: 'Open roles', sraised: 'Amount raised', sdate: 'Most recently funded', sname: 'Name', snewest: 'Newest roles',
+  noteOpen: 'Foreign-hires filter withdrawn: no posting in {scope} said yes to visa sponsorship or hiring from abroad on this snapshot — and silence is not a no (note 02).',
+  noteCity: 'City filter withdrawn: no posting in {scope} named a city on this snapshot. A city is read, never invented (note 03).',
+  noteCovered: '{label} — {n} of {m} state {field}; the rest are hidden by this filter, not disqualified.',
+  fieldAmount: 'an amount', fieldDate: 'a date',
+  noteDept: 'Department is read off the role title where we can place it, and taken from the board’s own word where we cannot: of {all} roles here, {a} are our reading of the title and {b} are what the board calls them (note 03).',
+  tallyRoles: '{n} of {m} roles', tallyCompanies: '{n} of {m} companies',
+  inSection: 'in {country}', everywhere: 'across fifteen countries',
+  unitLabel: 'Register unit', unitRoles: 'Roles', unitCompanies: 'Companies',
+  keysHint: '? keys',
+  role_1: 'role', role: 'roles', company_1: 'company', company: 'companies',
+  evidence: 'Evidence', openCo: '{name} — open its roles', closeCo: '{name} — close its roles',
+  openRole: '{title} — open this role',
+  sheetPosting: 'Open the posting', sheetWhere: 'Where', sheetWorkplace: 'Workplace',
+  wremote: 'remote', whybrid: 'hybrid', wonsite: 'on-site',
+  sheetOpenness: 'From abroad', visaYes: 'visa sponsorship', visaNo: 'no visa sponsorship',
+  abroadYes: 'hires from abroad', abroadNo: 'right to work required',
+  sheetFirstSeen: 'First seen', tagNew: 'New', tagAbroad: 'abroad ✓', tagAbroadNo: 'abroad ✕',
+  newTitle: 'First seen {d}. This company’s board was read on the previous snapshot too, so this role appeared between them.',
+  sheetBoard: 'Board read', sheetRead: 'Read on', sheetVerdict: 'Build verdict',
+  verdictListed: 'listed — open roles seen',
+  sheetOnBoard: 'On this board', onBoard: '{n} on the board', onBoardScope: '{n} on the board · {m} in this view',
+  sheetCorpus: 'Corpus', corpusV: 'checked {n} of {m} · listed {k}',
+  sheetFunding: 'Funding', fundingV: 'Raised {amt} · {round} · announced {date}',
+  fundingDark: 'Funded — amount, round and date all undisclosed',
+  fundingSource: 'funding source', seriesX: 'Series {x}', roundNone: 'round letter not stated',
+  undisclosed: 'undisclosed', dateNone: 'date not stated',
+  sheetQualified: 'Qualified', qualifiedV: 'Series A or later, by {rule}',
+  ruleLetter: 'a stated round letter', ruleAmount: 'the size of a disclosed round', ruleStage: 'its funding directory’s growth-stage label',
+  sheetSalary: 'India CTC', salaryV: '{v} average · {n} · as of {d}',
+  report_1: '{n} report', report: '{n} reports',
+  sheetMca: 'India registration', sheetUk: 'UK registration',
+  regV: '{name} · incorporated {y}{city} · {status}',
+  descWhat: 'What', descForWhom: 'For whom', descWhyThem: 'Why them',
+  provBoard: 'AI-summarized · read from their own job board',
+  provChecked: 'AI-summarized · checked against their own site',
+  provUnverified: 'AI-summarized · unverified',
+  seamEyebrow: 'The log continues',
+  seamHead: '{n} more roles, at {m} more companies, lie below this line.',
+  seamBody: 'You have read {k} of them without an account, and nothing above was withheld — every role, every board, every receipt. Signing in opens the rest of the column, and it costs you nothing here: your place, your filters and what you searched for all survive it.',
+  doorSignIn: 'Sign in and keep reading', doorBypass: 'Keep reading without an account',
+  seamNoClerk: 'Sign-in is not reachable from this browser right now — a blocker, or Clerk itself. The door below needs neither, and the register is open through it.',
+  seamMeasure: 'This page counts, in your browser and nowhere else, that you were shown this and what you chose. That count is the only evidence that would ever justify moving the register behind a login, and it has not been earned.',
+  seamOpened: 'You opened the rest of the column without an account. It stays open.',
+  belowLabel: '{n} roles below this line',
+  emptyBuild: 'This snapshot listed no companies. The build report says why, for each one.',
+  emptyCountry: 'No company we could check had an open role in {scope} on this snapshot — a country we read, with nobody hiring.',
+  emptyCountryTop: ' Most of the register is in {country}: {n} of {m} companies.',
+  emptyOpenness: 'No posting in {scope} said yes to visa sponsorship or to hiring from abroad. 92% of the postings we measured say nothing at all, and a posting that says nothing is not a no — note 02.',
+  emptyRoles: 'No role matches these filters.', emptyCompanies: 'No company matches these filters.',
+  integrityV: 'Checked {n} of the {m} funded companies in our corpus. The other {k} could not be checked — no job board we could find, or one we could not read — so they are left off rather than shown as not hiring. This is not every funded company hiring across the fifteen countries we watch; it is every one we could prove.',
+  firstSeenV: 'Every role carries the date we first saw it — {dated} of {total} on this snapshot. A role is marked new only where we read its company’s board on the previous snapshot as well as this one; {unconf} are dated but unconfirmed, which means we saw them first on a night we could not compare, not that they are new or old.',
+  note1: 'Every company here showed at least one open role, in one of the fifteen countries this register covers, on its own job board, on the snapshot date. A company we could not check is left off rather than shown as not hiring.',
+  note2: 'The visa and hiring-from-abroad badges are read from what a posting says, and most postings say nothing at all — 92% of the ones we measured. A role with no badge is one whose posting did not say, which is not the same as a no.',
+  note3: 'A role’s department is read from its title where we can place it, and taken from the board’s own word where we cannot; what neither places stays Unclassified rather than being guessed into a bucket. A city is taken only where the board named its country beside it, so a posting listing five cities at once contributes none.',
+  note4: 'The MCA data we hold lists companies registered in India as subsidiaries of a parent incorporated abroad, so a missing registration says nothing about a company. Company names, role titles, cities and register statuses print in the language they were published in: the page translates, the evidence does not.',
+  note5: 'Depth is measured in roles, not in pixels. The gauge draws this register at its true scale and the horizons on it are the points where the open-role count drops a band — 10 or more, 2 to 9, 1 — which under this register’s own order is the only ordering in which those are real boundaries.',
+  srcBuild: 'build report', srcData: 'the data', srcSeen: 'first seen', srcSnapshot: 'snapshot {d}',
+  keysTitle: 'Keyboard', kSearch: 'Search', kRows: 'Role down / up', kStrata: 'Company down / up',
+  kUnit: 'Open or close every company', kOpenR: 'Open the role under the cursor', kCloseR: 'Close it',
+  kSections: 'Previous / next country', kHelp: 'This card',
+  loading: 'Reading the register…', loadFail: 'Could not load {src}: {msg}',
+  schemaFail: 'This page reads schema v{want}; {src} is v{got}. Not rendering it.',
+  dept: { Legal: 'Legal', Security: 'Security', Data: 'Data', Design: 'Design',
+    'Customer Success & Support': 'Customer success & support', Marketing: 'Marketing',
+    Sales: 'Sales', 'People/HR': 'People / HR', IT: 'IT', Finance: 'Finance',
+    Product: 'Product', Engineering: 'Engineering', Operations: 'Operations',
+    Unclassified: 'Unclassified' },
+},
+es: {
+  title: 'ROLE·ATLAS — empresas financiadas que contratan, probado por su propio portal de empleo',
+  tagline: 'Empresas de software financiadas con una vacante abierta en su propio portal de empleo — <b>probado por el portal, no por una afirmación.</b>',
+  snapshot: 'Instantánea', language: 'Idioma', signIn: 'Iniciar sesión',
+  depth: 'Profundidad', depthOf: 'de {n}', railFoot: 'La columna entera, a escala',
+  sections: 'Países — parte de las vacantes', allCountries: 'Todos los países',
+  barNote: 'El ancho de cada segmento es la parte de vacantes de ese país, con un mínimo para que uno pequeño siga siendo accesible. Un segmento hueco es un país cuyos portales leímos y en el que nadie contrataba.',
+  filters: 'Filtros y orden', nSet: '{n} activos',
+  lq: 'Buscar', lqPh: 'empresa o título de la vacante',
+  lcity: 'Ciudad', anycity: 'Cualquier ciudad',
+  ldept: 'Área', anydept: 'Cualquier área',
+  lremote: 'Modalidad', anyremote: 'Cualquiera', remoteonly: 'Vacantes remotas',
+  lopen: 'Desde el extranjero', anyopen: 'Cualquiera', openyes: 'Abierta a contratar fuera — {n}',
+  lmca: 'Registro MCA', anymca: 'Cualquiera', mcamatched: 'Con registro en India',
+  lraised: 'Capital', anyamount: 'Cualquier importe', bsmall: 'Menos de 10 M$', bmid: '10 M$ – 50 M$', blarge: '50 M$ o más',
+  lfunded: 'Financiada', anytime: 'Cualquier fecha', d90: 'Últimos 90 días', d365: 'Últimos 12 meses',
+  lsort: 'Ordenar por', sreqs: 'Vacantes abiertas', sraised: 'Capital levantado', sdate: 'Financiación más reciente', sname: 'Nombre', snewest: 'Vacantes más nuevas',
+  noteOpen: 'Filtro de contratación desde el extranjero retirado: ninguna publicación en {scope} dijo que sí al patrocinio de visado ni a contratar fuera en esta instantánea — y el silencio no es un no (nota 02).',
+  noteCity: 'Filtro de ciudad retirado: ninguna publicación en {scope} nombró una ciudad en esta instantánea. Una ciudad se lee, nunca se inventa (nota 03).',
+  noteCovered: '{label} — {n} de {m} declaran {field}; el resto quedan ocultas por este filtro, no descartadas.',
+  fieldAmount: 'un importe', fieldDate: 'una fecha',
+  noteDept: 'El área se lee del título de la vacante cuando podemos situarlo, y se toma de la palabra del propio portal cuando no: de {all} vacantes aquí, {a} son nuestra lectura del título y {b} son como las llama el portal (nota 03).',
+  tallyRoles: '{n} de {m} vacantes', tallyCompanies: '{n} de {m} empresas',
+  inSection: 'en {country}', everywhere: 'en quince países',
+  unitLabel: 'Unidad del registro', unitRoles: 'Vacantes', unitCompanies: 'Empresas',
+  keysHint: '? teclas',
+  role_1: 'vacante', role: 'vacantes', company_1: 'empresa', company: 'empresas',
+  evidence: 'Pruebas', openCo: '{name} — abrir sus vacantes', closeCo: '{name} — cerrar sus vacantes',
+  openRole: '{title} — abrir esta vacante',
+  sheetPosting: 'Abrir la publicación', sheetWhere: 'Dónde', sheetWorkplace: 'Modalidad',
+  wremote: 'remoto', whybrid: 'híbrido', wonsite: 'presencial',
+  sheetOpenness: 'Desde el extranjero', visaYes: 'patrocinio de visado', visaNo: 'sin patrocinio de visado',
+  abroadYes: 'contrata desde fuera', abroadNo: 'exige permiso de trabajo',
+  sheetFirstSeen: 'Vista por primera vez', tagNew: 'Nueva', tagAbroad: 'exterior ✓', tagAbroadNo: 'exterior ✕',
+  newTitle: 'Vista por primera vez el {d}. También leímos el portal de esta empresa en la instantánea anterior, así que esta vacante apareció entre las dos.',
+  sheetBoard: 'Portal leído', sheetRead: 'Leído el', sheetVerdict: 'Veredicto del build',
+  verdictListed: 'listada — vacantes abiertas vistas',
+  sheetOnBoard: 'En este portal', onBoard: '{n} en el portal', onBoardScope: '{n} en el portal · {m} en esta vista',
+  sheetCorpus: 'Corpus', corpusV: 'comprobadas {n} de {m} · listadas {k}',
+  sheetFunding: 'Financiación', fundingV: 'Levantó {amt} · {round} · anunciado {date}',
+  fundingDark: 'Financiada — importe, ronda y fecha sin revelar',
+  fundingSource: 'fuente de la financiación', seriesX: 'Serie {x}', roundNone: 'letra de ronda no declarada',
+  undisclosed: 'sin revelar', dateNone: 'fecha no declarada',
+  sheetQualified: 'Calificada', qualifiedV: 'Serie A o posterior, por {rule}',
+  ruleLetter: 'una letra de ronda declarada', ruleAmount: 'el tamaño de una ronda revelada', ruleStage: 'la etiqueta de etapa de su directorio de financiación',
+  sheetSalary: 'CTC en India', salaryV: '{v} de media · {n} · a fecha de {d}',
+  report_1: '{n} informe', report: '{n} informes',
+  sheetMca: 'Registro en India', sheetUk: 'Registro en el Reino Unido',
+  regV: '{name} · constituida en {y}{city} · {status}',
+  descWhat: 'Qué', descForWhom: 'Para quién', descWhyThem: 'Por qué ellos',
+  provBoard: 'Resumen por IA · leído de su propio portal de empleo',
+  provChecked: 'Resumen por IA · contrastado con su propio sitio',
+  provUnverified: 'Resumen por IA · sin verificar',
+  seamEyebrow: 'El registro continúa',
+  seamHead: 'Debajo de esta línea hay {n} vacantes más, en {m} empresas más.',
+  seamBody: 'Has leído {k} de ellas sin cuenta, y nada de lo anterior estaba recortado: todas las vacantes, todos los portales, todos los recibos. Iniciar sesión abre el resto de la columna, y aquí no te cuesta nada: tu sitio, tus filtros y lo que buscaste sobreviven.',
+  doorSignIn: 'Iniciar sesión y seguir leyendo', doorBypass: 'Seguir leyendo sin cuenta',
+  seamNoClerk: 'Ahora mismo no se puede iniciar sesión desde este navegador — un bloqueador, o el propio Clerk. La puerta de abajo no necesita ninguno, y el registro se abre por ella.',
+  seamMeasure: 'Esta página cuenta, en tu navegador y en ningún otro sitio, que te mostramos esto y qué elegiste. Ese recuento es la única prueba que justificaría alguna vez poner el registro tras un inicio de sesión, y aún no se ha ganado.',
+  seamOpened: 'Has abierto el resto de la columna sin cuenta. Se queda abierta.',
+  belowLabel: '{n} vacantes bajo esta línea',
+  emptyBuild: 'Esta instantánea no listó ninguna empresa. El informe del build dice por qué, una a una.',
+  emptyCountry: 'Ninguna empresa que pudiéramos comprobar tenía una vacante abierta en {scope} en esta instantánea — un país que leímos, sin nadie contratando.',
+  emptyCountryTop: ' La mayor parte del registro está en {country}: {n} de {m} empresas.',
+  emptyOpenness: 'Ninguna publicación en {scope} dijo que sí al patrocinio de visado ni a contratar desde el extranjero. El 92 % de las publicaciones que medimos no dice nada, y una publicación que calla no es un no — nota 02.',
+  emptyRoles: 'Ninguna vacante coincide con estos filtros.', emptyCompanies: 'Ninguna empresa coincide con estos filtros.',
+  integrityV: 'Comprobamos {n} de las {m} empresas financiadas de nuestro corpus. Las otras {k} no se pudieron comprobar — sin portal de empleo localizable, o con uno que no pudimos leer — así que se omiten en lugar de mostrarse como que no contratan. Esto no es toda empresa financiada que contrata en los quince países que vigilamos; es toda la que pudimos probar.',
+  firstSeenV: 'Cada vacante lleva la fecha en que la vimos por primera vez — {dated} de {total} en esta instantánea. Una vacante se marca como nueva solo si leímos el portal de su empresa también en la instantánea anterior; {unconf} tienen fecha pero sin confirmar, lo que significa que las vimos por primera vez una noche en que no pudimos comparar, no que sean nuevas ni viejas.',
+  note1: 'Cada empresa aquí mostró al menos una vacante abierta, en uno de los quince países que cubre este registro, en su propio portal de empleo, en la fecha de la instantánea. Una empresa que no pudimos comprobar se omite en lugar de mostrarse como que no contrata.',
+  note2: 'Las marcas de visado y de contratación desde el extranjero se leen de lo que dice la publicación, y la mayoría no dice nada — el 92 % de las que medimos. Una vacante sin marca es una cuya publicación no lo dijo, que no es lo mismo que un no.',
+  note3: 'El área de una vacante se lee de su título cuando podemos situarlo, y se toma de la palabra del propio portal cuando no; lo que ninguno sitúa queda como Sin clasificar en vez de ser adivinado. Una ciudad se toma solo cuando el portal nombró su país al lado, así que una publicación que lista cinco ciudades a la vez no aporta ninguna.',
+  note4: 'Los datos de la MCA que tenemos listan empresas registradas en India como filiales de una matriz constituida en el extranjero, así que la ausencia de registro no dice nada sobre una empresa. Los nombres de empresa, los títulos de las vacantes, las ciudades y los estados registrales se imprimen en el idioma en que se publicaron: la página se traduce, las pruebas no.',
+  note5: 'La profundidad se mide en vacantes, no en píxeles. El indicador dibuja este registro a su escala real y sus horizontes son los puntos donde el número de vacantes abiertas baja de tramo — 10 o más, 2 a 9, 1 — que bajo el orden propio de este registro es el único orden en que esos son límites reales.',
+  srcBuild: 'informe del build', srcData: 'los datos', srcSeen: 'primera vez vistas', srcSnapshot: 'instantánea {d}',
+  keysTitle: 'Teclado', kSearch: 'Buscar', kRows: 'Vacante siguiente / anterior', kStrata: 'Empresa siguiente / anterior',
+  kUnit: 'Abrir o cerrar todas las empresas', kOpenR: 'Abrir la vacante bajo el cursor', kCloseR: 'Cerrarla',
+  kSections: 'País anterior / siguiente', kHelp: 'Esta tarjeta',
+  loading: 'Leyendo el registro…', loadFail: 'No se pudo cargar {src}: {msg}',
+  schemaFail: 'Esta página lee el esquema v{want}; {src} es v{got}. No se renderiza.',
+  dept: { Legal: 'Jurídico', Security: 'Seguridad', Data: 'Datos', Design: 'Diseño',
+    'Customer Success & Support': 'Éxito y soporte al cliente', Marketing: 'Marketing',
+    Sales: 'Ventas', 'People/HR': 'Personas / RR. HH.', IT: 'TI', Finance: 'Finanzas',
+    Product: 'Producto', Engineering: 'Ingeniería', Operations: 'Operaciones',
+    Unclassified: 'Sin clasificar' },
+},
+'pt-BR': {
+  title: 'ROLE·ATLAS — empresas financiadas contratando, provado pelo próprio site de vagas',
+  tagline: 'Empresas de software financiadas com uma vaga aberta no próprio site de vagas — <b>provado pelo site, não por uma alegação.</b>',
+  snapshot: 'Instantâneo', language: 'Idioma', signIn: 'Entrar',
+  depth: 'Profundidade', depthOf: 'de {n}', railFoot: 'A coluna inteira, em escala',
+  sections: 'Países — parcela das vagas', allCountries: 'Todos os países',
+  barNote: 'A largura de cada segmento é a parcela de vagas daquele país, com um mínimo para que um segmento pequeno continue acessível. Um segmento vazado é um país cujos sites lemos e onde ninguém estava contratando.',
+  filters: 'Filtros e ordem', nSet: '{n} ativos',
+  lq: 'Buscar', lqPh: 'empresa ou título da vaga',
+  lcity: 'Cidade', anycity: 'Qualquer cidade',
+  ldept: 'Área', anydept: 'Qualquer área',
+  lremote: 'Modelo', anyremote: 'Qualquer', remoteonly: 'Vagas remotas',
+  lopen: 'Do exterior', anyopen: 'Qualquer', openyes: 'Aberta a contratar fora — {n}',
+  lmca: 'Registro MCA', anymca: 'Qualquer', mcamatched: 'Com registro na Índia',
+  lraised: 'Captação', anyamount: 'Qualquer valor', bsmall: 'Menos de US$ 10 mi', bmid: 'US$ 10 mi – 50 mi', blarge: 'US$ 50 mi ou mais',
+  lfunded: 'Financiada', anytime: 'Qualquer data', d90: 'Últimos 90 dias', d365: 'Últimos 12 meses',
+  lsort: 'Ordenar por', sreqs: 'Vagas abertas', sraised: 'Valor captado', sdate: 'Financiada mais recentemente', sname: 'Nome', snewest: 'Vagas mais novas',
+  noteOpen: 'Filtro de contratação do exterior retirado: nenhuma publicação em {scope} disse sim a patrocínio de visto ou a contratar de fora neste instantâneo — e silêncio não é um não (nota 02).',
+  noteCity: 'Filtro de cidade retirado: nenhuma publicação em {scope} nomeou uma cidade neste instantâneo. Uma cidade é lida, nunca inventada (nota 03).',
+  noteCovered: '{label} — {n} de {m} declaram {field}; o resto fica oculto por este filtro, não desqualificado.',
+  fieldAmount: 'um valor', fieldDate: 'uma data',
+  noteDept: 'A área é lida do título da vaga quando conseguimos situá-lo, e tomada da palavra do próprio site quando não: das {all} vagas aqui, {a} são nossa leitura do título e {b} são como o site as chama (nota 03).',
+  tallyRoles: '{n} de {m} vagas', tallyCompanies: '{n} de {m} empresas',
+  inSection: 'em {country}', everywhere: 'em quinze países',
+  unitLabel: 'Unidade do registro', unitRoles: 'Vagas', unitCompanies: 'Empresas',
+  keysHint: '? teclas',
+  role_1: 'vaga', role: 'vagas', company_1: 'empresa', company: 'empresas',
+  evidence: 'Provas', openCo: '{name} — abrir suas vagas', closeCo: '{name} — fechar suas vagas',
+  openRole: '{title} — abrir esta vaga',
+  sheetPosting: 'Abrir a publicação', sheetWhere: 'Onde', sheetWorkplace: 'Modelo',
+  wremote: 'remoto', whybrid: 'híbrido', wonsite: 'presencial',
+  sheetOpenness: 'Do exterior', visaYes: 'patrocínio de visto', visaNo: 'sem patrocínio de visto',
+  abroadYes: 'contrata do exterior', abroadNo: 'exige autorização de trabalho',
+  sheetFirstSeen: 'Vista pela primeira vez', tagNew: 'Nova', tagAbroad: 'exterior ✓', tagAbroadNo: 'exterior ✕',
+  newTitle: 'Vista pela primeira vez em {d}. Também lemos o site desta empresa no instantâneo anterior, então esta vaga surgiu entre os dois.',
+  sheetBoard: 'Site lido', sheetRead: 'Lido em', sheetVerdict: 'Veredito do build',
+  verdictListed: 'listada — vagas abertas vistas',
+  sheetOnBoard: 'Neste site', onBoard: '{n} no site', onBoardScope: '{n} no site · {m} nesta visão',
+  sheetCorpus: 'Corpus', corpusV: 'verificadas {n} de {m} · listadas {k}',
+  sheetFunding: 'Financiamento', fundingV: 'Captou {amt} · {round} · anunciado em {date}',
+  fundingDark: 'Financiada — valor, rodada e data não divulgados',
+  fundingSource: 'fonte do financiamento', seriesX: 'Série {x}', roundNone: 'letra da rodada não declarada',
+  undisclosed: 'não divulgado', dateNone: 'data não declarada',
+  sheetQualified: 'Qualificada', qualifiedV: 'Série A ou posterior, por {rule}',
+  ruleLetter: 'uma letra de rodada declarada', ruleAmount: 'o tamanho de uma rodada divulgada', ruleStage: 'o rótulo de estágio do seu diretório de financiamento',
+  sheetSalary: 'CTC na Índia', salaryV: '{v} em média · {n} · em {d}',
+  report_1: '{n} relato', report: '{n} relatos',
+  sheetMca: 'Registro na Índia', sheetUk: 'Registro no Reino Unido',
+  regV: '{name} · constituída em {y}{city} · {status}',
+  descWhat: 'O quê', descForWhom: 'Para quem', descWhyThem: 'Por que eles',
+  provBoard: 'Resumo por IA · lido do próprio site de vagas',
+  provChecked: 'Resumo por IA · conferido com o próprio site',
+  provUnverified: 'Resumo por IA · não verificado',
+  seamEyebrow: 'O registro continua',
+  seamHead: 'Abaixo desta linha há {n} vagas a mais, em {m} empresas a mais.',
+  seamBody: 'Você leu {k} delas sem conta, e nada acima foi cortado: todas as vagas, todos os sites, todos os recibos. Entrar abre o resto da coluna, e aqui não custa nada: seu lugar, seus filtros e o que você buscou sobrevivem.',
+  doorSignIn: 'Entrar e continuar lendo', doorBypass: 'Continuar lendo sem conta',
+  seamNoClerk: 'Não dá para entrar deste navegador agora — um bloqueador, ou o próprio Clerk. A porta abaixo não precisa de nenhum dos dois, e o registro se abre por ela.',
+  seamMeasure: 'Esta página conta, no seu navegador e em nenhum outro lugar, que isto lhe foi mostrado e o que você escolheu. Essa contagem é a única prova que algum dia justificaria pôr o registro atrás de um login, e ela ainda não foi conquistada.',
+  seamOpened: 'Você abriu o resto da coluna sem conta. Ela continua aberta.',
+  belowLabel: '{n} vagas abaixo desta linha',
+  emptyBuild: 'Este instantâneo não listou nenhuma empresa. O relatório do build diz por quê, uma a uma.',
+  emptyCountry: 'Nenhuma empresa que pudemos verificar tinha vaga aberta em {scope} neste instantâneo — um país que lemos, sem ninguém contratando.',
+  emptyCountryTop: ' A maior parte do registro está em {country}: {n} de {m} empresas.',
+  emptyOpenness: 'Nenhuma publicação em {scope} disse sim a patrocínio de visto ou a contratar do exterior. 92% das publicações que medimos não dizem nada, e uma publicação que cala não é um não — nota 02.',
+  emptyRoles: 'Nenhuma vaga corresponde a estes filtros.', emptyCompanies: 'Nenhuma empresa corresponde a estes filtros.',
+  integrityV: 'Verificamos {n} das {m} empresas financiadas do nosso corpus. As outras {k} não puderam ser verificadas — sem site de vagas localizável, ou com um que não conseguimos ler — então ficam de fora em vez de aparecerem como não contratando. Isto não é toda empresa financiada contratando nos quinze países que acompanhamos; é toda a que conseguimos provar.',
+  firstSeenV: 'Cada vaga carrega a data em que a vimos pela primeira vez — {dated} de {total} neste instantâneo. Uma vaga é marcada como nova só quando lemos o site da empresa também no instantâneo anterior; {unconf} têm data mas não confirmada, o que significa que as vimos primeiro numa noite em que não pudemos comparar, não que sejam novas ou antigas.',
+  note1: 'Toda empresa aqui mostrou pelo menos uma vaga aberta, em um dos quinze países que este registro cobre, no próprio site de vagas, na data do instantâneo. Uma empresa que não pudemos verificar fica de fora em vez de aparecer como não contratando.',
+  note2: 'As marcas de visto e de contratação do exterior são lidas do que a publicação diz, e a maioria não diz nada — 92% das que medimos. Uma vaga sem marca é uma cuja publicação não disse, o que não é o mesmo que um não.',
+  note3: 'A área de uma vaga é lida do título quando conseguimos situá-lo, e tomada da palavra do próprio site quando não; o que nenhum dos dois situa fica como Não classificada em vez de ser adivinhada. Uma cidade só é tomada quando o site nomeou o país ao lado dela, então uma publicação que lista cinco cidades de uma vez não contribui com nenhuma.',
+  note4: 'Os dados da MCA que temos listam empresas registradas na Índia como subsidiárias de uma matriz constituída no exterior, então a ausência de registro não diz nada sobre uma empresa. Nomes de empresa, títulos de vagas, cidades e situações cadastrais aparecem no idioma em que foram publicados: a página traduz, a prova não.',
+  note5: 'A profundidade é medida em vagas, não em pixels. O indicador desenha este registro na escala real e seus horizontes são os pontos em que a contagem de vagas abertas cai de faixa — 10 ou mais, 2 a 9, 1 — que sob a ordem própria deste registro é a única ordem em que esses são limites reais.',
+  srcBuild: 'relatório do build', srcData: 'os dados', srcSeen: 'primeira aparição', srcSnapshot: 'instantâneo {d}',
+  keysTitle: 'Teclado', kSearch: 'Buscar', kRows: 'Vaga seguinte / anterior', kStrata: 'Empresa seguinte / anterior',
+  kUnit: 'Abrir ou fechar todas as empresas', kOpenR: 'Abrir a vaga sob o cursor', kCloseR: 'Fechá-la',
+  kSections: 'País anterior / seguinte', kHelp: 'Este cartão',
+  loading: 'Lendo o registro…', loadFail: 'Não foi possível carregar {src}: {msg}',
+  schemaFail: 'Esta página lê o esquema v{want}; {src} é v{got}. Não será renderizado.',
+  dept: { Legal: 'Jurídico', Security: 'Segurança', Data: 'Dados', Design: 'Design',
+    'Customer Success & Support': 'Sucesso e suporte ao cliente', Marketing: 'Marketing',
+    Sales: 'Vendas', 'People/HR': 'Pessoas / RH', IT: 'TI', Finance: 'Financeiro',
+    Product: 'Produto', Engineering: 'Engenharia', Operations: 'Operações',
+    Unclassified: 'Não classificada' },
+},
+fr: {
+  title: 'ROLE·ATLAS — entreprises financées qui recrutent, prouvé par leur propre site d’emploi',
+  tagline: 'Entreprises logicielles financées avec un poste ouvert sur leur propre site d’emploi — <b>prouvé par le site, pas par une déclaration.</b>',
+  snapshot: 'Instantané', language: 'Langue', signIn: 'Se connecter',
+  depth: 'Profondeur', depthOf: 'sur {n}', railFoot: 'La colonne entière, à l’échelle',
+  sections: 'Pays — part des postes ouverts', allCountries: 'Tous les pays',
+  barNote: 'La largeur d’un segment est la part de postes ouverts de ce pays, avec un minimum pour qu’un petit reste atteignable. Un segment évidé est un pays dont nous avons lu les sites sans y trouver personne qui recrute.',
+  filters: 'Filtres et tri', nSet: '{n} actifs',
+  lq: 'Rechercher', lqPh: 'entreprise ou intitulé du poste',
+  lcity: 'Ville', anycity: 'Toutes les villes',
+  ldept: 'Domaine', anydept: 'Tous les domaines',
+  lremote: 'Mode de travail', anyremote: 'Tous', remoteonly: 'Postes à distance',
+  lopen: 'Depuis l’étranger', anyopen: 'Tous', openyes: 'Recrute depuis l’étranger — {n}',
+  lmca: 'Registre MCA', anymca: 'Tous', mcamatched: 'Immatriculée en Inde',
+  lraised: 'Levée', anyamount: 'Tout montant', bsmall: 'Moins de 10 M$', bmid: '10 M$ – 50 M$', blarge: '50 M$ et plus',
+  lfunded: 'Financée', anytime: 'À tout moment', d90: '90 derniers jours', d365: '12 derniers mois',
+  lsort: 'Trier par', sreqs: 'Postes ouverts', sraised: 'Montant levé', sdate: 'Financée le plus récemment', sname: 'Nom', snewest: 'Postes les plus récents',
+  noteOpen: 'Filtre « depuis l’étranger » retiré : aucune annonce en {scope} n’a dit oui au parrainage de visa ni au recrutement depuis l’étranger sur cet instantané — et le silence n’est pas un non (note 02).',
+  noteCity: 'Filtre ville retiré : aucune annonce en {scope} n’a nommé de ville sur cet instantané. Une ville se lit, elle ne s’invente pas (note 03).',
+  noteCovered: '{label} — {n} sur {m} indiquent {field} ; les autres sont masquées par ce filtre, pas disqualifiées.',
+  fieldAmount: 'un montant', fieldDate: 'une date',
+  noteDept: 'Le domaine est lu sur l’intitulé du poste quand nous pouvons le situer, et repris du mot du site quand nous ne le pouvons pas : sur {all} postes ici, {a} relèvent de notre lecture de l’intitulé et {b} de ce que le site en dit (note 03).',
+  tallyRoles: '{n} sur {m} postes', tallyCompanies: '{n} sur {m} entreprises',
+  inSection: 'en {country}', everywhere: 'sur quinze pays',
+  unitLabel: 'Unité du registre', unitRoles: 'Postes', unitCompanies: 'Entreprises',
+  keysHint: '? touches',
+  role_1: 'poste', role: 'postes', company_1: 'entreprise', company: 'entreprises',
+  evidence: 'Preuves', openCo: '{name} — ouvrir ses postes', closeCo: '{name} — fermer ses postes',
+  openRole: '{title} — ouvrir ce poste',
+  sheetPosting: 'Ouvrir l’annonce', sheetWhere: 'Où', sheetWorkplace: 'Mode de travail',
+  wremote: 'à distance', whybrid: 'hybride', wonsite: 'sur site',
+  sheetOpenness: 'Depuis l’étranger', visaYes: 'parrainage de visa', visaNo: 'pas de parrainage de visa',
+  abroadYes: 'recrute depuis l’étranger', abroadNo: 'droit de travailler exigé',
+  sheetFirstSeen: 'Vu la première fois', tagNew: 'Nouveau', tagAbroad: 'étranger ✓', tagAbroadNo: 'étranger ✕',
+  newTitle: 'Vu pour la première fois le {d}. Nous avions aussi lu le site de cette entreprise sur l’instantané précédent : ce poste est donc apparu entre les deux.',
+  sheetBoard: 'Site lu', sheetRead: 'Lu le', sheetVerdict: 'Verdict du build',
+  verdictListed: 'listée — postes ouverts constatés',
+  sheetOnBoard: 'Sur ce site', onBoard: '{n} sur le site', onBoardScope: '{n} sur le site · {m} dans cette vue',
+  sheetCorpus: 'Corpus', corpusV: 'vérifiées {n} sur {m} · listées {k}',
+  sheetFunding: 'Financement', fundingV: 'A levé {amt} · {round} · annoncé le {date}',
+  fundingDark: 'Financée — montant, tour et date non divulgués',
+  fundingSource: 'source du financement', seriesX: 'Série {x}', roundNone: 'lettre de tour non indiquée',
+  undisclosed: 'non divulgué', dateNone: 'date non indiquée',
+  sheetQualified: 'Qualifiée', qualifiedV: 'Série A ou plus, par {rule}',
+  ruleLetter: 'une lettre de tour indiquée', ruleAmount: 'la taille d’un tour divulgué', ruleStage: 'l’étiquette de stade de son annuaire de financement',
+  sheetSalary: 'CTC Inde', salaryV: '{v} en moyenne · {n} · au {d}',
+  report_1: '{n} déclaration', report: '{n} déclarations',
+  sheetMca: 'Immatriculation en Inde', sheetUk: 'Immatriculation au Royaume-Uni',
+  regV: '{name} · constituée en {y}{city} · {status}',
+  descWhat: 'Quoi', descForWhom: 'Pour qui', descWhyThem: 'Pourquoi eux',
+  provBoard: 'Résumé par IA · lu sur leur propre site d’emploi',
+  provChecked: 'Résumé par IA · recoupé avec leur propre site',
+  provUnverified: 'Résumé par IA · non vérifié',
+  seamEyebrow: 'Le journal continue',
+  seamHead: 'Sous cette ligne, {n} postes de plus, dans {m} entreprises de plus.',
+  seamBody: 'Vous en avez lu {k} sans compte, et rien au-dessus n’a été retenu : chaque poste, chaque site, chaque reçu. Se connecter ouvre le reste de la colonne, et ne vous coûte rien ici : votre place, vos filtres et votre recherche y survivent.',
+  doorSignIn: 'Se connecter et continuer', doorBypass: 'Continuer sans compte',
+  seamNoClerk: 'La connexion n’est pas joignable depuis ce navigateur pour l’instant — un bloqueur, ou Clerk lui-même. La porte ci-dessous n’a besoin ni de l’un ni de l’autre, et le registre s’ouvre par elle.',
+  seamMeasure: 'Cette page compte, dans votre navigateur et nulle part ailleurs, que ceci vous a été montré et ce que vous avez choisi. Ce comptage est la seule preuve qui justifierait un jour de mettre le registre derrière une connexion, et elle n’est pas acquise.',
+  seamOpened: 'Vous avez ouvert le reste de la colonne sans compte. Elle reste ouverte.',
+  belowLabel: '{n} postes sous cette ligne',
+  emptyBuild: 'Cet instantané n’a listé aucune entreprise. Le rapport de build dit pourquoi, pour chacune.',
+  emptyCountry: 'Aucune entreprise que nous ayons pu vérifier n’avait de poste ouvert en {scope} sur cet instantané — un pays que nous avons lu, sans personne qui recrute.',
+  emptyCountryTop: ' L’essentiel du registre est en {country} : {n} entreprises sur {m}.',
+  emptyOpenness: 'Aucune annonce en {scope} n’a dit oui au parrainage de visa ni au recrutement depuis l’étranger. 92 % des annonces que nous avons mesurées ne disent rien, et une annonce muette n’est pas un non — note 02.',
+  emptyRoles: 'Aucun poste ne correspond à ces filtres.', emptyCompanies: 'Aucune entreprise ne correspond à ces filtres.',
+  integrityV: 'Nous avons vérifié {n} des {m} entreprises financées de notre corpus. Les {k} autres n’ont pas pu l’être — aucun site d’emploi trouvable, ou un site illisible — elles sont donc omises plutôt que présentées comme ne recrutant pas. Ce n’est pas toute entreprise financée qui recrute dans les quinze pays que nous suivons ; c’est toute celle que nous avons pu prouver.',
+  firstSeenV: 'Chaque poste porte la date où nous l’avons vu pour la première fois — {dated} sur {total} sur cet instantané. Un poste n’est marqué nouveau que si nous avons lu le site de son entreprise sur l’instantané précédent aussi ; {unconf} sont datés mais non confirmés, ce qui veut dire que nous les avons vus une nuit où nous ne pouvions pas comparer, et non qu’ils soient récents ou anciens.',
+  note1: 'Chaque entreprise ici montrait au moins un poste ouvert, dans l’un des quinze pays couverts par ce registre, sur son propre site d’emploi, à la date de l’instantané. Une entreprise que nous n’avons pas pu vérifier est omise plutôt que présentée comme ne recrutant pas.',
+  note2: 'Les mentions de visa et de recrutement depuis l’étranger sont lues sur ce que dit l’annonce, et la plupart ne disent rien — 92 % de celles que nous avons mesurées. Un poste sans mention est un poste dont l’annonce n’a rien dit, ce qui n’est pas un non.',
+  note3: 'Le domaine d’un poste est lu sur son intitulé quand nous pouvons le situer, et repris du mot du site quand nous ne le pouvons pas ; ce que ni l’un ni l’autre ne situe reste Non classé plutôt que deviné. Une ville n’est retenue que si le site a nommé son pays à côté, si bien qu’une annonce listant cinq villes d’un coup n’en fournit aucune.',
+  note4: 'Les données MCA que nous détenons listent les sociétés immatriculées en Inde comme filiales d’une maison mère constituée à l’étranger : une immatriculation absente ne dit donc rien d’une entreprise. Les noms d’entreprise, les intitulés de poste, les villes et les statuts de registre s’impriment dans la langue où ils ont été publiés : la page se traduit, la preuve non.',
+  note5: 'La profondeur se mesure en postes, pas en pixels. La jauge dessine ce registre à son échelle réelle, et ses horizons sont les points où le nombre de postes ouverts change de palier — 10 ou plus, 2 à 9, 1 — ce qui, sous l’ordre propre de ce registre, est le seul ordre où ce sont de vraies frontières.',
+  srcBuild: 'rapport de build', srcData: 'les données', srcSeen: 'première apparition', srcSnapshot: 'instantané {d}',
+  keysTitle: 'Clavier', kSearch: 'Rechercher', kRows: 'Poste suivant / précédent', kStrata: 'Entreprise suivante / précédente',
+  kUnit: 'Ouvrir ou fermer toutes les entreprises', kOpenR: 'Ouvrir le poste sous le curseur', kCloseR: 'Le fermer',
+  kSections: 'Pays précédent / suivant', kHelp: 'Cette carte',
+  loading: 'Lecture du registre…', loadFail: 'Impossible de charger {src} : {msg}',
+  schemaFail: 'Cette page lit le schéma v{want} ; {src} est en v{got}. Rendu annulé.',
+  dept: { Legal: 'Juridique', Security: 'Sécurité', Data: 'Données', Design: 'Design',
+    'Customer Success & Support': 'Succès et support client', Marketing: 'Marketing',
+    Sales: 'Ventes', 'People/HR': 'Personnel / RH', IT: 'Informatique', Finance: 'Finance',
+    Product: 'Produit', Engineering: 'Ingénierie', Operations: 'Opérations',
+    Unclassified: 'Non classé' },
+},
+de: {
+  title: 'ROLE·ATLAS — finanzierte Unternehmen, die einstellen, belegt durch ihre eigene Stellenseite',
+  tagline: 'Finanzierte Softwareunternehmen mit einer offenen Stelle auf ihrer eigenen Stellenseite — <b>belegt durch die Stellenseite, nicht durch eine Behauptung.</b>',
+  snapshot: 'Momentaufnahme', language: 'Sprache', signIn: 'Anmelden',
+  depth: 'Tiefe', depthOf: 'von {n}', railFoot: 'Die ganze Säule, maßstabsgetreu',
+  sections: 'Länder — Anteil an den offenen Stellen', allCountries: 'Alle Länder',
+  barNote: 'Die Breite eines Segments ist der Anteil dieses Landes an den offenen Stellen, mit einer Untergrenze, damit ein kleines erreichbar bleibt. Ein hohles Segment ist ein Land, dessen Stellenseiten wir gelesen haben, ohne jemanden zu finden, der einstellt.',
+  filters: 'Filter & Sortierung', nSet: '{n} gesetzt',
+  lq: 'Suchen', lqPh: 'Unternehmen oder Stellenbezeichnung',
+  lcity: 'Stadt', anycity: 'Alle Städte',
+  ldept: 'Bereich', anydept: 'Alle Bereiche',
+  lremote: 'Arbeitsform', anyremote: 'Alle', remoteonly: 'Remote-Stellen',
+  lopen: 'Aus dem Ausland', anyopen: 'Alle', openyes: 'Stellt aus dem Ausland ein — {n}',
+  lmca: 'MCA-Register', anymca: 'Alle', mcamatched: 'In Indien eingetragen',
+  lraised: 'Kapital', anyamount: 'Beliebige Höhe', bsmall: 'Unter 10 Mio. $', bmid: '10 Mio. $ – 50 Mio. $', blarge: '50 Mio. $ und mehr',
+  lfunded: 'Finanziert', anytime: 'Jederzeit', d90: 'Letzte 90 Tage', d365: 'Letzte 12 Monate',
+  lsort: 'Sortieren nach', sreqs: 'Offene Stellen', sraised: 'Eingesammeltes Kapital', sdate: 'Zuletzt finanziert', sname: 'Name', snewest: 'Neueste Stellen',
+  noteOpen: 'Auslandsfilter zurückgezogen: keine Ausschreibung in {scope} sagte in dieser Momentaufnahme Ja zu Visum-Sponsoring oder zum Einstellen aus dem Ausland — und Schweigen ist kein Nein (Anmerkung 02).',
+  noteCity: 'Stadtfilter zurückgezogen: keine Ausschreibung in {scope} nannte in dieser Momentaufnahme eine Stadt. Eine Stadt wird gelesen, nie erfunden (Anmerkung 03).',
+  noteCovered: '{label} — {n} von {m} nennen {field}; der Rest wird von diesem Filter verborgen, nicht ausgeschlossen.',
+  fieldAmount: 'einen Betrag', fieldDate: 'ein Datum',
+  noteDept: 'Der Bereich wird aus der Stellenbezeichnung gelesen, wo wir sie einordnen können, und sonst dem eigenen Wort der Stellenseite entnommen: von {all} Stellen hier sind {a} unsere Lesart der Bezeichnung und {b} das, was die Stellenseite sie nennt (Anmerkung 03).',
+  tallyRoles: '{n} von {m} Stellen', tallyCompanies: '{n} von {m} Unternehmen',
+  inSection: 'in {country}', everywhere: 'in fünfzehn Ländern',
+  unitLabel: 'Einheit des Registers', unitRoles: 'Stellen', unitCompanies: 'Unternehmen',
+  keysHint: '? Tasten',
+  role_1: 'Stelle', role: 'Stellen', company_1: 'Unternehmen', company: 'Unternehmen',
+  evidence: 'Belege', openCo: '{name} — Stellen öffnen', closeCo: '{name} — Stellen schließen',
+  openRole: '{title} — diese Stelle öffnen',
+  sheetPosting: 'Ausschreibung öffnen', sheetWhere: 'Wo', sheetWorkplace: 'Arbeitsform',
+  wremote: 'remote', whybrid: 'hybrid', wonsite: 'vor Ort',
+  sheetOpenness: 'Aus dem Ausland', visaYes: 'Visum-Sponsoring', visaNo: 'kein Visum-Sponsoring',
+  abroadYes: 'stellt aus dem Ausland ein', abroadNo: 'Arbeitserlaubnis erforderlich',
+  sheetFirstSeen: 'Zuerst gesehen', tagNew: 'Neu', tagAbroad: 'Ausland ✓', tagAbroadNo: 'Ausland ✕',
+  newTitle: 'Zuerst gesehen am {d}. Die Stellenseite dieses Unternehmens haben wir auch in der vorherigen Momentaufnahme gelesen, diese Stelle ist also dazwischen erschienen.',
+  sheetBoard: 'Gelesene Stellenseite', sheetRead: 'Gelesen am', sheetVerdict: 'Build-Befund',
+  verdictListed: 'gelistet — offene Stellen gesehen',
+  sheetOnBoard: 'Auf dieser Stellenseite', onBoard: '{n} auf der Seite', onBoardScope: '{n} auf der Seite · {m} in dieser Ansicht',
+  sheetCorpus: 'Korpus', corpusV: 'geprüft {n} von {m} · gelistet {k}',
+  sheetFunding: 'Finanzierung', fundingV: '{amt} eingesammelt · {round} · bekannt gegeben am {date}',
+  fundingDark: 'Finanziert — Betrag, Runde und Datum alle nicht offengelegt',
+  fundingSource: 'Finanzierungsquelle', seriesX: 'Serie {x}', roundNone: 'Rundenbuchstabe nicht genannt',
+  undisclosed: 'nicht offengelegt', dateNone: 'Datum nicht genannt',
+  sheetQualified: 'Qualifiziert', qualifiedV: 'Serie A oder später, durch {rule}',
+  ruleLetter: 'einen genannten Rundenbuchstaben', ruleAmount: 'die Höhe einer offengelegten Runde', ruleStage: 'das Wachstumsphasen-Label ihres Finanzierungsverzeichnisses',
+  sheetSalary: 'CTC Indien', salaryV: '{v} im Schnitt · {n} · Stand {d}',
+  report_1: '{n} Meldung', report: '{n} Meldungen',
+  sheetMca: 'Eintragung in Indien', sheetUk: 'Eintragung im Vereinigten Königreich',
+  regV: '{name} · gegründet {y}{city} · {status}',
+  descWhat: 'Was', descForWhom: 'Für wen', descWhyThem: 'Warum sie',
+  provBoard: 'KI-Zusammenfassung · von der eigenen Stellenseite gelesen',
+  provChecked: 'KI-Zusammenfassung · gegen die eigene Website geprüft',
+  provUnverified: 'KI-Zusammenfassung · ungeprüft',
+  seamEyebrow: 'Das Protokoll geht weiter',
+  seamHead: 'Unter dieser Linie liegen {n} weitere Stellen bei {m} weiteren Unternehmen.',
+  seamBody: 'Sie haben {k} davon ohne Konto gelesen, und nichts darüber wurde zurückgehalten: jede Stelle, jede Stellenseite, jeder Beleg. Eine Anmeldung öffnet den Rest der Säule und kostet Sie hier nichts: Ihr Platz, Ihre Filter und Ihre Suche überstehen sie.',
+  doorSignIn: 'Anmelden und weiterlesen', doorBypass: 'Ohne Konto weiterlesen',
+  seamNoClerk: 'Die Anmeldung ist aus diesem Browser gerade nicht erreichbar — ein Blocker oder Clerk selbst. Die Tür darunter braucht beides nicht, und das Register steht durch sie offen.',
+  seamMeasure: 'Diese Seite zählt, in Ihrem Browser und sonst nirgends, dass Ihnen dies gezeigt wurde und wofür Sie sich entschieden haben. Diese Zählung ist der einzige Beleg, der es je rechtfertigen würde, das Register hinter eine Anmeldung zu legen — und er ist nicht erbracht.',
+  seamOpened: 'Sie haben den Rest der Säule ohne Konto geöffnet. Er bleibt offen.',
+  belowLabel: '{n} Stellen unter dieser Linie',
+  emptyBuild: 'Diese Momentaufnahme listete kein Unternehmen. Der Build-Bericht sagt für jedes einzelne, warum.',
+  emptyCountry: 'Kein Unternehmen, das wir prüfen konnten, hatte in dieser Momentaufnahme eine offene Stelle in {scope} — ein Land, das wir gelesen haben, ohne dass jemand einstellt.',
+  emptyCountryTop: ' Der größte Teil des Registers liegt in {country}: {n} von {m} Unternehmen.',
+  emptyOpenness: 'Keine Ausschreibung in {scope} sagte Ja zu Visum-Sponsoring oder zum Einstellen aus dem Ausland. 92 % der von uns gemessenen Ausschreibungen sagen gar nichts, und eine schweigende Ausschreibung ist kein Nein — Anmerkung 02.',
+  emptyRoles: 'Keine Stelle passt zu diesen Filtern.', emptyCompanies: 'Kein Unternehmen passt zu diesen Filtern.',
+  integrityV: 'Wir haben {n} der {m} finanzierten Unternehmen in unserem Korpus geprüft. Die anderen {k} konnten nicht geprüft werden — keine auffindbare Stellenseite oder eine, die wir nicht lesen konnten — sie bleiben deshalb weg, statt als „stellt nicht ein“ zu erscheinen. Dies ist nicht jedes finanzierte Unternehmen, das in den fünfzehn Ländern einstellt, die wir beobachten; es ist jedes, das wir belegen konnten.',
+  firstSeenV: 'Jede Stelle trägt das Datum, an dem wir sie zuerst gesehen haben — {dated} von {total} in dieser Momentaufnahme. Als neu markiert wird eine Stelle nur, wenn wir die Stellenseite ihres Unternehmens auch in der vorherigen Momentaufnahme gelesen haben; {unconf} sind datiert, aber unbestätigt, was heißt, dass wir sie in einer Nacht zuerst sahen, in der wir nicht vergleichen konnten — nicht, dass sie neu oder alt wären.',
+  note1: 'Jedes Unternehmen hier zeigte am Stichtag mindestens eine offene Stelle in einem der fünfzehn Länder dieses Registers, auf seiner eigenen Stellenseite. Ein Unternehmen, das wir nicht prüfen konnten, bleibt weg, statt als „stellt nicht ein“ zu erscheinen.',
+  note2: 'Die Angaben zu Visum und Einstellung aus dem Ausland werden aus dem gelesen, was die Ausschreibung sagt, und die meisten sagen gar nichts — 92 % der von uns gemessenen. Eine Stelle ohne Angabe ist eine, deren Ausschreibung nichts gesagt hat, und das ist kein Nein.',
+  note3: 'Der Bereich einer Stelle wird aus ihrer Bezeichnung gelesen, wo wir sie einordnen können, und sonst dem eigenen Wort der Stellenseite entnommen; was beides nicht einordnet, bleibt Nicht klassifiziert statt geraten zu werden. Eine Stadt wird nur übernommen, wenn die Stellenseite ihr Land danebengesetzt hat — eine Ausschreibung, die fünf Städte auf einmal nennt, liefert deshalb keine.',
+  note4: 'Die MCA-Daten, die wir halten, listen in Indien eingetragene Gesellschaften als Töchter einer im Ausland gegründeten Mutter; eine fehlende Eintragung sagt also nichts über ein Unternehmen. Unternehmensnamen, Stellenbezeichnungen, Städte und Registerstatus erscheinen in der Sprache, in der sie veröffentlicht wurden: die Seite übersetzt, der Beleg nicht.',
+  note5: 'Tiefe wird in Stellen gemessen, nicht in Pixeln. Die Anzeige zeichnet dieses Register maßstabsgetreu, und ihre Horizonte sind die Punkte, an denen die Zahl der offenen Stellen eine Stufe fällt — 10 oder mehr, 2 bis 9, 1 — was unter der eigenen Ordnung dieses Registers die einzige Ordnung ist, in der das echte Grenzen sind.',
+  srcBuild: 'Build-Bericht', srcData: 'die Daten', srcSeen: 'zuerst gesehen', srcSnapshot: 'Momentaufnahme {d}',
+  keysTitle: 'Tastatur', kSearch: 'Suchen', kRows: 'Stelle abwärts / aufwärts', kStrata: 'Unternehmen abwärts / aufwärts',
+  kUnit: 'Alle Unternehmen öffnen oder schließen', kOpenR: 'Stelle unter dem Cursor öffnen', kCloseR: 'Sie schließen',
+  kSections: 'Vorheriges / nächstes Land', kHelp: 'Diese Karte',
+  loading: 'Register wird gelesen…', loadFail: '{src} konnte nicht geladen werden: {msg}',
+  schemaFail: 'Diese Seite liest Schema v{want}; {src} ist v{got}. Es wird nicht gerendert.',
+  dept: { Legal: 'Recht', Security: 'Sicherheit', Data: 'Daten', Design: 'Design',
+    'Customer Success & Support': 'Kundenerfolg & Support', Marketing: 'Marketing',
+    Sales: 'Vertrieb', 'People/HR': 'Personal', IT: 'IT', Finance: 'Finanzen',
+    Product: 'Produkt', Engineering: 'Entwicklung', Operations: 'Betrieb',
+    Unclassified: 'Nicht klassifiziert' },
+},
+ja: {
+  title: 'ROLE·ATLAS — 資金調達済み企業の採用を、その企業自身の求人ページで確認',
+  tagline: '自社の求人ページに公開中の求人がある、資金調達済みのソフトウェア企業。<b>主張ではなく、求人ページで確認しています。</b>',
+  snapshot: 'スナップショット', language: '言語', signIn: 'サインイン',
+  depth: '深度', depthOf: '／ {n}', railFoot: '全体を実寸で表示',
+  sections: '国 — 公開求人に占める割合', allCountries: 'すべての国',
+  barNote: '各区画の幅はその国が公開求人に占める割合です。小さな国でも押せるよう下限を設けています。中抜きの区画は、求人ページを読んだ結果、採用中の企業が見つからなかった国です。',
+  filters: '絞り込みと並び替え', nSet: '{n} 件設定',
+  lq: '検索', lqPh: '企業名または職種名',
+  lcity: '勤務地', anycity: 'すべての都市',
+  ldept: '職種分野', anydept: 'すべての分野',
+  lremote: '勤務形態', anyremote: 'すべて', remoteonly: 'リモートの求人',
+  lopen: '海外からの採用', anyopen: 'すべて', openyes: '海外からの採用に前向き — {n}',
+  lmca: 'MCA 登記', anymca: 'すべて', mcamatched: 'インドでの登記あり',
+  lraised: '調達額', anyamount: '金額を問わない', bsmall: '1,000万ドル未満', bmid: '1,000万〜5,000万ドル', blarge: '5,000万ドル以上',
+  lfunded: '調達時期', anytime: '時期を問わない', d90: '過去90日', d365: '過去12か月',
+  lsort: '並び替え', sreqs: '公開求人数', sraised: '調達額', sdate: '調達が新しい順', sname: '名前', snewest: '新しい求人順',
+  noteOpen: '海外採用の絞り込みを取り下げました。{scope} のどの求人も、このスナップショットではビザ支援にも海外からの採用にも「はい」と答えていません。沈黙は「いいえ」ではありません（注 02）。',
+  noteCity: '都市の絞り込みを取り下げました。{scope} のどの求人も、このスナップショットでは都市名を挙げていません。都市は読み取るものであり、決して作りません（注 03）。',
+  noteCovered: '{label} — {m} 件中 {n} 件が{field}を記載しています。残りはこの絞り込みで隠れているだけで、除外されたわけではありません。',
+  fieldAmount: '金額', fieldDate: '日付',
+  noteDept: '職種分野は、判別できる場合は求人名から読み取り、できない場合は求人ページ自身の記載を用います。ここにある {all} 件のうち、{a} 件は求人名からの読み取り、{b} 件は求人ページの記載です（注 03）。',
+  tallyRoles: '{m} 件中 {n} 件の求人', tallyCompanies: '{m} 社中 {n} 社',
+  inSection: '（{country}）', everywhere: '15 か国',
+  unitLabel: '一覧の単位', unitRoles: '求人', unitCompanies: '企業',
+  keysHint: '? キー操作',
+  role_1: '件', role: '件', company_1: '社', company: '社',
+  evidence: '根拠', openCo: '{name} — 求人を開く', closeCo: '{name} — 求人を閉じる',
+  openRole: '{title} — この求人を開く',
+  sheetPosting: '求人ページを開く', sheetWhere: '勤務地', sheetWorkplace: '勤務形態',
+  wremote: 'リモート', whybrid: 'ハイブリッド', wonsite: '出社',
+  sheetOpenness: '海外から', visaYes: 'ビザ支援あり', visaNo: 'ビザ支援なし',
+  abroadYes: '海外からの採用あり', abroadNo: '就労資格が必要',
+  sheetFirstSeen: '初めて確認した日', tagNew: '新着', tagAbroad: '海外 ✓', tagAbroadNo: '海外 ✕',
+  newTitle: '{d} に初めて確認しました。この企業の求人ページは前回のスナップショットでも読んでいるため、この求人はその間に掲載されたものです。',
+  sheetBoard: '読み取った求人ページ', sheetRead: '読み取り日', sheetVerdict: 'ビルドの判定',
+  verdictListed: '掲載 — 公開求人を確認',
+  sheetOnBoard: 'この求人ページ', onBoard: '求人ページに {n} 件', onBoardScope: '求人ページに {n} 件・この表示に {m} 件',
+  sheetCorpus: 'コーパス', corpusV: '{m} 社中 {n} 社を確認・{k} 社を掲載',
+  sheetFunding: '資金調達', fundingV: '{amt} を調達・{round}・{date} 発表',
+  fundingDark: '資金調達済み — 金額・ラウンド・時期のいずれも非公開',
+  fundingSource: '調達の出典', seriesX: 'シリーズ {x}', roundNone: 'ラウンドの記載なし',
+  undisclosed: '非公開', dateNone: '日付の記載なし',
+  sheetQualified: '対象条件', qualifiedV: '{rule}により、シリーズ A 以降',
+  ruleLetter: '記載されたラウンド', ruleAmount: '公開されたラウンドの規模', ruleStage: '資金調達ディレクトリの成長ステージ表記',
+  sheetSalary: 'インドの CTC', salaryV: '平均 {v}・{n}・{d} 時点',
+  report_1: '{n} 件の報告', report: '{n} 件の報告',
+  sheetMca: 'インドでの登記', sheetUk: '英国での登記',
+  regV: '{name}・{y} 年設立{city}・{status}',
+  descWhat: '事業', descForWhom: '対象', descWhyThem: '特色',
+  provBoard: 'AI による要約 · 自社の求人ページから読み取り',
+  provChecked: 'AI による要約 · 自社サイトと照合済み',
+  provUnverified: 'AI による要約 · 未検証',
+  seamEyebrow: '記録はここから先も続きます',
+  seamHead: 'この線の下に、さらに {m} 社・{n} 件の求人があります。',
+  seamBody: 'ここまでの {k} 件はアカウントなしで読めました。上に表示したものは何ひとつ伏せていません — 求人も、求人ページも、根拠もすべてです。サインインすると残りが開きます。ここでは何も失いません。見ていた位置も、絞り込みも、検索語もそのまま残ります。',
+  doorSignIn: 'サインインして続きを読む', doorBypass: 'アカウントなしで続きを読む',
+  seamNoClerk: 'このブラウザからは今サインインできません（拡張機能によるブロック、または Clerk 側の問題）。下のボタンはどちらも必要とせず、そこから一覧はすべて開きます。',
+  seamMeasure: 'このページは、この案内を表示したことと、あなたが選んだ結果を、あなたのブラウザの中だけで数えています。その集計こそが、この一覧をログインの後ろに置くことを将来正当化しうる唯一の根拠であり、今はまだ得られていません。',
+  seamOpened: 'アカウントなしで残りを開きました。この先も開いたままです。',
+  belowLabel: 'この線の下に {n} 件',
+  emptyBuild: 'このスナップショットには掲載企業がありません。ビルドレポートに一社ごとの理由があります。',
+  emptyCountry: '確認できた企業の中に、このスナップショットで {scope} の公開求人を持つ企業はありませんでした。求人ページは読みましたが、採用中の企業がいませんでした。',
+  emptyCountryTop: ' 一覧の大半は {country} にあります（{m} 社中 {n} 社）。',
+  emptyOpenness: '{scope} のどの求人も、ビザ支援にも海外からの採用にも「はい」と答えていません。計測した求人の 92% は何も述べておらず、述べていないことは「いいえ」ではありません（注 02）。',
+  emptyRoles: 'この条件に合う求人はありません。', emptyCompanies: 'この条件に合う企業はありません。',
+  integrityV: 'コーパスにある資金調達済み企業 {m} 社のうち {n} 社を確認しました。残りの {k} 社は確認できませんでした — 求人ページが見つからないか、読み取れなかったためです。そのため「採用していない」と示すのではなく、掲載から外しています。これは対象 15 か国で採用しているすべての企業ではなく、確認できたすべての企業です。',
+  firstSeenV: 'すべての求人に、初めて確認した日付が付いています（このスナップショットで {total} 件中 {dated} 件）。新着と示すのは、前回のスナップショットでもその企業の求人ページを読んでいる場合だけです。{unconf} 件は日付はあるものの未確認で、比較できなかった夜に初めて見たという意味であり、新しいとも古いとも言えません。',
+  note1: 'ここに載る企業はすべて、スナップショットの日に、この一覧が対象とする 15 か国のいずれかで、自社の求人ページに公開求人を少なくとも 1 件出していました。確認できなかった企業は、「採用していない」と示すのではなく掲載から外しています。',
+  note2: 'ビザおよび海外採用の表示は、求人の記載から読み取っています。ほとんどの求人は何も述べていません（計測分の 92%）。表示のない求人は「求人が述べていない」という意味であり、「いいえ」とは異なります。',
+  note3: '職種分野は、判別できる場合は求人名から読み取り、できない場合は求人ページ自身の記載を用います。どちらでも判別できないものは推測せず「未分類」のままにします。都市は、求人ページが国名を併記している場合にのみ採用するため、5 都市をまとめて挙げる求人からは 1 件も採りません。',
+  note4: '当方が保有する MCA データは、海外で設立された親会社の子会社としてインドで登記された企業の一覧です。したがって登記がないことは、その企業について何も意味しません。企業名・職種名・都市名・登記上の状態は、公開された言語のまま表示します。ページは翻訳しますが、根拠は翻訳しません。',
+  note5: '深度はピクセルではなく求人数で測ります。左のゲージはこの一覧を実際の縮尺で描いており、その目盛りは公開求人数が段階を下げる地点（10 件以上・2〜9 件・1 件）です。この一覧本来の並び順においてのみ、それは実際の境界になります。',
+  srcBuild: 'ビルドレポート', srcData: 'データ', srcSeen: '初出データ', srcSnapshot: 'スナップショット {d}',
+  keysTitle: 'キーボード操作', kSearch: '検索', kRows: '次／前の求人', kStrata: '次／前の企業',
+  kUnit: 'すべての企業を開く／閉じる', kOpenR: 'カーソル位置の求人を開く', kCloseR: '閉じる',
+  kSections: '前／次の国', kHelp: 'このカード',
+  loading: '一覧を読み込んでいます…', loadFail: '{src} を読み込めませんでした：{msg}',
+  schemaFail: 'このページはスキーマ v{want} を読みます。{src} は v{got} のため描画しません。',
+  dept: { Legal: '法務', Security: 'セキュリティ', Data: 'データ', Design: 'デザイン',
+    'Customer Success & Support': 'カスタマーサクセス・サポート', Marketing: 'マーケティング',
+    Sales: '営業', 'People/HR': '人事', IT: '情報システム', Finance: '財務',
+    Product: 'プロダクト', Engineering: 'エンジニアリング', Operations: 'オペレーション',
+    Unclassified: '未分類' },
+},
+'zh-Hans': {
+  title: 'ROLE·ATLAS — 已融资公司正在招聘，由其自有招聘页佐证',
+  tagline: '在自有招聘页上有在招职位的已融资软件公司 — <b>由招聘页佐证，而非一句声明。</b>',
+  snapshot: '快照', language: '语言', signIn: '登录',
+  depth: '深度', depthOf: '／共 {n}', railFoot: '整列，按真实比例',
+  sections: '国家 — 在招职位占比', allCountries: '全部国家',
+  barNote: '每段宽度是该国在全部在招职位中的占比，并设有下限，好让占比小的国家仍能点到。空心段表示我们读过该国的招聘页，但没有发现任何在招职位。',
+  filters: '筛选与排序', nSet: '已设 {n} 项',
+  lq: '搜索', lqPh: '公司或职位名称',
+  lcity: '城市', anycity: '全部城市',
+  ldept: '职能', anydept: '全部职能',
+  lremote: '办公方式', anyremote: '全部', remoteonly: '远程职位',
+  lopen: '海外招聘', anyopen: '全部', openyes: '接受海外应聘 — {n}',
+  lmca: 'MCA 登记', anymca: '全部', mcamatched: '在印度有登记',
+  lraised: '融资额', anyamount: '不限金额', bsmall: '低于 1000 万美元', bmid: '1000 万 – 5000 万美元', blarge: '5000 万美元及以上',
+  lfunded: '融资时间', anytime: '不限时间', d90: '近 90 天', d365: '近 12 个月',
+  lsort: '排序方式', sreqs: '在招职位数', sraised: '融资金额', sdate: '最近融资', sname: '名称', snewest: '最新职位',
+  noteOpen: '海外招聘筛选已撤下：在本次快照中，{scope} 没有任何职位说明支持签证或接受海外应聘。沉默并不等于否定（注 02）。',
+  noteCity: '城市筛选已撤下：在本次快照中，{scope} 没有任何职位写明城市。城市只能读取，绝不臆造（注 03）。',
+  noteCovered: '{label} — {m} 家中有 {n} 家写明{field}；其余只是被此筛选隐藏，并非不合格。',
+  fieldAmount: '金额', fieldDate: '日期',
+  noteDept: '职能优先从职位名称读取；无法判定时采用招聘页自身的说法。此处 {all} 个职位中，{a} 个来自我们对名称的判读，{b} 个是招聘页的说法（注 03）。',
+  tallyRoles: '{m} 个职位中的 {n} 个', tallyCompanies: '{m} 家公司中的 {n} 家',
+  inSection: '（{country}）', everywhere: '十五个国家',
+  unitLabel: '列表单位', unitRoles: '职位', unitCompanies: '公司',
+  keysHint: '? 快捷键',
+  role_1: '个职位', role: '个职位', company_1: '家公司', company: '家公司',
+  evidence: '依据', openCo: '{name} — 展开其职位', closeCo: '{name} — 收起其职位',
+  openRole: '{title} — 打开此职位',
+  sheetPosting: '打开职位页', sheetWhere: '地点', sheetWorkplace: '办公方式',
+  wremote: '远程', whybrid: '混合', wonsite: '现场',
+  sheetOpenness: '海外应聘', visaYes: '提供签证支持', visaNo: '不提供签证支持',
+  abroadYes: '接受海外应聘', abroadNo: '需具备工作许可',
+  sheetFirstSeen: '首次发现', tagNew: '新增', tagAbroad: '海外 ✓', tagAbroadNo: '海外 ✕',
+  newTitle: '首次发现于 {d}。上一版快照我们也读过这家公司的招聘页，因此该职位是在两次之间出现的。',
+  sheetBoard: '所读招聘页', sheetRead: '读取日期', sheetVerdict: '构建判定',
+  verdictListed: '已收录 — 见到在招职位',
+  sheetOnBoard: '该招聘页', onBoard: '招聘页共 {n} 个', onBoardScope: '招聘页共 {n} 个 · 本视图 {m} 个',
+  sheetCorpus: '语料', corpusV: '已核查 {m} 家中的 {n} 家 · 收录 {k} 家',
+  sheetFunding: '融资', fundingV: '融资 {amt} · {round} · 于 {date} 公布',
+  fundingDark: '已融资 — 金额、轮次与时间均未披露',
+  fundingSource: '融资来源', seriesX: '{x} 轮', roundNone: '未注明轮次',
+  undisclosed: '未披露', dateNone: '未注明日期',
+  sheetQualified: '入选依据', qualifiedV: '依据{rule}，属 A 轮或更后',
+  ruleLetter: '已注明的轮次字母', ruleAmount: '已披露轮次的规模', ruleStage: '其融资目录的成长阶段标签',
+  sheetSalary: '印度 CTC', salaryV: '平均 {v} · {n} · 截至 {d}',
+  report_1: '{n} 份报告', report: '{n} 份报告',
+  sheetMca: '印度登记', sheetUk: '英国登记',
+  regV: '{name} · {y} 年成立{city} · {status}',
+  descWhat: '做什么', descForWhom: '面向谁', descWhyThem: '为何是他们',
+  provBoard: 'AI 摘要 · 读自其自有招聘页',
+  provChecked: 'AI 摘要 · 已与其官网核对',
+  provUnverified: 'AI 摘要 · 未核验',
+  seamEyebrow: '记录仍在继续',
+  seamHead: '这条线以下还有 {m} 家公司的 {n} 个职位。',
+  seamBody: '你在没有账号的情况下已经读了其中 {k} 个，上面的内容没有任何删减 — 每个职位、每个招聘页、每条依据都在。登录会打开这一列的其余部分，而且在这里不会让你付出什么：你的位置、筛选条件和搜索词都会保留。',
+  doorSignIn: '登录并继续阅读', doorBypass: '不登录继续阅读',
+  seamNoClerk: '此浏览器目前无法登录 — 可能是拦截插件，也可能是 Clerk 本身。下面这个入口两者都不需要，整份记录都能从那里打开。',
+  seamMeasure: '本页只在你的浏览器里统计：这段邀请是否展示过，以及你做了什么选择。这项统计是将来唯一可能支持把这份记录放到登录之后的证据，而它尚未成立。',
+  seamOpened: '你已在没有账号的情况下打开了其余部分，它会一直开着。',
+  belowLabel: '这条线以下有 {n} 个职位',
+  emptyBuild: '本次快照未收录任何公司。构建报告逐家说明了原因。',
+  emptyCountry: '在本次快照中，我们能够核查的公司里没有一家在 {scope} 有在招职位 — 招聘页读过了，但没有人在招聘。',
+  emptyCountryTop: ' 记录的主体在 {country}：{m} 家中的 {n} 家。',
+  emptyOpenness: '{scope} 没有任何职位说明支持签证或接受海外应聘。我们统计的职位中有 92% 对此只字未提，而未提并不等于否定 — 注 02。',
+  emptyRoles: '没有职位符合这些筛选条件。', emptyCompanies: '没有公司符合这些筛选条件。',
+  integrityV: '我们核查了语料中 {m} 家已融资公司里的 {n} 家。其余 {k} 家无法核查 — 找不到招聘页，或读不了 — 因此予以略去，而不是标为“未在招聘”。这不是我们关注的十五个国家里所有在招聘的已融资公司，而是所有我们能够证明的。',
+  firstSeenV: '每个职位都带有我们首次发现它的日期 — 本次快照共 {total} 个，其中 {dated} 个有日期。只有当我们在上一版快照也读过该公司招聘页时，职位才会标为新增；{unconf} 个有日期但未确认，意思是我们是在无法比对的那一晚首次见到它，而不是说它新或旧。',
+  note1: '这里的每家公司，在快照当日，都在自有招聘页上、于本记录覆盖的十五个国家之一，至少有一个在招职位。无法核查的公司予以略去，而不是标为“未在招聘”。',
+  note2: '签证与海外招聘标记读自职位说明本身，而大多数职位只字未提 — 我们统计的有 92%。没有标记的职位，是其说明未作交代，这与否定不同。',
+  note3: '职位的职能优先从名称读取；无法判定时采用招聘页自身的说法。两者都无法判定的保留为“未分类”，而不是猜进某一类。城市只在招聘页把国家写在旁边时才采纳，因此一次列出五个城市的职位不提供任何城市。',
+  note4: '我们持有的 MCA 数据，列的是以境外注册母公司之子公司身份在印度登记的企业，因此没有登记记录并不说明任何问题。公司名称、职位名称、城市与登记状态一律按其发布时的语言呈现：页面会翻译，依据不会。',
+  note5: '深度以职位数计量，而非像素。左侧标尺按真实比例绘出这份记录，其上的分界是在招职位数下降一档的位置 — 10 个及以上、2 至 9 个、1 个 — 只有在本记录固有的排序下，这些才是真实的边界。',
+  srcBuild: '构建报告', srcData: '原始数据', srcSeen: '首次发现记录', srcSnapshot: '快照 {d}',
+  keysTitle: '键盘操作', kSearch: '搜索', kRows: '下一个／上一个职位', kStrata: '下一家／上一家公司',
+  kUnit: '展开或收起全部公司', kOpenR: '打开光标处的职位', kCloseR: '关闭',
+  kSections: '上一个／下一个国家', kHelp: '本卡片',
+  loading: '正在读取记录…', loadFail: '无法加载 {src}：{msg}',
+  schemaFail: '本页读取 schema v{want}；{src} 为 v{got}，不予渲染。',
+  dept: { Legal: '法务', Security: '安全', Data: '数据', Design: '设计',
+    'Customer Success & Support': '客户成功与支持', Marketing: '市场',
+    Sales: '销售', 'People/HR': '人力资源', IT: 'IT', Finance: '财务',
+    Product: '产品', Engineering: '研发', Operations: '运营',
+    Unclassified: '未分类' },
+},
+hi: {
+  title: 'ROLE·ATLAS — फंडेड कंपनियाँ जो भर्ती कर रही हैं, उनके अपने जॉब बोर्ड से प्रमाणित',
+  tagline: 'फंडेड सॉफ़्टवेयर कंपनियाँ जिनके अपने जॉब बोर्ड पर कोई पद खुला है — <b>दावे से नहीं, बोर्ड से प्रमाणित।</b>',
+  snapshot: 'स्नैपशॉट', language: 'भाषा', signIn: 'साइन इन',
+  depth: 'गहराई', depthOf: '/ {n}', railFoot: 'पूरा स्तंभ, सही पैमाने पर',
+  sections: 'देश — खुले पदों में हिस्सा', allCountries: 'सभी देश',
+  barNote: 'हर खंड की चौड़ाई उस देश का खुले पदों में हिस्सा है, और एक न्यूनतम चौड़ाई रखी गई है ताकि छोटा खंड भी दबाया जा सके। खोखला खंड वह देश है जिसके बोर्ड हमने पढ़े और किसी को भर्ती करते नहीं पाया।',
+  filters: 'फ़िल्टर और क्रम', nSet: '{n} लागू',
+  lq: 'खोजें', lqPh: 'कंपनी या पद का नाम',
+  lcity: 'शहर', anycity: 'कोई भी शहर',
+  ldept: 'विभाग', anydept: 'कोई भी विभाग',
+  lremote: 'कार्यशैली', anyremote: 'कोई भी', remoteonly: 'रिमोट पद',
+  lopen: 'विदेश से भर्ती', anyopen: 'कोई भी', openyes: 'विदेश से भर्ती के लिए खुला — {n}',
+  lmca: 'MCA रजिस्टर', anymca: 'कोई भी', mcamatched: 'भारत में पंजीकरण है',
+  lraised: 'जुटाई राशि', anyamount: 'कोई भी राशि', bsmall: '$1 करोड़ से कम', bmid: '$1 – $5 करोड़', blarge: '$5 करोड़ या अधिक',
+  lfunded: 'फंडिंग', anytime: 'कभी भी', d90: 'पिछले 90 दिन', d365: 'पिछले 12 महीने',
+  lsort: 'क्रम', sreqs: 'खुले पद', sraised: 'जुटाई राशि', sdate: 'सबसे हाल की फंडिंग', sname: 'नाम', snewest: 'सबसे नए पद',
+  noteOpen: 'विदेश-भर्ती फ़िल्टर हटा दिया गया: इस स्नैपशॉट में {scope} की किसी भी पोस्टिंग ने वीज़ा प्रायोजन या विदेश से भर्ती के लिए हाँ नहीं कहा — और चुप्पी ना नहीं होती (टिप्पणी 02)।',
+  noteCity: 'शहर फ़िल्टर हटा दिया गया: इस स्नैपशॉट में {scope} की किसी पोस्टिंग ने शहर का नाम नहीं दिया। शहर पढ़ा जाता है, गढ़ा नहीं जाता (टिप्पणी 03)।',
+  noteCovered: '{label} — {m} में से {n} {field} बताती हैं; बाकी इस फ़िल्टर से छिपी हैं, अयोग्य नहीं।',
+  fieldAmount: 'राशि', fieldDate: 'तारीख़',
+  noteDept: 'विभाग पहले पद के नाम से पढ़ा जाता है जहाँ हम उसे रख सकें, और जहाँ नहीं, वहाँ बोर्ड का अपना शब्द लिया जाता है: यहाँ के {all} पदों में से {a} नाम की हमारी पढ़त हैं और {b} वही हैं जो बोर्ड उन्हें कहता है (टिप्पणी 03)।',
+  tallyRoles: '{m} में से {n} पद', tallyCompanies: '{m} में से {n} कंपनियाँ',
+  inSection: '{country} में', everywhere: 'पंद्रह देशों में',
+  unitLabel: 'रजिस्टर की इकाई', unitRoles: 'पद', unitCompanies: 'कंपनियाँ',
+  keysHint: '? कुंजियाँ',
+  role_1: 'पद', role: 'पद', company_1: 'कंपनी', company: 'कंपनियाँ',
+  evidence: 'प्रमाण', openCo: '{name} — इसके पद खोलें', closeCo: '{name} — इसके पद बंद करें',
+  openRole: '{title} — यह पद खोलें',
+  sheetPosting: 'पोस्टिंग खोलें', sheetWhere: 'कहाँ', sheetWorkplace: 'कार्यशैली',
+  wremote: 'रिमोट', whybrid: 'हाइब्रिड', wonsite: 'ऑन-साइट',
+  sheetOpenness: 'विदेश से', visaYes: 'वीज़ा प्रायोजन', visaNo: 'वीज़ा प्रायोजन नहीं',
+  abroadYes: 'विदेश से भर्ती करते हैं', abroadNo: 'कार्य-अनुमति आवश्यक',
+  sheetFirstSeen: 'पहली बार देखा', tagNew: 'नया', tagAbroad: 'विदेश ✓', tagAbroadNo: 'विदेश ✕',
+  newTitle: '{d} को पहली बार देखा। इस कंपनी का बोर्ड हमने पिछले स्नैपशॉट में भी पढ़ा था, इसलिए यह पद उनके बीच आया।',
+  sheetBoard: 'पढ़ा गया बोर्ड', sheetRead: 'पढ़ने की तारीख़', sheetVerdict: 'बिल्ड का निर्णय',
+  verdictListed: 'सूचीबद्ध — खुले पद देखे गए',
+  sheetOnBoard: 'इस बोर्ड पर', onBoard: 'बोर्ड पर {n}', onBoardScope: 'बोर्ड पर {n} · इस दृश्य में {m}',
+  sheetCorpus: 'कॉर्पस', corpusV: '{m} में से {n} जाँचीं · {k} सूचीबद्ध',
+  sheetFunding: 'फंडिंग', fundingV: '{amt} जुटाए · {round} · {date} को घोषित',
+  fundingDark: 'फंडेड — राशि, राउंड और तारीख़ तीनों अघोषित',
+  fundingSource: 'फंडिंग का स्रोत', seriesX: 'सीरीज़ {x}', roundNone: 'राउंड नहीं बताया गया',
+  undisclosed: 'अघोषित', dateNone: 'तारीख़ नहीं बताई गई',
+  sheetQualified: 'योग्यता', qualifiedV: '{rule} के आधार पर, सीरीज़ A या उसके बाद',
+  ruleLetter: 'बताए गए राउंड अक्षर', ruleAmount: 'घोषित राउंड के आकार', ruleStage: 'उसकी फंडिंग डायरेक्टरी के ग्रोथ-स्टेज लेबल',
+  sheetSalary: 'भारत CTC', salaryV: 'औसत {v} · {n} · {d} तक',
+  report_1: '{n} रिपोर्ट', report: '{n} रिपोर्टें',
+  sheetMca: 'भारत में पंजीकरण', sheetUk: 'यूके में पंजीकरण',
+  regV: '{name} · {y} में निगमित{city} · {status}',
+  descWhat: 'क्या', descForWhom: 'किसके लिए', descWhyThem: 'वे क्यों',
+  provBoard: 'AI-सारांश · उनके अपने जॉब बोर्ड से पढ़ा गया',
+  provChecked: 'AI-सारांश · उनकी अपनी साइट से मिलान किया गया',
+  provUnverified: 'AI-सारांश · असत्यापित',
+  seamEyebrow: 'रिकॉर्ड आगे भी चलता है',
+  seamHead: 'इस रेखा के नीचे {m} और कंपनियों के {n} और पद हैं।',
+  seamBody: 'आपने इनमें से {k} बिना खाते के पढ़े, और ऊपर कुछ भी रोका नहीं गया — हर पद, हर बोर्ड, हर प्रमाण। साइन इन करने पर बाकी स्तंभ खुल जाता है, और यहाँ इसकी कोई कीमत नहीं: आपकी जगह, आपके फ़िल्टर और आपकी खोज सब बनी रहती है।',
+  doorSignIn: 'साइन इन करें और पढ़ते रहें', doorBypass: 'बिना खाते के पढ़ते रहें',
+  seamNoClerk: 'इस ब्राउज़र से अभी साइन इन नहीं हो पा रहा — कोई ब्लॉकर, या Clerk स्वयं। नीचे वाला रास्ता इनमें से कुछ नहीं माँगता, और पूरा रजिस्टर उसी से खुलता है।',
+  seamMeasure: 'यह पेज केवल आपके ब्राउज़र में गिनता है कि यह निमंत्रण आपको दिखाया गया और आपने क्या चुना। यही गिनती वह अकेला प्रमाण है जो कभी इस रजिस्टर को लॉगिन के पीछे रखने को उचित ठहरा सकता है, और वह अभी अर्जित नहीं हुआ है।',
+  seamOpened: 'आपने बिना खाते के बाकी स्तंभ खोल लिया। यह खुला ही रहेगा।',
+  belowLabel: 'इस रेखा के नीचे {n} पद',
+  emptyBuild: 'इस स्नैपशॉट में कोई कंपनी सूचीबद्ध नहीं हुई। बिल्ड रिपोर्ट हर एक का कारण बताती है।',
+  emptyCountry: 'हम जिन कंपनियों को जाँच सके, उनमें से किसी का भी इस स्नैपशॉट में {scope} में कोई खुला पद नहीं था — एक देश जिसे हमने पढ़ा, और कोई भर्ती करता नहीं मिला।',
+  emptyCountryTop: ' रजिस्टर का अधिकांश हिस्सा {country} में है: {m} में से {n} कंपनियाँ।',
+  emptyOpenness: '{scope} की किसी पोस्टिंग ने वीज़ा प्रायोजन या विदेश से भर्ती के लिए हाँ नहीं कहा। हमने जो पोस्टिंग मापीं उनमें से 92% कुछ कहती ही नहीं, और जो कुछ न कहे वह ना नहीं है — टिप्पणी 02।',
+  emptyRoles: 'इन फ़िल्टरों से कोई पद मेल नहीं खाता।', emptyCompanies: 'इन फ़िल्टरों से कोई कंपनी मेल नहीं खाती।',
+  integrityV: 'हमारे कॉर्पस की {m} फंडेड कंपनियों में से {n} जाँची गईं। बाकी {k} जाँची नहीं जा सकीं — कोई जॉब बोर्ड नहीं मिला, या जो मिला वह पढ़ा नहीं जा सका — इसलिए उन्हें "भर्ती नहीं कर रही" दिखाने के बजाय छोड़ दिया गया। यह उन पंद्रह देशों में भर्ती करने वाली हर फंडेड कंपनी नहीं है; यह हर वह कंपनी है जिसे हम सिद्ध कर सके।',
+  firstSeenV: 'हर पद के साथ वह तारीख़ है जब हमने उसे पहली बार देखा — इस स्नैपशॉट में {total} में से {dated}। किसी पद को नया तभी कहा जाता है जब हमने उसकी कंपनी का बोर्ड पिछले स्नैपशॉट में भी पढ़ा हो; {unconf} पर तारीख़ है पर पुष्टि नहीं, यानी हमने उन्हें उस रात पहली बार देखा जब तुलना संभव नहीं थी — यह नहीं कि वे नए हैं या पुराने।',
+  note1: 'यहाँ की हर कंपनी ने स्नैपशॉट की तारीख़ को, इस रजिस्टर के पंद्रह देशों में से किसी एक में, अपने ही जॉब बोर्ड पर कम से कम एक खुला पद दिखाया था। जिस कंपनी को हम जाँच नहीं सके उसे "भर्ती नहीं कर रही" दिखाने के बजाय छोड़ दिया गया है।',
+  note2: 'वीज़ा और विदेश-भर्ती के चिह्न पोस्टिंग जो कहती है उसी से पढ़े जाते हैं, और अधिकांश पोस्टिंग कुछ कहती ही नहीं — हमने जो मापीं उनमें 92%। बिना चिह्न वाला पद वह है जिसकी पोस्टिंग ने कुछ नहीं कहा, जो "ना" के बराबर नहीं है।',
+  note3: 'पद का विभाग उसके नाम से पढ़ा जाता है जहाँ हम उसे रख सकें, और जहाँ नहीं वहाँ बोर्ड का अपना शब्द लिया जाता है; जिसे दोनों न रख सकें वह अनुमान के बजाय "अवर्गीकृत" रहता है। शहर तभी लिया जाता है जब बोर्ड ने उसके साथ देश का नाम लिखा हो, इसलिए एक साथ पाँच शहर गिनाने वाली पोस्टिंग से कोई शहर नहीं लिया जाता।',
+  note4: 'हमारे पास जो MCA डेटा है वह भारत में विदेश-निगमित मूल कंपनी की सहायक कंपनियों के रूप में पंजीकृत कंपनियों की सूची है, इसलिए पंजीकरण का न होना किसी कंपनी के बारे में कुछ नहीं कहता। कंपनी के नाम, पदों के नाम, शहर और रजिस्टर की स्थिति उसी भाषा में छपते हैं जिसमें वे प्रकाशित हुए थे: पेज अनूदित होता है, प्रमाण नहीं।',
+  note5: 'गहराई पिक्सल में नहीं, पदों में मापी जाती है। बायाँ गेज इस रजिस्टर को उसके असली पैमाने पर खींचता है और उस पर बनी रेखाएँ वे बिंदु हैं जहाँ खुले पदों की संख्या एक स्तर नीचे गिरती है — 10 या अधिक, 2 से 9, 1 — जो इस रजिस्टर के अपने क्रम में ही वास्तविक सीमाएँ बनती हैं।',
+  srcBuild: 'बिल्ड रिपोर्ट', srcData: 'डेटा', srcSeen: 'पहली बार देखा', srcSnapshot: 'स्नैपशॉट {d}',
+  keysTitle: 'कीबोर्ड', kSearch: 'खोजें', kRows: 'अगला / पिछला पद', kStrata: 'अगली / पिछली कंपनी',
+  kUnit: 'सभी कंपनियाँ खोलें या बंद करें', kOpenR: 'कर्सर वाला पद खोलें', kCloseR: 'बंद करें',
+  kSections: 'पिछला / अगला देश', kHelp: 'यह कार्ड',
+  loading: 'रजिस्टर पढ़ा जा रहा है…', loadFail: '{src} लोड नहीं हो सका: {msg}',
+  schemaFail: 'यह पेज schema v{want} पढ़ता है; {src} v{got} है। इसे रेंडर नहीं किया जा रहा।',
+  dept: { Legal: 'विधि', Security: 'सुरक्षा', Data: 'डेटा', Design: 'डिज़ाइन',
+    'Customer Success & Support': 'ग्राहक सफलता और सहायता', Marketing: 'मार्केटिंग',
+    Sales: 'बिक्री', 'People/HR': 'मानव संसाधन', IT: 'आईटी', Finance: 'वित्त',
+    Product: 'प्रोडक्ट', Engineering: 'इंजीनियरिंग', Operations: 'संचालन',
+    Unclassified: 'अवर्गीकृत' },
+},
+};
+// ===========================================================================
+// The fifteen countries this register covers, in src/countries.py order, and
+// what each is called in each locale. A country name here is the BUILD's
+// classification of a role, not a word any board typed — so it is page chrome
+// and it translates. The ISO code beside it never does: a code is a code.
+// ===========================================================================
+const COUNTRIES = [
+  'India', 'United Kingdom', 'Ireland', 'Germany', 'Netherlands', 'France',
+  'Spain', 'Sweden', 'Denmark', 'Norway', 'Finland', 'Japan', 'Singapore',
+  'Australia', 'New Zealand',
+];
+// ponytail: this variant keeps the country CODE and drops the anchor
+// COORDINATE the atlas lane navigates by — the chart it belonged to is gone and
+// a coordinate with no chart to place it on is apparatus pointing at nothing.
+// Ceiling: an entry can no longer state where on a map its country sits, and
+// bringing that back means bringing back a projection.
+const CODE = {
+  'India': 'IN', 'United Kingdom': 'GB', 'Ireland': 'IE', 'Germany': 'DE',
+  'Netherlands': 'NL', 'France': 'FR', 'Spain': 'ES', 'Sweden': 'SE',
+  'Denmark': 'DK', 'Norway': 'NO', 'Finland': 'FI', 'Japan': 'JP',
+  'Singapore': 'SG', 'Australia': 'AU', 'New Zealand': 'NZ',
+};
+const CNAMES = {
+  en: {}, // the keys are already English
+  es: { 'India': 'India', 'United Kingdom': 'Reino Unido', 'Ireland': 'Irlanda', 'Germany': 'Alemania', 'Netherlands': 'Países Bajos', 'France': 'Francia', 'Spain': 'España', 'Sweden': 'Suecia', 'Denmark': 'Dinamarca', 'Norway': 'Noruega', 'Finland': 'Finlandia', 'Japan': 'Japón', 'Singapore': 'Singapur', 'Australia': 'Australia', 'New Zealand': 'Nueva Zelanda' },
+  'pt-BR': { 'India': 'Índia', 'United Kingdom': 'Reino Unido', 'Ireland': 'Irlanda', 'Germany': 'Alemanha', 'Netherlands': 'Países Baixos', 'France': 'França', 'Spain': 'Espanha', 'Sweden': 'Suécia', 'Denmark': 'Dinamarca', 'Norway': 'Noruega', 'Finland': 'Finlândia', 'Japan': 'Japão', 'Singapore': 'Singapura', 'Australia': 'Austrália', 'New Zealand': 'Nova Zelândia' },
+  fr: { 'India': 'Inde', 'United Kingdom': 'Royaume-Uni', 'Ireland': 'Irlande', 'Germany': 'Allemagne', 'Netherlands': 'Pays-Bas', 'France': 'France', 'Spain': 'Espagne', 'Sweden': 'Suède', 'Denmark': 'Danemark', 'Norway': 'Norvège', 'Finland': 'Finlande', 'Japan': 'Japon', 'Singapore': 'Singapour', 'Australia': 'Australie', 'New Zealand': 'Nouvelle-Zélande' },
+  de: { 'India': 'Indien', 'United Kingdom': 'Vereinigtes Königreich', 'Ireland': 'Irland', 'Germany': 'Deutschland', 'Netherlands': 'Niederlande', 'France': 'Frankreich', 'Spain': 'Spanien', 'Sweden': 'Schweden', 'Denmark': 'Dänemark', 'Norway': 'Norwegen', 'Finland': 'Finnland', 'Japan': 'Japan', 'Singapore': 'Singapur', 'Australia': 'Australien', 'New Zealand': 'Neuseeland' },
+  ja: { 'India': 'インド', 'United Kingdom': 'イギリス', 'Ireland': 'アイルランド', 'Germany': 'ドイツ', 'Netherlands': 'オランダ', 'France': 'フランス', 'Spain': 'スペイン', 'Sweden': 'スウェーデン', 'Denmark': 'デンマーク', 'Norway': 'ノルウェー', 'Finland': 'フィンランド', 'Japan': '日本', 'Singapore': 'シンガポール', 'Australia': 'オーストラリア', 'New Zealand': 'ニュージーランド' },
+  'zh-Hans': { 'India': '印度', 'United Kingdom': '英国', 'Ireland': '爱尔兰', 'Germany': '德国', 'Netherlands': '荷兰', 'France': '法国', 'Spain': '西班牙', 'Sweden': '瑞典', 'Denmark': '丹麦', 'Norway': '挪威', 'Finland': '芬兰', 'Japan': '日本', 'Singapore': '新加坡', 'Australia': '澳大利亚', 'New Zealand': '新西兰' },
+  hi: { 'India': 'भारत', 'United Kingdom': 'यूनाइटेड किंगडम', 'Ireland': 'आयरलैंड', 'Germany': 'जर्मनी', 'Netherlands': 'नीदरलैंड', 'France': 'फ़्रांस', 'Spain': 'स्पेन', 'Sweden': 'स्वीडन', 'Denmark': 'डेनमार्क', 'Norway': 'नॉर्वे', 'Finland': 'फ़िनलैंड', 'Japan': 'जापान', 'Singapore': 'सिंगापुर', 'Australia': 'ऑस्ट्रेलिया', 'New Zealand': 'न्यूज़ीलैंड' },
+};
+
+// ------------------------------- locale -----------------------------------
+// Explicit choice first, then what the browser asked for, then English. The
+// match walks the browser's list in its own order of preference and accepts a
+// base-language hit (`pt` for the Brazilian table, `zh` for Simplified),
+// because a reader whose browser says `pt-PT` is better served by Portuguese
+// than by English and the page can say which Portuguese it is shipping.
+const LKEY = 'roleatlas.lang';
+function pickLocale() {
+  let want = null;
+  try { want = localStorage.getItem(LKEY); } catch {}
+  if (want && STRINGS[want]) return want;
+  const have = LOCALES.map(([id]) => id);
+  for (const tag of (navigator.languages || [navigator.language || 'en'])) {
+    const low = String(tag).toLowerCase();
+    const exact = have.find((id) => id.toLowerCase() === low);
+    if (exact) return exact;
+    if (low.startsWith('zh')) return /hant|tw|hk|mo/.test(low) ? 'zh-Hans' : 'zh-Hans';
+    if (low.startsWith('pt')) return 'pt-BR';
+    const base = have.find((id) => id.split('-')[0] === low.split('-')[0]);
+    if (base) return base;
+  }
+  return 'en';
+}
+let LOC = pickLocale();
+function t(key, vars) {
+  const tbl = STRINGS[LOC] || STRINGS.en;
+  let s = tbl[key];
+  if (s == null) s = STRINGS.en[key];
+  if (s == null) return '';
+  if (vars) for (const k in vars) s = s.split('{' + k + '}').join(vars[k]);
+  return s;
+}
+// One plural split, which is all eight of these locales need from this page:
+// every count it prints is either exactly one or plainly more. ja and zh carry
+// the same string in both slots because they do not inflect for it.
+function tn(key, n, vars) {
+  const tbl = STRINGS[LOC] || STRINGS.en;
+  return t(n === 1 && tbl[key + '_1'] != null ? key + '_1' : key, vars);
+}
+const cname = (n) => (CNAMES[LOC] && CNAMES[LOC][n]) || n;
+const dname = (d) => ((STRINGS[LOC] || {}).dept || {})[d] || (STRINGS.en.dept[d] || d);
+
+// Every number, date and amount on this page goes through Intl in the reader's
+// own locale. The old page hardcoded 'en-IN' grouping, which is right in one of
+// the eight locales shipped here and wrong in seven.
+let NF = new Intl.NumberFormat(LOC);
+let DF = new Intl.DateTimeFormat(LOC, { year: 'numeric', month: 'short', day: 'numeric', timeZone: 'UTC' });
+const nf = (n) => NF.format(n);
+// The build writes plain YYYY-MM-DD. Parsed as UTC and formatted as UTC, so a
+// reader west of Greenwich is never shown the day before the snapshot.
+const df = (iso) => {
+  if (!iso || !/^\d{4}-\d{2}-\d{2}/.test(iso)) return iso || '';
+  const d = new Date(iso.slice(0, 10) + 'T00:00:00Z');
+  return isNaN(d) ? iso : DF.format(d);
+};
+function setLocale(id) {
+  LOC = STRINGS[id] ? id : 'en';
+  try { localStorage.setItem(LKEY, LOC); } catch {}
+  NF = new Intl.NumberFormat(LOC);
+  DF = new Intl.DateTimeFormat(LOC, { year: 'numeric', month: 'short', day: 'numeric', timeZone: 'UTC' });
+  document.documentElement.lang = LOC;
+  document.documentElement.dir = DIRS[LOC] || 'ltr';
+  paintChrome();
+  if (companies.length) { plateBar(); render(); }
+}
+
+// ------------------------------ the renderer -------------------------------
+const SCHEMA = 10;
+const DEFAULT_SRC = '../data/companies.json';
+// Test seam: same-origin relative paths only — a ?data= pointing at another
+// host would render someone else's rows under our name.
+const asked = new URLSearchParams(location.search).get('data');
+const src = asked && !/^[a-z]+:|^\/\//i.test(asked) ? asked : DEFAULT_SRC;
+const askedSeen = new URLSearchParams(location.search).get('seen');
+const seenSrc = askedSeen && !/^[a-z]+:|^\/\//i.test(askedSeen) ? askedSeen : '../data/first-seen.json';
+
+const $ = (s) => document.querySelector(s);
+const el = (tag, cls, text) => {
+  const n = document.createElement(tag);
+  if (cls) n.className = cls;
+  if (text != null) n.textContent = text;     // never innerHTML: see the seam above
+  return n;
+};
+const link = (href, text, cls) => {
+  // A row's URLs come from the data and are untrusted here; javascript: is the
+  // one that matters. Anything not http(s) renders as plain text.
+  if (!/^https?:\/\//i.test(href || '')) return el('span', cls, text);
+  const a = el('a', cls, text);
+  a.href = href; a.rel = 'noopener'; a.target = '_blank';
+  return a;
+};
+const BOARDS = { greenhouse: 'https://job-boards.greenhouse.io/' };
+const RULEKEY = { letter: 'ruleLetter', amount: 'ruleAmount', stage: 'ruleStage' };
+const OPENNESS = {
+  visa: { yes: 'visaYes', no: 'visaNo' },
+  hire_from_abroad: { yes: 'abroadYes', no: 'abroadNo' },
+};
+const WORKPLACE = { remote: 'wremote', hybrid: 'whybrid', onsite: 'wonsite' };
+
+// Money: the build's figure, shortened, never restated. Intl does the shortening
+// and the grouping, so ₹ groups in lakhs for a Hindi reader and $4.1B reads
+// 4,1 Mrd. $ for a German one — same number, the reader's own notation.
+function money(c) {
+  if (c.amount == null) return t('undisclosed');
+  const opt = { notation: 'compact', maximumFractionDigits: 1 };
+  try {
+    if (c.currency) return new Intl.NumberFormat(LOC, { ...opt, style: 'currency', currency: c.currency }).format(c.amount);
+  } catch {}
+  return new Intl.NumberFormat(LOC, opt).format(c.amount) + (c.currency ? ' ' + c.currency : '');
+}
+const roundOf = (c) => (c.round_letter ? t('seriesX', { x: c.round_letter }) : t('roundNone'));
+const whenOf = (c) => (c.date ? df(c.date) : t('dateNone'));
+const days = (from, to) => (Date.parse(to) - Date.parse(from)) / 86400000;
+
+// -------- location typesetting (unchanged in substance from the original) ---
+// Typesetting, never invention: split the board's own separators, hold every
+// mode word to one idiom, dedupe case-insensitively, name no place a board did
+// not. The place strings themselves stay in the language the board typed them.
+const MODE = /^(remote|hybrid)$/i;
+const canonPlaces = (list) => {
+  const seen = new Map();
+  for (const raw of list.flatMap((s) => String(s).split(/\s*;\s*/))) {
+    let x = raw.trim().replace(/\s+/g, ' ');
+    if (!x) continue;
+    const m = x.match(/^(.+?)\s*[-–—]\s*(.+)$/);
+    if (m && (MODE.test(m[1]) || MODE.test(m[2]))) {
+      const mode = MODE.test(m[1]) ? m[1] : m[2];
+      const place = MODE.test(m[1]) ? m[2] : m[1];
+      x = `${mode[0].toUpperCase()}${mode.slice(1).toLowerCase()} — ${place}`;
+    }
+    x = x.replace(/(\S)-(\S)/g, '$1‑$2');
+    const k = x.toLowerCase();
+    if (!seen.has(k) || seen.get(k) === k) seen.set(k, x);
+  }
+  return [...seen.values()];
+};
+const placeLine = (list, max = 3) => {
+  const all = canonPlaces(list);
+  return (all.length > max ? [...all.slice(0, max), `+${nf(all.length - max)}`] : all).join(' · ');
+};
+const isRemote = (c) => c.roles.some((r) => r.workplace === 'remote');
+const opensToForeignHires = (c) => c.roles.some((r) => r.visa === 'yes' || r.hire_from_abroad === 'yes');
+const wherePieces = (c) => c.cities.length ? canonPlaces(c.cities)
+  : isRemote(c) ? [`Remote — ${c.countries.map(cname).join(' · ')}`]
+  : canonPlaces(c.roles.flatMap((r) => r.locations));
+
+// ------------------------------ the city parser ----------------------------
+// The one place this renderer derives a fact instead of printing one, and note
+// 03 says so. Conservative by construction: a piece yields a place only where
+// the board itself put the country beside it, or where the whole string is one
+// bare place. Everything about it is the original's; nothing here is new.
+const words = (s) => new Set(s.split('|'));
+const CWORDS = {
+  'India': words('india|ind|in'),
+  'United Kingdom': words('united kingdom|uk|u.k.|gb|england|scotland|wales|northern ireland|great britain|britain'),
+  'Ireland': words('ireland|republic of ireland|ie'),
+  'Germany': words('germany|deutschland|ger|de'),
+  'Netherlands': words('netherlands|the netherlands|holland|nl'),
+  'France': words('france|fr'),
+  'Spain': words('spain|espana|españa|es'),
+  'Sweden': words('sweden|sverige|se'),
+  'Denmark': words('denmark|danmark|dk'),
+  'Norway': words('norway|norge|norvegia|no'),
+  'Finland': words('finland|suomi|fi'),
+  'Japan': words('japan|jp'),
+  'Singapore': words('singapore|sg'),
+  'Australia': words('australia|aus|au'),
+  'New Zealand': words('new zealand|nz'),
+};
+const ANYCTRY = new Set(Object.values(CWORDS).flatMap((s) => [...s]));
+const NOTACITY = words(
+  'canada|united states|united states of america|us|usa|u.s.|israel|nigeria|poland|portugal|'
+  + 'italy|croatia|austria|switzerland|belgium|bulgaria|romania|serbia|czech republic|lithuania|'
+  + 'estonia|georgia|turkey|hong kong|hong kong sar|china|taiwan|malaysia|indonesia|philippines|'
+  + 'korea|south korea|qatar|uae|dubai|mexico|brazil|europe|european union|emea|apac|apj|americas|'
+  + 'north america|asia|middle east|africa|any location|anywhere|worldwide|global|international|'
+  + 'ile-de-france|karnataka|maharashtra|telangana|tamil nadu|uttar pradesh|haryana|kerala|'
+  + 'new south wales|victoria|queensland|tasmania|western australia|australian capital territory|'
+  + 'bavaria|bayern|hesse|sachsen|brandenburg|capital region of denmark|central|uusimaa|'
+  + 'north holland|south holland|new delhi');
+const MODEHEAD = /^(remote|remotely|hybrid|onsite|on-?site|anywhere|all)\b[\s:,–—-]*(in\s+(the\s+)?)?/i;
+const PLACETAIL = /\s+(remote|hybrid|onsite|on-?site|offices?|hq|area|region|prefecture)$/i;
+const SEGSPLIT = /[,\/|]|\s+or\s+|\s+l\s+|\s*[-–—]\s+|\s+[-–—]\s*/i;
+const CITYALIAS = { 'münchen': 'Munich', 'københavn': 'Copenhagen', 'bangalore': 'Bengaluru' };
+function cityOf(piece, country, alone) {
+  const segs = String(piece).replace(/\([^)]*\)/g, ' ').split(SEGSPLIT)
+    .map((s) => {
+      let x = s.replace(MODEHEAD, '').trim();
+      x = x.replace(PLACETAIL, '').trim().replace(PLACETAIL, '').trim();
+      return x.replace(/\s+/g, ' ').replace(/^[.\s–—-]+|[.\s–—-]+$/g, '');
+    }).filter(Boolean);
+  if (!segs.length) return null;
+  if (CWORDS[country].has(segs[segs.length - 1].toLowerCase())) {
+    if (segs.length > 3) return null;
+    const mid = segs.length === 3 ? segs[1].toLowerCase() : null;
+    if (mid && !NOTACITY.has(mid) && !ANYCTRY.has(mid) && mid !== segs[0].toLowerCase()) return null;
+  } else if (!(alone && segs.length === 1)) return null;
+  const head = segs[0], key = head.toLowerCase();
+  if (NOTACITY.has(key) || ANYCTRY.has(key) || key.startsWith('greater ')
+      || /\d/.test(head) || head.split(' ').length > 3 || head.length < 2) return null;
+  return CITYALIAS[key] || head;
+}
+const CITYMEMO = new WeakMap();
+function roleCities(r) {
+  let found = CITYMEMO.get(r);
+  if (found) return found;
+  found = [];
+  if (r.countries.length === 1 && r.countries[0] !== 'India') {
+    for (const loc of r.locations) {
+      const pieces = String(loc).split(';');
+      for (const piece of pieces) {
+        const city = cityOf(piece, r.countries[0], pieces.length === 1);
+        if (city && !found.includes(city)) found.push(city);
+      }
+    }
+  }
+  CITYMEMO.set(r, found);
+  return found;
+}
+const uniqCased = (list) => {
+  const seen = new Map();
+  for (const x of list) {
+    const k = x.toLowerCase();
+    if (!seen.has(k) || seen.get(k) === k) seen.set(k, x);
+  }
+  return [...seen.values()];
+};
+
+// ------------------------------- departments -------------------------------
+// The patterns read ENGLISH role titles, which is what the boards publish, and
+// they stay in English for exactly that reason. Only the bucket's NAME is
+// translated: the label is the page's own vocabulary, the title is not.
+const UNCLASSIFIED = 'Unclassified';
+const DEPTS = [
+  ['Legal', /\blegal\b|counsel\b|paralegal|attorney|\bcompliance\b|regulatory affairs|contracts? manager/i],
+  ['Security', /security|infosec|appsec|cyber|penetration test|red team/i],
+  ['Data', /data scien|data analy|data engineer|analytics|machine learning|\bml (engineer|scientist|ops)|\bmlops\b|deep learning|research scientist|applied scientist|\bnlp\b|statistic|econometric/i],
+  ['Design', /designer|design (engineer|system|lead|manager|technologist)|product design|\bux\b|ui\/ux|user experience|user research|creative director/i],
+  ['Customer Success & Support', /customer success|customer support|customer experience|customer care|client success|support engineer|technical support|\bsupport\b|helpdesk|help desk|onboarding specialist|implementation|renewals?\b|professional services/i],
+  ['Marketing', /marketing|marketer|\bseo\b|\bsem\b|demand gen|content writer|copywriter|\bcommunications\b|\bbrand\b|social media|community manager|events? manager/i],
+  ['Sales', /\bsales\b|account (executive|manager|director|lead|partner|associate|representative|development)|\baccounts\b|business development|\bbdr\b|\bsdr\b|pre-?sales|solutions? (engineer|architect|consultant)|commercial|revenue|partnerships?\b|channel manager/i],
+  ['People/HR', /recruit|talent|\bpeople\b|human resources|\bhr\b|sourcer|compensation|benefits|payroll|learning and development/i],
+  ['IT', /\bit\b|information technology|systems administrator|sysadmin|desktop support|network administrator/i],
+  ['Finance', /financ|accounting|accountant|controller|treasur|\bfp&a\b|\btax\b|audit|billing/i],
+  ['Product', /product manager|product owner|product (lead|director|analyst|operations)|head of product|technical product|\bproduct\b/i],
+  ['Engineering', /engineer|developer|\bdevops\b|\bsre\b|site reliability|architect|programmer|technical lead|\bcto\b|full.?stack|front.?end|back.?end|\bqa\b|quality assurance|firmware|embedded|\bandroid\b|\bios\b|platform/i],
+  ['Operations', /operations|\bops\b|program manager|project manager|chief of staff|strategy|procurement|office manager|executive assistant/i],
+];
+const DEPTMEMO = new Map();
+function bucketOf(text) {
+  if (!text) return null;
+  if (DEPTMEMO.has(text)) return DEPTMEMO.get(text);
+  let found = null;
+  for (const [name, pattern] of DEPTS) if (pattern.test(text)) { found = name; break; }
+  DEPTMEMO.set(text, found);
+  return found;
+}
+const deptOf = (r) => bucketOf(r.title) || bucketOf(r.department) || UNCLASSIFIED;
+const deptSource = (r) => (bucketOf(r.title) ? 'title' : bucketOf(r.department) ? 'board' : 'neither');
+
+const brackets = {
+  any: () => true,
+  small: (c) => c.amount != null && c.amount < 1e7,
+  mid: (c) => c.amount != null && c.amount >= 1e7 && c.amount < 5e7,
+  large: (c) => c.amount != null && c.amount >= 5e7,
+};
+const sorts = {
+  reqs: (a, b) => b.roles.length - a.roles.length || a.name.localeCompare(b.name),
+  raised: (a, b) => (b.amount ?? -1) - (a.amount ?? -1),
+  date: (a, b) => (b.date || '').localeCompare(a.date || ''),
+  name: (a, b) => a.name.localeCompare(b.name),
+  newest: (a, b) => sorts.reqs(a, b),
+};
+
+// --------------------------------- state -----------------------------------
+let companies = [], snapshot = '', REFS = {};
+let activeCountry = null;
+let view = 'roles';
+let DESCRIPTIONS = {}, BUILDREP = null, FIRSTSEEN = new Map();
+let CORPUS_ROLES = 0, ROLES_BY_COUNTRY = {};
+const NEW_DAYS = 7;
+const freshlySeen = (e) => !!e && e.date != null && days(e.date, snapshot) >= 0 && days(e.date, snapshot) <= NEW_DAYS;
+
+// The rendered column, as the gauge needs it: one entry per stratum on the
+// sheet, with the depth its first role sits at and the height it occupies.
+// Measured once per render, never during a scroll.
+let STRATA = [];
+let COLUMN = 0;        // roles in this view, gate or no gate — the gauge's scale
+let SHOWNROLES = 0;    // roles actually on the sheet
+let openSheet = null;  // one at a time: an accordion, not a pile
+
+const REDUCE = matchMedia('(prefers-reduced-motion: reduce)');
+const NARROW = matchMedia('(max-width: 64rem)');
+
+// =========================== FLOW 1 — THE ASK ==============================
+// The gate is client-side and bypassable ON PURPOSE. Its real job is to
+// MEASURE whether anyone signs in, because that measurement is the only
+// evidence that would ever justify moving the corpus behind the Worker. So
+// every arm of it is counted, in localStorage, and the seam says out loud that
+// it is being counted — a gate nobody can measure is worse than no gate, and a
+// gate that measures in secret is worse than both.
+const GKEY = 'roleatlas.gate.v1';
+const PREVIEW = 12;               // companies, complete, before the seam
+const gateRead = () => { try { return JSON.parse(localStorage.getItem(GKEY) || '{}') || {}; } catch { return {}; } };
+const gateWrite = (o) => { try { localStorage.setItem(GKEY, JSON.stringify(o)); } catch {} };
+function gateBump(field) {
+  const g = gateRead();
+  g[field] = (g[field] || 0) + 1;
+  g.last = new Date().toISOString().slice(0, 10);
+  if (!g.first) g.first = g.last;
+  gateWrite(g);
+  return g;
+}
+let signedIn = false;
+let bypassed = !!gateRead().open;
+let askCounted = false;
+const unlocked = () => signedIn || bypassed;
+// Clerk may never answer — blocked, offline, or broken. Until it does the seam
+// prints the door that needs nobody's permission, and says why the other one
+// is not there. It is never a Sign in that cannot sign anybody in.
+let clerkReady = false;
+
+// ============================== chrome painting =============================
+// Everything with a fixed label. Called on load and on every locale change, so
+// there is exactly one place where a string reaches the page.
+function opt(sel, pairs, keep) {
+  const was = keep ? sel.value : null;
+  sel.replaceChildren(...pairs.map(([v, label]) => {
+    const o = el('option', null, label); o.value = v; return o;
+  }));
+  if (was && pairs.some(([v]) => v === was)) sel.value = was;
+}
+function paintChrome() {
+  document.title = t('title');
+  document.documentElement.lang = LOC;
+  document.documentElement.dir = DIRS[LOC] || 'ltr';
+  $('#thesis').innerHTML = '';
+  // The tagline is the one string with emphasis in it, and it is OURS — it is
+  // in the table above, not in the data. Split rather than innerHTML'd so no
+  // markup from a string table can ever reach the parser.
+  for (const [i, part] of t('tagline').split(/<\/?b>/).entries()) {
+    $('#thesis').append(i % 2 ? el('b', null, part) : document.createTextNode(part));
+  }
+  $('#depthlbl').textContent = t('depth');
+  $('#snaplbl').textContent = t('snapshot');
+  $('#langlbl').textContent = t('language');
+  $('#railfoot').textContent = t('railFoot');
+  $('#barlbl').textContent = t('sections');
+  $('#allbtn').textContent = t('allCountries');
+  $('#barnote').textContent = t('barNote');
+  $('#ffoldlbl').textContent = t('filters');
+  for (const [id, key] of [['q', 'lq'], ['city', 'lcity'], ['dept', 'ldept'],
+      ['remote', 'lremote'], ['openness', 'lopen'], ['mca', 'lmca'],
+      ['bracket', 'lraised'], ['recency', 'lfunded'], ['sort', 'lsort']]) {
+    $('#l-' + id).textContent = t(key);
+  }
+  $('#q').placeholder = t('lqPh');
+  $('#q').setAttribute('aria-label', t('lq'));
+  opt($('#remote'), [['any', t('anyremote')], ['remote', t('remoteonly')]], true);
+  opt($('#openness'), [['any', t('anyopen')], ['open', t('openyes', { n: '' })]], true);
+  opt($('#mca'), [['any', t('anymca')], ['matched', t('mcamatched')]], true);
+  opt($('#bracket'), [['any', t('anyamount')], ['small', t('bsmall')],
+                      ['mid', t('bmid')], ['large', t('blarge')]], true);
+  opt($('#recency'), [['any', t('anytime')], ['90', t('d90')], ['365', t('d365')]], true);
+  opt($('#sort'), [['reqs', t('sreqs')], ['raised', t('sraised')], ['date', t('sdate')],
+                   ['name', t('sname')], ['newest', t('snewest')]], true);
+  $('#city').dataset.sig = ''; $('#dept').dataset.sig = '';   // force a rebuild in the reader's language
+  // The language picker names each language in that language, which is the one
+  // convention a reader who cannot read the current one can still navigate.
+  opt($('#lang'), LOCALES.map(([id, label]) => [id, label]));
+  $('#lang').value = LOC;
+  // The footer's apparatus. Two of these are filled from the data in load();
+  // the rest are the page's own claims about how it was made.
+  const notes = $('#notes');
+  notes.replaceChildren();
+  const integrity = el('p'); integrity.id = 'integrity';
+  const seen = el('p'); seen.id = 'firstseen';
+  notes.append(integrity, seen);
+  for (const k of ['note1', 'note2', 'note3', 'note4', 'note5']) notes.append(el('p', null, t(k)));
+  const srcs = $('#sources');
+  srcs.replaceChildren();
+  const a1 = el('a', null, t('srcBuild')); a1.href = '../data/build-report.json';
+  const a2 = el('a', null, t('srcData')); a2.href = '../data/companies.json';
+  const a3 = el('a', null, t('srcSeen')); a3.href = '../data/first-seen.json';
+  srcs.append(a1, el('span', null, ' · '), a2, el('span', null, ' · '), a3);
+  if (snapshot) srcs.append(el('span', null, ' · ' + t('srcSnapshot', { d: df(snapshot) })));
+  if (snapshot) { $('#snapshot').textContent = df(snapshot); $('#snapshot').dateTime = snapshot; }
+  // The keyboard card.
+  $('#keystitle').textContent = t('keysTitle');
+  $('#kclose').setAttribute('aria-label', t('kCloseR'));
+  $('#keylist').replaceChildren();
+  for (const [k, key] of [['/', 'kSearch'], ['j k', 'kRows'], ['J K', 'kStrata'],
+      ['u', 'kUnit'], ['Enter', 'kOpenR'], ['Esc', 'kCloseR'], ['[ ]', 'kSections'], ['?', 'kHelp']]) {
+    $('#keylist').append(el('dt', null, k), el('dd', null, t(key)));
+  }
+  if (integrityData) fillIntegrity();
+  if (window.__paintAccount) window.__paintAccount();
+}
+// A translated string with a number in it, set so the number can be marked
+// without the table carrying markup. The placeholder is replaced by a control
+// character, the result split on it, and the odd pieces wrapped — so a locale
+// is free to put the number wherever its grammar wants it.
+function marked(key, vars, marks, cls) {
+  const v = Object.assign({}, vars);
+  for (const k of marks) v[k] = '\u0001' + (vars[k] == null ? '' : vars[k]) + '\u0001';
+  return t(key, v).split('\u0001')
+    .map((part, i) => (i % 2 ? el('span', cls, part) : document.createTextNode(part)));
+}
+
+// ============================ the section bar ==============================
+// The register's own shape, used as its navigation: each country's width is
+// its share of the open roles. Selecting one lets that segment take four times
+// its share of the bar — the settling that says "you are inside this now",
+// and the only place on this page where a layout animates, because it is a
+// deliberate 420ms on one flex row and not a thing that happens while you
+// scroll.
+function plateBar() {
+  const bar = $('#bar');
+  bar.replaceChildren(...COUNTRIES.map((name) => {
+    const n = ROLES_BY_COUNTRY[name] || 0;
+    const b = el('button', 'seg' + (n ? '' : ' nil'));
+    b.type = 'button';
+    b.dataset.country = name;
+    b.style.flex = '1 1 0';
+    b.append(el('span', 'sgc', CODE[name]), el('span', 'sgn', n ? nf(n) : '·'));
+    b.title = `${cname(name)} — ${nf(n)} ${tn('role', n)}`;
+    b.setAttribute('aria-label', `${cname(name)} — ${nf(n)} ${tn('role', n)}`);
+    b.setAttribute('aria-pressed', 'false');
+    b.addEventListener('click', () => goCountry(name));
+    return b;
+  }));
+  paintBar();
+}
+function paintBar() {
+  const total = CORPUS_ROLES || 1;
+  for (const b of $('#bar').children) {
+    const name = b.dataset.country;
+    const on = activeCountry === name;
+    const share = Math.max((ROLES_BY_COUNTRY[name] || 0) / total, 0.018);
+    b.style.flexGrow = String(on ? share * 4 + 0.06 : share);
+    b.setAttribute('aria-pressed', String(on));
+  }
+  $('#allbtn').setAttribute('aria-pressed', String(!activeCountry));
+}
+function goCountry(name) {
+  activeCountry = activeCountry === name ? null : name;
+  closeSheet();
+  paintBar();
+  render(true);
+  saveState();
+  // A page turn puts you at the top of the new country, which is where a page
+  // turn puts you. Instant under reduced motion, because a smooth 6,000px
+  // journey is the exact thing that setting asks the page not to do.
+  const y = $('#sections').getBoundingClientRect().top + window.scrollY - 8;
+  if (window.scrollY > y) window.scrollTo({ top: y, behavior: REDUCE.matches ? 'auto' : 'smooth' });
+}
+
+// ================================ the sheet ================================
+// A role reveals itself where it is. Nothing above the row moves, so the scroll
+// is never lost — which is what "in place" has to mean when the thing being
+// revealed has to occupy space somewhere.
+function closeSheet() {
+  if (!openSheet) return;
+  const { box, btn } = openSheet;
+  openSheet = null;
+  btn.setAttribute('aria-expanded', 'false');
+  box.classList.remove('open');
+  const drop = () => { box.remove(); measure(); };
+  if (REDUCE.matches) drop();
+  else {
+    let done = false;
+    box.addEventListener('transitionend', () => { if (!done) { done = true; drop(); } }, { once: true });
+    setTimeout(() => { if (!done) { done = true; drop(); } }, 400);   // a transition that never fires must not strand a node
+  }
+}
+function openSheetFor(btn, build) {
+  const same = openSheet && openSheet.btn === btn;
+  closeSheet();
+  if (same) return;
+  const box = el('div', 'sheet');
+  const inner = el('div', 'sinner');
+  const body = el('div', 'sbody');
+  build(body);
+  inner.append(body);
+  box.append(inner);
+  btn.after(box);
+  btn.setAttribute('aria-expanded', 'true');
+  openSheet = { box, btn };
+  // One frame between insertion and the class, so the 0fr→1fr transition has a
+  // start value to run from. Under reduced motion the class lands in the same
+  // frame and the state change is instant.
+  if (REDUCE.matches) box.classList.add('open');
+  else requestAnimationFrame(() => box.classList.add('open'));
+  measure();
+}
+function kv(dl, k, v) {
+  if (v == null || v === '') return;
+  dl.append(el('dt', null, k));
+  const dd = el('dd');
+  if (typeof v === 'string') dd.textContent = v; else dd.append(v);
+  dl.append(dd);
+}
+// The evidence every sheet carries, role or company: the board we read, the day
+// we read it, the build's verdict, the funding, the registrations. Every line
+// is a fact the build wrote; the lines it did not write do not print at all.
+function evidence(dl, c, scopeCount) {
+  const bhost = BOARDS[c.ats] ? BOARDS[c.ats].replace(/^https?:\/\//, '').replace(/\/$/, '') : c.ats;
+  kv(dl, t('sheetBoard'), BOARDS[c.ats] ? link(BOARDS[c.ats] + c.slug, `${bhost}/${c.slug}`) : `${bhost}/${c.slug}`);
+  kv(dl, t('sheetRead'), df(snapshot));
+  const verdict = BUILDREP && BUILDREP.companies ? BUILDREP.companies[c.name] : null;
+  if (verdict) kv(dl, t('sheetVerdict'), verdict === 'listed' ? t('verdictListed') : verdict);
+  const onBoard = c.total || c.roles.length;
+  kv(dl, t('sheetOnBoard'), scopeCount != null && onBoard > scopeCount
+    ? t('onBoardScope', { n: nf(onBoard), m: nf(scopeCount) })
+    : t('onBoard', { n: nf(onBoard) }));
+  if (BUILDREP && BUILDREP.checked != null && BUILDREP.corpus_size != null) {
+    kv(dl, t('sheetCorpus'), t('corpusV', {
+      n: nf(BUILDREP.checked), m: nf(BUILDREP.corpus_size),
+      k: nf((BUILDREP.counts && BUILDREP.counts.listed) ?? BUILDREP.listed ?? 0) }));
+  }
+  const fund = el('span');
+  fund.append(c.amount == null && !c.round_letter && !c.date
+    ? t('fundingDark')
+    : t('fundingV', { amt: money(c), round: roundOf(c), date: whenOf(c) }));
+  if (c.source_url) { fund.append(' · '); fund.append(link(c.source_url, t('fundingSource'))); }
+  kv(dl, t('sheetFunding'), fund);
+  kv(dl, t('sheetQualified'), t('qualifiedV', { rule: t(RULEKEY[c.qualified_by] || 'ruleStage') }));
+  // Absent is absent: no salary line, no registration line, no placeholder.
+  if (c.salary) kv(dl, t('sheetSalary'), t('salaryV', {
+    v: '₹' + nf(Math.round(c.salary.avg_lpa * 10) / 10) + 'L',
+    n: tn('report', c.salary.reports, { n: nf(c.salary.reports) }),
+    d: df(c.salary.observed) }));
+  if (c.mca) kv(dl, t('sheetMca'), regLine(c.mca, c.mca.cin, null));
+  if (c.uk) kv(dl, t('sheetUk'), regLine(c.uk, c.uk.number, c.uk.url));
+  const said = DESCRIPTIONS[c.name];
+  if (said) {
+    for (const [key, val] of [['descWhat', said.what], ['descForWhom', said.for_whom],
+                              ['descWhyThem', said.why_them]]) {
+      if (typeof val === 'string' && val.trim()) kv(dl, t(key), val);
+    }
+  }
+}
+// A registration status is the register's own word — `active`, `liquidation`,
+// `struck off`. It is a source claim and prints exactly as the register wrote
+// it, in every locale.
+function regLine(m, id, url) {
+  const span = el('span');
+  const num = url ? link(url, id, 'mono') : el('span', 'mono', id);
+  span.append(num, ' · ', t('regV', {
+    name: m.name, y: m.incorporated ? m.incorporated.slice(0, 4) : '',
+    city: m.city ? ' · ' + m.city : '', status: m.status }));
+  return span;
+}
+// A register line carries at most TWO marks, and this is measured rather than
+// preferred: the openness sentence the sheet prints in full ("stellt aus dem
+// Ausland ein") is four times the width the column has, and a badge cut to
+// "hires from abro" is worse than no badge at all. So the line takes a SHORT
+// token — the same OR the foreign-hires filter uses, said as a tick or a cross
+// — and the sheet keeps the sentence, both fields, unabridged.
+//
+// A stated no is a fact and prints as one. Silence prints nothing, which is the
+// register's oldest rule: 92% of postings say nothing about hiring from abroad,
+// and a mark on every one of them would read, at a glance, like a refusal.
+function tagFor(r) {
+  const out = [];
+  if (WORKPLACE[r.workplace]) out.push([t(WORKPLACE[r.workplace]), false]);
+  if (r.visa === 'yes' || r.hire_from_abroad === 'yes') out.push([t('tagAbroad'), true]);
+  else if (r.visa === 'no' || r.hire_from_abroad === 'no') out.push([t('tagAbroadNo'), false]);
+  return out;
+}
+
+// ================================ render ===================================
+const scope = () => (activeCountry ? [activeCountry] : COUNTRIES);
+const scopeName = () => (activeCountry ? cname(activeCountry) : t('everywhere'));
+function inScope(c, covers) {
+  const roles = c.roles.filter((r) => r.countries.some((x) => covers.includes(x)));
+  if (!roles.length) return null;
+  const india = covers.includes('India');
+  return { ...c, roles, total: c.roles.length,
+    countries: c.countries.filter((x) => covers.includes(x)),
+    cities: india ? c.cities : [], salary: india ? c.salary : null,
+    mca: india ? c.mca : null,
+    uk: covers.includes('United Kingdom') ? c.uk : null };
+}
+const listedIn = (covers) => companies.filter((c) => c.countries.some((x) => covers.includes(x))).length;
+
+let integrityData = null;
+function fillIntegrity() {
+  const c = integrityData;
+  const node = document.getElementById('integrity');
+  if (node && c) node.textContent = t('integrityV', { n: nf(c.checked), m: nf(c.corpus_size), k: nf(c.unchecked) });
+  const fs = document.getElementById('firstseen');
+  if (fs && FIRSTSEEN.size) {
+    let dated = 0, unconf = 0, total = 0;
+    for (const co of companies) for (const r of co.roles) {
+      total += 1;
+      const e = FIRSTSEEN.get(r.url);
+      if (!e) continue;
+      dated += 1;
+      if (!e.confirmed) unconf += 1;
+    }
+    fs.textContent = t('firstSeenV', { dated: nf(dated), total: nf(total), unconf: nf(unconf) });
+  }
+}
+
+function fill(sel, opts, head) {
+  const sig = LOC + '|' + opts.map((o) => o.join(' ')).join('|');
+  if (sel.dataset.sig === sig) return;
+  const was = sel.value;
+  sel.replaceChildren(el('option', null, head), ...opts.map(([v, label]) => {
+    const o = el('option', null, label); o.value = v; return o;
+  }));
+  sel.options[0].value = 'any';
+  sel.value = opts.some(([v]) => v === was) ? was : 'any';
+  sel.dataset.sig = sig;
+}
+
+function render(settle) {
+  const covers = scope();
+  const q = $('#q').value.trim().toLowerCase();
+  const recency = $('#recency').value;
+  const here = companies.map((c) => inScope(c, covers)).filter(Boolean);
+
+  for (const label of document.querySelectorAll('#controls .india-only')) {
+    label.hidden = !covers.includes('India');
+    if (label.hidden) label.querySelector('select').value = 'any';
+  }
+
+  // The two derived selects, rebuilt for the open country and built from what
+  // the country holds rather than from the filtered set — a list of options
+  // that shrank as you used the other filters would be a control describing
+  // itself rather than the register.
+  const cityHome = new Map();
+  for (const c of here) {
+    for (const p of c.cities) if (!cityHome.has(p)) cityHome.set(p, 'India');
+    for (const r of c.roles) for (const p of roleCities(r)) if (!cityHome.has(p)) cityHome.set(p, r.countries[0]);
+  }
+  const cityOpts = uniqCased([...cityHome.keys()]).sort((a, b) => a.localeCompare(b, LOC))
+    .map((p) => [p, activeCountry || !CODE[cityHome.get(p)] ? p : `${p} · ${CODE[cityHome.get(p)]}`]);
+  fill($('#city'), cityOpts, t('anycity'));
+  const citySel = $('#city');
+  citySel.closest('label').hidden = !cityOpts.length;
+  if (!cityOpts.length && citySel.value !== 'any') citySel.value = 'any';
+
+  const deptN = new Map();
+  const deptFrom = { title: 0, board: 0, neither: 0 };
+  for (const c of here) for (const r of c.roles) {
+    const d = deptOf(r);
+    deptN.set(d, (deptN.get(d) || 0) + 1);
+    deptFrom[deptSource(r)] += 1;
+  }
+  const deptOpts = [...deptN].filter(([d]) => d !== UNCLASSIFIED)
+    .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
+  if (deptN.has(UNCLASSIFIED)) deptOpts.push([UNCLASSIFIED, deptN.get(UNCLASSIFIED)]);
+  fill($('#dept'), deptOpts.map(([d, n]) => [d, `${dname(d)} — ${nf(n)}`]), t('anydept'));
+  const city = $('#city').value, dept = $('#dept').value;
+
+  const setN = ['city', 'dept', 'remote', 'openness', 'mca', 'bracket', 'recency']
+    .filter((id) => { const n = document.getElementById(id); return !n.closest('label').hidden && n.value !== 'any'; }).length;
+  $('#fcount').textContent = setN ? t('nSet', { n: nf(setN) }) : '';
+  for (const n of document.querySelectorAll('#controls select')) {
+    n.classList.toggle('set', n.id !== 'sort' && n.value !== 'any');
+  }
+  $('#q').classList.toggle('set', !!$('#q').value.trim());
+
+  const roleView = view === 'roles';
+  const sortSel = $('#sort');
+  const sortable = FIRSTSEEN.size > 0;
+  sortSel.querySelector('option[value="newest"]').hidden = !sortable;
+  if (!sortable && sortSel.value === 'newest') sortSel.value = 'reqs';
+
+  // The foreign-hires control states its own yield before the click, and at
+  // zero it leaves the row rather than sitting disabled — a control that can
+  // only return nothing is furniture. Its fact prints below instead.
+  const openN = here.filter(opensToForeignHires).length;
+  const openSel = $('#openness');
+  openSel.options[1].textContent = t('openyes', { n: nf(openN) });
+  const notes = [];
+  if (!openN) {
+    if (openSel.value !== 'any') openSel.value = 'any';
+    openSel.closest('label').hidden = true;
+    notes.push(t('noteOpen', { scope: scopeName() }));
+  } else openSel.closest('label').hidden = false;
+  if (!cityOpts.length) notes.push(t('noteCity', { scope: scopeName() }));
+  const covered = (label, has, field) => {
+    const n = here.filter(has).length;
+    notes.push(t('noteCovered', { label, n: nf(n), m: nf(here.length), field }));
+  };
+  if ($('#bracket').value !== 'any') covered(t('lraised'), (c) => c.amount != null, t('fieldAmount'));
+  if (recency !== 'any') covered(t('lfunded'), (c) => !!c.date, t('fieldDate'));
+  if (dept !== 'any') {
+    const all = here.reduce((n, c) => n + c.roles.length, 0);
+    notes.push(t('noteDept', { all: nf(all), a: nf(deptFrom.title), b: nf(deptFrom.board) }));
+  }
+  $('#fchip').replaceChildren(...notes.map((x) => el('p', null, x)));
+  $('#fchip').hidden = !notes.length;
+
+  // The department cuts at ROLE level, before anything counts, the same rule a
+  // country follows one level up.
+  const listed = dept === 'any' ? here : here.map((c) => {
+    const roles = c.roles.filter((r) => deptOf(r) === dept);
+    return roles.length ? { ...c, roles } : null;
+  }).filter(Boolean);
+  const hits = (c) => (q ? c.roles.filter((r) => r.title.toLowerCase().includes(q)).length : 0);
+  const remote = $('#remote').value, openness = $('#openness').value;
+  const shown = listed
+    .filter((c) => !q || c.name.toLowerCase().includes(q) || hits(c) > 0)
+    .filter((c) => city === 'any' || c.cities.includes(city) || c.roles.some((r) => roleCities(r).includes(city)))
+    .filter((c) => remote === 'any' || isRemote(c))
+    .filter((c) => openness === 'any' || opensToForeignHires(c))
+    .filter((c) => $('#mca').value === 'any' || c.mca != null)
+    .filter(brackets[$('#bracket').value])
+    .filter((c) => recency === 'any' || (c.date != null && days(c.date, snapshot) <= +recency))
+    .sort(sorts[sortSel.value]);
+
+  // Each stratum's roles get the controls a company could have satisfied
+  // through a DIFFERENT role than the one being printed. A remote-filtered
+  // register showing the on-site jobs of a company with one remote opening
+  // elsewhere would be answering a question nobody asked.
+  STRATA = [];
+  let depth = 0;
+  for (const c of shown) {
+    const roles = c.roles.filter((r) => {
+      if (q && !r.title.toLowerCase().includes(q) && !c.name.toLowerCase().includes(q)) return false;
+      if (city !== 'any' && !c.cities.includes(city) && !roleCities(r).includes(city)) return false;
+      if (remote !== 'any' && r.workplace !== 'remote') return false;
+      if (openness !== 'any' && r.visa !== 'yes' && r.hire_from_abroad !== 'yes') return false;
+      return true;
+    });
+    if (!roles.length) continue;
+    if (sortSel.value === 'newest') {
+      const at = (r) => (FIRSTSEEN.get(r.url) || {}).date || '';
+      roles.sort((a, b) => at(b).localeCompare(at(a)));
+    }
+    STRATA.push({ c, roles, first: depth, hits: hits(c) });
+    depth += roles.length;
+  }
+  COLUMN = depth;
+
+  const gated = !unlocked() && STRATA.length > PREVIEW;
+  const cut = gated ? PREVIEW : STRATA.length;
+  SHOWNROLES = STRATA.slice(0, cut).reduce((n, s) => n + s.roles.length, 0);
+
+  const log = $('#log');
+  log.replaceChildren();
+  if (!STRATA.length) {
+    log.append(emptyState(here, openN, roleView));
+  } else {
+    const folded = !roleView;
+    for (let i = 0; i < cut; i++) log.append(stratumEl(STRATA[i], i, folded, q));
+    if (gated) log.append(seamEl(cut));
+  }
+  // The settle: the incoming rows arrive rather than appearing, and only the
+  // ones a reader could be looking at — a stagger across four hundred rows is
+  // four hundred animations nobody sees. Never on a keystroke's own re-render
+  // of the same question, never under reduced motion.
+  if (settle && !REDUCE.matches) {
+    const rows = log.querySelectorAll('.stratum');
+    for (let i = 0; i < Math.min(rows.length, 10); i++) {
+      rows[i].style.animationDelay = (i * 26) + 'ms';
+      rows[i].classList.add('settle');
+      rows[i].addEventListener('animationend', () => {
+        rows[i].classList.remove('settle'); rows[i].style.animationDelay = '';
+      }, { once: true });
+    }
+  }
+  paintStatus(shown, here, openN, roleView, gated);
+  // The first strata are built in this same frame rather than left to the
+  // observer: the reader is looking at the top of the register the instant a
+  // filter lands, and an observer callback is a frame late. It is also what
+  // gives measure() a real row to take the line pitch from.
+  for (const sec of [...log.querySelectorAll('.stratum')].slice(0, 4)) materialise(sec);
+  paintSeamMarks(gated);
+  observeAll();
+  measure();
+}
+
+function emptyState(here, openN, roleView) {
+  const p = el('p', 'empty');
+  const tops = COUNTRIES.map((n) => [n, listedIn([n])]).filter(([, n]) => n).sort((a, b) => b[1] - a[1]);
+  // Four ways to show nothing, and they are four different facts. One sentence
+  // for all four would be the ambiguous zero this register exists to avoid.
+  if (!companies.length) p.textContent = t('emptyBuild');
+  else if (!here.length) {
+    p.textContent = t('emptyCountry', { scope: scopeName() })
+      + (tops.length ? t('emptyCountryTop', { country: cname(tops[0][0]), n: nf(tops[0][1]), m: nf(companies.length) }) : '');
+  } else if ($('#openness').value !== 'any' && !openN) p.textContent = t('emptyOpenness', { scope: scopeName() });
+  else p.textContent = roleView ? t('emptyRoles') : t('emptyCompanies');
+  return p;
+}
+
+function stratumEl(s, i, folded, q) {
+  const c = s.c;
+  const sec = el('section', 'stratum');
+  sec.dataset.i = String(i);
+  if (folded) sec.dataset.fold = '';
+  const head = el('div', 'sh');
+  const btn = el('button', 'shb');
+  btn.type = 'button';
+  btn.setAttribute('aria-expanded', String(!folded));
+  btn.append(
+    el('span', 'sref', REFS[c.name] || '—'),
+    el('span', 'snm', c.name),
+    el('span', 'sct', c.countries.map((x) => CODE[x]).filter(Boolean).slice(0, 3).join('·')),
+    el('span', 'snn', `${nf(s.roles.length)} ${tn('role', s.roles.length)}`));
+  const relabel = () => btn.setAttribute('aria-label',
+    t(sec.hasAttribute('data-fold') ? 'openCo' : 'closeCo', { name: c.name }));
+  relabel();
+  btn.addEventListener('click', () => {
+    sec.toggleAttribute('data-fold');
+    btn.setAttribute('aria-expanded', String(!sec.hasAttribute('data-fold')));
+    relabel();
+    if (!sec.hasAttribute('data-fold')) materialise(sec);
+    measure();
+  });
+  const ev = el('button', 'she', t('evidence'));
+  ev.type = 'button';
+  ev.setAttribute('aria-expanded', 'false');
+  ev.addEventListener('click', () => openSheetFor(ev, (body) => {
+    body.append(el('h3', null, c.name));
+    const dl = el('dl', 'sgrid');
+    kv(dl, t('sheetWhere'), placeLine(wherePieces(c), 6));
+    evidence(dl, c, s.roles.length);
+    body.append(dl);
+    const said = DESCRIPTIONS[c.name];
+    if (said && said.ai) {
+      body.append(el('p', 'prov', said.source === 'board' ? t('provBoard')
+        : said.checked ? t('provChecked') : t('provUnverified')));
+    }
+  }));
+  head.append(btn, ev);
+  const list = el('div', 'rlist');
+  list.style.setProperty('--n', String(s.roles.length));
+  list.dataset.pending = '';
+  sec.append(head, list);
+  sec._s = s; sec._q = q;
+  return sec;
+}
+
+// Rows are built when the stratum is within a screen and a half of the reader,
+// and never rebuilt. The height they will occupy is reserved exactly from the
+// first paint (see .rlist in the stylesheet), so materialising one shifts
+// nothing — this is the difference between a lazy list and a jumping one.
+function materialise(sec) {
+  const list = sec.querySelector('.rlist');
+  if (!list || !list.hasAttribute('data-pending')) return;
+  list.removeAttribute('data-pending');
+  const s = sec._s, q = sec._q;
+  const frag = document.createDocumentFragment();
+  s.roles.forEach((r, k) => frag.append(roleRow(s.c, r, s.first + k + 1, q)));
+  list.append(frag);
+}
+function roleRow(c, r, depth, q) {
+  const b = el('button', 'rrow');
+  b.type = 'button';
+  b.setAttribute('aria-expanded', 'false');
+  b.dataset.depth = String(depth);
+  b.append(el('span', 'rd', String(depth).padStart(4, '0')));
+  const title = el('span', 'rt', r.title);
+  // The row is one pitch tall — that is what makes the gauge exact — so a long
+  // title loses its tail. The sheet under it prints the title whole; this puts
+  // it a hover away too, for the reader who is scanning rather than opening.
+  title.title = r.title;
+  if (q && r.title.toLowerCase().includes(q)) title.style.color = 'var(--sig)';
+  b.append(title, el('span', 'rp', placeLine(r.locations, 2)));
+  const tw = el('span', 'rw');
+  const marks = tagFor(r);
+  const seen = FIRSTSEEN.get(r.url);
+  const isNew = seen && seen.confirmed && freshlySeen(seen);
+  if (isNew) marks.splice(1, 1, [t('tagNew'), true]);   // the perishable fact wins the slot
+  for (const [label, strong] of marks) {
+    const tag = el('span', 'tag' + (strong ? ' on' : ''), label);
+    if (isNew && label === t('tagNew')) tag.title = t('newTitle', { d: df(seen.date) });
+    tw.append(tag);
+  }
+  b.append(tw, el('span', 'rg', r.countries.map((x) => CODE[x]).filter(Boolean)[0] || ''));
+  b.setAttribute('aria-label', t('openRole', { title: r.title }));
+  b.addEventListener('click', () => openSheetFor(b, (body) => {
+    body.append(el('h3', null, r.title));
+    const who = el('p', 'swho');
+    who.append(c.name, ' · ', r.countries.map(cname).join(' · '));
+    body.append(who);
+    body.append(link(r.url, t('sheetPosting') + ' ↗', 'apply'));
+    const dl = el('dl', 'sgrid');
+    kv(dl, t('sheetWhere'), placeLine(r.locations, 6));
+    if (WORKPLACE[r.workplace]) kv(dl, t('sheetWorkplace'), t(WORKPLACE[r.workplace]));
+    const said = [];
+    for (const f of ['visa', 'hire_from_abroad']) { const k = OPENNESS[f][r[f]]; if (k) said.push(t(k)); }
+    if (said.length) kv(dl, t('sheetOpenness'), said.join(' · '));
+    if (seen) kv(dl, t('sheetFirstSeen'), df(seen.date));
+    evidence(dl, c, null);
+    body.append(dl);
+    const d = DESCRIPTIONS[c.name];
+    if (d && d.ai) body.append(el('p', 'prov', d.source === 'board' ? t('provBoard') : d.checked ? t('provChecked') : t('provUnverified')));
+  }));
+  return b;
+}
+
+// ------------------------------- the seam ----------------------------------
+function seamEl(cut) {
+  const below = COLUMN - SHOWNROLES;
+  const cos = STRATA.length - cut;
+  const sec = el('section', 'seam');
+  sec.id = 'seam';
+  sec.append(el('p', 'micro eyebrow', t('seamEyebrow')));
+  // The two numbers ARE the argument, so they are set as numbers: stated at
+  // their true size, beside a bar drawn to the same scale. No blur, no
+  // "unlock", no countdown, and nothing above this line was withheld.
+  const h = el('h2');
+  h.append(...marked('seamHead', { n: nf(below), m: nf(cos) }, ['n', 'm'], 'n'));
+  sec.append(h);
+  sec.append(el('p', null, t('seamBody', { k: nf(SHOWNROLES) })));
+  // The column, drawn at the ratio it actually has: what you have read in the
+  // signal colour, what is below in the same hatch the gauge uses. No number
+  // here is rhetorical — the bar IS the two numbers above it, at scale.
+  const bar = el('div', 'belowbar');
+  const read = el('span', 'bbr');
+  read.style.width = Math.max(2, (SHOWNROLES / COLUMN) * 100) + '%';
+  bar.append(read, el('span', 'bb'), el('span', 'bbn', t('belowLabel', { n: nf(below) })));
+  sec.append(bar);
+  const doors = el('div', 'doors');
+  if (clerkReady) {
+    const a = el('button', 'door pri', t('doorSignIn'));
+    a.type = 'button';
+    a.addEventListener('click', () => {
+      gateBump('signin');
+      try { window.Clerk.openSignIn(); } catch {}
+    });
+    doors.append(a);
+  }
+  const b = el('button', 'door sec', t('doorBypass'));
+  b.type = 'button';
+  b.addEventListener('click', () => {
+    const g = gateBump('bypass');
+    g.open = true; gateWrite(g);
+    bypassed = true;
+    const y = sec.getBoundingClientRect().top + window.scrollY;
+    render();
+    // The reader asked for what was below this line; they are put back at the
+    // line, not at the top of the page.
+    window.scrollTo({ top: y - 40, behavior: 'auto' });
+  });
+  doors.append(b);
+  sec.append(doors);
+  if (!clerkReady) sec.append(el('p', 'note', t('seamNoClerk')));
+  sec.append(el('p', 'note', t('seamMeasure')));
+  if (!askCounted) { askCounted = true; gateBump('shown'); }
+  return sec;
+}
+
+// ------------------------------ the status line ----------------------------
+function paintStatus(shown, here, openN, roleView, gated) {
+  const st = $('#status');
+  st.replaceChildren();
+  st.hidden = false;
+  const tally = el('span', 'tally');
+  tally.append(...(roleView
+    ? marked('tallyRoles', { n: nf(COLUMN), m: nf(CORPUS_ROLES) }, ['n'], 'live')
+    : marked('tallyCompanies', { n: nf(STRATA.length), m: nf(companies.length) }, ['n'], 'live')));
+  if (STRATA.length) st.append(tally);
+  if (activeCountry) st.append(el('span', 'micro', t('inSection', { country: cname(activeCountry) })));
+  const sw = el('span', 'vsw');
+  sw.setAttribute('role', 'group');
+  sw.setAttribute('aria-label', t('unitLabel'));
+  for (const [unit, label] of [['roles', t('unitRoles')], ['companies', t('unitCompanies')]]) {
+    const x = el('button', null, label);
+    x.type = 'button';
+    x.setAttribute('aria-pressed', String(view === unit));
+    x.addEventListener('click', () => setView(unit));
+    sw.append(x);
+  }
+  st.append(sw);
+  const kb = el('button', 'micro', t('keysHint'));
+  kb.type = 'button'; kb.id = 'keyhint';
+  kb.addEventListener('click', () => toggleKeys());
+  st.append(kb);
+}
+
+// The unit switch is not a swap. Companies and roles are the same column at two
+// depths of focus, so switching is every stratum folding or unfolding at once —
+// you watch the register breathe from 371 lines out to 6,423 and back, which is
+// the only way this page has of showing you how much of it there is.
+function setView(unit) {
+  if (view === unit) return;
+  view = unit;
+  saveState();
+  const folding = unit === 'companies';
+  const secs = [...$('#log').querySelectorAll('.stratum')];
+  if (REDUCE.matches || secs.length === 0) { render(); return; }
+  // Fold from the top of the VIEWPORT outward rather than from the top of the
+  // document: the reader watches the strata nearest them move first, and the
+  // ones they cannot see cost nothing at all. Fourteen either side is what
+  // fits on a tall screen; past that it is a state change nobody witnesses.
+  const vh = window.innerHeight;
+  let near = 0, best = Infinity;
+  secs.forEach((sec, i) => {
+    const d = Math.abs(sec.getBoundingClientRect().top - vh * 0.3);
+    if (d < best) { best = d; near = i; }
+  });
+  const anchor = secs[near];
+  const hold = () => {
+    // The stratum the reader is looking at does not move under them. Measured
+    // before and after, so folding 6,000 rows away above the fold cannot throw
+    // the reader anywhere.
+    const now = ($('#log').querySelectorAll('.stratum')[near] || anchor);
+    if (now && now.isConnected) window.scrollBy({ top: now.getBoundingClientRect().top - held, behavior: 'auto' });
+  };
+  const held = anchor.getBoundingClientRect().top;
+  secs.forEach((sec, i) => {
+    const away = Math.abs(i - near);
+    const flip = () => {
+      sec.toggleAttribute('data-fold', folding);
+      const btn = sec.querySelector('.shb');
+      if (btn) {
+        btn.setAttribute('aria-expanded', String(!folding));
+        btn.setAttribute('aria-label', t(folding ? 'openCo' : 'closeCo', { name: sec._s.c.name }));
+      }
+      if (!folding) materialise(sec);
+      if (i === near) hold();
+    };
+    if (away > 14) flip(); else setTimeout(flip, away * 22);
+  });
+  setTimeout(() => { render(); hold(); measure(); }, Math.min(14, secs.length) * 22 + 60);
+}
+
+// =============================== THE GAUGE =================================
+// One loop. It runs only while the page is moving, reads window.scrollY and
+// nothing else, and writes two custom properties, one text node and at most one
+// class. Every layout number it needs was measured after the last render.
+const DEPTHNODE = document.getElementById('depth');
+let OFF = [];          // [{top, first, n, headH}] in document coordinates
+let LOGTOP = 0, ROWH = 40, DOCMAX = 1;
+function measure() {
+  const secs = $('#log').querySelectorAll('.stratum');
+  OFF = [];
+  const probe = document.querySelector('.rrow');
+  if (probe && probe.offsetHeight) ROWH = probe.offsetHeight;
+  else {
+    const cs = getComputedStyle(document.documentElement);
+    const rem = parseFloat(cs.fontSize) || 16;
+    ROWH = (parseFloat(cs.getPropertyValue('--rowh')) || 2.5) * rem;
+  }
+  for (const sec of secs) {
+    const s = sec._s;
+    if (!s) continue;
+    const head = sec.querySelector('.sh');
+    OFF.push({ top: sec.offsetTop, first: s.first, n: s.roles.length,
+               headH: head ? head.offsetHeight : 0,
+               folded: sec.hasAttribute('data-fold'), sec });
+  }
+  LOGTOP = $('#log').offsetTop;
+  // What the sticky strata have to clear. At a hand's width the gauge lies
+  // across the top of the screen, and its height is a function of the locale's
+  // own line box — guessing it in rem left a 15px window of rows scrolling
+  // between the bar and the header pinned under it (measured at 380).
+  document.documentElement.style.setProperty('--sticktop',
+    NARROW.matches ? ($('#rail').offsetHeight || 0) + 'px' : '0px');
+  DOCMAX = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+  paintSeamMarks();
+  tick();
+}
+// The reading line: a third of the way down the screen, because that is where a
+// reader's eye sits and a depth measured at the very top edge reads as one
+// stratum behind where you actually are.
+const readLine = () => window.scrollY + window.innerHeight * 0.33;
+function depthAt(y) {
+  if (!OFF.length) return 0;
+  let lo = 0, hi = OFF.length - 1, at = 0;
+  while (lo <= hi) {
+    const mid = (lo + hi) >> 1;
+    if (OFF[mid].top <= y) { at = mid; lo = mid + 1; } else hi = mid - 1;
+  }
+  const s = OFF[at];
+  if (s.folded) return s.first;
+  const into = (y - s.top - s.headH) / ROWH;
+  return s.first + Math.max(0, Math.min(s.n, into));
+}
+let hereAt = -1, moving = false, lastY = 0, lastT = 0, queued = false;
+function tick() {
+  queued = false;
+  const y = window.scrollY;
+  const d = depthAt(readLine());
+  const root = document.documentElement;
+  const scale = COLUMN || 1;
+  root.style.setProperty('--pos', String(Math.max(0, Math.min(1, d / scale))));
+  root.style.setProperty('--lens', String(Math.max(0.004, Math.min(1, (window.innerHeight / ROWH) / scale))));
+  const shownD = Math.round(Math.min(d, SHOWNROLES));
+  const txt = String(shownD).padStart(4, '0');
+  if (DEPTHNODE.textContent !== txt) DEPTHNODE.textContent = txt;
+  // Which stratum the reader is inside. Changed at most once per stratum
+  // crossed, so the style cost is paid on a boundary and not on a frame.
+  let at = 0;
+  for (let i = 0; i < OFF.length; i++) if (OFF[i].top <= y + 4) at = i; else break;
+  if (at !== hereAt) {
+    if (OFF[hereAt]) OFF[hereAt].sec.classList.remove('here');
+    if (OFF[at]) OFF[at].sec.classList.add('here');
+    hereAt = at;
+  }
+  // The rate of travel. Hysteresis on the threshold, so a scroll that hovers
+  // at the boundary does not strobe the class on and off.
+  if (!REDUCE.matches) {
+    const now = performance.now();
+    const dt = Math.max(1, now - lastT);
+    const v = Math.abs(y - lastY) / dt;
+    lastY = y; lastT = now;
+    if (!moving && v > 1.7) { moving = true; root.classList.add('moving'); }
+    else if (moving && v < 0.5) { moving = false; root.classList.remove('moving'); }
+    root.style.setProperty('--v', String(Math.max(0, Math.min(1, (v - 0.5) / 3))));
+  }
+  // Rows come into being one screen and a half before they are needed. Done
+  // here rather than by an observer callback per row because the observer is
+  // already only watching 371 boxes, and this is the belt to its braces on a
+  // fling that outruns the observer's own scheduling.
+  const win = window.innerHeight * 1.5;
+  for (const s of OFF) {
+    if (s.folded) continue;
+    if (s.top < y + win && s.top + s.headH + s.n * ROWH > y - win) materialise(s.sec);
+  }
+}
+function onScroll() {
+  if (queued) return;
+  queued = true;
+  requestAnimationFrame(tick);
+}
+let stillTimer = 0;
+window.addEventListener('scroll', () => {
+  onScroll();
+  clearTimeout(stillTimer);
+  stillTimer = setTimeout(() => {
+    if (moving) { moving = false; document.documentElement.classList.remove('moving'); }
+    document.documentElement.style.setProperty('--v', '0');
+  }, 130);
+}, { passive: true });
+
+// The IntersectionObserver is the primary materialiser; the loop above is the
+// backstop. Both are idempotent — the pending flag is cleared before any row
+// is built, so a double call builds nothing twice.
+let IO = null;
+function observeAll() {
+  if (!('IntersectionObserver' in window)) {
+    for (const sec of $('#log').querySelectorAll('.stratum')) materialise(sec);
+    return;
+  }
+  if (IO) IO.disconnect();
+  IO = new IntersectionObserver((entries) => {
+    for (const e of entries) if (e.isIntersecting) { materialise(e.target); IO.unobserve(e.target); }
+  }, { rootMargin: '1200px 0px' });
+  for (const sec of $('#log').querySelectorAll('.stratum')) IO.observe(sec);
+}
+
+// The marks on the track: the seam at its true depth, the band horizons at
+// theirs, and the unlogged interval below the seam drawn to scale. Rebuilt on
+// render because all three are facts about the current view.
+function paintSeamMarks(gated) {
+  const track = $('#track');
+  for (const x of track.querySelectorAll('.rk-seam,.rk-band,.rk-unlogged')) x.remove();
+  if (!COLUMN) { $('#depthtot').textContent = '—'; return; }
+  $('#depthtot').textContent = t('depthOf', { n: nf(COLUMN) });
+  const isGated = gated === undefined ? (!unlocked() && STRATA.length > PREVIEW) : gated;
+  if (isGated) {
+    const f = Math.min(1, SHOWNROLES / COLUMN);
+    const seam = el('span', 'rk-seam');
+    const un = el('span', 'rk-unlogged');
+    if (NARROW.matches) {
+      seam.style.left = (f * 100) + '%';
+      un.style.left = (f * 100) + '%'; un.style.right = '0';
+    } else {
+      seam.style.top = (f * 100) + '%';
+      un.style.top = (f * 100) + '%'; un.style.bottom = '0';
+    }
+    track.append(un, seam);
+  }
+  if (NARROW.matches) return;   // the horizontal instrument has no room for labels
+  // The bands are only boundaries under the register's own order; under any
+  // other sort the count does not fall monotonically and a horizon would lie.
+  if ($('#sort').value !== 'reqs' || view !== 'roles') return;
+  const tier = (n) => (n >= 10 ? 0 : n >= 2 ? 1 : 2);
+  const names = ['10+', '2–9', '1'];
+  let prev = -1;
+  for (const s of STRATA) {
+    const x = tier(s.roles.length);
+    if (x !== prev && s.first > 0) {
+      const m = el('span', 'rk-band');
+      m.style.top = (Math.min(1, s.first / COLUMN) * 100) + '%';
+      m.append(el('span', null, names[x]));
+      track.append(m);
+    }
+    prev = x;
+  }
+}
+
+// ================================ keyboard =================================
+// Someone who lives here for an hour should never have to touch a mouse.
+function rows() { return [...$('#log').querySelectorAll('.rrow')]; }
+function heads() { return [...$('#log').querySelectorAll('.shb')]; }
+function step(list, dir) {
+  if (!list.length) return;
+  const at = list.indexOf(document.activeElement);
+  const next = list[Math.max(0, Math.min(list.length - 1, at < 0 ? 0 : at + dir))];
+  if (next) { next.focus({ preventScroll: true }); next.scrollIntoView({ block: 'center', behavior: 'auto' }); }
+}
+function toggleKeys(force) {
+  const k = $('#keys');
+  k.hidden = force === undefined ? !k.hidden : !force;
+}
+document.addEventListener('keydown', (e) => {
+  if (e.metaKey || e.ctrlKey || e.altKey) return;
+  const typing = e.target.closest && e.target.closest('input, select, textarea');
+  if (e.key === 'Escape') {
+    if (!$('#keys').hidden) { toggleKeys(false); return; }
+    if (typing) { e.target.blur(); return; }
+    if (openSheet) { const b = openSheet.btn; closeSheet(); b.focus({ preventScroll: true }); }
+    return;
+  }
+  if (typing) return;
+  if (e.key === '/') { e.preventDefault(); $('#q').focus(); return; }
+  if (e.key === '?') { e.preventDefault(); toggleKeys(); return; }
+  if (e.key === 'j') { e.preventDefault(); step(rows(), 1); return; }
+  if (e.key === 'k') { e.preventDefault(); step(rows(), -1); return; }
+  if (e.key === 'J') { e.preventDefault(); step(heads(), 1); return; }
+  if (e.key === 'K') { e.preventDefault(); step(heads(), -1); return; }
+  if (e.key === 'u') { e.preventDefault(); setView(view === 'roles' ? 'companies' : 'roles'); return; }
+  if (e.key === '[' || e.key === ']') {
+    e.preventDefault();
+    const seq = [null, ...COUNTRIES];
+    const i = Math.max(0, seq.indexOf(activeCountry));
+    activeCountry = seq[(i + (e.key === ']' ? 1 : -1) + seq.length) % seq.length];
+    closeSheet(); paintBar(); render(true);
+  }
+});
+$('#kclose').addEventListener('click', () => toggleKeys(false));
+
+// =============================== the controls ==============================
+// Guarded on the VALUES. `change` fires when a text input blurs whatever its
+// value is, so every click away from the search box would otherwise re-render
+// the whole register — and a re-render that detaches a button between mousedown
+// and mouseup cancels the click the reader was making.
+let lastAsk = null;
+function reask() {
+  const sig = [...document.querySelectorAll('#controls input, #controls select')].map((n) => n.value).join(' ');
+  if (sig === lastAsk) return;
+  lastAsk = sig;
+  closeSheet();
+  render(true);
+  saveState();
+}
+$('#controls').addEventListener('input', reask);
+$('#controls').addEventListener('change', reask);
+const ffold = $('#ffold');
+const setFold = (folded) => {
+  $('#controls').classList.toggle('folded', folded);
+  ffold.setAttribute('aria-expanded', String(!folded));
+  ffold.querySelector('.chev').textContent = folded ? '▾' : '▴';
+};
+ffold.addEventListener('click', () => setFold(!$('#controls').classList.contains('folded')));
+const handMQ = matchMedia('(max-width: 52rem)');
+setFold(handMQ.matches);
+handMQ.addEventListener('change', (e) => setFold(e.matches));
+$('#lang').addEventListener('change', (e) => setLocale(e.target.value));
+$('#allbtn').addEventListener('click', () => goCountry(null));
+
+let resizeT = 0;
+window.addEventListener('resize', () => {
+  clearTimeout(resizeT);
+  resizeT = setTimeout(() => { measure(); paintSeamMarks(); }, 120);
+});
+
+// Signing in must not cost the reader their place. Clerk's modal keeps the page
+// alive, but a reader who is bounced anywhere at all should come back to the
+// register they were reading, so the question they asked is written down.
+const SKEY = 'roleatlas.place.v1';
+function saveState() {
+  try {
+    sessionStorage.setItem(SKEY, JSON.stringify({
+      country: activeCountry, view,
+      f: Object.fromEntries([...document.querySelectorAll('#controls input, #controls select')].map((n) => [n.id, n.value])),
+    }));
+  } catch {}
+}
+function restoreState() {
+  let s = null;
+  try { s = JSON.parse(sessionStorage.getItem(SKEY) || 'null'); } catch {}
+  if (!s) return;
+  if (s.country && COUNTRIES.includes(s.country)) activeCountry = s.country;
+  if (s.view === 'roles' || s.view === 'companies') view = s.view;
+  for (const [id, v] of Object.entries(s.f || {})) {
+    const n = document.getElementById(id);
+    // A select whose options are rebuilt per country may not offer this value
+    // any more; setting it would leave a control reading something it cannot
+    // filter by. Text inputs take anything.
+    if (n && (n.tagName !== 'SELECT' || [...n.options].some((o) => o.value === v))) n.value = v;
+  }
+}
+window.addEventListener('pagehide', saveState);
+
+// ================================== load ===================================
+function load(data) {
+  if (data.schema_version !== SCHEMA) {
+    $('#status').textContent = t('schemaFail', { want: SCHEMA, src, got: data.schema_version });
+    return;
+  }
+  companies = data.companies || [];
+  snapshot = data.snapshot || '';
+  REFS = Object.fromEntries([...companies].sort(sorts.reqs).map((c, i) => [c.name, String(i + 1).padStart(3, '0')]));
+  CORPUS_ROLES = companies.reduce((n, c) => n + c.roles.length, 0);
+  ROLES_BY_COUNTRY = {};
+  for (const c of companies) for (const r of c.roles) {
+    for (const x of r.countries) if (CODE[x]) ROLES_BY_COUNTRY[x] = (ROLES_BY_COUNTRY[x] || 0) + 1;
+  }
+  integrityData = data.integrity || null;
+  $('#snapshot').textContent = df(snapshot);
+  $('#snapshot').dateTime = snapshot;
+  paintChrome();
+  restoreState();
+  plateBar();
+  render();
+  lastAsk = [...document.querySelectorAll('#controls input, #controls select')].map((n) => n.value).join(' ');
+}
+
+paintChrome();
+$('#status').textContent = t('loading');
+// no-cache, not no-store: revalidate every load, but let a 304 keep the bytes.
+// On a site whose whole claim is "as of the snapshot date", a browser inventing
+// a freshness lifetime for the data is the bug.
+const descriptionsReady = fetch('../data/descriptions.json', { cache: 'no-cache' }).then((r) => (r.ok ? r.json() : {})).catch(() => ({}));
+const buildReady = fetch('../data/build-report.json', { cache: 'no-cache' }).then((r) => (r.ok ? r.json() : null)).catch(() => null);
+const firstSeenReady = fetch(seenSrc, { cache: 'no-cache' }).then((r) => (r.ok ? r.json() : null)).catch(() => null);
+fetch(src, { cache: 'no-cache' })
+  .then((r) => (r.ok ? r.json() : Promise.reject(new Error(`HTTP ${r.status}`))))
+  .then(async (data) => {
+    // Enrichment, never a dependency: each of these has already resolved to a
+    // safe empty value on any failure, so a missing file costs its own feature
+    // and nothing else. The register renders without all three.
+    const found = await descriptionsReady;
+    DESCRIPTIONS = found && typeof found === 'object' && !Array.isArray(found) ? found : {};
+    const rep = await buildReady;
+    BUILDREP = rep && typeof rep === 'object' && !Array.isArray(rep) ? rep : null;
+    const seenDoc = await firstSeenReady;
+    FIRSTSEEN = new Map();
+    for (const [day, buckets] of Object.entries((seenDoc && seenDoc.dates) || {})) {
+      for (const [kind, urls] of Object.entries(buckets || {})) {
+        if (!Array.isArray(urls)) continue;
+        for (const url of urls) FIRSTSEEN.set(url, { date: day, confirmed: kind === 'confirmed' });
+      }
+    }
+    load(data);
+  })
+  .catch((e) => { $('#status').textContent = t('loadFail', { src, msg: e.message }); });
+</script>
+
+<!-- Accounts. Clerk holds the users, the sessions and the password resets; this
+     project holds none of them and stores no credential.
+
+     THE KEY BELOW IS PUBLIC BY DESIGN. The one that must never appear here is
+     the SECRET key (`sk_`), which grants admin over every account.
+
+     PINNED TO @5 DELIBERATELY: `@latest` serves a major version behind, so the
+     tag every quickstart reaches for would load v4 under v5 code.
+
+     ponytail: the key is written into the page rather than injected at build
+     time, because the site is a committed file and the key is public. Ceiling:
+     promoting to a production Clerk instance is an edit to these two lines
+     plus the CNAMEs Clerk asks for on the zone. -->
+<script
+  async crossorigin="anonymous"
+  data-clerk-publishable-key="pk_test_cmVndWxhci10cm9sbC01MC5jbGVyay5hY2NvdW50cy5kZXYk"
+  src="https://regular-troll-50.clerk.accounts.dev/npm/@clerk/clerk-js@5/dist/clerk.browser.js"
+></script>
+<script>
+// AUTH IS ADDITIVE, and the guards below are the whole point of it. The register
+// is a public document that must render when Clerk is blocked, offline, slow or
+// broken. Nothing here runs before the data, nothing here can throw into the
+// page, and a failed load leaves the header with no control at all — which is
+// honest — rather than a Sign in that cannot sign anybody in.
+//
+// The seam reads `clerkReady`. Until it is true the ask prints one door, the
+// one that needs no account and no third party, and says plainly why the other
+// is missing. That is the invariant: the ask never becomes a dead end because
+// somebody else's script did not arrive.
+function paintAccount() {
+  const slot = document.getElementById('account');
+  if (!slot || !window.Clerk) return;
+  slot.replaceChildren();
+  if (window.Clerk.user) {
+    const mount = document.createElement('div');
+    slot.append(mount);
+    try { window.Clerk.mountUserButton(mount); } catch {}
+  } else {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.textContent = t('signIn');
+    b.addEventListener('click', () => {
+      gateBump('signin');
+      try { window.Clerk.openSignIn(); } catch {}
+    });
+    slot.append(b);
+  }
+  slot.dataset.ready = '';
+}
+window.__paintAccount = paintAccount;
+
+window.addEventListener('load', async () => {
+  if (!window.Clerk) return;
+  try {
+    // afterSignOutUrl is THIS page. Clerk's default sends the reader to `/`,
+    // which drops the query string — signing out should cost you your name,
+    // not your place in the register.
+    await window.Clerk.load({ afterSignOutUrl: location.href });
+  } catch { return; }
+  clerkReady = true;
+  const settle = () => {
+    const was = signedIn;
+    signedIn = !!window.Clerk.user;
+    // The measurement, and the only one that matters: an ask was shown, and
+    // somebody answered it with an account. Counted once, in this browser.
+    if (signedIn && !was) {
+      const g = gateRead();
+      if (g.shown && !g.signedIn) { g.signedIn = 1; gateWrite(g); }
+    }
+    paintAccount();
+    if (companies.length) render();
+  };
+  settle();
+  window.Clerk.addListener(settle);   // sign-in and sign-out both land here
+});
+</script>
+</body>
+</html>
