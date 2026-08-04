@@ -3129,16 +3129,42 @@ because they were SMALL (0.23MB and 0.71s each, against 0.79MB and 0.83s for the
 boards that already paid), so T8.1's 259-of-422 headline was large in board
 count and small in bytes.
 
-**The cost that is NOT in the nightly, and is not this task's to decide.**
-`data/companies.json` is **3.03MB -> 11.90MB on disk, fetched by every visitor
-on every page load** (`{cache: 'no-cache'}`, and Pages does not compress it any
-harder for us). `data/first-seen.json` is 0.51MB -> 2.11MB the same way. The
-projection said ~13.2MB at 471 bytes a role; the real file is 430 bytes a role,
-because the roles this task added carry no country and often no department.
-That is a product decision about what the page downloads, not a build one —
-HLD-v5's Worker-served corpus is the standing answer and ladder step 4 is where
-it lives. **The rebuilt data files are deliberately NOT committed** while that
-decision is open; the register on the site is still the 371-company v10 one.
+**The cost that is NOT in the nightly, and is not this task's to decide.** This
+paragraph said 3.03MB -> 11.90MB "fetched by every visitor" and that was the
+wrong number for the claim it was making. Those are RAW bytes; **Pages serves
+this asset gzipped**, which the live host states outright:
+
+```
+$ curl -sI -H 'Accept-Encoding: gzip' https://roleatlas.sennamind.com/data/companies.json
+content-encoding: gzip
+content-length: 267864
+```
+
+| | raw | gzip -6 | on the wire |
+|---|---|---|---|
+| `companies.json` v10 | 3.03MB | 0.25MB | 8.2% |
+| `companies.json` v11 | 11.90MB | 0.98MB | 8.2% |
+| `first-seen.json` | 2.11MB | 0.38MB | 18.1% |
+
+So a reader downloads **249KB -> 977KB, x3.93** — not 3MB -> 12MB. Compared at
+the same compression level on both sides, which is the only comparison that
+means anything: the live host's 268KB against a local `gzip -9` would flatter it
+to x3.3. Highly repetitive JSON compresses about as well as text can, and 27,687
+roles sharing a schema is as repetitive as it gets. Render does not move either
+(the register pages at 200 rows, so it is bounded whatever the corpus does);
+transfer is the only axis that changes.
+
+**Still worth the human's answer, and a different question at this size.** ~1MB
+on every page load with `{cache: 'no-cache'}` is a real cost on a slow
+connection, and x3.93 is a real regression — but it is a decision about a
+megabyte, not about twelve, and those get different answers. HLD-v5's
+Worker-served corpus is the standing answer and ladder step 4 is where it lives.
+**The rebuilt data files are deliberately NOT committed** while that decision is
+open; the register on the site is still the 371-company v10 one.
+
+Units, because two agents measured this file and printed different numbers for
+it: 11,901,294 bytes is 11.90MB decimal and 11.35MiB binary. Same file. This
+block is decimal throughout.
 
 **The first-seen boundary, executed for real rather than in a fixture.** The
 build was followed by `python -m src.firstseen`, which is `scripts/nightly.sh`'s
