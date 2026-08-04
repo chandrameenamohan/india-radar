@@ -183,7 +183,7 @@ print(f"{n} of {n} roles" if n else
 # And the same tally under the other register, on the same real data: the switch
 # has to change the UNIT, not just the rows. A view that reported roles under
 # both labels would pass every row check above and still be lying here.
-$B select '#view' 'companies' >/dev/null 2>&1
+$B click '#vcompanies' >/dev/null 2>&1
 check "switching the register switches the unit the tally counts" \
   "$($PY -c '
 import json
@@ -191,7 +191,7 @@ n = len(json.load(open("data/companies.json"))["companies"])
 print(f"{n} of {n} companies" if n else
       "This snapshot listed no companies. The build report says why for each one.")')" \
   "$(tally)"
-$B select '#view' 'roles' >/dev/null 2>&1
+$B click '#vroles' >/dev/null 2>&1
 
 # The roles register PAGES: 6,422 lines is a download, not a page. Checked here
 # against the real corpus rather than on the fixture, because the fixture holds
@@ -1110,7 +1110,7 @@ print('|'.join(r['title'] for c in cs for r in c['roles'] if $1))"; }
 # the page a stranger lands on lists jobs.
 open_page "$DEFAULT"
 check "the page opens on the roles register" "roles" \
-  "$(val 'document.querySelector("#view").value')"
+  "$(val 'document.querySelector("#viewsw").dataset.unit')"
 console_clean "roles register"
 
 open_page "$ROLES"
@@ -1256,7 +1256,7 @@ print("|".join(r["title"] for r in flat))')" \
 # an India-less plate. It clears itself on the way out for the same reason they
 # do: a sort holding a value while invisible orders the register by something
 # nobody can see or change.
-$B select '#view' 'companies' >/dev/null 2>&1
+$B click '#vcompanies' >/dev/null 2>&1
 check "Newest leaves the row where the register counts companies" "true" \
   "$(val 'String(document.querySelector("#sort option[value=newest]").hidden)')"
 check "and clears itself rather than ordering by an invisible control" "reqs" \
@@ -1294,7 +1294,42 @@ check "a company name returns that company's roles" \
 $B fill '#q' 'no-such-role' >/dev/null 2>&1
 check "a roles filter that matches nothing says so" "No role matches these filters." \
   "$(val 'document.querySelector("#status > span").textContent')"
+
+# THE TRAP CHECK, and the reason the switch is built by both of render()'s
+# branches rather than only the one that has rows. A reader whose filters met in
+# an empty corner is the one who most needs the other register; an empty page
+# that also withdrew the way out of it would be a dead end wearing a message.
+# The box still reads 'no-such-role' here -- that is the point.
+check "the unit switch survives a register showing nothing" "true" \
+  "$(val 'String(!!document.querySelector("#status #vcompanies"))')"
+$B click '#vcompanies' >/dev/null 2>&1
+check "and it still works from there" "companies" \
+  "$(val 'document.querySelector("#viewsw").dataset.unit')"
+# The same dead search under the other unit: the reader escaped the empty roles
+# register into an empty company one, which is honest, and can still get back.
+check "the way back is offered too" "true" \
+  "$(val 'String(!!document.querySelector("#status #vroles"))')"
+$B click '#vroles' >/dev/null 2>&1
+check "the register returns to roles" "roles" \
+  "$(val 'document.querySelector("#viewsw").dataset.unit')"
 console_clean "roles register after interaction"
+
+# The switch is navigation, not a filter, and it says so to a screen reader: the
+# open unit is pressed and is not a control, because pressing the register you
+# are already reading announces a state change that did not happen.
+open_page "$ROLES"
+check "the open unit is marked pressed" "true|false" \
+  "$(val '[...document.querySelectorAll("#viewsw button")]
+       .map((b) => b.getAttribute("aria-pressed")).join("|")')"
+check "the switch names itself for a screen reader" "Register unit" \
+  "$(val 'document.querySelector("#viewsw").getAttribute("aria-label")')"
+# It lives on the status line and NOT in the filter bank -- a control that
+# changes what a line IS among nine that change which lines show is how the
+# first version shipped, and a reader asked for a view the page already had.
+check "the unit switch is not in the filter bank" "true" \
+  "$(val 'String(!document.querySelector("#controls #viewsw, #controls #view"))')"
+check "the fold's tally does not count it as a filter" "" \
+  "$(val 'document.querySelector("#fcount").textContent')"
 
 # 4c visual regression is NOT here. It needs baseline screenshots a human
 # approves once (VERIFICATION.md 4c), and an agent approving its own baselines

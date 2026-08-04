@@ -2853,6 +2853,27 @@ Out of scope:
 > renamed `.jrow`. Deleting the role-level workplace cut turns the remote check
 > red with Gamma Health's four on-site roles riding in on its one remote job.
 
+>
+> **Amended 2026-08-04, after a reader asked for a view the page already had.**
+> The unit switch shipped as control #2 of 10 in the filter bank, where it read as
+> a filter. It is not one: every control in that bank changes which lines show,
+> and this one changes what a line IS. It moved to the status line — the line that
+> already announces what the register is showing — as a pair of struck words, the
+> open one in red over its own rule. It is built by BOTH of render()'s branches,
+> because a reader whose filters met in an empty corner is the one who most needs
+> the other register, and an empty page that withdrew the way out would be a dead
+> end wearing a message.
+>
+> **The move uncovered a real bug that predated it.** `change` fires when a text
+> input BLURS, whatever its value, so every click away from the search box
+> re-rendered the whole register. Harmless until a control lived inside something
+> `render()` rebuilds: pressing the switch blurred the box, the blur re-rendered,
+> `replaceChildren` detached and reinserted the button BETWEEN mousedown and
+> mouseup, and the browser cancelled the click. Instrumented: **mousedown 1,
+> mouseup 1, click 0**, three runs out of three — the reader's first press did
+> nothing. `reask()` now compares the control values and returns on a blur that
+> changed none of them. Deleting that guard turns the check red.
+
 ```
 Acceptance (observable):
   The page opens on the roles register with no parameter and no click.

@@ -397,6 +397,28 @@
   #status .pib:focus-visible { outline: 2px solid var(--red); outline-offset: 3px; }
   #status .pib .pchev { color: var(--ink-3); font-size: 9px; }
   #status .pib:hover .pchev { color: var(--red); }
+  /* The register's UNIT, and it lives here rather than in the filter bank
+     because it is not a filter: every control down there changes which lines
+     show, and this one changes what a line IS. Shipped once among nine filters
+     and a reader asked for a view the page already had, which is the whole
+     argument for moving it. It sets as a pair of struck words on the line that
+     already announces what the register is showing — the open one in red over
+     its own rule, the way the plate stamp marks the open sheet. */
+  #status .vsw { display: inline-flex; gap: 0 .5rem; white-space: nowrap; }
+  #status .vsw button { appearance: none; background: none; border: 0;
+                        border-radius: 0; margin: 0; padding: 0 0 .1rem;
+                        font: inherit; letter-spacing: inherit; cursor: pointer;
+                        color: var(--ink-3);
+                        border-bottom: 1px solid transparent; }
+  #status .vsw button:hover { color: var(--red); }
+  #status .vsw button:focus-visible { outline: 2px solid var(--red);
+                                      outline-offset: 3px; }
+  /* aria-pressed is the state, and the paint reads off it rather than off a
+     second class — one source of truth, so the control cannot look open while
+     announcing itself shut. */
+  #status .vsw button[aria-pressed="true"] { color: var(--red); font-weight: 800;
+                                             border-bottom-color: var(--red);
+                                             cursor: default; }
   /* The status line's separators: real characters, not flex gap alone, so
      the line's TEXT carries its own punctuation — "Plate 01 · Plates 02–16"
      is what a screen reader hears, never one concatenated word. */
@@ -1034,15 +1056,6 @@
        roles. So the placeholder states both, because a search box that silently
        widened would just look like it had started returning strangers. -->
   <label class="q-always"><span class="lbl">Search</span><input id="q" type="search" placeholder="company or role title" autocomplete="off"></label>
-  <!-- The register's UNIT. A reader is looking for a job, so the page opens on
-       roles; the company register the atlas was built as is one switch away and
-       unchanged. This is not a filter — it changes what a LINE IS, not which
-       lines show — so it never reddens and never counts toward the fold's
-       tally, the same exemption the sort control has. -->
-  <label class="q-always"><span class="lbl">Register</span><select id="view">
-    <option value="roles">Roles</option>
-    <option value="companies">Companies</option>
-  </select></label>
   <!-- T5.4: the city filter is every plate's now. India's cities ship with the
        build (src/india.py canonicalises the spellings); for the other fourteen
        countries no such field exists, so the list is read off the plate's own
@@ -1735,13 +1748,63 @@ let spreadOpen = false;
 // states the true total.
 const ROLE_PAGE = 200;
 let roleCap = ROLE_PAGE;
-// The open register is deep-linkable, like the dataset seam above it: a reader
-// who found the company index useful can send someone the company index. Roles
-// is the default because a reader arrives looking for a job — and an unknown
-// value is ignored rather than honoured, so a typo opens the page, not a blank.
+// The register's unit. Held in a variable rather than read off a control,
+// because the control is rebuilt into the status line on every render and state
+// that lives inside something we replaceChildren() is state we throw away.
+//
+// Deep-linkable, like the dataset seam above it: a reader who found the company
+// index useful can send someone the company index. Roles is the default because
+// a reader arrives looking for a job — and an unknown value is ignored rather
+// than honoured, so a typo opens the page rather than a blank.
+let view = 'roles';
 {
   const want = new URLSearchParams(location.search).get('view');
-  if (want === 'companies' || want === 'roles') $('#view').value = want;
+  if (want === 'companies' || want === 'roles') view = want;
+}
+
+// The unit switch. HELD AS A NODE, not rebuilt, for the same reason SHEET is —
+// and this one is a measured bug rather than a tidiness preference.
+//
+// render() rebuilds the status line with replaceChildren, so a control
+// constructed there is a DIFFERENT element every render. Blurring the search box
+// fires `change`, and `change` re-renders: a reader who typed a search and then
+// clicked this switch had their mousedown target detached before the mouseup
+// arrived, so no click event ever fired and the FIRST PRESS DID NOTHING.
+// Reproduced three times out of three. replaceChildren MOVES a node it already
+// holds, so one persistent element sidesteps the whole race.
+const VIEWSW = (() => {
+  const group = el('span', 'vsw');
+  group.id = 'viewsw';
+  group.setAttribute('role', 'group');
+  group.setAttribute('aria-label', 'Register unit');
+  for (const [unit, label] of [['roles', 'Roles'], ['companies', 'Companies']]) {
+    const b = el('button', null, label);
+    b.type = 'button';
+    b.id = unit === 'roles' ? 'vroles' : 'vcompanies';
+    b.dataset.unit = unit;
+    b.addEventListener('click', () => {
+      // The open register is not a destination. Re-rendering what the reader is
+      // already reading would announce a state change that did not happen.
+      if (view === unit) return;
+      view = unit;
+      roleCap = ROLE_PAGE;        // a new unit is a new question, not a scroll
+      render();
+    });
+    group.append(b);
+  }
+  return group;
+})();
+
+// Repainted from `view`; the node itself never changes. Placed into the status
+// line by BOTH of render()'s branches, deliberately: filters that meet in an
+// empty corner still leave a reader in a register, and the one place a reader
+// most needs the other view is the one showing nothing.
+function viewSwitch() {
+  VIEWSW.dataset.unit = view;                      // what the register is, for tests and CSS
+  for (const b of VIEWSW.children) {
+    b.setAttribute('aria-pressed', String(b.dataset.unit === view));
+  }
+  return VIEWSW;
 }
 // The last plate rendered, for the page-turn sweep: the sweep runs only when
 // this changes, so filters and sorts never fire it. '01' is the load state.
@@ -2606,7 +2669,7 @@ function render() {
   // A departed filter shows its state on the control itself: red until
   // cleared. Sort always has a value and never reddens.
   for (const n of document.querySelectorAll('#controls select')) {
-    n.classList.toggle('set', n.id !== 'sort' && n.id !== 'view' && n.value !== 'any');
+    n.classList.toggle('set', n.id !== 'sort' && n.value !== 'any');
   }
   $('#q').classList.toggle('set', !!$('#q').value.trim());
   // T15.2 — the Newest sort withdraws, on the openness control's rule (round 5)
@@ -2620,7 +2683,7 @@ function render() {
   // optional, and a build predating the backfill has none) there is no date to
   // read. Read here rather than at the sort itself, which is thirty lines below
   // and would then be ordering by a control it had just hidden.
-  const roleView = $('#view').value === 'roles';
+  const roleView = view === 'roles';
   const sortable = roleView && FIRSTSEEN.size > 0;
   const sortSel = $('#sort');
   sortSel.querySelector('option[value="newest"]').hidden = !sortable;
@@ -2930,6 +2993,8 @@ function render() {
       el('span', 'psep', '·'),
       sheetEl,
       el('span', 'psep', '·'),
+      viewSwitch(),
+      el('span', 'psep', '·'),
       tally,
       folioMark());
   } else {
@@ -2958,6 +3023,11 @@ function render() {
             + `at all, and a posting that says nothing is not a no — note 03.`
           : roleView ? 'No role matches these filters.'
                      : 'No company matches these filters.'),
+      // The switch rides the empty states too. A reader whose filters met in an
+      // empty corner is the one who most needs the other register, and an empty
+      // page that also withdrew the way out of it would be a dead end.
+      el('span', 'psep', '·'),
+      viewSwitch(),
       folioMark());
   }
   seps();
@@ -2979,7 +3049,7 @@ function tierRules() {
   for (const t of document.querySelectorAll('#spreadrows .trule')) t.remove();
   // The bands are a company fact — 10+ / 2–9 / 1 OPEN ROLES — so under the roles
   // register they would print a rule between two jobs at the same company.
-  if ($('#view').value === 'roles') return;
+  if (view === 'roles') return;
   if ($('#sort').value !== 'reqs' || $('#spread').hidden) return;
   const tier = (n) => (n >= 10 ? '10+' : n >= 2 ? '2–9' : '1');
   const last = [...document.querySelectorAll('#index .irow')].pop();
@@ -3144,7 +3214,25 @@ function load(data) {
 
 // Any control change re-asks the question, so the roles register starts again
 // at its first page: a reader who just filtered is not scrolling the old answer.
-const reask = () => { roleCap = ROLE_PAGE; render(); };
+//
+// GUARDED ON THE VALUES, and that is a bug fix rather than an optimisation.
+// `change` fires when a text input BLURS, whatever its value, so every click
+// away from the search box re-rendered the entire register. Harmless-looking
+// until a control lives in something render() rebuilds: pressing the unit switch
+// blurred the box, the blur re-rendered, replaceChildren detached and reinserted
+// the button BETWEEN mousedown and mouseup, and the browser cancelled the click.
+// Measured — mousedown 1, mouseup 1, click 0, three runs out of three, and the
+// reader's first press did nothing. A blur that changed no value is not a
+// question, so it no longer answers one.
+let lastAsk = null;
+const reask = () => {
+  const sig = [...document.querySelectorAll('#controls input, #controls select')]
+    .map((n) => n.value).join(' ');
+  if (sig === lastAsk) return;
+  lastAsk = sig;
+  roleCap = ROLE_PAGE;
+  render();
+};
 $('#controls').addEventListener('input', reask);
 $('#controls').addEventListener('change', reask);   // some agents/browsers fire only this
 
