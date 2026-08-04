@@ -3023,3 +3023,86 @@ Out of scope:
   - Re-confirming the backfill's 1,728. It would mean a table of which builds
     changed the definition, hand-maintained, to badge roles a week old.
 ```
+
+---
+
+### T16.1 — The product's own name `blocked` · *Phase 11* · blocked on: the human's go-ahead
+> **ROLE·ATLAS is a description, not a name.** It says what the thing is —
+> a map of roles — which is exactly what a placeholder does, and exactly why it
+> cannot carry a brand. The repo already knows: the README's own note says the
+> site shipped as INDIA·RADAR and the rename to ROLE·ATLAS is still a human
+> action, pending. That is twice now the name has been the last thing decided
+> and the first thing outgrown. The domain, the CNAME, the GitHub repo and every
+> screenshot follow whatever wins here, so it is worth doing once, properly.
+>
+> **The method is Lexicon Branding's, read first rather than paraphrased.**
+> https://www.lexiconbranding.com/service/strategic-brand-name-development/ —
+> the firm that produced Pentium, PowerBook, Swiffer and BlackBerry. Their
+> Predict™ layer scores a candidate on four axes, and those four are the grading
+> rubric this task adopts rather than inventing one: **structural architecture**
+> (how the name is built), **phonetic signaling** (what it sounds like before it
+> is understood), **cognitive processing** (how cheaply it is read, said, spelled
+> and recalled), **competitive proximity** (where it sits against the names
+> already in the market). They are explicit that the analytics narrow the field
+> and the leap stays human — so this task ends in a recommendation with evidence,
+> never in an automated winner.
+>
+> **The harness is Anthropic's, and it is what stops this producing 400 words of
+> confident slop.** https://www.anthropic.com/engineering/harness-design-long-running-apps
+> Four of its practices are load-bearing here and each is a check below:
+> *separate the generator from the evaluator*, because an agent praises its own
+> names; *operationalise the subjective criteria*, because "is this a good name?"
+> is ungradable until the four axes have written definitions and calibration
+> examples; *decompose into chunks with a contract for done*, because generation,
+> screening and recommendation are three jobs and one prompt does all three
+> badly; *structured artifact handoff*, because the candidate list must survive
+> a context reset as a file, not as conversation.
+>
+> **The screens are the cheap half and they run before any judgment.** A name
+> that cannot be registered is not a candidate, however beautiful, and finding
+> that out last is how naming exercises waste a week.
+Acceptance:
+  A written naming brief exists first: what the product IS (a register of funded
+    software companies proven to be hiring in fifteen countries, by their own
+    job board), who reads it, what it must never be mistaken for, and the three
+    or four adjectives the name must earn. Nothing is generated before this.
+  The four Lexicon axes are written down as GRADABLE definitions with at least
+    two calibration examples each — one name that scores well on that axis and
+    one that fails it — before a single candidate is scored.
+  At least 100 candidates, generated across deliberately different naming
+    territories (coined/neologism, real-word, compound, metaphor, classical
+    root), not 100 variations of one idea.
+  Every candidate passes the mechanical screens before scoring: .com or a
+    credible TLD available, no live USPTO/EUIPO mark in the relevant classes,
+    no collision with an existing HR-tech or jobs product, and a linguistic
+    check for an unfortunate meaning in the fifteen target countries' languages.
+  Scoring is done by an evaluator that did not generate the candidates, against
+    the written rubric, and its output cites the axis and the reason per score.
+  A shortlist of 5-8 survives, each with: the evidence for its scores, the
+    screen results, and the case against it stated as plainly as the case for.
+  One recommendation, with the runner-up and why it lost. The choice is the
+    human's; this task hands over a decision, not a decree.
+  The shortlist and the rubric land as files in the repo, not as a chat log —
+    a later session must be able to pick this up cold.
+Checks:
+  Generator and evaluator are separate agents with separate prompts. A single
+    agent doing both is the failure this task is shaped to prevent.
+  The rubric is written and committed BEFORE the candidates. Check the file
+    order in git history; a rubric authored after the names it grades is a
+    rubric fitted to a favourite.
+  Every shortlisted name has its domain and trademark check RECORDED with the
+    date and the source consulted, not asserted.
+  Spot-check the evaluator: feed it three names known to be weak for this
+    product and confirm it says so. An evaluator that likes everything is
+    measuring nothing.
+  Read both reference URLs during the task. Do not work from this summary.
+Out of scope:
+  - Executing the rename. The repo rename, CNAME, DNS and the GitHub Pages
+    domain are one deliberate human action after the name is chosen, and
+    bundling them here would mean choosing under deployment pressure.
+  - Logo, wordmark, colour, type. A name is not an identity, and a name chosen
+    to suit a logo that does not exist yet is chosen for the wrong reason.
+  - Full legal clearance. The screens above catch the obvious kills; a
+    registrable mark is a lawyer's opinion, and this task produces the shortlist
+    that makes paying for one worthwhile.
+  - Renaming anything in the codebase. Nothing in src/ carries the brand.
