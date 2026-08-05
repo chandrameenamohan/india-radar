@@ -2224,7 +2224,7 @@
  "Bitstack": {
   "what": "A bitcoin savings app with automatic purchase round-ups",
   "for_whom": "Everyday savers across twenty European countries",
-  "why_them": "over 350,000 users and €350 million invested in bitcoin",
+  "why_them": "over 350,000 users and \u20ac350 million invested in bitcoin",
   "ai": true
  },
  "Cambly": {
@@ -2337,7 +2337,7 @@
  },
  "Lendable": {
   "what": "Online personal loans with rates quoted before applying",
-  "for_whom": "UK consumers borrowing between £1,000 and £25,000",
+  "for_whom": "UK consumers borrowing between \u00a31,000 and \u00a325,000",
   "why_them": "Site claims a new customer approved every 30 seconds",
   "ai": true
  },
@@ -2488,7 +2488,7 @@
  "Zilch": {
   "what": "A credit card with pay-now or instalment repayment options",
   "for_whom": "UK shoppers aged 18 and over",
-  "why_them": "States over 6 million customers, credit £50–£4,500",
+  "why_them": "States over 6 million customers, credit \u00a350\u2013\u00a34,500",
   "ai": true
  },
  "Blitzy": {
@@ -2532,5 +2532,65 @@
   "why_them": "Covers hundreds of teams across 47 markets and all 20 Premier League clubs",
   "ai": true,
   "source": "board"
+ },
+ "Blue Energy": {
+  "what": "Factory-prefabricated modular nuclear power plants",
+  "for_whom": "Energy developers and data center operators",
+  "why_them": "Claims 3-year build time versus 10-15 years traditional",
+  "ai": true
+ },
+ "Bolna": {
+  "what": "Voice AI agents for calls in Indian languages",
+  "for_whom": "Indian businesses needing automated voice calling at scale",
+  "why_them": "Claims 1000+ companies and 10+ vernacular Indian languages supported",
+  "ai": true
+ },
+ "Focused Energy": {
+  "what": "Direct-drive laser fusion power plant technology",
+  "for_whom": "Future grid-scale clean energy generation",
+  "why_them": "Founded by scientists behind NIF fusion ignition achievement",
+  "ai": true
+ },
+ "Granola": {
+  "what": "An AI notepad that writes meeting notes automatically",
+  "for_whom": "Professionals in sales, product, and business roles",
+  "why_them": "Used by teams at Figma, Intercom, Brex, and Ramp",
+  "ai": true
+ },
+ "HaloBraid": {
+  "what": "A braid-assist device that halves hair braiding time",
+  "for_whom": "Hair stylists, braiders, and salon owners",
+  "why_them": "600+ prototypes developed, reduces 6-hour appointments to 3 hours",
+  "ai": true
+ },
+ "Mirelo": {
+  "what": "AI-generated sound effects and music synced to video",
+  "for_whom": "Video creators and editors using professional editing software",
+  "why_them": "Plugins for Premiere Pro, DaVinci Resolve, and Roblox Studio",
+  "ai": true
+ },
+ "Passionfroot": {
+  "what": "AI-powered platform for managing creator marketing campaigns",
+  "for_whom": "B2B marketing and growth teams running influencer campaigns",
+  "why_them": "Named customers include Figma, HubSpot, Replit, and ElevenLabs",
+  "ai": true
+ },
+ "Peec AI": {
+  "what": "Analytics platform tracking brand visibility in AI search engines",
+  "for_whom": "Marketing teams and agencies optimizing AI search presence",
+  "why_them": "Trusted by 3000+ brands and agencies per their site",
+  "ai": true
+ },
+ "Tem": {
+  "what": "AI-powered energy procurement platform for business electricity buying",
+  "for_whom": "Businesses managing electricity across multiple sites",
+  "why_them": "Claims up to 30% cost savings, manages 6,000+ sites",
+  "ai": true
+ },
+ "Vest": {
+  "what": "Structured investment strategies with contractual downside protection",
+  "for_whom": "Investors seeking equity exposure with loss protection",
+  "why_them": "Offers buffer strategies with defined layers of loss protection",
+  "ai": true
  }
 }
