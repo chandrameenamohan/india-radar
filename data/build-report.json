@@ -3,8 +3,8 @@
   "checked": 860,
   "unchecked": 2166,
   "counts": {
-    "listed": 380,
-    "no-target-roles": 480,
+    "listed": 381,
+    "no-target-roles": 479,
     "slug-unresolved": 2148,
     "probe-failed": 0,
     "empty-board-unverified": 5,
@@ -40,12 +40,12 @@
     "Arcadia",
     "Arketa",
     "Armada",
-    "Artisan",
     "Ashby",
     "Aspora",
     "Assembled",
     "AssemblyAI",
     "Astronomer",
+    "AtoB",
     "Attentive",
     "Attotude",
     "Aviatrix",
@@ -75,6 +75,7 @@
     "Cato Networks",
     "Celonis",
     "Chainguard",
+    "Cinder",
     "CircleCI",
     "Clear Street",
     "ClickHouse",
@@ -205,7 +206,6 @@
     "Lightdash",
     "Lighthouse",
     "Lightning AI",
-    "Lightricks",
     "Linear",
     "Lio",
     "Liquid AI",
@@ -257,6 +257,7 @@
     "Onebrief",
     "OpenAI",
     "OpenWeb",
+    "Orca Security",
     "Overview",
     "Oyster",
     "PPRO",
@@ -583,7 +584,7 @@
     "Arthena": "slug-unresolved",
     "Articulate": "slug-unresolved",
     "Artie": "no-target-roles",
-    "Artisan": "listed",
+    "Artisan": "no-target-roles",
     "Arvist": "slug-unresolved",
     "Ascen": "slug-unresolved",
     "Ascend Money": "slug-unresolved",
@@ -614,7 +615,7 @@
     "Atlas": "slug-unresolved",
     "Atmo": "slug-unresolved",
     "Atmosphere": "slug-unresolved",
-    "AtoB": "no-target-roles",
+    "AtoB": "listed",
     "Atolio": "no-target-roles",
     "Atrium": "slug-unresolved",
     "Atropos Group": "no-target-roles",
@@ -917,7 +918,7 @@
     "Chowbus": "no-target-roles",
     "Chowdeck": "slug-unresolved",
     "Chute": "slug-unresolved",
-    "Cinder": "no-target-roles",
+    "Cinder": "listed",
     "Circadian Risk": "slug-unresolved",
     "Circle": "slug-unresolved",
     "Circle Medical": "slug-unresolved",
@@ -1888,7 +1889,7 @@
     "Lighthouse": "listed",
     "Lightmatter": "no-target-roles",
     "Lightning AI": "listed",
-    "Lightricks": "listed",
+    "Lightricks": "no-target-roles",
     "Lightship Energy": "slug-unresolved",
     "Lightyear AI": "slug-unresolved",
     "Lilt": "slug-unresolved",
@@ -2307,7 +2308,7 @@
     "Optiversal": "slug-unresolved",
     "Oratomic": "no-target-roles",
     "Orbillion Bio": "slug-unresolved",
-    "Orca Security": "no-target-roles",
+    "Orca Security": "listed",
     "Orchard": "no-target-roles",
     "Origin Quantum": "slug-unresolved",
     "Ossium Health": "no-target-roles",
@@ -3422,10 +3423,8 @@
     "zeroheight": "slug-unresolved"
   },
   "departed": {
-    "AtoB": "no-target-roles",
-    "FullStory": "no-target-roles",
-    "Oklo": "no-target-roles",
-    "Sendbird": "no-target-roles"
+    "Artisan": "no-target-roles",
+    "Lightricks": "no-target-roles"
   },
   "websites": {
     "with_website": 1928,
@@ -3448,11 +3447,11 @@
     "Insider": "Business Insider"
   },
   "countries": {
-    "India": 130,
-    "United Kingdom": 265,
-    "Ireland": 55,
+    "India": 132,
+    "United Kingdom": 264,
+    "Ireland": 53,
     "Germany": 112,
-    "Netherlands": 49,
+    "Netherlands": 50,
     "France": 60,
     "Spain": 66,
     "Sweden": 32,
@@ -3758,6 +3757,19 @@
             "name": "OLERIA CORPORATION INDIA PRIVATE LIMITED",
             "incorporated": "2024-03-13",
             "address": "No.01-121 & 04-120, WeWork Vaishnavi Signature East Ground Floor,,78/9, Outer Ring Road, Hobli, Varthur,Bangalore South,Bangalore,Karnataka,560103-India",
+            "status": "Active"
+          }
+        ]
+      },
+      {
+        "name": "Orca Security",
+        "confidence": "prefix",
+        "candidates": [
+          {
+            "cin": "U62099KA2025FTC201999",
+            "name": "ORCA SECURITY GLOBAL PRIVATE LIMITED",
+            "incorporated": "2025-04-25",
+            "address": "Clayworks South End, 1st Floor,,No. 38/C/23, Basavanagudi,Bangalore South,Bangalore,Karnataka,560004-India",
             "status": "Active"
           }
         ]
@@ -6166,23 +6178,6 @@
         ]
       },
       {
-        "name": "Lightricks",
-        "confidence": "exact",
-        "why": "silent; one exact-tier name match",
-        "candidates": [
-          {
-            "number": "11444887",
-            "name": "LIGHTRICKS UK LTD",
-            "status": "active",
-            "incorporated": "2018-07-03",
-            "locality": "",
-            "postcode": "",
-            "sic": [],
-            "kind": ""
-          }
-        ]
-      },
-      {
         "name": "Linear",
         "confidence": "exact",
         "why": "silent; 3 companies reach the exact tier",
@@ -6804,43 +6799,6 @@
             "name": "ONE TRUST",
             "status": "active",
             "incorporated": "2015-03-19",
-            "locality": "",
-            "postcode": "",
-            "sic": [],
-            "kind": ""
-          }
-        ]
-      },
-      {
-        "name": "OpenWeb",
-        "confidence": "exact",
-        "why": "silent; 3 companies reach the exact tier",
-        "candidates": [
-          {
-            "number": "13463889",
-            "name": "OPENWEB LTD",
-            "status": "dissolved",
-            "incorporated": "2021-06-18",
-            "locality": "",
-            "postcode": "",
-            "sic": [],
-            "kind": ""
-          },
-          {
-            "number": "12362496",
-            "name": "OPENWEB LIMITED",
-            "status": "dissolved",
-            "incorporated": "2019-12-13",
-            "locality": "",
-            "postcode": "",
-            "sic": [],
-            "kind": ""
-          },
-          {
-            "number": "05615644",
-            "name": "OPENWEB LTD",
-            "status": "dissolved",
-            "incorporated": "2005-11-08",
             "locality": "",
             "postcode": "",
             "sic": [],
