@@ -190,29 +190,42 @@ lacks a flow, record "absent", not a time.
 - An idle notification is not a report — brief every agent to SEND its final
   report, and prod it if it goes idle silent.
 
-## NEXT, in order
+## NEXT, in order — items 1–6 DONE 2026-08-05 (session after this file was written)
 
-1. Confirm the push rule exists (try a trivial push to next-fastest-car; if
-   blocked, ask the founder — options above).
-2. Clone `sennamind/next-fastest-car` to `/Users/ralph/sennamind/next-fastest-car`.
-3. Scaffold: TypeScript + Vite, zero framework; port r05-a (build → static
-   HTML + vanilla TS, per-company shards) and apply the graft list; vendor
-   fixture-v2 + its regeneration recipe; own lint/test gate; `qa/` harness
-   with M1–M6.
-4. CI: run the measures on every push; claude-code-action once the secret
-   lands; wrangler preview deploy per version once that secret lands.
-5. Deploy to workers.dev preview (`npx wrangler deploy` may prompt once);
-   custom domain (suggest `next.sennamind.com`, two-level = Universal SSL
-   covers it) only on the founder's word. **roleatlas.sennamind.com stays
-   untouched.**
-6. Write `FLOWS.md` (old vs new, timed). Judge the result against 68–69 with a
-   fresh judge agent if useful — same rubric, same anchors.
+1. ~~Push rule~~ — CONFIRMED working (`git -C /Users/ralph/sennamind/next-fastest-car push`).
+2. ~~Clone~~ — exists at `/Users/ralph/sennamind/next-fastest-car`, on `main`.
+3. ~~Scaffold~~ — DONE, commit `6f91e58`: TS + Vite, zero framework (deps:
+   typescript/vite/tsx only). ONE renderer (`src/render.ts` shared by the
+   build-time fold inliner and the browser — the Python/JS drift class is
+   dead). `src/fold.ts` verified **byte-identical** to r05-a's committed
+   data/index.json (meta + all 789 records) except the judge's requested CB
+   caption variation (89 cards, cbi & <20 roles). Whole graft list applied
+   and measured green: plate at 2+ keeps, link-arrival (storage EMPTY after
+   opening a 3-keep link), copy-preview, RATE row, per-cut provenance, sticky
+   controls, paint-safe `__firstCardPainted` (harness reads 647ms now), no
+   per-card backfill stamp. M1 649ms median local / 1,406ms on live
+   workers.dev (Fast 3G); M3 4.2s/5 clicks; M4–M6 PASS (`qa/measures.mjs`).
+4. ~~CI~~ — DONE, green on first run: build + tsc + node:test gate + measures
+   + perf on ubuntu Chrome. Deploy job guarded on `CLOUDFLARE_API_TOKEN`
+   secret (not yet set — founder's call, along with
+   `CLAUDE_CODE_OAUTH_TOKEN` for claude-code-action; neither is added yet).
+5. ~~Deploy~~ — LIVE: **https://next-fastest-car.sennamind.workers.dev**
+   (assets-only Worker). Had to register the account's workers.dev subdomain
+   (`sennamind`) via API — none existed. roleatlas.sennamind.com untouched.
+   Custom domain still awaits the founder's word.
+6. ~~FLOWS.md~~ — DONE, in the new repo (`qa/flows.mjs` reproduces it): first
+   actionable thing 5,699ms (old) vs 1,406ms (new) on Fast 3G; keep/share/
+   return-visit are sign-in-gated or absent on old, 295ms / URL-carried /
+   139ms on new. No fresh judge round run — the verdict already said 66→68 is
+   backfill + grafts, not another generation round; the grafts now ship.
 7. Descriptions backfill (418 companies) via `scripts/describe.py` — needs the
    founder's OK to spend subscription usage.
 8. Put it in front of the founder for the **ten-application weekend** — their
    stall points are the next brief. Decisions still open for them: default
    732 vs 789 · plate-as-head vs expanded strip · Bay Area vs SF proper ·
-   whether the live site's chart band gets a descendant.
+   whether the live site's chart band gets a descendant · whether the new
+   app ever grows the old site's name search (FLOWS.md names the refusal) ·
+   repo secrets (step 4) · custom domain (step 5).
 
 Memory files exist for the sharpest traps (`pages-deploy-is-ungated`,
 `ralph-loop-switches-branches`, `headless-chrome-min-width-500`). The full
