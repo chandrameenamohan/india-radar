@@ -23,15 +23,37 @@ directory name differs from its corpus name silently gets no YC block (measured
 below and printed); promote to slug-matching if the miss list grows.
 """
 import json
+import os
 import pathlib
 import re
+import sys
 import urllib.request
 
 HERE = pathlib.Path(__file__).parent
-CLONE = pathlib.Path(
+
+# The world-build data directory this fixture derives from. The original run
+# read a git clone in a session scratchpad that no longer exists once /tmp
+# clears, which the hosting audit flagged: a hardcoded ephemeral path makes the
+# committed fixture the only surviving artifact. So the source is now an
+# argument. To regenerate from scratch:
+#
+#   git clone -b harness/loving-portal . /tmp/buildclone   # schema-11 build.py
+#   (cd /tmp/buildclone && python3 -m src.build)           # ~15 min, hits boards
+#   python3 design/fixture2.py /tmp/buildclone/data
+#
+# Never point this at the repo's own data/ unless main has the schema-11 build:
+# the fifteen-country pipeline writes 371 companies and the fixture would
+# silently shrink to a third of itself.
+_default = (
     "/private/tmp/claude-505/-Users-ralph-sennamind-next-rocket-ship/"
     "60ce8322-0ae6-42f9-94e7-e4244f7b3e1e/scratchpad/buildclone/data"
 )
+CLONE = pathlib.Path(sys.argv[1] if len(sys.argv) > 1 else os.environ.get("FIXTURE_SRC", _default))
+if not (CLONE / "companies.json").exists():
+    sys.exit(
+        f"fixture source not found: {CLONE}\n"
+        "Pass the data/ dir of a schema-11 world build (see comment above)."
+    )
 OUT = HERE / "fixture-v2"
 YC_API = "https://yc-oss.github.io/api/companies/all.json"
 
