@@ -41,10 +41,8 @@ Target was 68–69; the judge ruled the missing points are not design:
 Read in order: `design/rounds/r05-verdict.md` → `design/iterations/r05-a/`
 (NOTES.md, JUDGE.md, build.py, page.html, qa/) → `design/PRODUCT-1.md` (spec +
 measures M1–M6) → `design/rounds/r05-brief.md` (the founder's four calibration
-signals) → `design/STRATEGY.md`, `design/ROCKETSHIP.md`, `design/FINDINGS.md`.
-`design/PLATFORM.md` may exist (a platform-scout agent was researching agentic
-hosting when the session ended — check; if absent, its brief is reproducible
-from the git log).
+signals) → `design/STRATEGY.md`, `design/ROCKETSHIP.md`, `design/FINDINGS.md`
+→ `design/PLATFORM.md` (committed `2b4399c` — summary below, detail there).
 
 ## The founder's calibration — binds every future round; founder outranks judge
 
@@ -111,6 +109,52 @@ via `/permissions`. **If the rule isn't there yet, ask the founder to add it
 around the block.** Repo secrets (founder's call, not yet set):
 `CLOUDFLARE_API_TOKEN` (CI preview deploys) and `CLAUDE_CODE_OAUTH_TOKEN`
 (claude-code-action reviews every PR = "founder's Claude verifies each stage").
+
+## Platform — decided, with the numbers (full detail: `design/PLATFORM.md`)
+
+**Stay all-in on Cloudflare.** At 10k users the whole Cloudflare footprint is
+~\$2,400/mo against ~\$210,000/mo of Claude tokens — infrastructure is ~1% of
+variable cost, so the host is chosen on what is already built and provisioned
+(Worker, D1, R2, live token, active zone). Everything problems 3–7 need is GA
+after Agents Week 2026 **except the Agents SDK (preview — v1 must not touch
+it)**; Workflows + a plain Durable Object does the same job at GA. Vercel's
+sandbox measured 60% more on the same workload; eve would import Next.js into
+a project that has refused every dependency. Managed Agents is a runtime a
+Worker could call later, not a competing host — and is 403 on this account.
+
+What v1 must not foreclose — **~100 lines, build them into the scaffold**:
+- `llm` module doing plain `fetch` against `/v1/messages`, no vendor SDK;
+- ONE tool-function array that the future MCP server, the Claude `tools`
+  parameter, a Managed Agents custom tool, and the page's own filters all
+  read from;
+- user state keyed on the **company**, not the posting (already doctrine);
+- **meter token spend from the first line of code** — the cost wall is real:
+  "apply to 100 companies" ≈ \$21 of tokens per user per weekend at Sonnet
+  rates vs \$15–30/**month** willingness to pay. Negative gross margin on the
+  flagship feature; the structural answer is charge for the referral.
+
+Roadmap-changing findings:
+- **Problem 3 is two products.** Ashby + Lever (about half the register)
+  publish no application API; Greenhouse's sanctioned submit endpoint uses the
+  **employer's** key. Sanctioned auto-apply therefore runs through registered
+  employer partners — the same shape as referrals — and browser-assist with a
+  human pressing submit covers the rest. "Nothing auto-submitted" is the
+  ToS-safe path, the cheap path, and the brand at once.
+- **MCP inverts the economics.** The corpus as a remote MCP server on a Worker
+  is ~\$0 marginal and the caller's subscription pays for the reasoning — the
+  only roadmap item whose unit economics improve with scale. Build after
+  feature 1 and after the hosting move.
+- **Problem 7's email watching: never full inbox OAuth.** A dedicated `+tag`
+  alias via Cloudflare Email Routing (free, GA) sees replies to our own
+  applications and nothing else — the only version consistent with a schema
+  that has no column for Article 9 data.
+- Unproven and wants a half-day experiment before problem 3 is scheduled:
+  whether Browser Run can drive a Greenhouse form end-to-end past CAPTCHA and
+  file upload. Greenhouse ToS pages 404'd — exposure lives in per-employer
+  career-page terms, not a quotable clause.
+- `api.roleatlas.sennamind.com` TLS still failed 2026-08-05 — HLD-v5's
+  hosting-move finding now has a day of evidence; the new app's two-level
+  domain (e.g. `next.sennamind.com`) is covered by Universal SSL.
 
 ## Verification — how this project knows things
 
