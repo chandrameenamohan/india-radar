@@ -1,11 +1,11 @@
 {
   "corpus_size": 3026,
-  "checked": 860,
-  "unchecked": 2166,
+  "checked": 858,
+  "unchecked": 2168,
   "counts": {
-    "listed": 381,
-    "no-target-roles": 479,
-    "slug-unresolved": 2148,
+    "listed": 384,
+    "no-target-roles": 474,
+    "slug-unresolved": 2150,
     "probe-failed": 0,
     "empty-board-unverified": 5,
     "not-qualified": 0,
@@ -147,6 +147,7 @@
     "GitLab",
     "Glean",
     "GoCardless",
+    "Goodfire",
     "Grafana Labs",
     "Granola",
     "Groww",
@@ -246,6 +247,7 @@
     "Netskope",
     "Nextiva",
     "Niantic Spatial",
+    "Nirvana",
     "Notabene",
     "Notion",
     "Numeral",
@@ -356,6 +358,7 @@
     "Tipalti",
     "Together AI",
     "Torq",
+    "Tractable",
     "Trade Republic",
     "Trigger.dev",
     "Triomics",
@@ -1286,7 +1289,7 @@
     "Eruditus Executive Education": "slug-unresolved",
     "Escape": "listed",
     "Estimote, Inc.": "slug-unresolved",
-    "Esusu": "no-target-roles",
+    "Esusu": "slug-unresolved",
     "Ethos": "no-target-roles",
     "Eve": "no-target-roles",
     "EvenUp": "slug-unresolved",
@@ -1450,7 +1453,7 @@
     "FullStory": "no-target-roles",
     "Function Health": "slug-unresolved",
     "Fundamental": "listed",
-    "Fundamental Research Labs": "no-target-roles",
+    "Fundamental Research Labs": "slug-unresolved",
     "Fundbox": "slug-unresolved",
     "FundersClub": "slug-unresolved",
     "FurtherAI": "listed",
@@ -1518,7 +1521,7 @@
     "GoodGrain": "slug-unresolved",
     "GoodLeap": "no-target-roles",
     "Goodcover": "slug-unresolved",
-    "Goodfire": "no-target-roles",
+    "Goodfire": "listed",
     "Goodfire AI": "slug-unresolved",
     "Gotrade": "slug-unresolved",
     "GovDash": "no-target-roles",
@@ -2186,7 +2189,7 @@
     "NimbleRx": "slug-unresolved",
     "Ninite": "slug-unresolved",
     "NinjaOne": "slug-unresolved",
-    "Nirvana": "no-target-roles",
+    "Nirvana": "listed",
     "Nisos Holdings": "slug-unresolved",
     "Nitricity": "no-target-roles",
     "Niural": "slug-unresolved",
@@ -3077,7 +3080,7 @@
     "Toss": "no-target-roles",
     "Touareg Group Technologies": "slug-unresolved",
     "Tovala": "no-target-roles",
-    "Tractable": "no-target-roles",
+    "Tractable": "listed",
     "Tractian": "slug-unresolved",
     "Trade Republic": "listed",
     "Tradeshift": "slug-unresolved",
@@ -3422,14 +3425,11 @@
     "xLight": "slug-unresolved",
     "zeroheight": "slug-unresolved"
   },
-  "departed": {
-    "Artisan": "no-target-roles",
-    "Lightricks": "no-target-roles"
-  },
+  "departed": {},
   "websites": {
     "with_website": 1928,
-    "slug_unresolved_with_website": 1168,
-    "slug_unresolved_without_website": 980
+    "slug_unresolved_with_website": 1169,
+    "slug_unresolved_without_website": 981
   },
   "shared_boards": {
     "Bright": "BrightAI",
@@ -3447,19 +3447,19 @@
     "Insider": "Business Insider"
   },
   "countries": {
-    "India": 132,
-    "United Kingdom": 264,
-    "Ireland": 53,
+    "India": 133,
+    "United Kingdom": 268,
+    "Ireland": 52,
     "Germany": 112,
-    "Netherlands": 50,
+    "Netherlands": 49,
     "France": 60,
     "Spain": 66,
-    "Sweden": 32,
+    "Sweden": 33,
     "Denmark": 17,
     "Norway": 7,
     "Finland": 7,
     "Japan": 65,
-    "Singapore": 81,
+    "Singapore": 80,
     "Australia": 84,
     "New Zealand": 3
   },
@@ -3744,6 +3744,26 @@
             "name": "NETSKOPE SOFTWARE INDIA PRIVATE LIMITED",
             "incorporated": "2013-03-01",
             "address": "KNOWLEDGE COURT, WING B, 1ST FLR, PLOT NO 9,   SURVEY NO 77, DODDANAKUNDI PHASE 1 INDUS,TRIAL AREA,WHITEFIELD ROAD BANGALORE,Bangalore,Karnataka,560048-India",
+            "status": "Active"
+          }
+        ]
+      },
+      {
+        "name": "Nirvana",
+        "confidence": "prefix",
+        "candidates": [
+          {
+            "cin": "U51100MH2015FTC264733",
+            "name": "NIRVANA DIGITAL STUDIOS PRIVATE LIMITED",
+            "incorporated": "2015-05-21",
+            "address": "B-30,1ST FLOOR, KIRAN VILLA   PEDDER ROAD,MUMBAI,Mumbai City,Maharashtra,400026-India",
+            "status": "Active"
+          },
+          {
+            "cin": "U62090UP2025FTC217785",
+            "name": "NIRVANA LAB INDIA PRIVATE LIMITED",
+            "incorporated": "2025-02-27",
+            "address": "A-05,DLF GARDEN CITY,Mohanlalganj,Lucknow,Uttar Pradesh,226301-India",
             "status": "Active"
           }
         ]
@@ -5618,43 +5638,6 @@
             "name": "GITLAB UK LIMITED",
             "status": "active",
             "incorporated": "2016-08-31",
-            "locality": "",
-            "postcode": "",
-            "sic": [],
-            "kind": ""
-          }
-        ]
-      },
-      {
-        "name": "Glean",
-        "confidence": "exact",
-        "why": "silent; 3 companies reach the exact tier",
-        "candidates": [
-          {
-            "number": "16031793",
-            "name": "GLEAN LIMITED",
-            "status": "active",
-            "incorporated": "2024-10-21",
-            "locality": "",
-            "postcode": "",
-            "sic": [],
-            "kind": ""
-          },
-          {
-            "number": "10425060",
-            "name": "GLEAN LTD.",
-            "status": "dissolved",
-            "incorporated": "2016-10-13",
-            "locality": "",
-            "postcode": "",
-            "sic": [],
-            "kind": ""
-          },
-          {
-            "number": "06528341",
-            "name": "GLEAN LIMITED",
-            "status": "dissolved",
-            "incorporated": "2008-03-10",
             "locality": "",
             "postcode": "",
             "sic": [],
