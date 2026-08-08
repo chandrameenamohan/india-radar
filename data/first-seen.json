@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "snapshot": "2026-08-07",
+  "snapshot": "2026-08-08",
   "note": "first_seen is the snapshot date a role's URL first appeared in a build. A role is confirmed only where its company's board was read on the previous snapshot AND on this one \u2014 both sides genuinely observed. Everything else is unconfirmed: we saw it for the first time, which is not the same as it being new. Only confirmed roles may be called new.",
   "observed": [
     "1Password",
@@ -7758,6 +7758,31 @@
         "https://jobs.ashbyhq.com/nirvana/5c3b382b-e970-4d62-b041-dc0b8086c61c",
         "https://jobs.ashbyhq.com/tractable/50a78b11-98eb-45c0-9ec5-a3dcc6249f08"
       ]
+    },
+    "2026-08-08": {
+      "confirmed": [
+        "https://job-boards.greenhouse.io/chainguard/jobs/4702085006",
+        "https://job-boards.greenhouse.io/distrokid/jobs/4361067009",
+        "https://job-boards.greenhouse.io/gitlab/jobs/8646595002",
+        "https://job-boards.greenhouse.io/lightningai/jobs/7837259003",
+        "https://job-boards.greenhouse.io/lightningai/jobs/7837299003",
+        "https://job-boards.greenhouse.io/lightningai/jobs/7837300003",
+        "https://job-boards.greenhouse.io/project44/jobs/8101750",
+        "https://job-boards.greenhouse.io/project44/jobs/8106113",
+        "https://job-boards.greenhouse.io/project44/jobs/8106395",
+        "https://job-boards.greenhouse.io/project44/jobs/8106407",
+        "https://job-boards.greenhouse.io/vercel/jobs/6134464004",
+        "https://jobs.ashbyhq.com/clickup/ee404def-5b59-4636-948e-ee50b31e8a2b",
+        "https://jobs.ashbyhq.com/exa/f6bd612e-a4ee-4c75-a205-5cd70901661f",
+        "https://jobs.ashbyhq.com/lendable/10178808-a3e2-428c-92b2-88cc001223f2",
+        "https://jobs.ashbyhq.com/lendable/8cbe2dc4-e746-4565-9c4e-2eda086057da",
+        "https://jobs.ashbyhq.com/meticulous/4c48d25d-7f40-4c02-aa32-b0dd8d0b8fa2",
+        "https://n26.com/en-eu/careers/positions/8108866?gh_jid=8108866",
+        "https://stripe.com/jobs/search?gh_jid=8102337",
+        "https://www.harness.io/company/jobs/apply?gh_jid=5062241007&gh_jid=5062241007",
+        "https://www.observe.ai/position?gh_jid=5376142008"
+      ],
+      "unconfirmed": []
     }
   }
 }

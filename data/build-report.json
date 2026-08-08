@@ -1,11 +1,11 @@
 {
   "corpus_size": 3026,
-  "checked": 857,
-  "unchecked": 2169,
+  "checked": 855,
+  "unchecked": 2171,
   "counts": {
     "listed": 385,
-    "no-target-roles": 472,
-    "slug-unresolved": 2151,
+    "no-target-roles": 470,
+    "slug-unresolved": 2153,
     "probe-failed": 0,
     "empty-board-unverified": 5,
     "not-qualified": 0,
@@ -877,7 +877,7 @@
     "Catalyx Space": "slug-unresolved",
     "Catapult Group International": "slug-unresolved",
     "Catch": "no-target-roles",
-    "Catena Clearing": "no-target-roles",
+    "Catena Clearing": "slug-unresolved",
     "Cato Networks": "listed",
     "Caviar": "slug-unresolved",
     "CavilinQ": "slug-unresolved",
@@ -1290,7 +1290,7 @@
     "Eruditus Executive Education": "slug-unresolved",
     "Escape": "listed",
     "Estimote, Inc.": "slug-unresolved",
-    "Esusu": "no-target-roles",
+    "Esusu": "slug-unresolved",
     "Ethos": "no-target-roles",
     "Eve": "no-target-roles",
     "EvenUp": "slug-unresolved",
@@ -3426,13 +3426,11 @@
     "xLight": "slug-unresolved",
     "zeroheight": "slug-unresolved"
   },
-  "departed": {
-    "Zapier": "no-target-roles"
-  },
+  "departed": {},
   "websites": {
     "with_website": 1928,
     "slug_unresolved_with_website": 1171,
-    "slug_unresolved_without_website": 980
+    "slug_unresolved_without_website": 982
   },
   "shared_boards": {
     "Bright": "BrightAI",
