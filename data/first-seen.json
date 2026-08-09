@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "snapshot": "2026-08-08",
+  "snapshot": "2026-08-09",
   "note": "first_seen is the snapshot date a role's URL first appeared in a build. A role is confirmed only where its company's board was read on the previous snapshot AND on this one \u2014 both sides genuinely observed. Everything else is unconfirmed: we saw it for the first time, which is not the same as it being new. Only confirmed roles may be called new.",
   "observed": [
     "1Password",
@@ -7781,6 +7781,19 @@
         "https://stripe.com/jobs/search?gh_jid=8102337",
         "https://www.harness.io/company/jobs/apply?gh_jid=5062241007&gh_jid=5062241007",
         "https://www.observe.ai/position?gh_jid=5376142008"
+      ],
+      "unconfirmed": []
+    },
+    "2026-08-09": {
+      "confirmed": [
+        "https://databricks.com/company/careers/open-positions/job?gh_jid=7619810002",
+        "https://databricks.com/company/careers/open-positions/job?gh_jid=7647369002",
+        "https://databricks.com/company/careers/open-positions/job?gh_jid=8037500002",
+        "https://databricks.com/company/careers/open-positions/job?gh_jid=8210383002",
+        "https://job-boards.greenhouse.io/gitlab/jobs/8687026002",
+        "https://job-boards.greenhouse.io/project44/jobs/8114570",
+        "https://jobs.ashbyhq.com/kraken.com/21b158e1-b96a-4ec9-b597-d7fa9c344267",
+        "https://jobs.ashbyhq.com/thought-machine/050cbb8f-8d28-4ea4-a7c0-e3cdfbf6e9fd"
       ],
       "unconfirmed": []
     }
