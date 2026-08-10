@@ -1,13 +1,13 @@
 {
   "corpus_size": 3026,
-  "checked": 855,
-  "unchecked": 2171,
+  "checked": 852,
+  "unchecked": 2174,
   "counts": {
-    "listed": 385,
-    "no-target-roles": 470,
-    "slug-unresolved": 2153,
+    "listed": 381,
+    "no-target-roles": 471,
+    "slug-unresolved": 2155,
     "probe-failed": 0,
-    "empty-board-unverified": 5,
+    "empty-board-unverified": 6,
     "not-qualified": 0,
     "another-companys-board": 13
   },
@@ -55,7 +55,6 @@
     "Benchling",
     "BetterUp",
     "BitPanda",
-    "Bitmovin",
     "Bitstack",
     "Black Forest Labs",
     "Blee",
@@ -63,7 +62,6 @@
     "Blue Energy",
     "Bolna",
     "Braze",
-    "Bringg",
     "CAIS",
     "Cambly",
     "Cambridge Mobile Telematics",
@@ -200,7 +198,6 @@
     "Lago",
     "Lambda Labs",
     "LangChain",
-    "Lattice",
     "LaunchDarkly",
     "Legora",
     "LemFi",
@@ -255,7 +252,6 @@
     "OKX",
     "Observe.AI",
     "Odyssey",
-    "Oleria",
     "OneTrust",
     "Onebrief",
     "OpenAI",
@@ -719,7 +715,7 @@
     "BitPanda": "listed",
     "BitSight Technologies": "slug-unresolved",
     "Bitmain Technologies": "slug-unresolved",
-    "Bitmovin": "listed",
+    "Bitmovin": "no-target-roles",
     "Bitnami": "slug-unresolved",
     "Bitrise": "slug-unresolved",
     "Bits": "slug-unresolved",
@@ -788,7 +784,7 @@
     "BrightAI": "no-target-roles",
     "Brightwheel": "slug-unresolved",
     "Brij": "slug-unresolved",
-    "Bringg": "listed",
+    "Bringg": "no-target-roles",
     "Brisk": "no-target-roles",
     "Brite": "slug-unresolved",
     "Broccoli AI": "slug-unresolved",
@@ -1851,7 +1847,7 @@
     "LangChain": "listed",
     "Last Energy": "slug-unresolved",
     "Latchel": "slug-unresolved",
-    "Lattice": "listed",
+    "Lattice": "no-target-roles",
     "LaunchDarkly": "listed",
     "LayerZero Labs": "no-target-roles",
     "Le Tote": "slug-unresolved",
@@ -2130,7 +2126,7 @@
     "MyVillage": "slug-unresolved",
     "Mysten Labs": "no-target-roles",
     "Mystery.org": "slug-unresolved",
-    "Mythical Games": "no-target-roles",
+    "Mythical Games": "slug-unresolved",
     "Mythworx": "slug-unresolved",
     "N26": "listed",
     "NALA": "slug-unresolved",
@@ -2260,7 +2256,7 @@
     "Oklo": "no-target-roles",
     "Okteto": "slug-unresolved",
     "Olden Labs": "slug-unresolved",
-    "Oleria": "listed",
+    "Oleria": "empty-board-unverified",
     "Olio Health": "slug-unresolved",
     "Olive": "slug-unresolved",
     "Ollama": "no-target-roles",
@@ -3191,7 +3187,7 @@
     "Vector Defense": "slug-unresolved",
     "Vectra Networks": "listed",
     "Veda Tech Labs": "slug-unresolved",
-    "Vellum": "no-target-roles",
+    "Vellum": "slug-unresolved",
     "Velontra": "slug-unresolved",
     "Vena Medical": "slug-unresolved",
     "Vendease": "slug-unresolved",
@@ -3426,10 +3422,15 @@
     "xLight": "slug-unresolved",
     "zeroheight": "slug-unresolved"
   },
-  "departed": {},
+  "departed": {
+    "Bitmovin": "no-target-roles",
+    "Bringg": "no-target-roles",
+    "Lattice": "no-target-roles",
+    "Oleria": "empty-board-unverified"
+  },
   "websites": {
     "with_website": 1928,
-    "slug_unresolved_with_website": 1171,
+    "slug_unresolved_with_website": 1173,
     "slug_unresolved_without_website": 982
   },
   "shared_boards": {
@@ -3448,21 +3449,21 @@
     "Insider": "Business Insider"
   },
   "countries": {
-    "India": 133,
-    "United Kingdom": 267,
+    "India": 132,
+    "United Kingdom": 266,
     "Ireland": 53,
     "Germany": 110,
-    "Netherlands": 50,
+    "Netherlands": 51,
     "France": 59,
     "Spain": 66,
-    "Sweden": 33,
+    "Sweden": 32,
     "Denmark": 17,
     "Norway": 8,
     "Finland": 7,
     "Japan": 67,
-    "Singapore": 81,
-    "Australia": 84,
-    "New Zealand": 3
+    "Singapore": 80,
+    "Australia": 86,
+    "New Zealand": 4
   },
   "mca": {
     "records": 24102,
@@ -3765,19 +3766,6 @@
             "name": "NIRVANA LAB INDIA PRIVATE LIMITED",
             "incorporated": "2025-02-27",
             "address": "A-05,DLF GARDEN CITY,Mohanlalganj,Lucknow,Uttar Pradesh,226301-India",
-            "status": "Active"
-          }
-        ]
-      },
-      {
-        "name": "Oleria",
-        "confidence": "prefix",
-        "candidates": [
-          {
-            "cin": "U62011KA2024FTC186167",
-            "name": "OLERIA CORPORATION INDIA PRIVATE LIMITED",
-            "incorporated": "2024-03-13",
-            "address": "No.01-121 & 04-120, WeWork Vaishnavi Signature East Ground Floor,,78/9, Outer Ring Road, Hobli, Varthur,Bangalore South,Bangalore,Karnataka,560103-India",
             "status": "Active"
           }
         ]
@@ -4469,23 +4457,6 @@
             "name": "BRAZE LIMITED",
             "status": "active",
             "incorporated": "2015-10-28",
-            "locality": "",
-            "postcode": "",
-            "sic": [],
-            "kind": ""
-          }
-        ]
-      },
-      {
-        "name": "Bringg",
-        "confidence": "exact",
-        "why": "unreachable; one exact-tier name match",
-        "candidates": [
-          {
-            "number": "11563258",
-            "name": "BRINGG UK LIMITED",
-            "status": "active",
-            "incorporated": "2018-09-11",
             "locality": "",
             "postcode": "",
             "sic": [],
@@ -5647,6 +5618,43 @@
         ]
       },
       {
+        "name": "Glean",
+        "confidence": "exact",
+        "why": "silent; 3 companies reach the exact tier",
+        "candidates": [
+          {
+            "number": "16031793",
+            "name": "GLEAN LIMITED",
+            "status": "active",
+            "incorporated": "2024-10-21",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "10425060",
+            "name": "GLEAN LTD.",
+            "status": "dissolved",
+            "incorporated": "2016-10-13",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "06528341",
+            "name": "GLEAN LIMITED",
+            "status": "dissolved",
+            "incorporated": "2008-03-10",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
         "name": "Grafana Labs",
         "confidence": "exact",
         "why": "silent; one exact-tier name match",
@@ -6093,33 +6101,6 @@
             "name": "KPLER LTD",
             "status": "active",
             "incorporated": "2017-11-01",
-            "locality": "",
-            "postcode": "",
-            "sic": [],
-            "kind": ""
-          }
-        ]
-      },
-      {
-        "name": "Lattice",
-        "confidence": "exact",
-        "why": "silent; 2 companies reach the exact tier",
-        "candidates": [
-          {
-            "number": "14004034",
-            "name": "LATTICE LTD",
-            "status": "active",
-            "incorporated": "2022-03-25",
-            "locality": "",
-            "postcode": "",
-            "sic": [],
-            "kind": ""
-          },
-          {
-            "number": "09579785",
-            "name": "LATTICE LIMITED",
-            "status": "dissolved",
-            "incorporated": "2015-05-07",
             "locality": "",
             "postcode": "",
             "sic": [],
