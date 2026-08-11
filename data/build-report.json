@@ -3,8 +3,8 @@
   "checked": 852,
   "unchecked": 2174,
   "counts": {
-    "listed": 381,
-    "no-target-roles": 471,
+    "listed": 383,
+    "no-target-roles": 469,
     "slug-unresolved": 2155,
     "probe-failed": 0,
     "empty-board-unverified": 6,
@@ -21,7 +21,6 @@
     "AXONIUS",
     "Abacum",
     "Airbnb",
-    "Airtable",
     "Algolia",
     "Alloy",
     "Alpaca",
@@ -127,6 +126,7 @@
     "FalconX",
     "Feedzai",
     "Fieldguide",
+    "Finni Health",
     "Fireblocks",
     "Fivetran",
     "Fleek",
@@ -198,6 +198,7 @@
     "Lago",
     "Lambda Labs",
     "LangChain",
+    "Lattice",
     "LaunchDarkly",
     "Legora",
     "LemFi",
@@ -302,6 +303,7 @@
     "Reka AI",
     "Replit",
     "Rigetti Computing",
+    "Rillet",
     "Ripple",
     "Rogo",
     "SOLIDROAD",
@@ -487,7 +489,7 @@
     "Airbnb": "listed",
     "Airbyte": "no-target-roles",
     "Airfordable": "slug-unresolved",
-    "Airtable": "listed",
+    "Airtable": "no-target-roles",
     "Airwallex": "slug-unresolved",
     "Airware": "slug-unresolved",
     "Aiven": "slug-unresolved",
@@ -1358,7 +1360,7 @@
     "Finerpoint": "slug-unresolved",
     "Finland\u2019s NestAI": "slug-unresolved",
     "Finley": "slug-unresolved",
-    "Finni Health": "no-target-roles",
+    "Finni Health": "listed",
     "Fintainium": "slug-unresolved",
     "Fintoc": "slug-unresolved",
     "Fintual": "slug-unresolved",
@@ -1847,7 +1849,7 @@
     "LangChain": "listed",
     "Last Energy": "slug-unresolved",
     "Latchel": "slug-unresolved",
-    "Lattice": "no-target-roles",
+    "Lattice": "listed",
     "LaunchDarkly": "listed",
     "LayerZero Labs": "no-target-roles",
     "Le Tote": "slug-unresolved",
@@ -2656,7 +2658,7 @@
     "Ridwell": "slug-unresolved",
     "Rigetti Computing": "listed",
     "Rilian Technologies": "slug-unresolved",
-    "Rillet": "no-target-roles",
+    "Rillet": "listed",
     "Rinsed": "slug-unresolved",
     "Riot": "slug-unresolved",
     "Ripple": "listed",
@@ -3423,10 +3425,7 @@
     "zeroheight": "slug-unresolved"
   },
   "departed": {
-    "Bitmovin": "no-target-roles",
-    "Bringg": "no-target-roles",
-    "Lattice": "no-target-roles",
-    "Oleria": "empty-board-unverified"
+    "Airtable": "no-target-roles"
   },
   "websites": {
     "with_website": 1928,
@@ -3449,21 +3448,21 @@
     "Insider": "Business Insider"
   },
   "countries": {
-    "India": 132,
-    "United Kingdom": 266,
-    "Ireland": 53,
-    "Germany": 110,
+    "India": 131,
+    "United Kingdom": 267,
+    "Ireland": 52,
+    "Germany": 111,
     "Netherlands": 51,
-    "France": 59,
+    "France": 61,
     "Spain": 66,
-    "Sweden": 32,
+    "Sweden": 31,
     "Denmark": 17,
     "Norway": 8,
     "Finland": 7,
-    "Japan": 67,
-    "Singapore": 80,
+    "Japan": 66,
+    "Singapore": 79,
     "Australia": 86,
-    "New Zealand": 4
+    "New Zealand": 5
   },
   "mca": {
     "records": 24102,
@@ -4021,23 +4020,6 @@
         ]
       },
       {
-        "name": "Airtable",
-        "confidence": "exact",
-        "why": "silent; one exact-tier name match",
-        "candidates": [
-          {
-            "number": "14440416",
-            "name": "AIRTABLE LIMITED",
-            "status": "dissolved",
-            "incorporated": "2022-10-25",
-            "locality": "",
-            "postcode": "",
-            "sic": [],
-            "kind": ""
-          }
-        ]
-      },
-      {
         "name": "Algolia",
         "confidence": "exact",
         "why": "silent; one exact-tier name match",
@@ -4183,23 +4165,6 @@
             "name": "APPLIED INTUITION UK LTD.",
             "status": "active",
             "incorporated": "2025-02-03",
-            "locality": "",
-            "postcode": "",
-            "sic": [],
-            "kind": ""
-          }
-        ]
-      },
-      {
-        "name": "AppsFlyer",
-        "confidence": "exact",
-        "why": "silent; one exact-tier name match",
-        "candidates": [
-          {
-            "number": "10246990",
-            "name": "APPSFLYER UK LTD",
-            "status": "active",
-            "incorporated": "2016-06-23",
             "locality": "",
             "postcode": "",
             "sic": [],
@@ -6101,6 +6066,33 @@
             "name": "KPLER LTD",
             "status": "active",
             "incorporated": "2017-11-01",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Lattice",
+        "confidence": "exact",
+        "why": "silent; 2 companies reach the exact tier",
+        "candidates": [
+          {
+            "number": "14004034",
+            "name": "LATTICE LTD",
+            "status": "active",
+            "incorporated": "2022-03-25",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "09579785",
+            "name": "LATTICE LIMITED",
+            "status": "dissolved",
+            "incorporated": "2015-05-07",
             "locality": "",
             "postcode": "",
             "sic": [],
