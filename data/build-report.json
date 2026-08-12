@@ -313,6 +313,7 @@
     "Saturn",
     "Scale AI",
     "Scandit",
+    "Securitize",
     "SeekOut",
     "Semperis",
     "Sentry",
@@ -354,7 +355,6 @@
     "ThreatLocker",
     "Tide",
     "Tines",
-    "Tipalti",
     "Together AI",
     "Torq",
     "Tractable",
@@ -2768,7 +2768,7 @@
     "Second Measure": "slug-unresolved",
     "Secro": "slug-unresolved",
     "Secured": "slug-unresolved",
-    "Securitize": "no-target-roles",
+    "Securitize": "listed",
     "SeeQC": "slug-unresolved",
     "Seegrid": "slug-unresolved",
     "SeekOut": "listed",
@@ -3061,7 +3061,7 @@
     "Tilt (f.k.a. Delphia)": "slug-unresolved",
     "Timescale": "slug-unresolved",
     "Tines": "listed",
-    "Tipalti": "listed",
+    "Tipalti": "no-target-roles",
     "Tiptap": "slug-unresolved",
     "Titan": "no-target-roles",
     "TitanX Holdings": "slug-unresolved",
@@ -3425,7 +3425,7 @@
     "zeroheight": "slug-unresolved"
   },
   "departed": {
-    "Airtable": "no-target-roles"
+    "Tipalti": "no-target-roles"
   },
   "websites": {
     "with_website": 1928,
@@ -3449,20 +3449,20 @@
   },
   "countries": {
     "India": 131,
-    "United Kingdom": 267,
-    "Ireland": 52,
-    "Germany": 111,
+    "United Kingdom": 266,
+    "Ireland": 53,
+    "Germany": 112,
     "Netherlands": 51,
-    "France": 61,
-    "Spain": 66,
+    "France": 60,
+    "Spain": 67,
     "Sweden": 31,
     "Denmark": 17,
     "Norway": 8,
     "Finland": 7,
-    "Japan": 66,
-    "Singapore": 79,
+    "Japan": 65,
+    "Singapore": 78,
     "Australia": 86,
-    "New Zealand": 5
+    "New Zealand": 6
   },
   "mca": {
     "records": 24102,
@@ -7776,33 +7776,6 @@
             "name": "TIDE LTD",
             "status": "dissolved",
             "incorporated": "2005-07-12",
-            "locality": "",
-            "postcode": "",
-            "sic": [],
-            "kind": ""
-          }
-        ]
-      },
-      {
-        "name": "Tipalti",
-        "confidence": "prefix",
-        "why": "silent; 2 companies reach the prefix tier",
-        "candidates": [
-          {
-            "number": "12471817",
-            "name": "TIPALTI EUROPE LTD",
-            "status": "active",
-            "incorporated": "2020-02-19",
-            "locality": "",
-            "postcode": "",
-            "sic": [],
-            "kind": ""
-          },
-          {
-            "number": "12420590",
-            "name": "TIPALTI SOLUTIONS LTD",
-            "status": "dissolved",
-            "incorporated": "2020-01-23",
             "locality": "",
             "postcode": "",
             "sic": [],
