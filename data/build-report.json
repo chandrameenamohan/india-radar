@@ -1,11 +1,11 @@
 {
   "corpus_size": 3026,
-  "checked": 852,
-  "unchecked": 2174,
+  "checked": 853,
+  "unchecked": 2173,
   "counts": {
     "listed": 383,
-    "no-target-roles": 469,
-    "slug-unresolved": 2155,
+    "no-target-roles": 470,
+    "slug-unresolved": 2154,
     "probe-failed": 0,
     "empty-board-unverified": 6,
     "not-qualified": 0,
@@ -26,7 +26,6 @@
     "Alpaca",
     "AlphaSense",
     "Ambient.ai",
-    "Amperity",
     "Amplitude",
     "Anchorage Digital",
     "Andela",
@@ -54,6 +53,7 @@
     "Benchling",
     "BetterUp",
     "BitPanda",
+    "Bitmovin",
     "Bitstack",
     "Black Forest Labs",
     "Blee",
@@ -116,6 +116,7 @@
     "Elyos AI",
     "Enable",
     "Encord",
+    "Envoy",
     "Epic Games",
     "Epidemic Sound",
     "Escape",
@@ -140,6 +141,7 @@
     "Fundamental",
     "FurtherAI",
     "Gather AI",
+    "Gauntlet Networks",
     "General Intuition",
     "Giga",
     "Gigs",
@@ -244,7 +246,6 @@
     "Nash",
     "Neo4j",
     "Netskope",
-    "Nextiva",
     "Niantic Spatial",
     "Nirvana",
     "Notabene",
@@ -256,7 +257,6 @@
     "OneTrust",
     "Onebrief",
     "OpenAI",
-    "OpenWeb",
     "Orca Security",
     "Overview",
     "Oyster",
@@ -531,7 +531,7 @@
     "American Terawatt": "slug-unresolved",
     "Amgine Technologies (US)": "slug-unresolved",
     "Ammortal": "slug-unresolved",
-    "Amperity": "listed",
+    "Amperity": "no-target-roles",
     "Amplifier": "slug-unresolved",
     "Amplitude": "listed",
     "Anaconda": "slug-unresolved",
@@ -717,7 +717,7 @@
     "BitPanda": "listed",
     "BitSight Technologies": "slug-unresolved",
     "Bitmain Technologies": "slug-unresolved",
-    "Bitmovin": "no-target-roles",
+    "Bitmovin": "listed",
     "Bitnami": "slug-unresolved",
     "Bitrise": "slug-unresolved",
     "Bits": "slug-unresolved",
@@ -1276,7 +1276,7 @@
     "Enter": "no-target-roles",
     "Entrada AI": "slug-unresolved",
     "Enveda": "slug-unresolved",
-    "Envoy": "no-target-roles",
+    "Envoy": "listed",
     "Epic Games": "listed",
     "Epidemic Sound": "listed",
     "Epsilon3": "slug-unresolved",
@@ -1470,7 +1470,7 @@
     "Garage": "no-target-roles",
     "Garage Technologies": "slug-unresolved",
     "Gather AI": "listed",
-    "Gauntlet Networks": "no-target-roles",
+    "Gauntlet Networks": "listed",
     "Gecko Robotics": "no-target-roles",
     "Gem": "slug-unresolved",
     "Gemnote": "slug-unresolved",
@@ -2177,7 +2177,7 @@
     "Next Insurance": "slug-unresolved",
     "Next Silicon": "slug-unresolved",
     "Nexthop": "slug-unresolved",
-    "Nextiva": "listed",
+    "Nextiva": "no-target-roles",
     "Nextmv": "slug-unresolved",
     "Nexu": "slug-unresolved",
     "Neysa": "slug-unresolved",
@@ -2294,7 +2294,7 @@
     "OpenInvest": "slug-unresolved",
     "OpenRouter": "no-target-roles",
     "OpenSea": "no-target-roles",
-    "OpenWeb": "listed",
+    "OpenWeb": "no-target-roles",
     "Opencall": "no-target-roles",
     "Opendate": "slug-unresolved",
     "Openlayer": "slug-unresolved",
@@ -2883,7 +2883,7 @@
     "Sourceress": "slug-unresolved",
     "Soylent": "slug-unresolved",
     "Space Forge": "slug-unresolved",
-    "Spade": "slug-unresolved",
+    "Spade": "no-target-roles",
     "Span.IO": "slug-unresolved",
     "SparkCharge": "slug-unresolved",
     "SparkCognition": "listed",
@@ -3425,11 +3425,13 @@
     "zeroheight": "slug-unresolved"
   },
   "departed": {
-    "Tipalti": "no-target-roles"
+    "Amperity": "no-target-roles",
+    "Nextiva": "no-target-roles",
+    "OpenWeb": "no-target-roles"
   },
   "websites": {
     "with_website": 1928,
-    "slug_unresolved_with_website": 1173,
+    "slug_unresolved_with_website": 1172,
     "slug_unresolved_without_website": 982
   },
   "shared_boards": {
@@ -3451,17 +3453,17 @@
     "India": 131,
     "United Kingdom": 266,
     "Ireland": 53,
-    "Germany": 112,
+    "Germany": 113,
     "Netherlands": 51,
-    "France": 60,
+    "France": 59,
     "Spain": 67,
     "Sweden": 31,
     "Denmark": 17,
     "Norway": 8,
     "Finland": 7,
-    "Japan": 65,
+    "Japan": 64,
     "Singapore": 78,
-    "Australia": 86,
+    "Australia": 84,
     "New Zealand": 6
   },
   "mca": {
@@ -4088,23 +4090,6 @@
         ]
       },
       {
-        "name": "Amperity",
-        "confidence": "exact",
-        "why": "unreachable; one exact-tier name match",
-        "candidates": [
-          {
-            "number": "13962739",
-            "name": "AMPERITY UK LIMITED",
-            "status": "active",
-            "incorporated": "2022-03-08",
-            "locality": "",
-            "postcode": "",
-            "sic": [],
-            "kind": ""
-          }
-        ]
-      },
-      {
         "name": "Amplitude",
         "confidence": "exact",
         "why": "silent; one exact-tier name match",
@@ -4165,6 +4150,23 @@
             "name": "APPLIED INTUITION UK LTD.",
             "status": "active",
             "incorporated": "2025-02-03",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "AppsFlyer",
+        "confidence": "exact",
+        "why": "silent; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "10246990",
+            "name": "APPSFLYER UK LTD",
+            "status": "active",
+            "incorporated": "2016-06-23",
             "locality": "",
             "postcode": "",
             "sic": [],
@@ -5785,23 +5787,6 @@
             "name": "HIGHTOUCH LIMITED",
             "status": "active",
             "incorporated": "2010-09-20",
-            "locality": "",
-            "postcode": "",
-            "sic": [],
-            "kind": ""
-          }
-        ]
-      },
-      {
-        "name": "Horizon 3 AI",
-        "confidence": "exact",
-        "why": "no website; one exact-tier name match",
-        "candidates": [
-          {
-            "number": "16225773",
-            "name": "HORIZON3 AI UK LTD",
-            "status": "active",
-            "incorporated": "2025-02-03",
             "locality": "",
             "postcode": "",
             "sic": [],
