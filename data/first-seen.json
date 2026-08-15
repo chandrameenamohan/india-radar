@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "snapshot": "2026-08-14",
+  "snapshot": "2026-08-15",
   "note": "first_seen is the snapshot date a role's URL first appeared in a build. A role is confirmed only where its company's board was read on the previous snapshot AND on this one \u2014 both sides genuinely observed. Everything else is unconfirmed: we saw it for the first time, which is not the same as it being new. Only confirmed roles may be called new.",
   "observed": [
     "1Password",
@@ -339,6 +339,7 @@
     "Tamara",
     "Tanium",
     "TaxBit",
+    "Teamworks",
     "Teleport",
     "Tem",
     "Temporal",
@@ -8425,6 +8426,27 @@
         "https://jobs.ashbyhq.com/suno/b6ee10bd-4f08-48ad-81d2-74d5f4c642bd",
         "https://www.nextiva.com/company/careers-listing?gh_jid=8621884002",
         "https://www.nextiva.com/company/careers-listing?gh_jid=8621899002"
+      ]
+    },
+    "2026-08-15": {
+      "confirmed": [
+        "https://databricks.com/company/careers/open-positions/job?gh_jid=6709301002",
+        "https://databricks.com/company/careers/open-positions/job?gh_jid=8294304002",
+        "https://job-boards.greenhouse.io/clickhouse/jobs/6113761004",
+        "https://job-boards.greenhouse.io/gleanwork/jobs/4724225005",
+        "https://job-boards.greenhouse.io/launchdarkly/jobs/7872899003",
+        "https://jobs.ashbyhq.com/halter/93f0afbf-9989-4fc0-af60-8254f8291d23",
+        "https://jobs.ashbyhq.com/halter/c6188b09-e1ec-46dd-8ba4-19ef431a18af",
+        "https://jobs.ashbyhq.com/photoroom/1073f2ae-906a-42ae-bb5f-96981a2555cf",
+        "https://jobs.ashbyhq.com/photoroom/4886fd85-2b2c-4dca-bf48-1dbc370629bc",
+        "https://jobs.ashbyhq.com/photoroom/e51e28e4-b740-44d6-922a-8a7b00a245a8",
+        "https://jobs.ashbyhq.com/zip/532f6e01-217b-4561-bcb7-e2475ae0c98a",
+        "https://jobs.lever.co/ppro/bd3eeafb-f12b-462e-b50a-cfef99b291b5",
+        "https://jobs.lever.co/ppro/ce0ab9f9-2050-4c1e-b303-70bf0868d4c4",
+        "https://wayve.firststage.co/jobs?gh_jid=8708581002"
+      ],
+      "unconfirmed": [
+        "https://jobs.ashbyhq.com/teamworks/f36ed3f0-7c48-48f1-b395-7c093bd5d867"
       ]
     }
   }

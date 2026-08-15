@@ -3,8 +3,8 @@
   "checked": 853,
   "unchecked": 2173,
   "counts": {
-    "listed": 386,
-    "no-target-roles": 467,
+    "listed": 387,
+    "no-target-roles": 466,
     "slug-unresolved": 2154,
     "probe-failed": 0,
     "empty-board-unverified": 6,
@@ -348,6 +348,7 @@
     "Tamara",
     "Tanium",
     "TaxBit",
+    "Teamworks",
     "Teleport",
     "Tem",
     "Temporal",
@@ -3015,7 +3016,7 @@
     "Tealium": "slug-unresolved",
     "TeamNote": "slug-unresolved",
     "TeamSense": "no-target-roles",
-    "Teamworks": "no-target-roles",
+    "Teamworks": "listed",
     "Teespring": "slug-unresolved",
     "Teleport": "listed",
     "Tem": "listed",
@@ -3427,10 +3428,7 @@
     "xLight": "slug-unresolved",
     "zeroheight": "slug-unresolved"
   },
-  "departed": {
-    "AXONIUS": "no-target-roles",
-    "Imply Data": "no-target-roles"
-  },
+  "departed": {},
   "websites": {
     "with_website": 1928,
     "slug_unresolved_with_website": 1172,
