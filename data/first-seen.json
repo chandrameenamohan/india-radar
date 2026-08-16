@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "snapshot": "2026-08-15",
+  "snapshot": "2026-08-16",
   "note": "first_seen is the snapshot date a role's URL first appeared in a build. A role is confirmed only where its company's board was read on the previous snapshot AND on this one \u2014 both sides genuinely observed. Everything else is unconfirmed: we saw it for the first time, which is not the same as it being new. Only confirmed roles may be called new.",
   "observed": [
     "1Password",
@@ -193,6 +193,7 @@
     "LangChain",
     "Lattice",
     "LaunchDarkly",
+    "Legion Health",
     "Legora",
     "LemFi",
     "Lendable",
@@ -8447,6 +8448,15 @@
       ],
       "unconfirmed": [
         "https://jobs.ashbyhq.com/teamworks/f36ed3f0-7c48-48f1-b395-7c093bd5d867"
+      ]
+    },
+    "2026-08-16": {
+      "confirmed": [
+        "https://job-boards.greenhouse.io/gitlab/jobs/8615268002",
+        "https://job-boards.greenhouse.io/onetrust/jobs/8113157"
+      ],
+      "unconfirmed": [
+        "https://jobs.ashbyhq.com/legionhealth/f296ad4b-ca07-4b86-a88f-8ef1e8849e43"
       ]
     }
   }
