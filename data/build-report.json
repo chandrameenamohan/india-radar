@@ -1,13 +1,13 @@
 {
   "corpus_size": 3026,
-  "checked": 849,
-  "unchecked": 2177,
+  "checked": 847,
+  "unchecked": 2179,
   "counts": {
-    "listed": 391,
-    "no-target-roles": 458,
-    "slug-unresolved": 2158,
+    "listed": 390,
+    "no-target-roles": 457,
+    "slug-unresolved": 2159,
     "probe-failed": 0,
-    "empty-board-unverified": 6,
+    "empty-board-unverified": 7,
     "not-qualified": 0,
     "another-companys-board": 13
   },
@@ -244,7 +244,6 @@
     "Mux",
     "N26",
     "NIUM",
-    "NanoNets",
     "Nash",
     "Neo4j",
     "Netskope",
@@ -298,7 +297,6 @@
     "Qonto",
     "Quantexa",
     "Quantum Metric",
-    "Quicknode",
     "Quince",
     "Qumulo",
     "Ramp",
@@ -344,6 +342,7 @@
     "Substack",
     "SumUp",
     "Suno",
+    "Supabase",
     "Super",
     "Symphony",
     "Tailscale",
@@ -2150,7 +2149,7 @@
     "NURX": "slug-unresolved",
     "Nabis": "no-target-roles",
     "Nabla Bio": "slug-unresolved",
-    "NanoNets": "listed",
+    "NanoNets": "slug-unresolved",
     "Narada AI": "slug-unresolved",
     "Narrator": "slug-unresolved",
     "Nash": "listed",
@@ -2478,7 +2477,7 @@
     "Polars": "slug-unresolved",
     "Poliglota": "slug-unresolved",
     "Polimorphic": "slug-unresolved",
-    "Poll Everywhere": "no-target-roles",
+    "Poll Everywhere": "empty-board-unverified",
     "Pollen": "slug-unresolved",
     "Polygraf": "slug-unresolved",
     "Polyhedra Network": "slug-unresolved",
@@ -2557,7 +2556,7 @@
     "Quercus Biosolutions": "slug-unresolved",
     "Quero Education": "slug-unresolved",
     "QueryPie AI": "slug-unresolved",
-    "Quicknode": "listed",
+    "Quicknode": "no-target-roles",
     "Quilt": "no-target-roles",
     "Quince": "listed",
     "Quindar": "no-target-roles",
@@ -2957,7 +2956,7 @@
     "Sunday App": "slug-unresolved",
     "Sunfolding": "slug-unresolved",
     "Suno": "listed",
-    "Supabase": "no-target-roles",
+    "Supabase": "listed",
     "Super": "listed",
     "Super League Enterprise": "slug-unresolved",
     "SuperAnnotate AI": "slug-unresolved",
@@ -3432,10 +3431,13 @@
     "xLight": "slug-unresolved",
     "zeroheight": "slug-unresolved"
   },
-  "departed": {},
+  "departed": {
+    "NanoNets": "slug-unresolved",
+    "Quicknode": "no-target-roles"
+  },
   "websites": {
     "with_website": 1928,
-    "slug_unresolved_with_website": 1173,
+    "slug_unresolved_with_website": 1174,
     "slug_unresolved_without_website": 985
   },
   "shared_boards": {
@@ -3457,15 +3459,15 @@
     "India": 131,
     "United Kingdom": 273,
     "Ireland": 53,
-    "Germany": 113,
-    "Netherlands": 51,
-    "France": 56,
-    "Spain": 67,
-    "Sweden": 29,
+    "Germany": 112,
+    "Netherlands": 49,
+    "France": 55,
+    "Spain": 65,
+    "Sweden": 28,
     "Denmark": 15,
-    "Norway": 8,
+    "Norway": 9,
     "Finland": 7,
-    "Japan": 65,
+    "Japan": 66,
     "Singapore": 76,
     "Australia": 80,
     "New Zealand": 6
@@ -3725,19 +3727,6 @@
             "name": "MONIEPOINT TECHNOLOGIES INDIA PRIVATE LIMITED",
             "incorporated": "2025-01-24",
             "address": "Wework Prestige Cube, Site No. 26,,Laskar Hosur Road,Koramangala,,Bangalore South,Bangalore,Karnataka,560030-India",
-            "status": "Active"
-          }
-        ]
-      },
-      {
-        "name": "NanoNets",
-        "confidence": "prefix",
-        "candidates": [
-          {
-            "cin": "U72502KA2017FTC100862",
-            "name": "NANONETS WEB SERVICES PRIVATE LIMITED",
-            "incorporated": "2017-02-27",
-            "address": "51/2, Venkat Reddy Layout,   Koramangala 6th Block,,Bengaluru,Bangalore,Karnataka,560095-India",
             "status": "Active"
           }
         ]
@@ -5334,23 +5323,6 @@
             "name": "FEEDZAI UK LIMITED",
             "status": "active",
             "incorporated": "2020-06-11",
-            "locality": "",
-            "postcode": "",
-            "sic": [],
-            "kind": ""
-          }
-        ]
-      },
-      {
-        "name": "Fieldguide",
-        "confidence": "exact",
-        "why": "silent; one exact-tier name match",
-        "candidates": [
-          {
-            "number": "17124510",
-            "name": "FIELD GUIDE LTD",
-            "status": "active",
-            "incorporated": "2026-03-30",
             "locality": "",
             "postcode": "",
             "sic": [],
