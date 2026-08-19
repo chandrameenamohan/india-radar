@@ -3,8 +3,8 @@
   "checked": 847,
   "unchecked": 2179,
   "counts": {
-    "listed": 390,
-    "no-target-roles": 457,
+    "listed": 389,
+    "no-target-roles": 458,
     "slug-unresolved": 2159,
     "probe-failed": 0,
     "empty-board-unverified": 7,
@@ -227,7 +227,6 @@
     "Mattermost",
     "MeltPlan",
     "Mercor",
-    "Mercury",
     "Meter",
     "Meticulous",
     "MindTickle",
@@ -2034,7 +2033,7 @@
     "Mending Health": "slug-unresolved",
     "Mercor": "listed",
     "Mercor.io": "slug-unresolved",
-    "Mercury": "listed",
+    "Mercury": "no-target-roles",
     "Mercury Technologies": "slug-unresolved",
     "Merkle Manufactory": "slug-unresolved",
     "Meru Health": "no-target-roles",
@@ -3432,8 +3431,7 @@
     "zeroheight": "slug-unresolved"
   },
   "departed": {
-    "NanoNets": "slug-unresolved",
-    "Quicknode": "no-target-roles"
+    "Mercury": "no-target-roles"
   },
   "websites": {
     "with_website": 1928,
@@ -3456,26 +3454,26 @@
     "Insider": "Business Insider"
   },
   "countries": {
-    "India": 131,
-    "United Kingdom": 273,
-    "Ireland": 53,
+    "India": 130,
+    "United Kingdom": 272,
+    "Ireland": 52,
     "Germany": 112,
     "Netherlands": 49,
-    "France": 55,
-    "Spain": 65,
+    "France": 56,
+    "Spain": 63,
     "Sweden": 28,
-    "Denmark": 15,
+    "Denmark": 14,
     "Norway": 9,
     "Finland": 7,
-    "Japan": 66,
-    "Singapore": 76,
-    "Australia": 80,
+    "Japan": 67,
+    "Singapore": 77,
+    "Australia": 82,
     "New Zealand": 6
   },
   "mca": {
     "records": 24102,
     "pulled": "2026-07-29",
-    "matched": 35,
+    "matched": 34,
     "held": [
       {
         "name": "6Sense",
@@ -4464,23 +4462,6 @@
             "name": "CAMPFIRE LTD",
             "status": "dissolved",
             "incorporated": "2018-01-08",
-            "locality": "",
-            "postcode": "",
-            "sic": [],
-            "kind": ""
-          }
-        ]
-      },
-      {
-        "name": "Capi Money",
-        "confidence": "exact",
-        "why": "silent; one exact-tier name match",
-        "candidates": [
-          {
-            "number": "15031811",
-            "name": "CAPI MONEY UK LTD",
-            "status": "active",
-            "incorporated": "2023-07-27",
             "locality": "",
             "postcode": "",
             "sic": [],
