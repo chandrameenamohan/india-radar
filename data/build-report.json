@@ -1,13 +1,13 @@
 {
   "corpus_size": 3026,
-  "checked": 847,
-  "unchecked": 2179,
+  "checked": 849,
+  "unchecked": 2177,
   "counts": {
-    "listed": 389,
-    "no-target-roles": 458,
-    "slug-unresolved": 2159,
+    "listed": 390,
+    "no-target-roles": 459,
+    "slug-unresolved": 2158,
     "probe-failed": 0,
-    "empty-board-unverified": 7,
+    "empty-board-unverified": 6,
     "not-qualified": 0,
     "another-companys-board": 13
   },
@@ -47,6 +47,7 @@
     "Attentive",
     "Attotude",
     "Aviatrix",
+    "Avoca",
     "Awardco",
     "Beamery",
     "Benchling",
@@ -249,6 +250,7 @@
     "Nextiva",
     "Niantic Spatial",
     "Nirvana",
+    "Nitricity",
     "Notabene",
     "Notion",
     "Nova Credit",
@@ -292,7 +294,6 @@
     "Project44",
     "Prove Identity",
     "PsiQuantum",
-    "Pump",
     "Qonto",
     "Quantexa",
     "Quantum Metric",
@@ -648,7 +649,7 @@
     "Avenue One": "slug-unresolved",
     "Aviatrix": "listed",
     "Avo": "slug-unresolved",
-    "Avoca": "no-target-roles",
+    "Avoca": "listed",
     "Awardco": "listed",
     "Axelar": "slug-unresolved",
     "Axiom Math": "slug-unresolved",
@@ -1060,7 +1061,7 @@
     "Cube Security": "slug-unresolved",
     "Cue": "slug-unresolved",
     "CueZen": "slug-unresolved",
-    "Culdesac": "empty-board-unverified",
+    "Culdesac": "no-target-roles",
     "Culture Amp": "listed",
     "Cura OS": "slug-unresolved",
     "Curative": "no-target-roles",
@@ -1294,7 +1295,7 @@
     "Eruditus Executive Education": "slug-unresolved",
     "Escape": "listed",
     "Estimote, Inc.": "slug-unresolved",
-    "Esusu": "slug-unresolved",
+    "Esusu": "no-target-roles",
     "Ethos": "no-target-roles",
     "Eve": "no-target-roles",
     "EvenUp": "slug-unresolved",
@@ -2196,7 +2197,7 @@
     "NinjaOne": "slug-unresolved",
     "Nirvana": "listed",
     "Nisos Holdings": "slug-unresolved",
-    "Nitricity": "no-target-roles",
+    "Nitricity": "listed",
     "Niural": "slug-unresolved",
     "Nixtla": "slug-unresolved",
     "NoBroker": "slug-unresolved",
@@ -2531,7 +2532,7 @@
     "PullRequest": "slug-unresolved",
     "Pulley": "no-target-roles",
     "Pulse": "no-target-roles",
-    "Pump": "listed",
+    "Pump": "no-target-roles",
     "Push Security": "slug-unresolved",
     "Pyka": "no-target-roles",
     "Pylon": "slug-unresolved",
@@ -3431,12 +3432,12 @@
     "zeroheight": "slug-unresolved"
   },
   "departed": {
-    "Mercury": "no-target-roles"
+    "Pump": "no-target-roles"
   },
   "websites": {
     "with_website": 1928,
     "slug_unresolved_with_website": 1174,
-    "slug_unresolved_without_website": 985
+    "slug_unresolved_without_website": 984
   },
   "shared_boards": {
     "Bright": "BrightAI",
@@ -3455,25 +3456,25 @@
   },
   "countries": {
     "India": 130,
-    "United Kingdom": 272,
-    "Ireland": 52,
-    "Germany": 112,
-    "Netherlands": 49,
+    "United Kingdom": 271,
+    "Ireland": 53,
+    "Germany": 113,
+    "Netherlands": 50,
     "France": 56,
     "Spain": 63,
-    "Sweden": 28,
-    "Denmark": 14,
-    "Norway": 9,
+    "Sweden": 29,
+    "Denmark": 15,
+    "Norway": 8,
     "Finland": 7,
     "Japan": 67,
-    "Singapore": 77,
+    "Singapore": 78,
     "Australia": 82,
     "New Zealand": 6
   },
   "mca": {
     "records": 24102,
     "pulled": "2026-07-29",
-    "matched": 34,
+    "matched": 33,
     "held": [
       {
         "name": "6Sense",
@@ -3816,19 +3817,6 @@
         ]
       },
       {
-        "name": "Pump",
-        "confidence": "prefix",
-        "candidates": [
-          {
-            "cin": "U62099TS2023FTC175387",
-            "name": "PUMP BILLING TECHNOLOGIES INDIA PRIVATE LIMITED",
-            "incorporated": "2023-07-25",
-            "address": "Flat 101,Ganesh GHR & MSY,Plaza, Vittal Rao Nagar,,Shaikpet,Hyderabad,Telangana,500081-India",
-            "status": "Active"
-          }
-        ]
-      },
-      {
         "name": "Razorpay",
         "confidence": "prefix",
         "candidates": [
@@ -3953,7 +3941,7 @@
     "names": 220,
     "stated": 20,
     "pulled": "2026-08-02",
-    "matched": 19,
+    "matched": 18,
     "held": [
       {
         "name": "Airbnb",
