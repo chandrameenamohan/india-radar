@@ -1,11 +1,11 @@
 {
   "corpus_size": 3026,
-  "checked": 849,
-  "unchecked": 2177,
+  "checked": 847,
+  "unchecked": 2179,
   "counts": {
-    "listed": 390,
-    "no-target-roles": 459,
-    "slug-unresolved": 2158,
+    "listed": 391,
+    "no-target-roles": 456,
+    "slug-unresolved": 2160,
     "probe-failed": 0,
     "empty-board-unverified": 6,
     "not-qualified": 0,
@@ -95,6 +95,7 @@
     "Culture Amp",
     "Cursor",
     "Cyberhaven",
+    "DailyPay",
     "Databricks",
     "Dataiku",
     "DeepL",
@@ -121,7 +122,6 @@
     "Epidemic Sound",
     "Escape",
     "Exa",
-    "Expel",
     "Factory",
     "Faire",
     "FalconX",
@@ -161,6 +161,7 @@
     "HappyRobot",
     "Harmonic",
     "Harness",
+    "HawkEye 360",
     "Heidi Health",
     "Helsing",
     "HeyGen",
@@ -1096,7 +1097,7 @@
     "Dadi Cinema": "slug-unresolved",
     "Daedalus": "slug-unresolved",
     "Daily": "slug-unresolved",
-    "DailyPay": "no-target-roles",
+    "DailyPay": "listed",
     "Daloopa": "slug-unresolved",
     "Dapper Labs": "slug-unresolved",
     "DarioHealth": "slug-unresolved",
@@ -1295,7 +1296,7 @@
     "Eruditus Executive Education": "slug-unresolved",
     "Escape": "listed",
     "Estimote, Inc.": "slug-unresolved",
-    "Esusu": "no-target-roles",
+    "Esusu": "slug-unresolved",
     "Ethos": "no-target-roles",
     "Eve": "no-target-roles",
     "EvenUp": "slug-unresolved",
@@ -1312,7 +1313,7 @@
     "Exa Labs": "slug-unresolved",
     "Exaforce": "slug-unresolved",
     "Exclusive Positron": "slug-unresolved",
-    "Expel": "listed",
+    "Expel": "no-target-roles",
     "Expo": "slug-unresolved",
     "Extellis": "slug-unresolved",
     "Extend": "no-target-roles",
@@ -1599,7 +1600,7 @@
     "Hatch": "no-target-roles",
     "Hauler Hero": "no-target-roles",
     "Haus Analytics": "slug-unresolved",
-    "HawkEye 360": "no-target-roles",
+    "HawkEye 360": "listed",
     "Hazel Health": "slug-unresolved",
     "HealthSherpa": "no-target-roles",
     "Healthcare Triangle": "slug-unresolved",
@@ -1926,7 +1927,7 @@
     "Loft": "slug-unresolved",
     "Lokal": "slug-unresolved",
     "Long Term Stock Exchange": "no-target-roles",
-    "Lookout": "no-target-roles",
+    "Lookout": "slug-unresolved",
     "Looma Project": "slug-unresolved",
     "Loop": "slug-unresolved",
     "Loop Health": "slug-unresolved",
@@ -3432,12 +3433,12 @@
     "zeroheight": "slug-unresolved"
   },
   "departed": {
-    "Pump": "no-target-roles"
+    "Expel": "no-target-roles"
   },
   "websites": {
     "with_website": 1928,
-    "slug_unresolved_with_website": 1174,
-    "slug_unresolved_without_website": 984
+    "slug_unresolved_with_website": 1175,
+    "slug_unresolved_without_website": 985
   },
   "shared_boards": {
     "Bright": "BrightAI",
@@ -3456,19 +3457,19 @@
   },
   "countries": {
     "India": 130,
-    "United Kingdom": 271,
-    "Ireland": 53,
-    "Germany": 113,
-    "Netherlands": 50,
-    "France": 56,
-    "Spain": 63,
+    "United Kingdom": 274,
+    "Ireland": 52,
+    "Germany": 114,
+    "Netherlands": 48,
+    "France": 57,
+    "Spain": 64,
     "Sweden": 29,
     "Denmark": 15,
     "Norway": 8,
     "Finland": 7,
     "Japan": 67,
-    "Singapore": 78,
-    "Australia": 82,
+    "Singapore": 79,
+    "Australia": 81,
     "New Zealand": 6
   },
   "mca": {
@@ -5292,6 +5293,23 @@
             "name": "FEEDZAI UK LIMITED",
             "status": "active",
             "incorporated": "2020-06-11",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Fieldguide",
+        "confidence": "exact",
+        "why": "silent; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "17124510",
+            "name": "FIELD GUIDE LTD",
+            "status": "active",
+            "incorporated": "2026-03-30",
             "locality": "",
             "postcode": "",
             "sic": [],
