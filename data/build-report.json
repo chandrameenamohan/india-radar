@@ -1,13 +1,13 @@
 {
   "corpus_size": 3026,
-  "checked": 847,
-  "unchecked": 2179,
+  "checked": 846,
+  "unchecked": 2180,
   "counts": {
     "listed": 391,
-    "no-target-roles": 456,
+    "no-target-roles": 455,
     "slug-unresolved": 2160,
     "probe-failed": 0,
-    "empty-board-unverified": 6,
+    "empty-board-unverified": 7,
     "not-qualified": 0,
     "another-companys-board": 13
   },
@@ -228,6 +228,7 @@
     "Matillion",
     "Mattermost",
     "MeltPlan",
+    "Mem0",
     "Mercor",
     "Meter",
     "Meticulous",
@@ -272,7 +273,6 @@
     "Parker",
     "Parloa",
     "Passionfroot",
-    "PatSnap",
     "Patreon",
     "Payward",
     "Peec AI",
@@ -2029,7 +2029,7 @@
     "Meesho": "slug-unresolved",
     "Mellohead": "slug-unresolved",
     "MeltPlan": "listed",
-    "Mem0": "no-target-roles",
+    "Mem0": "listed",
     "Membrion": "slug-unresolved",
     "Memfault": "no-target-roles",
     "Mending Health": "slug-unresolved",
@@ -2381,7 +2381,7 @@
     "Pascal Research": "slug-unresolved",
     "Passage Health": "slug-unresolved",
     "Passionfroot": "listed",
-    "PatSnap": "listed",
+    "PatSnap": "empty-board-unverified",
     "Pathmind": "slug-unresolved",
     "Pathrise": "slug-unresolved",
     "PatientFi": "slug-unresolved",
@@ -3433,7 +3433,7 @@
     "zeroheight": "slug-unresolved"
   },
   "departed": {
-    "Expel": "no-target-roles"
+    "PatSnap": "empty-board-unverified"
   },
   "websites": {
     "with_website": 1928,
@@ -3456,7 +3456,7 @@
     "Insider": "Business Insider"
   },
   "countries": {
-    "India": 130,
+    "India": 131,
     "United Kingdom": 274,
     "Ireland": 52,
     "Germany": 114,
@@ -3467,8 +3467,8 @@
     "Denmark": 15,
     "Norway": 8,
     "Finland": 7,
-    "Japan": 67,
-    "Singapore": 79,
+    "Japan": 66,
+    "Singapore": 78,
     "Australia": 81,
     "New Zealand": 6
   },

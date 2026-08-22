@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "snapshot": "2026-08-21",
+  "snapshot": "2026-08-22",
   "note": "first_seen is the snapshot date a role's URL first appeared in a build. A role is confirmed only where its company's board was read on the previous snapshot AND on this one \u2014 both sides genuinely observed. Everything else is unconfirmed: we saw it for the first time, which is not the same as it being new. Only confirmed roles may be called new.",
   "observed": [
     "1Password",
@@ -219,6 +219,7 @@
     "Matillion",
     "Mattermost",
     "MeltPlan",
+    "Mem0",
     "Mercor",
     "Meter",
     "Meticulous",
@@ -263,7 +264,6 @@
     "Parker",
     "Parloa",
     "Passionfroot",
-    "PatSnap",
     "Patreon",
     "Payward",
     "Peec AI",
@@ -9198,6 +9198,29 @@
       "unconfirmed": [
         "https://job-boards.greenhouse.io/hawkeye360/jobs/4377631009",
         "https://jobs.ashbyhq.com/dailypay/9fd4a648-9031-4815-8d5e-2eaf1f42854d"
+      ]
+    },
+    "2026-08-22": {
+      "confirmed": [
+        "https://databricks.com/company/careers/open-positions/job?gh_jid=7841782002",
+        "https://databricks.com/company/careers/open-positions/job?gh_jid=8661524002",
+        "https://databricks.com/company/careers/open-positions/job?gh_jid=8740680002",
+        "https://job-boards.greenhouse.io/anthropic/jobs/5391257008",
+        "https://job-boards.greenhouse.io/anthropic/jobs/5398653008",
+        "https://job-boards.greenhouse.io/anthropic/jobs/5398659008",
+        "https://job-boards.greenhouse.io/anthropic/jobs/5398753008",
+        "https://job-boards.greenhouse.io/cresta/jobs/5398815008",
+        "https://jobs.ashbyhq.com/benchling/a9aeb47a-cc62-4ef3-997f-5c78d36d9cb2",
+        "https://jobs.ashbyhq.com/mercor/a0a98be0-d856-4129-b500-c0a3e412ef01",
+        "https://sambanova.ai/sambanova-available-positions/?gh_jid=6149146004",
+        "https://wayve.firststage.co/jobs?gh_jid=8727973002",
+        "https://wayve.firststage.co/jobs?gh_jid=8738152002",
+        "https://wayve.firststage.co/jobs?gh_jid=8738575002",
+        "https://wayve.firststage.co/jobs?gh_jid=8739398002",
+        "https://www.coinbase.com/careers/positions/8147917?gh_jid=8147917"
+      ],
+      "unconfirmed": [
+        "https://jobs.ashbyhq.com/mem0/74a4c176-4bbe-4bf7-b471-06573dba05a1"
       ]
     }
   }
