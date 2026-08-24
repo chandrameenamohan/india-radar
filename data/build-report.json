@@ -3,8 +3,8 @@
   "checked": 846,
   "unchecked": 2180,
   "counts": {
-    "listed": 391,
-    "no-target-roles": 455,
+    "listed": 389,
+    "no-target-roles": 457,
     "slug-unresolved": 2160,
     "probe-failed": 0,
     "empty-board-unverified": 7,
@@ -107,7 +107,6 @@
     "DistroKid",
     "Distyl AI",
     "Docker",
-    "Doppel",
     "Drata",
     "DriveWealth",
     "Dropbox",
@@ -374,7 +373,6 @@
     "Tulip",
     "Turing",
     "Twin Health",
-    "Twitch",
     "Vanta",
     "Vapi",
     "Vectra Networks",
@@ -1181,7 +1179,7 @@
     "Domyn SpA": "slug-unresolved",
     "DoorDash": "slug-unresolved",
     "Doorstep": "slug-unresolved",
-    "Doppel": "listed",
+    "Doppel": "no-target-roles",
     "Doppler": "no-target-roles",
     "Dots \ud83d\udcb8": "no-target-roles",
     "Double Blind Bio": "slug-unresolved",
@@ -3130,7 +3128,7 @@
     "Turnstile Software": "slug-unresolved",
     "Tutor Intelligence": "slug-unresolved",
     "Twin Health": "listed",
-    "Twitch": "listed",
+    "Twitch": "no-target-roles",
     "Two Dots": "slug-unresolved",
     "Two Six Technologies Holdings": "slug-unresolved",
     "Tycho AI": "slug-unresolved",
@@ -3432,7 +3430,10 @@
     "xLight": "slug-unresolved",
     "zeroheight": "slug-unresolved"
   },
-  "departed": {},
+  "departed": {
+    "Doppel": "no-target-roles",
+    "Twitch": "no-target-roles"
+  },
   "websites": {
     "with_website": 1928,
     "slug_unresolved_with_website": 1175,
@@ -3455,18 +3456,18 @@
   },
   "countries": {
     "India": 131,
-    "United Kingdom": 274,
+    "United Kingdom": 272,
     "Ireland": 52,
     "Germany": 114,
-    "Netherlands": 48,
+    "Netherlands": 49,
     "France": 57,
-    "Spain": 64,
-    "Sweden": 29,
+    "Spain": 66,
+    "Sweden": 30,
     "Denmark": 15,
     "Norway": 8,
     "Finland": 7,
     "Japan": 66,
-    "Singapore": 78,
+    "Singapore": 77,
     "Australia": 81,
     "New Zealand": 6
   },
@@ -5058,23 +5059,6 @@
             "name": "DIALPAD UK LIMITED",
             "status": "active",
             "incorporated": "2019-02-28",
-            "locality": "",
-            "postcode": "",
-            "sic": [],
-            "kind": ""
-          }
-        ]
-      },
-      {
-        "name": "Doppel",
-        "confidence": "exact",
-        "why": "no website; one exact-tier name match",
-        "candidates": [
-          {
-            "number": "08365543",
-            "name": "DOPPEL LTD",
-            "status": "dissolved",
-            "incorporated": "2013-01-18",
             "locality": "",
             "postcode": "",
             "sic": [],
@@ -7739,33 +7723,6 @@
             "name": "TORQ LIMITED",
             "status": "active",
             "incorporated": "2000-02-28",
-            "locality": "",
-            "postcode": "",
-            "sic": [],
-            "kind": ""
-          }
-        ]
-      },
-      {
-        "name": "Twitch",
-        "confidence": "exact",
-        "why": "silent; 2 companies reach the exact tier",
-        "candidates": [
-          {
-            "number": "SC355644",
-            "name": "TWITCH LIMITED",
-            "status": "dissolved",
-            "incorporated": "2009-02-25",
-            "locality": "",
-            "postcode": "",
-            "sic": [],
-            "kind": ""
-          },
-          {
-            "number": "10084616",
-            "name": "TWITCH UK LIMITED",
-            "status": "active",
-            "incorporated": "2016-03-24",
             "locality": "",
             "postcode": "",
             "sic": [],
