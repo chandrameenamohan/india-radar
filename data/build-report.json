@@ -1,11 +1,11 @@
 {
   "corpus_size": 3026,
-  "checked": 845,
-  "unchecked": 2181,
+  "checked": 846,
+  "unchecked": 2180,
   "counts": {
-    "listed": 383,
-    "no-target-roles": 462,
-    "slug-unresolved": 2161,
+    "listed": 382,
+    "no-target-roles": 464,
+    "slug-unresolved": 2160,
     "probe-failed": 0,
     "empty-board-unverified": 7,
     "not-qualified": 0,
@@ -35,6 +35,7 @@
     "AppDirect",
     "Applied Intuition",
     "AppsFlyer",
+    "Arcadia",
     "Arketa",
     "Armada",
     "Ashby",
@@ -197,7 +198,6 @@
     "Kpler",
     "Lambda Labs",
     "LangChain",
-    "Lattice",
     "LaunchDarkly",
     "Legion Health",
     "Legora",
@@ -268,7 +268,6 @@
     "Parker",
     "Parloa",
     "Passionfroot",
-    "Patreon",
     "Payward",
     "Peec AI",
     "Pelago",
@@ -566,7 +565,7 @@
     "Aptos": "no-target-roles",
     "Aqua Security": "slug-unresolved",
     "Arc": "slug-unresolved",
-    "Arcadia": "slug-unresolved",
+    "Arcadia": "listed",
     "Archil": "no-target-roles",
     "Architect Financial Technologies": "slug-unresolved",
     "Arcjet Labs": "slug-unresolved",
@@ -1849,7 +1848,7 @@
     "LangChain": "listed",
     "Last Energy": "slug-unresolved",
     "Latchel": "slug-unresolved",
-    "Lattice": "listed",
+    "Lattice": "no-target-roles",
     "LaunchDarkly": "listed",
     "LayerZero Labs": "no-target-roles",
     "Le Tote": "slug-unresolved",
@@ -2378,7 +2377,7 @@
     "Pathrise": "slug-unresolved",
     "PatientFi": "slug-unresolved",
     "Patlytics": "slug-unresolved",
-    "Patreon": "listed",
+    "Patreon": "no-target-roles",
     "Patronus AI": "slug-unresolved",
     "Pave": "slug-unresolved",
     "Pax8": "slug-unresolved",
@@ -3425,16 +3424,12 @@
     "zeroheight": "slug-unresolved"
   },
   "departed": {
-    "Arcadia": "slug-unresolved",
-    "Awardco": "no-target-roles",
-    "Bitstack": "no-target-roles",
-    "Lago": "no-target-roles",
-    "Securitize": "no-target-roles",
-    "Substack": "no-target-roles"
+    "Lattice": "no-target-roles",
+    "Patreon": "no-target-roles"
   },
   "websites": {
     "with_website": 1928,
-    "slug_unresolved_with_website": 1176,
+    "slug_unresolved_with_website": 1175,
     "slug_unresolved_without_website": 985
   },
   "shared_boards": {
@@ -3453,20 +3448,20 @@
     "Insider": "Business Insider"
   },
   "countries": {
-    "India": 130,
-    "United Kingdom": 271,
+    "India": 131,
+    "United Kingdom": 269,
     "Ireland": 51,
     "Germany": 113,
     "Netherlands": 48,
     "France": 55,
-    "Spain": 64,
+    "Spain": 65,
     "Sweden": 28,
     "Denmark": 15,
     "Norway": 8,
     "Finland": 7,
     "Japan": 65,
-    "Singapore": 78,
-    "Australia": 81,
+    "Singapore": 76,
+    "Australia": 80,
     "New Zealand": 6
   },
   "mca": {
@@ -5933,33 +5928,6 @@
             "name": "KPLER LTD",
             "status": "active",
             "incorporated": "2017-11-01",
-            "locality": "",
-            "postcode": "",
-            "sic": [],
-            "kind": ""
-          }
-        ]
-      },
-      {
-        "name": "Lattice",
-        "confidence": "exact",
-        "why": "silent; 2 companies reach the exact tier",
-        "candidates": [
-          {
-            "number": "14004034",
-            "name": "LATTICE LTD",
-            "status": "active",
-            "incorporated": "2022-03-25",
-            "locality": "",
-            "postcode": "",
-            "sic": [],
-            "kind": ""
-          },
-          {
-            "number": "09579785",
-            "name": "LATTICE LIMITED",
-            "status": "dissolved",
-            "incorporated": "2015-05-07",
             "locality": "",
             "postcode": "",
             "sic": [],
