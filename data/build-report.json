@@ -1,11 +1,11 @@
 {
   "corpus_size": 3026,
-  "checked": 846,
-  "unchecked": 2180,
+  "checked": 848,
+  "unchecked": 2178,
   "counts": {
-    "listed": 382,
-    "no-target-roles": 464,
-    "slug-unresolved": 2160,
+    "listed": 383,
+    "no-target-roles": 465,
+    "slug-unresolved": 2158,
     "probe-failed": 0,
     "empty-board-unverified": 7,
     "not-qualified": 0,
@@ -198,6 +198,7 @@
     "Kpler",
     "Lambda Labs",
     "LangChain",
+    "Lattice",
     "LaunchDarkly",
     "Legion Health",
     "Legora",
@@ -1033,7 +1034,7 @@
     "Courier": "slug-unresolved",
     "Courtyard.io": "no-target-roles",
     "Covariance Labs": "slug-unresolved",
-    "Cover": "slug-unresolved",
+    "Cover": "no-target-roles",
     "Cratejoy": "slug-unresolved",
     "Creatio": "slug-unresolved",
     "Credible Data": "slug-unresolved",
@@ -1848,7 +1849,7 @@
     "LangChain": "listed",
     "Last Energy": "slug-unresolved",
     "Latchel": "slug-unresolved",
-    "Lattice": "no-target-roles",
+    "Lattice": "listed",
     "LaunchDarkly": "listed",
     "LayerZero Labs": "no-target-roles",
     "Le Tote": "slug-unresolved",
@@ -1918,7 +1919,7 @@
     "Loft": "slug-unresolved",
     "Lokal": "slug-unresolved",
     "Long Term Stock Exchange": "no-target-roles",
-    "Lookout": "slug-unresolved",
+    "Lookout": "no-target-roles",
     "Looma Project": "slug-unresolved",
     "Loop": "slug-unresolved",
     "Loop Health": "slug-unresolved",
@@ -3423,13 +3424,10 @@
     "xLight": "slug-unresolved",
     "zeroheight": "slug-unresolved"
   },
-  "departed": {
-    "Lattice": "no-target-roles",
-    "Patreon": "no-target-roles"
-  },
+  "departed": {},
   "websites": {
     "with_website": 1928,
-    "slug_unresolved_with_website": 1175,
+    "slug_unresolved_with_website": 1173,
     "slug_unresolved_without_website": 985
   },
   "shared_boards": {
@@ -3449,9 +3447,9 @@
   },
   "countries": {
     "India": 131,
-    "United Kingdom": 269,
+    "United Kingdom": 270,
     "Ireland": 51,
-    "Germany": 113,
+    "Germany": 112,
     "Netherlands": 48,
     "France": 55,
     "Spain": 65,
@@ -3461,7 +3459,7 @@
     "Finland": 7,
     "Japan": 65,
     "Singapore": 76,
-    "Australia": 80,
+    "Australia": 79,
     "New Zealand": 6
   },
   "mca": {
@@ -5928,6 +5926,33 @@
             "name": "KPLER LTD",
             "status": "active",
             "incorporated": "2017-11-01",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Lattice",
+        "confidence": "exact",
+        "why": "silent; 2 companies reach the exact tier",
+        "candidates": [
+          {
+            "number": "14004034",
+            "name": "LATTICE LTD",
+            "status": "active",
+            "incorporated": "2022-03-25",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "09579785",
+            "name": "LATTICE LIMITED",
+            "status": "dissolved",
+            "incorporated": "2015-05-07",
             "locality": "",
             "postcode": "",
             "sic": [],
