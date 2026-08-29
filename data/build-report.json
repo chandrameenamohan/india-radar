@@ -1,11 +1,11 @@
 {
   "corpus_size": 3026,
-  "checked": 848,
-  "unchecked": 2178,
+  "checked": 845,
+  "unchecked": 2181,
   "counts": {
-    "listed": 383,
-    "no-target-roles": 465,
-    "slug-unresolved": 2158,
+    "listed": 377,
+    "no-target-roles": 468,
+    "slug-unresolved": 2161,
     "probe-failed": 0,
     "empty-board-unverified": 7,
     "not-qualified": 0,
@@ -35,7 +35,6 @@
     "AppDirect",
     "Applied Intuition",
     "AppsFlyer",
-    "Arcadia",
     "Arketa",
     "Armada",
     "Ashby",
@@ -53,8 +52,6 @@
     "BetterUp",
     "BitPanda",
     "Bitmovin",
-    "Black Forest Labs",
-    "Blee",
     "Blitzy",
     "Blue Energy",
     "Bolna",
@@ -274,7 +271,6 @@
     "Pelago",
     "Pendo",
     "Pennylane",
-    "Peregrine",
     "PermitFlow",
     "Permutive",
     "Photoroom",
@@ -311,7 +307,6 @@
     "Saturn",
     "Scale AI",
     "Scandit",
-    "SeekOut",
     "Semafor",
     "Semperis",
     "Sentry",
@@ -347,7 +342,6 @@
     "Teamworks",
     "Teleport",
     "Tem",
-    "Temporal",
     "TensTorrent",
     "Teya",
     "The Athletic",
@@ -566,7 +560,7 @@
     "Aptos": "no-target-roles",
     "Aqua Security": "slug-unresolved",
     "Arc": "slug-unresolved",
-    "Arcadia": "listed",
+    "Arcadia": "slug-unresolved",
     "Archil": "no-target-roles",
     "Architect Financial Technologies": "slug-unresolved",
     "Arcjet Labs": "slug-unresolved",
@@ -723,7 +717,7 @@
     "Bits": "slug-unresolved",
     "Bitso": "no-target-roles",
     "Bitstack": "no-target-roles",
-    "Black Forest Labs": "listed",
+    "Black Forest Labs": "slug-unresolved",
     "Black Lake Technologies": "slug-unresolved",
     "Black Unicorn Factory": "slug-unresolved",
     "Blacksmith Software": "slug-unresolved",
@@ -731,7 +725,7 @@
     "Bland AI": "no-target-roles",
     "Blank Slate Technologies": "slug-unresolved",
     "BlastPoint": "no-target-roles",
-    "Blee": "listed",
+    "Blee": "no-target-roles",
     "Blink Technologies": "slug-unresolved",
     "Blinq": "slug-unresolved",
     "Blitzy": "listed",
@@ -2407,7 +2401,7 @@
     "Per Vices": "slug-unresolved",
     "Percent": "slug-unresolved",
     "Perceptive Technologies": "slug-unresolved",
-    "Peregrine": "listed",
+    "Peregrine": "no-target-roles",
     "Peregrine Hydrogen": "slug-unresolved",
     "Perfios": "slug-unresolved",
     "Perfumeo": "slug-unresolved",
@@ -2771,7 +2765,7 @@
     "Securitize": "no-target-roles",
     "SeeQC": "slug-unresolved",
     "Seegrid": "slug-unresolved",
-    "SeekOut": "listed",
+    "SeekOut": "no-target-roles",
     "Seekr": "no-target-roles",
     "Seekr Technologies": "slug-unresolved",
     "Seezo": "slug-unresolved",
@@ -3019,7 +3013,7 @@
     "Temelio": "slug-unresolved",
     "Templarbit": "slug-unresolved",
     "Tempo": "no-target-roles",
-    "Temporal": "listed",
+    "Temporal": "slug-unresolved",
     "TeneoSeven": "slug-unresolved",
     "Tennr": "no-target-roles",
     "TensTorrent": "listed",
@@ -3424,10 +3418,17 @@
     "xLight": "slug-unresolved",
     "zeroheight": "slug-unresolved"
   },
-  "departed": {},
+  "departed": {
+    "Arcadia": "slug-unresolved",
+    "Black Forest Labs": "slug-unresolved",
+    "Blee": "no-target-roles",
+    "Peregrine": "no-target-roles",
+    "SeekOut": "no-target-roles",
+    "Temporal": "slug-unresolved"
+  },
   "websites": {
     "with_website": 1928,
-    "slug_unresolved_with_website": 1173,
+    "slug_unresolved_with_website": 1176,
     "slug_unresolved_without_website": 985
   },
   "shared_boards": {
@@ -3446,20 +3447,20 @@
     "Insider": "Business Insider"
   },
   "countries": {
-    "India": 131,
-    "United Kingdom": 270,
-    "Ireland": 51,
-    "Germany": 112,
+    "India": 127,
+    "United Kingdom": 267,
+    "Ireland": 56,
+    "Germany": 110,
     "Netherlands": 48,
-    "France": 55,
-    "Spain": 65,
-    "Sweden": 28,
+    "France": 54,
+    "Spain": 63,
+    "Sweden": 29,
     "Denmark": 15,
     "Norway": 8,
     "Finland": 7,
     "Japan": 65,
-    "Singapore": 76,
-    "Australia": 79,
+    "Singapore": 75,
+    "Australia": 80,
     "New Zealand": 6
   },
   "mca": {
@@ -3548,19 +3549,6 @@
             "name": "COCKROACH LABS TECHNOLOGIES INDIA PRIVATE LIMITED",
             "incorporated": "2022-06-29",
             "address": "WeWork Roshni Tech Hub, 7B-102, Roshni Arcade,, Marathahalli Main Road, Lakshminarayana Pura, EPIP Zone, Chinnapanna Halli,Bangalore North,Bangalore,Karnataka,560037-India",
-            "status": "Active"
-          }
-        ]
-      },
-      {
-        "name": "Degreed",
-        "confidence": "prefix",
-        "candidates": [
-          {
-            "cin": "U74999MH2019FTC319055",
-            "name": "DEGREED APAC PRIVATE LIMITED",
-            "incorporated": "2019-01-04",
-            "address": "We work 247 Park 13th Floor Vikhroli Corporate Park,Hindustan C. Bus Stop  Lal Bahadur Shastri Rd Gandhi Nagar Vikhroli West Mumbai,Mumbai,Mumbai,Maharashtra,400083-India",
             "status": "Active"
           }
         ]
@@ -3816,19 +3804,6 @@
             "name": "RAZORPAY TECHNOLOGIES PRIVATE LIMITED",
             "incorporated": "2015-08-28",
             "address": "1st Floor, SJR Cyber   22, Laskar Hosur Road, Adugodi,Bangalore,Bangalore,Karnataka,560030-India",
-            "status": "Active"
-          }
-        ]
-      },
-      {
-        "name": "SeekOut",
-        "confidence": "prefix",
-        "candidates": [
-          {
-            "cin": "U62099KA2023FTC205613",
-            "name": "SEEKOUT TALENT INNOVATIONS INDIA PRIVATE LIMITED",
-            "incorporated": "2023-08-25",
-            "address": "4th Floor, Kabra Excelsior,,6/A, 80 Feet Rd, Koramangala 1A Block,,Bangalore South,Bangalore,Karnataka,560034-India",
             "status": "Active"
           }
         ]
@@ -4326,23 +4301,6 @@
             "name": "BENCHLING UK LTD",
             "status": "active",
             "incorporated": "2021-12-06",
-            "locality": "",
-            "postcode": "",
-            "sic": [],
-            "kind": ""
-          }
-        ]
-      },
-      {
-        "name": "Blee",
-        "confidence": "exact",
-        "why": "silent; one exact-tier name match",
-        "candidates": [
-          {
-            "number": "11734337",
-            "name": "BLEE LTD",
-            "status": "active",
-            "incorporated": "2018-12-19",
             "locality": "",
             "postcode": "",
             "sic": [],
@@ -5670,6 +5628,23 @@
         ]
       },
       {
+        "name": "Horizon 3 AI",
+        "confidence": "exact",
+        "why": "no website; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "16225773",
+            "name": "HORIZON3 AI UK LTD",
+            "status": "active",
+            "incorporated": "2025-02-03",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
         "name": "Huntress",
         "confidence": "exact",
         "why": "silent; one exact-tier name match",
@@ -6739,23 +6714,6 @@
         ]
       },
       {
-        "name": "Peregrine",
-        "confidence": "exact",
-        "why": "silent; one exact-tier name match",
-        "candidates": [
-          {
-            "number": "12538909",
-            "name": "PEREGRINE LTD",
-            "status": "active",
-            "incorporated": "2020-03-30",
-            "locality": "",
-            "postcode": "",
-            "sic": [],
-            "kind": ""
-          }
-        ]
-      },
-      {
         "name": "Permutive",
         "confidence": "exact",
         "why": "silent; one exact-tier name match",
@@ -7515,33 +7473,6 @@
             "name": "TELEPORT LIMITED",
             "status": "dissolved",
             "incorporated": "1994-10-06",
-            "locality": "",
-            "postcode": "",
-            "sic": [],
-            "kind": ""
-          }
-        ]
-      },
-      {
-        "name": "Temporal",
-        "confidence": "exact",
-        "why": "silent; 2 companies reach the exact tier",
-        "candidates": [
-          {
-            "number": "16727677",
-            "name": "TEMPORAL LIMITED",
-            "status": "active",
-            "incorporated": "2025-09-18",
-            "locality": "",
-            "postcode": "",
-            "sic": [],
-            "kind": ""
-          },
-          {
-            "number": "07363219",
-            "name": "TEMPORAL LTD",
-            "status": "dissolved",
-            "incorporated": "2010-09-02",
             "locality": "",
             "postcode": "",
             "sic": [],
