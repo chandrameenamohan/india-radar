@@ -3,8 +3,8 @@
   "checked": 845,
   "unchecked": 2181,
   "counts": {
-    "listed": 377,
-    "no-target-roles": 468,
+    "listed": 378,
+    "no-target-roles": 467,
     "slug-unresolved": 2161,
     "probe-failed": 0,
     "empty-board-unverified": 7,
@@ -253,6 +253,7 @@
     "OKX",
     "Observe.AI",
     "Odyssey",
+    "Oklo",
     "OneTrust",
     "Onebrief",
     "OpenAI",
@@ -2249,7 +2250,7 @@
     "Offchain Labs": "no-target-roles",
     "OkCredit": "slug-unresolved",
     "Okami Medical": "slug-unresolved",
-    "Oklo": "no-target-roles",
+    "Oklo": "listed",
     "Okteto": "slug-unresolved",
     "Olden Labs": "slug-unresolved",
     "Oleria": "empty-board-unverified",
@@ -3441,10 +3442,10 @@
   },
   "countries": {
     "India": 127,
-    "United Kingdom": 267,
+    "United Kingdom": 268,
     "Ireland": 56,
     "Germany": 110,
-    "Netherlands": 48,
+    "Netherlands": 49,
     "France": 54,
     "Spain": 63,
     "Sweden": 29,
@@ -6523,6 +6524,33 @@
             "name": "ODYSSEY LTD",
             "status": "active",
             "incorporated": "2001-08-07",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Oklo",
+        "confidence": "exact",
+        "why": "unreachable; 2 companies reach the exact tier",
+        "candidates": [
+          {
+            "number": "12419700",
+            "name": "OKLO LTD",
+            "status": "dissolved",
+            "incorporated": "2020-01-22",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "07894704",
+            "name": "OKLO LIMITED",
+            "status": "dissolved",
+            "incorporated": "2012-01-03",
             "locality": "",
             "postcode": "",
             "sic": [],

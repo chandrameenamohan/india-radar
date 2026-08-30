@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "snapshot": "2026-08-29",
+  "snapshot": "2026-08-30",
   "note": "first_seen is the snapshot date a role's URL first appeared in a build. A role is confirmed only where its company's board was read on the previous snapshot AND on this one \u2014 both sides genuinely observed. Everything else is unconfirmed: we saw it for the first time, which is not the same as it being new. Only confirmed roles may be called new.",
   "observed": [
     "1Password",
@@ -244,6 +244,7 @@
     "OKX",
     "Observe.AI",
     "Odyssey",
+    "Oklo",
     "OneTrust",
     "Onebrief",
     "OpenAI",
@@ -9843,6 +9844,21 @@
         "https://www.kaseya.com/careers/jobs/id/6146948004/?gh_jid=6146948004",
         "https://www.netskope.com/company/careers/open-positions/?gh_jid=7733429",
         "https://www.workato.com/careers?gh_jid=8743119002#open-roles"
+      ],
+      "unconfirmed": []
+    },
+    "2026-08-30": {
+      "confirmed": [
+        "https://job-boards.eu.greenhouse.io/parloa/jobs/4963789101",
+        "https://jobs.ashbyhq.com/andela/0c0aec45-7420-4987-bf06-ea13556b7f9f",
+        "https://n26.com/en-eu/careers/positions/7649873?gh_jid=7649873",
+        "https://n26.com/en-eu/careers/positions/7653388?gh_jid=7653388",
+        "https://ripple.com/careers/all-jobs/job/8164504?gh_jid=8164504",
+        "https://stripe.com/jobs/search?gh_jid=7964956",
+        "https://wayve.firststage.co/jobs?gh_jid=8682187002",
+        "https://www.kaseya.com/careers/jobs/id/6146936004/?gh_jid=6146936004",
+        "https://www.kaseya.com/careers/jobs/id/6146940004/?gh_jid=6146940004",
+        "https://www.kaseya.com/careers/jobs/id/6146950004/?gh_jid=6146950004"
       ],
       "unconfirmed": []
     }
