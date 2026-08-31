@@ -80,6 +80,7 @@
     "Cohere Health",
     "Coinbase",
     "Collibra",
+    "ConductorOne",
     "ContentSquare",
     "Contentful",
     "Conveo",
@@ -253,7 +254,6 @@
     "OKX",
     "Observe.AI",
     "Odyssey",
-    "Oklo",
     "OneTrust",
     "Onebrief",
     "OpenAI",
@@ -998,7 +998,7 @@
     "Concrete AI": "slug-unresolved",
     "Conductor": "no-target-roles",
     "ConductorAI": "slug-unresolved",
-    "ConductorOne": "no-target-roles",
+    "ConductorOne": "listed",
     "Conduit": "slug-unresolved",
     "Conduit Health": "slug-unresolved",
     "Confident LIMS": "slug-unresolved",
@@ -2250,7 +2250,7 @@
     "Offchain Labs": "no-target-roles",
     "OkCredit": "slug-unresolved",
     "Okami Medical": "slug-unresolved",
-    "Oklo": "listed",
+    "Oklo": "no-target-roles",
     "Okteto": "slug-unresolved",
     "Olden Labs": "slug-unresolved",
     "Oleria": "empty-board-unverified",
@@ -3419,7 +3419,9 @@
     "xLight": "slug-unresolved",
     "zeroheight": "slug-unresolved"
   },
-  "departed": {},
+  "departed": {
+    "Oklo": "no-target-roles"
+  },
   "websites": {
     "with_website": 1928,
     "slug_unresolved_with_website": 1176,
@@ -3442,18 +3444,18 @@
   },
   "countries": {
     "India": 127,
-    "United Kingdom": 268,
+    "United Kingdom": 269,
     "Ireland": 56,
     "Germany": 110,
-    "Netherlands": 49,
+    "Netherlands": 48,
     "France": 54,
     "Spain": 63,
     "Sweden": 29,
     "Denmark": 15,
     "Norway": 8,
     "Finland": 7,
-    "Japan": 65,
-    "Singapore": 75,
+    "Japan": 64,
+    "Singapore": 74,
     "Australia": 80,
     "New Zealand": 6
   },
@@ -6524,33 +6526,6 @@
             "name": "ODYSSEY LTD",
             "status": "active",
             "incorporated": "2001-08-07",
-            "locality": "",
-            "postcode": "",
-            "sic": [],
-            "kind": ""
-          }
-        ]
-      },
-      {
-        "name": "Oklo",
-        "confidence": "exact",
-        "why": "unreachable; 2 companies reach the exact tier",
-        "candidates": [
-          {
-            "number": "12419700",
-            "name": "OKLO LTD",
-            "status": "dissolved",
-            "incorporated": "2020-01-22",
-            "locality": "",
-            "postcode": "",
-            "sic": [],
-            "kind": ""
-          },
-          {
-            "number": "07894704",
-            "name": "OKLO LIMITED",
-            "status": "dissolved",
-            "incorporated": "2012-01-03",
             "locality": "",
             "postcode": "",
             "sic": [],
