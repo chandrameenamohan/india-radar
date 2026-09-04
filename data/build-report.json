@@ -1,11 +1,11 @@
 {
   "corpus_size": 3026,
-  "checked": 840,
-  "unchecked": 2186,
+  "checked": 839,
+  "unchecked": 2187,
   "counts": {
-    "listed": 374,
-    "no-target-roles": 466,
-    "slug-unresolved": 2166,
+    "listed": 372,
+    "no-target-roles": 467,
+    "slug-unresolved": 2167,
     "probe-failed": 0,
     "empty-board-unverified": 7,
     "not-qualified": 0,
@@ -58,7 +58,6 @@
     "Bolna",
     "Braze",
     "CAIS",
-    "Cambly",
     "Cambridge Mobile Telematics",
     "Campfire",
     "Canary Technologies",
@@ -316,7 +315,6 @@
     "Socure",
     "Solve Intelligence",
     "Sorare",
-    "Sorcero",
     "SparkCognition",
     "Speak",
     "Spellbrush",
@@ -825,7 +823,7 @@
     "Camber": "no-target-roles",
     "Cambio": "no-target-roles",
     "Cambium Biomaterials": "slug-unresolved",
-    "Cambly": "listed",
+    "Cambly": "no-target-roles",
     "Cambridge Mobile Telematics": "listed",
     "Cambridge Terahertz": "slug-unresolved",
     "Cameo": "no-target-roles",
@@ -2607,7 +2605,7 @@
     "Reflection": "slug-unresolved",
     "Reflection AI": "listed",
     "Reframe": "slug-unresolved",
-    "RegScale": "no-target-roles",
+    "RegScale": "slug-unresolved",
     "Regology": "slug-unresolved",
     "Reka AI": "listed",
     "Relativity": "another-companys-board",
@@ -2867,7 +2865,7 @@
     "Soomgo": "slug-unresolved",
     "Sophia Space": "slug-unresolved",
     "Sorare": "listed",
-    "Sorcero": "listed",
+    "Sorcero": "no-target-roles",
     "Sorella Labs": "no-target-roles",
     "Soteris": "slug-unresolved",
     "Sourcegraph": "no-target-roles",
@@ -3416,12 +3414,13 @@
     "zeroheight": "slug-unresolved"
   },
   "departed": {
-    "Modern Health": "no-target-roles"
+    "Cambly": "no-target-roles",
+    "Sorcero": "no-target-roles"
   },
   "websites": {
     "with_website": 1928,
     "slug_unresolved_with_website": 1180,
-    "slug_unresolved_without_website": 986
+    "slug_unresolved_without_website": 987
   },
   "shared_boards": {
     "Bright": "BrightAI",
@@ -3439,26 +3438,26 @@
     "Insider": "Business Insider"
   },
   "countries": {
-    "India": 128,
-    "United Kingdom": 271,
+    "India": 127,
+    "United Kingdom": 269,
     "Ireland": 54,
-    "Germany": 104,
-    "Netherlands": 47,
-    "France": 54,
-    "Spain": 61,
+    "Germany": 102,
+    "Netherlands": 48,
+    "France": 55,
+    "Spain": 62,
     "Sweden": 26,
     "Denmark": 16,
     "Norway": 8,
     "Finland": 7,
-    "Japan": 63,
+    "Japan": 62,
     "Singapore": 70,
-    "Australia": 76,
+    "Australia": 77,
     "New Zealand": 5
   },
   "mca": {
     "records": 24102,
     "pulled": "2026-07-29",
-    "matched": 33,
+    "matched": 32,
     "held": [
       {
         "name": "6Sense",
