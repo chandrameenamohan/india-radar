@@ -1,6 +1,6 @@
 {
   "schema_version": 10,
-  "snapshot": "2026-09-04",
+  "snapshot": "2026-09-05",
   "integrity": {
     "corpus_size": 3026,
     "checked": 839,
@@ -833,12 +833,12 @@
       "roles": [
         {
           "title": "Acquisition Manager",
-          "url": "https://careers.airbnb.com/positions/7995199?gh_jid=7995199",
+          "url": "https://careers.airbnb.com/positions/7995153?gh_jid=7995153",
           "locations": [
-            "Paris, France"
+            "Berlin, Germany "
           ],
           "countries": [
-            "France"
+            "Germany"
           ],
           "workplace": null,
           "department": "Sales",
@@ -847,12 +847,12 @@
         },
         {
           "title": "Acquisition Manager",
-          "url": "https://careers.airbnb.com/positions/7995153?gh_jid=7995153",
+          "url": "https://careers.airbnb.com/positions/7995199?gh_jid=7995199",
           "locations": [
-            "Berlin, Germany "
+            "Paris, France"
           ],
           "countries": [
-            "Germany"
+            "France"
           ],
           "workplace": null,
           "department": "Sales",
@@ -2045,6 +2045,20 @@
         },
         {
           "title": "Client Due Dilligence Analyst (DDQ)",
+          "url": "https://job-boards.greenhouse.io/alphasense/jobs/8658276002",
+          "locations": [
+            "Delhi"
+          ],
+          "countries": [
+            "India"
+          ],
+          "workplace": null,
+          "department": "Compliance",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Client Due Dilligence Analyst (DDQ)",
           "url": "https://job-boards.greenhouse.io/alphasense/jobs/8658278002",
           "locations": [
             "Bengaluru"
@@ -2072,8 +2086,8 @@
           "hire_from_abroad": "unknown"
         },
         {
-          "title": "Client Due Dilligence Analyst (DDQ)",
-          "url": "https://job-boards.greenhouse.io/alphasense/jobs/8658276002",
+          "title": "Cloud Support Engineer",
+          "url": "https://job-boards.greenhouse.io/alphasense/jobs/8556014002",
           "locations": [
             "Delhi"
           ],
@@ -2081,15 +2095,15 @@
             "India"
           ],
           "workplace": null,
-          "department": "Compliance",
+          "department": "Customer Success",
           "visa": "unknown",
           "hire_from_abroad": "unknown"
         },
         {
           "title": "Cloud Support Engineer",
-          "url": "https://job-boards.greenhouse.io/alphasense/jobs/8556018002",
+          "url": "https://job-boards.greenhouse.io/alphasense/jobs/8556009002",
           "locations": [
-            "Bengaluru"
+            "Pune"
           ],
           "countries": [
             "India"
@@ -2115,9 +2129,9 @@
         },
         {
           "title": "Cloud Support Engineer",
-          "url": "https://job-boards.greenhouse.io/alphasense/jobs/8556009002",
+          "url": "https://job-boards.greenhouse.io/alphasense/jobs/8556018002",
           "locations": [
-            "Pune"
+            "Bengaluru"
           ],
           "countries": [
             "India"
@@ -2142,16 +2156,16 @@
           "hire_from_abroad": "unknown"
         },
         {
-          "title": "Cloud Support Engineer",
-          "url": "https://job-boards.greenhouse.io/alphasense/jobs/8556014002",
+          "title": "Compliance Analyst",
+          "url": "https://job-boards.greenhouse.io/alphasense/jobs/8630663002",
           "locations": [
-            "Delhi"
+            "Bengaluru"
           ],
           "countries": [
             "India"
           ],
           "workplace": null,
-          "department": "Customer Success",
+          "department": "Compliance",
           "visa": "unknown",
           "hire_from_abroad": "unknown"
         },
@@ -2184,20 +2198,6 @@
           "hire_from_abroad": "unknown"
         },
         {
-          "title": "Compliance Analyst",
-          "url": "https://job-boards.greenhouse.io/alphasense/jobs/8630663002",
-          "locations": [
-            "Bengaluru"
-          ],
-          "countries": [
-            "India"
-          ],
-          "workplace": null,
-          "department": "Compliance",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
           "title": "Compliance Analyst - AI Governance",
           "url": "https://job-boards.greenhouse.io/alphasense/jobs/8648659002",
           "locations": [
@@ -2213,9 +2213,9 @@
         },
         {
           "title": "Compliance Analyst, Expert Network",
-          "url": "https://job-boards.greenhouse.io/alphasense/jobs/8693022002",
+          "url": "https://job-boards.greenhouse.io/alphasense/jobs/8693025002",
           "locations": [
-            "Pune"
+            "Delhi"
           ],
           "countries": [
             "India"
@@ -2227,9 +2227,9 @@
         },
         {
           "title": "Compliance Analyst, Expert Network",
-          "url": "https://job-boards.greenhouse.io/alphasense/jobs/8693025002",
+          "url": "https://job-boards.greenhouse.io/alphasense/jobs/8693022002",
           "locations": [
-            "Delhi"
+            "Pune"
           ],
           "countries": [
             "India"
@@ -2409,34 +2409,6 @@
         },
         {
           "title": "Engineer II - Information Engineer",
-          "url": "https://job-boards.greenhouse.io/alphasense/jobs/8576243002",
-          "locations": [
-            "Delhi"
-          ],
-          "countries": [
-            "India"
-          ],
-          "workplace": null,
-          "department": "Security / IT",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Engineer II - Information Engineer",
-          "url": "https://job-boards.greenhouse.io/alphasense/jobs/8576244002",
-          "locations": [
-            "Bengaluru"
-          ],
-          "countries": [
-            "India"
-          ],
-          "workplace": null,
-          "department": "Security / IT",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Engineer II - Information Engineer",
           "url": "https://job-boards.greenhouse.io/alphasense/jobs/8576246002",
           "locations": [
             "Remote - India"
@@ -2451,9 +2423,37 @@
         },
         {
           "title": "Engineer II - Information Engineer",
+          "url": "https://job-boards.greenhouse.io/alphasense/jobs/8576243002",
+          "locations": [
+            "Delhi"
+          ],
+          "countries": [
+            "India"
+          ],
+          "workplace": null,
+          "department": "Security / IT",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Engineer II - Information Engineer",
           "url": "https://job-boards.greenhouse.io/alphasense/jobs/8576239002",
           "locations": [
             "Pune"
+          ],
+          "countries": [
+            "India"
+          ],
+          "workplace": null,
+          "department": "Security / IT",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Engineer II - Information Engineer",
+          "url": "https://job-boards.greenhouse.io/alphasense/jobs/8576244002",
+          "locations": [
+            "Bengaluru"
           ],
           "countries": [
             "India"
@@ -2479,7 +2479,7 @@
         },
         {
           "title": "Enterprise Account Executive, Corporate",
-          "url": "https://job-boards.greenhouse.io/alphasense/jobs/7767705002",
+          "url": "https://job-boards.greenhouse.io/alphasense/jobs/8592055002",
           "locations": [
             "Singapore, Central, Singapore"
           ],
@@ -2493,7 +2493,7 @@
         },
         {
           "title": "Enterprise Account Executive, Corporate",
-          "url": "https://job-boards.greenhouse.io/alphasense/jobs/8592055002",
+          "url": "https://job-boards.greenhouse.io/alphasense/jobs/7767705002",
           "locations": [
             "Singapore, Central, Singapore"
           ],
@@ -2577,20 +2577,6 @@
         },
         {
           "title": "Join AlphaSense India Talent Community",
-          "url": "https://job-boards.greenhouse.io/alphasense/jobs/7119400002",
-          "locations": [
-            "Pune"
-          ],
-          "countries": [
-            "India"
-          ],
-          "workplace": null,
-          "department": "Talent Communities",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Join AlphaSense India Talent Community",
           "url": "https://job-boards.greenhouse.io/alphasense/jobs/7119393002",
           "locations": [
             "Bengaluru"
@@ -2608,6 +2594,20 @@
           "url": "https://job-boards.greenhouse.io/alphasense/jobs/7119410002",
           "locations": [
             "Mumbai"
+          ],
+          "countries": [
+            "India"
+          ],
+          "workplace": null,
+          "department": "Talent Communities",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Join AlphaSense India Talent Community",
+          "url": "https://job-boards.greenhouse.io/alphasense/jobs/7119400002",
+          "locations": [
+            "Pune"
           ],
           "countries": [
             "India"
@@ -2815,20 +2815,6 @@
         },
         {
           "title": "Product Manager I",
-          "url": "https://job-boards.greenhouse.io/alphasense/jobs/8598289002",
-          "locations": [
-            "Delhi"
-          ],
-          "countries": [
-            "India"
-          ],
-          "workplace": null,
-          "department": "Content",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Product Manager I",
           "url": "https://job-boards.greenhouse.io/alphasense/jobs/8598282002",
           "locations": [
             "Remote - India"
@@ -2846,6 +2832,20 @@
           "url": "https://job-boards.greenhouse.io/alphasense/jobs/8598288002",
           "locations": [
             "Pune"
+          ],
+          "countries": [
+            "India"
+          ],
+          "workplace": null,
+          "department": "Content",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Product Manager I",
+          "url": "https://job-boards.greenhouse.io/alphasense/jobs/8598289002",
+          "locations": [
+            "Delhi"
           ],
           "countries": [
             "India"
@@ -2969,9 +2969,9 @@
         },
         {
           "title": "Security Automation Engineer",
-          "url": "https://job-boards.greenhouse.io/alphasense/jobs/8644546002",
+          "url": "https://job-boards.greenhouse.io/alphasense/jobs/8644545002",
           "locations": [
-            "Delhi"
+            "Pune"
           ],
           "countries": [
             "India"
@@ -2983,23 +2983,9 @@
         },
         {
           "title": "Security Automation Engineer",
-          "url": "https://job-boards.greenhouse.io/alphasense/jobs/8644558002",
+          "url": "https://job-boards.greenhouse.io/alphasense/jobs/8644546002",
           "locations": [
-            "Remote - India"
-          ],
-          "countries": [
-            "India"
-          ],
-          "workplace": "remote",
-          "department": "Security / IT",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Security Automation Engineer",
-          "url": "https://job-boards.greenhouse.io/alphasense/jobs/8644545002",
-          "locations": [
-            "Pune"
+            "Delhi"
           ],
           "countries": [
             "India"
@@ -3019,6 +3005,20 @@
             "India"
           ],
           "workplace": null,
+          "department": "Security / IT",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Security Automation Engineer",
+          "url": "https://job-boards.greenhouse.io/alphasense/jobs/8644558002",
+          "locations": [
+            "Remote - India"
+          ],
+          "countries": [
+            "India"
+          ],
+          "workplace": "remote",
           "department": "Security / IT",
           "visa": "unknown",
           "hire_from_abroad": "unknown"
@@ -4199,20 +4199,6 @@
         },
         {
           "title": "Applied AI Architect",
-          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5076109008",
-          "locations": [
-            "Tokyo, Japan"
-          ],
-          "countries": [
-            "Japan"
-          ],
-          "workplace": null,
-          "department": "Applied AI",
-          "visa": "yes",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Applied AI Architect",
           "url": "https://job-boards.greenhouse.io/anthropic/jobs/5227672008",
           "locations": [
             "Madrid, Spain"
@@ -4233,6 +4219,20 @@
           ],
           "countries": [
             "India"
+          ],
+          "workplace": null,
+          "department": "Applied AI",
+          "visa": "yes",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Applied AI Architect",
+          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5076109008",
+          "locations": [
+            "Tokyo, Japan"
+          ],
+          "countries": [
+            "Japan"
           ],
           "workplace": null,
           "department": "Applied AI",
@@ -4479,12 +4479,12 @@
         },
         {
           "title": "Contracts Manager, APAC",
-          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5271060008",
+          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5271063008",
           "locations": [
-            "Singapore"
+            "Sydney, Australia"
           ],
           "countries": [
-            "Singapore"
+            "Australia"
           ],
           "workplace": null,
           "department": "Legal",
@@ -4493,12 +4493,12 @@
         },
         {
           "title": "Contracts Manager, APAC",
-          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5271063008",
+          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5271060008",
           "locations": [
-            "Sydney, Australia"
+            "Singapore"
           ],
           "countries": [
-            "Australia"
+            "Singapore"
           ],
           "workplace": null,
           "department": "Legal",
@@ -4521,12 +4521,12 @@
         },
         {
           "title": "Customer Success Manager",
-          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5391102008",
+          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5387027008",
           "locations": [
-            "London, UK"
+            "Tokyo, Japan"
           ],
           "countries": [
-            "United Kingdom"
+            "Japan"
           ],
           "workplace": null,
           "department": "Sales",
@@ -4535,12 +4535,12 @@
         },
         {
           "title": "Customer Success Manager",
-          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5387027008",
+          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5391102008",
           "locations": [
-            "Tokyo, Japan"
+            "London, UK"
           ],
           "countries": [
-            "Japan"
+            "United Kingdom"
           ],
           "workplace": null,
           "department": "Sales",
@@ -4885,12 +4885,12 @@
         },
         {
           "title": "Finance & Strategy GTM, EMEA",
-          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5393268008",
+          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5409108008",
           "locations": [
-            "Dublin, IE"
+            "London, UK"
           ],
           "countries": [
-            "Ireland"
+            "United Kingdom"
           ],
           "workplace": null,
           "department": "Finance",
@@ -4899,12 +4899,12 @@
         },
         {
           "title": "Finance & Strategy GTM, EMEA",
-          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5409108008",
+          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5393268008",
           "locations": [
-            "London, UK"
+            "Dublin, IE"
           ],
           "countries": [
-            "United Kingdom"
+            "Ireland"
           ],
           "workplace": null,
           "department": "Finance",
@@ -4969,12 +4969,12 @@
         },
         {
           "title": "Head of Deal Desk - International",
-          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5358100008",
+          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5369755008",
           "locations": [
-            "Dublin, IE"
+            "London, UK"
           ],
           "countries": [
-            "Ireland"
+            "United Kingdom"
           ],
           "workplace": null,
           "department": "Finance",
@@ -4983,12 +4983,12 @@
         },
         {
           "title": "Head of Deal Desk - International",
-          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5369755008",
+          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5358100008",
           "locations": [
-            "London, UK"
+            "Dublin, IE"
           ],
           "countries": [
-            "United Kingdom"
+            "Ireland"
           ],
           "workplace": null,
           "department": "Finance",
@@ -11202,12 +11202,12 @@
         },
         {
           "title": "Associate (AI) Solution Consultant (Benelux) - Orbit Program",
-          "url": "https://job-boards.greenhouse.io/celonis/jobs/7809732003?gh_jid=7809732003",
+          "url": "https://job-boards.greenhouse.io/celonis/jobs/7765936003?gh_jid=7765936003",
           "locations": [
-            "Amsterdam, Netherlands"
+            "Madrid, Spain"
           ],
           "countries": [
-            "Netherlands"
+            "Spain"
           ],
           "workplace": null,
           "department": "Value Engineering",
@@ -11216,12 +11216,12 @@
         },
         {
           "title": "Associate (AI) Solution Consultant (Benelux) - Orbit Program",
-          "url": "https://job-boards.greenhouse.io/celonis/jobs/7765936003?gh_jid=7765936003",
+          "url": "https://job-boards.greenhouse.io/celonis/jobs/7809732003?gh_jid=7809732003",
           "locations": [
-            "Madrid, Spain"
+            "Amsterdam, Netherlands"
           ],
           "countries": [
-            "Spain"
+            "Netherlands"
           ],
           "workplace": null,
           "department": "Value Engineering",
@@ -11328,12 +11328,12 @@
         },
         {
           "title": "Associate Applied (AI) Value Engineer (DACH) - Orbit Program",
-          "url": "https://job-boards.greenhouse.io/celonis/jobs/7816927003?gh_jid=7816927003",
+          "url": "https://job-boards.greenhouse.io/celonis/jobs/7819725003?gh_jid=7819725003",
           "locations": [
-            "Madrid, Spain"
+            "Munich, Germany"
           ],
           "countries": [
-            "Spain"
+            "Germany"
           ],
           "workplace": null,
           "department": "Value Engineering",
@@ -11342,12 +11342,12 @@
         },
         {
           "title": "Associate Applied (AI) Value Engineer (DACH) - Orbit Program",
-          "url": "https://job-boards.greenhouse.io/celonis/jobs/7819725003?gh_jid=7819725003",
+          "url": "https://job-boards.greenhouse.io/celonis/jobs/7816927003?gh_jid=7816927003",
           "locations": [
-            "Munich, Germany"
+            "Madrid, Spain"
           ],
           "countries": [
-            "Germany"
+            "Spain"
           ],
           "workplace": null,
           "department": "Value Engineering",
@@ -11482,20 +11482,6 @@
         },
         {
           "title": "Client Account Lead - Strategy & Transformation (Logistics/Transportation)",
-          "url": "https://job-boards.greenhouse.io/celonis/jobs/7773301003?gh_jid=7773301003",
-          "locations": [
-            "Munich, Germany"
-          ],
-          "countries": [
-            "Germany"
-          ],
-          "workplace": null,
-          "department": "Value Engineering",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Client Account Lead - Strategy & Transformation (Logistics/Transportation)",
           "url": "https://job-boards.greenhouse.io/celonis/jobs/7820048003?gh_jid=7820048003",
           "locations": [
             "Remote, Germany, Cologne"
@@ -11509,15 +11495,15 @@
           "hire_from_abroad": "unknown"
         },
         {
-          "title": "Client Engagement Partner - AI-Driven Transformation & Process Intelligence (Logistics/Transportation)",
-          "url": "https://job-boards.greenhouse.io/celonis/jobs/7820049003?gh_jid=7820049003",
+          "title": "Client Account Lead - Strategy & Transformation (Logistics/Transportation)",
+          "url": "https://job-boards.greenhouse.io/celonis/jobs/7773301003?gh_jid=7773301003",
           "locations": [
-            "Remote, Germany, Cologne"
+            "Munich, Germany"
           ],
           "countries": [
             "Germany"
           ],
-          "workplace": "remote",
+          "workplace": null,
           "department": "Value Engineering",
           "visa": "unknown",
           "hire_from_abroad": "unknown"
@@ -11537,13 +11523,27 @@
           "hire_from_abroad": "unknown"
         },
         {
-          "title": "Client Value Partner",
-          "url": "https://job-boards.greenhouse.io/celonis/jobs/7817240003?gh_jid=7817240003",
+          "title": "Client Engagement Partner - AI-Driven Transformation & Process Intelligence (Logistics/Transportation)",
+          "url": "https://job-boards.greenhouse.io/celonis/jobs/7820049003?gh_jid=7820049003",
           "locations": [
-            "Stockholm, Sweden"
+            "Remote, Germany, Cologne"
           ],
           "countries": [
-            "Sweden"
+            "Germany"
+          ],
+          "workplace": "remote",
+          "department": "Value Engineering",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Client Value Partner",
+          "url": "https://job-boards.greenhouse.io/celonis/jobs/7817395003?gh_jid=7817395003",
+          "locations": [
+            "London, United Kingdom"
+          ],
+          "countries": [
+            "United Kingdom"
           ],
           "workplace": null,
           "department": "Value Engineering",
@@ -11566,12 +11566,12 @@
         },
         {
           "title": "Client Value Partner",
-          "url": "https://job-boards.greenhouse.io/celonis/jobs/7693390003?gh_jid=7693390003",
+          "url": "https://job-boards.greenhouse.io/celonis/jobs/7817240003?gh_jid=7817240003",
           "locations": [
-            "Munich, Germany"
+            "Stockholm, Sweden"
           ],
           "countries": [
-            "Germany"
+            "Sweden"
           ],
           "workplace": null,
           "department": "Value Engineering",
@@ -11580,21 +11580,7 @@
         },
         {
           "title": "Client Value Partner",
-          "url": "https://job-boards.greenhouse.io/celonis/jobs/7817395003?gh_jid=7817395003",
-          "locations": [
-            "London, United Kingdom"
-          ],
-          "countries": [
-            "United Kingdom"
-          ],
-          "workplace": null,
-          "department": "Value Engineering",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Client Value Partner- AI-Driven Transformation & Process Intelligence (Logistics/Transportation)",
-          "url": "https://job-boards.greenhouse.io/celonis/jobs/7777096003?gh_jid=7777096003",
+          "url": "https://job-boards.greenhouse.io/celonis/jobs/7693390003?gh_jid=7693390003",
           "locations": [
             "Munich, Germany"
           ],
@@ -11616,6 +11602,20 @@
             "Germany"
           ],
           "workplace": "remote",
+          "department": "Value Engineering",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Client Value Partner- AI-Driven Transformation & Process Intelligence (Logistics/Transportation)",
+          "url": "https://job-boards.greenhouse.io/celonis/jobs/7777096003?gh_jid=7777096003",
+          "locations": [
+            "Munich, Germany"
+          ],
+          "countries": [
+            "Germany"
+          ],
+          "workplace": null,
           "department": "Value Engineering",
           "visa": "unknown",
           "hire_from_abroad": "unknown"
@@ -11832,12 +11832,12 @@
         },
         {
           "title": "Enterprise Architect Director",
-          "url": "https://job-boards.greenhouse.io/celonis/jobs/7681585003?gh_jid=7681585003",
+          "url": "https://job-boards.greenhouse.io/celonis/jobs/7693187003?gh_jid=7693187003",
           "locations": [
-            "Munich, Germany"
+            "Paris, France"
           ],
           "countries": [
-            "Germany"
+            "France"
           ],
           "workplace": null,
           "department": "Value Engineering",
@@ -11846,12 +11846,26 @@
         },
         {
           "title": "Enterprise Architect Director",
-          "url": "https://job-boards.greenhouse.io/celonis/jobs/7693187003?gh_jid=7693187003",
+          "url": "https://job-boards.greenhouse.io/celonis/jobs/7681584003?gh_jid=7681584003",
           "locations": [
-            "Paris, France"
+            "London, United Kingdom"
           ],
           "countries": [
-            "France"
+            "United Kingdom"
+          ],
+          "workplace": null,
+          "department": "Value Engineering",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Enterprise Architect Director",
+          "url": "https://job-boards.greenhouse.io/celonis/jobs/7693188003?gh_jid=7693188003",
+          "locations": [
+            "Amsterdam, Netherlands"
+          ],
+          "countries": [
+            "Netherlands"
           ],
           "workplace": null,
           "department": "Value Engineering",
@@ -11888,12 +11902,12 @@
         },
         {
           "title": "Enterprise Architect Director",
-          "url": "https://job-boards.greenhouse.io/celonis/jobs/7693188003?gh_jid=7693188003",
+          "url": "https://job-boards.greenhouse.io/celonis/jobs/7681585003?gh_jid=7681585003",
           "locations": [
-            "Amsterdam, Netherlands"
+            "Munich, Germany"
           ],
           "countries": [
-            "Netherlands"
+            "Germany"
           ],
           "workplace": null,
           "department": "Value Engineering",
@@ -11901,13 +11915,13 @@
           "hire_from_abroad": "unknown"
         },
         {
-          "title": "Enterprise Architect Director",
-          "url": "https://job-boards.greenhouse.io/celonis/jobs/7681584003?gh_jid=7681584003",
+          "title": "Executive Assistant to the Global SVP",
+          "url": "https://job-boards.greenhouse.io/celonis/jobs/7985248003?gh_jid=7985248003",
           "locations": [
-            "London, United Kingdom"
+            "Madrid, Spain"
           ],
           "countries": [
-            "United Kingdom"
+            "Spain"
           ],
           "workplace": null,
           "department": "Value Engineering",
@@ -12070,12 +12084,12 @@
         },
         {
           "title": "Head of Value Engineering - Nordics",
-          "url": "https://job-boards.greenhouse.io/celonis/jobs/7683735003?gh_jid=7683735003",
+          "url": "https://job-boards.greenhouse.io/celonis/jobs/7683737003?gh_jid=7683737003",
           "locations": [
-            "Copenhagen, Denmark"
+            "Stockholm, Sweden"
           ],
           "countries": [
-            "Denmark"
+            "Sweden"
           ],
           "workplace": null,
           "department": "Value Engineering",
@@ -12084,12 +12098,12 @@
         },
         {
           "title": "Head of Value Engineering - Nordics",
-          "url": "https://job-boards.greenhouse.io/celonis/jobs/7683737003?gh_jid=7683737003",
+          "url": "https://job-boards.greenhouse.io/celonis/jobs/7683735003?gh_jid=7683735003",
           "locations": [
-            "Stockholm, Sweden"
+            "Copenhagen, Denmark"
           ],
           "countries": [
-            "Sweden"
+            "Denmark"
           ],
           "workplace": null,
           "department": "Value Engineering",
@@ -12728,12 +12742,12 @@
         },
         {
           "title": "Manager, Pre-Sales and Solution Engineering - Nordics",
-          "url": "https://job-boards.greenhouse.io/celonis/jobs/7681577003?gh_jid=7681577003",
+          "url": "https://job-boards.greenhouse.io/celonis/jobs/7683734003?gh_jid=7683734003",
           "locations": [
-            "Stockholm, Sweden"
+            "Copenhagen, Denmark"
           ],
           "countries": [
-            "Sweden"
+            "Denmark"
           ],
           "workplace": null,
           "department": "Value Engineering",
@@ -12742,12 +12756,12 @@
         },
         {
           "title": "Manager, Pre-Sales and Solution Engineering - Nordics",
-          "url": "https://job-boards.greenhouse.io/celonis/jobs/7683734003?gh_jid=7683734003",
+          "url": "https://job-boards.greenhouse.io/celonis/jobs/7681577003?gh_jid=7681577003",
           "locations": [
-            "Copenhagen, Denmark"
+            "Stockholm, Sweden"
           ],
           "countries": [
-            "Denmark"
+            "Sweden"
           ],
           "workplace": null,
           "department": "Value Engineering",
@@ -12826,40 +12840,12 @@
         },
         {
           "title": "Principal Enterprise Architect",
-          "url": "https://job-boards.greenhouse.io/celonis/jobs/7800476003?gh_jid=7800476003",
-          "locations": [
-            "Stockholm, Sweden"
-          ],
-          "countries": [
-            "Sweden"
-          ],
-          "workplace": null,
-          "department": "Value Engineering",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Principal Enterprise Architect",
           "url": "https://job-boards.greenhouse.io/celonis/jobs/7548628003?gh_jid=7548628003",
           "locations": [
             "London, United Kingdom"
           ],
           "countries": [
             "United Kingdom"
-          ],
-          "workplace": null,
-          "department": "Value Engineering",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Principal Enterprise Architect",
-          "url": "https://job-boards.greenhouse.io/celonis/jobs/7830985003?gh_jid=7830985003",
-          "locations": [
-            "Copenhagen, Denmark"
-          ],
-          "countries": [
-            "Denmark"
           ],
           "workplace": null,
           "department": "Value Engineering",
@@ -12896,6 +12882,34 @@
         },
         {
           "title": "Principal Enterprise Architect",
+          "url": "https://job-boards.greenhouse.io/celonis/jobs/7800476003?gh_jid=7800476003",
+          "locations": [
+            "Stockholm, Sweden"
+          ],
+          "countries": [
+            "Sweden"
+          ],
+          "workplace": null,
+          "department": "Value Engineering",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Principal Enterprise Architect",
+          "url": "https://job-boards.greenhouse.io/celonis/jobs/7830985003?gh_jid=7830985003",
+          "locations": [
+            "Copenhagen, Denmark"
+          ],
+          "countries": [
+            "Denmark"
+          ],
+          "workplace": null,
+          "department": "Value Engineering",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Principal Enterprise Architect",
           "url": "https://job-boards.greenhouse.io/celonis/jobs/7539075003?gh_jid=7539075003",
           "locations": [
             "Munich, Germany"
@@ -12924,12 +12938,12 @@
         },
         {
           "title": "Product Lead - Front Office - (CX, Sales, Service Marketing, Commerce)",
-          "url": "https://job-boards.greenhouse.io/celonis/jobs/6485699003?gh_jid=6485699003",
+          "url": "https://job-boards.greenhouse.io/celonis/jobs/5928673003?gh_jid=5928673003",
           "locations": [
-            "Madrid, Spain"
+            "Munich, Germany"
           ],
           "countries": [
-            "Spain"
+            "Germany"
           ],
           "workplace": null,
           "department": "Product Business Apps",
@@ -12938,12 +12952,12 @@
         },
         {
           "title": "Product Lead - Front Office - (CX, Sales, Service Marketing, Commerce)",
-          "url": "https://job-boards.greenhouse.io/celonis/jobs/5928673003?gh_jid=5928673003",
+          "url": "https://job-boards.greenhouse.io/celonis/jobs/6485699003?gh_jid=6485699003",
           "locations": [
-            "Munich, Germany"
+            "Madrid, Spain"
           ],
           "countries": [
-            "Germany"
+            "Spain"
           ],
           "workplace": null,
           "department": "Product Business Apps",
@@ -13344,6 +13358,20 @@
         },
         {
           "title": "Senior Value Engineer",
+          "url": "https://job-boards.greenhouse.io/celonis/jobs/7742470003?gh_jid=7742470003",
+          "locations": [
+            "London, United Kingdom"
+          ],
+          "countries": [
+            "United Kingdom"
+          ],
+          "workplace": null,
+          "department": "Value Engineering",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Senior Value Engineer",
           "url": "https://job-boards.greenhouse.io/celonis/jobs/7885753003?gh_jid=7885753003",
           "locations": [
             "Copenhagen, Denmark"
@@ -13373,20 +13401,6 @@
         {
           "title": "Senior Value Engineer",
           "url": "https://job-boards.greenhouse.io/celonis/jobs/7742440003?gh_jid=7742440003",
-          "locations": [
-            "London, United Kingdom"
-          ],
-          "countries": [
-            "United Kingdom"
-          ],
-          "workplace": null,
-          "department": "Value Engineering",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Senior Value Engineer",
-          "url": "https://job-boards.greenhouse.io/celonis/jobs/7742470003?gh_jid=7742470003",
           "locations": [
             "London, United Kingdom"
           ],
@@ -13442,12 +13456,12 @@
         },
         {
           "title": "Senior Value Engineer - Public Sector",
-          "url": "https://job-boards.greenhouse.io/celonis/jobs/7817366003?gh_jid=7817366003",
+          "url": "https://job-boards.greenhouse.io/celonis/jobs/7817305003?gh_jid=7817305003",
           "locations": [
-            "Madrid, Spain"
+            "Amsterdam, Netherlands"
           ],
           "countries": [
-            "Spain"
+            "Netherlands"
           ],
           "workplace": null,
           "department": "Value Engineering",
@@ -13456,12 +13470,12 @@
         },
         {
           "title": "Senior Value Engineer - Public Sector",
-          "url": "https://job-boards.greenhouse.io/celonis/jobs/7817305003?gh_jid=7817305003",
+          "url": "https://job-boards.greenhouse.io/celonis/jobs/7817366003?gh_jid=7817366003",
           "locations": [
-            "Amsterdam, Netherlands"
+            "Madrid, Spain"
           ],
           "countries": [
-            "Netherlands"
+            "Spain"
           ],
           "workplace": null,
           "department": "Value Engineering",
@@ -14623,7 +14637,7 @@
           "hire_from_abroad": "unknown"
         },
         {
-          "title": "Customer Success Manager (Germany)",
+          "title": "Customer Success Manager, Germany",
           "url": "https://www.coalitioninc.com/job-posting?gh_jid=4705588005",
           "locations": [
             "Any location, Germany"
@@ -14637,7 +14651,7 @@
           "hire_from_abroad": "unknown"
         },
         {
-          "title": "Cyber Claims Counsel - France (M/W)",
+          "title": "Cyber Claims Counsel, France (M/W)",
           "url": "https://www.coalitioninc.com/job-posting?gh_jid=4730644005",
           "locations": [
             "Any location, France"
@@ -14651,7 +14665,7 @@
           "hire_from_abroad": "unknown"
         },
         {
-          "title": "Incident Response Lead - Germany (m/w/d)*",
+          "title": "Incident Response Lead, Germany (m/w/d)*",
           "url": "https://www.coalitioninc.com/job-posting?gh_jid=4720348005",
           "locations": [
             "Any location, Germany"
@@ -14693,7 +14707,7 @@
           "hire_from_abroad": "unknown"
         },
         {
-          "title": "Senior Complex Claims Specialist, Large Market - Germany - (m/w/d)",
+          "title": "Senior Complex Claims Specialist, Large Market - Germany (m/w/d)",
           "url": "https://www.coalitioninc.com/job-posting?gh_jid=4721600005",
           "locations": [
             "Any location, Germany"
@@ -16118,7 +16132,7 @@
         },
         {
           "title": "Concierge Specialist IV",
-          "url": "https://www.coinbase.com/careers/positions/8031253?gh_jid=8031253",
+          "url": "https://www.coinbase.com/careers/positions/8031308?gh_jid=8031308",
           "locations": [
             "Hybrid - London, UK"
           ],
@@ -16146,7 +16160,7 @@
         },
         {
           "title": "Concierge Specialist IV",
-          "url": "https://www.coinbase.com/careers/positions/8031308?gh_jid=8031308",
+          "url": "https://www.coinbase.com/careers/positions/8031253?gh_jid=8031253",
           "locations": [
             "Hybrid - London, UK"
           ],
@@ -16314,20 +16328,6 @@
         },
         {
           "title": "Risk & Monitoring Analyst IV",
-          "url": "https://www.coinbase.com/careers/positions/8049976?gh_jid=8049976",
-          "locations": [
-            "Remote - UK"
-          ],
-          "countries": [
-            "United Kingdom"
-          ],
-          "workplace": "remote",
-          "department": "Customer Experience",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Risk & Monitoring Analyst IV",
           "url": "https://www.coinbase.com/careers/positions/8030686?gh_jid=8030686",
           "locations": [
             "Dublin, Ireland"
@@ -16336,6 +16336,20 @@
             "Ireland"
           ],
           "workplace": null,
+          "department": "Customer Experience",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Risk & Monitoring Analyst IV",
+          "url": "https://www.coinbase.com/careers/positions/8049976?gh_jid=8049976",
+          "locations": [
+            "Remote - UK"
+          ],
+          "countries": [
+            "United Kingdom"
+          ],
+          "workplace": "remote",
           "department": "Customer Experience",
           "visa": "unknown",
           "hire_from_abroad": "unknown"
@@ -18877,20 +18891,6 @@
         },
         {
           "title": "AI Engineer - FDE (Forward Deployed Engineer)",
-          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8099751002",
-          "locations": [
-            "Remote - India"
-          ],
-          "countries": [
-            "India"
-          ],
-          "workplace": "remote",
-          "department": "Professional Services Operations",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "AI Engineer - FDE (Forward Deployed Engineer)",
           "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8749859002",
           "locations": [
             "Munich, Germany"
@@ -18899,6 +18899,20 @@
             "Germany"
           ],
           "workplace": null,
+          "department": "Professional Services Operations",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "AI Engineer - FDE (Forward Deployed Engineer)",
+          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8099751002",
+          "locations": [
+            "Remote - India"
+          ],
+          "countries": [
+            "India"
+          ],
+          "workplace": "remote",
           "department": "Professional Services Operations",
           "visa": "unknown",
           "hire_from_abroad": "unknown"
@@ -19004,6 +19018,20 @@
         },
         {
           "title": "Delivery Solutions Architect",
+          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8735820002",
+          "locations": [
+            "Melbourne, Australia; Queensland, Australia"
+          ],
+          "countries": [
+            "Australia"
+          ],
+          "workplace": null,
+          "department": "Delivery Solutions Architects",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Delivery Solutions Architect",
           "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8549681002",
           "locations": [
             "London, United Kingdom"
@@ -19032,9 +19060,9 @@
         },
         {
           "title": "Delivery Solutions Architect",
-          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8735820002",
+          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8476496002",
           "locations": [
-            "Melbourne, Australia; Queensland, Australia"
+            "Brisbane, Australia; Melbourne, Australia; Western Australia, Australia"
           ],
           "countries": [
             "Australia"
@@ -19076,20 +19104,6 @@
         },
         {
           "title": "Delivery Solutions Architect",
-          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8476496002",
-          "locations": [
-            "Brisbane, Australia; Melbourne, Australia; Western Australia, Australia"
-          ],
-          "countries": [
-            "Australia"
-          ],
-          "workplace": null,
-          "department": "Delivery Solutions Architects",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Delivery Solutions Architect",
           "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8575048002",
           "locations": [
             "Amsterdam, Netherlands"
@@ -19099,20 +19113,6 @@
           ],
           "workplace": null,
           "department": "Delivery Solutions Architects",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Deployment Strategist",
-          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8637736002",
-          "locations": [
-            "Remote - India"
-          ],
-          "countries": [
-            "India"
-          ],
-          "workplace": "remote",
-          "department": "Professional Services Operations",
           "visa": "unknown",
           "hire_from_abroad": "unknown"
         },
@@ -19140,6 +19140,20 @@
             "United Kingdom"
           ],
           "workplace": null,
+          "department": "Professional Services Operations",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Deployment Strategist",
+          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8637736002",
+          "locations": [
+            "Remote - India"
+          ],
+          "countries": [
+            "India"
+          ],
+          "workplace": "remote",
           "department": "Professional Services Operations",
           "visa": "unknown",
           "hire_from_abroad": "unknown"
@@ -19230,6 +19244,20 @@
         },
         {
           "title": "Director, Lakebase Sales Specialists",
+          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8569622002",
+          "locations": [
+            "Sydney, Australia"
+          ],
+          "countries": [
+            "Australia"
+          ],
+          "workplace": null,
+          "department": "HQ Management",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Director, Lakebase Sales Specialists",
           "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8569616002",
           "locations": [
             "London, United Kingdom"
@@ -19247,20 +19275,6 @@
           "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8585150002",
           "locations": [
             "Melbourne, Australia"
-          ],
-          "countries": [
-            "Australia"
-          ],
-          "workplace": null,
-          "department": "HQ Management",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Director, Lakebase Sales Specialists",
-          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8569622002",
-          "locations": [
-            "Sydney, Australia"
           ],
           "countries": [
             "Australia"
@@ -19919,26 +19933,12 @@
         },
         {
           "title": "Lakebase Sales Specialist",
-          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8569524002",
+          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8569572002",
           "locations": [
-            "Amsterdam, Netherlands"
+            "Tokyo, Japan"
           ],
           "countries": [
-            "Netherlands"
-          ],
-          "workplace": null,
-          "department": "HQ Management",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Lakebase Sales Specialist",
-          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8569522002",
-          "locations": [
-            "Stockholm, Sweden"
-          ],
-          "countries": [
-            "Sweden"
+            "Japan"
           ],
           "workplace": null,
           "department": "HQ Management",
@@ -19961,12 +19961,26 @@
         },
         {
           "title": "Lakebase Sales Specialist",
-          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8569572002",
+          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8569522002",
           "locations": [
-            "Tokyo, Japan"
+            "Stockholm, Sweden"
           ],
           "countries": [
-            "Japan"
+            "Sweden"
+          ],
+          "workplace": null,
+          "department": "HQ Management",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Lakebase Sales Specialist",
+          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8569524002",
+          "locations": [
+            "Amsterdam, Netherlands"
+          ],
+          "countries": [
+            "Netherlands"
           ],
           "workplace": null,
           "department": "HQ Management",
@@ -20073,20 +20087,6 @@
         },
         {
           "title": "Lakebase Specialist Sales",
-          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8569594002",
-          "locations": [
-            "Singapore"
-          ],
-          "countries": [
-            "Singapore"
-          ],
-          "workplace": null,
-          "department": "HQ Management",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Lakebase Specialist Sales",
           "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8569564002",
           "locations": [
             "Melbourne, Australia"
@@ -20107,6 +20107,20 @@
           ],
           "countries": [
             "Australia"
+          ],
+          "workplace": null,
+          "department": "HQ Management",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Lakebase Specialist Sales",
+          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8569594002",
+          "locations": [
+            "Singapore"
+          ],
+          "countries": [
+            "Singapore"
           ],
           "workplace": null,
           "department": "HQ Management",
@@ -20200,34 +20214,6 @@
         },
         {
           "title": "Manager, Forward Deployed Engineering",
-          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8445817002",
-          "locations": [
-            "Sydney, Australia"
-          ],
-          "countries": [
-            "Australia"
-          ],
-          "workplace": null,
-          "department": "Professional Services Operations",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Manager, Forward Deployed Engineering",
-          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8503068002",
-          "locations": [
-            "Remote - India"
-          ],
-          "countries": [
-            "India"
-          ],
-          "workplace": "remote",
-          "department": "Professional Services Operations",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Manager, Forward Deployed Engineering",
           "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8629997002",
           "locations": [
             "Singapore"
@@ -20256,12 +20242,40 @@
         },
         {
           "title": "Manager, Forward Deployed Engineering",
+          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8503068002",
+          "locations": [
+            "Remote - India"
+          ],
+          "countries": [
+            "India"
+          ],
+          "workplace": "remote",
+          "department": "Professional Services Operations",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Manager, Forward Deployed Engineering",
           "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8535419002",
           "locations": [
             "Tokyo, Japan"
           ],
           "countries": [
             "Japan"
+          ],
+          "workplace": null,
+          "department": "Professional Services Operations",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Manager, Forward Deployed Engineering",
+          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8445817002",
+          "locations": [
+            "Sydney, Australia"
+          ],
+          "countries": [
+            "Australia"
           ],
           "workplace": null,
           "department": "Professional Services Operations",
@@ -20340,20 +20354,6 @@
         },
         {
           "title": "Named Enterprise Account Executive",
-          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8536432002",
-          "locations": [
-            "Remote - Denmark"
-          ],
-          "countries": [
-            "Denmark"
-          ],
-          "workplace": "remote",
-          "department": "Enterprise Sales",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Named Enterprise Account Executive",
           "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8536436002",
           "locations": [
             "Stockholm, Sweden"
@@ -20362,6 +20362,20 @@
             "Sweden"
           ],
           "workplace": null,
+          "department": "Enterprise Sales",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Named Enterprise Account Executive",
+          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8536432002",
+          "locations": [
+            "Remote - Denmark"
+          ],
+          "countries": [
+            "Denmark"
+          ],
+          "workplace": "remote",
           "department": "Enterprise Sales",
           "visa": "unknown",
           "hire_from_abroad": "unknown"
@@ -20861,12 +20875,12 @@
         },
         {
           "title": "Senior Software Engineer - Backend",
-          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8029671002",
+          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=7477087002",
           "locations": [
-            "Amsterdam, Netherlands"
+            "Berlin, Germany"
           ],
           "countries": [
-            "Netherlands"
+            "Germany"
           ],
           "workplace": null,
           "department": "Engineering - Pipeline",
@@ -20875,12 +20889,12 @@
         },
         {
           "title": "Senior Software Engineer - Backend",
-          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=7477087002",
+          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8029671002",
           "locations": [
-            "Berlin, Germany"
+            "Amsterdam, Netherlands"
           ],
           "countries": [
-            "Germany"
+            "Netherlands"
           ],
           "workplace": null,
           "department": "Engineering - Pipeline",
@@ -21056,27 +21070,13 @@
           "hire_from_abroad": "unknown"
         },
         {
-          "title": "Senior Software Engineer- Singapore",
-          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8350956002",
-          "locations": [
-            "Singapore"
-          ],
-          "countries": [
-            "Singapore"
-          ],
-          "workplace": null,
-          "department": "Engineering - Pipeline",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
           "title": "Senior Solutions Architect",
-          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8568420002",
+          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8620637002",
           "locations": [
-            "Denmark"
+            "Mumbai, India"
           ],
           "countries": [
-            "Denmark"
+            "India"
           ],
           "workplace": null,
           "department": "Field Engineering - Other",
@@ -21113,12 +21113,12 @@
         },
         {
           "title": "Senior Solutions Architect",
-          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8620637002",
+          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8568420002",
           "locations": [
-            "Mumbai, India"
+            "Denmark"
           ],
           "countries": [
-            "India"
+            "Denmark"
           ],
           "workplace": null,
           "department": "Field Engineering - Other",
@@ -21155,12 +21155,12 @@
         },
         {
           "title": "Senior Solutions Architect (EDW Enterprise Data Warehouse Migrations)",
-          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8720252002",
+          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8704938002",
           "locations": [
-            "Amsterdam, Netherlands"
+            "London, United Kingdom"
           ],
           "countries": [
-            "Netherlands"
+            "United Kingdom"
           ],
           "workplace": null,
           "department": "Field Engineering - Other",
@@ -21169,12 +21169,12 @@
         },
         {
           "title": "Senior Solutions Architect (EDW Enterprise Data Warehouse Migrations)",
-          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8704938002",
+          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8720252002",
           "locations": [
-            "London, United Kingdom"
+            "Amsterdam, Netherlands"
           ],
           "countries": [
-            "United Kingdom"
+            "Netherlands"
           ],
           "workplace": null,
           "department": "Field Engineering - Other",
@@ -21351,6 +21351,20 @@
         },
         {
           "title": "Senior Staff Software Engineer (Backend)",
+          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=7651326002",
+          "locations": [
+            "Bengaluru, India"
+          ],
+          "countries": [
+            "India"
+          ],
+          "workplace": null,
+          "department": "Executive Engineering - Pipeline",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Senior Staff Software Engineer (Backend)",
           "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=7651345002",
           "locations": [
             "Bengaluru, India"
@@ -21364,13 +21378,13 @@
           "hire_from_abroad": "unknown"
         },
         {
-          "title": "Senior Staff Software Engineer (Backend)",
-          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=7651326002",
+          "title": "Senior Staff Software Engineer - Delta",
+          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8303014002",
           "locations": [
-            "Bengaluru, India"
+            "Aarhus, Denmark"
           ],
           "countries": [
-            "India"
+            "Denmark"
           ],
           "workplace": null,
           "department": "Executive Engineering - Pipeline",
@@ -21385,20 +21399,6 @@
           ],
           "countries": [
             "United Kingdom"
-          ],
-          "workplace": null,
-          "department": "Executive Engineering - Pipeline",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Senior Staff Software Engineer - Delta",
-          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8303014002",
-          "locations": [
-            "Aarhus, Denmark"
-          ],
-          "countries": [
-            "Denmark"
           ],
           "workplace": null,
           "department": "Executive Engineering - Pipeline",
@@ -21533,6 +21533,20 @@
         },
         {
           "title": "Solutions Architect",
+          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8531153002",
+          "locations": [
+            "Stockholm, Sweden"
+          ],
+          "countries": [
+            "Sweden"
+          ],
+          "workplace": null,
+          "department": "Field Engineering - Other",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Solutions Architect",
           "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8437008002",
           "locations": [
             "Queensland, Australia"
@@ -21547,7 +21561,21 @@
         },
         {
           "title": "Solutions Architect",
-          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8783431002",
+          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8595160002",
+          "locations": [
+            "Sydney, Australia"
+          ],
+          "countries": [
+            "Australia"
+          ],
+          "workplace": null,
+          "department": "Field Engineering - Other",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Solutions Architect",
+          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8559339002",
           "locations": [
             "Singapore"
           ],
@@ -21561,7 +21589,7 @@
         },
         {
           "title": "Solutions Architect",
-          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8783421002",
+          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8783431002",
           "locations": [
             "Singapore"
           ],
@@ -21589,54 +21617,12 @@
         },
         {
           "title": "Solutions Architect",
-          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8531153002",
-          "locations": [
-            "Stockholm, Sweden"
-          ],
-          "countries": [
-            "Sweden"
-          ],
-          "workplace": null,
-          "department": "Field Engineering - Other",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Solutions Architect",
-          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8608603002",
-          "locations": [
-            "Munich, Germany"
-          ],
-          "countries": [
-            "Germany"
-          ],
-          "workplace": null,
-          "department": "Field Engineering - Other",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Solutions Architect",
-          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8559339002",
+          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8783421002",
           "locations": [
             "Singapore"
           ],
           "countries": [
             "Singapore"
-          ],
-          "workplace": null,
-          "department": "Field Engineering - Other",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Solutions Architect",
-          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8595160002",
-          "locations": [
-            "Sydney, Australia"
-          ],
-          "countries": [
-            "Australia"
           ],
           "workplace": null,
           "department": "Field Engineering - Other",
@@ -21651,6 +21637,20 @@
           ],
           "countries": [
             "India"
+          ],
+          "workplace": null,
+          "department": "Field Engineering - Other",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Solutions Architect",
+          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8608603002",
+          "locations": [
+            "Munich, Germany"
+          ],
+          "countries": [
+            "Germany"
           ],
           "workplace": null,
           "department": "Field Engineering - Other",
@@ -21897,9 +21897,9 @@
         },
         {
           "title": "Specialist Solutions Architect - AI/ML",
-          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8585164002",
+          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8593505002",
           "locations": [
-            "Bengaluru, India"
+            "Mumbai, India"
           ],
           "countries": [
             "India"
@@ -21911,9 +21911,9 @@
         },
         {
           "title": "Specialist Solutions Architect - AI/ML",
-          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8593505002",
+          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8585164002",
           "locations": [
-            "Mumbai, India"
+            "Bengaluru, India"
           ],
           "countries": [
             "India"
@@ -21953,12 +21953,12 @@
         },
         {
           "title": "Sr. Delivery Solutions Architect",
-          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8583353002",
+          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8465963002",
           "locations": [
-            "Tokyo, Japan"
+            "Singapore"
           ],
           "countries": [
-            "Japan"
+            "Singapore"
           ],
           "workplace": null,
           "department": "Delivery Solutions Architects",
@@ -21967,12 +21967,12 @@
         },
         {
           "title": "Sr. Delivery Solutions Architect",
-          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8465963002",
+          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8583353002",
           "locations": [
-            "Singapore"
+            "Tokyo, Japan"
           ],
           "countries": [
-            "Singapore"
+            "Japan"
           ],
           "workplace": null,
           "department": "Delivery Solutions Architects",
@@ -22051,34 +22051,6 @@
         },
         {
           "title": "Sr. Forward Deployed Engineer",
-          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8514430002",
-          "locations": [
-            "Western Australia, Australia"
-          ],
-          "countries": [
-            "Australia"
-          ],
-          "workplace": null,
-          "department": "Professional Services Operations",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Sr. Forward Deployed Engineer",
-          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8645054002",
-          "locations": [
-            "Stockholm, Sweden"
-          ],
-          "countries": [
-            "Sweden"
-          ],
-          "workplace": null,
-          "department": "Professional Services Operations",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Sr. Forward Deployed Engineer",
           "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8578144002",
           "locations": [
             "Sydney, Australia"
@@ -22099,6 +22071,34 @@
           ],
           "countries": [
             "Japan"
+          ],
+          "workplace": null,
+          "department": "Professional Services Operations",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Sr. Forward Deployed Engineer",
+          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8514430002",
+          "locations": [
+            "Western Australia, Australia"
+          ],
+          "countries": [
+            "Australia"
+          ],
+          "workplace": null,
+          "department": "Professional Services Operations",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Sr. Forward Deployed Engineer",
+          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8645054002",
+          "locations": [
+            "Stockholm, Sweden"
+          ],
+          "countries": [
+            "Sweden"
           ],
           "workplace": null,
           "department": "Professional Services Operations",
@@ -22177,6 +22177,20 @@
         },
         {
           "title": "Sr. Manager, Field Engineering",
+          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8438767002",
+          "locations": [
+            "Singapore"
+          ],
+          "countries": [
+            "Singapore"
+          ],
+          "workplace": null,
+          "department": "Field Engineering - Other",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Sr. Manager, Field Engineering",
           "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8682223002",
           "locations": [
             "Sydney, Australia"
@@ -22197,20 +22211,6 @@
           ],
           "countries": [
             "Germany"
-          ],
-          "workplace": null,
-          "department": "Field Engineering - Other",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Sr. Manager, Field Engineering",
-          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8438767002",
-          "locations": [
-            "Singapore"
-          ],
-          "countries": [
-            "Singapore"
           ],
           "workplace": null,
           "department": "Field Engineering - Other",
@@ -22388,9 +22388,9 @@
         },
         {
           "title": "Sr. Solutions Architect",
-          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8620635002",
+          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8620285002",
           "locations": [
-            "Melbourne, Australia"
+            "Western Australia, Australia"
           ],
           "countries": [
             "Australia"
@@ -22416,12 +22416,12 @@
         },
         {
           "title": "Sr. Solutions Architect",
-          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8476064002",
+          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8620635002",
           "locations": [
-            "Bengaluru, India"
+            "Melbourne, Australia"
           ],
           "countries": [
-            "India"
+            "Australia"
           ],
           "workplace": null,
           "department": "Field Engineering - Other",
@@ -22458,12 +22458,12 @@
         },
         {
           "title": "Sr. Solutions Architect",
-          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8620285002",
+          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8476064002",
           "locations": [
-            "Western Australia, Australia"
+            "Bengaluru, India"
           ],
           "countries": [
-            "Australia"
+            "India"
           ],
           "workplace": null,
           "department": "Field Engineering - Other",
@@ -22584,12 +22584,26 @@
         },
         {
           "title": "Sr. Solutions Engineer",
-          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8609866002",
+          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8368205002",
           "locations": [
-            "Stockholm, Sweden"
+            "Finland"
           ],
           "countries": [
-            "Sweden"
+            "Finland"
+          ],
+          "workplace": null,
+          "department": "Field Engineering - Other",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Sr. Solutions Engineer",
+          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8742382002",
+          "locations": [
+            "London, United Kingdom"
+          ],
+          "countries": [
+            "United Kingdom"
           ],
           "workplace": null,
           "department": "Field Engineering - Other",
@@ -22626,20 +22640,6 @@
         },
         {
           "title": "Sr. Solutions Engineer",
-          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8368205002",
-          "locations": [
-            "Finland"
-          ],
-          "countries": [
-            "Finland"
-          ],
-          "workplace": null,
-          "department": "Field Engineering - Other",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Sr. Solutions Engineer",
           "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8721005002",
           "locations": [
             "Munich, Germany"
@@ -22654,12 +22654,12 @@
         },
         {
           "title": "Sr. Solutions Engineer",
-          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8742382002",
+          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8609866002",
           "locations": [
-            "London, United Kingdom"
+            "Stockholm, Sweden"
           ],
           "countries": [
-            "United Kingdom"
+            "Sweden"
           ],
           "workplace": null,
           "department": "Field Engineering - Other",
@@ -22682,12 +22682,12 @@
         },
         {
           "title": "Sr. Specialist Solutions Architect",
-          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8625656002",
+          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8762362002",
           "locations": [
-            "Melbourne, Australia; Sydney, Australia"
+            "Singapore"
           ],
           "countries": [
-            "Australia"
+            "Singapore"
           ],
           "workplace": null,
           "department": "Field Engineering - Other",
@@ -22696,12 +22696,12 @@
         },
         {
           "title": "Sr. Specialist Solutions Architect",
-          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8762362002",
+          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8625656002",
           "locations": [
-            "Singapore"
+            "Melbourne, Australia; Sydney, Australia"
           ],
           "countries": [
-            "Singapore"
+            "Australia"
           ],
           "workplace": null,
           "department": "Field Engineering - Other",
@@ -22836,20 +22836,6 @@
         },
         {
           "title": "Staff Forward Deployed Engineer",
-          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8530855002",
-          "locations": [
-            "Remote - India"
-          ],
-          "countries": [
-            "India"
-          ],
-          "workplace": "remote",
-          "department": "Professional Services Operations",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Staff Forward Deployed Engineer",
           "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8653264002",
           "locations": [
             "Berlin, Germany; Munich, Germany"
@@ -22863,16 +22849,16 @@
           "hire_from_abroad": "unknown"
         },
         {
-          "title": "Staff Product Manager",
-          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=7649411002",
+          "title": "Staff Forward Deployed Engineer",
+          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8530855002",
           "locations": [
-            "Berlin, Germany"
+            "Remote - India"
           ],
           "countries": [
-            "Germany"
+            "India"
           ],
-          "workplace": null,
-          "department": "Product",
+          "workplace": "remote",
+          "department": "Professional Services Operations",
           "visa": "unknown",
           "hire_from_abroad": "unknown"
         },
@@ -22884,6 +22870,20 @@
           ],
           "countries": [
             "Netherlands"
+          ],
+          "workplace": null,
+          "department": "Product",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Staff Product Manager",
+          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=7649411002",
+          "locations": [
+            "Berlin, Germany"
+          ],
+          "countries": [
+            "Germany"
           ],
           "workplace": null,
           "department": "Product",
@@ -22920,12 +22920,12 @@
         },
         {
           "title": "Staff Software Engineer - Backend",
-          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8320187002",
+          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=7984907002",
           "locations": [
-            "Bengaluru, India"
+            "Berlin, Germany"
           ],
           "countries": [
-            "India"
+            "Germany"
           ],
           "workplace": null,
           "department": "Engineering - Pipeline",
@@ -22934,12 +22934,12 @@
         },
         {
           "title": "Staff Software Engineer - Backend",
-          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=7984907002",
+          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8320187002",
           "locations": [
-            "Berlin, Germany"
+            "Bengaluru, India"
           ],
           "countries": [
-            "Germany"
+            "India"
           ],
           "workplace": null,
           "department": "Engineering - Pipeline",
@@ -25247,7 +25247,7 @@
         },
         {
           "title": "Customer Support Representative, Tier 1",
-          "url": "https://job-boards.greenhouse.io/dialpad/jobs/8516411002",
+          "url": "https://job-boards.greenhouse.io/dialpad/jobs/8721206002",
           "locations": [
             "Tokyo, Japan"
           ],
@@ -25261,7 +25261,7 @@
         },
         {
           "title": "Customer Support Representative, Tier 1",
-          "url": "https://job-boards.greenhouse.io/dialpad/jobs/8721206002",
+          "url": "https://job-boards.greenhouse.io/dialpad/jobs/8516411002",
           "locations": [
             "Tokyo, Japan"
           ],
@@ -29904,20 +29904,6 @@
         },
         {
           "title": "Account Executive, Enterprise",
-          "url": "https://job-boards.greenhouse.io/flexport/jobs/7564342",
-          "locations": [
-            "Frankfurt, Germany; Hamburg, Germany"
-          ],
-          "countries": [
-            "Germany"
-          ],
-          "workplace": null,
-          "department": "Sales",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Account Executive, Enterprise",
           "url": "https://job-boards.greenhouse.io/flexport/jobs/8164060",
           "locations": [
             "Dublin"
@@ -29938,6 +29924,20 @@
           ],
           "countries": [
             "Netherlands"
+          ],
+          "workplace": null,
+          "department": "Sales",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Account Executive, Enterprise",
+          "url": "https://job-boards.greenhouse.io/flexport/jobs/7564342",
+          "locations": [
+            "Frankfurt, Germany; Hamburg, Germany"
+          ],
+          "countries": [
+            "Germany"
           ],
           "workplace": null,
           "department": "Sales",
@@ -31803,12 +31803,12 @@
         },
         {
           "title": "Associate Solutions Architect (French or German fluency)",
-          "url": "https://job-boards.greenhouse.io/gitlab/jobs/8687171002",
+          "url": "https://job-boards.greenhouse.io/gitlab/jobs/8675543002",
           "locations": [
-            "Remote, Spain"
+            "Remote Ireland"
           ],
           "countries": [
-            "Spain"
+            "Ireland"
           ],
           "workplace": "remote",
           "department": "SA",
@@ -31817,12 +31817,12 @@
         },
         {
           "title": "Associate Solutions Architect (French or German fluency)",
-          "url": "https://job-boards.greenhouse.io/gitlab/jobs/8675543002",
+          "url": "https://job-boards.greenhouse.io/gitlab/jobs/8687171002",
           "locations": [
-            "Remote Ireland"
+            "Remote, Spain"
           ],
           "countries": [
-            "Ireland"
+            "Spain"
           ],
           "workplace": "remote",
           "department": "SA",
@@ -32448,6 +32448,20 @@
           "hire_from_abroad": "unknown"
         },
         {
+          "title": "Principal Security Researcher",
+          "url": "https://job-boards.greenhouse.io/gitlab/jobs/8731718002",
+          "locations": [
+            "Remote, Canada; Remote, Israel; Remote, United Kingdom; Remote, United States"
+          ],
+          "countries": [
+            "United Kingdom"
+          ],
+          "workplace": "remote",
+          "department": "Product Security",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
           "title": "RPA Engineer, UiPath",
           "url": "https://job-boards.greenhouse.io/gitlab/jobs/8705011002",
           "locations": [
@@ -33001,12 +33015,12 @@
         },
         {
           "title": "Senior Solutions Architect",
-          "url": "https://job-boards.greenhouse.io/gitlab/jobs/8611764002",
+          "url": "https://job-boards.greenhouse.io/gitlab/jobs/8695969002",
           "locations": [
-            "Remote, United Kingdom"
+            "Remote, Germany"
           ],
           "countries": [
-            "United Kingdom"
+            "Germany"
           ],
           "workplace": "remote",
           "department": "SA",
@@ -33015,12 +33029,12 @@
         },
         {
           "title": "Senior Solutions Architect",
-          "url": "https://job-boards.greenhouse.io/gitlab/jobs/8695969002",
+          "url": "https://job-boards.greenhouse.io/gitlab/jobs/8611764002",
           "locations": [
-            "Remote, Germany"
+            "Remote, United Kingdom"
           ],
           "countries": [
-            "Germany"
+            "United Kingdom"
           ],
           "workplace": "remote",
           "department": "SA",
@@ -33232,6 +33246,20 @@
           ],
           "countries": [
             "India",
+            "United Kingdom"
+          ],
+          "workplace": "remote",
+          "department": "Product Security",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Staff Security Researcher",
+          "url": "https://job-boards.greenhouse.io/gitlab/jobs/8782153002",
+          "locations": [
+            "Remote, Canada; Remote, Israel; Remote, United Kingdom; Remote, United States"
+          ],
+          "countries": [
             "United Kingdom"
           ],
           "workplace": "remote",
@@ -35537,6 +35565,20 @@
           "hire_from_abroad": "unknown"
         },
         {
+          "title": "Senior AI Data Operations Manager",
+          "url": "https://job-boards.greenhouse.io/hackerrank/jobs/7959598",
+          "locations": [
+            "Hybrid in Bangalore, India"
+          ],
+          "countries": [
+            "India"
+          ],
+          "workplace": "hybrid",
+          "department": "Product",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
           "title": "Senior Backend Engineer",
           "url": "https://job-boards.greenhouse.io/hackerrank/jobs/7693789",
           "locations": [
@@ -37107,6 +37149,20 @@
           "hire_from_abroad": "unknown"
         },
         {
+          "title": "Data Analyst, Finance and Payments",
+          "url": "https://jobs.ashbyhq.com/handshake/11625d7a-36cc-48b9-808a-ae020c0bf535",
+          "locations": [
+            "India"
+          ],
+          "countries": [
+            "India"
+          ],
+          "workplace": "onsite",
+          "department": "General & Administrative",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
           "title": "Forward Deployed Engineer I",
           "url": "https://jobs.ashbyhq.com/handshake/f632f0c3-0b9c-49a7-984b-de92e18e6d0b",
           "locations": [
@@ -37159,6 +37215,20 @@
           ],
           "workplace": "onsite",
           "department": "Engineering",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Growth Operations Lead (India)",
+          "url": "https://jobs.ashbyhq.com/handshake/ba86755b-c182-41a5-91de-497988a395b3",
+          "locations": [
+            "India"
+          ],
+          "countries": [
+            "India"
+          ],
+          "workplace": "onsite",
+          "department": "Product",
           "visa": "unknown",
           "hire_from_abroad": "unknown"
         }
@@ -48825,20 +48895,6 @@
       "roles": [
         {
           "title": "Account Manager",
-          "url": "https://www.kaseya.com/careers/jobs/id/6146014004/?gh_jid=6146014004",
-          "locations": [
-            "Dublin, Ireland"
-          ],
-          "countries": [
-            "Ireland"
-          ],
-          "workplace": null,
-          "department": "Account Management",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Account Manager",
           "url": "https://www.kaseya.com/careers/jobs/id/6180334004/?gh_jid=6180334004",
           "locations": [
             "Amsterdam, Netherlands"
@@ -48848,6 +48904,20 @@
           ],
           "workplace": null,
           "department": "AMA Managers - EMEA",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Account Manager",
+          "url": "https://www.kaseya.com/careers/jobs/id/6146014004/?gh_jid=6146014004",
+          "locations": [
+            "Dublin, Ireland"
+          ],
+          "countries": [
+            "Ireland"
+          ],
+          "workplace": null,
+          "department": "Account Management",
           "visa": "unknown",
           "hire_from_abroad": "unknown"
         },
@@ -48993,20 +49063,6 @@
         },
         {
           "title": "Software Engineer I",
-          "url": "https://www.kaseya.com/careers/jobs/id/6146541004/?gh_jid=6146541004",
-          "locations": [
-            "Pune, India"
-          ],
-          "countries": [
-            "India"
-          ],
-          "workplace": null,
-          "department": "R&D Engineering",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Software Engineer I",
           "url": "https://www.kaseya.com/careers/jobs/id/6144274004/?gh_jid=6144274004",
           "locations": [
             "Pune, India"
@@ -49020,8 +49076,8 @@
           "hire_from_abroad": "unknown"
         },
         {
-          "title": "Software Engineer II",
-          "url": "https://www.kaseya.com/careers/jobs/id/6146543004/?gh_jid=6146543004",
+          "title": "Software Engineer I",
+          "url": "https://www.kaseya.com/careers/jobs/id/6146541004/?gh_jid=6146541004",
           "locations": [
             "Pune, India"
           ],
@@ -49036,6 +49092,20 @@
         {
           "title": "Software Engineer II",
           "url": "https://www.kaseya.com/careers/jobs/id/6144293004/?gh_jid=6144293004",
+          "locations": [
+            "Pune, India"
+          ],
+          "countries": [
+            "India"
+          ],
+          "workplace": null,
+          "department": "R&D Engineering",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Software Engineer II",
+          "url": "https://www.kaseya.com/careers/jobs/id/6146543004/?gh_jid=6146543004",
           "locations": [
             "Pune, India"
           ],
@@ -49077,7 +49147,7 @@
         },
         {
           "title": "Staff Software Engineer",
-          "url": "https://www.kaseya.com/careers/jobs/id/6015830004/?gh_jid=6015830004",
+          "url": "https://www.kaseya.com/careers/jobs/id/6146555004/?gh_jid=6146555004",
           "locations": [
             "Pune, India"
           ],
@@ -49091,7 +49161,7 @@
         },
         {
           "title": "Staff Software Engineer",
-          "url": "https://www.kaseya.com/careers/jobs/id/6146555004/?gh_jid=6146555004",
+          "url": "https://www.kaseya.com/careers/jobs/id/6015830004/?gh_jid=6015830004",
           "locations": [
             "Pune, India"
           ],
@@ -56416,7 +56486,7 @@
           "hire_from_abroad": "unknown"
         },
         {
-          "title": "Group Product Manager",
+          "title": "Group Product Manager (Manager Effectiveness)",
           "url": "https://jobs.lever.co/mindtickle/4365dc2a-87b1-4751-bd30-c90c70dea92c",
           "locations": [
             "Pune, Maharashtra",
@@ -62262,12 +62332,12 @@
         },
         {
           "title": "Regional Sales Manager",
-          "url": "https://www.netskope.com/company/careers/open-positions/?gh_jid=8176475",
+          "url": "https://www.netskope.com/company/careers/open-positions/?gh_jid=7484205",
           "locations": [
-            "Sydney, New South Wales, Australia"
+            "Germany"
           ],
           "countries": [
-            "Australia"
+            "Germany"
           ],
           "workplace": null,
           "department": "Sales Representative",
@@ -62304,12 +62374,12 @@
         },
         {
           "title": "Regional Sales Manager",
-          "url": "https://www.netskope.com/company/careers/open-positions/?gh_jid=7484205",
+          "url": "https://www.netskope.com/company/careers/open-positions/?gh_jid=8176475",
           "locations": [
-            "Germany"
+            "Sydney, New South Wales, Australia"
           ],
           "countries": [
-            "Germany"
+            "Australia"
           ],
           "workplace": null,
           "department": "Sales Representative",
@@ -62332,12 +62402,12 @@
         },
         {
           "title": "Sales Development Representative",
-          "url": "https://www.netskope.com/company/careers/open-positions/?gh_jid=7556727",
+          "url": "https://www.netskope.com/company/careers/open-positions/?gh_jid=7950415",
           "locations": [
-            "Portugal; Spain"
+            "Netherlands"
           ],
           "countries": [
-            "Spain"
+            "Netherlands"
           ],
           "workplace": null,
           "department": "Sales Development",
@@ -62346,12 +62416,12 @@
         },
         {
           "title": "Sales Development Representative",
-          "url": "https://www.netskope.com/company/careers/open-positions/?gh_jid=7950415",
+          "url": "https://www.netskope.com/company/careers/open-positions/?gh_jid=7556727",
           "locations": [
-            "Netherlands"
+            "Portugal; Spain"
           ],
           "countries": [
-            "Netherlands"
+            "Spain"
           ],
           "workplace": null,
           "department": "Sales Development",
@@ -62383,20 +62453,6 @@
           ],
           "workplace": null,
           "department": "Human Resources Business Partners",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Senior Manager, Sales Development",
-          "url": "https://www.netskope.com/company/careers/open-positions/?gh_jid=8141217",
-          "locations": [
-            "Singapore"
-          ],
-          "countries": [
-            "Singapore"
-          ],
-          "workplace": null,
-          "department": "Sales Development",
           "visa": "unknown",
           "hire_from_abroad": "unknown"
         },
@@ -62817,7 +62873,6 @@
         "Sweden",
         "Norway",
         "Japan",
-        "Singapore",
         "Australia"
       ],
       "cities": [
@@ -70612,42 +70667,6 @@
           "hire_from_abroad": "unknown"
         },
         {
-          "title": "Senior Software Engineer - AI Enablement Compliance",
-          "url": "https://jobs.ashbyhq.com/kraken.com/bd1f8aca-7a8d-4127-92c5-8e0dcc3771f3",
-          "locations": [
-            "United Kingdom",
-            "Ireland",
-            "Spain"
-          ],
-          "countries": [
-            "United Kingdom",
-            "Ireland",
-            "Spain"
-          ],
-          "workplace": "remote",
-          "department": "Engineering",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Senior Software Engineer - AI Enablement Finance",
-          "url": "https://jobs.ashbyhq.com/kraken.com/d00e0127-f2ad-427b-bb68-512f2883bd26",
-          "locations": [
-            "United Kingdom",
-            "Ireland",
-            "Spain"
-          ],
-          "countries": [
-            "United Kingdom",
-            "Ireland",
-            "Spain"
-          ],
-          "workplace": "remote",
-          "department": "Engineering",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
           "title": "Mobile Design Engineer",
           "url": "https://jobs.ashbyhq.com/kraken.com/95b0206c-8168-49d5-8e6c-e0c5ff885cf6",
           "locations": [
@@ -71124,24 +71143,6 @@
           ],
           "workplace": "remote",
           "department": "Business Expansion",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Senior Software Engineer - AI Enablement HR",
-          "url": "https://jobs.ashbyhq.com/kraken.com/4aacc5a1-a848-4b68-90b8-958b6e4a2d0b",
-          "locations": [
-            "United Kingdom",
-            "Ireland",
-            "Spain"
-          ],
-          "countries": [
-            "United Kingdom",
-            "Ireland",
-            "Spain"
-          ],
-          "workplace": "remote",
-          "department": "Engineering",
           "visa": "unknown",
           "hire_from_abroad": "unknown"
         },
@@ -78179,20 +78180,6 @@
           "hire_from_abroad": "unknown"
         },
         {
-          "title": "Associate Technical Program Manager",
-          "url": "https://job-boards.greenhouse.io/razorpaysoftwareprivatelimited/jobs/4723029005",
-          "locations": [
-            "Bengaluru"
-          ],
-          "countries": [
-            "India"
-          ],
-          "workplace": null,
-          "department": "Technical Program Management",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
           "title": "Forward Deployed Engineer",
           "url": "https://job-boards.greenhouse.io/razorpaysoftwareprivatelimited/jobs/4723067005",
           "locations": [
@@ -78348,20 +78335,6 @@
         },
         {
           "title": "Senior Product Manager",
-          "url": "https://job-boards.greenhouse.io/razorpaysoftwareprivatelimited/jobs/4729527005",
-          "locations": [
-            "Bengaluru"
-          ],
-          "countries": [
-            "India"
-          ],
-          "workplace": null,
-          "department": "Product",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Senior Product Manager",
           "url": "https://job-boards.greenhouse.io/razorpaysoftwareprivatelimited/jobs/4716555005",
           "locations": [
             "Bengaluru"
@@ -78371,6 +78344,20 @@
           ],
           "workplace": null,
           "department": "Product Management",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Senior Product Manager",
+          "url": "https://job-boards.greenhouse.io/razorpaysoftwareprivatelimited/jobs/4729527005",
+          "locations": [
+            "Bengaluru"
+          ],
+          "countries": [
+            "India"
+          ],
+          "workplace": null,
+          "department": "Product",
           "visa": "unknown",
           "hire_from_abroad": "unknown"
         },
@@ -79238,6 +79225,20 @@
           "hire_from_abroad": "unknown"
         },
         {
+          "title": "Customer Success Manager",
+          "url": "https://ripple.com/careers/all-jobs/job/8141304?gh_jid=8141304",
+          "locations": [
+            "London, UK"
+          ],
+          "countries": [
+            "United Kingdom"
+          ],
+          "workplace": null,
+          "department": "Customer Success",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
           "title": "Director, Global SDR Operations",
           "url": "https://ripple.com/careers/all-jobs/job/8108602?gh_jid=8108602",
           "locations": [
@@ -79295,12 +79296,12 @@
         },
         {
           "title": "RFP Specialist (12-Month Contract)",
-          "url": "https://ripple.com/careers/all-jobs/job/8173047?gh_jid=8173047",
+          "url": "https://ripple.com/careers/all-jobs/job/8173045?gh_jid=8173045",
           "locations": [
-            "London, UK"
+            "Dublin, Ireland"
           ],
           "countries": [
-            "United Kingdom"
+            "Ireland"
           ],
           "workplace": null,
           "department": "Sales",
@@ -79309,12 +79310,12 @@
         },
         {
           "title": "RFP Specialist (12-Month Contract)",
-          "url": "https://ripple.com/careers/all-jobs/job/8173045?gh_jid=8173045",
+          "url": "https://ripple.com/careers/all-jobs/job/8173047?gh_jid=8173047",
           "locations": [
-            "Dublin, Ireland"
+            "London, UK"
           ],
           "countries": [
-            "Ireland"
+            "United Kingdom"
           ],
           "workplace": null,
           "department": "Sales",
@@ -79449,12 +79450,12 @@
         },
         {
           "title": "Staff Cloud Architect",
-          "url": "https://ripple.com/careers/all-jobs/job/7685310?gh_jid=7685310",
+          "url": "https://ripple.com/careers/all-jobs/job/7685312?gh_jid=7685312",
           "locations": [
-            "Singapore"
+            "Sydney, New South Wales, Australia"
           ],
           "countries": [
-            "Singapore"
+            "Australia"
           ],
           "workplace": null,
           "department": "Engineering",
@@ -79463,12 +79464,12 @@
         },
         {
           "title": "Staff Cloud Architect",
-          "url": "https://ripple.com/careers/all-jobs/job/7685312?gh_jid=7685312",
+          "url": "https://ripple.com/careers/all-jobs/job/7685310?gh_jid=7685310",
           "locations": [
-            "Sydney, New South Wales, Australia"
+            "Singapore"
           ],
           "countries": [
-            "Australia"
+            "Singapore"
           ],
           "workplace": null,
           "department": "Engineering",
@@ -79491,12 +79492,12 @@
         },
         {
           "title": "Staff Security Engineer",
-          "url": "https://ripple.com/careers/all-jobs/job/8126238?gh_jid=8126238",
+          "url": "https://ripple.com/careers/all-jobs/job/8126240?gh_jid=8126240",
           "locations": [
-            "Dublin, Ireland"
+            "London, UK"
           ],
           "countries": [
-            "Ireland"
+            "United Kingdom"
           ],
           "workplace": null,
           "department": "Engineering",
@@ -79505,12 +79506,12 @@
         },
         {
           "title": "Staff Security Engineer",
-          "url": "https://ripple.com/careers/all-jobs/job/8126240?gh_jid=8126240",
+          "url": "https://ripple.com/careers/all-jobs/job/8126238?gh_jid=8126238",
           "locations": [
-            "London, UK"
+            "Dublin, Ireland"
           ],
           "countries": [
-            "United Kingdom"
+            "Ireland"
           ],
           "workplace": null,
           "department": "Engineering",
@@ -81761,7 +81762,7 @@
           "workplace": null,
           "department": "Human Frontier Collective",
           "visa": "no",
-          "hire_from_abroad": "no"
+          "hire_from_abroad": "unknown"
         },
         {
           "title": "Medical Fellow - Human Frontier Collective (UK)",
@@ -84755,7 +84756,7 @@
       "roles": [
         {
           "title": "Abuse Investigator",
-          "url": "https://stripe.com/jobs/search?gh_jid=8172487",
+          "url": "https://stripe.com/jobs/search?gh_jid=8172508",
           "locations": [
             "Dublin"
           ],
@@ -84769,7 +84770,7 @@
         },
         {
           "title": "Abuse Investigator",
-          "url": "https://stripe.com/jobs/search?gh_jid=8172508",
+          "url": "https://stripe.com/jobs/search?gh_jid=8172487",
           "locations": [
             "Dublin"
           ],
@@ -85232,20 +85233,6 @@
           "hire_from_abroad": "unknown"
         },
         {
-          "title": "Chief Compliance Officer (APAC)",
-          "url": "https://stripe.com/jobs/search?gh_jid=8023529",
-          "locations": [
-            "Singapore"
-          ],
-          "countries": [
-            "Singapore"
-          ],
-          "workplace": null,
-          "department": "3311 FinCRO",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
           "title": "Commercial Counsel, EMEA",
           "url": "https://stripe.com/jobs/search?gh_jid=8092304",
           "locations": [
@@ -85276,7 +85263,7 @@
         },
         {
           "title": "Contracting Operations Specialist",
-          "url": "https://stripe.com/jobs/search?gh_jid=7976710",
+          "url": "https://stripe.com/jobs/search?gh_jid=7994945",
           "locations": [
             "Bengaluru"
           ],
@@ -85346,7 +85333,7 @@
         },
         {
           "title": "Customer Success Manager",
-          "url": "https://stripe.com/jobs/search?gh_jid=8170772",
+          "url": "https://stripe.com/jobs/search?gh_jid=8009536",
           "locations": [
             "London"
           ],
@@ -85360,7 +85347,7 @@
         },
         {
           "title": "Customer Success Manager",
-          "url": "https://stripe.com/jobs/search?gh_jid=8009536",
+          "url": "https://stripe.com/jobs/search?gh_jid=8170772",
           "locations": [
             "London"
           ],
@@ -86117,7 +86104,7 @@
           "hire_from_abroad": "unknown"
         },
         {
-          "title": "Manager, Payments Performance Strategist (SEA and Greater China)",
+          "title": "Manager, Payments Performance (SEA and Greater China)",
           "url": "https://stripe.com/jobs/search?gh_jid=8175826",
           "locations": [
             "Singapore"
@@ -86146,20 +86133,6 @@
         },
         {
           "title": "Manager, Technical Account Management",
-          "url": "https://stripe.com/jobs/search?gh_jid=7767222",
-          "locations": [
-            "Dublin"
-          ],
-          "countries": [
-            "Ireland"
-          ],
-          "workplace": null,
-          "department": "4147 Technical Account Management, Support & Services - EMEA",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Manager, Technical Account Management",
           "url": "https://stripe.com/jobs/search?gh_jid=7664667",
           "locations": [
             "Sydney or Melbourne"
@@ -86169,6 +86142,20 @@
           ],
           "workplace": null,
           "department": "4148 Technical Account Management, Support & Services - APAC",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Manager, Technical Account Management",
+          "url": "https://stripe.com/jobs/search?gh_jid=7767222",
+          "locations": [
+            "Dublin"
+          ],
+          "countries": [
+            "Ireland"
+          ],
+          "workplace": null,
+          "department": "4147 Technical Account Management, Support & Services - EMEA",
           "visa": "unknown",
           "hire_from_abroad": "unknown"
         },
@@ -86949,12 +86936,12 @@
         },
         {
           "title": "Software Engineer, New Grad",
-          "url": "https://stripe.com/jobs/search?gh_jid=8130881",
+          "url": "https://stripe.com/jobs/search?gh_jid=8160776",
           "locations": [
-            "Dublin"
+            "Singapore"
           ],
           "countries": [
-            "Ireland"
+            "Singapore"
           ],
           "workplace": null,
           "department": "5112 General University",
@@ -86977,12 +86964,12 @@
         },
         {
           "title": "Software Engineer, New Grad",
-          "url": "https://stripe.com/jobs/search?gh_jid=8160776",
+          "url": "https://stripe.com/jobs/search?gh_jid=8130881",
           "locations": [
-            "Singapore"
+            "Dublin"
           ],
           "countries": [
-            "Singapore"
+            "Ireland"
           ],
           "workplace": null,
           "department": "5112 General University",
@@ -91209,12 +91196,12 @@
         },
         {
           "title": "AI Platform Engineer",
-          "url": "https://job-boards.eu.greenhouse.io/super/jobs/4914669101",
+          "url": "https://job-boards.eu.greenhouse.io/super/jobs/4914670101",
           "locations": [
-            "Netherlands"
+            "Spain"
           ],
           "countries": [
-            "Netherlands"
+            "Spain"
           ],
           "workplace": null,
           "department": "Product & Technology",
@@ -91223,12 +91210,12 @@
         },
         {
           "title": "AI Platform Engineer",
-          "url": "https://job-boards.eu.greenhouse.io/super/jobs/4914670101",
+          "url": "https://job-boards.eu.greenhouse.io/super/jobs/4914669101",
           "locations": [
-            "Spain"
+            "Netherlands"
           ],
           "countries": [
-            "Spain"
+            "Netherlands"
           ],
           "workplace": null,
           "department": "Product & Technology",
@@ -91265,12 +91252,12 @@
         },
         {
           "title": "Business Process Analyst",
-          "url": "https://job-boards.eu.greenhouse.io/super/jobs/4937520101",
+          "url": "https://job-boards.eu.greenhouse.io/super/jobs/4948362101",
           "locations": [
-            "Spain"
+            "Netherlands"
           ],
           "countries": [
-            "Spain"
+            "Netherlands"
           ],
           "workplace": null,
           "department": "Business Transformation",
@@ -91279,12 +91266,12 @@
         },
         {
           "title": "Business Process Analyst",
-          "url": "https://job-boards.eu.greenhouse.io/super/jobs/4948362101",
+          "url": "https://job-boards.eu.greenhouse.io/super/jobs/4937520101",
           "locations": [
-            "Netherlands"
+            "Spain"
           ],
           "countries": [
-            "Netherlands"
+            "Spain"
           ],
           "workplace": null,
           "department": "Business Transformation",
@@ -91419,12 +91406,12 @@
         },
         {
           "title": "Head of Product Design - Manager role",
-          "url": "https://job-boards.eu.greenhouse.io/super/jobs/4944439101",
+          "url": "https://job-boards.eu.greenhouse.io/super/jobs/4944435101",
           "locations": [
-            "Ireland"
+            "United Kingdom"
           ],
           "countries": [
-            "Ireland"
+            "United Kingdom"
           ],
           "workplace": null,
           "department": "Product Design & Research",
@@ -91433,12 +91420,12 @@
         },
         {
           "title": "Head of Product Design - Manager role",
-          "url": "https://job-boards.eu.greenhouse.io/super/jobs/4944435101",
+          "url": "https://job-boards.eu.greenhouse.io/super/jobs/4944439101",
           "locations": [
-            "United Kingdom"
+            "Ireland"
           ],
           "countries": [
-            "United Kingdom"
+            "Ireland"
           ],
           "workplace": null,
           "department": "Product Design & Research",
@@ -91559,12 +91546,12 @@
         },
         {
           "title": "Project Portfolio Manager (Finance)",
-          "url": "https://job-boards.eu.greenhouse.io/super/jobs/4906064101",
+          "url": "https://job-boards.eu.greenhouse.io/super/jobs/4906314101",
           "locations": [
-            "Spain"
+            "United Kingdom"
           ],
           "countries": [
-            "Spain"
+            "United Kingdom"
           ],
           "workplace": null,
           "department": "Group Finance Control",
@@ -91573,12 +91560,12 @@
         },
         {
           "title": "Project Portfolio Manager (Finance)",
-          "url": "https://job-boards.eu.greenhouse.io/super/jobs/4906314101",
+          "url": "https://job-boards.eu.greenhouse.io/super/jobs/4906064101",
           "locations": [
-            "United Kingdom"
+            "Spain"
           ],
           "countries": [
-            "United Kingdom"
+            "Spain"
           ],
           "workplace": null,
           "department": "Group Finance Control",
@@ -91965,7 +91952,7 @@
         },
         {
           "title": "Senior Software Engineer (Backend)",
-          "url": "https://job-boards.eu.greenhouse.io/super/jobs/4521285101",
+          "url": "https://job-boards.eu.greenhouse.io/super/jobs/4848153101",
           "locations": [
             "Spain"
           ],
@@ -91979,7 +91966,7 @@
         },
         {
           "title": "Senior Software Engineer (Backend)",
-          "url": "https://job-boards.eu.greenhouse.io/super/jobs/4848153101",
+          "url": "https://job-boards.eu.greenhouse.io/super/jobs/4521285101",
           "locations": [
             "Spain"
           ],
@@ -92077,6 +92064,20 @@
         },
         {
           "title": "Staff Market Intelligence Researcher",
+          "url": "https://job-boards.eu.greenhouse.io/super/jobs/4854917101",
+          "locations": [
+            "United Kingdom"
+          ],
+          "countries": [
+            "United Kingdom"
+          ],
+          "workplace": null,
+          "department": "Data Insights (Data & Analytics)",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Staff Market Intelligence Researcher",
           "url": "https://job-boards.eu.greenhouse.io/super/jobs/4854469101",
           "locations": [
             "Spain"
@@ -92097,20 +92098,6 @@
           ],
           "countries": [
             "Netherlands"
-          ],
-          "workplace": null,
-          "department": "Data Insights (Data & Analytics)",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Staff Market Intelligence Researcher",
-          "url": "https://job-boards.eu.greenhouse.io/super/jobs/4854917101",
-          "locations": [
-            "United Kingdom"
-          ],
-          "countries": [
-            "United Kingdom"
           ],
           "workplace": null,
           "department": "Data Insights (Data & Analytics)",
@@ -92175,12 +92162,12 @@
         },
         {
           "title": "Staff Site Reliability Engineer - Cloud Efficiency",
-          "url": "https://job-boards.eu.greenhouse.io/super/jobs/4902283101",
+          "url": "https://job-boards.eu.greenhouse.io/super/jobs/4903788101",
           "locations": [
-            "Spain"
+            "Netherlands"
           ],
           "countries": [
-            "Spain"
+            "Netherlands"
           ],
           "workplace": null,
           "department": "Technology",
@@ -92189,12 +92176,12 @@
         },
         {
           "title": "Staff Site Reliability Engineer - Cloud Efficiency",
-          "url": "https://job-boards.eu.greenhouse.io/super/jobs/4903788101",
+          "url": "https://job-boards.eu.greenhouse.io/super/jobs/4902283101",
           "locations": [
-            "Netherlands"
+            "Spain"
           ],
           "countries": [
-            "Netherlands"
+            "Spain"
           ],
           "workplace": null,
           "department": "Technology",
@@ -92231,12 +92218,12 @@
         },
         {
           "title": "Staff Strategy & Competitive Intelligence Researcher",
-          "url": "https://job-boards.eu.greenhouse.io/super/jobs/4878125101",
+          "url": "https://job-boards.eu.greenhouse.io/super/jobs/4942706101",
           "locations": [
-            "United Kingdom"
+            "Netherlands"
           ],
           "countries": [
-            "United Kingdom"
+            "Netherlands"
           ],
           "workplace": null,
           "department": "Data Insights (Data & Analytics)",
@@ -92245,12 +92232,12 @@
         },
         {
           "title": "Staff Strategy & Competitive Intelligence Researcher",
-          "url": "https://job-boards.eu.greenhouse.io/super/jobs/4942706101",
+          "url": "https://job-boards.eu.greenhouse.io/super/jobs/4878125101",
           "locations": [
-            "Netherlands"
+            "United Kingdom"
           ],
           "countries": [
-            "Netherlands"
+            "United Kingdom"
           ],
           "workplace": null,
           "department": "Data Insights (Data & Analytics)",
@@ -92273,12 +92260,12 @@
         },
         {
           "title": "Strategy Analyst Intern",
-          "url": "https://job-boards.eu.greenhouse.io/super/jobs/4963556101",
+          "url": "https://job-boards.eu.greenhouse.io/super/jobs/4963574101",
           "locations": [
-            "Spain"
+            "United Kingdom"
           ],
           "countries": [
-            "Spain"
+            "United Kingdom"
           ],
           "workplace": null,
           "department": "Strategy & Corporate",
@@ -92287,12 +92274,12 @@
         },
         {
           "title": "Strategy Analyst Intern",
-          "url": "https://job-boards.eu.greenhouse.io/super/jobs/4963574101",
+          "url": "https://job-boards.eu.greenhouse.io/super/jobs/4963556101",
           "locations": [
-            "United Kingdom"
+            "Spain"
           ],
           "countries": [
-            "United Kingdom"
+            "Spain"
           ],
           "workplace": null,
           "department": "Strategy & Corporate",
@@ -99261,12 +99248,12 @@
       "roles": [
         {
           "title": "ADAS Feature Engineer",
-          "url": "https://wayve.firststage.co/jobs?gh_jid=8578343002",
+          "url": "https://wayve.firststage.co/jobs?gh_jid=8578569002",
           "locations": [
-            "Germany"
+            "Tokyo"
           ],
           "countries": [
-            "Germany"
+            "Japan"
           ],
           "workplace": null,
           "department": "Product & Delivery",
@@ -99275,12 +99262,12 @@
         },
         {
           "title": "ADAS Feature Engineer",
-          "url": "https://wayve.firststage.co/jobs?gh_jid=8578569002",
+          "url": "https://wayve.firststage.co/jobs?gh_jid=8578343002",
           "locations": [
-            "Tokyo"
+            "Germany"
           ],
           "countries": [
-            "Japan"
+            "Germany"
           ],
           "workplace": null,
           "department": "Product & Delivery",
@@ -99484,6 +99471,20 @@
           "hire_from_abroad": "unknown"
         },
         {
+          "title": "Engineering Manager, SRE \u2013 AV Fleet, Japan",
+          "url": "https://wayve.firststage.co/jobs?gh_jid=8780872002",
+          "locations": [
+            "Japan"
+          ],
+          "countries": [
+            "Japan"
+          ],
+          "workplace": null,
+          "department": "Vehicle SW Engineering",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
           "title": "Engineering Technician",
           "url": "https://wayve.firststage.co/jobs?gh_jid=8600235002",
           "locations": [
@@ -99499,12 +99500,12 @@
         },
         {
           "title": "Feature Owner, ADAS",
-          "url": "https://wayve.firststage.co/jobs?gh_jid=8648406002",
+          "url": "https://wayve.firststage.co/jobs?gh_jid=8551387002",
           "locations": [
-            "Germany"
+            "London"
           ],
           "countries": [
-            "Germany"
+            "United Kingdom"
           ],
           "workplace": null,
           "department": "Product & Delivery",
@@ -99527,12 +99528,12 @@
         },
         {
           "title": "Feature Owner, ADAS",
-          "url": "https://wayve.firststage.co/jobs?gh_jid=8551387002",
+          "url": "https://wayve.firststage.co/jobs?gh_jid=8648406002",
           "locations": [
-            "London"
+            "Germany"
           ],
           "countries": [
-            "United Kingdom"
+            "Germany"
           ],
           "workplace": null,
           "department": "Product & Delivery",
@@ -99760,6 +99761,20 @@
           ],
           "workplace": null,
           "department": "Product & Delivery",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Material Program Manager",
+          "url": "https://wayve.firststage.co/jobs?gh_jid=8480867002",
+          "locations": [
+            "Japan"
+          ],
+          "countries": [
+            "Japan"
+          ],
+          "workplace": null,
+          "department": "Hardware & Supply Chain",
           "visa": "unknown",
           "hire_from_abroad": "unknown"
         },
@@ -100438,12 +100453,12 @@
         },
         {
           "title": "Vehicle Safety Operator",
-          "url": "https://wayve.firststage.co/jobs?gh_jid=8578329002",
+          "url": "https://wayve.firststage.co/jobs?gh_jid=7988301002",
           "locations": [
-            "Germany"
+            "Japan"
           ],
           "countries": [
-            "Germany"
+            "Japan"
           ],
           "workplace": null,
           "department": "Fleet Operations",
@@ -100452,12 +100467,12 @@
         },
         {
           "title": "Vehicle Safety Operator",
-          "url": "https://wayve.firststage.co/jobs?gh_jid=7988301002",
+          "url": "https://wayve.firststage.co/jobs?gh_jid=8578329002",
           "locations": [
-            "Japan"
+            "Germany"
           ],
           "countries": [
-            "Japan"
+            "Germany"
           ],
           "workplace": null,
           "department": "Fleet Operations",
@@ -101364,20 +101379,6 @@
           "hire_from_abroad": "unknown"
         },
         {
-          "title": "Security engineer, detection and response (UK)",
-          "url": "https://jobs.ashbyhq.com/writer/c4508e49-bfd4-44f2-af41-bf695a83605d",
-          "locations": [
-            "London, UK"
-          ],
-          "countries": [
-            "United Kingdom"
-          ],
-          "workplace": "hybrid",
-          "department": "Engineering, product & design",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
           "title": "AI engineer (UK)",
           "url": "https://jobs.ashbyhq.com/writer/e89c9689-d5ed-4b95-8f3c-b13c6f4c94ba",
           "locations": [
@@ -101394,34 +101395,6 @@
         {
           "title": "Software engineer, agents (UK)",
           "url": "https://jobs.ashbyhq.com/writer/6bbdb7ac-d081-4788-952b-6648be46a3bc",
-          "locations": [
-            "London, UK"
-          ],
-          "countries": [
-            "United Kingdom"
-          ],
-          "workplace": "hybrid",
-          "department": "Engineering, product & design",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Security engineer, application security (UK)",
-          "url": "https://jobs.ashbyhq.com/writer/58aea7b9-69ac-42df-b9ca-bee5c87b354a",
-          "locations": [
-            "London, UK"
-          ],
-          "countries": [
-            "United Kingdom"
-          ],
-          "workplace": "hybrid",
-          "department": "Engineering, product & design",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Software quality engineer (UK)",
-          "url": "https://jobs.ashbyhq.com/writer/b69a7c74-861f-4265-a5fa-8bc27f47d0c0",
           "locations": [
             "London, UK"
           ],
@@ -101561,7 +101534,49 @@
         },
         {
           "title": "Infrastructure engineer (UK)",
-          "url": "https://jobs.ashbyhq.com/writer/104de3e0-639b-4ff1-95f0-e157d5e85116",
+          "url": "https://jobs.ashbyhq.com/writer/1b283445-c4cd-4b88-be80-1d3a492bd6c0",
+          "locations": [
+            "London, UK"
+          ],
+          "countries": [
+            "United Kingdom"
+          ],
+          "workplace": "hybrid",
+          "department": "Engineering, product & design",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Security engineer, detection and response (UK)",
+          "url": "https://jobs.ashbyhq.com/writer/069a0e75-8c96-438b-be2d-6fa9b3b86701",
+          "locations": [
+            "London, UK"
+          ],
+          "countries": [
+            "United Kingdom"
+          ],
+          "workplace": "hybrid",
+          "department": "Engineering, product & design",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Security engineer, application security (UK)",
+          "url": "https://jobs.ashbyhq.com/writer/60cc89b9-b582-49d2-b9e8-b83af6094da5",
+          "locations": [
+            "London, UK"
+          ],
+          "countries": [
+            "United Kingdom"
+          ],
+          "workplace": "hybrid",
+          "department": "Engineering, product & design",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Software quality engineer (UK)",
+          "url": "https://jobs.ashbyhq.com/writer/59857771-c377-4815-bfea-1892169ce8e9",
           "locations": [
             "London, UK"
           ],

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "snapshot": "2026-09-04",
+  "snapshot": "2026-09-05",
   "note": "first_seen is the snapshot date a role's URL first appeared in a build. A role is confirmed only where its company's board was read on the previous snapshot AND on this one \u2014 both sides genuinely observed. Everything else is unconfirmed: we saw it for the first time, which is not the same as it being new. Only confirmed roles may be called new.",
   "observed": [
     "1Password",
@@ -10427,6 +10427,24 @@
         "https://www.netskope.com/company/careers/open-positions/?gh_jid=8176475",
         "https://www.observe.ai/position?gh_jid=5365285008",
         "https://www.scandit.com/careers/job-description/?gh_jid=8179821"
+      ],
+      "unconfirmed": []
+    },
+    "2026-09-05": {
+      "confirmed": [
+        "https://job-boards.greenhouse.io/celonis/jobs/7985248003?gh_jid=7985248003",
+        "https://job-boards.greenhouse.io/gitlab/jobs/8731718002",
+        "https://job-boards.greenhouse.io/gitlab/jobs/8782153002",
+        "https://jobs.ashbyhq.com/handshake/11625d7a-36cc-48b9-808a-ae020c0bf535",
+        "https://jobs.ashbyhq.com/handshake/ba86755b-c182-41a5-91de-497988a395b3",
+        "https://jobs.ashbyhq.com/writer/069a0e75-8c96-438b-be2d-6fa9b3b86701",
+        "https://jobs.ashbyhq.com/writer/1b283445-c4cd-4b88-be80-1d3a492bd6c0",
+        "https://jobs.ashbyhq.com/writer/59857771-c377-4815-bfea-1892169ce8e9",
+        "https://jobs.ashbyhq.com/writer/60cc89b9-b582-49d2-b9e8-b83af6094da5",
+        "https://ripple.com/careers/all-jobs/job/8141304?gh_jid=8141304",
+        "https://stripe.com/jobs/search?gh_jid=7994945",
+        "https://wayve.firststage.co/jobs?gh_jid=8480867002",
+        "https://wayve.firststage.co/jobs?gh_jid=8780872002"
       ],
       "unconfirmed": []
     }
