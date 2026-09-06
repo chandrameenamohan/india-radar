@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "snapshot": "2026-09-05",
+  "snapshot": "2026-09-06",
   "note": "first_seen is the snapshot date a role's URL first appeared in a build. A role is confirmed only where its company's board was read on the previous snapshot AND on this one \u2014 both sides genuinely observed. Everything else is unconfirmed: we saw it for the first time, which is not the same as it being new. Only confirmed roles may be called new.",
   "observed": [
     "1Password",
@@ -10445,6 +10445,16 @@
         "https://stripe.com/jobs/search?gh_jid=7994945",
         "https://wayve.firststage.co/jobs?gh_jid=8480867002",
         "https://wayve.firststage.co/jobs?gh_jid=8780872002"
+      ],
+      "unconfirmed": []
+    },
+    "2026-09-06": {
+      "confirmed": [
+        "https://databricks.com/company/careers/open-positions/job?gh_jid=7841778002",
+        "https://job-boards.greenhouse.io/firmus/jobs/5414787008",
+        "https://job-boards.greenhouse.io/togetherai/jobs/5222294007",
+        "https://jobs.ashbyhq.com/kraken.com/d8fd9d2b-4ffb-4e90-b10e-c14d01c6cb92",
+        "https://stripe.com/jobs/search?gh_jid=8181003"
       ],
       "unconfirmed": []
     }
