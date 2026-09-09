@@ -3,8 +3,8 @@
   "checked": 840,
   "unchecked": 2186,
   "counts": {
-    "listed": 373,
-    "no-target-roles": 467,
+    "listed": 374,
+    "no-target-roles": 466,
     "slug-unresolved": 2166,
     "probe-failed": 0,
     "empty-board-unverified": 7,
@@ -108,6 +108,7 @@
     "Duffel",
     "EBANX",
     "Elyos AI",
+    "Enable",
     "Encord",
     "Envoy",
     "Epic Games",
@@ -1252,7 +1253,7 @@
     "Empirical Security": "slug-unresolved",
     "Employment Hero": "slug-unresolved",
     "EmptyVessel": "slug-unresolved",
-    "Enable": "no-target-roles",
+    "Enable": "listed",
     "Encord": "listed",
     "Encore AI": "slug-unresolved",
     "Endless": "slug-unresolved",
@@ -3414,10 +3415,7 @@
     "xLight": "slug-unresolved",
     "zeroheight": "slug-unresolved"
   },
-  "departed": {
-    "Assembled": "no-target-roles",
-    "Nova Credit": "no-target-roles"
-  },
+  "departed": {},
   "websites": {
     "with_website": 1928,
     "slug_unresolved_with_website": 1180,
@@ -3440,20 +3438,20 @@
   },
   "countries": {
     "India": 128,
-    "United Kingdom": 270,
-    "Ireland": 54,
+    "United Kingdom": 268,
+    "Ireland": 53,
     "Germany": 99,
     "Netherlands": 49,
-    "France": 55,
+    "France": 56,
     "Spain": 62,
     "Sweden": 26,
     "Denmark": 16,
     "Norway": 8,
     "Finland": 7,
     "Japan": 63,
-    "Singapore": 70,
-    "Australia": 77,
-    "New Zealand": 5
+    "Singapore": 72,
+    "Australia": 78,
+    "New Zealand": 6
   },
   "mca": {
     "records": 24102,
@@ -4720,23 +4718,6 @@
             "name": "CRIBL UNITED KINGDOM LIMITED",
             "status": "active",
             "incorporated": "2022-11-30",
-            "locality": "",
-            "postcode": "",
-            "sic": [],
-            "kind": ""
-          }
-        ]
-      },
-      {
-        "name": "Culture Amp",
-        "confidence": "exact",
-        "why": "silent; one exact-tier name match",
-        "candidates": [
-          {
-            "number": "10067991",
-            "name": "CULTURE AMP LIMITED",
-            "status": "active",
-            "incorporated": "2016-03-17",
             "locality": "",
             "postcode": "",
             "sic": [],
@@ -6458,23 +6439,6 @@
             "name": "OKLO LIMITED",
             "status": "dissolved",
             "incorporated": "2012-01-03",
-            "locality": "",
-            "postcode": "",
-            "sic": [],
-            "kind": ""
-          }
-        ]
-      },
-      {
-        "name": "OKX",
-        "confidence": "exact",
-        "why": "unreachable; one exact-tier name match",
-        "candidates": [
-          {
-            "number": "15802291",
-            "name": "OKX LIMITED",
-            "status": "active",
-            "incorporated": "2024-06-25",
             "locality": "",
             "postcode": "",
             "sic": [],
