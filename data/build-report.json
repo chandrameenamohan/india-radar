@@ -1,11 +1,11 @@
 {
   "corpus_size": 3026,
-  "checked": 840,
-  "unchecked": 2186,
+  "checked": 839,
+  "unchecked": 2187,
   "counts": {
-    "listed": 374,
-    "no-target-roles": 466,
-    "slug-unresolved": 2166,
+    "listed": 375,
+    "no-target-roles": 464,
+    "slug-unresolved": 2167,
     "probe-failed": 0,
     "empty-board-unverified": 7,
     "not-qualified": 0,
@@ -325,6 +325,7 @@
     "Starburst",
     "Stilta",
     "Stripe",
+    "Substack",
     "SumUp",
     "Suno",
     "Supabase",
@@ -2867,7 +2868,7 @@
     "Soomgo": "slug-unresolved",
     "Sophia Space": "slug-unresolved",
     "Sorare": "listed",
-    "Sorcero": "no-target-roles",
+    "Sorcero": "slug-unresolved",
     "Sorella Labs": "no-target-roles",
     "Soteris": "slug-unresolved",
     "Sourcegraph": "no-target-roles",
@@ -2930,7 +2931,7 @@
     "Striveworks": "no-target-roles",
     "StudyFetch": "slug-unresolved",
     "Submittable": "no-target-roles",
-    "Substack": "no-target-roles",
+    "Substack": "listed",
     "Subtotal": "slug-unresolved",
     "Suite Studios": "slug-unresolved",
     "Suiteness": "slug-unresolved",
@@ -3419,7 +3420,7 @@
   "websites": {
     "with_website": 1928,
     "slug_unresolved_with_website": 1180,
-    "slug_unresolved_without_website": 986
+    "slug_unresolved_without_website": 987
   },
   "shared_boards": {
     "Bright": "BrightAI",
@@ -3437,20 +3438,20 @@
     "Insider": "Business Insider"
   },
   "countries": {
-    "India": 128,
-    "United Kingdom": 268,
+    "India": 127,
+    "United Kingdom": 269,
     "Ireland": 53,
-    "Germany": 99,
+    "Germany": 100,
     "Netherlands": 49,
     "France": 56,
     "Spain": 62,
     "Sweden": 26,
-    "Denmark": 16,
+    "Denmark": 15,
     "Norway": 8,
     "Finland": 7,
     "Japan": 63,
-    "Singapore": 72,
-    "Australia": 78,
+    "Singapore": 73,
+    "Australia": 77,
     "New Zealand": 6
   },
   "mca": {
