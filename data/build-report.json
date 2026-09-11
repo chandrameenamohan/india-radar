@@ -1,11 +1,11 @@
 {
   "corpus_size": 3026,
-  "checked": 839,
-  "unchecked": 2187,
+  "checked": 838,
+  "unchecked": 2188,
   "counts": {
-    "listed": 375,
+    "listed": 374,
     "no-target-roles": 464,
-    "slug-unresolved": 2167,
+    "slug-unresolved": 2168,
     "probe-failed": 0,
     "empty-board-unverified": 7,
     "not-qualified": 0,
@@ -81,6 +81,7 @@
     "Collibra",
     "ConductorOne",
     "ContentSquare",
+    "Contentful",
     "Conveo",
     "Corgi",
     "Cresta",
@@ -219,7 +220,6 @@
     "Matillion",
     "Mattermost",
     "MeltPlan",
-    "Mem0",
     "Mercor",
     "Meter",
     "Meticulous",
@@ -271,7 +271,6 @@
     "Permutive",
     "Photoroom",
     "PhysicsX",
-    "PicsArt",
     "Pigment",
     "Plaid",
     "Pleo",
@@ -1003,7 +1002,7 @@
     "ConsenSys": "no-target-roles",
     "Conta Simples": "slug-unresolved",
     "ContentSquare": "listed",
-    "Contentful": "no-target-roles",
+    "Contentful": "listed",
     "Continuum Technologies": "slug-unresolved",
     "Contrast Security": "no-target-roles",
     "Conveo": "listed",
@@ -2013,7 +2012,7 @@
     "Meesho": "slug-unresolved",
     "Mellohead": "slug-unresolved",
     "MeltPlan": "listed",
-    "Mem0": "listed",
+    "Mem0": "no-target-roles",
     "Membrion": "slug-unresolved",
     "Memfault": "no-target-roles",
     "Mending Health": "slug-unresolved",
@@ -2426,7 +2425,7 @@
     "Pibit.ai": "slug-unresolved",
     "PickTrace": "no-target-roles",
     "PicnicAI": "no-target-roles",
-    "PicsArt": "listed",
+    "PicsArt": "no-target-roles",
     "Pierre": "slug-unresolved",
     "Pigment": "listed",
     "Pillar": "slug-unresolved",
@@ -3289,7 +3288,7 @@
     "Workhuman": "slug-unresolved",
     "Workpay": "slug-unresolved",
     "Workwise Solutions": "slug-unresolved",
-    "World Labs": "no-target-roles",
+    "World Labs": "slug-unresolved",
     "World View Enterprises": "slug-unresolved",
     "WorldCover": "slug-unresolved",
     "Worldcoin": "slug-unresolved",
@@ -3416,11 +3415,14 @@
     "xLight": "slug-unresolved",
     "zeroheight": "slug-unresolved"
   },
-  "departed": {},
+  "departed": {
+    "Mem0": "no-target-roles",
+    "PicsArt": "no-target-roles"
+  },
   "websites": {
     "with_website": 1928,
     "slug_unresolved_with_website": 1180,
-    "slug_unresolved_without_website": 987
+    "slug_unresolved_without_website": 988
   },
   "shared_boards": {
     "Bright": "BrightAI",
@@ -3438,20 +3440,20 @@
     "Insider": "Business Insider"
   },
   "countries": {
-    "India": 127,
+    "India": 126,
     "United Kingdom": 269,
-    "Ireland": 53,
+    "Ireland": 52,
     "Germany": 100,
-    "Netherlands": 49,
-    "France": 56,
-    "Spain": 62,
-    "Sweden": 26,
+    "Netherlands": 48,
+    "France": 55,
+    "Spain": 61,
+    "Sweden": 27,
     "Denmark": 15,
     "Norway": 8,
-    "Finland": 7,
+    "Finland": 8,
     "Japan": 63,
-    "Singapore": 73,
-    "Australia": 77,
+    "Singapore": 72,
+    "Australia": 81,
     "New Zealand": 6
   },
   "mca": {
@@ -4659,6 +4661,23 @@
         ]
       },
       {
+        "name": "Contentful",
+        "confidence": "exact",
+        "why": "silent; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "13723044",
+            "name": "CONTENTFUL (UK) LIMITED",
+            "status": "active",
+            "incorporated": "2021-11-04",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
         "name": "ContentSquare",
         "confidence": "exact",
         "why": "silent; one exact-tier name match",
@@ -4719,6 +4738,23 @@
             "name": "CRIBL UNITED KINGDOM LIMITED",
             "status": "active",
             "incorporated": "2022-11-30",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Culture Amp",
+        "confidence": "exact",
+        "why": "silent; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "10067991",
+            "name": "CULTURE AMP LIMITED",
+            "status": "active",
+            "incorporated": "2016-03-17",
             "locality": "",
             "postcode": "",
             "sic": [],
@@ -6633,23 +6669,6 @@
             "name": "PHYSICSX LIMITED",
             "status": "active",
             "incorporated": "2019-08-01",
-            "locality": "",
-            "postcode": "",
-            "sic": [],
-            "kind": ""
-          }
-        ]
-      },
-      {
-        "name": "PicsArt",
-        "confidence": "exact",
-        "why": "silent; one exact-tier name match",
-        "candidates": [
-          {
-            "number": "13741239",
-            "name": "PICSART UK LIMITED",
-            "status": "active",
-            "incorporated": "2021-11-12",
             "locality": "",
             "postcode": "",
             "sic": [],
