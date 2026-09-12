@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "snapshot": "2026-09-11",
+  "snapshot": "2026-09-12",
   "note": "first_seen is the snapshot date a role's URL first appeared in a build. A role is confirmed only where its company's board was read on the previous snapshot AND on this one \u2014 both sides genuinely observed. Everything else is unconfirmed: we saw it for the first time, which is not the same as it being new. Only confirmed roles may be called new.",
   "observed": [
     "1Password",
@@ -11092,6 +11092,20 @@
         "https://job-boards.greenhouse.io/contentful/jobs/8197036",
         "https://job-boards.greenhouse.io/contentful/jobs/8197219"
       ]
+    },
+    "2026-09-12": {
+      "confirmed": [
+        "https://databricks.com/company/careers/open-positions/job?gh_jid=8785055002",
+        "https://job-boards.greenhouse.io/chainguard/jobs/4712481006",
+        "https://job-boards.greenhouse.io/chainguard/jobs/4712483006",
+        "https://job-boards.greenhouse.io/devrev/jobs/6189937004",
+        "https://job-boards.greenhouse.io/gitlab/jobs/8789857002",
+        "https://jobs.ashbyhq.com/envoy/50fb0d1e-fa3a-4f05-b40f-df0149882eec",
+        "https://jobs.ashbyhq.com/oyster/32074b6f-94c2-4fbc-8dec-38c4a64b5347",
+        "https://wayve.firststage.co/jobs?gh_jid=8793806002",
+        "https://www.nextiva.com/company/careers-listing?gh_jid=8784787002"
+      ],
+      "unconfirmed": []
     }
   }
 }

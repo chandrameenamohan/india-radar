@@ -1,11 +1,11 @@
 {
   "corpus_size": 3026,
-  "checked": 838,
-  "unchecked": 2188,
+  "checked": 837,
+  "unchecked": 2189,
   "counts": {
     "listed": 374,
-    "no-target-roles": 464,
-    "slug-unresolved": 2168,
+    "no-target-roles": 463,
+    "slug-unresolved": 2169,
     "probe-failed": 0,
     "empty-board-unverified": 7,
     "not-qualified": 0,
@@ -3373,7 +3373,7 @@
     "airSlate": "listed",
     "apna": "slug-unresolved",
     "authzed": "no-target-roles",
-    "autone": "no-target-roles",
+    "autone": "slug-unresolved",
     "bolttech": "slug-unresolved",
     "bxblue": "slug-unresolved",
     "clicOH": "slug-unresolved",
@@ -3415,13 +3415,10 @@
     "xLight": "slug-unresolved",
     "zeroheight": "slug-unresolved"
   },
-  "departed": {
-    "Mem0": "no-target-roles",
-    "PicsArt": "no-target-roles"
-  },
+  "departed": {},
   "websites": {
     "with_website": 1928,
-    "slug_unresolved_with_website": 1180,
+    "slug_unresolved_with_website": 1181,
     "slug_unresolved_without_website": 988
   },
   "shared_boards": {
