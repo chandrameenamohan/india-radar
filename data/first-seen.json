@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "snapshot": "2026-09-12",
+  "snapshot": "2026-09-13",
   "note": "first_seen is the snapshot date a role's URL first appeared in a build. A role is confirmed only where its company's board was read on the previous snapshot AND on this one \u2014 both sides genuinely observed. Everything else is unconfirmed: we saw it for the first time, which is not the same as it being new. Only confirmed roles may be called new.",
   "observed": [
     "1Password",
@@ -11104,6 +11104,14 @@
         "https://jobs.ashbyhq.com/oyster/32074b6f-94c2-4fbc-8dec-38c4a64b5347",
         "https://wayve.firststage.co/jobs?gh_jid=8793806002",
         "https://www.nextiva.com/company/careers-listing?gh_jid=8784787002"
+      ],
+      "unconfirmed": []
+    },
+    "2026-09-13": {
+      "confirmed": [
+        "https://databricks.com/company/careers/open-positions/job?gh_jid=8320183002",
+        "https://jobs.ashbyhq.com/kraken.com/c6298ed5-978b-49ea-8cec-ce90f275d540",
+        "https://www.netskope.com/company/careers/open-positions/?gh_jid=8009546"
       ],
       "unconfirmed": []
     }
