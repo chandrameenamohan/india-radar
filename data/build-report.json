@@ -3,8 +3,8 @@
   "checked": 837,
   "unchecked": 2189,
   "counts": {
-    "listed": 374,
-    "no-target-roles": 463,
+    "listed": 370,
+    "no-target-roles": 467,
     "slug-unresolved": 2169,
     "probe-failed": 0,
     "empty-board-unverified": 7,
@@ -169,7 +169,6 @@
     "Illumio",
     "Immuta",
     "Immutable",
-    "Improbable",
     "InMobi",
     "Incode Technologies",
     "Infisical",
@@ -240,7 +239,6 @@
     "Neo4j",
     "Netskope",
     "Nextiva",
-    "Niantic Spatial",
     "Nirvana",
     "Nitricity",
     "Notabene",
@@ -275,7 +273,6 @@
     "Plaid",
     "Pleo",
     "Podium",
-    "Poolside",
     "Postman",
     "PowerUs",
     "Project44",
@@ -366,7 +363,6 @@
     "Verkada",
     "Vest",
     "Vivodyne",
-    "Wasabi",
     "Wayflyer",
     "Wayve",
     "Webflow",
@@ -1676,7 +1672,7 @@
     "Impossible Metals": "slug-unresolved",
     "Impraise": "slug-unresolved",
     "Imprint": "slug-unresolved",
-    "Improbable": "listed",
+    "Improbable": "no-target-roles",
     "InCred": "slug-unresolved",
     "InMobi": "listed",
     "InScope": "slug-unresolved",
@@ -2173,7 +2169,7 @@
     "Nexu": "slug-unresolved",
     "Neysa": "slug-unresolved",
     "Niantic": "slug-unresolved",
-    "Niantic Spatial": "listed",
+    "Niantic Spatial": "no-target-roles",
     "NightVision Security": "slug-unresolved",
     "Nimble": "slug-unresolved",
     "NimbleRx": "slug-unresolved",
@@ -2467,7 +2463,7 @@
     "Polyhedra Network": "slug-unresolved",
     "Polymarket": "slug-unresolved",
     "Pomelo Care": "no-target-roles",
-    "Poolside": "listed",
+    "Poolside": "no-target-roles",
     "Pop Meals": "slug-unresolved",
     "PopSQL": "slug-unresolved",
     "Popcorn Labs": "slug-unresolved",
@@ -3242,7 +3238,7 @@
     "Wacai": "slug-unresolved",
     "Wander.com": "slug-unresolved",
     "Warmly,": "slug-unresolved",
-    "Wasabi": "listed",
+    "Wasabi": "no-target-roles",
     "Watershed": "no-target-roles",
     "Wave": "slug-unresolved",
     "WayUp": "slug-unresolved",
@@ -3415,7 +3411,12 @@
     "xLight": "slug-unresolved",
     "zeroheight": "slug-unresolved"
   },
-  "departed": {},
+  "departed": {
+    "Improbable": "no-target-roles",
+    "Niantic Spatial": "no-target-roles",
+    "Poolside": "no-target-roles",
+    "Wasabi": "no-target-roles"
+  },
   "websites": {
     "with_website": 1928,
     "slug_unresolved_with_website": 1181,
@@ -3437,20 +3438,20 @@
     "Insider": "Business Insider"
   },
   "countries": {
-    "India": 126,
-    "United Kingdom": 269,
-    "Ireland": 52,
-    "Germany": 100,
-    "Netherlands": 48,
+    "India": 125,
+    "United Kingdom": 264,
+    "Ireland": 51,
+    "Germany": 101,
+    "Netherlands": 46,
     "France": 55,
-    "Spain": 61,
+    "Spain": 60,
     "Sweden": 27,
     "Denmark": 15,
     "Norway": 8,
     "Finland": 8,
-    "Japan": 63,
+    "Japan": 62,
     "Singapore": 72,
-    "Australia": 81,
+    "Australia": 82,
     "New Zealand": 6
   },
   "mca": {
@@ -3897,7 +3898,7 @@
     "names": 220,
     "stated": 20,
     "pulled": "2026-08-02",
-    "matched": 18,
+    "matched": 17,
     "held": [
       {
         "name": "Airbnb",
@@ -6369,23 +6370,6 @@
         ]
       },
       {
-        "name": "Niantic Spatial",
-        "confidence": "exact",
-        "why": "no website; one exact-tier name match",
-        "candidates": [
-          {
-            "number": "16188793",
-            "name": "NIANTIC SPATIAL UK LIMITED",
-            "status": "active",
-            "incorporated": "2025-01-16",
-            "locality": "",
-            "postcode": "",
-            "sic": [],
-            "kind": ""
-          }
-        ]
-      },
-      {
         "name": "NIUM",
         "confidence": "exact",
         "why": "silent; one exact-tier name match",
@@ -7338,23 +7322,6 @@
             "name": "TANIUM UK LIMITED",
             "status": "active",
             "incorporated": "2014-12-02",
-            "locality": "",
-            "postcode": "",
-            "sic": [],
-            "kind": ""
-          }
-        ]
-      },
-      {
-        "name": "TaxBit",
-        "confidence": "exact",
-        "why": "silent; one exact-tier name match",
-        "candidates": [
-          {
-            "number": "16128756",
-            "name": "TAXBIT UK LTD",
-            "status": "active",
-            "incorporated": "2024-12-10",
             "locality": "",
             "postcode": "",
             "sic": [],
