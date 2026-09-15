@@ -1,11 +1,11 @@
 {
   "corpus_size": 3026,
-  "checked": 837,
-  "unchecked": 2189,
+  "checked": 836,
+  "unchecked": 2190,
   "counts": {
     "listed": 370,
-    "no-target-roles": 467,
-    "slug-unresolved": 2169,
+    "no-target-roles": 466,
+    "slug-unresolved": 2170,
     "probe-failed": 0,
     "empty-board-unverified": 7,
     "not-qualified": 0,
@@ -17,7 +17,6 @@
     "9fin",
     "A24 Films",
     "ARQ",
-    "ASAPP",
     "AXONIUS",
     "Abacum",
     "Airbnb",
@@ -48,6 +47,7 @@
     "Augmodo",
     "Aviatrix",
     "Avoca",
+    "Baseten",
     "Beamery",
     "Benchling",
     "BetterUp",
@@ -415,7 +415,7 @@
     "AON3D": "no-target-roles",
     "ARCADE AI": "slug-unresolved",
     "ARQ": "listed",
-    "ASAPP": "listed",
+    "ASAPP": "no-target-roles",
     "AUGMENTT HOLDCO": "slug-unresolved",
     "AVID Group": "slug-unresolved",
     "AXONIUS": "listed",
@@ -666,7 +666,7 @@
     "Barnwell Bio": "slug-unresolved",
     "Barti Software": "no-target-roles",
     "Base Power": "slug-unresolved",
-    "Baseten": "no-target-roles",
+    "Baseten": "listed",
     "Basis": "slug-unresolved",
     "Baubap": "no-target-roles",
     "BeZero": "slug-unresolved",
@@ -834,7 +834,7 @@
     "Canva": "slug-unresolved",
     "Caper": "slug-unresolved",
     "Capi Money": "listed",
-    "Capitalize": "no-target-roles",
+    "Capitalize": "slug-unresolved",
     "Capitol AI": "slug-unresolved",
     "Capitolis": "no-target-roles",
     "Capsule.Video": "slug-unresolved",
@@ -3412,15 +3412,12 @@
     "zeroheight": "slug-unresolved"
   },
   "departed": {
-    "Improbable": "no-target-roles",
-    "Niantic Spatial": "no-target-roles",
-    "Poolside": "no-target-roles",
-    "Wasabi": "no-target-roles"
+    "ASAPP": "no-target-roles"
   },
   "websites": {
     "with_website": 1928,
     "slug_unresolved_with_website": 1181,
-    "slug_unresolved_without_website": 988
+    "slug_unresolved_without_website": 989
   },
   "shared_boards": {
     "Bright": "BrightAI",
@@ -3438,20 +3435,20 @@
     "Insider": "Business Insider"
   },
   "countries": {
-    "India": 125,
-    "United Kingdom": 264,
+    "India": 124,
+    "United Kingdom": 266,
     "Ireland": 51,
     "Germany": 101,
-    "Netherlands": 46,
+    "Netherlands": 45,
     "France": 55,
-    "Spain": 60,
-    "Sweden": 27,
+    "Spain": 61,
+    "Sweden": 28,
     "Denmark": 15,
     "Norway": 8,
     "Finland": 8,
-    "Japan": 62,
+    "Japan": 63,
     "Singapore": 72,
-    "Australia": 82,
+    "Australia": 81,
     "New Zealand": 6
   },
   "mca": {
@@ -3481,19 +3478,6 @@
             "name": "ALPHASENSE TECHNOLOGY (INDIA) PRIVATE LIMITED",
             "incorporated": "2019-08-21",
             "address": "3rd Floor, Tower B, Panchshil Business Park,   Survey No. 20, Balewadi,,Pune,Pune,Maharashtra,411045-India",
-            "status": "Active"
-          }
-        ]
-      },
-      {
-        "name": "ASAPP",
-        "confidence": "prefix",
-        "candidates": [
-          {
-            "cin": "U62099KA2023FTC172837",
-            "name": "ASAPP SERVICES INDIA PRIVATE LIMITED",
-            "incorporated": "2023-04-26",
-            "address": "Survey No 414/190/13, Suite No 208, 2nd Floor,PSR Complex, Govinda Reddy Layout,Bangalore South,Bangalore,Karnataka,560076-India",
             "status": "Active"
           }
         ]
@@ -5217,6 +5201,23 @@
         ]
       },
       {
+        "name": "Flexport",
+        "confidence": "exact",
+        "why": "silent; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "07484806",
+            "name": "FLEXPORT LIMITED",
+            "status": "dissolved",
+            "incorporated": "2011-01-06",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
         "name": "Focal Systems",
         "confidence": "exact",
         "why": "silent; one exact-tier name match",
@@ -5710,23 +5711,6 @@
             "name": "JUST WORKS LIMITED",
             "status": "active",
             "incorporated": "2010-08-24",
-            "locality": "",
-            "postcode": "",
-            "sic": [],
-            "kind": ""
-          }
-        ]
-      },
-      {
-        "name": "Kaseya",
-        "confidence": "prefix",
-        "why": "silent; one prefix-tier name match",
-        "candidates": [
-          {
-            "number": "05752088",
-            "name": "KASEYA INTERNATIONAL (UK) LIMITED",
-            "status": "active",
-            "incorporated": "2006-03-22",
             "locality": "",
             "postcode": "",
             "sic": [],
