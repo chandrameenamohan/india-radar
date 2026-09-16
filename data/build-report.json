@@ -3,8 +3,8 @@
   "checked": 836,
   "unchecked": 2190,
   "counts": {
-    "listed": 370,
-    "no-target-roles": 466,
+    "listed": 368,
+    "no-target-roles": 468,
     "slug-unresolved": 2170,
     "probe-failed": 0,
     "empty-board-unverified": 7,
@@ -273,7 +273,6 @@
     "Plaid",
     "Pleo",
     "Podium",
-    "Postman",
     "PowerUs",
     "Project44",
     "Prove Identity",
@@ -372,7 +371,6 @@
     "Xendit",
     "YipitData",
     "YugaByte",
-    "Zapier",
     "Zilch",
     "Zip",
     "airSlate",
@@ -834,7 +832,7 @@
     "Canva": "slug-unresolved",
     "Caper": "slug-unresolved",
     "Capi Money": "listed",
-    "Capitalize": "slug-unresolved",
+    "Capitalize": "no-target-roles",
     "Capitol AI": "slug-unresolved",
     "Capitolis": "no-target-roles",
     "Capsule.Video": "slug-unresolved",
@@ -1327,7 +1325,7 @@
     "Feedzai": "listed",
     "Felicity AI": "slug-unresolved",
     "Felix Technologies": "slug-unresolved",
-    "Fern": "another-companys-board",
+    "Fern": "slug-unresolved",
     "Fervo Energy": "slug-unresolved",
     "Fictions": "slug-unresolved",
     "FidoCure\u00ae": "slug-unresolved",
@@ -2473,7 +2471,7 @@
     "Possible Finance": "slug-unresolved",
     "PostEra": "slug-unresolved",
     "PostHog": "slug-unresolved",
-    "Postman": "listed",
+    "Postman": "another-companys-board",
     "Postscript": "no-target-roles",
     "Povio": "slug-unresolved",
     "PowerLattice Technologies": "slug-unresolved",
@@ -3327,7 +3325,7 @@
     "Zageno": "slug-unresolved",
     "Zama": "slug-unresolved",
     "Zapata Computing Holdings": "slug-unresolved",
-    "Zapier": "listed",
+    "Zapier": "no-target-roles",
     "Zeal": "slug-unresolved",
     "Zebec": "slug-unresolved",
     "Zed Industries": "slug-unresolved",
@@ -3412,16 +3410,17 @@
     "zeroheight": "slug-unresolved"
   },
   "departed": {
-    "ASAPP": "no-target-roles"
+    "Postman": "another-companys-board",
+    "Zapier": "no-target-roles"
   },
   "websites": {
     "with_website": 1928,
-    "slug_unresolved_with_website": 1181,
-    "slug_unresolved_without_website": 989
+    "slug_unresolved_with_website": 1182,
+    "slug_unresolved_without_website": 988
   },
   "shared_boards": {
     "Bright": "BrightAI",
-    "Fern": "Postman",
+    "Postman": "Fern",
     "Fireworks AI": "Fireworks",
     "Raintank": "Grafana Labs",
     "Horizon3": "Horizon 3 AI",
@@ -3435,26 +3434,26 @@
     "Insider": "Business Insider"
   },
   "countries": {
-    "India": 124,
-    "United Kingdom": 266,
+    "India": 122,
+    "United Kingdom": 267,
     "Ireland": 51,
-    "Germany": 101,
+    "Germany": 100,
     "Netherlands": 45,
-    "France": 55,
+    "France": 56,
     "Spain": 61,
-    "Sweden": 28,
-    "Denmark": 15,
+    "Sweden": 30,
+    "Denmark": 14,
     "Norway": 8,
     "Finland": 8,
     "Japan": 63,
-    "Singapore": 72,
-    "Australia": 81,
+    "Singapore": 71,
+    "Australia": 80,
     "New Zealand": 6
   },
   "mca": {
     "records": 24102,
     "pulled": "2026-07-29",
-    "matched": 33,
+    "matched": 32,
     "held": [
       {
         "name": "6Sense",
@@ -4317,6 +4316,33 @@
             "name": "CAMPFIRE LTD",
             "status": "dissolved",
             "incorporated": "2018-01-08",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Canary Technologies",
+        "confidence": "exact",
+        "why": "silent; 2 companies reach the exact tier",
+        "candidates": [
+          {
+            "number": "15515060",
+            "name": "CANARY TECHNOLOGIES LTD",
+            "status": "active",
+            "incorporated": "2024-02-22",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "11949019",
+            "name": "CANARY TECHNOLOGIES LTD.",
+            "status": "dissolved",
+            "incorporated": "2019-04-16",
             "locality": "",
             "postcode": "",
             "sic": [],
@@ -5201,23 +5227,6 @@
         ]
       },
       {
-        "name": "Flexport",
-        "confidence": "exact",
-        "why": "silent; one exact-tier name match",
-        "candidates": [
-          {
-            "number": "07484806",
-            "name": "FLEXPORT LIMITED",
-            "status": "dissolved",
-            "incorporated": "2011-01-06",
-            "locality": "",
-            "postcode": "",
-            "sic": [],
-            "kind": ""
-          }
-        ]
-      },
-      {
         "name": "Focal Systems",
         "confidence": "exact",
         "why": "silent; one exact-tier name match",
@@ -5711,6 +5720,23 @@
             "name": "JUST WORKS LIMITED",
             "status": "active",
             "incorporated": "2010-08-24",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Kaseya",
+        "confidence": "prefix",
+        "why": "silent; one prefix-tier name match",
+        "candidates": [
+          {
+            "number": "05752088",
+            "name": "KASEYA INTERNATIONAL (UK) LIMITED",
+            "status": "active",
+            "incorporated": "2006-03-22",
             "locality": "",
             "postcode": "",
             "sic": [],
@@ -6708,23 +6734,6 @@
             "name": "PLEO LTD",
             "status": "dissolved",
             "incorporated": "2013-08-28",
-            "locality": "",
-            "postcode": "",
-            "sic": [],
-            "kind": ""
-          }
-        ]
-      },
-      {
-        "name": "Postman",
-        "confidence": "exact",
-        "why": "silent; one exact-tier name match",
-        "candidates": [
-          {
-            "number": "10092728",
-            "name": "POSTMAN LIMITED",
-            "status": "dissolved",
-            "incorporated": "2016-03-31",
             "locality": "",
             "postcode": "",
             "sic": [],
