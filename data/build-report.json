@@ -3407,11 +3407,7 @@
     "xLight": "slug-unresolved",
     "zeroheight": "slug-unresolved"
   },
-  "departed": {
-    "airSlate": "no-target-roles",
-    "Capi Money": "no-target-roles",
-    "FurtherAI": "no-target-roles"
-  },
+  "departed": {},
   "websites": {
     "with_website": 1928,
     "slug_unresolved_with_website": 1185,
