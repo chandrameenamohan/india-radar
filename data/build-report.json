@@ -1,11 +1,11 @@
 {
   "corpus_size": 3026,
-  "checked": 833,
-  "unchecked": 2193,
+  "checked": 832,
+  "unchecked": 2194,
   "counts": {
     "listed": 366,
-    "no-target-roles": 467,
-    "slug-unresolved": 2173,
+    "no-target-roles": 466,
+    "slug-unresolved": 2174,
     "probe-failed": 0,
     "empty-board-unverified": 7,
     "not-qualified": 0,
@@ -2508,7 +2508,7 @@
     "PullRequest": "slug-unresolved",
     "Pulley": "no-target-roles",
     "Pulse": "no-target-roles",
-    "Pump": "no-target-roles",
+    "Pump": "slug-unresolved",
     "Push Security": "slug-unresolved",
     "Pyka": "no-target-roles",
     "Pylon": "slug-unresolved",
@@ -3410,7 +3410,7 @@
   "departed": {},
   "websites": {
     "with_website": 1928,
-    "slug_unresolved_with_website": 1185,
+    "slug_unresolved_with_website": 1186,
     "slug_unresolved_without_website": 988
   },
   "shared_boards": {
@@ -3436,13 +3436,13 @@
     "Netherlands": 46,
     "France": 56,
     "Spain": 61,
-    "Sweden": 30,
+    "Sweden": 29,
     "Denmark": 13,
     "Norway": 7,
     "Finland": 8,
     "Japan": 63,
     "Singapore": 71,
-    "Australia": 84,
+    "Australia": 83,
     "New Zealand": 6
   },
   "mca": {

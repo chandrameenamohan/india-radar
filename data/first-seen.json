@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "snapshot": "2026-09-19",
+  "snapshot": "2026-09-20",
   "note": "first_seen is the snapshot date a role's URL first appeared in a build. A role is confirmed only where its company's board was read on the previous snapshot AND on this one \u2014 both sides genuinely observed. Everything else is unconfirmed: we saw it for the first time, which is not the same as it being new. Only confirmed roles may be called new.",
   "observed": [
     "1Password",
@@ -11794,6 +11794,15 @@
         "https://job-boards.greenhouse.io/razorpaysoftwareprivatelimited/jobs/4735389005",
         "https://jobs.ashbyhq.com/qonto/300981a0-0bbb-404c-b4a1-e41556363e50",
         "https://jobs.ashbyhq.com/qonto/b5a82563-96a8-4bd3-8ed3-7e4c60f8139d"
+      ],
+      "unconfirmed": []
+    },
+    "2026-09-20": {
+      "confirmed": [
+        "https://job-boards.greenhouse.io/carta/jobs/7998004003",
+        "https://job-boards.greenhouse.io/okx/jobs/8000313003",
+        "https://job-boards.greenhouse.io/staffbase/jobs/8819543002",
+        "https://jobs.ashbyhq.com/anima/c0ecb316-adfe-4063-b922-4801ea6eacf0"
       ],
       "unconfirmed": []
     }
