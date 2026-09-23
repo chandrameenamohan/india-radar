@@ -1,13 +1,13 @@
 {
   "corpus_size": 3026,
-  "checked": 829,
-  "unchecked": 2197,
+  "checked": 830,
+  "unchecked": 2196,
   "counts": {
-    "listed": 365,
-    "no-target-roles": 464,
-    "slug-unresolved": 2176,
-    "probe-failed": 0,
-    "empty-board-unverified": 8,
+    "listed": 368,
+    "no-target-roles": 462,
+    "slug-unresolved": 2175,
+    "probe-failed": 1,
+    "empty-board-unverified": 7,
     "not-qualified": 0,
     "another-companys-board": 13
   },
@@ -32,6 +32,7 @@
     "Anthropic",
     "Anyscale",
     "Apollo.io",
+    "AppDirect",
     "Applied Intuition",
     "AppsFlyer",
     "Arketa",
@@ -69,6 +70,7 @@
     "Cinder",
     "CircleCI",
     "Clear Street",
+    "Clever",
     "ClickUp",
     "Clipboard",
     "Coalition",
@@ -130,6 +132,7 @@
     "Front",
     "FullStory",
     "Fundamental",
+    "FurtherAI",
     "Gather AI",
     "Gauntlet Networks",
     "General Intuition",
@@ -174,7 +177,6 @@
     "Intercom",
     "Ironclad",
     "Isomorphic Labs",
-    "Iterable",
     "Ivalua",
     "Juicebox",
     "Junction",
@@ -235,6 +237,7 @@
     "Neo4j",
     "Netskope",
     "Nextiva",
+    "Niantic Spatial",
     "Nirvana",
     "Nitricity",
     "Notabene",
@@ -534,7 +537,7 @@
     "Apiphani": "no-target-roles",
     "Apollo": "no-target-roles",
     "Apollo.io": "listed",
-    "AppDirect": "no-target-roles",
+    "AppDirect": "listed",
     "AppWork Technologies": "slug-unresolved",
     "Applause Group": "slug-unresolved",
     "Applied Compute": "slug-unresolved",
@@ -926,7 +929,7 @@
     "Clearing Co of San Francisco": "slug-unresolved",
     "Clearwater Analytics Holdings": "slug-unresolved",
     "Clerq": "slug-unresolved",
-    "Clever": "no-target-roles",
+    "Clever": "listed",
     "ClickHouse": "slug-unresolved",
     "ClickUp": "listed",
     "ClinTrial Research": "slug-unresolved",
@@ -1036,7 +1039,7 @@
     "Cube Security": "slug-unresolved",
     "Cue": "slug-unresolved",
     "CueZen": "slug-unresolved",
-    "Culdesac": "empty-board-unverified",
+    "Culdesac": "no-target-roles",
     "Culture Amp": "listed",
     "Cura OS": "slug-unresolved",
     "Curative": "no-target-roles",
@@ -1437,7 +1440,7 @@
     "Fundamental Research Labs": "slug-unresolved",
     "Fundbox": "slug-unresolved",
     "FundersClub": "slug-unresolved",
-    "FurtherAI": "no-target-roles",
+    "FurtherAI": "listed",
     "FutureAdvisor": "slug-unresolved",
     "G2": "slug-unresolved",
     "GIBO HOLDINGS": "slug-unresolved",
@@ -1722,7 +1725,7 @@
     "Isembard": "slug-unresolved",
     "Island": "slug-unresolved",
     "Isomorphic Labs": "listed",
-    "Iterable": "listed",
+    "Iterable": "no-target-roles",
     "Ivalua": "listed",
     "Jasper": "slug-unresolved",
     "Jasper.ai": "another-companys-board",
@@ -2110,7 +2113,7 @@
     "MyVillage": "slug-unresolved",
     "Mysten Labs": "no-target-roles",
     "Mystery.org": "slug-unresolved",
-    "Mythical Games": "slug-unresolved",
+    "Mythical Games": "probe-failed",
     "Mythworx": "slug-unresolved",
     "N26": "listed",
     "NALA": "slug-unresolved",
@@ -2164,7 +2167,7 @@
     "Nexu": "slug-unresolved",
     "Neysa": "slug-unresolved",
     "Niantic": "slug-unresolved",
-    "Niantic Spatial": "no-target-roles",
+    "Niantic Spatial": "listed",
     "NightVision Security": "slug-unresolved",
     "Nimble": "slug-unresolved",
     "NimbleRx": "slug-unresolved",
@@ -3407,13 +3410,11 @@
     "zeroheight": "slug-unresolved"
   },
   "departed": {
-    "Degreed": "no-target-roles",
-    "DistroKid": "no-target-roles",
-    "Vapi": "no-target-roles"
+    "Iterable": "no-target-roles"
   },
   "websites": {
     "with_website": 1928,
-    "slug_unresolved_with_website": 1187,
+    "slug_unresolved_with_website": 1186,
     "slug_unresolved_without_website": 989
   },
   "shared_boards": {
@@ -3432,26 +3433,26 @@
     "Insider": "Business Insider"
   },
   "countries": {
-    "India": 119,
-    "United Kingdom": 266,
-    "Ireland": 51,
-    "Germany": 102,
-    "Netherlands": 45,
-    "France": 55,
-    "Spain": 62,
-    "Sweden": 29,
+    "India": 122,
+    "United Kingdom": 269,
+    "Ireland": 50,
+    "Germany": 104,
+    "Netherlands": 47,
+    "France": 56,
+    "Spain": 63,
+    "Sweden": 30,
     "Denmark": 13,
     "Norway": 6,
     "Finland": 8,
-    "Japan": 63,
+    "Japan": 62,
     "Singapore": 72,
-    "Australia": 82,
+    "Australia": 83,
     "New Zealand": 6
   },
   "mca": {
     "records": 24102,
     "pulled": "2026-07-29",
-    "matched": 31,
+    "matched": 32,
     "held": [
       {
         "name": "6Sense",
@@ -3651,6 +3652,19 @@
             "name": "LIGHTHOUSE ASIA PACIFIC PRIVATE LIMITED",
             "incorporated": "2006-07-19",
             "address": "Smartworks, 2nd Floor, Fleet House, Marol Naka   Metro Station, Gamdevi, Marol, Andheri E,ast,MUMBAI,Mumbai City,Maharashtra,400059-India",
+            "status": "Active"
+          }
+        ]
+      },
+      {
+        "name": "Matillion",
+        "confidence": "prefix",
+        "candidates": [
+          {
+            "cin": "U62011TS2024FTC190691",
+            "name": "MATILLION CONSULTANCY (INDIA) PRIVATE LIMITED",
+            "incorporated": "2024-11-04",
+            "address": "5th Floor, Building No.4, Raheja Mind Space, Survey No. 64,Madhapur Village, Serilingampally Mandal, Ranga Reddy District,Shaikpet,Hyderabad,Telangana,500081-India",
             "status": "Active"
           }
         ]
@@ -6370,6 +6384,23 @@
             "name": "NEO4J UK LIMITED",
             "status": "active",
             "incorporated": "2017-08-18",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Niantic Spatial",
+        "confidence": "exact",
+        "why": "no website; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "16188793",
+            "name": "NIANTIC SPATIAL UK LIMITED",
+            "status": "active",
+            "incorporated": "2025-01-16",
             "locality": "",
             "postcode": "",
             "sic": [],
