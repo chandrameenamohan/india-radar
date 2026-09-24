@@ -1,12 +1,12 @@
 {
   "corpus_size": 3026,
-  "checked": 830,
-  "unchecked": 2196,
+  "checked": 829,
+  "unchecked": 2197,
   "counts": {
     "listed": 368,
-    "no-target-roles": 462,
-    "slug-unresolved": 2175,
-    "probe-failed": 1,
+    "no-target-roles": 461,
+    "slug-unresolved": 2177,
+    "probe-failed": 0,
     "empty-board-unverified": 7,
     "not-qualified": 0,
     "another-companys-board": 13
@@ -20,6 +20,7 @@
     "AXONIUS",
     "Abacum",
     "Airbnb",
+    "Airtable",
     "Algolia",
     "Alloy",
     "Alpaca",
@@ -101,7 +102,6 @@
     "Distyl AI",
     "Docker",
     "Drata",
-    "DriveWealth",
     "Dropbox",
     "Druva",
     "Duffel",
@@ -239,7 +239,6 @@
     "Nextiva",
     "Niantic Spatial",
     "Nirvana",
-    "Nitricity",
     "Notabene",
     "Notion",
     "Numeral",
@@ -372,6 +371,7 @@
     "Xendit",
     "YipitData",
     "YugaByte",
+    "Zapier",
     "Zilch",
     "Zip",
     "commercetools",
@@ -474,7 +474,7 @@
     "Airbnb": "listed",
     "Airbyte": "no-target-roles",
     "Airfordable": "slug-unresolved",
-    "Airtable": "no-target-roles",
+    "Airtable": "listed",
     "Airwallex": "slug-unresolved",
     "Airware": "slug-unresolved",
     "Aiven": "slug-unresolved",
@@ -1175,7 +1175,7 @@
     "Dremio": "no-target-roles",
     "Drip Capital": "slug-unresolved",
     "DriveNets": "slug-unresolved",
-    "DriveWealth": "listed",
+    "DriveWealth": "no-target-roles",
     "Drivezy": "slug-unresolved",
     "Drone Volt": "slug-unresolved",
     "DroneBase": "slug-unresolved",
@@ -1613,7 +1613,7 @@
     "HistoWiz": "slug-unresolved",
     "HitPay": "slug-unresolved",
     "Hive": "no-target-roles",
-    "HiveWatch": "no-target-roles",
+    "HiveWatch": "slug-unresolved",
     "HockeyStack": "no-target-roles",
     "Hogaru": "slug-unresolved",
     "HomeLight": "no-target-roles",
@@ -2113,7 +2113,7 @@
     "MyVillage": "slug-unresolved",
     "Mysten Labs": "no-target-roles",
     "Mystery.org": "slug-unresolved",
-    "Mythical Games": "probe-failed",
+    "Mythical Games": "slug-unresolved",
     "Mythworx": "slug-unresolved",
     "N26": "listed",
     "NALA": "slug-unresolved",
@@ -2175,7 +2175,7 @@
     "NinjaOne": "slug-unresolved",
     "Nirvana": "listed",
     "Nisos Holdings": "slug-unresolved",
-    "Nitricity": "listed",
+    "Nitricity": "no-target-roles",
     "Niural": "slug-unresolved",
     "Nixtla": "slug-unresolved",
     "NoBroker": "slug-unresolved",
@@ -3325,7 +3325,7 @@
     "Zageno": "slug-unresolved",
     "Zama": "slug-unresolved",
     "Zapata Computing Holdings": "slug-unresolved",
-    "Zapier": "no-target-roles",
+    "Zapier": "listed",
     "Zeal": "slug-unresolved",
     "Zebec": "slug-unresolved",
     "Zed Industries": "slug-unresolved",
@@ -3410,12 +3410,13 @@
     "zeroheight": "slug-unresolved"
   },
   "departed": {
-    "Iterable": "no-target-roles"
+    "DriveWealth": "no-target-roles",
+    "Nitricity": "no-target-roles"
   },
   "websites": {
     "with_website": 1928,
-    "slug_unresolved_with_website": 1186,
-    "slug_unresolved_without_website": 989
+    "slug_unresolved_with_website": 1187,
+    "slug_unresolved_without_website": 990
   },
   "shared_boards": {
     "Bright": "BrightAI",
@@ -3436,23 +3437,23 @@
     "India": 122,
     "United Kingdom": 269,
     "Ireland": 50,
-    "Germany": 104,
-    "Netherlands": 47,
-    "France": 56,
+    "Germany": 105,
+    "Netherlands": 48,
+    "France": 55,
     "Spain": 63,
-    "Sweden": 30,
+    "Sweden": 29,
     "Denmark": 13,
-    "Norway": 6,
+    "Norway": 5,
     "Finland": 8,
     "Japan": 62,
     "Singapore": 72,
-    "Australia": 83,
+    "Australia": 85,
     "New Zealand": 6
   },
   "mca": {
     "records": 24102,
     "pulled": "2026-07-29",
-    "matched": 32,
+    "matched": 34,
     "held": [
       {
         "name": "6Sense",
@@ -3945,6 +3946,23 @@
             "name": "AIRBNB HABITAT CLEANING LTD",
             "status": "active",
             "incorporated": "2025-06-27",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Airtable",
+        "confidence": "exact",
+        "why": "silent; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "14440416",
+            "name": "AIRTABLE LIMITED",
+            "status": "dissolved",
+            "incorporated": "2022-10-25",
             "locality": "",
             "postcode": "",
             "sic": [],
@@ -7057,23 +7075,6 @@
             "name": "SCALE AI LIMITED",
             "status": "active",
             "incorporated": "2024-11-19",
-            "locality": "",
-            "postcode": "",
-            "sic": [],
-            "kind": ""
-          }
-        ]
-      },
-      {
-        "name": "Scandit",
-        "confidence": "exact",
-        "why": "silent; one exact-tier name match",
-        "candidates": [
-          {
-            "number": "10866473",
-            "name": "SCANDIT LTD",
-            "status": "active",
-            "incorporated": "2017-07-14",
             "locality": "",
             "postcode": "",
             "sic": [],
