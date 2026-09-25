@@ -3,8 +3,8 @@
   "checked": 829,
   "unchecked": 2197,
   "counts": {
-    "listed": 368,
-    "no-target-roles": 461,
+    "listed": 365,
+    "no-target-roles": 464,
     "slug-unresolved": 2177,
     "probe-failed": 0,
     "empty-board-unverified": 7,
@@ -118,7 +118,6 @@
     "Faire",
     "FalconX",
     "Feedzai",
-    "Fieldguide",
     "Finni Health",
     "Fireblocks",
     "Fivetran",
@@ -245,7 +244,6 @@
     "OKX",
     "Observe.AI",
     "Odyssey",
-    "Oklo",
     "OneTrust",
     "Onebrief",
     "OpenAI",
@@ -265,7 +263,6 @@
     "Pendo",
     "Pennylane",
     "PermitFlow",
-    "Permutive",
     "Photoroom",
     "PhysicsX",
     "PicsArt",
@@ -1330,7 +1327,7 @@
     "Fictions": "slug-unresolved",
     "FidoCure\u00ae": "slug-unresolved",
     "FieldAI": "slug-unresolved",
-    "Fieldguide": "listed",
+    "Fieldguide": "no-target-roles",
     "Figment": "no-target-roles",
     "Filed": "slug-unresolved",
     "Filevine": "slug-unresolved",
@@ -2240,7 +2237,7 @@
     "Offchain Labs": "no-target-roles",
     "OkCredit": "slug-unresolved",
     "Okami Medical": "slug-unresolved",
-    "Oklo": "listed",
+    "Oklo": "no-target-roles",
     "Okteto": "slug-unresolved",
     "Olden Labs": "slug-unresolved",
     "Oleria": "empty-board-unverified",
@@ -2399,7 +2396,7 @@
     "PerkCity": "slug-unresolved",
     "PerksHub (1-13)": "slug-unresolved",
     "PermitFlow": "listed",
-    "Permutive": "listed",
+    "Permutive": "no-target-roles",
     "Perplexity": "slug-unresolved",
     "Perplexity AI": "slug-unresolved",
     "Persist AI": "slug-unresolved",
@@ -3410,8 +3407,9 @@
     "zeroheight": "slug-unresolved"
   },
   "departed": {
-    "DriveWealth": "no-target-roles",
-    "Nitricity": "no-target-roles"
+    "Fieldguide": "no-target-roles",
+    "Oklo": "no-target-roles",
+    "Permutive": "no-target-roles"
   },
   "websites": {
     "with_website": 1928,
@@ -3434,20 +3432,20 @@
     "Insider": "Business Insider"
   },
   "countries": {
-    "India": 122,
-    "United Kingdom": 269,
+    "India": 121,
+    "United Kingdom": 266,
     "Ireland": 50,
     "Germany": 105,
-    "Netherlands": 48,
+    "Netherlands": 47,
     "France": 55,
-    "Spain": 63,
+    "Spain": 64,
     "Sweden": 29,
     "Denmark": 13,
     "Norway": 5,
     "Finland": 8,
     "Japan": 62,
-    "Singapore": 72,
-    "Australia": 85,
+    "Singapore": 71,
+    "Australia": 84,
     "New Zealand": 6
   },
   "mca": {
@@ -4273,6 +4271,23 @@
         ]
       },
       {
+        "name": "Bitmovin",
+        "confidence": "exact",
+        "why": "unreachable; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "11066428",
+            "name": "BITMOVIN UK LIMITED",
+            "status": "active",
+            "incorporated": "2017-11-15",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
         "name": "Braze",
         "confidence": "exact",
         "why": "no website; one exact-tier name match",
@@ -5010,33 +5025,6 @@
         ]
       },
       {
-        "name": "Druva",
-        "confidence": "prefix",
-        "why": "silent; 2 companies reach the prefix tier",
-        "candidates": [
-          {
-            "number": "07305286",
-            "name": "DRUVA EUROPE LIMITED",
-            "status": "active",
-            "incorporated": "2010-07-06",
-            "locality": "",
-            "postcode": "",
-            "sic": [],
-            "kind": ""
-          },
-          {
-            "number": "SL028158",
-            "name": "DRUVA TRADE LP",
-            "status": "active",
-            "incorporated": "2016-09-01",
-            "locality": "",
-            "postcode": "",
-            "sic": [],
-            "kind": ""
-          }
-        ]
-      },
-      {
         "name": "EBANX",
         "confidence": "exact",
         "why": "silent; 4 companies reach the exact tier",
@@ -5181,23 +5169,6 @@
             "name": "FEEDZAI UK LIMITED",
             "status": "active",
             "incorporated": "2020-06-11",
-            "locality": "",
-            "postcode": "",
-            "sic": [],
-            "kind": ""
-          }
-        ]
-      },
-      {
-        "name": "Fieldguide",
-        "confidence": "exact",
-        "why": "silent; one exact-tier name match",
-        "candidates": [
-          {
-            "number": "17124510",
-            "name": "FIELD GUIDE LTD",
-            "status": "active",
-            "incorporated": "2026-03-30",
             "locality": "",
             "postcode": "",
             "sic": [],
@@ -6495,33 +6466,6 @@
         ]
       },
       {
-        "name": "Oklo",
-        "confidence": "exact",
-        "why": "unreachable; 2 companies reach the exact tier",
-        "candidates": [
-          {
-            "number": "12419700",
-            "name": "OKLO LTD",
-            "status": "dissolved",
-            "incorporated": "2020-01-22",
-            "locality": "",
-            "postcode": "",
-            "sic": [],
-            "kind": ""
-          },
-          {
-            "number": "07894704",
-            "name": "OKLO LIMITED",
-            "status": "dissolved",
-            "incorporated": "2012-01-03",
-            "locality": "",
-            "postcode": "",
-            "sic": [],
-            "kind": ""
-          }
-        ]
-      },
-      {
         "name": "OneTrust",
         "confidence": "exact",
         "why": "silent; one exact-tier name match",
@@ -6673,23 +6617,6 @@
             "name": "PENNY LANE LTD",
             "status": "active",
             "incorporated": "2013-09-30",
-            "locality": "",
-            "postcode": "",
-            "sic": [],
-            "kind": ""
-          }
-        ]
-      },
-      {
-        "name": "Permutive",
-        "confidence": "exact",
-        "why": "silent; one exact-tier name match",
-        "candidates": [
-          {
-            "number": "08738815",
-            "name": "PERMUTIVE LIMITED",
-            "status": "active",
-            "incorporated": "2013-10-18",
             "locality": "",
             "postcode": "",
             "sic": [],
