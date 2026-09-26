@@ -1,11 +1,11 @@
 {
   "corpus_size": 3026,
-  "checked": 829,
-  "unchecked": 2197,
+  "checked": 828,
+  "unchecked": 2198,
   "counts": {
-    "listed": 365,
-    "no-target-roles": 464,
-    "slug-unresolved": 2177,
+    "listed": 366,
+    "no-target-roles": 462,
+    "slug-unresolved": 2178,
     "probe-failed": 0,
     "empty-board-unverified": 7,
     "not-qualified": 0,
@@ -99,6 +99,7 @@
     "Depot",
     "DevRev",
     "Dialpad",
+    "DistroKid",
     "Distyl AI",
     "Docker",
     "Drata",
@@ -829,7 +830,7 @@
     "Canva": "slug-unresolved",
     "Caper": "slug-unresolved",
     "Capi Money": "no-target-roles",
-    "Capitalize": "no-target-roles",
+    "Capitalize": "slug-unresolved",
     "Capitol AI": "slug-unresolved",
     "Capitolis": "no-target-roles",
     "Capsule.Video": "slug-unresolved",
@@ -1141,7 +1142,7 @@
     "Discord": "no-target-roles",
     "Diskover Data": "slug-unresolved",
     "Disqus": "slug-unresolved",
-    "DistroKid": "no-target-roles",
+    "DistroKid": "listed",
     "Distyl AI": "listed",
     "Ditto": "slug-unresolved",
     "Djamo": "slug-unresolved",
@@ -3406,15 +3407,11 @@
     "xLight": "slug-unresolved",
     "zeroheight": "slug-unresolved"
   },
-  "departed": {
-    "Fieldguide": "no-target-roles",
-    "Oklo": "no-target-roles",
-    "Permutive": "no-target-roles"
-  },
+  "departed": {},
   "websites": {
     "with_website": 1928,
     "slug_unresolved_with_website": 1187,
-    "slug_unresolved_without_website": 990
+    "slug_unresolved_without_website": 991
   },
   "shared_boards": {
     "Bright": "BrightAI",
@@ -3433,7 +3430,7 @@
   },
   "countries": {
     "India": 121,
-    "United Kingdom": 266,
+    "United Kingdom": 267,
     "Ireland": 50,
     "Germany": 105,
     "Netherlands": 47,

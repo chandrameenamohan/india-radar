@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "snapshot": "2026-09-25",
+  "snapshot": "2026-09-26",
   "note": "first_seen is the snapshot date a role's URL first appeared in a build. A role is confirmed only where its company's board was read on the previous snapshot AND on this one \u2014 both sides genuinely observed. Everything else is unconfirmed: we saw it for the first time, which is not the same as it being new. Only confirmed roles may be called new.",
   "observed": [
     "1Password",
@@ -90,6 +90,7 @@
     "Depot",
     "DevRev",
     "Dialpad",
+    "DistroKid",
     "Distyl AI",
     "Docker",
     "Drata",
@@ -12448,6 +12449,18 @@
         "https://www.vectra.ai/about/jobs?gh_jid=8222860",
         "https://www.vectra.ai/about/jobs?gh_jid=8225589",
         "https://www.veriff.com/careers/position/8626079002?gh_jid=8626079002"
+      ],
+      "unconfirmed": []
+    },
+    "2026-09-26": {
+      "confirmed": [
+        "https://careers.airbnb.com/positions/8232474?gh_jid=8232474",
+        "https://job-boards.greenhouse.io/celonis/jobs/7997059003?gh_jid=7997059003",
+        "https://job-boards.greenhouse.io/gitlab/jobs/8799044002",
+        "https://job-boards.greenhouse.io/grafanalabs/jobs/6121618004",
+        "https://job-boards.greenhouse.io/razorpaysoftwareprivatelimited/jobs/4736154005",
+        "https://job-boards.greenhouse.io/tenstorrent/jobs/5248013007",
+        "https://wayve.firststage.co/jobs?gh_jid=8766985002"
       ],
       "unconfirmed": []
     }
