@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "snapshot": "2026-09-26",
+  "snapshot": "2026-09-27",
   "note": "first_seen is the snapshot date a role's URL first appeared in a build. A role is confirmed only where its company's board was read on the previous snapshot AND on this one \u2014 both sides genuinely observed. Everything else is unconfirmed: we saw it for the first time, which is not the same as it being new. Only confirmed roles may be called new.",
   "observed": [
     "1Password",
@@ -12461,6 +12461,20 @@
         "https://job-boards.greenhouse.io/razorpaysoftwareprivatelimited/jobs/4736154005",
         "https://job-boards.greenhouse.io/tenstorrent/jobs/5248013007",
         "https://wayve.firststage.co/jobs?gh_jid=8766985002"
+      ],
+      "unconfirmed": []
+    },
+    "2026-09-27": {
+      "confirmed": [
+        "https://databricks.com/company/careers/open-positions/job?gh_jid=8403943002",
+        "https://job-boards.eu.greenhouse.io/parloa/jobs/4988028101",
+        "https://job-boards.eu.greenhouse.io/parloa/jobs/4988030101",
+        "https://jobs.ashbyhq.com/cognition/d0fece15-9e53-4539-a975-360e1a6fd257",
+        "https://jobs.ashbyhq.com/iceye/d99923a8-6a54-4968-9468-74dd064b953c",
+        "https://jobs.ashbyhq.com/iceye/e28c6e08-79ca-442b-aae8-adb02ee56076",
+        "https://sumup.com/careers/positions/8821322002?gh_jid=8821322002",
+        "https://tulip.co/careers/job-posting/?gh_jid=7493003003",
+        "https://tulip.co/careers/job-posting/?gh_jid=8006362003"
       ],
       "unconfirmed": []
     }
