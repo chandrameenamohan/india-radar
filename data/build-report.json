@@ -1,11 +1,11 @@
 {
   "corpus_size": 3026,
-  "checked": 828,
-  "unchecked": 2198,
+  "checked": 826,
+  "unchecked": 2200,
   "counts": {
-    "listed": 366,
-    "no-target-roles": 462,
-    "slug-unresolved": 2178,
+    "listed": 368,
+    "no-target-roles": 458,
+    "slug-unresolved": 2180,
     "probe-failed": 0,
     "empty-board-unverified": 7,
     "not-qualified": 0,
@@ -26,7 +26,6 @@
     "Alpaca",
     "AlphaSense",
     "Ambient.ai",
-    "Amplitude",
     "Anchorage Digital",
     "Andela",
     "Anima",
@@ -263,6 +262,7 @@
     "Pelago",
     "Pendo",
     "Pennylane",
+    "Peregrine",
     "PermitFlow",
     "Photoroom",
     "PhysicsX",
@@ -363,6 +363,7 @@
     "Wayflyer",
     "Wayve",
     "Webflow",
+    "Whop",
     "Wispr Flow",
     "Workato",
     "Writer",
@@ -372,6 +373,7 @@
     "Zapier",
     "Zilch",
     "Zip",
+    "airSlate",
     "commercetools",
     "d-Matrix",
     "firmus",
@@ -516,7 +518,7 @@
     "Ammortal": "slug-unresolved",
     "Amperity": "no-target-roles",
     "Amplifier": "slug-unresolved",
-    "Amplitude": "listed",
+    "Amplitude": "slug-unresolved",
     "Anaconda": "slug-unresolved",
     "Anchorage Digital": "listed",
     "Andalusia Labs": "slug-unresolved",
@@ -2301,7 +2303,7 @@
     "OutRival, Inc.": "slug-unresolved",
     "OutSystems": "slug-unresolved",
     "Outreach": "slug-unresolved",
-    "Outschool": "no-target-roles",
+    "Outschool": "slug-unresolved",
     "Outsmart Education": "slug-unresolved",
     "Outtake": "slug-unresolved",
     "Overhaul Group": "slug-unresolved",
@@ -2390,7 +2392,7 @@
     "Per Vices": "slug-unresolved",
     "Percent": "slug-unresolved",
     "Perceptive Technologies": "slug-unresolved",
-    "Peregrine": "no-target-roles",
+    "Peregrine": "listed",
     "Peregrine Hydrogen": "slug-unresolved",
     "Perfios": "slug-unresolved",
     "Perfumeo": "slug-unresolved",
@@ -3259,7 +3261,7 @@
     "Whatnot": "slug-unresolved",
     "When Insurance Agency": "slug-unresolved",
     "Wholefin": "slug-unresolved",
-    "Whop": "no-target-roles",
+    "Whop": "listed",
     "Wildlife Studios": "no-target-roles",
     "Willing": "slug-unresolved",
     "Wingspan Networks": "slug-unresolved",
@@ -3362,7 +3364,7 @@
     "Zuma": "slug-unresolved",
     "Zyper": "slug-unresolved",
     "Zyphra": "no-target-roles",
-    "airSlate": "no-target-roles",
+    "airSlate": "listed",
     "apna": "slug-unresolved",
     "authzed": "no-target-roles",
     "autone": "slug-unresolved",
@@ -3407,10 +3409,12 @@
     "xLight": "slug-unresolved",
     "zeroheight": "slug-unresolved"
   },
-  "departed": {},
+  "departed": {
+    "Amplitude": "slug-unresolved"
+  },
   "websites": {
     "with_website": 1928,
-    "slug_unresolved_with_website": 1187,
+    "slug_unresolved_with_website": 1189,
     "slug_unresolved_without_website": 991
   },
   "shared_boards": {
@@ -3429,26 +3433,26 @@
     "Insider": "Business Insider"
   },
   "countries": {
-    "India": 121,
-    "United Kingdom": 268,
+    "India": 120,
+    "United Kingdom": 267,
     "Ireland": 50,
     "Germany": 105,
-    "Netherlands": 47,
-    "France": 55,
+    "Netherlands": 46,
+    "France": 56,
     "Spain": 64,
     "Sweden": 29,
     "Denmark": 13,
     "Norway": 5,
     "Finland": 8,
     "Japan": 62,
-    "Singapore": 71,
+    "Singapore": 70,
     "Australia": 84,
     "New Zealand": 6
   },
   "mca": {
     "records": 24102,
     "pulled": "2026-07-29",
-    "matched": 34,
+    "matched": 33,
     "held": [
       {
         "name": "6Sense",
@@ -4026,23 +4030,6 @@
             "name": "ALPHASENSE LIMITED",
             "status": "active",
             "incorporated": "1996-10-16",
-            "locality": "",
-            "postcode": "",
-            "sic": [],
-            "kind": ""
-          }
-        ]
-      },
-      {
-        "name": "Amplitude",
-        "confidence": "exact",
-        "why": "silent; one exact-tier name match",
-        "candidates": [
-          {
-            "number": "02962681",
-            "name": "AMPLITUDE LIMITED",
-            "status": "active",
-            "incorporated": "1994-08-26",
             "locality": "",
             "postcode": "",
             "sic": [],
@@ -6614,6 +6601,23 @@
             "name": "PENNY LANE LTD",
             "status": "active",
             "incorporated": "2013-09-30",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Peregrine",
+        "confidence": "exact",
+        "why": "silent; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "12538909",
+            "name": "PEREGRINE LTD",
+            "status": "active",
+            "incorporated": "2020-03-30",
             "locality": "",
             "postcode": "",
             "sic": [],
