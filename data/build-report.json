@@ -88,6 +88,7 @@
     "Cribl",
     "Cross River Bank",
     "Culture Amp",
+    "Curri",
     "Cursor",
     "Cyberhaven",
     "DailyPay",
@@ -252,7 +253,6 @@
     "Oyster",
     "PPRO",
     "Paddle",
-    "PagerDuty",
     "PandaDoc",
     "Parker",
     "Parloa",
@@ -1045,7 +1045,7 @@
     "Curative": "no-target-roles",
     "Curebase": "slug-unresolved",
     "Current": "no-target-roles",
-    "Curri": "no-target-roles",
+    "Curri": "listed",
     "Cursor": "listed",
     "Curtsy": "slug-unresolved",
     "Custora": "slug-unresolved",
@@ -2330,7 +2330,7 @@
     "Pactum AI": "slug-unresolved",
     "Paddle": "listed",
     "Padlet": "slug-unresolved",
-    "PagerDuty": "listed",
+    "PagerDuty": "no-target-roles",
     "Pair Team": "no-target-roles",
     "Paladin Drones": "slug-unresolved",
     "PaleBlueDot AI": "slug-unresolved",
@@ -3410,7 +3410,7 @@
     "zeroheight": "slug-unresolved"
   },
   "departed": {
-    "Amplitude": "slug-unresolved"
+    "PagerDuty": "no-target-roles"
   },
   "websites": {
     "with_website": 1928,
@@ -3433,20 +3433,20 @@
     "Insider": "Business Insider"
   },
   "countries": {
-    "India": 120,
-    "United Kingdom": 267,
+    "India": 119,
+    "United Kingdom": 266,
     "Ireland": 50,
-    "Germany": 105,
-    "Netherlands": 46,
+    "Germany": 106,
+    "Netherlands": 47,
     "France": 56,
     "Spain": 64,
-    "Sweden": 29,
+    "Sweden": 28,
     "Denmark": 13,
     "Norway": 5,
     "Finland": 8,
     "Japan": 62,
     "Singapore": 70,
-    "Australia": 84,
+    "Australia": 85,
     "New Zealand": 6
   },
   "mca": {
@@ -6476,23 +6476,6 @@
             "name": "OYSTER LIMITED",
             "status": "active",
             "incorporated": "1980-05-19",
-            "locality": "",
-            "postcode": "",
-            "sic": [],
-            "kind": ""
-          }
-        ]
-      },
-      {
-        "name": "PagerDuty",
-        "confidence": "exact",
-        "why": "silent; one exact-tier name match",
-        "candidates": [
-          {
-            "number": "10131422",
-            "name": "PAGERDUTY, LTD",
-            "status": "active",
-            "incorporated": "2016-04-19",
             "locality": "",
             "postcode": "",
             "sic": [],
