@@ -1,11 +1,11 @@
 {
   "corpus_size": 3026,
-  "checked": 826,
-  "unchecked": 2200,
+  "checked": 827,
+  "unchecked": 2199,
   "counts": {
-    "listed": 368,
+    "listed": 369,
     "no-target-roles": 458,
-    "slug-unresolved": 2180,
+    "slug-unresolved": 2179,
     "probe-failed": 0,
     "empty-board-unverified": 7,
     "not-qualified": 0,
@@ -126,6 +126,7 @@
     "Flexport",
     "Focal Systems",
     "Focused Energy",
+    "Formance",
     "Forter",
     "Foundational Industries",
     "FourKites",
@@ -1408,7 +1409,7 @@
     "Font Awesome": "slug-unresolved",
     "FormX": "slug-unresolved",
     "Formal": "no-target-roles",
-    "Formance": "no-target-roles",
+    "Formance": "listed",
     "Foro Holdings": "slug-unresolved",
     "Fortastra": "no-target-roles",
     "Forte Labs": "slug-unresolved",
@@ -1716,7 +1717,7 @@
     "International Battery": "slug-unresolved",
     "Inversion Space": "no-target-roles",
     "Invert": "no-target-roles",
-    "Invoca": "no-target-roles",
+    "Invoca": "slug-unresolved",
     "Ionic Digital": "slug-unresolved",
     "Iris Automation": "slug-unresolved",
     "IronVest": "slug-unresolved",
@@ -2510,7 +2511,7 @@
     "PullRequest": "slug-unresolved",
     "Pulley": "no-target-roles",
     "Pulse": "no-target-roles",
-    "Pump": "slug-unresolved",
+    "Pump": "no-target-roles",
     "Push Security": "slug-unresolved",
     "Pyka": "no-target-roles",
     "Pylon": "slug-unresolved",
@@ -2844,7 +2845,7 @@
     "Snorkel AI": "no-target-roles",
     "Snowcap Compute": "slug-unresolved",
     "Snowflake": "slug-unresolved",
-    "Snyk": "slug-unresolved",
+    "Snyk": "no-target-roles",
     "Soapbox Holdings": "slug-unresolved",
     "Social Construct": "slug-unresolved",
     "Socure": "listed",
@@ -3409,12 +3410,10 @@
     "xLight": "slug-unresolved",
     "zeroheight": "slug-unresolved"
   },
-  "departed": {
-    "PagerDuty": "no-target-roles"
-  },
+  "departed": {},
   "websites": {
     "with_website": 1928,
-    "slug_unresolved_with_website": 1189,
+    "slug_unresolved_with_website": 1188,
     "slug_unresolved_without_website": 991
   },
   "shared_boards": {
@@ -3434,19 +3433,19 @@
   },
   "countries": {
     "India": 119,
-    "United Kingdom": 266,
-    "Ireland": 50,
+    "United Kingdom": 264,
+    "Ireland": 51,
     "Germany": 106,
     "Netherlands": 47,
-    "France": 56,
-    "Spain": 64,
+    "France": 59,
+    "Spain": 65,
     "Sweden": 28,
     "Denmark": 13,
     "Norway": 5,
     "Finland": 8,
     "Japan": 62,
-    "Singapore": 70,
-    "Australia": 85,
+    "Singapore": 72,
+    "Australia": 83,
     "New Zealand": 6
   },
   "mca": {
@@ -4115,33 +4114,6 @@
             "name": "ARKETA LIMITED",
             "status": "dissolved",
             "incorporated": "2008-01-02",
-            "locality": "",
-            "postcode": "",
-            "sic": [],
-            "kind": ""
-          }
-        ]
-      },
-      {
-        "name": "Armada",
-        "confidence": "exact",
-        "why": "silent; 2 companies reach the exact tier",
-        "candidates": [
-          {
-            "number": "10991884",
-            "name": "ARMADA LTD",
-            "status": "active",
-            "incorporated": "2017-10-02",
-            "locality": "",
-            "postcode": "",
-            "sic": [],
-            "kind": ""
-          },
-          {
-            "number": "05036574",
-            "name": "ARMADA LIMITED",
-            "status": "dissolved",
-            "incorporated": "2004-02-06",
             "locality": "",
             "postcode": "",
             "sic": [],
