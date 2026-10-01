@@ -1,13 +1,13 @@
 {
   "corpus_size": 3026,
-  "checked": 827,
-  "unchecked": 2199,
+  "checked": 824,
+  "unchecked": 2202,
   "counts": {
-    "listed": 369,
+    "listed": 366,
     "no-target-roles": 458,
-    "slug-unresolved": 2179,
+    "slug-unresolved": 2181,
     "probe-failed": 0,
-    "empty-board-unverified": 7,
+    "empty-board-unverified": 8,
     "not-qualified": 0,
     "another-companys-board": 13
   },
@@ -252,7 +252,6 @@
     "Orca Security",
     "Overview",
     "Oyster",
-    "PPRO",
     "Paddle",
     "PandaDoc",
     "Parker",
@@ -362,7 +361,6 @@
     "Vest",
     "Vivodyne",
     "Wayflyer",
-    "Wayve",
     "Webflow",
     "Whop",
     "Wispr Flow",
@@ -371,7 +369,6 @@
     "Xendit",
     "YipitData",
     "YugaByte",
-    "Zapier",
     "Zilch",
     "Zip",
     "airSlate",
@@ -1043,7 +1040,7 @@
     "Culdesac": "no-target-roles",
     "Culture Amp": "listed",
     "Cura OS": "slug-unresolved",
-    "Curative": "no-target-roles",
+    "Curative": "slug-unresolved",
     "Curebase": "slug-unresolved",
     "Current": "no-target-roles",
     "Curri": "listed",
@@ -2322,7 +2319,7 @@
     "POSITION IMAGING": "slug-unresolved",
     "POSITIVE IMAGE CONSULTING SERVICES": "slug-unresolved",
     "PPC Diskover": "slug-unresolved",
-    "PPRO": "listed",
+    "PPRO": "empty-board-unverified",
     "PROMPTPATH.AI": "slug-unresolved",
     "Pacaso": "no-target-roles",
     "Pace (NY)": "slug-unresolved",
@@ -3244,7 +3241,7 @@
     "Waydev": "slug-unresolved",
     "Wayflyer": "listed",
     "WaystoCap": "slug-unresolved",
-    "Wayve": "listed",
+    "Wayve": "slug-unresolved",
     "WeLab": "slug-unresolved",
     "WePay": "slug-unresolved",
     "WearLinq": "slug-unresolved",
@@ -3326,7 +3323,7 @@
     "Zageno": "slug-unresolved",
     "Zama": "slug-unresolved",
     "Zapata Computing Holdings": "slug-unresolved",
-    "Zapier": "listed",
+    "Zapier": "no-target-roles",
     "Zeal": "slug-unresolved",
     "Zebec": "slug-unresolved",
     "Zed Industries": "slug-unresolved",
@@ -3410,10 +3407,14 @@
     "xLight": "slug-unresolved",
     "zeroheight": "slug-unresolved"
   },
-  "departed": {},
+  "departed": {
+    "PPRO": "empty-board-unverified",
+    "Wayve": "slug-unresolved",
+    "Zapier": "no-target-roles"
+  },
   "websites": {
     "with_website": 1928,
-    "slug_unresolved_with_website": 1188,
+    "slug_unresolved_with_website": 1190,
     "slug_unresolved_without_website": 991
   },
   "shared_boards": {
@@ -3432,26 +3433,26 @@
     "Insider": "Business Insider"
   },
   "countries": {
-    "India": 119,
+    "India": 118,
     "United Kingdom": 264,
-    "Ireland": 51,
-    "Germany": 106,
+    "Ireland": 52,
+    "Germany": 103,
     "Netherlands": 47,
     "France": 59,
     "Spain": 65,
-    "Sweden": 28,
+    "Sweden": 29,
     "Denmark": 13,
     "Norway": 5,
     "Finland": 8,
-    "Japan": 62,
+    "Japan": 61,
     "Singapore": 72,
-    "Australia": 83,
+    "Australia": 84,
     "New Zealand": 6
   },
   "mca": {
     "records": 24102,
     "pulled": "2026-07-29",
-    "matched": 33,
+    "matched": 32,
     "held": [
       {
         "name": "6Sense",
@@ -3892,7 +3893,7 @@
     "names": 220,
     "stated": 20,
     "pulled": "2026-08-02",
-    "matched": 17,
+    "matched": 15,
     "held": [
       {
         "name": "Airbnb",
