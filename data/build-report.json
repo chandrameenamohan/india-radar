@@ -1,11 +1,11 @@
 {
   "corpus_size": 3026,
-  "checked": 824,
-  "unchecked": 2202,
+  "checked": 823,
+  "unchecked": 2203,
   "counts": {
-    "listed": 366,
-    "no-target-roles": 458,
-    "slug-unresolved": 2181,
+    "listed": 364,
+    "no-target-roles": 459,
+    "slug-unresolved": 2182,
     "probe-failed": 0,
     "empty-board-unverified": 8,
     "not-qualified": 0,
@@ -83,7 +83,6 @@
     "ContentSquare",
     "Contentful",
     "Conveo",
-    "Corgi",
     "Cresta",
     "Cribl",
     "Cross River Bank",
@@ -119,6 +118,7 @@
     "Faire",
     "FalconX",
     "Feedzai",
+    "Fieldguide",
     "Finni Health",
     "Fireblocks",
     "Fivetran",
@@ -160,7 +160,6 @@
     "HeyGen",
     "Higgsfield",
     "HighRadius",
-    "Hightouch",
     "Horizon 3 AI",
     "Humaans",
     "Huntress",
@@ -289,7 +288,6 @@
     "Rillet",
     "Ripple",
     "Rogo",
-    "Rollstack",
     "SOLIDROAD",
     "SambaNova Systems",
     "Sarvam",
@@ -1005,7 +1003,7 @@
     "Copilot Labs, Inc. \\ DE": "slug-unresolved",
     "Coralogix": "slug-unresolved",
     "CoreOS": "slug-unresolved",
-    "Corgi": "listed",
+    "Corgi": "no-target-roles",
     "Corgi Insurance": "slug-unresolved",
     "Corista": "slug-unresolved",
     "Corner Health Platform": "slug-unresolved",
@@ -1328,7 +1326,7 @@
     "Fictions": "slug-unresolved",
     "FidoCure\u00ae": "slug-unresolved",
     "FieldAI": "slug-unresolved",
-    "Fieldguide": "no-target-roles",
+    "Fieldguide": "listed",
     "Figment": "no-target-roles",
     "Filed": "slug-unresolved",
     "Filevine": "slug-unresolved",
@@ -1604,7 +1602,7 @@
     "HighRadius": "listed",
     "Highbeam, Inc./de": "slug-unresolved",
     "Highnote": "no-target-roles",
-    "Hightouch": "listed",
+    "Hightouch": "slug-unresolved",
     "Hipmunk": "slug-unresolved",
     "Hipp Health": "slug-unresolved",
     "HireArt": "slug-unresolved",
@@ -2658,7 +2656,7 @@
     "Rogo": "listed",
     "Rokid": "slug-unresolved",
     "Rokt": "slug-unresolved",
-    "Rollstack": "listed",
+    "Rollstack": "no-target-roles",
     "RoofMarketplace": "slug-unresolved",
     "Roofstock": "no-target-roles",
     "Rootly": "slug-unresolved",
@@ -3408,13 +3406,13 @@
     "zeroheight": "slug-unresolved"
   },
   "departed": {
-    "PPRO": "empty-board-unverified",
-    "Wayve": "slug-unresolved",
-    "Zapier": "no-target-roles"
+    "Corgi": "no-target-roles",
+    "Hightouch": "slug-unresolved",
+    "Rollstack": "no-target-roles"
   },
   "websites": {
     "with_website": 1928,
-    "slug_unresolved_with_website": 1190,
+    "slug_unresolved_with_website": 1191,
     "slug_unresolved_without_website": 991
   },
   "shared_boards": {
@@ -3434,25 +3432,25 @@
   },
   "countries": {
     "India": 118,
-    "United Kingdom": 264,
+    "United Kingdom": 262,
     "Ireland": 52,
     "Germany": 103,
     "Netherlands": 47,
-    "France": 59,
-    "Spain": 65,
-    "Sweden": 29,
+    "France": 58,
+    "Spain": 64,
+    "Sweden": 30,
     "Denmark": 13,
     "Norway": 5,
     "Finland": 8,
     "Japan": 61,
-    "Singapore": 72,
+    "Singapore": 70,
     "Australia": 84,
     "New Zealand": 6
   },
   "mca": {
     "records": 24102,
     "pulled": "2026-07-29",
-    "matched": 32,
+    "matched": 33,
     "held": [
       {
         "name": "6Sense",
@@ -5134,6 +5132,23 @@
         ]
       },
       {
+        "name": "Fieldguide",
+        "confidence": "exact",
+        "why": "silent; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "17124510",
+            "name": "FIELD GUIDE LTD",
+            "status": "active",
+            "incorporated": "2026-03-30",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
         "name": "Fireblocks",
         "confidence": "prefix",
         "why": "silent; one prefix-tier name match",
@@ -5496,23 +5511,6 @@
         ]
       },
       {
-        "name": "Hightouch",
-        "confidence": "exact",
-        "why": "silent; one exact-tier name match",
-        "candidates": [
-          {
-            "number": "07381521",
-            "name": "HIGHTOUCH LIMITED",
-            "status": "active",
-            "incorporated": "2010-09-20",
-            "locality": "",
-            "postcode": "",
-            "sic": [],
-            "kind": ""
-          }
-        ]
-      },
-      {
         "name": "Horizon 3 AI",
         "confidence": "exact",
         "why": "no website; one exact-tier name match",
@@ -5678,23 +5676,6 @@
             "name": "JUST WORKS LIMITED",
             "status": "active",
             "incorporated": "2010-08-24",
-            "locality": "",
-            "postcode": "",
-            "sic": [],
-            "kind": ""
-          }
-        ]
-      },
-      {
-        "name": "Kaseya",
-        "confidence": "prefix",
-        "why": "silent; one prefix-tier name match",
-        "candidates": [
-          {
-            "number": "05752088",
-            "name": "KASEYA INTERNATIONAL (UK) LIMITED",
-            "status": "active",
-            "incorporated": "2006-03-22",
             "locality": "",
             "postcode": "",
             "sic": [],
@@ -6959,6 +6940,23 @@
             "name": "SCALE AI LIMITED",
             "status": "active",
             "incorporated": "2024-11-19",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Scandit",
+        "confidence": "exact",
+        "why": "silent; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "10866473",
+            "name": "SCANDIT LTD",
+            "status": "active",
+            "incorporated": "2017-07-14",
             "locality": "",
             "postcode": "",
             "sic": [],
