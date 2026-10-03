@@ -3405,11 +3405,7 @@
     "xLight": "slug-unresolved",
     "zeroheight": "slug-unresolved"
   },
-  "departed": {
-    "Corgi": "no-target-roles",
-    "Hightouch": "slug-unresolved",
-    "Rollstack": "no-target-roles"
-  },
+  "departed": {},
   "websites": {
     "with_website": 1928,
     "slug_unresolved_with_website": 1191,
