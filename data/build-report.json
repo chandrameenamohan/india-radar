@@ -1,11 +1,11 @@
 {
   "corpus_size": 3026,
-  "checked": 823,
-  "unchecked": 2203,
+  "checked": 822,
+  "unchecked": 2204,
   "counts": {
     "listed": 364,
-    "no-target-roles": 459,
-    "slug-unresolved": 2182,
+    "no-target-roles": 458,
+    "slug-unresolved": 2183,
     "probe-failed": 0,
     "empty-board-unverified": 8,
     "not-qualified": 0,
@@ -2456,7 +2456,7 @@
     "Polygraf": "slug-unresolved",
     "Polyhedra Network": "slug-unresolved",
     "Polymarket": "slug-unresolved",
-    "Pomelo Care": "no-target-roles",
+    "Pomelo Care": "slug-unresolved",
     "Poolside": "no-target-roles",
     "Pop Meals": "slug-unresolved",
     "PopSQL": "slug-unresolved",
@@ -3408,7 +3408,7 @@
   "departed": {},
   "websites": {
     "with_website": 1928,
-    "slug_unresolved_with_website": 1191,
+    "slug_unresolved_with_website": 1192,
     "slug_unresolved_without_website": 991
   },
   "shared_boards": {

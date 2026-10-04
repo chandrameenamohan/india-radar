@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "snapshot": "2026-10-03",
+  "snapshot": "2026-10-04",
   "note": "first_seen is the snapshot date a role's URL first appeared in a build. A role is confirmed only where its company's board was read on the previous snapshot AND on this one \u2014 both sides genuinely observed. Everything else is unconfirmed: we saw it for the first time, which is not the same as it being new. Only confirmed roles may be called new.",
   "observed": [
     "1Password",
@@ -13080,6 +13080,22 @@
         "https://job-boards.greenhouse.io/shifttechnology/jobs/8012550003",
         "https://jobs.ashbyhq.com/openai/18e64608-5881-4b8f-b5cf-abd09a8ff086",
         "https://jobs.ashbyhq.com/openai/e96c039a-0ecb-4aad-8e45-caa11524644c"
+      ],
+      "unconfirmed": []
+    },
+    "2026-10-04": {
+      "confirmed": [
+        "https://careers.appsflyer.com/jobs/position/8867105002?gh_jid=8867105002",
+        "https://job-boards.greenhouse.io/quince/jobs/5435972008",
+        "https://jobs.ashbyhq.com/factory/9b4262d3-4468-4e74-9d47-6ac3ae2804ec",
+        "https://jobs.ashbyhq.com/halter/053420c5-6eeb-481a-b526-1a74b4f60327",
+        "https://jobs.ashbyhq.com/halter/36cfdb76-20ed-4148-b4c0-26d89125353a",
+        "https://jobs.ashbyhq.com/halter/3d5242a0-73ba-4e13-a3f6-41cca271e456",
+        "https://jobs.ashbyhq.com/halter/3e0ddffa-f078-4f68-8f0a-266e69d0bc95",
+        "https://jobs.ashbyhq.com/halter/4c68dac6-fc4c-4be6-a92a-5feb0a26cf22",
+        "https://jobs.ashbyhq.com/halter/61872331-725c-49d7-9bd5-7fc58a6c1be6",
+        "https://jobs.ashbyhq.com/halter/9294015a-adab-4d52-ba13-78eef5898e75",
+        "https://jobs.ashbyhq.com/halter/eb79fefc-f00a-4086-8c0f-fa6c347e91eb"
       ],
       "unconfirmed": []
     }
