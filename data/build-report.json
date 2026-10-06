@@ -1,11 +1,11 @@
 {
   "corpus_size": 3026,
-  "checked": 822,
-  "unchecked": 2204,
+  "checked": 821,
+  "unchecked": 2205,
   "counts": {
-    "listed": 364,
-    "no-target-roles": 458,
-    "slug-unresolved": 2183,
+    "listed": 366,
+    "no-target-roles": 455,
+    "slug-unresolved": 2184,
     "probe-failed": 0,
     "empty-board-unverified": 8,
     "not-qualified": 0,
@@ -207,7 +207,6 @@
     "Lucis",
     "Luma AI",
     "MOLOCO",
-    "MUBI",
     "MURAL",
     "Magic Eden",
     "MaintainX",
@@ -230,7 +229,6 @@
     "Monzo",
     "MoonPay",
     "Morning Consult",
-    "Mux",
     "N26",
     "NIUM",
     "Nash",
@@ -239,6 +237,7 @@
     "Nextiva",
     "Niantic Spatial",
     "Nirvana",
+    "Nitricity",
     "Notabene",
     "Notion",
     "Numeral",
@@ -302,6 +301,7 @@
     "SingleStore",
     "Slice",
     "Smallest.ai",
+    "Snyk",
     "Socure",
     "Solve Intelligence",
     "Sorare",
@@ -330,6 +330,7 @@
     "Teamworks",
     "Teleport",
     "Tem",
+    "Tempo",
     "TensTorrent",
     "Teya",
     "The Athletic",
@@ -356,6 +357,7 @@
     "Vercel",
     "Veriff",
     "Verkada",
+    "Verse Medical",
     "Vest",
     "Vivodyne",
     "Wayflyer",
@@ -1003,7 +1005,7 @@
     "Copilot Labs, Inc. \\ DE": "slug-unresolved",
     "Coralogix": "slug-unresolved",
     "CoreOS": "slug-unresolved",
-    "Corgi": "no-target-roles",
+    "Corgi": "slug-unresolved",
     "Corgi Insurance": "slug-unresolved",
     "Corista": "slug-unresolved",
     "Corner Health Platform": "slug-unresolved",
@@ -1948,7 +1950,7 @@
     "MOLOCO": "listed",
     "MRToolworx": "slug-unresolved",
     "MTailor": "slug-unresolved",
-    "MUBI": "listed",
+    "MUBI": "no-target-roles",
     "MURAL": "listed",
     "MX": "slug-unresolved",
     "MachGen AI": "slug-unresolved",
@@ -2103,7 +2105,7 @@
     "Multiverse Computing": "slug-unresolved",
     "Mundo AI": "slug-unresolved",
     "Musely": "slug-unresolved",
-    "Mux": "listed",
+    "Mux": "no-target-roles",
     "Muzz": "slug-unresolved",
     "MyVR": "slug-unresolved",
     "MyVillage": "slug-unresolved",
@@ -2171,7 +2173,7 @@
     "NinjaOne": "slug-unresolved",
     "Nirvana": "listed",
     "Nisos Holdings": "slug-unresolved",
-    "Nitricity": "no-target-roles",
+    "Nitricity": "listed",
     "Niural": "slug-unresolved",
     "Nixtla": "slug-unresolved",
     "NoBroker": "slug-unresolved",
@@ -2840,7 +2842,7 @@
     "Snorkel AI": "no-target-roles",
     "Snowcap Compute": "slug-unresolved",
     "Snowflake": "slug-unresolved",
-    "Snyk": "no-target-roles",
+    "Snyk": "listed",
     "Soapbox Holdings": "slug-unresolved",
     "Social Construct": "slug-unresolved",
     "Socure": "listed",
@@ -2999,7 +3001,7 @@
     "Tem": "listed",
     "Temelio": "slug-unresolved",
     "Templarbit": "slug-unresolved",
-    "Tempo": "no-target-roles",
+    "Tempo": "listed",
     "Temporal": "slug-unresolved",
     "TeneoSeven": "slug-unresolved",
     "Tennr": "no-target-roles",
@@ -3187,7 +3189,7 @@
     "Veriff": "listed",
     "Verihubs": "slug-unresolved",
     "Verkada": "listed",
-    "Verse Medical": "no-target-roles",
+    "Verse Medical": "listed",
     "Verve Cloud": "slug-unresolved",
     "Veryfi, Inc.": "slug-unresolved",
     "Vest": "listed",
@@ -3405,10 +3407,13 @@
     "xLight": "slug-unresolved",
     "zeroheight": "slug-unresolved"
   },
-  "departed": {},
+  "departed": {
+    "MUBI": "no-target-roles",
+    "Mux": "no-target-roles"
+  },
   "websites": {
     "with_website": 1928,
-    "slug_unresolved_with_website": 1192,
+    "slug_unresolved_with_website": 1193,
     "slug_unresolved_without_website": 991
   },
   "shared_boards": {
@@ -3427,20 +3432,20 @@
     "Insider": "Business Insider"
   },
   "countries": {
-    "India": 118,
-    "United Kingdom": 262,
+    "India": 120,
+    "United Kingdom": 260,
     "Ireland": 52,
-    "Germany": 103,
-    "Netherlands": 47,
-    "France": 58,
-    "Spain": 64,
+    "Germany": 104,
+    "Netherlands": 46,
+    "France": 59,
+    "Spain": 63,
     "Sweden": 30,
-    "Denmark": 13,
+    "Denmark": 14,
     "Norway": 5,
     "Finland": 8,
     "Japan": 61,
-    "Singapore": 70,
-    "Australia": 84,
+    "Singapore": 71,
+    "Australia": 87,
     "New Zealand": 6
   },
   "mca": {
@@ -5196,23 +5201,6 @@
         ]
       },
       {
-        "name": "Flexport",
-        "confidence": "exact",
-        "why": "silent; one exact-tier name match",
-        "candidates": [
-          {
-            "number": "07484806",
-            "name": "FLEXPORT LIMITED",
-            "status": "dissolved",
-            "incorporated": "2011-01-06",
-            "locality": "",
-            "postcode": "",
-            "sic": [],
-            "kind": ""
-          }
-        ]
-      },
-      {
         "name": "Focal Systems",
         "confidence": "exact",
         "why": "silent; one exact-tier name match",
@@ -6190,23 +6178,6 @@
         ]
       },
       {
-        "name": "MUBI",
-        "confidence": "exact",
-        "why": "silent; one exact-tier name match",
-        "candidates": [
-          {
-            "number": "07385593",
-            "name": "MUBI UK LIMITED",
-            "status": "active",
-            "incorporated": "2010-09-23",
-            "locality": "",
-            "postcode": "",
-            "sic": [],
-            "kind": ""
-          }
-        ]
-      },
-      {
         "name": "MURAL",
         "confidence": "exact",
         "why": "silent; 4 companies reach the exact tier",
@@ -6246,23 +6217,6 @@
             "name": "MURAL LTD.",
             "status": "dissolved",
             "incorporated": "2006-05-26",
-            "locality": "",
-            "postcode": "",
-            "sic": [],
-            "kind": ""
-          }
-        ]
-      },
-      {
-        "name": "Mux",
-        "confidence": "exact",
-        "why": "silent; one exact-tier name match",
-        "candidates": [
-          {
-            "number": "11054768",
-            "name": "MUX UK LTD",
-            "status": "active",
-            "incorporated": "2017-11-08",
             "locality": "",
             "postcode": "",
             "sic": [],
