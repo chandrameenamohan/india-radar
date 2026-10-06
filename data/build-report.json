@@ -1,11 +1,11 @@
 {
   "corpus_size": 3026,
-  "checked": 821,
-  "unchecked": 2205,
+  "checked": 820,
+  "unchecked": 2206,
   "counts": {
-    "listed": 366,
-    "no-target-roles": 455,
-    "slug-unresolved": 2184,
+    "listed": 364,
+    "no-target-roles": 456,
+    "slug-unresolved": 2185,
     "probe-failed": 0,
     "empty-board-unverified": 8,
     "not-qualified": 0,
@@ -170,7 +170,6 @@
     "InMobi",
     "Incode Technologies",
     "Infisical",
-    "Inflection AI",
     "InfluxData",
     "Instawork",
     "Instead",
@@ -240,7 +239,6 @@
     "Nitricity",
     "Notabene",
     "Notion",
-    "Numeral",
     "OKX",
     "Observe.AI",
     "Odyssey",
@@ -1686,7 +1684,7 @@
     "Infinite Reality": "slug-unresolved",
     "Infinity": "slug-unresolved",
     "Infisical": "listed",
-    "Inflection AI": "listed",
+    "Inflection AI": "no-target-roles",
     "Infleqtion": "slug-unresolved",
     "InfluxData": "listed",
     "Infobip": "slug-unresolved",
@@ -2209,7 +2207,7 @@
     "Nukkleus": "slug-unresolved",
     "Numbrs": "slug-unresolved",
     "Numen": "no-target-roles",
-    "Numeral": "listed",
+    "Numeral": "no-target-roles",
     "Numeral Two": "slug-unresolved",
     "Numerion Labs": "slug-unresolved",
     "OKX": "listed",
@@ -2277,7 +2275,7 @@
     "OpenInvest": "slug-unresolved",
     "OpenRouter": "no-target-roles",
     "OpenSea": "no-target-roles",
-    "OpenWeb": "no-target-roles",
+    "OpenWeb": "slug-unresolved",
     "Opencall": "no-target-roles",
     "Opendate": "slug-unresolved",
     "Openlayer": "slug-unresolved",
@@ -3408,12 +3406,12 @@
     "zeroheight": "slug-unresolved"
   },
   "departed": {
-    "MUBI": "no-target-roles",
-    "Mux": "no-target-roles"
+    "Inflection AI": "no-target-roles",
+    "Numeral": "no-target-roles"
   },
   "websites": {
     "with_website": 1928,
-    "slug_unresolved_with_website": 1193,
+    "slug_unresolved_with_website": 1194,
     "slug_unresolved_without_website": 991
   },
   "shared_boards": {
@@ -3432,26 +3430,26 @@
     "Insider": "Business Insider"
   },
   "countries": {
-    "India": 120,
-    "United Kingdom": 260,
-    "Ireland": 52,
+    "India": 119,
+    "United Kingdom": 261,
+    "Ireland": 51,
     "Germany": 104,
-    "Netherlands": 46,
-    "France": 59,
-    "Spain": 63,
-    "Sweden": 30,
-    "Denmark": 14,
+    "Netherlands": 47,
+    "France": 61,
+    "Spain": 62,
+    "Sweden": 31,
+    "Denmark": 16,
     "Norway": 5,
     "Finland": 8,
     "Japan": 61,
     "Singapore": 71,
-    "Australia": 87,
+    "Australia": 86,
     "New Zealand": 6
   },
   "mca": {
     "records": 24102,
     "pulled": "2026-07-29",
-    "matched": 33,
+    "matched": 32,
     "held": [
       {
         "name": "6Sense",
