@@ -1,11 +1,11 @@
 {
   "corpus_size": 3026,
-  "checked": 820,
-  "unchecked": 2206,
+  "checked": 819,
+  "unchecked": 2207,
   "counts": {
     "listed": 364,
-    "no-target-roles": 456,
-    "slug-unresolved": 2185,
+    "no-target-roles": 455,
+    "slug-unresolved": 2186,
     "probe-failed": 0,
     "empty-board-unverified": 8,
     "not-qualified": 0,
@@ -1785,7 +1785,7 @@
     "Kivo": "slug-unresolved",
     "Kivo Health": "slug-unresolved",
     "Kiwify": "slug-unresolved",
-    "Klarity": "no-target-roles",
+    "Klarity": "slug-unresolved",
     "Klir": "slug-unresolved",
     "Knapsack": "slug-unresolved",
     "Known": "no-target-roles",
@@ -3405,13 +3405,10 @@
     "xLight": "slug-unresolved",
     "zeroheight": "slug-unresolved"
   },
-  "departed": {
-    "Inflection AI": "no-target-roles",
-    "Numeral": "no-target-roles"
-  },
+  "departed": {},
   "websites": {
     "with_website": 1928,
-    "slug_unresolved_with_website": 1194,
+    "slug_unresolved_with_website": 1195,
     "slug_unresolved_without_website": 991
   },
   "shared_boards": {
@@ -3430,19 +3427,19 @@
     "Insider": "Business Insider"
   },
   "countries": {
-    "India": 119,
+    "India": 118,
     "United Kingdom": 261,
-    "Ireland": 51,
-    "Germany": 104,
-    "Netherlands": 47,
-    "France": 61,
-    "Spain": 62,
-    "Sweden": 31,
+    "Ireland": 50,
+    "Germany": 105,
+    "Netherlands": 46,
+    "France": 62,
+    "Spain": 64,
+    "Sweden": 32,
     "Denmark": 16,
     "Norway": 5,
     "Finland": 8,
     "Japan": 61,
-    "Singapore": 71,
+    "Singapore": 72,
     "Australia": 86,
     "New Zealand": 6
   },
