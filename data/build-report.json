@@ -3,8 +3,8 @@
   "checked": 819,
   "unchecked": 2207,
   "counts": {
-    "listed": 364,
-    "no-target-roles": 455,
+    "listed": 363,
+    "no-target-roles": 456,
     "slug-unresolved": 2186,
     "probe-failed": 0,
     "empty-board-unverified": 8,
@@ -147,7 +147,6 @@
     "Granola",
     "Groww",
     "HackerRank",
-    "HaloBraid",
     "Halter",
     "Handshake",
     "Happl",
@@ -1553,7 +1552,7 @@
     "Halan": "slug-unresolved",
     "Halcyon": "no-target-roles",
     "Halcyon Carbon": "slug-unresolved",
-    "HaloBraid": "listed",
+    "HaloBraid": "no-target-roles",
     "Halter": "listed",
     "Halusky": "slug-unresolved",
     "Handshake": "listed",
@@ -3405,7 +3404,9 @@
     "xLight": "slug-unresolved",
     "zeroheight": "slug-unresolved"
   },
-  "departed": {},
+  "departed": {
+    "HaloBraid": "no-target-roles"
+  },
   "websites": {
     "with_website": 1928,
     "slug_unresolved_with_website": 1195,
@@ -3428,19 +3429,19 @@
   },
   "countries": {
     "India": 118,
-    "United Kingdom": 261,
-    "Ireland": 50,
-    "Germany": 105,
+    "United Kingdom": 259,
+    "Ireland": 49,
+    "Germany": 104,
     "Netherlands": 46,
-    "France": 62,
+    "France": 61,
     "Spain": 64,
-    "Sweden": 32,
+    "Sweden": 33,
     "Denmark": 16,
     "Norway": 5,
     "Finland": 8,
-    "Japan": 61,
+    "Japan": 60,
     "Singapore": 72,
-    "Australia": 86,
+    "Australia": 85,
     "New Zealand": 6
   },
   "mca": {
@@ -7172,23 +7173,6 @@
             "name": "TALKDESK U.K. LIMITED",
             "status": "active",
             "incorporated": "2018-10-08",
-            "locality": "",
-            "postcode": "",
-            "sic": [],
-            "kind": ""
-          }
-        ]
-      },
-      {
-        "name": "Tanium",
-        "confidence": "exact",
-        "why": "silent; one exact-tier name match",
-        "candidates": [
-          {
-            "number": "09335968",
-            "name": "TANIUM UK LIMITED",
-            "status": "active",
-            "incorporated": "2014-12-02",
             "locality": "",
             "postcode": "",
             "sic": [],
