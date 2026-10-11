@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "snapshot": "2026-10-10",
+  "snapshot": "2026-10-11",
   "note": "first_seen is the snapshot date a role's URL first appeared in a build. A role is confirmed only where its company's board was read on the previous snapshot AND on this one \u2014 both sides genuinely observed. Everything else is unconfirmed: we saw it for the first time, which is not the same as it being new. Only confirmed roles may be called new.",
   "observed": [
     "1Password",
@@ -13749,6 +13749,21 @@
         "https://job-boards.greenhouse.io/odeko/jobs/6221702004",
         "https://jobs.ashbyhq.com/openrouter/64fe7bcc-39e7-454b-bb13-020d5676b162"
       ]
+    },
+    "2026-10-11": {
+      "confirmed": [
+        "https://databricks.com/company/careers/open-positions/job?gh_jid=8878095002",
+        "https://job-boards.greenhouse.io/cultureamp/jobs/8260732",
+        "https://job-boards.greenhouse.io/cultureamp/jobs/8260735",
+        "https://job-boards.greenhouse.io/firmus/jobs/5448384008",
+        "https://jobs.ashbyhq.com/deepgram/12fd68d7-5034-41f5-a992-022691a25f53",
+        "https://jobs.ashbyhq.com/deepgram/1518fd8f-7e9d-4712-9e6b-a7e10ba25bdd",
+        "https://jobs.ashbyhq.com/deepgram/a0678103-1b9c-44a4-92c0-f705850a8fa1",
+        "https://jobs.ashbyhq.com/deepgram/c7922eab-cca8-46e8-b073-06ad60337edf",
+        "https://jobs.ashbyhq.com/halter/a4dde170-5b47-445b-9ed3-532df4dc7221",
+        "https://jobs.ashbyhq.com/halter/e4aec1d8-8c6b-4d0e-a6ee-67da59ee2c3d"
+      ],
+      "unconfirmed": []
     }
   }
 }
