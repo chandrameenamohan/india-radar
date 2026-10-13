@@ -1,13 +1,13 @@
 {
   "corpus_size": 3026,
-  "checked": 819,
-  "unchecked": 2207,
+  "checked": 817,
+  "unchecked": 2209,
   "counts": {
-    "listed": 363,
-    "no-target-roles": 456,
-    "slug-unresolved": 2186,
+    "listed": 364,
+    "no-target-roles": 453,
+    "slug-unresolved": 2187,
     "probe-failed": 0,
-    "empty-board-unverified": 8,
+    "empty-board-unverified": 9,
     "not-qualified": 0,
     "another-companys-board": 13
   },
@@ -101,6 +101,7 @@
     "Distyl AI",
     "Docker",
     "Drata",
+    "DriveWealth",
     "Dropbox",
     "Druva",
     "Duffel",
@@ -1034,7 +1035,7 @@
     "Cube Security": "slug-unresolved",
     "Cue": "slug-unresolved",
     "CueZen": "slug-unresolved",
-    "Culdesac": "no-target-roles",
+    "Culdesac": "empty-board-unverified",
     "Culture Amp": "listed",
     "Cura OS": "slug-unresolved",
     "Curative": "slug-unresolved",
@@ -1170,7 +1171,7 @@
     "Dremio": "no-target-roles",
     "Drip Capital": "slug-unresolved",
     "DriveNets": "slug-unresolved",
-    "DriveWealth": "no-target-roles",
+    "DriveWealth": "listed",
     "Drivezy": "slug-unresolved",
     "Drone Volt": "slug-unresolved",
     "DroneBase": "slug-unresolved",
@@ -2575,7 +2576,7 @@
     "RealCrowd": "slug-unresolved",
     "Reality Defender": "no-target-roles",
     "Realize": "slug-unresolved",
-    "Realm": "no-target-roles",
+    "Realm": "slug-unresolved",
     "Rebound Technologies": "slug-unresolved",
     "Recall.ai": "no-target-roles",
     "Recurrency": "slug-unresolved",
@@ -3404,16 +3405,10 @@
     "xLight": "slug-unresolved",
     "zeroheight": "slug-unresolved"
   },
-  "departed": {
-    "Airtable": "no-target-roles",
-    "DriveWealth": "no-target-roles",
-    "FurtherAI": "no-target-roles",
-    "The Athletic": "no-target-roles",
-    "Trade Republic": "no-target-roles"
-  },
+  "departed": {},
   "websites": {
     "with_website": 1928,
-    "slug_unresolved_with_website": 1195,
+    "slug_unresolved_with_website": 1196,
     "slug_unresolved_without_website": 991
   },
   "shared_boards": {
@@ -3432,15 +3427,15 @@
     "Insider": "Business Insider"
   },
   "countries": {
-    "India": 116,
-    "United Kingdom": 258,
-    "Ireland": 49,
-    "Germany": 100,
-    "Netherlands": 47,
-    "France": 62,
-    "Spain": 64,
-    "Sweden": 34,
-    "Denmark": 16,
+    "India": 117,
+    "United Kingdom": 260,
+    "Ireland": 50,
+    "Germany": 102,
+    "Netherlands": 46,
+    "France": 63,
+    "Spain": 63,
+    "Sweden": 32,
+    "Denmark": 17,
     "Norway": 5,
     "Finland": 8,
     "Japan": 59,
@@ -4063,23 +4058,6 @@
             "name": "APPLIED INTUITION UK LTD.",
             "status": "active",
             "incorporated": "2025-02-03",
-            "locality": "",
-            "postcode": "",
-            "sic": [],
-            "kind": ""
-          }
-        ]
-      },
-      {
-        "name": "AppsFlyer",
-        "confidence": "exact",
-        "why": "silent; one exact-tier name match",
-        "candidates": [
-          {
-            "number": "10246990",
-            "name": "APPSFLYER UK LTD",
-            "status": "active",
-            "incorporated": "2016-06-23",
             "locality": "",
             "postcode": "",
             "sic": [],
@@ -4964,6 +4942,33 @@
         ]
       },
       {
+        "name": "Druva",
+        "confidence": "prefix",
+        "why": "silent; 2 companies reach the prefix tier",
+        "candidates": [
+          {
+            "number": "07305286",
+            "name": "DRUVA EUROPE LIMITED",
+            "status": "active",
+            "incorporated": "2010-07-06",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "SL028158",
+            "name": "DRUVA TRADE LP",
+            "status": "active",
+            "incorporated": "2016-09-01",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
         "name": "EBANX",
         "confidence": "exact",
         "why": "silent; 4 companies reach the exact tier",
@@ -5176,6 +5181,23 @@
             "name": "FLEEK LTD",
             "status": "active",
             "incorporated": "2012-06-18",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Flexport",
+        "confidence": "exact",
+        "why": "silent; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "07484806",
+            "name": "FLEXPORT LIMITED",
+            "status": "dissolved",
+            "incorporated": "2011-01-06",
             "locality": "",
             "postcode": "",
             "sic": [],
