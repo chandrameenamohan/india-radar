@@ -1,11 +1,11 @@
 {
   "corpus_size": 3026,
-  "checked": 817,
-  "unchecked": 2209,
+  "checked": 816,
+  "unchecked": 2210,
   "counts": {
     "listed": 364,
-    "no-target-roles": 453,
-    "slug-unresolved": 2187,
+    "no-target-roles": 452,
+    "slug-unresolved": 2188,
     "probe-failed": 0,
     "empty-board-unverified": 9,
     "not-qualified": 0,
@@ -20,6 +20,7 @@
     "AXONIUS",
     "Abacum",
     "Airbnb",
+    "Airtable",
     "Algolia",
     "Alloy",
     "Alpaca",
@@ -84,7 +85,6 @@
     "Conveo",
     "Cresta",
     "Cribl",
-    "Cross River Bank",
     "Culture Amp",
     "Curri",
     "Cursor",
@@ -470,7 +470,7 @@
     "Airbnb": "listed",
     "Airbyte": "no-target-roles",
     "Airfordable": "slug-unresolved",
-    "Airtable": "no-target-roles",
+    "Airtable": "listed",
     "Airwallex": "slug-unresolved",
     "Airware": "slug-unresolved",
     "Aiven": "slug-unresolved",
@@ -1024,7 +1024,7 @@
     "Cribl": "listed",
     "Critical Loop": "no-target-roles",
     "Crosby": "slug-unresolved",
-    "Cross River Bank": "listed",
+    "Cross River Bank": "no-target-roles",
     "Crossmint": "slug-unresolved",
     "CrowdAI": "slug-unresolved",
     "Cruise": "slug-unresolved",
@@ -1262,7 +1262,7 @@
     "Epidemic Sound": "listed",
     "Epsilon3": "slug-unresolved",
     "Equal AI": "slug-unresolved",
-    "Equatic": "no-target-roles",
+    "Equatic": "slug-unresolved",
     "Erebor": "slug-unresolved",
     "Eridu": "slug-unresolved",
     "ErudiFi": "slug-unresolved",
@@ -3405,11 +3405,13 @@
     "xLight": "slug-unresolved",
     "zeroheight": "slug-unresolved"
   },
-  "departed": {},
+  "departed": {
+    "Cross River Bank": "no-target-roles"
+  },
   "websites": {
     "with_website": 1928,
     "slug_unresolved_with_website": 1196,
-    "slug_unresolved_without_website": 991
+    "slug_unresolved_without_website": 992
   },
   "shared_boards": {
     "Bright": "BrightAI",
@@ -3427,20 +3429,20 @@
     "Insider": "Business Insider"
   },
   "countries": {
-    "India": 117,
-    "United Kingdom": 260,
+    "India": 118,
+    "United Kingdom": 263,
     "Ireland": 50,
     "Germany": 102,
     "Netherlands": 46,
-    "France": 63,
+    "France": 62,
     "Spain": 63,
-    "Sweden": 32,
+    "Sweden": 31,
     "Denmark": 17,
     "Norway": 5,
     "Finland": 8,
-    "Japan": 59,
-    "Singapore": 73,
-    "Australia": 89,
+    "Japan": 60,
+    "Singapore": 74,
+    "Australia": 88,
     "New Zealand": 6
   },
   "mca": {
@@ -3581,6 +3583,33 @@
             "name": "FLEXPORT INTERNATIONAL (INDIA) PRIVATE LIMITED",
             "incorporated": "2026-02-17",
             "address": "B/205, BLDG -42, B-WING,AZAD NAGAR SANGAM CHS,Mumbai,Mumbai,Maharashtra,400053-India",
+            "status": "Active"
+          }
+        ]
+      },
+      {
+        "name": "Giga",
+        "confidence": "prefix",
+        "candidates": [
+          {
+            "cin": "U74999DL2020FTC368645",
+            "name": "GIGA PIPE SYSTEMS INDIA PRIVATE LIMITED",
+            "incorporated": "2020-08-25",
+            "address": "DSIIDC SHED NO. 103,  SCHEME - I   OKHLA INDUSTRIAL AREA, PHASE-II,NEW DELHI,South Delhi,Delhi,110020-India",
+            "status": "Under CIRP"
+          },
+          {
+            "cin": "U71100GJ2025FTC165460",
+            "name": "GIGA ENERGY SOLUTIONS INDIA PRIVATE LIMITED",
+            "incorporated": "2025-07-24",
+            "address": "710-711, 7th FL, 73 EAST AVENUE,SARABHAI CAMPUS, GENDA CIRCLE,Vadodara,Vadodara,Gujarat,390017-India",
+            "status": "Active"
+          },
+          {
+            "cin": "U62099TS2023FTC174538",
+            "name": "GIGA AI INDIA PRIVATE LIMITED",
+            "incorporated": "2023-07-03",
+            "address": "H No 11-14-173/201,Sree Harika Residency,Saroornagar,K.V.Rangareddy,Telangana,500035-India",
             "status": "Active"
           }
         ]
@@ -3939,6 +3968,23 @@
             "name": "AIRBNB HABITAT CLEANING LTD",
             "status": "active",
             "incorporated": "2025-06-27",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Airtable",
+        "confidence": "exact",
+        "why": "silent; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "14440416",
+            "name": "AIRTABLE LIMITED",
+            "status": "dissolved",
+            "incorporated": "2022-10-25",
             "locality": "",
             "postcode": "",
             "sic": [],
