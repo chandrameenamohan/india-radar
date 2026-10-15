@@ -1,13 +1,13 @@
 {
   "corpus_size": 3026,
-  "checked": 816,
-  "unchecked": 2210,
+  "checked": 815,
+  "unchecked": 2211,
   "counts": {
-    "listed": 364,
+    "listed": 363,
     "no-target-roles": 452,
     "slug-unresolved": 2188,
     "probe-failed": 0,
-    "empty-board-unverified": 9,
+    "empty-board-unverified": 10,
     "not-qualified": 0,
     "another-companys-board": 13
   },
@@ -205,7 +205,6 @@
     "Luma AI",
     "MOLOCO",
     "MURAL",
-    "Magic Eden",
     "MaintainX",
     "MarqVision",
     "Marshmallow",
@@ -1705,7 +1704,7 @@
     "Instacrops": "slug-unresolved",
     "Instawork": "listed",
     "Instead": "listed",
-    "Integrate": "no-target-roles",
+    "Integrate": "empty-board-unverified",
     "Integration Innovation": "slug-unresolved",
     "Intellect": "slug-unresolved",
     "Intercom": "listed",
@@ -1955,7 +1954,7 @@
     "Machina Labs": "slug-unresolved",
     "Machine Zone": "slug-unresolved",
     "Magic": "no-target-roles",
-    "Magic Eden": "listed",
+    "Magic Eden": "no-target-roles",
     "Magic Leap": "slug-unresolved",
     "MagicBus": "slug-unresolved",
     "Maimai": "slug-unresolved",
@@ -3406,7 +3405,7 @@
     "zeroheight": "slug-unresolved"
   },
   "departed": {
-    "Cross River Bank": "no-target-roles"
+    "Magic Eden": "no-target-roles"
   },
   "websites": {
     "with_website": 1928,
@@ -3431,18 +3430,18 @@
   "countries": {
     "India": 118,
     "United Kingdom": 263,
-    "Ireland": 50,
+    "Ireland": 49,
     "Germany": 102,
     "Netherlands": 46,
-    "France": 62,
-    "Spain": 63,
-    "Sweden": 31,
-    "Denmark": 17,
-    "Norway": 5,
+    "France": 61,
+    "Spain": 62,
+    "Sweden": 32,
+    "Denmark": 16,
+    "Norway": 4,
     "Finland": 8,
     "Japan": 60,
-    "Singapore": 74,
-    "Australia": 88,
+    "Singapore": 75,
+    "Australia": 86,
     "New Zealand": 6
   },
   "mca": {
