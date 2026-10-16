@@ -1,11 +1,11 @@
 {
   "corpus_size": 3026,
-  "checked": 815,
-  "unchecked": 2211,
+  "checked": 814,
+  "unchecked": 2212,
   "counts": {
-    "listed": 363,
+    "listed": 362,
     "no-target-roles": 452,
-    "slug-unresolved": 2188,
+    "slug-unresolved": 2189,
     "probe-failed": 0,
     "empty-board-unverified": 10,
     "not-qualified": 0,
@@ -20,7 +20,6 @@
     "AXONIUS",
     "Abacum",
     "Airbnb",
-    "Airtable",
     "Algolia",
     "Alloy",
     "Alpaca",
@@ -53,8 +52,8 @@
     "BetterUp",
     "BitPanda",
     "Bitmovin",
+    "Bitstack",
     "Blitzy",
-    "Blue Energy",
     "Bolna",
     "Braze",
     "CAIS",
@@ -248,6 +247,7 @@
     "Overview",
     "Oyster",
     "Paddle",
+    "PagerDuty",
     "PandaDoc",
     "Parker",
     "Parloa",
@@ -358,7 +358,6 @@
     "Vivodyne",
     "Wasabi",
     "Wayflyer",
-    "Webflow",
     "Whop",
     "Wispr Flow",
     "Workato",
@@ -469,7 +468,7 @@
     "Airbnb": "listed",
     "Airbyte": "no-target-roles",
     "Airfordable": "slug-unresolved",
-    "Airtable": "listed",
+    "Airtable": "no-target-roles",
     "Airwallex": "slug-unresolved",
     "Airware": "slug-unresolved",
     "Aiven": "slug-unresolved",
@@ -702,7 +701,7 @@
     "Bitrise": "slug-unresolved",
     "Bits": "slug-unresolved",
     "Bitso": "slug-unresolved",
-    "Bitstack": "no-target-roles",
+    "Bitstack": "listed",
     "Black Forest Labs": "slug-unresolved",
     "Black Lake Technologies": "slug-unresolved",
     "Black Unicorn Factory": "slug-unresolved",
@@ -724,7 +723,7 @@
     "BloomThat": "slug-unresolved",
     "Blossom BH OpCo": "slug-unresolved",
     "Blue Current": "no-target-roles",
-    "Blue Energy": "listed",
+    "Blue Energy": "no-target-roles",
     "Blue Frog Gaming": "slug-unresolved",
     "Blue Onion": "slug-unresolved",
     "BlueFlag Security": "slug-unresolved",
@@ -2325,7 +2324,7 @@
     "Pactum AI": "slug-unresolved",
     "Paddle": "listed",
     "Padlet": "slug-unresolved",
-    "PagerDuty": "no-target-roles",
+    "PagerDuty": "listed",
     "Pair Team": "no-target-roles",
     "Paladin Drones": "slug-unresolved",
     "PaleBlueDot AI": "slug-unresolved",
@@ -3245,7 +3244,7 @@
     "Wearable Devices": "slug-unresolved",
     "Weave": "no-target-roles",
     "Weave Communications": "slug-unresolved",
-    "Webflow": "listed",
+    "Webflow": "slug-unresolved",
     "Weebly": "slug-unresolved",
     "Weekend (fmr. Volley)": "no-target-roles",
     "Wefunder": "slug-unresolved",
@@ -3405,11 +3404,13 @@
     "zeroheight": "slug-unresolved"
   },
   "departed": {
-    "Magic Eden": "no-target-roles"
+    "Airtable": "no-target-roles",
+    "Blue Energy": "no-target-roles",
+    "Webflow": "slug-unresolved"
   },
   "websites": {
     "with_website": 1928,
-    "slug_unresolved_with_website": 1196,
+    "slug_unresolved_with_website": 1197,
     "slug_unresolved_without_website": 992
   },
   "shared_boards": {
@@ -3429,17 +3430,17 @@
   },
   "countries": {
     "India": 118,
-    "United Kingdom": 263,
-    "Ireland": 49,
-    "Germany": 102,
+    "United Kingdom": 259,
+    "Ireland": 50,
+    "Germany": 103,
     "Netherlands": 46,
-    "France": 61,
+    "France": 63,
     "Spain": 62,
-    "Sweden": 32,
-    "Denmark": 16,
+    "Sweden": 31,
+    "Denmark": 17,
     "Norway": 4,
     "Finland": 8,
-    "Japan": 60,
+    "Japan": 59,
     "Singapore": 75,
     "Australia": 86,
     "New Zealand": 6
@@ -3975,23 +3976,6 @@
         ]
       },
       {
-        "name": "Airtable",
-        "confidence": "exact",
-        "why": "silent; one exact-tier name match",
-        "candidates": [
-          {
-            "number": "14440416",
-            "name": "AIRTABLE LIMITED",
-            "status": "dissolved",
-            "incorporated": "2022-10-25",
-            "locality": "",
-            "postcode": "",
-            "sic": [],
-            "kind": ""
-          }
-        ]
-      },
-      {
         "name": "Algolia",
         "confidence": "exact",
         "why": "silent; one exact-tier name match",
@@ -4174,23 +4158,6 @@
             "name": "ASSEMBLYAI LIMITED",
             "status": "dissolved",
             "incorporated": "2021-01-07",
-            "locality": "",
-            "postcode": "",
-            "sic": [],
-            "kind": ""
-          }
-        ]
-      },
-      {
-        "name": "Attentive",
-        "confidence": "exact",
-        "why": "silent; one exact-tier name match",
-        "candidates": [
-          {
-            "number": "13483001",
-            "name": "ATTENTIVE LIMITED",
-            "status": "active",
-            "incorporated": "2021-06-29",
             "locality": "",
             "postcode": "",
             "sic": [],
@@ -6012,33 +5979,6 @@
         ]
       },
       {
-        "name": "Mattermost",
-        "confidence": "exact",
-        "why": "silent; 2 companies reach the exact tier",
-        "candidates": [
-          {
-            "number": "02347058",
-            "name": "MATTERMOST LIMITED",
-            "status": "dissolved",
-            "incorporated": "1989-02-13",
-            "locality": "",
-            "postcode": "",
-            "sic": [],
-            "kind": ""
-          },
-          {
-            "number": "12372753",
-            "name": "MATTERMOST UK LTD",
-            "status": "active",
-            "incorporated": "2019-12-20",
-            "locality": "",
-            "postcode": "",
-            "sic": [],
-            "kind": ""
-          }
-        ]
-      },
-      {
         "name": "Mercor",
         "confidence": "exact",
         "why": "no website; 4 companies reach the exact tier",
@@ -6430,6 +6370,23 @@
             "name": "OYSTER LIMITED",
             "status": "active",
             "incorporated": "1980-05-19",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "PagerDuty",
+        "confidence": "exact",
+        "why": "silent; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "10131422",
+            "name": "PAGERDUTY, LTD",
+            "status": "active",
+            "incorporated": "2016-04-19",
             "locality": "",
             "postcode": "",
             "sic": [],
@@ -7443,43 +7400,6 @@
             "name": "WAYFLYER UK LIMITED",
             "status": "active",
             "incorporated": "2019-11-04",
-            "locality": "",
-            "postcode": "",
-            "sic": [],
-            "kind": ""
-          }
-        ]
-      },
-      {
-        "name": "Webflow",
-        "confidence": "exact",
-        "why": "silent; 3 companies reach the exact tier",
-        "candidates": [
-          {
-            "number": "16434722",
-            "name": "WEBFLOW LTD",
-            "status": "active",
-            "incorporated": "2025-05-07",
-            "locality": "",
-            "postcode": "",
-            "sic": [],
-            "kind": ""
-          },
-          {
-            "number": "14980805",
-            "name": "WEBFLOW LTD",
-            "status": "dissolved",
-            "incorporated": "2023-07-04",
-            "locality": "",
-            "postcode": "",
-            "sic": [],
-            "kind": ""
-          },
-          {
-            "number": "04088901",
-            "name": "WEBFLOW LIMITED",
-            "status": "dissolved",
-            "incorporated": "2000-10-12",
             "locality": "",
             "postcode": "",
             "sic": [],
