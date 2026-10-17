@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "snapshot": "2026-10-16",
+  "snapshot": "2026-10-17",
   "note": "first_seen is the snapshot date a role's URL first appeared in a build. A role is confirmed only where its company's board was read on the previous snapshot AND on this one \u2014 both sides genuinely observed. Everything else is unconfirmed: we saw it for the first time, which is not the same as it being new. Only confirmed roles may be called new.",
   "observed": [
     "1Password",
@@ -14336,6 +14336,17 @@
         "https://jobs.ashbyhq.com/bitstack/81db4dd5-82f2-4fa4-980e-53edc1ec8e9c",
         "https://jobs.ashbyhq.com/bitstack/907e43c0-51d8-4350-9a42-34878b767120"
       ]
+    },
+    "2026-10-17": {
+      "confirmed": [
+        "https://job-boards.greenhouse.io/razorpaysoftwareprivatelimited/jobs/4743544005",
+        "https://job-boards.greenhouse.io/turing/jobs/6227621004",
+        "https://job-boards.greenhouse.io/xendit/jobs/8034243003",
+        "https://jobs.ashbyhq.com/finni-health/47909f62-f750-47ed-8002-5f2b13bbb536",
+        "https://jobs.ashbyhq.com/openai/5ad8c21c-dbfe-4e04-9826-7f52aaf0ddc3",
+        "https://www.harness.io/company/jobs/apply?gh_jid=5225250007&gh_jid=5225250007"
+      ],
+      "unconfirmed": []
     }
   }
 }
