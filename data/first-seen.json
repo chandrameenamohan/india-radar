@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "snapshot": "2026-10-17",
+  "snapshot": "2026-10-18",
   "note": "first_seen is the snapshot date a role's URL first appeared in a build. A role is confirmed only where its company's board was read on the previous snapshot AND on this one \u2014 both sides genuinely observed. Everything else is unconfirmed: we saw it for the first time, which is not the same as it being new. Only confirmed roles may be called new.",
   "observed": [
     "1Password",
@@ -14345,6 +14345,23 @@
         "https://jobs.ashbyhq.com/finni-health/47909f62-f750-47ed-8002-5f2b13bbb536",
         "https://jobs.ashbyhq.com/openai/5ad8c21c-dbfe-4e04-9826-7f52aaf0ddc3",
         "https://www.harness.io/company/jobs/apply?gh_jid=5225250007&gh_jid=5225250007"
+      ],
+      "unconfirmed": []
+    },
+    "2026-10-18": {
+      "confirmed": [
+        "https://job-boards.eu.greenhouse.io/parloa/jobs/5009506101",
+        "https://job-boards.greenhouse.io/anthropic/jobs/5391356008",
+        "https://job-boards.greenhouse.io/assemblyai/jobs/4744907005",
+        "https://job-boards.greenhouse.io/firmus/jobs/5449673008",
+        "https://job-boards.greenhouse.io/firmus/jobs/5454669008",
+        "https://jobs.ashbyhq.com/beamery/09782106-a132-437d-b771-d8e3443b9d17",
+        "https://jobs.ashbyhq.com/docker/d7113d8e-904b-4925-acd8-e65d5d5f6cd2",
+        "https://jobs.ashbyhq.com/halter/25bd21fa-ee1f-494d-85cf-3f8257aa10dd",
+        "https://jobs.ashbyhq.com/lemfi/18697ce4-74a6-47aa-bcad-2e5a3f8db65e",
+        "https://jobs.ashbyhq.com/lemfi/674e5eba-2724-47e4-8ed7-d50f4f1fa8a1",
+        "https://jobs.ashbyhq.com/lio/1fc14ed0-e843-4cd8-b60e-2d902d606e30",
+        "https://jobs.ashbyhq.com/pleo/edab5b3d-3aed-403a-b4ca-2aa1ff136cf9"
       ],
       "unconfirmed": []
     }
