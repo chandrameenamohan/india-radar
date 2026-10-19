@@ -3,8 +3,8 @@
   "checked": 815,
   "unchecked": 2211,
   "counts": {
-    "listed": 362,
-    "no-target-roles": 453,
+    "listed": 359,
+    "no-target-roles": 456,
     "slug-unresolved": 2188,
     "probe-failed": 0,
     "empty-board-unverified": 10,
@@ -31,7 +31,6 @@
     "Anthropic",
     "Anyscale",
     "Apollo.io",
-    "AppDirect",
     "Applied Intuition",
     "AppsFlyer",
     "Arketa",
@@ -69,7 +68,6 @@
     "Cinder",
     "CircleCI",
     "Clear Street",
-    "Clever",
     "ClickUp",
     "Clipboard",
     "Coalition",
@@ -232,7 +230,6 @@
     "Nextiva",
     "Niantic Spatial",
     "Nirvana",
-    "Nitricity",
     "Notabene",
     "Notion",
     "OKX",
@@ -531,7 +528,7 @@
     "Apiphani": "no-target-roles",
     "Apollo": "no-target-roles",
     "Apollo.io": "listed",
-    "AppDirect": "listed",
+    "AppDirect": "no-target-roles",
     "AppWork Technologies": "slug-unresolved",
     "Applause Group": "slug-unresolved",
     "Applied Compute": "slug-unresolved",
@@ -923,7 +920,7 @@
     "Clearing Co of San Francisco": "slug-unresolved",
     "Clearwater Analytics Holdings": "slug-unresolved",
     "Clerq": "slug-unresolved",
-    "Clever": "listed",
+    "Clever": "no-target-roles",
     "ClickHouse": "slug-unresolved",
     "ClickUp": "listed",
     "ClinTrial Research": "slug-unresolved",
@@ -2169,7 +2166,7 @@
     "NinjaOne": "slug-unresolved",
     "Nirvana": "listed",
     "Nisos Holdings": "slug-unresolved",
-    "Nitricity": "listed",
+    "Nitricity": "no-target-roles",
     "Niural": "slug-unresolved",
     "Nixtla": "slug-unresolved",
     "NoBroker": "slug-unresolved",
@@ -3403,7 +3400,11 @@
     "xLight": "slug-unresolved",
     "zeroheight": "slug-unresolved"
   },
-  "departed": {},
+  "departed": {
+    "AppDirect": "no-target-roles",
+    "Clever": "no-target-roles",
+    "Nitricity": "no-target-roles"
+  },
   "websites": {
     "with_website": 1928,
     "slug_unresolved_with_website": 1196,
@@ -3425,26 +3426,26 @@
     "Insider": "Business Insider"
   },
   "countries": {
-    "India": 118,
-    "United Kingdom": 260,
+    "India": 116,
+    "United Kingdom": 261,
     "Ireland": 50,
-    "Germany": 103,
+    "Germany": 104,
     "Netherlands": 46,
-    "France": 63,
-    "Spain": 62,
+    "France": 62,
+    "Spain": 63,
     "Sweden": 31,
     "Denmark": 17,
-    "Norway": 4,
+    "Norway": 5,
     "Finland": 8,
     "Japan": 60,
-    "Singapore": 75,
-    "Australia": 86,
+    "Singapore": 73,
+    "Australia": 85,
     "New Zealand": 6
   },
   "mca": {
     "records": 24102,
     "pulled": "2026-07-29",
-    "matched": 32,
+    "matched": 31,
     "held": [
       {
         "name": "6Sense",
@@ -3527,19 +3528,6 @@
             "name": "DEVREV CLOUD INDIA PRIVATE LIMITED",
             "incorporated": "2020-12-03",
             "address": "Villa/460, Phase 2, Adarsh Palm Retreat,   Near Intel Office, Deverabisanahalli,,Bangalore,Bangalore,Karnataka,560103-India",
-            "status": "Active"
-          }
-        ]
-      },
-      {
-        "name": "Dialpad",
-        "confidence": "prefix",
-        "candidates": [
-          {
-            "cin": "U72900KA2018FTC118558",
-            "name": "DIALPAD SERVICES PRIVATE LIMITED",
-            "incorporated": "2018-11-15",
-            "address": "Salarpuria Magnificia, 12th Floor, No. 78,   Next to KR Puram Tin Factory, Old Madras, Road,,Bengaluru,Bangalore,Karnataka,560016-India",
             "status": "Active"
           }
         ]
@@ -4888,23 +4876,6 @@
             "name": "DEPOT CONNECT INTERNATIONAL LIMITED",
             "status": "active",
             "incorporated": "2016-03-30",
-            "locality": "",
-            "postcode": "",
-            "sic": [],
-            "kind": ""
-          }
-        ]
-      },
-      {
-        "name": "Dialpad",
-        "confidence": "exact",
-        "why": "silent; one exact-tier name match",
-        "candidates": [
-          {
-            "number": "11852821",
-            "name": "DIALPAD UK LIMITED",
-            "status": "active",
-            "incorporated": "2019-02-28",
             "locality": "",
             "postcode": "",
             "sic": [],
@@ -7180,6 +7151,23 @@
             "name": "TALKDESK U.K. LIMITED",
             "status": "active",
             "incorporated": "2018-10-08",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Tanium",
+        "confidence": "exact",
+        "why": "silent; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "09335968",
+            "name": "TANIUM UK LIMITED",
+            "status": "active",
+            "incorporated": "2014-12-02",
             "locality": "",
             "postcode": "",
             "sic": [],
