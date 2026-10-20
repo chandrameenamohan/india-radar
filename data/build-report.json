@@ -1,11 +1,11 @@
 {
   "corpus_size": 3026,
-  "checked": 815,
-  "unchecked": 2211,
+  "checked": 814,
+  "unchecked": 2212,
   "counts": {
-    "listed": 359,
-    "no-target-roles": 456,
-    "slug-unresolved": 2188,
+    "listed": 361,
+    "no-target-roles": 453,
+    "slug-unresolved": 2189,
     "probe-failed": 0,
     "empty-board-unverified": 10,
     "not-qualified": 0,
@@ -46,6 +46,7 @@
     "Aviatrix",
     "Avoca",
     "Baseten",
+    "Beacon",
     "Beamery",
     "Benchling",
     "BetterUp",
@@ -230,6 +231,7 @@
     "Nextiva",
     "Niantic Spatial",
     "Nirvana",
+    "Nitricity",
     "Notabene",
     "Notion",
     "OKX",
@@ -659,7 +661,7 @@
     "Basis": "slug-unresolved",
     "Baubap": "no-target-roles",
     "BeZero": "slug-unresolved",
-    "Beacon": "no-target-roles",
+    "Beacon": "listed",
     "Beacons": "no-target-roles",
     "Beagle Technology": "slug-unresolved",
     "Beamery": "listed",
@@ -2166,7 +2168,7 @@
     "NinjaOne": "slug-unresolved",
     "Nirvana": "listed",
     "Nisos Holdings": "slug-unresolved",
-    "Nitricity": "no-target-roles",
+    "Nitricity": "listed",
     "Niural": "slug-unresolved",
     "Nixtla": "slug-unresolved",
     "NoBroker": "slug-unresolved",
@@ -3027,7 +3029,7 @@
     "Thought Machine": "listed",
     "ThoughtSpot": "slug-unresolved",
     "Thread": "slug-unresolved",
-    "ThreatLocker": "no-target-roles",
+    "ThreatLocker": "slug-unresolved",
     "Thrive Agric": "slug-unresolved",
     "Thrive Agritech": "slug-unresolved",
     "Thunkable": "slug-unresolved",
@@ -3400,15 +3402,11 @@
     "xLight": "slug-unresolved",
     "zeroheight": "slug-unresolved"
   },
-  "departed": {
-    "AppDirect": "no-target-roles",
-    "Clever": "no-target-roles",
-    "Nitricity": "no-target-roles"
-  },
+  "departed": {},
   "websites": {
     "with_website": 1928,
     "slug_unresolved_with_website": 1196,
-    "slug_unresolved_without_website": 992
+    "slug_unresolved_without_website": 993
   },
   "shared_boards": {
     "Bright": "BrightAI",
@@ -3426,26 +3424,26 @@
     "Insider": "Business Insider"
   },
   "countries": {
-    "India": 116,
-    "United Kingdom": 261,
+    "India": 118,
+    "United Kingdom": 262,
     "Ireland": 50,
     "Germany": 104,
     "Netherlands": 46,
     "France": 62,
     "Spain": 63,
     "Sweden": 31,
-    "Denmark": 17,
-    "Norway": 5,
+    "Denmark": 18,
+    "Norway": 4,
     "Finland": 8,
     "Japan": 60,
-    "Singapore": 73,
-    "Australia": 85,
+    "Singapore": 72,
+    "Australia": 89,
     "New Zealand": 6
   },
   "mca": {
     "records": 24102,
     "pulled": "2026-07-29",
-    "matched": 31,
+    "matched": 32,
     "held": [
       {
         "name": "6Sense",
