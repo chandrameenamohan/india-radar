@@ -6,8 +6,8 @@
     "listed": 361,
     "no-target-roles": 453,
     "slug-unresolved": 2189,
-    "probe-failed": 0,
-    "empty-board-unverified": 10,
+    "probe-failed": 1,
+    "empty-board-unverified": 9,
     "not-qualified": 0,
     "another-companys-board": 13
   },
@@ -31,6 +31,7 @@
     "Anthropic",
     "Anyscale",
     "Apollo.io",
+    "AppDirect",
     "Applied Intuition",
     "AppsFlyer",
     "Arketa",
@@ -60,7 +61,6 @@
     "Cambridge Mobile Telematics",
     "Campfire",
     "Canary Technologies",
-    "CarbonChain",
     "Caribou",
     "Carta",
     "Cato Networks",
@@ -530,7 +530,7 @@
     "Apiphani": "no-target-roles",
     "Apollo": "no-target-roles",
     "Apollo.io": "listed",
-    "AppDirect": "no-target-roles",
+    "AppDirect": "listed",
     "AppWork Technologies": "slug-unresolved",
     "Applause Group": "slug-unresolved",
     "Applied Compute": "slug-unresolved",
@@ -831,7 +831,7 @@
     "Capsule.Video": "slug-unresolved",
     "CaptivateIQ": "slug-unresolved",
     "Carbon Insurance": "slug-unresolved",
-    "CarbonChain": "listed",
+    "CarbonChain": "no-target-roles",
     "Cardless": "no-target-roles",
     "Care.Stat!": "slug-unresolved",
     "CareRev": "slug-unresolved",
@@ -2314,7 +2314,7 @@
     "POSITION IMAGING": "slug-unresolved",
     "POSITIVE IMAGE CONSULTING SERVICES": "slug-unresolved",
     "PPC Diskover": "slug-unresolved",
-    "PPRO": "empty-board-unverified",
+    "PPRO": "probe-failed",
     "PROMPTPATH.AI": "slug-unresolved",
     "Pacaso": "no-target-roles",
     "Pace (NY)": "slug-unresolved",
@@ -3402,7 +3402,9 @@
     "xLight": "slug-unresolved",
     "zeroheight": "slug-unresolved"
   },
-  "departed": {},
+  "departed": {
+    "CarbonChain": "no-target-roles"
+  },
   "websites": {
     "with_website": 1928,
     "slug_unresolved_with_website": 1196,
@@ -3424,26 +3426,26 @@
     "Insider": "Business Insider"
   },
   "countries": {
-    "India": 118,
+    "India": 119,
     "United Kingdom": 262,
-    "Ireland": 50,
+    "Ireland": 51,
     "Germany": 104,
     "Netherlands": 46,
-    "France": 62,
+    "France": 61,
     "Spain": 63,
     "Sweden": 31,
     "Denmark": 18,
     "Norway": 4,
     "Finland": 8,
     "Japan": 60,
-    "Singapore": 72,
-    "Australia": 89,
+    "Singapore": 71,
+    "Australia": 90,
     "New Zealand": 6
   },
   "mca": {
     "records": 24102,
     "pulled": "2026-07-29",
-    "matched": 32,
+    "matched": 33,
     "held": [
       {
         "name": "6Sense",
@@ -4148,6 +4150,23 @@
         ]
       },
       {
+        "name": "Attentive",
+        "confidence": "exact",
+        "why": "silent; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "13483001",
+            "name": "ATTENTIVE LIMITED",
+            "status": "active",
+            "incorporated": "2021-06-29",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
         "name": "AXONIUS",
         "confidence": "exact",
         "why": "unreachable; one exact-tier name match",
@@ -4299,33 +4318,6 @@
             "name": "CANARY TECHNOLOGIES LTD.",
             "status": "dissolved",
             "incorporated": "2019-04-16",
-            "locality": "",
-            "postcode": "",
-            "sic": [],
-            "kind": ""
-          }
-        ]
-      },
-      {
-        "name": "CarbonChain",
-        "confidence": "exact",
-        "why": "silent; 2 companies reach the exact tier",
-        "candidates": [
-          {
-            "number": "16240848",
-            "name": "CARBON-CHAIN LTD",
-            "status": "active",
-            "incorporated": "2025-02-10",
-            "locality": "",
-            "postcode": "",
-            "sic": [],
-            "kind": ""
-          },
-          {
-            "number": "06715922",
-            "name": "CARBON CHAIN LTD",
-            "status": "dissolved",
-            "incorporated": "2008-10-06",
             "locality": "",
             "postcode": "",
             "sic": [],
@@ -5642,6 +5634,23 @@
             "name": "JUST WORKS LIMITED",
             "status": "active",
             "incorporated": "2010-08-24",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Kaseya",
+        "confidence": "prefix",
+        "why": "silent; one prefix-tier name match",
+        "candidates": [
+          {
+            "number": "05752088",
+            "name": "KASEYA INTERNATIONAL (UK) LIMITED",
+            "status": "active",
+            "incorporated": "2006-03-22",
             "locality": "",
             "postcode": "",
             "sic": [],
