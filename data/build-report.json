@@ -3,11 +3,11 @@
   "checked": 814,
   "unchecked": 2212,
   "counts": {
-    "listed": 361,
-    "no-target-roles": 453,
+    "listed": 360,
+    "no-target-roles": 454,
     "slug-unresolved": 2189,
-    "probe-failed": 1,
-    "empty-board-unverified": 9,
+    "probe-failed": 0,
+    "empty-board-unverified": 10,
     "not-qualified": 0,
     "another-companys-board": 13
   },
@@ -175,7 +175,6 @@
     "Ivalua",
     "Juicebox",
     "Junction",
-    "Justworks",
     "KODEX",
     "Karat",
     "Kaseya",
@@ -1746,7 +1745,7 @@
     "Just Imagine": "slug-unresolved",
     "Justo": "slug-unresolved",
     "Justt": "slug-unresolved",
-    "Justworks": "listed",
+    "Justworks": "no-target-roles",
     "KEA Cloud": "slug-unresolved",
     "KERNEL": "slug-unresolved",
     "KINTSUGI AI": "slug-unresolved",
@@ -2314,7 +2313,7 @@
     "POSITION IMAGING": "slug-unresolved",
     "POSITIVE IMAGE CONSULTING SERVICES": "slug-unresolved",
     "PPC Diskover": "slug-unresolved",
-    "PPRO": "probe-failed",
+    "PPRO": "empty-board-unverified",
     "PROMPTPATH.AI": "slug-unresolved",
     "Pacaso": "no-target-roles",
     "Pace (NY)": "slug-unresolved",
@@ -3403,7 +3402,7 @@
     "zeroheight": "slug-unresolved"
   },
   "departed": {
-    "CarbonChain": "no-target-roles"
+    "Justworks": "no-target-roles"
   },
   "websites": {
     "with_website": 1928,
@@ -3427,19 +3426,19 @@
   },
   "countries": {
     "India": 119,
-    "United Kingdom": 262,
-    "Ireland": 51,
-    "Germany": 104,
-    "Netherlands": 46,
-    "France": 61,
+    "United Kingdom": 261,
+    "Ireland": 52,
+    "Germany": 102,
+    "Netherlands": 45,
+    "France": 60,
     "Spain": 63,
-    "Sweden": 31,
+    "Sweden": 32,
     "Denmark": 18,
     "Norway": 4,
     "Finland": 8,
     "Japan": 60,
     "Singapore": 71,
-    "Australia": 90,
+    "Australia": 89,
     "New Zealand": 6
   },
   "mca": {
@@ -5452,23 +5451,6 @@
         ]
       },
       {
-        "name": "HeyGen",
-        "confidence": "exact",
-        "why": "no website; one exact-tier name match",
-        "candidates": [
-          {
-            "number": "17186879",
-            "name": "HEYGEN LTD",
-            "status": "active",
-            "incorporated": "2026-04-28",
-            "locality": "",
-            "postcode": "",
-            "sic": [],
-            "kind": ""
-          }
-        ]
-      },
-      {
         "name": "Horizon 3 AI",
         "confidence": "exact",
         "why": "no website; one exact-tier name match",
@@ -5617,23 +5599,6 @@
             "name": "JUNCTION LTD",
             "status": "dissolved",
             "incorporated": "2004-02-20",
-            "locality": "",
-            "postcode": "",
-            "sic": [],
-            "kind": ""
-          }
-        ]
-      },
-      {
-        "name": "Justworks",
-        "confidence": "exact",
-        "why": "unreachable; one exact-tier name match",
-        "candidates": [
-          {
-            "number": "07354277",
-            "name": "JUST WORKS LIMITED",
-            "status": "active",
-            "incorporated": "2010-08-24",
             "locality": "",
             "postcode": "",
             "sic": [],
