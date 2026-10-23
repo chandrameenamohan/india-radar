@@ -3,8 +3,8 @@
   "checked": 814,
   "unchecked": 2212,
   "counts": {
-    "listed": 360,
-    "no-target-roles": 454,
+    "listed": 359,
+    "no-target-roles": 455,
     "slug-unresolved": 2189,
     "probe-failed": 0,
     "empty-board-unverified": 10,
@@ -50,7 +50,6 @@
     "Beacon",
     "Beamery",
     "Benchling",
-    "BetterUp",
     "BitPanda",
     "Bitmovin",
     "Bitstack",
@@ -675,7 +674,7 @@
     "Berbix": "slug-unresolved",
     "BetHog": "slug-unresolved",
     "BetterComp": "slug-unresolved",
-    "BetterUp": "listed",
+    "BetterUp": "no-target-roles",
     "Betterfly": "slug-unresolved",
     "Betterment": "no-target-roles",
     "Beyond Identity": "no-target-roles",
@@ -3402,7 +3401,7 @@
     "zeroheight": "slug-unresolved"
   },
   "departed": {
-    "Justworks": "no-target-roles"
+    "BetterUp": "no-target-roles"
   },
   "websites": {
     "with_website": 1928,
@@ -3425,20 +3424,20 @@
     "Insider": "Business Insider"
   },
   "countries": {
-    "India": 119,
+    "India": 120,
     "United Kingdom": 261,
     "Ireland": 52,
-    "Germany": 102,
+    "Germany": 101,
     "Netherlands": 45,
     "France": 60,
-    "Spain": 63,
+    "Spain": 62,
     "Sweden": 32,
     "Denmark": 18,
     "Norway": 4,
     "Finland": 8,
-    "Japan": 60,
-    "Singapore": 71,
-    "Australia": 89,
+    "Japan": 59,
+    "Singapore": 72,
+    "Australia": 86,
     "New Zealand": 6
   },
   "mca": {
@@ -3541,6 +3540,19 @@
             "incorporated": "2013-02-11",
             "address": "PLOT NO- 403/1, CTS NO- 985, 8TH FLOOR   THE PAVILION, SENAPATI BAPAT ROAD,SHIVAJ,I NAGAR,PUNE,Pune,Maharashtra,411016-India",
             "status": "Active"
+          }
+        ]
+      },
+      {
+        "name": "Exa",
+        "confidence": "prefix",
+        "candidates": [
+          {
+            "cin": "U72900DL2017FTC373548",
+            "name": "EXA POWERFLOW INDIA PRIVATE LIMITED",
+            "incorporated": "2017-06-14",
+            "address": "House No 43, 4th Floor, Gujarat Vihar,   Vikas Marg,,Delhi,New Delhi,Delhi,110092-India",
+            "status": "Amalgamated"
           }
         ]
       },
@@ -6283,6 +6295,23 @@
         ]
       },
       {
+        "name": "OKX",
+        "confidence": "exact",
+        "why": "unreachable; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "15802291",
+            "name": "OKX LIMITED",
+            "status": "active",
+            "incorporated": "2024-06-25",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
         "name": "OneTrust",
         "confidence": "exact",
         "why": "silent; one exact-tier name match",
@@ -6853,33 +6882,6 @@
             "name": "SCANDIT LTD",
             "status": "active",
             "incorporated": "2017-07-14",
-            "locality": "",
-            "postcode": "",
-            "sic": [],
-            "kind": ""
-          }
-        ]
-      },
-      {
-        "name": "Shift",
-        "confidence": "exact",
-        "why": "silent; 2 companies reach the exact tier",
-        "candidates": [
-          {
-            "number": "14368604",
-            "name": "SHIFT LTD",
-            "status": "active",
-            "incorporated": "2022-09-21",
-            "locality": "",
-            "postcode": "",
-            "sic": [],
-            "kind": ""
-          },
-          {
-            "number": "11895043",
-            "name": "SHIFT LIMITED",
-            "status": "dissolved",
-            "incorporated": "2019-03-20",
             "locality": "",
             "postcode": "",
             "sic": [],
