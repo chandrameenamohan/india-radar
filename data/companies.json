@@ -1,6 +1,6 @@
 {
   "schema_version": 10,
-  "snapshot": "2026-10-23",
+  "snapshot": "2026-10-24",
   "integrity": {
     "corpus_size": 3026,
     "checked": 814,
@@ -945,12 +945,12 @@
         },
         {
           "title": "Manager, Key Accounts - Hotels",
-          "url": "https://careers.airbnb.com/positions/8303971?gh_jid=8303971",
+          "url": "https://careers.airbnb.com/positions/8303970?gh_jid=8303970",
           "locations": [
-            "Dublin, Ireland"
+            "Berlin, Germany"
           ],
           "countries": [
-            "Ireland"
+            "Germany"
           ],
           "workplace": null,
           "department": "Sales",
@@ -959,12 +959,12 @@
         },
         {
           "title": "Manager, Key Accounts - Hotels",
-          "url": "https://careers.airbnb.com/positions/8303917?gh_jid=8303917",
+          "url": "https://careers.airbnb.com/positions/8303971?gh_jid=8303971",
           "locations": [
-            "London, United Kingdom"
+            "Dublin, Ireland"
           ],
           "countries": [
-            "United Kingdom"
+            "Ireland"
           ],
           "workplace": null,
           "department": "Sales",
@@ -1001,12 +1001,12 @@
         },
         {
           "title": "Manager, Key Accounts - Hotels",
-          "url": "https://careers.airbnb.com/positions/8303970?gh_jid=8303970",
+          "url": "https://careers.airbnb.com/positions/8303917?gh_jid=8303917",
           "locations": [
-            "Berlin, Germany"
+            "London, United Kingdom"
           ],
           "countries": [
-            "Germany"
+            "United Kingdom"
           ],
           "workplace": null,
           "department": "Sales",
@@ -1239,12 +1239,12 @@
         },
         {
           "title": "Senior Compliance Lead, EMEA",
-          "url": "https://careers.airbnb.com/positions/8318103?gh_jid=8318103",
+          "url": "https://careers.airbnb.com/positions/8318152?gh_jid=8318152",
           "locations": [
-            "London, United Kingdom"
+            "Dublin, Ireland"
           ],
           "countries": [
-            "United Kingdom"
+            "Ireland"
           ],
           "workplace": null,
           "department": "Business Operations/Analysis",
@@ -1253,12 +1253,12 @@
         },
         {
           "title": "Senior Compliance Lead, EMEA",
-          "url": "https://careers.airbnb.com/positions/8318152?gh_jid=8318152",
+          "url": "https://careers.airbnb.com/positions/8318103?gh_jid=8318103",
           "locations": [
-            "Dublin, Ireland"
+            "London, United Kingdom"
           ],
           "countries": [
-            "Ireland"
+            "United Kingdom"
           ],
           "workplace": null,
           "department": "Business Operations/Analysis",
@@ -1583,12 +1583,12 @@
       "roles": [
         {
           "title": "Account Manager - Dutch speaking",
-          "url": "https://job-boards.greenhouse.io/algolia/jobs/6141481004",
+          "url": "https://job-boards.greenhouse.io/algolia/jobs/6194391004",
           "locations": [
-            "London, England"
+            "Paris, France"
           ],
           "countries": [
-            "United Kingdom"
+            "France"
           ],
           "workplace": null,
           "department": "Direct Sales",
@@ -1611,12 +1611,12 @@
         },
         {
           "title": "Account Manager - Dutch speaking",
-          "url": "https://job-boards.greenhouse.io/algolia/jobs/6194391004",
+          "url": "https://job-boards.greenhouse.io/algolia/jobs/6141481004",
           "locations": [
-            "Paris, France"
+            "London, England"
           ],
           "countries": [
-            "France"
+            "United Kingdom"
           ],
           "workplace": null,
           "department": "Direct Sales",
@@ -1667,14 +1667,14 @@
         },
         {
           "title": "Commercial Account Executive, DACH",
-          "url": "https://job-boards.greenhouse.io/algolia/jobs/5854606004",
+          "url": "https://job-boards.greenhouse.io/algolia/jobs/5854568004",
           "locations": [
-            "Remote - Germany"
+            "London, England"
           ],
           "countries": [
-            "Germany"
+            "United Kingdom"
           ],
-          "workplace": "remote",
+          "workplace": null,
           "department": "Direct Sales",
           "visa": "unknown",
           "hire_from_abroad": "unknown"
@@ -1695,14 +1695,14 @@
         },
         {
           "title": "Commercial Account Executive, DACH",
-          "url": "https://job-boards.greenhouse.io/algolia/jobs/5854568004",
+          "url": "https://job-boards.greenhouse.io/algolia/jobs/5854606004",
           "locations": [
-            "London, England"
+            "Remote - Germany"
           ],
           "countries": [
-            "United Kingdom"
+            "Germany"
           ],
-          "workplace": null,
+          "workplace": "remote",
           "department": "Direct Sales",
           "visa": "unknown",
           "hire_from_abroad": "unknown"
@@ -4220,6 +4220,20 @@
         },
         {
           "title": "Applied AI Architect",
+          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5076109008",
+          "locations": [
+            "Tokyo, Japan"
+          ],
+          "countries": [
+            "Japan"
+          ],
+          "workplace": null,
+          "department": "Applied AI",
+          "visa": "yes",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Applied AI Architect",
           "url": "https://job-boards.greenhouse.io/anthropic/jobs/5424310008",
           "locations": [
             "Mumbai, India"
@@ -4240,20 +4254,6 @@
           ],
           "countries": [
             "India"
-          ],
-          "workplace": null,
-          "department": "Applied AI",
-          "visa": "yes",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Applied AI Architect",
-          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5076109008",
-          "locations": [
-            "Tokyo, Japan"
-          ],
-          "countries": [
-            "Japan"
           ],
           "workplace": null,
           "department": "Applied AI",
@@ -4304,12 +4304,12 @@
         },
         {
           "title": "Applied AI Architect, Partnerships",
-          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5426933008",
+          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5390902008",
           "locations": [
-            "Munich, Germany"
+            "Sydney, Australia"
           ],
           "countries": [
-            "Germany"
+            "Australia"
           ],
           "workplace": null,
           "department": "Applied AI",
@@ -4346,12 +4346,12 @@
         },
         {
           "title": "Applied AI Architect, Partnerships",
-          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5390902008",
+          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5426933008",
           "locations": [
-            "Sydney, Australia"
+            "Munich, Germany"
           ],
           "countries": [
-            "Australia"
+            "Germany"
           ],
           "workplace": null,
           "department": "Applied AI",
@@ -4570,12 +4570,12 @@
         },
         {
           "title": "Customer Success Manager",
-          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5391102008",
+          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5456491008",
           "locations": [
-            "London, UK"
+            "Tokyo, Japan"
           ],
           "countries": [
-            "United Kingdom"
+            "Japan"
           ],
           "workplace": null,
           "department": "Sales",
@@ -4584,12 +4584,12 @@
         },
         {
           "title": "Customer Success Manager",
-          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5456491008",
+          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5391102008",
           "locations": [
-            "Tokyo, Japan"
+            "London, UK"
           ],
           "countries": [
-            "Japan"
+            "United Kingdom"
           ],
           "workplace": null,
           "department": "Sales",
@@ -4849,6 +4849,20 @@
           "hire_from_abroad": "unknown"
         },
         {
+          "title": "Enterprise Account Executive - Manufacturing Industries, Taiwan",
+          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5448366008",
+          "locations": [
+            "Singapore"
+          ],
+          "countries": [
+            "Singapore"
+          ],
+          "workplace": null,
+          "department": "Sales",
+          "visa": "yes",
+          "hire_from_abroad": "unknown"
+        },
+        {
           "title": "Enterprise Account Executive, Materials & Industrial",
           "url": "https://job-boards.greenhouse.io/anthropic/jobs/5391301008",
           "locations": [
@@ -4962,6 +4976,20 @@
         },
         {
           "title": "Forward Deployed Engineer",
+          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5391016008",
+          "locations": [
+            "Munich, Germany"
+          ],
+          "countries": [
+            "Germany"
+          ],
+          "workplace": null,
+          "department": "Applied AI",
+          "visa": "yes",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Forward Deployed Engineer",
           "url": "https://job-boards.greenhouse.io/anthropic/jobs/5391021008",
           "locations": [
             "Paris, France"
@@ -4982,20 +5010,6 @@
           ],
           "countries": [
             "United Kingdom"
-          ],
-          "workplace": null,
-          "department": "Applied AI",
-          "visa": "yes",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Forward Deployed Engineer",
-          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5391016008",
-          "locations": [
-            "Munich, Germany"
-          ],
-          "countries": [
-            "Germany"
           ],
           "workplace": null,
           "department": "Applied AI",
@@ -5089,12 +5103,12 @@
         },
         {
           "title": "International Compensation Partner",
-          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5452859008",
+          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5458322008",
           "locations": [
-            "Dublin, IE"
+            "London, UK"
           ],
           "countries": [
-            "Ireland"
+            "United Kingdom"
           ],
           "workplace": null,
           "department": "People",
@@ -5103,12 +5117,12 @@
         },
         {
           "title": "International Compensation Partner",
-          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5458322008",
+          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5452859008",
           "locations": [
-            "London, UK"
+            "Dublin, IE"
           ],
           "countries": [
-            "United Kingdom"
+            "Ireland"
           ],
           "workplace": null,
           "department": "People",
@@ -5383,20 +5397,6 @@
         },
         {
           "title": "Regional Research Economist, Economic Research",
-          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5460515008",
-          "locations": [
-            "Sydney, Australia"
-          ],
-          "countries": [
-            "Australia"
-          ],
-          "workplace": null,
-          "department": "Public Benefit",
-          "visa": "yes",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Regional Research Economist, Economic Research",
           "url": "https://job-boards.greenhouse.io/anthropic/jobs/5460521008",
           "locations": [
             "Tokyo, Japan"
@@ -5417,6 +5417,20 @@
           ],
           "countries": [
             "Singapore"
+          ],
+          "workplace": null,
+          "department": "Public Benefit",
+          "visa": "yes",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Regional Research Economist, Economic Research",
+          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5460515008",
+          "locations": [
+            "Sydney, Australia"
+          ],
+          "countries": [
+            "Australia"
           ],
           "workplace": null,
           "department": "Public Benefit",
@@ -5635,12 +5649,12 @@
         },
         {
           "title": "Staff Software Engineer, AI Reliability Engineering",
-          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5101173008",
+          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5101169008",
           "locations": [
-            "London, UK"
+            "Dublin, IE"
           ],
           "countries": [
-            "United Kingdom"
+            "Ireland"
           ],
           "workplace": null,
           "department": "Software Engineering - Infrastructure",
@@ -5649,12 +5663,12 @@
         },
         {
           "title": "Staff Software Engineer, AI Reliability Engineering",
-          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5101169008",
+          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5101173008",
           "locations": [
-            "Dublin, IE"
+            "London, UK"
           ],
           "countries": [
-            "Ireland"
+            "United Kingdom"
           ],
           "workplace": null,
           "department": "Software Engineering - Infrastructure",
@@ -6155,27 +6169,12 @@
           "department": "Managed Services Strategy & Operations",
           "visa": "unknown",
           "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Senior Human Resources Business Partner",
-          "url": "https://job-boards.greenhouse.io/appdirect/jobs/8747485002",
-          "locations": [
-            "Hyderabad, India"
-          ],
-          "countries": [
-            "India"
-          ],
-          "workplace": null,
-          "department": "People",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
         }
       ],
       "countries": [
         "India"
       ],
       "cities": [
-        "Hyderabad",
         "Pune"
       ],
       "amount": null,
@@ -7067,6 +7066,20 @@
           ],
           "workplace": "onsite",
           "department": "Software Engineering - Vehicle Systems",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Shift Lead",
+          "url": "https://jobs.ashbyhq.com/applied/aa86d0fe-5c9c-40dd-9256-5a189eee7952",
+          "locations": [
+            "Tokyo"
+          ],
+          "countries": [
+            "Japan"
+          ],
+          "workplace": "onsite",
+          "department": "Operations",
           "visa": "unknown",
           "hire_from_abroad": "unknown"
         },
@@ -11511,12 +11524,12 @@
         },
         {
           "title": "Commercial Account Executive",
-          "url": "https://www.catonetworks.com/careers/careers-post/4988932101?gh_jid=4988932101",
+          "url": "https://www.catonetworks.com/careers/careers-post/4988934101?gh_jid=4988934101",
           "locations": [
-            "Paris, Paris, France"
+            "Berlin, Berlin, Germany"
           ],
           "countries": [
-            "France"
+            "Germany"
           ],
           "workplace": null,
           "department": "Commercial Account Executive - EMEA",
@@ -11525,12 +11538,12 @@
         },
         {
           "title": "Commercial Account Executive",
-          "url": "https://www.catonetworks.com/careers/careers-post/4988934101?gh_jid=4988934101",
+          "url": "https://www.catonetworks.com/careers/careers-post/4988932101?gh_jid=4988932101",
           "locations": [
-            "Berlin, Berlin, Germany"
+            "Paris, Paris, France"
           ],
           "countries": [
-            "Germany"
+            "France"
           ],
           "workplace": null,
           "department": "Commercial Account Executive - EMEA",
@@ -11749,12 +11762,12 @@
         },
         {
           "title": "Regional Sales Director",
-          "url": "https://www.catonetworks.com/careers/careers-post/4988947101?gh_jid=4988947101",
+          "url": "https://www.catonetworks.com/careers/careers-post/4988954101?gh_jid=4988954101",
           "locations": [
-            "United Kingdom"
+            "M\u00fcnchen, Bavaria, Germany"
           ],
           "countries": [
-            "United Kingdom"
+            "Germany"
           ],
           "workplace": null,
           "department": "Sales - Regional Sales Director",
@@ -11791,12 +11804,12 @@
         },
         {
           "title": "Regional Sales Director",
-          "url": "https://www.catonetworks.com/careers/careers-post/4988954101?gh_jid=4988954101",
+          "url": "https://www.catonetworks.com/careers/careers-post/4988947101?gh_jid=4988947101",
           "locations": [
-            "M\u00fcnchen, Bavaria, Germany"
+            "United Kingdom"
           ],
           "countries": [
-            "Germany"
+            "United Kingdom"
           ],
           "workplace": null,
           "department": "Sales - Regional Sales Director",
@@ -11943,20 +11956,6 @@
       "roles": [
         {
           "title": "Account Executive - Public Sector Germany - Defense (Bundeswehr)",
-          "url": "https://job-boards.greenhouse.io/celonis/jobs/8040046003?gh_jid=8040046003",
-          "locations": [
-            "Munich, Germany"
-          ],
-          "countries": [
-            "Germany"
-          ],
-          "workplace": null,
-          "department": "Sales",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Account Executive - Public Sector Germany - Defense (Bundeswehr)",
           "url": "https://job-boards.greenhouse.io/celonis/jobs/8039943003?gh_jid=8039943003",
           "locations": [
             "Remote, Germany"
@@ -11970,15 +11969,15 @@
           "hire_from_abroad": "unknown"
         },
         {
-          "title": "Account Executive - Public Sector Germany - Police (Polizei)",
-          "url": "https://job-boards.greenhouse.io/celonis/jobs/8015242003?gh_jid=8015242003",
+          "title": "Account Executive - Public Sector Germany - Defense (Bundeswehr)",
+          "url": "https://job-boards.greenhouse.io/celonis/jobs/8040046003?gh_jid=8040046003",
           "locations": [
-            "Remote, Germany"
+            "Munich, Germany"
           ],
           "countries": [
             "Germany"
           ],
-          "workplace": "remote",
+          "workplace": null,
           "department": "Sales",
           "visa": "unknown",
           "hire_from_abroad": "unknown"
@@ -11993,6 +11992,20 @@
             "Germany"
           ],
           "workplace": null,
+          "department": "Sales",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Account Executive - Public Sector Germany - Police (Polizei)",
+          "url": "https://job-boards.greenhouse.io/celonis/jobs/8015242003?gh_jid=8015242003",
+          "locations": [
+            "Remote, Germany"
+          ],
+          "countries": [
+            "Germany"
+          ],
+          "workplace": "remote",
           "department": "Sales",
           "visa": "unknown",
           "hire_from_abroad": "unknown"
@@ -12083,12 +12096,12 @@
         },
         {
           "title": "Applied Value Engineer",
-          "url": "https://job-boards.greenhouse.io/celonis/jobs/8016485003?gh_jid=8016485003",
+          "url": "https://job-boards.greenhouse.io/celonis/jobs/7958952003?gh_jid=7958952003",
           "locations": [
-            "Amsterdam, Netherlands"
+            "London, United Kingdom"
           ],
           "countries": [
-            "Netherlands"
+            "United Kingdom"
           ],
           "workplace": null,
           "department": "Value Engineering",
@@ -12097,12 +12110,12 @@
         },
         {
           "title": "Applied Value Engineer",
-          "url": "https://job-boards.greenhouse.io/celonis/jobs/7958952003?gh_jid=7958952003",
+          "url": "https://job-boards.greenhouse.io/celonis/jobs/8016485003?gh_jid=8016485003",
           "locations": [
-            "London, United Kingdom"
+            "Amsterdam, Netherlands"
           ],
           "countries": [
-            "United Kingdom"
+            "Netherlands"
           ],
           "workplace": null,
           "department": "Value Engineering",
@@ -12279,12 +12292,12 @@
         },
         {
           "title": "Associate Applied (AI) Value Engineer (DACH) - Orbit Program",
-          "url": "https://job-boards.greenhouse.io/celonis/jobs/7816927003?gh_jid=7816927003",
+          "url": "https://job-boards.greenhouse.io/celonis/jobs/7819725003?gh_jid=7819725003",
           "locations": [
-            "Madrid, Spain"
+            "Munich, Germany"
           ],
           "countries": [
-            "Spain"
+            "Germany"
           ],
           "workplace": null,
           "department": "Value Engineering",
@@ -12293,12 +12306,12 @@
         },
         {
           "title": "Associate Applied (AI) Value Engineer (DACH) - Orbit Program",
-          "url": "https://job-boards.greenhouse.io/celonis/jobs/7819725003?gh_jid=7819725003",
+          "url": "https://job-boards.greenhouse.io/celonis/jobs/7816927003?gh_jid=7816927003",
           "locations": [
-            "Munich, Germany"
+            "Madrid, Spain"
           ],
           "countries": [
-            "Germany"
+            "Spain"
           ],
           "workplace": null,
           "department": "Value Engineering",
@@ -12670,20 +12683,6 @@
           "hire_from_abroad": "unknown"
         },
         {
-          "title": "Intern Applied AI Engineering / Strategic Consulting (CoE Tiger Team)",
-          "url": "https://job-boards.greenhouse.io/celonis/jobs/7989895003?gh_jid=7989895003",
-          "locations": [
-            "Madrid, Spain"
-          ],
-          "countries": [
-            "Spain"
-          ],
-          "workplace": null,
-          "department": "Value Engineering",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
           "title": "Intern Deployment Engineer - Data & AI",
           "url": "https://job-boards.greenhouse.io/celonis/jobs/7986440003?gh_jid=7986440003",
           "locations": [
@@ -13021,34 +13020,6 @@
         },
         {
           "title": "Principal Enterprise Architect",
-          "url": "https://job-boards.greenhouse.io/celonis/jobs/7618692003?gh_jid=7618692003",
-          "locations": [
-            "Bangalore, India"
-          ],
-          "countries": [
-            "India"
-          ],
-          "workplace": null,
-          "department": "Value Engineering",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Principal Enterprise Architect",
-          "url": "https://job-boards.greenhouse.io/celonis/jobs/7974130003?gh_jid=7974130003",
-          "locations": [
-            "Paris, France"
-          ],
-          "countries": [
-            "France"
-          ],
-          "workplace": null,
-          "department": "Value Engineering",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Principal Enterprise Architect",
           "url": "https://job-boards.greenhouse.io/celonis/jobs/7548628003?gh_jid=7548628003",
           "locations": [
             "London, United Kingdom"
@@ -13077,12 +13048,26 @@
         },
         {
           "title": "Principal Enterprise Architect",
-          "url": "https://job-boards.greenhouse.io/celonis/jobs/7800476003?gh_jid=7800476003",
+          "url": "https://job-boards.greenhouse.io/celonis/jobs/7974130003?gh_jid=7974130003",
           "locations": [
-            "Stockholm, Sweden"
+            "Paris, France"
           ],
           "countries": [
-            "Sweden"
+            "France"
+          ],
+          "workplace": null,
+          "department": "Value Engineering",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Principal Enterprise Architect",
+          "url": "https://job-boards.greenhouse.io/celonis/jobs/7618692003?gh_jid=7618692003",
+          "locations": [
+            "Bangalore, India"
+          ],
+          "countries": [
+            "India"
           ],
           "workplace": null,
           "department": "Value Engineering",
@@ -13097,6 +13082,20 @@
           ],
           "countries": [
             "Denmark"
+          ],
+          "workplace": null,
+          "department": "Value Engineering",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Principal Enterprise Architect",
+          "url": "https://job-boards.greenhouse.io/celonis/jobs/7800476003?gh_jid=7800476003",
+          "locations": [
+            "Stockholm, Sweden"
+          ],
+          "countries": [
+            "Sweden"
           ],
           "workplace": null,
           "department": "Value Engineering",
@@ -13343,12 +13342,12 @@
         },
         {
           "title": "Senior Deployment Engineer",
-          "url": "https://job-boards.greenhouse.io/celonis/jobs/8037367003?gh_jid=8037367003",
+          "url": "https://job-boards.greenhouse.io/celonis/jobs/7562947003?gh_jid=7562947003",
           "locations": [
-            "Tokyo, Japan"
+            "Bangalore, India"
           ],
           "countries": [
-            "Japan"
+            "India"
           ],
           "workplace": null,
           "department": "Services",
@@ -13357,12 +13356,12 @@
         },
         {
           "title": "Senior Deployment Engineer",
-          "url": "https://job-boards.greenhouse.io/celonis/jobs/7562947003?gh_jid=7562947003",
+          "url": "https://job-boards.greenhouse.io/celonis/jobs/8037367003?gh_jid=8037367003",
           "locations": [
-            "Bangalore, India"
+            "Tokyo, Japan"
           ],
           "countries": [
-            "India"
+            "Japan"
           ],
           "workplace": null,
           "department": "Services",
@@ -13665,20 +13664,6 @@
         },
         {
           "title": "Senior Value Engineer",
-          "url": "https://job-boards.greenhouse.io/celonis/jobs/7885753003?gh_jid=7885753003",
-          "locations": [
-            "Copenhagen, Denmark"
-          ],
-          "countries": [
-            "Denmark"
-          ],
-          "workplace": null,
-          "department": "Value Engineering",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Senior Value Engineer",
           "url": "https://job-boards.greenhouse.io/celonis/jobs/7742470003?gh_jid=7742470003",
           "locations": [
             "London, United Kingdom"
@@ -13699,6 +13684,20 @@
           ],
           "countries": [
             "Netherlands"
+          ],
+          "workplace": null,
+          "department": "Value Engineering",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Senior Value Engineer",
+          "url": "https://job-boards.greenhouse.io/celonis/jobs/7885753003?gh_jid=7885753003",
+          "locations": [
+            "Copenhagen, Denmark"
+          ],
+          "countries": [
+            "Denmark"
           ],
           "workplace": null,
           "department": "Value Engineering",
@@ -13987,20 +13986,6 @@
         },
         {
           "title": "Strategic Account Executive - Transportation & Logistics",
-          "url": "https://job-boards.greenhouse.io/celonis/jobs/8038816003?gh_jid=8038816003",
-          "locations": [
-            "Remote, Germany"
-          ],
-          "countries": [
-            "Germany"
-          ],
-          "workplace": "remote",
-          "department": "Sales",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Strategic Account Executive - Transportation & Logistics",
           "url": "https://job-boards.greenhouse.io/celonis/jobs/8009490003?gh_jid=8009490003",
           "locations": [
             "Munich, Germany"
@@ -14009,6 +13994,20 @@
             "Germany"
           ],
           "workplace": null,
+          "department": "Sales",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Strategic Account Executive - Transportation & Logistics",
+          "url": "https://job-boards.greenhouse.io/celonis/jobs/8038816003?gh_jid=8038816003",
+          "locations": [
+            "Remote, Germany"
+          ],
+          "countries": [
+            "Germany"
+          ],
+          "workplace": "remote",
           "department": "Sales",
           "visa": "unknown",
           "hire_from_abroad": "unknown"
@@ -19626,7 +19625,7 @@
           "hire_from_abroad": "unknown"
         },
         {
-          "title": "Staff Software Engineer (Cloud API)",
+          "title": "Senior Software Engineer (Cloud API)",
           "url": "https://jobs.ashbyhq.com/cyberhaven/c10007e9-2f9d-4901-8726-435742e658d3",
           "locations": [
             "Bangalore"
@@ -19640,7 +19639,7 @@
           "hire_from_abroad": "unknown"
         },
         {
-          "title": "Staff Cloud Infrastructure Engineer",
+          "title": "Senior/Staff Cloud Infrastructure Engineer",
           "url": "https://jobs.ashbyhq.com/cyberhaven/d99735a1-6ac9-46d5-866c-092777a01ec9",
           "locations": [
             "Bangalore"
@@ -19963,54 +19962,40 @@
         },
         {
           "title": "Delivery Solutions Architect",
-          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8813844002",
-          "locations": [
-            "Tokyo, Japan"
-          ],
-          "countries": [
-            "Japan"
-          ],
-          "workplace": null,
-          "department": "Delivery Solutions Architects",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Delivery Solutions Architect",
-          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8549681002",
-          "locations": [
-            "London, United Kingdom"
-          ],
-          "countries": [
-            "United Kingdom"
-          ],
-          "workplace": null,
-          "department": "Delivery Solutions Architects",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Delivery Solutions Architect",
-          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8575046002",
-          "locations": [
-            "Paris, France"
-          ],
-          "countries": [
-            "France"
-          ],
-          "workplace": null,
-          "department": "Delivery Solutions Architects",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Delivery Solutions Architect",
           "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8826872002",
           "locations": [
             "Munich, Germany"
           ],
           "countries": [
             "Germany"
+          ],
+          "workplace": null,
+          "department": "Delivery Solutions Architects",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Delivery Solutions Architect",
+          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8476496002",
+          "locations": [
+            "Brisbane, Australia; Melbourne, Australia; Western Australia, Australia"
+          ],
+          "countries": [
+            "Australia"
+          ],
+          "workplace": null,
+          "department": "Delivery Solutions Architects",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Delivery Solutions Architect",
+          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8813844002",
+          "locations": [
+            "Tokyo, Japan"
+          ],
+          "countries": [
+            "Japan"
           ],
           "workplace": null,
           "department": "Delivery Solutions Architects",
@@ -20047,12 +20032,26 @@
         },
         {
           "title": "Delivery Solutions Architect",
-          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8476496002",
+          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8575046002",
           "locations": [
-            "Brisbane, Australia; Melbourne, Australia; Western Australia, Australia"
+            "Paris, France"
           ],
           "countries": [
-            "Australia"
+            "France"
+          ],
+          "workplace": null,
+          "department": "Delivery Solutions Architects",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Delivery Solutions Architect",
+          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8549681002",
+          "locations": [
+            "London, United Kingdom"
+          ],
+          "countries": [
+            "United Kingdom"
           ],
           "workplace": null,
           "department": "Delivery Solutions Architects",
@@ -20201,9 +20200,9 @@
         },
         {
           "title": "Director, Lakebase Sales Specialists",
-          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8585150002",
+          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8569622002",
           "locations": [
-            "Melbourne, Australia"
+            "Sydney, Australia"
           ],
           "countries": [
             "Australia"
@@ -20215,9 +20214,9 @@
         },
         {
           "title": "Director, Lakebase Sales Specialists",
-          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8569622002",
+          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8585150002",
           "locations": [
-            "Sydney, Australia"
+            "Melbourne, Australia"
           ],
           "countries": [
             "Australia"
@@ -20663,12 +20662,12 @@
         },
         {
           "title": "Forward Deployed Engineer",
-          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8648494002",
+          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8741922002",
           "locations": [
-            "Belgrade, Serbia; Berlin, Germany; Munich, Germany"
+            "Tokyo, Japan"
           ],
           "countries": [
-            "Germany"
+            "Japan"
           ],
           "workplace": null,
           "department": "Professional Services Operations",
@@ -20677,12 +20676,12 @@
         },
         {
           "title": "Forward Deployed Engineer",
-          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8741922002",
+          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8648494002",
           "locations": [
-            "Tokyo, Japan"
+            "Belgrade, Serbia; Berlin, Germany; Munich, Germany"
           ],
           "countries": [
-            "Japan"
+            "Germany"
           ],
           "workplace": null,
           "department": "Professional Services Operations",
@@ -20831,12 +20830,12 @@
         },
         {
           "title": "Lakebase Sales Specialist",
-          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8569594002",
+          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8569524002",
           "locations": [
-            "Singapore"
+            "Amsterdam, Netherlands"
           ],
           "countries": [
-            "Singapore"
+            "Netherlands"
           ],
           "workplace": null,
           "department": "HQ Management",
@@ -20845,12 +20844,12 @@
         },
         {
           "title": "Lakebase Sales Specialist",
-          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8569524002",
+          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8569594002",
           "locations": [
-            "Amsterdam, Netherlands"
+            "Singapore"
           ],
           "countries": [
-            "Netherlands"
+            "Singapore"
           ],
           "workplace": null,
           "department": "HQ Management",
@@ -20985,6 +20984,20 @@
         },
         {
           "title": "Lead Solutions Architect - Generative AI (EMEA Emerging DNB)",
+          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8892968002",
+          "locations": [
+            "Remote - Sweden"
+          ],
+          "countries": [
+            "Sweden"
+          ],
+          "workplace": "remote",
+          "department": "Field Engineering - Other",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Lead Solutions Architect - Generative AI (EMEA Emerging DNB)",
           "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8892965002",
           "locations": [
             "Amsterdam, Netherlands"
@@ -20999,12 +21012,12 @@
         },
         {
           "title": "Lead Solutions Architect - Generative AI (EMEA Emerging DNB)",
-          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8892971002",
+          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8403943002",
           "locations": [
-            "Remote - Germany"
+            "Remote - United Kingdom"
           ],
           "countries": [
-            "Germany"
+            "United Kingdom"
           ],
           "workplace": "remote",
           "department": "Field Engineering - Other",
@@ -21027,26 +21040,12 @@
         },
         {
           "title": "Lead Solutions Architect - Generative AI (EMEA Emerging DNB)",
-          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8892968002",
+          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8892971002",
           "locations": [
-            "Remote - Sweden"
+            "Remote - Germany"
           ],
           "countries": [
-            "Sweden"
-          ],
-          "workplace": "remote",
-          "department": "Field Engineering - Other",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Lead Solutions Architect - Generative AI (EMEA Emerging DNB)",
-          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8403943002",
-          "locations": [
-            "Remote - United Kingdom"
-          ],
-          "countries": [
-            "United Kingdom"
+            "Germany"
           ],
           "workplace": "remote",
           "department": "Field Engineering - Other",
@@ -21154,12 +21153,12 @@
         },
         {
           "title": "Manager, Forward Deployed Engineering",
-          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8629997002",
+          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8445817002",
           "locations": [
-            "Singapore"
+            "Sydney, Australia"
           ],
           "countries": [
-            "Singapore"
+            "Australia"
           ],
           "workplace": null,
           "department": "Professional Services Operations",
@@ -21168,12 +21167,12 @@
         },
         {
           "title": "Manager, Forward Deployed Engineering",
-          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8445817002",
+          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8899736002",
           "locations": [
-            "Sydney, Australia"
+            "Munich, Germany"
           ],
           "countries": [
-            "Australia"
+            "Germany"
           ],
           "workplace": null,
           "department": "Professional Services Operations",
@@ -21196,12 +21195,12 @@
         },
         {
           "title": "Manager, Forward Deployed Engineering",
-          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8899736002",
+          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8629997002",
           "locations": [
-            "Munich, Germany"
+            "Singapore"
           ],
           "countries": [
-            "Germany"
+            "Singapore"
           ],
           "workplace": null,
           "department": "Professional Services Operations",
@@ -21798,7 +21797,7 @@
         },
         {
           "title": "Senior Software Engineer (App-Framework)",
-          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8210383002",
+          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8294304002",
           "locations": [
             "Bengaluru, India"
           ],
@@ -21812,12 +21811,26 @@
         },
         {
           "title": "Senior Software Engineer (App-Framework)",
-          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8294304002",
+          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8210383002",
           "locations": [
             "Bengaluru, India"
           ],
           "countries": [
             "India"
+          ],
+          "workplace": null,
+          "department": "Engineering - Pipeline",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Senior Software Engineer - Backend",
+          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8029671002",
+          "locations": [
+            "Amsterdam, Netherlands"
+          ],
+          "countries": [
+            "Netherlands"
           ],
           "workplace": null,
           "department": "Engineering - Pipeline",
@@ -21846,20 +21859,6 @@
           ],
           "countries": [
             "Germany"
-          ],
-          "workplace": null,
-          "department": "Engineering - Pipeline",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Senior Software Engineer - Backend",
-          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8029671002",
-          "locations": [
-            "Amsterdam, Netherlands"
-          ],
-          "countries": [
-            "Netherlands"
           ],
           "workplace": null,
           "department": "Engineering - Pipeline",
@@ -22050,20 +22049,6 @@
         },
         {
           "title": "Senior Solutions Architect - Digital Natives",
-          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8905967002",
-          "locations": [
-            "Finland"
-          ],
-          "countries": [
-            "Finland"
-          ],
-          "workplace": null,
-          "department": "Field Engineering - Other",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Senior Solutions Architect - Digital Natives",
           "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8885049002",
           "locations": [
             "Sweden"
@@ -22077,13 +22062,27 @@
           "hire_from_abroad": "unknown"
         },
         {
-          "title": "Senior Solutions Architect (EDW Enterprise Data Warehouse Migrations)",
-          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8720252002",
+          "title": "Senior Solutions Architect - Digital Natives",
+          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8905967002",
           "locations": [
-            "Amsterdam, Netherlands"
+            "Finland"
           ],
           "countries": [
-            "Netherlands"
+            "Finland"
+          ],
+          "workplace": null,
+          "department": "Field Engineering - Other",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Senior Solutions Architect (EDW Enterprise Data Warehouse Migrations)",
+          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8704938002",
+          "locations": [
+            "London, United Kingdom"
+          ],
+          "countries": [
+            "United Kingdom"
           ],
           "workplace": null,
           "department": "Field Engineering - Other",
@@ -22120,12 +22119,12 @@
         },
         {
           "title": "Senior Solutions Architect (EDW Enterprise Data Warehouse Migrations)",
-          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8704938002",
+          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8720252002",
           "locations": [
-            "London, United Kingdom"
+            "Amsterdam, Netherlands"
           ],
           "countries": [
-            "United Kingdom"
+            "Netherlands"
           ],
           "workplace": null,
           "department": "Field Engineering - Other",
@@ -22330,26 +22329,12 @@
         },
         {
           "title": "Senior Staff Software Engineer - Delta",
-          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8303014002",
+          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=7319791002",
           "locations": [
-            "Aarhus, Denmark"
+            "Berlin, Germany"
           ],
           "countries": [
-            "Denmark"
-          ],
-          "workplace": null,
-          "department": "Executive Engineering - Pipeline",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Senior Staff Software Engineer - Delta",
-          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8303015002",
-          "locations": [
-            "Amsterdam, Netherlands"
-          ],
-          "countries": [
-            "Netherlands"
+            "Germany"
           ],
           "workplace": null,
           "department": "Executive Engineering - Pipeline",
@@ -22372,12 +22357,26 @@
         },
         {
           "title": "Senior Staff Software Engineer - Delta",
-          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=7319791002",
+          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8303015002",
           "locations": [
-            "Berlin, Germany"
+            "Amsterdam, Netherlands"
           ],
           "countries": [
-            "Germany"
+            "Netherlands"
+          ],
+          "workplace": null,
+          "department": "Executive Engineering - Pipeline",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Senior Staff Software Engineer - Delta",
+          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8303014002",
+          "locations": [
+            "Aarhus, Denmark"
+          ],
+          "countries": [
+            "Denmark"
           ],
           "workplace": null,
           "department": "Executive Engineering - Pipeline",
@@ -22469,6 +22468,20 @@
           "hire_from_abroad": "unknown"
         },
         {
+          "title": "Software Engineer, Infrastructure",
+          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8829029002",
+          "locations": [
+            "Bengaluru, India"
+          ],
+          "countries": [
+            "India"
+          ],
+          "workplace": null,
+          "department": "Infrastructure",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
           "title": "Software Engineering Intern (2027 Start) - Aarhus",
           "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8133710002",
           "locations": [
@@ -22526,6 +22539,20 @@
         },
         {
           "title": "Solutions Architect",
+          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8783421002",
+          "locations": [
+            "Singapore"
+          ],
+          "countries": [
+            "Singapore"
+          ],
+          "workplace": null,
+          "department": "Field Engineering - Other",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Solutions Architect",
           "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8795446002",
           "locations": [
             "Bengaluru, India"
@@ -22540,12 +22567,12 @@
         },
         {
           "title": "Solutions Architect",
-          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8874892002",
+          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8603684002",
           "locations": [
-            "Australia"
+            "Auckland, New Zealand"
           ],
           "countries": [
-            "Australia"
+            "New Zealand"
           ],
           "workplace": null,
           "department": "Field Engineering - Other",
@@ -22560,20 +22587,6 @@
           ],
           "countries": [
             "United Kingdom"
-          ],
-          "workplace": null,
-          "department": "Field Engineering - Other",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Solutions Architect",
-          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8785049002",
-          "locations": [
-            "Melbourne, Australia"
-          ],
-          "countries": [
-            "Australia"
           ],
           "workplace": null,
           "department": "Field Engineering - Other",
@@ -22610,6 +22623,20 @@
         },
         {
           "title": "Solutions Architect",
+          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8785049002",
+          "locations": [
+            "Melbourne, Australia"
+          ],
+          "countries": [
+            "Australia"
+          ],
+          "workplace": null,
+          "department": "Field Engineering - Other",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Solutions Architect",
           "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8608603002",
           "locations": [
             "Munich, Germany"
@@ -22624,26 +22651,12 @@
         },
         {
           "title": "Solutions Architect",
-          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8603684002",
+          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8874892002",
           "locations": [
-            "Auckland, New Zealand"
+            "Australia"
           ],
           "countries": [
-            "New Zealand"
-          ],
-          "workplace": null,
-          "department": "Field Engineering - Other",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Solutions Architect",
-          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8783421002",
-          "locations": [
-            "Singapore"
-          ],
-          "countries": [
-            "Singapore"
+            "Australia"
           ],
           "workplace": null,
           "department": "Field Engineering - Other",
@@ -22862,9 +22875,9 @@
         },
         {
           "title": "Specialist Solutions Architect - AI/ML",
-          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8585164002",
+          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8593505002",
           "locations": [
-            "Bengaluru, India"
+            "Mumbai, India"
           ],
           "countries": [
             "India"
@@ -22876,9 +22889,9 @@
         },
         {
           "title": "Specialist Solutions Architect - AI/ML",
-          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8593505002",
+          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8585164002",
           "locations": [
-            "Mumbai, India"
+            "Bengaluru, India"
           ],
           "countries": [
             "India"
@@ -23002,20 +23015,6 @@
         },
         {
           "title": "Sr. Engagement Manager, FDE",
-          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8885045002",
-          "locations": [
-            "Munich, Germany"
-          ],
-          "countries": [
-            "Germany"
-          ],
-          "workplace": null,
-          "department": "Professional Services Operations",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Sr. Engagement Manager, FDE",
           "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8829903002",
           "locations": [
             "Singapore"
@@ -23029,27 +23028,13 @@
           "hire_from_abroad": "unknown"
         },
         {
-          "title": "Sr. Forward Deployed Engineer",
-          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8514430002",
+          "title": "Sr. Engagement Manager, FDE",
+          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8885045002",
           "locations": [
-            "Western Australia, Australia"
+            "Munich, Germany"
           ],
           "countries": [
-            "Australia"
-          ],
-          "workplace": null,
-          "department": "Professional Services Operations",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Sr. Forward Deployed Engineer",
-          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8741925002",
-          "locations": [
-            "Tokyo, Japan"
-          ],
-          "countries": [
-            "Japan"
+            "Germany"
           ],
           "workplace": null,
           "department": "Professional Services Operations",
@@ -23078,6 +23063,34 @@
           ],
           "countries": [
             "Singapore"
+          ],
+          "workplace": null,
+          "department": "Professional Services Operations",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Sr. Forward Deployed Engineer",
+          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8741925002",
+          "locations": [
+            "Tokyo, Japan"
+          ],
+          "countries": [
+            "Japan"
+          ],
+          "workplace": null,
+          "department": "Professional Services Operations",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Sr. Forward Deployed Engineer",
+          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8514430002",
+          "locations": [
+            "Western Australia, Australia"
+          ],
+          "countries": [
+            "Australia"
           ],
           "workplace": null,
           "department": "Professional Services Operations",
@@ -23114,12 +23127,12 @@
         },
         {
           "title": "Sr. Manager, AI Forward Deployed Engineering",
-          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8630019002",
+          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8574912002",
           "locations": [
-            "Bengaluru, India"
+            "Amsterdam, Netherlands"
           ],
           "countries": [
-            "India"
+            "Netherlands"
           ],
           "workplace": null,
           "department": "Professional Services Operations",
@@ -23142,29 +23155,15 @@
         },
         {
           "title": "Sr. Manager, AI Forward Deployed Engineering",
-          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8574912002",
+          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8630019002",
           "locations": [
-            "Amsterdam, Netherlands"
+            "Bengaluru, India"
           ],
           "countries": [
-            "Netherlands"
+            "India"
           ],
           "workplace": null,
           "department": "Professional Services Operations",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Sr. Manager, Field Engineering",
-          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8682223002",
-          "locations": [
-            "Sydney, Australia"
-          ],
-          "countries": [
-            "Australia"
-          ],
-          "workplace": null,
-          "department": "Field Engineering - Other",
           "visa": "unknown",
           "hire_from_abroad": "unknown"
         },
@@ -23176,6 +23175,20 @@
           ],
           "countries": [
             "Singapore"
+          ],
+          "workplace": null,
+          "department": "Field Engineering - Other",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Sr. Manager, Field Engineering",
+          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8682223002",
+          "locations": [
+            "Sydney, Australia"
+          ],
+          "countries": [
+            "Australia"
           ],
           "workplace": null,
           "department": "Field Engineering - Other",
@@ -23339,12 +23352,26 @@
         },
         {
           "title": "Sr. Solutions Architect",
-          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8785045002",
+          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8753679002",
           "locations": [
-            "Auckland, New Zealand"
+            "Sydney, Australia"
           ],
           "countries": [
-            "New Zealand"
+            "Australia"
+          ],
+          "workplace": null,
+          "department": "Field Engineering - Other",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Sr. Solutions Architect",
+          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8537033002",
+          "locations": [
+            "Queensland, Australia"
+          ],
+          "countries": [
+            "Australia"
           ],
           "workplace": null,
           "department": "Field Engineering - Other",
@@ -23367,12 +23394,12 @@
         },
         {
           "title": "Sr. Solutions Architect",
-          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8753679002",
+          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8720995002",
           "locations": [
-            "Sydney, Australia"
+            "Munich, Germany"
           ],
           "countries": [
-            "Australia"
+            "Germany"
           ],
           "workplace": null,
           "department": "Field Engineering - Other",
@@ -23395,26 +23422,12 @@
         },
         {
           "title": "Sr. Solutions Architect",
-          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8720995002",
+          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8785045002",
           "locations": [
-            "Munich, Germany"
+            "Auckland, New Zealand"
           ],
           "countries": [
-            "Germany"
-          ],
-          "workplace": null,
-          "department": "Field Engineering - Other",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Sr. Solutions Architect",
-          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8537033002",
-          "locations": [
-            "Queensland, Australia"
-          ],
-          "countries": [
-            "Australia"
+            "New Zealand"
           ],
           "workplace": null,
           "department": "Field Engineering - Other",
@@ -23535,12 +23548,12 @@
         },
         {
           "title": "Sr. Solutions Engineer",
-          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8783420002",
+          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8609866002",
           "locations": [
-            "Singapore"
+            "Stockholm, Sweden"
           ],
           "countries": [
-            "Singapore"
+            "Sweden"
           ],
           "workplace": null,
           "department": "Field Engineering - Other",
@@ -23549,12 +23562,12 @@
         },
         {
           "title": "Sr. Solutions Engineer",
-          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8609866002",
+          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8783420002",
           "locations": [
-            "Stockholm, Sweden"
+            "Singapore"
           ],
           "countries": [
-            "Sweden"
+            "Singapore"
           ],
           "workplace": null,
           "department": "Field Engineering - Other",
@@ -23661,20 +23674,6 @@
         },
         {
           "title": "Staff Forward Deployed Engineer",
-          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8653264002",
-          "locations": [
-            "Berlin, Germany; Munich, Germany"
-          ],
-          "countries": [
-            "Germany"
-          ],
-          "workplace": null,
-          "department": "Professional Services Operations",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Staff Forward Deployed Engineer",
           "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8530855002",
           "locations": [
             "Remote - India"
@@ -23683,6 +23682,20 @@
             "India"
           ],
           "workplace": "remote",
+          "department": "Professional Services Operations",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Staff Forward Deployed Engineer",
+          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8653264002",
+          "locations": [
+            "Berlin, Germany; Munich, Germany"
+          ],
+          "countries": [
+            "Germany"
+          ],
+          "workplace": null,
           "department": "Professional Services Operations",
           "visa": "unknown",
           "hire_from_abroad": "unknown"
@@ -23892,7 +23905,7 @@
         },
         {
           "title": "Staff Software Engineer - Ingestion",
-          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8200692002",
+          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8201686002",
           "locations": [
             "Bengaluru, India"
           ],
@@ -23906,7 +23919,7 @@
         },
         {
           "title": "Staff Software Engineer - Ingestion",
-          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8201686002",
+          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8200692002",
           "locations": [
             "Bengaluru, India"
           ],
@@ -24270,12 +24283,12 @@
         },
         {
           "title": "Strategic Hunter Account Executive",
-          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8880400002",
+          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8737167002",
           "locations": [
-            "Australian Capital Territory, Australia"
+            "Paris, France"
           ],
           "countries": [
-            "Australia"
+            "France"
           ],
           "workplace": null,
           "department": "Enterprise Sales",
@@ -24284,12 +24297,12 @@
         },
         {
           "title": "Strategic Hunter Account Executive",
-          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8737167002",
+          "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8880400002",
           "locations": [
-            "Paris, France"
+            "Australian Capital Territory, Australia"
           ],
           "countries": [
-            "France"
+            "Australia"
           ],
           "workplace": null,
           "department": "Enterprise Sales",
@@ -30168,6 +30181,20 @@
       "roles": [
         {
           "title": "Account Executive, Enterprise",
+          "url": "https://job-boards.greenhouse.io/flexport/jobs/8164060",
+          "locations": [
+            "Dublin"
+          ],
+          "countries": [
+            "Ireland"
+          ],
+          "workplace": null,
+          "department": "Sales",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Account Executive, Enterprise",
           "url": "https://job-boards.greenhouse.io/flexport/jobs/7372929",
           "locations": [
             "Amsterdam, Netherlands"
@@ -30195,16 +30222,16 @@
           "hire_from_abroad": "unknown"
         },
         {
-          "title": "Account Executive, Enterprise",
-          "url": "https://job-boards.greenhouse.io/flexport/jobs/8164060",
+          "title": "Account Manager",
+          "url": "https://job-boards.greenhouse.io/flexport/jobs/8017046",
           "locations": [
-            "Dublin"
+            "London, England"
           ],
           "countries": [
-            "Ireland"
+            "United Kingdom"
           ],
           "workplace": null,
-          "department": "Sales",
+          "department": "Account Management",
           "visa": "unknown",
           "hire_from_abroad": "unknown"
         },
@@ -30216,20 +30243,6 @@
           ],
           "countries": [
             "Netherlands"
-          ],
-          "workplace": null,
-          "department": "Account Management",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Account Manager",
-          "url": "https://job-boards.greenhouse.io/flexport/jobs/8017046",
-          "locations": [
-            "London, England"
-          ],
-          "countries": [
-            "United Kingdom"
           ],
           "workplace": null,
           "department": "Account Management",
@@ -30336,12 +30349,12 @@
         },
         {
           "title": "Global Operations Associate",
-          "url": "https://job-boards.greenhouse.io/flexport/jobs/8207646",
+          "url": "https://job-boards.greenhouse.io/flexport/jobs/8204147",
           "locations": [
-            "Frankfurt am Main, Hesse, Germany; Frankfurt, Germany"
+            "Barcelona, Spain"
           ],
           "countries": [
-            "Germany"
+            "Spain"
           ],
           "workplace": null,
           "department": "Global Operations",
@@ -30350,12 +30363,12 @@
         },
         {
           "title": "Global Operations Associate",
-          "url": "https://job-boards.greenhouse.io/flexport/jobs/8204147",
+          "url": "https://job-boards.greenhouse.io/flexport/jobs/8207646",
           "locations": [
-            "Barcelona, Spain"
+            "Frankfurt am Main, Hesse, Germany; Frankfurt, Germany"
           ],
           "countries": [
-            "Spain"
+            "Germany"
           ],
           "workplace": null,
           "department": "Global Operations",
@@ -30448,12 +30461,12 @@
         },
         {
           "title": "Sales Development Representative",
-          "url": "https://job-boards.greenhouse.io/flexport/jobs/7242880",
+          "url": "https://job-boards.greenhouse.io/flexport/jobs/8211206",
           "locations": [
-            "Frankfurt, Germany; Hamburg, Germany"
+            "Barcelona, Spain"
           ],
           "countries": [
-            "Germany"
+            "Spain"
           ],
           "workplace": null,
           "department": "Sales",
@@ -30462,12 +30475,12 @@
         },
         {
           "title": "Sales Development Representative",
-          "url": "https://job-boards.greenhouse.io/flexport/jobs/8211206",
+          "url": "https://job-boards.greenhouse.io/flexport/jobs/7242880",
           "locations": [
-            "Barcelona, Spain"
+            "Frankfurt, Germany; Hamburg, Germany"
           ],
           "countries": [
-            "Spain"
+            "Germany"
           ],
           "workplace": null,
           "department": "Sales",
@@ -41649,6 +41662,20 @@
           ],
           "workplace": null,
           "department": "Market",
+          "visa": "unknown",
+          "hire_from_abroad": "yes"
+        },
+        {
+          "title": "(Senior) Programme Manager - Land",
+          "url": "https://helsing.ai/jobs/4944213101?gh_jid=4944213101",
+          "locations": [
+            "Munich"
+          ],
+          "countries": [
+            "Germany"
+          ],
+          "workplace": null,
+          "department": "Campaigns & Programmes",
           "visa": "unknown",
           "hire_from_abroad": "yes"
         },
@@ -56659,6 +56686,34 @@
           "hire_from_abroad": "unknown"
         },
         {
+          "title": "Product Manager",
+          "url": "https://jobs.ashbyhq.com/lio/dde6b547-d528-43fa-a573-a234cc3fad06",
+          "locations": [
+            "Munich Office"
+          ],
+          "countries": [
+            "Germany"
+          ],
+          "workplace": "onsite",
+          "department": "Engineering",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Product Manager",
+          "url": "https://jobs.ashbyhq.com/lio/f62b1c56-fbc2-411a-9bcd-607eb7564647",
+          "locations": [
+            "Munich Office"
+          ],
+          "countries": [
+            "Germany"
+          ],
+          "workplace": "onsite",
+          "department": "Engineering",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
           "title": "Site Reliability Engineer / SRE (all genders)",
           "url": "https://jobs.ashbyhq.com/lio/4f67e6d6-72ca-4248-a748-3bd8d3c769ea",
           "locations": [
@@ -71115,6 +71170,20 @@
           "department": "Go To Market",
           "visa": "unknown",
           "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Senior Counsel, EU Policy/Regulatory",
+          "url": "https://jobs.ashbyhq.com/openai/88667f7f-8fd2-48fd-8067-b58f6dff4652",
+          "locations": [
+            "London, UK"
+          ],
+          "countries": [
+            "United Kingdom"
+          ],
+          "workplace": "hybrid",
+          "department": "Legal",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
         }
       ],
       "countries": [
@@ -73616,8 +73685,8 @@
           "hire_from_abroad": "unknown"
         },
         {
-          "title": "Sr. Customer Engineer",
-          "url": "https://job-boards.greenhouse.io/pendo/jobs/8811075002",
+          "title": "Sr. Customer Engineer, Enterprise (Pre & Post Sales)",
+          "url": "https://job-boards.greenhouse.io/pendo/jobs/8859968002",
           "locations": [
             "London, UK"
           ],
@@ -73630,8 +73699,8 @@
           "hire_from_abroad": "unknown"
         },
         {
-          "title": "Sr. Customer Engineer, Enterprise",
-          "url": "https://job-boards.greenhouse.io/pendo/jobs/8859968002",
+          "title": "Sr. Customer Engineer (Pre & Post Sales)",
+          "url": "https://job-boards.greenhouse.io/pendo/jobs/8811075002",
           "locations": [
             "London, UK"
           ],
@@ -79378,20 +79447,6 @@
         },
         {
           "title": "Senior Manager, Global Procurement (Materials)",
-          "url": "https://job-boards.greenhouse.io/quince/jobs/5416501008",
-          "locations": [
-            "Bangladesh; India; Pakistan"
-          ],
-          "countries": [
-            "India"
-          ],
-          "workplace": null,
-          "department": "Procurement",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Senior Manager, Global Procurement (Materials)",
           "url": "https://job-boards.greenhouse.io/quince/jobs/5443524008",
           "locations": [
             "France; Germany - Remote; Italy - Remote; United Kingdom"
@@ -79402,6 +79457,20 @@
             "France"
           ],
           "workplace": "remote",
+          "department": "Procurement",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Senior Manager, Global Procurement (Materials)",
+          "url": "https://job-boards.greenhouse.io/quince/jobs/5416501008",
+          "locations": [
+            "Bangladesh; India; Pakistan"
+          ],
+          "countries": [
+            "India"
+          ],
+          "workplace": null,
           "department": "Procurement",
           "visa": "unknown",
           "hire_from_abroad": "unknown"
@@ -79952,20 +80021,6 @@
         },
         {
           "title": "Analyst, Banking Alliances",
-          "url": "https://job-boards.greenhouse.io/razorpaysoftwareprivatelimited/jobs/4740730005",
-          "locations": [
-            "Lucknow"
-          ],
-          "countries": [
-            "India"
-          ],
-          "workplace": null,
-          "department": "Banking",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Analyst, Banking Alliances",
           "url": "https://job-boards.greenhouse.io/razorpaysoftwareprivatelimited/jobs/4741226005",
           "locations": [
             "Chennai"
@@ -79975,6 +80030,20 @@
           ],
           "workplace": null,
           "department": "Banking Alliances",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Analyst, Banking Alliances",
+          "url": "https://job-boards.greenhouse.io/razorpaysoftwareprivatelimited/jobs/4740730005",
+          "locations": [
+            "Lucknow"
+          ],
+          "countries": [
+            "India"
+          ],
+          "workplace": null,
+          "department": "Banking",
           "visa": "unknown",
           "hire_from_abroad": "unknown"
         },
@@ -80036,7 +80105,7 @@
         },
         {
           "title": "Executive, Finance",
-          "url": "https://job-boards.greenhouse.io/razorpaysoftwareprivatelimited/jobs/4746498005",
+          "url": "https://job-boards.greenhouse.io/razorpaysoftwareprivatelimited/jobs/4731671005",
           "locations": [
             "Bengaluru"
           ],
@@ -80050,7 +80119,7 @@
         },
         {
           "title": "Executive, Finance",
-          "url": "https://job-boards.greenhouse.io/razorpaysoftwareprivatelimited/jobs/4731671005",
+          "url": "https://job-boards.greenhouse.io/razorpaysoftwareprivatelimited/jobs/4746498005",
           "locations": [
             "Bengaluru"
           ],
@@ -80115,20 +80184,6 @@
           ],
           "workplace": null,
           "department": "DevOps",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Lead Software Development Engineer",
-          "url": "https://job-boards.greenhouse.io/razorpaysoftwareprivatelimited/jobs/4746961005",
-          "locations": [
-            "Bengaluru"
-          ],
-          "countries": [
-            "India"
-          ],
-          "workplace": null,
-          "department": "Engineering",
           "visa": "unknown",
           "hire_from_abroad": "unknown"
         },
@@ -83912,6 +83967,20 @@
         {
           "title": "Commercial Customer Success Manager - EMEA",
           "url": "https://job-boards.greenhouse.io/sigmacomputing/jobs/7990102003",
+          "locations": [
+            "London, UK"
+          ],
+          "countries": [
+            "United Kingdom"
+          ],
+          "workplace": null,
+          "department": "Customer Success",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Enterprise Customer Success Manager - EMEA",
+          "url": "https://job-boards.greenhouse.io/sigmacomputing/jobs/8043817003",
           "locations": [
             "London, UK"
           ],
@@ -88017,6 +88086,20 @@
         },
         {
           "title": "Partner Development Manager",
+          "url": "https://stripe.com/jobs/search?gh_jid=8267519",
+          "locations": [
+            "London"
+          ],
+          "countries": [
+            "United Kingdom"
+          ],
+          "workplace": null,
+          "department": "1630 Alliances & Channels",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Partner Development Manager",
           "url": "https://stripe.com/jobs/search?gh_jid=8104427",
           "locations": [
             "London"
@@ -88040,20 +88123,6 @@
           ],
           "workplace": null,
           "department": "3514 Global Expansion and LPM Partnerships",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Partner Development Manager",
-          "url": "https://stripe.com/jobs/search?gh_jid=8267519",
-          "locations": [
-            "London"
-          ],
-          "countries": [
-            "United Kingdom"
-          ],
-          "workplace": null,
-          "department": "1630 Alliances & Channels",
           "visa": "unknown",
           "hire_from_abroad": "unknown"
         },
@@ -88777,12 +88846,12 @@
         },
         {
           "title": "Software Engineer, Intern",
-          "url": "https://stripe.com/jobs/search?gh_jid=8130883",
+          "url": "https://stripe.com/jobs/search?gh_jid=8031833",
           "locations": [
-            "Singapore"
+            "Bengaluru"
           ],
           "countries": [
-            "Singapore"
+            "India"
           ],
           "workplace": null,
           "department": "5112 General University",
@@ -88791,12 +88860,12 @@
         },
         {
           "title": "Software Engineer, Intern",
-          "url": "https://stripe.com/jobs/search?gh_jid=8031833",
+          "url": "https://stripe.com/jobs/search?gh_jid=8130883",
           "locations": [
-            "Bengaluru"
+            "Singapore"
           ],
           "countries": [
-            "India"
+            "Singapore"
           ],
           "workplace": null,
           "department": "5112 General University",
@@ -88847,12 +88916,12 @@
         },
         {
           "title": "Software Engineer, New Grad",
-          "url": "https://stripe.com/jobs/search?gh_jid=8130881",
+          "url": "https://stripe.com/jobs/search?gh_jid=8160776",
           "locations": [
-            "Dublin"
+            "Singapore"
           ],
           "countries": [
-            "Ireland"
+            "Singapore"
           ],
           "workplace": null,
           "department": "5112 General University",
@@ -88861,12 +88930,12 @@
         },
         {
           "title": "Software Engineer, New Grad",
-          "url": "https://stripe.com/jobs/search?gh_jid=8160776",
+          "url": "https://stripe.com/jobs/search?gh_jid=8130881",
           "locations": [
-            "Singapore"
+            "Dublin"
           ],
           "countries": [
-            "Singapore"
+            "Ireland"
           ],
           "workplace": null,
           "department": "5112 General University",
@@ -89240,12 +89309,12 @@
         },
         {
           "title": "Staff Security Engineer, Abuse Control",
-          "url": "https://stripe.com/jobs/search?gh_jid=8174963",
+          "url": "https://stripe.com/jobs/search?gh_jid=8211180",
           "locations": [
-            "Dublin"
+            "London"
           ],
           "countries": [
-            "Ireland"
+            "United Kingdom"
           ],
           "workplace": null,
           "department": "8611 Security Analytics",
@@ -89254,12 +89323,12 @@
         },
         {
           "title": "Staff Security Engineer, Abuse Control",
-          "url": "https://stripe.com/jobs/search?gh_jid=8211180",
+          "url": "https://stripe.com/jobs/search?gh_jid=8174963",
           "locations": [
-            "London"
+            "Dublin"
           ],
           "countries": [
-            "United Kingdom"
+            "Ireland"
           ],
           "workplace": null,
           "department": "8611 Security Analytics",
@@ -89685,34 +89754,6 @@
         },
         {
           "title": "Conseiller(\u00e8re) commercial(e) terrain exp\u00e9riment\u00e9(e) ind\u00e9pendant",
-          "url": "https://sumup.com/careers/positions/7988642002?gh_jid=7988642002",
-          "locations": [
-            "Nantes, Loire-Atlantique, France"
-          ],
-          "countries": [
-            "France"
-          ],
-          "workplace": null,
-          "department": "Field Sales",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Conseiller(\u00e8re) commercial(e) terrain exp\u00e9riment\u00e9(e) ind\u00e9pendant",
-          "url": "https://sumup.com/careers/positions/8370115002?gh_jid=8370115002",
-          "locations": [
-            "Bordeaux, Gironde, France"
-          ],
-          "countries": [
-            "France"
-          ],
-          "workplace": null,
-          "department": "Field Sales",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Conseiller(\u00e8re) commercial(e) terrain exp\u00e9riment\u00e9(e) ind\u00e9pendant",
           "url": "https://sumup.com/careers/positions/8370153002?gh_jid=8370153002",
           "locations": [
             "Mont-de-Marsan, Landes, France"
@@ -89727,9 +89768,37 @@
         },
         {
           "title": "Conseiller(\u00e8re) commercial(e) terrain exp\u00e9riment\u00e9(e) ind\u00e9pendant",
+          "url": "https://sumup.com/careers/positions/7988642002?gh_jid=7988642002",
+          "locations": [
+            "Nantes, Loire-Atlantique, France"
+          ],
+          "countries": [
+            "France"
+          ],
+          "workplace": null,
+          "department": "Field Sales",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Conseiller(\u00e8re) commercial(e) terrain exp\u00e9riment\u00e9(e) ind\u00e9pendant",
           "url": "https://sumup.com/careers/positions/7988606002?gh_jid=7988606002",
           "locations": [
             "Rennes, Ille-et-Vilaine, France"
+          ],
+          "countries": [
+            "France"
+          ],
+          "workplace": null,
+          "department": "Field Sales",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Conseiller(\u00e8re) commercial(e) terrain exp\u00e9riment\u00e9(e) ind\u00e9pendant",
+          "url": "https://sumup.com/careers/positions/8370115002?gh_jid=8370115002",
+          "locations": [
+            "Bordeaux, Gironde, France"
           ],
           "countries": [
             "France"
@@ -89769,9 +89838,9 @@
         },
         {
           "title": "Conseiller(\u00e8re) commercial(e) terrain exp\u00e9riment\u00e9(e) - Ind\u00e9pendant",
-          "url": "https://sumup.com/careers/positions/8887224002?gh_jid=8887224002",
+          "url": "https://sumup.com/careers/positions/8099530002?gh_jid=8099530002",
           "locations": [
-            "Montpellier, H\u00e9rault, France"
+            "Aix-en-Provence, Bouches-du-Rh\u00f4ne, France"
           ],
           "countries": [
             "France"
@@ -89797,9 +89866,9 @@
         },
         {
           "title": "Conseiller(\u00e8re) commercial(e) terrain exp\u00e9riment\u00e9(e) - Ind\u00e9pendant",
-          "url": "https://sumup.com/careers/positions/7868915002?gh_jid=7868915002",
+          "url": "https://sumup.com/careers/positions/8511538002?gh_jid=8511538002",
           "locations": [
-            "Strasbourg, Bas-Rhin, France"
+            "N\u00eemes, Gard, France"
           ],
           "countries": [
             "France"
@@ -89825,9 +89894,9 @@
         },
         {
           "title": "Conseiller(\u00e8re) commercial(e) terrain exp\u00e9riment\u00e9(e) - Ind\u00e9pendant",
-          "url": "https://sumup.com/careers/positions/8099530002?gh_jid=8099530002",
+          "url": "https://sumup.com/careers/positions/7868915002?gh_jid=7868915002",
           "locations": [
-            "Aix-en-Provence, Bouches-du-Rh\u00f4ne, France"
+            "Strasbourg, Bas-Rhin, France"
           ],
           "countries": [
             "France"
@@ -89839,23 +89908,9 @@
         },
         {
           "title": "Conseiller(\u00e8re) commercial(e) terrain exp\u00e9riment\u00e9(e) - Ind\u00e9pendant",
-          "url": "https://sumup.com/careers/positions/8511538002?gh_jid=8511538002",
+          "url": "https://sumup.com/careers/positions/8887224002?gh_jid=8887224002",
           "locations": [
-            "N\u00eemes, Gard, France"
-          ],
-          "countries": [
-            "France"
-          ],
-          "workplace": null,
-          "department": "Field Sales",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Conseiller(\u00e8re) commercial(e) terrain exp\u00e9riment\u00e9(e)- Ind\u00e9pendant",
-          "url": "https://sumup.com/careers/positions/7875332002?gh_jid=7875332002",
-          "locations": [
-            "Calais, Pas-de-Calais, France"
+            "Montpellier, H\u00e9rault, France"
           ],
           "countries": [
             "France"
@@ -89880,10 +89935,38 @@
           "hire_from_abroad": "unknown"
         },
         {
+          "title": "Conseiller(\u00e8re) commercial(e) terrain exp\u00e9riment\u00e9(e)- Ind\u00e9pendant",
+          "url": "https://sumup.com/careers/positions/7875332002?gh_jid=7875332002",
+          "locations": [
+            "Calais, Pas-de-Calais, France"
+          ],
+          "countries": [
+            "France"
+          ],
+          "workplace": null,
+          "department": "Field Sales",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
           "title": "Conseiller(\u00e8re) commercial(e) terrain exp\u00e9riment\u00e9(e)",
           "url": "https://sumup.com/careers/positions/8370114002?gh_jid=8370114002",
           "locations": [
             "Landes, France"
+          ],
+          "countries": [
+            "France"
+          ],
+          "workplace": null,
+          "department": "Field Sales",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Conseiller(\u00e8re) commercial(e) terrain exp\u00e9riment\u00e9(e)\u00a0ind\u00e9pendant",
+          "url": "https://sumup.com/careers/positions/7988602002?gh_jid=7988602002",
+          "locations": [
+            "Brest, Finist\u00e8re, France"
           ],
           "countries": [
             "France"
@@ -89923,6 +90006,20 @@
         },
         {
           "title": "Conseiller(\u00e8re) commercial(e) terrain exp\u00e9riment\u00e9(e)\u00a0ind\u00e9pendant",
+          "url": "https://sumup.com/careers/positions/7988614002?gh_jid=7988614002",
+          "locations": [
+            "Vannes, Morbihan, France"
+          ],
+          "countries": [
+            "France"
+          ],
+          "workplace": null,
+          "department": "Field Sales",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Conseiller(\u00e8re) commercial(e) terrain exp\u00e9riment\u00e9(e)\u00a0ind\u00e9pendant",
           "url": "https://sumup.com/careers/positions/8370147002?gh_jid=8370147002",
           "locations": [
             "Lacanau, Gironde, France"
@@ -89951,37 +90048,23 @@
         },
         {
           "title": "Conseiller(\u00e8re) commercial(e) terrain exp\u00e9riment\u00e9(e)\u00a0ind\u00e9pendant",
-          "url": "https://sumup.com/careers/positions/8355673002?gh_jid=8355673002",
-          "locations": [
-            "Poitiers, Vienne, France"
-          ],
-          "countries": [
-            "France"
-          ],
-          "workplace": null,
-          "department": "Field Sales",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Conseiller(\u00e8re) commercial(e) terrain exp\u00e9riment\u00e9(e)\u00a0ind\u00e9pendant",
-          "url": "https://sumup.com/careers/positions/7988614002?gh_jid=7988614002",
-          "locations": [
-            "Vannes, Morbihan, France"
-          ],
-          "countries": [
-            "France"
-          ],
-          "workplace": null,
-          "department": "Field Sales",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Conseiller(\u00e8re) commercial(e) terrain exp\u00e9riment\u00e9(e)\u00a0ind\u00e9pendant",
           "url": "https://sumup.com/careers/positions/8488967002?gh_jid=8488967002",
           "locations": [
             "Pau, Pyr\u00e9n\u00e9es-Atlantiques, France"
+          ],
+          "countries": [
+            "France"
+          ],
+          "workplace": null,
+          "department": "Field Sales",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Conseiller(\u00e8re) commercial(e) terrain exp\u00e9riment\u00e9(e)\u00a0ind\u00e9pendant",
+          "url": "https://sumup.com/careers/positions/8370140002?gh_jid=8370140002",
+          "locations": [
+            "Arcachon, Gironde, France; Bergerac, Dordogne, France"
           ],
           "countries": [
             "France"
@@ -90007,20 +90090,6 @@
         },
         {
           "title": "Conseiller(\u00e8re) commercial(e) terrain exp\u00e9riment\u00e9(e)\u00a0ind\u00e9pendant",
-          "url": "https://sumup.com/careers/positions/7988602002?gh_jid=7988602002",
-          "locations": [
-            "Brest, Finist\u00e8re, France"
-          ],
-          "countries": [
-            "France"
-          ],
-          "workplace": null,
-          "department": "Field Sales",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Conseiller(\u00e8re) commercial(e) terrain exp\u00e9riment\u00e9(e)\u00a0ind\u00e9pendant",
           "url": "https://sumup.com/careers/positions/7988641002?gh_jid=7988641002",
           "locations": [
             "Saint-Nazaire, Loire-Atlantique, France"
@@ -90035,9 +90104,23 @@
         },
         {
           "title": "Conseiller(\u00e8re) commercial(e) terrain exp\u00e9riment\u00e9(e)\u00a0ind\u00e9pendant",
-          "url": "https://sumup.com/careers/positions/8370140002?gh_jid=8370140002",
+          "url": "https://sumup.com/careers/positions/8355673002?gh_jid=8355673002",
           "locations": [
-            "Arcachon, Gironde, France; Bergerac, Dordogne, France"
+            "Poitiers, Vienne, France"
+          ],
+          "countries": [
+            "France"
+          ],
+          "workplace": null,
+          "department": "Field Sales",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Conseiller(\u00e8re) commercial(e) terrain exp\u00e9riment\u00e9(e)\u00a0 ind\u00e9pendant",
+          "url": "https://sumup.com/careers/positions/7988683002?gh_jid=7988683002",
+          "locations": [
+            "Tours, Indre-et-Loire, France"
           ],
           "countries": [
             "France"
@@ -90080,20 +90163,6 @@
           "url": "https://sumup.com/careers/positions/7988613002?gh_jid=7988613002",
           "locations": [
             "Saint-Malo, Ille-et-Vilaine, France"
-          ],
-          "countries": [
-            "France"
-          ],
-          "workplace": null,
-          "department": "Field Sales",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Conseiller(\u00e8re) commercial(e) terrain exp\u00e9riment\u00e9(e)\u00a0 ind\u00e9pendant",
-          "url": "https://sumup.com/careers/positions/7988683002?gh_jid=7988683002",
-          "locations": [
-            "Tours, Indre-et-Loire, France"
           ],
           "countries": [
             "France"
@@ -90301,20 +90370,6 @@
         },
         {
           "title": "Erfahrener Au\u00dfendienstmitarbeiter (m/w/d)",
-          "url": "https://sumup.com/careers/positions/7869240002?gh_jid=7869240002",
-          "locations": [
-            "Dortmund, North Rhine-Westphalia, Germany"
-          ],
-          "countries": [
-            "Germany"
-          ],
-          "workplace": null,
-          "department": "Field Sales",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Erfahrener Au\u00dfendienstmitarbeiter (m/w/d)",
           "url": "https://sumup.com/careers/positions/8317973002?gh_jid=8317973002",
           "locations": [
             "D\u00fcsseldorf, North Rhine-Westphalia, Germany"
@@ -90329,9 +90384,9 @@
         },
         {
           "title": "Erfahrener Au\u00dfendienstmitarbeiter (m/w/d)",
-          "url": "https://sumup.com/careers/positions/7945103002?gh_jid=7945103002",
+          "url": "https://sumup.com/careers/positions/7869240002?gh_jid=7869240002",
           "locations": [
-            "Cologne, Germany"
+            "Dortmund, North Rhine-Westphalia, Germany"
           ],
           "countries": [
             "Germany"
@@ -90356,13 +90411,13 @@
           "hire_from_abroad": "unknown"
         },
         {
-          "title": "Ervaren buitendienstmedewerker",
-          "url": "https://sumup.com/careers/positions/8183477002?gh_jid=8183477002",
+          "title": "Erfahrener Au\u00dfendienstmitarbeiter (m/w/d)",
+          "url": "https://sumup.com/careers/positions/7945103002?gh_jid=7945103002",
           "locations": [
-            "Rotterdam, South Holland, Netherlands"
+            "Cologne, Germany"
           ],
           "countries": [
-            "Netherlands"
+            "Germany"
           ],
           "workplace": null,
           "department": "Field Sales",
@@ -90374,6 +90429,20 @@
           "url": "https://sumup.com/careers/positions/8874545002?gh_jid=8874545002",
           "locations": [
             "Amsterdam, Netherlands; Rotterdam, South Holland, Netherlands"
+          ],
+          "countries": [
+            "Netherlands"
+          ],
+          "workplace": null,
+          "department": "Field Sales",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Ervaren buitendienstmedewerker",
+          "url": "https://sumup.com/careers/positions/8183477002?gh_jid=8183477002",
+          "locations": [
+            "Rotterdam, South Holland, Netherlands"
           ],
           "countries": [
             "Netherlands"
@@ -90399,9 +90468,9 @@
         },
         {
           "title": "Experienced Field Sales Consultant",
-          "url": "https://sumup.com/careers/positions/8870907002?gh_jid=8870907002",
+          "url": "https://sumup.com/careers/positions/8874361002?gh_jid=8874361002",
           "locations": [
-            "Waterford, Ireland"
+            "Dublin, Dublin, Ireland"
           ],
           "countries": [
             "Ireland"
@@ -90427,12 +90496,12 @@
         },
         {
           "title": "Experienced Field Sales Consultant",
-          "url": "https://sumup.com/careers/positions/8878859002?gh_jid=8878859002",
+          "url": "https://sumup.com/careers/positions/8871001002?gh_jid=8871001002",
           "locations": [
-            "Liverpool, England, United Kingdom"
+            "Offaly, Ireland"
           ],
           "countries": [
-            "United Kingdom"
+            "Ireland"
           ],
           "workplace": null,
           "department": "Field Sales",
@@ -90455,6 +90524,104 @@
         },
         {
           "title": "Experienced Field Sales Consultant",
+          "url": "https://sumup.com/careers/positions/8870996002?gh_jid=8870996002",
+          "locations": [
+            "Longford, Ireland"
+          ],
+          "countries": [
+            "Ireland"
+          ],
+          "workplace": null,
+          "department": "Field Sales",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Experienced Field Sales Consultant",
+          "url": "https://sumup.com/careers/positions/8878859002?gh_jid=8878859002",
+          "locations": [
+            "Liverpool, England, United Kingdom"
+          ],
+          "countries": [
+            "United Kingdom"
+          ],
+          "workplace": null,
+          "department": "Field Sales",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Experienced Field Sales Consultant",
+          "url": "https://sumup.com/careers/positions/8870907002?gh_jid=8870907002",
+          "locations": [
+            "Waterford, Ireland"
+          ],
+          "countries": [
+            "Ireland"
+          ],
+          "workplace": null,
+          "department": "Field Sales",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Experienced Field Sales Consultant",
+          "url": "https://sumup.com/careers/positions/8209395002?gh_jid=8209395002",
+          "locations": [
+            "Lancaster, England, United Kingdom"
+          ],
+          "countries": [
+            "United Kingdom"
+          ],
+          "workplace": null,
+          "department": "Field Sales",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Experienced Field Sales Consultant",
+          "url": "https://sumup.com/careers/positions/8125775002?gh_jid=8125775002",
+          "locations": [
+            "Dublin, Dublin, Ireland"
+          ],
+          "countries": [
+            "Ireland"
+          ],
+          "workplace": null,
+          "department": "Field Sales",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Experienced Field Sales Consultant",
+          "url": "https://sumup.com/careers/positions/8871020002?gh_jid=8871020002",
+          "locations": [
+            "Tipperary, Ireland"
+          ],
+          "countries": [
+            "Ireland"
+          ],
+          "workplace": null,
+          "department": "Field Sales",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Experienced Field Sales Consultant",
+          "url": "https://sumup.com/careers/positions/8874270002?gh_jid=8874270002",
+          "locations": [
+            "London, England, United Kingdom"
+          ],
+          "countries": [
+            "United Kingdom"
+          ],
+          "workplace": null,
+          "department": "Field Sales",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Experienced Field Sales Consultant",
           "url": "https://sumup.com/careers/positions/8878886002?gh_jid=8878886002",
           "locations": [
             "Stoke-on-Trent, England, United Kingdom"
@@ -90469,9 +90636,9 @@
         },
         {
           "title": "Experienced Field Sales Consultant",
-          "url": "https://sumup.com/careers/positions/8871020002?gh_jid=8871020002",
+          "url": "https://sumup.com/careers/positions/8660631002?gh_jid=8660631002",
           "locations": [
-            "Tipperary, Ireland"
+            "Kilkenny, Ireland"
           ],
           "countries": [
             "Ireland"
@@ -90539,62 +90706,6 @@
         },
         {
           "title": "Experienced Field Sales Consultant",
-          "url": "https://sumup.com/careers/positions/8874270002?gh_jid=8874270002",
-          "locations": [
-            "London, England, United Kingdom"
-          ],
-          "countries": [
-            "United Kingdom"
-          ],
-          "workplace": null,
-          "department": "Field Sales",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Experienced Field Sales Consultant",
-          "url": "https://sumup.com/careers/positions/8870912002?gh_jid=8870912002",
-          "locations": [
-            "Laois, Ireland"
-          ],
-          "countries": [
-            "Ireland"
-          ],
-          "workplace": null,
-          "department": "Field Sales",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Experienced Field Sales Consultant",
-          "url": "https://sumup.com/careers/positions/8209395002?gh_jid=8209395002",
-          "locations": [
-            "Lancaster, England, United Kingdom"
-          ],
-          "countries": [
-            "United Kingdom"
-          ],
-          "workplace": null,
-          "department": "Field Sales",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Experienced Field Sales Consultant",
-          "url": "https://sumup.com/careers/positions/8660631002?gh_jid=8660631002",
-          "locations": [
-            "Kilkenny, Ireland"
-          ],
-          "countries": [
-            "Ireland"
-          ],
-          "workplace": null,
-          "department": "Field Sales",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Experienced Field Sales Consultant",
           "url": "https://sumup.com/careers/positions/8472179002?gh_jid=8472179002",
           "locations": [
             "Dartford, England, United Kingdom"
@@ -90609,51 +90720,9 @@
         },
         {
           "title": "Experienced Field Sales Consultant",
-          "url": "https://sumup.com/careers/positions/8871001002?gh_jid=8871001002",
+          "url": "https://sumup.com/careers/positions/8870912002?gh_jid=8870912002",
           "locations": [
-            "Offaly, Ireland"
-          ],
-          "countries": [
-            "Ireland"
-          ],
-          "workplace": null,
-          "department": "Field Sales",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Experienced Field Sales Consultant",
-          "url": "https://sumup.com/careers/positions/8874361002?gh_jid=8874361002",
-          "locations": [
-            "Dublin, Dublin, Ireland"
-          ],
-          "countries": [
-            "Ireland"
-          ],
-          "workplace": null,
-          "department": "Field Sales",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Experienced Field Sales Consultant",
-          "url": "https://sumup.com/careers/positions/8870996002?gh_jid=8870996002",
-          "locations": [
-            "Longford, Ireland"
-          ],
-          "countries": [
-            "Ireland"
-          ],
-          "workplace": null,
-          "department": "Field Sales",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Experienced Field Sales Consultant",
-          "url": "https://sumup.com/careers/positions/8125775002?gh_jid=8125775002",
-          "locations": [
-            "Dublin, Dublin, Ireland"
+            "Laois, Ireland"
           ],
           "countries": [
             "Ireland"
@@ -90917,9 +90986,9 @@
         },
         {
           "title": "Field Sales Executive",
-          "url": "https://sumup.com/careers/positions/8456531002?gh_jid=8456531002",
+          "url": "https://sumup.com/careers/positions/8209155002?gh_jid=8209155002",
           "locations": [
-            "Leeds, England, United Kingdom"
+            "St Albans, England, United Kingdom"
           ],
           "countries": [
             "United Kingdom"
@@ -90931,9 +91000,51 @@
         },
         {
           "title": "Field Sales Executive",
-          "url": "https://sumup.com/careers/positions/8456529002?gh_jid=8456529002",
+          "url": "https://sumup.com/careers/positions/7786542002?gh_jid=7786542002",
           "locations": [
-            "Hull, England, United Kingdom"
+            "Belfast, Northern Ireland, United Kingdom"
+          ],
+          "countries": [
+            "United Kingdom"
+          ],
+          "workplace": null,
+          "department": "Field Sales",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Field Sales Executive",
+          "url": "https://sumup.com/careers/positions/8638015002?gh_jid=8638015002",
+          "locations": [
+            "Twickenham, England, United Kingdom"
+          ],
+          "countries": [
+            "United Kingdom"
+          ],
+          "workplace": null,
+          "department": "Field Sales",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Field Sales Executive",
+          "url": "https://sumup.com/careers/positions/7810145002?gh_jid=7810145002",
+          "locations": [
+            "Stevenage, England, United Kingdom"
+          ],
+          "countries": [
+            "United Kingdom"
+          ],
+          "workplace": null,
+          "department": "Field Sales",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Field Sales Executive",
+          "url": "https://sumup.com/careers/positions/8642854002?gh_jid=8642854002",
+          "locations": [
+            "Londonderry, Northern Ireland, United Kingdom"
           ],
           "countries": [
             "United Kingdom"
@@ -90948,6 +91059,174 @@
           "url": "https://sumup.com/careers/positions/8456554002?gh_jid=8456554002",
           "locations": [
             "Nottingham, England, United Kingdom"
+          ],
+          "countries": [
+            "United Kingdom"
+          ],
+          "workplace": null,
+          "department": "Field Sales",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Field Sales Executive",
+          "url": "https://sumup.com/careers/positions/8456566002?gh_jid=8456566002",
+          "locations": [
+            "Sheffield, England, United Kingdom"
+          ],
+          "countries": [
+            "United Kingdom"
+          ],
+          "workplace": null,
+          "department": "Field Sales",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Field Sales Executive",
+          "url": "https://sumup.com/careers/positions/8209186002?gh_jid=8209186002",
+          "locations": [
+            "Guildford, England, United Kingdom"
+          ],
+          "countries": [
+            "United Kingdom"
+          ],
+          "workplace": null,
+          "department": "Field Sales",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Field Sales Executive",
+          "url": "https://sumup.com/careers/positions/8209216002?gh_jid=8209216002",
+          "locations": [
+            "Northampton, England, United Kingdom"
+          ],
+          "countries": [
+            "United Kingdom"
+          ],
+          "workplace": null,
+          "department": "Field Sales",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Field Sales Executive",
+          "url": "https://sumup.com/careers/positions/7810182002?gh_jid=7810182002",
+          "locations": [
+            "Chelmsford, England, United Kingdom"
+          ],
+          "countries": [
+            "United Kingdom"
+          ],
+          "workplace": null,
+          "department": "Field Sales",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Field Sales Executive",
+          "url": "https://sumup.com/careers/positions/8221929002?gh_jid=8221929002",
+          "locations": [
+            "Hemel Hempstead, England, United Kingdom"
+          ],
+          "countries": [
+            "United Kingdom"
+          ],
+          "workplace": null,
+          "department": "Field Sales",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Field Sales Executive",
+          "url": "https://sumup.com/careers/positions/8644570002?gh_jid=8644570002",
+          "locations": [
+            "Redhill, England, United Kingdom"
+          ],
+          "countries": [
+            "United Kingdom"
+          ],
+          "workplace": null,
+          "department": "Field Sales",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Field Sales Executive",
+          "url": "https://sumup.com/careers/positions/8209409002?gh_jid=8209409002",
+          "locations": [
+            "Swansea, Wales, United Kingdom"
+          ],
+          "countries": [
+            "United Kingdom"
+          ],
+          "workplace": null,
+          "department": "Field Sales",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Field Sales Executive",
+          "url": "https://sumup.com/careers/positions/8493810002?gh_jid=8493810002",
+          "locations": [
+            "Oxford, England, United Kingdom"
+          ],
+          "countries": [
+            "United Kingdom"
+          ],
+          "workplace": null,
+          "department": "Field Sales",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Field Sales Executive",
+          "url": "https://sumup.com/careers/positions/7810142002?gh_jid=7810142002",
+          "locations": [
+            "Ipswich, England, United Kingdom"
+          ],
+          "countries": [
+            "United Kingdom"
+          ],
+          "workplace": null,
+          "department": "Field Sales",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Field Sales Executive",
+          "url": "https://sumup.com/careers/positions/8209165002?gh_jid=8209165002",
+          "locations": [
+            "Enfield, England, United Kingdom"
+          ],
+          "countries": [
+            "United Kingdom"
+          ],
+          "workplace": null,
+          "department": "Field Sales",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Field Sales Executive",
+          "url": "https://sumup.com/careers/positions/7810136002?gh_jid=7810136002",
+          "locations": [
+            "Peterborough, England, United Kingdom"
+          ],
+          "countries": [
+            "United Kingdom"
+          ],
+          "workplace": null,
+          "department": "Field Sales",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Field Sales Executive",
+          "url": "https://sumup.com/careers/positions/7786771002?gh_jid=7786771002",
+          "locations": [
+            "Colchester, England, United Kingdom"
           ],
           "countries": [
             "United Kingdom"
@@ -90987,289 +91266,9 @@
         },
         {
           "title": "Field Sales Executive",
-          "url": "https://sumup.com/careers/positions/8456566002?gh_jid=8456566002",
-          "locations": [
-            "Sheffield, England, United Kingdom"
-          ],
-          "countries": [
-            "United Kingdom"
-          ],
-          "workplace": null,
-          "department": "Field Sales",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Field Sales Executive",
-          "url": "https://sumup.com/careers/positions/8493810002?gh_jid=8493810002",
-          "locations": [
-            "Oxford, England, United Kingdom"
-          ],
-          "countries": [
-            "United Kingdom"
-          ],
-          "workplace": null,
-          "department": "Field Sales",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Field Sales Executive",
-          "url": "https://sumup.com/careers/positions/7810145002?gh_jid=7810145002",
-          "locations": [
-            "Stevenage, England, United Kingdom"
-          ],
-          "countries": [
-            "United Kingdom"
-          ],
-          "workplace": null,
-          "department": "Field Sales",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Field Sales Executive",
-          "url": "https://sumup.com/careers/positions/8209216002?gh_jid=8209216002",
-          "locations": [
-            "Northampton, England, United Kingdom"
-          ],
-          "countries": [
-            "United Kingdom"
-          ],
-          "workplace": null,
-          "department": "Field Sales",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Field Sales Executive",
-          "url": "https://sumup.com/careers/positions/8209409002?gh_jid=8209409002",
-          "locations": [
-            "Swansea, Wales, United Kingdom"
-          ],
-          "countries": [
-            "United Kingdom"
-          ],
-          "workplace": null,
-          "department": "Field Sales",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Field Sales Executive",
-          "url": "https://sumup.com/careers/positions/8221929002?gh_jid=8221929002",
-          "locations": [
-            "Hemel Hempstead, England, United Kingdom"
-          ],
-          "countries": [
-            "United Kingdom"
-          ],
-          "workplace": null,
-          "department": "Field Sales",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Field Sales Executive",
-          "url": "https://sumup.com/careers/positions/8209162002?gh_jid=8209162002",
-          "locations": [
-            "Luton, England, United Kingdom"
-          ],
-          "countries": [
-            "United Kingdom"
-          ],
-          "workplace": null,
-          "department": "Field Sales",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Field Sales Executive",
-          "url": "https://sumup.com/careers/positions/7810142002?gh_jid=7810142002",
-          "locations": [
-            "Ipswich, England, United Kingdom"
-          ],
-          "countries": [
-            "United Kingdom"
-          ],
-          "workplace": null,
-          "department": "Field Sales",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Field Sales Executive",
-          "url": "https://sumup.com/careers/positions/8209155002?gh_jid=8209155002",
-          "locations": [
-            "St Albans, England, United Kingdom"
-          ],
-          "countries": [
-            "United Kingdom"
-          ],
-          "workplace": null,
-          "department": "Field Sales",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Field Sales Executive",
-          "url": "https://sumup.com/careers/positions/8456536002?gh_jid=8456536002",
-          "locations": [
-            "Bradford, England, United Kingdom"
-          ],
-          "countries": [
-            "United Kingdom"
-          ],
-          "workplace": null,
-          "department": "Field Sales",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Field Sales Executive",
-          "url": "https://sumup.com/careers/positions/8456534002?gh_jid=8456534002",
-          "locations": [
-            "York, England, United Kingdom"
-          ],
-          "countries": [
-            "United Kingdom"
-          ],
-          "workplace": null,
-          "department": "Field Sales",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Field Sales Executive",
-          "url": "https://sumup.com/careers/positions/7810182002?gh_jid=7810182002",
-          "locations": [
-            "Chelmsford, England, United Kingdom"
-          ],
-          "countries": [
-            "United Kingdom"
-          ],
-          "workplace": null,
-          "department": "Field Sales",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Field Sales Executive",
-          "url": "https://sumup.com/careers/positions/8209186002?gh_jid=8209186002",
-          "locations": [
-            "Guildford, England, United Kingdom"
-          ],
-          "countries": [
-            "United Kingdom"
-          ],
-          "workplace": null,
-          "department": "Field Sales",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Field Sales Executive",
-          "url": "https://sumup.com/careers/positions/8209165002?gh_jid=8209165002",
-          "locations": [
-            "Enfield, England, United Kingdom"
-          ],
-          "countries": [
-            "United Kingdom"
-          ],
-          "workplace": null,
-          "department": "Field Sales",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Field Sales Executive",
-          "url": "https://sumup.com/careers/positions/7786542002?gh_jid=7786542002",
-          "locations": [
-            "Belfast, Northern Ireland, United Kingdom"
-          ],
-          "countries": [
-            "United Kingdom"
-          ],
-          "workplace": null,
-          "department": "Field Sales",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Field Sales Executive",
           "url": "https://sumup.com/careers/positions/7810133002?gh_jid=7810133002",
           "locations": [
             "Norwich, England, United Kingdom"
-          ],
-          "countries": [
-            "United Kingdom"
-          ],
-          "workplace": null,
-          "department": "Field Sales",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Field Sales Executive",
-          "url": "https://sumup.com/careers/positions/7786771002?gh_jid=7786771002",
-          "locations": [
-            "Colchester, England, United Kingdom"
-          ],
-          "countries": [
-            "United Kingdom"
-          ],
-          "workplace": null,
-          "department": "Field Sales",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Field Sales Executive",
-          "url": "https://sumup.com/careers/positions/8644570002?gh_jid=8644570002",
-          "locations": [
-            "Redhill, England, United Kingdom"
-          ],
-          "countries": [
-            "United Kingdom"
-          ],
-          "workplace": null,
-          "department": "Field Sales",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Field Sales Executive",
-          "url": "https://sumup.com/careers/positions/8642854002?gh_jid=8642854002",
-          "locations": [
-            "Londonderry, Northern Ireland, United Kingdom"
-          ],
-          "countries": [
-            "United Kingdom"
-          ],
-          "workplace": null,
-          "department": "Field Sales",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Field Sales Executive",
-          "url": "https://sumup.com/careers/positions/8638015002?gh_jid=8638015002",
-          "locations": [
-            "Twickenham, England, United Kingdom"
-          ],
-          "countries": [
-            "United Kingdom"
-          ],
-          "workplace": null,
-          "department": "Field Sales",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Field Sales Executive",
-          "url": "https://sumup.com/careers/positions/8456541002?gh_jid=8456541002",
-          "locations": [
-            "Derby, England, United Kingdom"
           ],
           "countries": [
             "United Kingdom"
@@ -91309,9 +91308,9 @@
         },
         {
           "title": "Field Sales Executive",
-          "url": "https://sumup.com/careers/positions/7810136002?gh_jid=7810136002",
+          "url": "https://sumup.com/careers/positions/8456534002?gh_jid=8456534002",
           "locations": [
-            "Peterborough, England, United Kingdom"
+            "York, England, United Kingdom"
           ],
           "countries": [
             "United Kingdom"
@@ -91323,9 +91322,65 @@
         },
         {
           "title": "Field Sales Executive",
-          "url": "https://sumup.com/careers/positions/8902360002?gh_jid=8902360002",
+          "url": "https://sumup.com/careers/positions/8456536002?gh_jid=8456536002",
           "locations": [
-            "Middlesbrough, England, United Kingdom"
+            "Bradford, England, United Kingdom"
+          ],
+          "countries": [
+            "United Kingdom"
+          ],
+          "workplace": null,
+          "department": "Field Sales",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Field Sales Executive",
+          "url": "https://sumup.com/careers/positions/8456541002?gh_jid=8456541002",
+          "locations": [
+            "Derby, England, United Kingdom"
+          ],
+          "countries": [
+            "United Kingdom"
+          ],
+          "workplace": null,
+          "department": "Field Sales",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Field Sales Executive",
+          "url": "https://sumup.com/careers/positions/8209162002?gh_jid=8209162002",
+          "locations": [
+            "Luton, England, United Kingdom"
+          ],
+          "countries": [
+            "United Kingdom"
+          ],
+          "workplace": null,
+          "department": "Field Sales",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Field Sales Executive",
+          "url": "https://sumup.com/careers/positions/8456531002?gh_jid=8456531002",
+          "locations": [
+            "Leeds, England, United Kingdom"
+          ],
+          "countries": [
+            "United Kingdom"
+          ],
+          "workplace": null,
+          "department": "Field Sales",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Field Sales Executive",
+          "url": "https://sumup.com/careers/positions/8456529002?gh_jid=8456529002",
+          "locations": [
+            "Hull, England, United Kingdom"
           ],
           "countries": [
             "United Kingdom"
@@ -91340,6 +91395,20 @@
           "url": "https://sumup.com/careers/positions/8905986002?gh_jid=8905986002",
           "locations": [
             "Durham, England, United Kingdom"
+          ],
+          "countries": [
+            "United Kingdom"
+          ],
+          "workplace": null,
+          "department": "Field Sales",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Field Sales Executive",
+          "url": "https://sumup.com/careers/positions/8902360002?gh_jid=8902360002",
+          "locations": [
+            "Middlesbrough, England, United Kingdom"
           ],
           "countries": [
             "United Kingdom"
@@ -91379,9 +91448,9 @@
         },
         {
           "title": "Field Sales Manager (m/w/d)",
-          "url": "https://sumup.com/careers/positions/8126118002?gh_jid=8126118002",
+          "url": "https://sumup.com/careers/positions/8082105002?gh_jid=8082105002",
           "locations": [
-            "Dortmund, North Rhine-Westphalia, Germany"
+            "Cologne, Germany"
           ],
           "countries": [
             "Germany"
@@ -91393,9 +91462,9 @@
         },
         {
           "title": "Field Sales Manager (m/w/d)",
-          "url": "https://sumup.com/careers/positions/8082105002?gh_jid=8082105002",
+          "url": "https://sumup.com/careers/positions/8126118002?gh_jid=8126118002",
           "locations": [
-            "Cologne, Germany"
+            "Dortmund, North Rhine-Westphalia, Germany"
           ],
           "countries": [
             "Germany"
@@ -91435,9 +91504,9 @@
         },
         {
           "title": "Field Sales Manager (m/w/d)",
-          "url": "https://sumup.com/careers/positions/8082062002?gh_jid=8082062002",
+          "url": "https://sumup.com/careers/positions/8468108002?gh_jid=8468108002",
           "locations": [
-            "D\u00fcsseldorf, North Rhine-Westphalia, Germany"
+            "M\u00fcnster, North Rhine-Westphalia, Germany"
           ],
           "countries": [
             "Germany"
@@ -91449,9 +91518,9 @@
         },
         {
           "title": "Field Sales Manager (m/w/d)",
-          "url": "https://sumup.com/careers/positions/8468108002?gh_jid=8468108002",
+          "url": "https://sumup.com/careers/positions/8082062002?gh_jid=8082062002",
           "locations": [
-            "M\u00fcnster, North Rhine-Westphalia, Germany"
+            "D\u00fcsseldorf, North Rhine-Westphalia, Germany"
           ],
           "countries": [
             "Germany"
@@ -91477,12 +91546,12 @@
         },
         {
           "title": "Field Sales Territory Manager",
-          "url": "https://sumup.com/careers/positions/8902104002?gh_jid=8902104002",
+          "url": "https://sumup.com/careers/positions/8905780002?gh_jid=8905780002",
           "locations": [
-            "Stockholm, Sweden"
+            "Tampere, Pirkanmaa, Finland"
           ],
           "countries": [
-            "Sweden"
+            "Finland"
           ],
           "workplace": null,
           "department": "Field Sales",
@@ -91505,12 +91574,12 @@
         },
         {
           "title": "Field Sales Territory Manager",
-          "url": "https://sumup.com/careers/positions/8905780002?gh_jid=8905780002",
+          "url": "https://sumup.com/careers/positions/8902104002?gh_jid=8902104002",
           "locations": [
-            "Tampere, Pirkanmaa, Finland"
+            "Stockholm, Sweden"
           ],
           "countries": [
-            "Finland"
+            "Sweden"
           ],
           "workplace": null,
           "department": "Field Sales",
@@ -91603,12 +91672,12 @@
         },
         {
           "title": "Head of Pricing & Monetisation",
-          "url": "https://sumup.com/careers/positions/8885083002?gh_jid=8885083002",
+          "url": "https://sumup.com/careers/positions/8885084002?gh_jid=8885084002",
           "locations": [
-            "Berlin, Germany"
+            "London, England, United Kingdom"
           ],
           "countries": [
-            "Germany"
+            "United Kingdom"
           ],
           "workplace": null,
           "department": "Finance",
@@ -91617,12 +91686,12 @@
         },
         {
           "title": "Head of Pricing & Monetisation",
-          "url": "https://sumup.com/careers/positions/8885084002?gh_jid=8885084002",
+          "url": "https://sumup.com/careers/positions/8885083002?gh_jid=8885083002",
           "locations": [
-            "London, England, United Kingdom"
+            "Berlin, Germany"
           ],
           "countries": [
-            "United Kingdom"
+            "Germany"
           ],
           "workplace": null,
           "department": "Finance",
@@ -92051,12 +92120,12 @@
         },
         {
           "title": "Senior iOS Engineer (KMP) - POS",
-          "url": "https://sumup.com/careers/positions/8862799002?gh_jid=8862799002",
+          "url": "https://sumup.com/careers/positions/8773681002?gh_jid=8773681002",
           "locations": [
-            "Paris, Paris, France"
+            "Berlin, Germany"
           ],
           "countries": [
-            "France"
+            "Germany"
           ],
           "workplace": null,
           "department": "iOS",
@@ -92065,12 +92134,12 @@
         },
         {
           "title": "Senior iOS Engineer (KMP) - POS",
-          "url": "https://sumup.com/careers/positions/8773681002?gh_jid=8773681002",
+          "url": "https://sumup.com/careers/positions/8862799002?gh_jid=8862799002",
           "locations": [
-            "Berlin, Germany"
+            "Paris, Paris, France"
           ],
           "countries": [
-            "Germany"
+            "France"
           ],
           "workplace": null,
           "department": "iOS",
@@ -92415,12 +92484,12 @@
         },
         {
           "title": "Workday Specialist",
-          "url": "https://sumup.com/careers/positions/8547633002?gh_jid=8547633002",
+          "url": "https://sumup.com/careers/positions/8547634002?gh_jid=8547634002",
           "locations": [
-            "Berlin, Germany"
+            "Barcelona, Barcelona, Spain"
           ],
           "countries": [
-            "Germany"
+            "Spain"
           ],
           "workplace": null,
           "department": "People",
@@ -92429,12 +92498,12 @@
         },
         {
           "title": "Workday Specialist",
-          "url": "https://sumup.com/careers/positions/8547634002?gh_jid=8547634002",
+          "url": "https://sumup.com/careers/positions/8547633002?gh_jid=8547633002",
           "locations": [
-            "Barcelona, Barcelona, Spain"
+            "Berlin, Germany"
           ],
           "countries": [
-            "Spain"
+            "Germany"
           ],
           "workplace": null,
           "department": "People",
@@ -97306,9 +97375,9 @@
       "roles": [
         {
           "title": "Forward-Deployed AI Engineer",
-          "url": "https://job-boards.greenhouse.io/turing/jobs/6192725004",
+          "url": "https://job-boards.greenhouse.io/turing/jobs/6192729004",
           "locations": [
-            "Bengaluru, Karnataka, India"
+            "Hyderabad, Telangana, India"
           ],
           "countries": [
             "India"
@@ -97320,9 +97389,9 @@
         },
         {
           "title": "Forward-Deployed AI Engineer",
-          "url": "https://job-boards.greenhouse.io/turing/jobs/6192729004",
+          "url": "https://job-boards.greenhouse.io/turing/jobs/6192725004",
           "locations": [
-            "Hyderabad, Telangana, India"
+            "Bengaluru, Karnataka, India"
           ],
           "countries": [
             "India"
