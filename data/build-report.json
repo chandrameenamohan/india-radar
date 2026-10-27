@@ -3,8 +3,8 @@
   "checked": 814,
   "unchecked": 2212,
   "counts": {
-    "listed": 360,
-    "no-target-roles": 454,
+    "listed": 362,
+    "no-target-roles": 452,
     "slug-unresolved": 2189,
     "probe-failed": 0,
     "empty-board-unverified": 10,
@@ -25,6 +25,7 @@
     "Alpaca",
     "AlphaSense",
     "Ambient.ai",
+    "Amperity",
     "Anchorage Digital",
     "Andela",
     "Anima",
@@ -38,6 +39,7 @@
     "Armada",
     "Ashby",
     "Aspora",
+    "Assembled",
     "AssemblyAI",
     "Astronomer",
     "AtoB",
@@ -127,7 +129,6 @@
     "Forter",
     "Foundational Industries",
     "FourKites",
-    "Front",
     "FullStory",
     "Fundamental",
     "Gather AI",
@@ -200,6 +201,7 @@
     "Lucis",
     "Luma AI",
     "MOLOCO",
+    "MUBI",
     "MURAL",
     "MaintainX",
     "MarqVision",
@@ -508,7 +510,7 @@
     "American Terawatt": "slug-unresolved",
     "Amgine Technologies (US)": "slug-unresolved",
     "Ammortal": "slug-unresolved",
-    "Amperity": "no-target-roles",
+    "Amperity": "listed",
     "Amplifier": "slug-unresolved",
     "Amplitude": "slug-unresolved",
     "Anaconda": "slug-unresolved",
@@ -575,7 +577,7 @@
     "AskElephant.ai": "slug-unresolved",
     "Aspire": "slug-unresolved",
     "Aspora": "listed",
-    "Assembled": "no-target-roles",
+    "Assembled": "listed",
     "AssemblyAI": "listed",
     "Asset Entities": "slug-unresolved",
     "AssetWatch": "no-target-roles",
@@ -1424,7 +1426,7 @@
     "Freshpaint": "no-target-roles",
     "Friday Harbor": "slug-unresolved",
     "Froda": "slug-unresolved",
-    "Front": "listed",
+    "Front": "no-target-roles",
     "Frubana Inc": "slug-unresolved",
     "FullStory": "listed",
     "Function Health": "slug-unresolved",
@@ -1944,7 +1946,7 @@
     "MOLOCO": "listed",
     "MRToolworx": "slug-unresolved",
     "MTailor": "slug-unresolved",
-    "MUBI": "no-target-roles",
+    "MUBI": "listed",
     "MURAL": "listed",
     "MX": "slug-unresolved",
     "MachGen AI": "slug-unresolved",
@@ -3401,7 +3403,9 @@
     "xLight": "slug-unresolved",
     "zeroheight": "slug-unresolved"
   },
-  "departed": {},
+  "departed": {
+    "Front": "no-target-roles"
+  },
   "websites": {
     "with_website": 1928,
     "slug_unresolved_with_website": 1196,
@@ -3424,19 +3428,19 @@
   },
   "countries": {
     "India": 120,
-    "United Kingdom": 260,
+    "United Kingdom": 261,
     "Ireland": 52,
     "Germany": 101,
     "Netherlands": 45,
-    "France": 60,
-    "Spain": 63,
+    "France": 61,
+    "Spain": 62,
     "Sweden": 33,
-    "Denmark": 17,
+    "Denmark": 16,
     "Norway": 4,
     "Finland": 8,
-    "Japan": 59,
+    "Japan": 58,
     "Singapore": 73,
-    "Australia": 85,
+    "Australia": 83,
     "New Zealand": 6
   },
   "mca": {
@@ -4038,6 +4042,23 @@
         ]
       },
       {
+        "name": "Amperity",
+        "confidence": "exact",
+        "why": "unreachable; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "13962739",
+            "name": "AMPERITY UK LIMITED",
+            "status": "active",
+            "incorporated": "2022-03-08",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
         "name": "Andela",
         "confidence": "exact",
         "why": "silent; one exact-tier name match",
@@ -4152,6 +4173,63 @@
             "name": "ARQ LIMITED",
             "status": "dissolved",
             "incorporated": "2015-08-08",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Assembled",
+        "confidence": "prefix",
+        "why": "no website; 18 companies reach the prefix tier",
+        "candidates": [
+          {
+            "number": "14815416",
+            "name": "ASSEMBLED BY ARTISANS LTD",
+            "status": "active",
+            "incorporated": "2023-04-19",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "16440799",
+            "name": "ASSEMBLED EUROPE LIMITED",
+            "status": "active",
+            "incorporated": "2025-05-09",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "09886417",
+            "name": "ASSEMBLED GALA LTD",
+            "status": "active",
+            "incorporated": "2015-11-24",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "14419850",
+            "name": "ASSEMBLED HEALTHCARE LTD",
+            "status": "active",
+            "incorporated": "2022-10-14",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "02953245",
+            "name": "ASSEMBLED JOINERY LIMITED",
+            "status": "active",
+            "incorporated": "1994-07-27",
             "locality": "",
             "postcode": "",
             "sic": [],
@@ -6135,6 +6213,23 @@
         ]
       },
       {
+        "name": "MUBI",
+        "confidence": "exact",
+        "why": "silent; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "07385593",
+            "name": "MUBI UK LIMITED",
+            "status": "active",
+            "incorporated": "2010-09-23",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
         "name": "MURAL",
         "confidence": "exact",
         "why": "silent; 4 companies reach the exact tier",
@@ -7124,23 +7219,6 @@
             "name": "TAILSCALE UK LIMITED",
             "status": "active",
             "incorporated": "2023-05-10",
-            "locality": "",
-            "postcode": "",
-            "sic": [],
-            "kind": ""
-          }
-        ]
-      },
-      {
-        "name": "Talkdesk",
-        "confidence": "prefix",
-        "why": "silent; one prefix-tier name match",
-        "candidates": [
-          {
-            "number": "11609285",
-            "name": "TALKDESK U.K. LIMITED",
-            "status": "active",
-            "incorporated": "2018-10-08",
             "locality": "",
             "postcode": "",
             "sic": [],
