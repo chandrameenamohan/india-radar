@@ -1,11 +1,11 @@
 {
   "corpus_size": 3026,
-  "checked": 814,
-  "unchecked": 2212,
+  "checked": 812,
+  "unchecked": 2214,
   "counts": {
-    "listed": 362,
-    "no-target-roles": 452,
-    "slug-unresolved": 2189,
+    "listed": 361,
+    "no-target-roles": 451,
+    "slug-unresolved": 2191,
     "probe-failed": 0,
     "empty-board-unverified": 10,
     "not-qualified": 0,
@@ -49,7 +49,6 @@
     "Aviatrix",
     "Avoca",
     "Baseten",
-    "Beacon",
     "Beamery",
     "Benchling",
     "BitPanda",
@@ -662,7 +661,7 @@
     "Basis": "slug-unresolved",
     "Baubap": "no-target-roles",
     "BeZero": "slug-unresolved",
-    "Beacon": "listed",
+    "Beacon": "slug-unresolved",
     "Beacons": "no-target-roles",
     "Beagle Technology": "slug-unresolved",
     "Beamery": "listed",
@@ -1820,7 +1819,7 @@
     "Labdoor": "slug-unresolved",
     "Labs": "slug-unresolved",
     "Labs Companies": "slug-unresolved",
-    "Lago": "no-target-roles",
+    "Lago": "slug-unresolved",
     "Lambda": "slug-unresolved",
     "Lambda Labs": "listed",
     "LanceDB": "no-target-roles",
@@ -3404,11 +3403,11 @@
     "zeroheight": "slug-unresolved"
   },
   "departed": {
-    "Front": "no-target-roles"
+    "Beacon": "slug-unresolved"
   },
   "websites": {
     "with_website": 1928,
-    "slug_unresolved_with_website": 1196,
+    "slug_unresolved_with_website": 1198,
     "slug_unresolved_without_website": 993
   },
   "shared_boards": {
@@ -3427,12 +3426,12 @@
     "Insider": "Business Insider"
   },
   "countries": {
-    "India": 120,
+    "India": 119,
     "United Kingdom": 261,
     "Ireland": 52,
-    "Germany": 101,
+    "Germany": 100,
     "Netherlands": 45,
-    "France": 61,
+    "France": 62,
     "Spain": 62,
     "Sweden": 33,
     "Denmark": 16,
