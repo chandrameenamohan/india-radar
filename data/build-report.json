@@ -3,8 +3,8 @@
   "checked": 812,
   "unchecked": 2214,
   "counts": {
-    "listed": 361,
-    "no-target-roles": 451,
+    "listed": 360,
+    "no-target-roles": 452,
     "slug-unresolved": 2191,
     "probe-failed": 0,
     "empty-board-unverified": 10,
@@ -336,7 +336,6 @@
     "Tipalti",
     "Together AI",
     "Torq",
-    "Tractable",
     "Transmit Security",
     "Trigger.dev",
     "Triomics",
@@ -3057,7 +3056,7 @@
     "Toss": "no-target-roles",
     "Touareg Group Technologies": "slug-unresolved",
     "Tovala": "no-target-roles",
-    "Tractable": "listed",
+    "Tractable": "no-target-roles",
     "Tractian": "slug-unresolved",
     "Trade Republic": "no-target-roles",
     "Tradeshift": "slug-unresolved",
@@ -3403,7 +3402,7 @@
     "zeroheight": "slug-unresolved"
   },
   "departed": {
-    "Beacon": "slug-unresolved"
+    "Tractable": "no-target-roles"
   },
   "websites": {
     "with_website": 1928,
@@ -3426,13 +3425,13 @@
     "Insider": "Business Insider"
   },
   "countries": {
-    "India": 119,
-    "United Kingdom": 261,
+    "India": 118,
+    "United Kingdom": 260,
     "Ireland": 52,
-    "Germany": 100,
+    "Germany": 102,
     "Netherlands": 45,
     "France": 62,
-    "Spain": 62,
+    "Spain": 63,
     "Sweden": 33,
     "Denmark": 16,
     "Norway": 4,
