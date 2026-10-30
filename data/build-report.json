@@ -1,11 +1,11 @@
 {
   "corpus_size": 3026,
-  "checked": 812,
-  "unchecked": 2214,
+  "checked": 811,
+  "unchecked": 2215,
   "counts": {
-    "listed": 360,
+    "listed": 359,
     "no-target-roles": 452,
-    "slug-unresolved": 2191,
+    "slug-unresolved": 2192,
     "probe-failed": 0,
     "empty-board-unverified": 10,
     "not-qualified": 0,
@@ -183,7 +183,6 @@
     "Kpler",
     "Lambda Labs",
     "LangChain",
-    "Lattice",
     "LaunchDarkly",
     "Legion Health",
     "Legora",
@@ -333,7 +332,6 @@
     "Thought Machine",
     "Tide",
     "Tines",
-    "Tipalti",
     "Together AI",
     "Torq",
     "Transmit Security",
@@ -363,6 +361,7 @@
     "Xendit",
     "YipitData",
     "YugaByte",
+    "Zapier",
     "Zilch",
     "Zip",
     "airSlate",
@@ -1826,7 +1825,7 @@
     "LangChain": "listed",
     "Last Energy": "slug-unresolved",
     "Latchel": "slug-unresolved",
-    "Lattice": "listed",
+    "Lattice": "no-target-roles",
     "LaunchDarkly": "listed",
     "LayerZero Labs": "no-target-roles",
     "Le Tote": "slug-unresolved",
@@ -2854,7 +2853,7 @@
     "Sophia Space": "slug-unresolved",
     "Sorare": "listed",
     "Sorcero": "slug-unresolved",
-    "Sorella Labs": "no-target-roles",
+    "Sorella Labs": "slug-unresolved",
     "Soteris": "slug-unresolved",
     "Sourcegraph": "no-target-roles",
     "Sourceress": "slug-unresolved",
@@ -3038,7 +3037,7 @@
     "Tilt (f.k.a. Delphia)": "slug-unresolved",
     "Timescale": "slug-unresolved",
     "Tines": "listed",
-    "Tipalti": "listed",
+    "Tipalti": "no-target-roles",
     "Tiptap": "slug-unresolved",
     "Titan": "no-target-roles",
     "TitanX Holdings": "slug-unresolved",
@@ -3317,7 +3316,7 @@
     "Zageno": "slug-unresolved",
     "Zama": "slug-unresolved",
     "Zapata Computing Holdings": "slug-unresolved",
-    "Zapier": "no-target-roles",
+    "Zapier": "listed",
     "Zeal": "slug-unresolved",
     "Zebec": "slug-unresolved",
     "Zed Industries": "slug-unresolved",
@@ -3402,12 +3401,13 @@
     "zeroheight": "slug-unresolved"
   },
   "departed": {
-    "Tractable": "no-target-roles"
+    "Lattice": "no-target-roles",
+    "Tipalti": "no-target-roles"
   },
   "websites": {
     "with_website": 1928,
     "slug_unresolved_with_website": 1198,
-    "slug_unresolved_without_website": 993
+    "slug_unresolved_without_website": 994
   },
   "shared_boards": {
     "Bright": "BrightAI",
@@ -3425,26 +3425,26 @@
     "Insider": "Business Insider"
   },
   "countries": {
-    "India": 118,
-    "United Kingdom": 260,
-    "Ireland": 52,
+    "India": 119,
+    "United Kingdom": 257,
+    "Ireland": 53,
     "Germany": 102,
     "Netherlands": 45,
     "France": 62,
-    "Spain": 63,
-    "Sweden": 33,
+    "Spain": 65,
+    "Sweden": 34,
     "Denmark": 16,
     "Norway": 4,
     "Finland": 8,
-    "Japan": 58,
+    "Japan": 59,
     "Singapore": 73,
-    "Australia": 83,
+    "Australia": 84,
     "New Zealand": 6
   },
   "mca": {
     "records": 24102,
     "pulled": "2026-07-29",
-    "matched": 33,
+    "matched": 34,
     "held": [
       {
         "name": "6Sense",
@@ -4394,33 +4394,6 @@
             "name": "CAMPFIRE LTD",
             "status": "dissolved",
             "incorporated": "2018-01-08",
-            "locality": "",
-            "postcode": "",
-            "sic": [],
-            "kind": ""
-          }
-        ]
-      },
-      {
-        "name": "Canary Technologies",
-        "confidence": "exact",
-        "why": "silent; 2 companies reach the exact tier",
-        "candidates": [
-          {
-            "number": "15515060",
-            "name": "CANARY TECHNOLOGIES LTD",
-            "status": "active",
-            "incorporated": "2024-02-22",
-            "locality": "",
-            "postcode": "",
-            "sic": [],
-            "kind": ""
-          },
-          {
-            "number": "11949019",
-            "name": "CANARY TECHNOLOGIES LTD.",
-            "status": "dissolved",
-            "incorporated": "2019-04-16",
             "locality": "",
             "postcode": "",
             "sic": [],
@@ -5819,33 +5792,6 @@
         ]
       },
       {
-        "name": "Lattice",
-        "confidence": "exact",
-        "why": "silent; 2 companies reach the exact tier",
-        "candidates": [
-          {
-            "number": "14004034",
-            "name": "LATTICE LTD",
-            "status": "active",
-            "incorporated": "2022-03-25",
-            "locality": "",
-            "postcode": "",
-            "sic": [],
-            "kind": ""
-          },
-          {
-            "number": "09579785",
-            "name": "LATTICE LIMITED",
-            "status": "dissolved",
-            "incorporated": "2015-05-07",
-            "locality": "",
-            "postcode": "",
-            "sic": [],
-            "kind": ""
-          }
-        ]
-      },
-      {
         "name": "LaunchDarkly",
         "confidence": "exact",
         "why": "no website; one exact-tier name match",
@@ -6112,6 +6058,33 @@
             "name": "MIXPANEL UK LIMITED",
             "status": "active",
             "incorporated": "2018-05-24",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "MOLOCO",
+        "confidence": "exact",
+        "why": "silent; 2 companies reach the exact tier",
+        "candidates": [
+          {
+            "number": "07596055",
+            "name": "MOLOCO LTD.",
+            "status": "dissolved",
+            "incorporated": "2011-04-07",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "12097069",
+            "name": "MOLOCO UK LIMITED",
+            "status": "active",
+            "incorporated": "2019-07-11",
             "locality": "",
             "postcode": "",
             "sic": [],
@@ -7225,6 +7198,23 @@
         ]
       },
       {
+        "name": "Talkdesk",
+        "confidence": "prefix",
+        "why": "silent; one prefix-tier name match",
+        "candidates": [
+          {
+            "number": "11609285",
+            "name": "TALKDESK U.K. LIMITED",
+            "status": "active",
+            "incorporated": "2018-10-08",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
         "name": "Tanium",
         "confidence": "exact",
         "why": "silent; one exact-tier name match",
@@ -7298,33 +7288,6 @@
             "name": "TIDE LTD",
             "status": "dissolved",
             "incorporated": "2005-07-12",
-            "locality": "",
-            "postcode": "",
-            "sic": [],
-            "kind": ""
-          }
-        ]
-      },
-      {
-        "name": "Tipalti",
-        "confidence": "prefix",
-        "why": "silent; 2 companies reach the prefix tier",
-        "candidates": [
-          {
-            "number": "12471817",
-            "name": "TIPALTI EUROPE LTD",
-            "status": "active",
-            "incorporated": "2020-02-19",
-            "locality": "",
-            "postcode": "",
-            "sic": [],
-            "kind": ""
-          },
-          {
-            "number": "12420590",
-            "name": "TIPALTI SOLUTIONS LTD",
-            "status": "dissolved",
-            "incorporated": "2020-01-23",
             "locality": "",
             "postcode": "",
             "sic": [],
