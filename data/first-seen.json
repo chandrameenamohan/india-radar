@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "snapshot": "2026-10-30",
+  "snapshot": "2026-10-31",
   "note": "first_seen is the snapshot date a role's URL first appeared in a build. A role is confirmed only where its company's board was read on the previous snapshot AND on this one \u2014 both sides genuinely observed. Everything else is unconfirmed: we saw it for the first time, which is not the same as it being new. Only confirmed roles may be called new.",
   "observed": [
     "1Password",
@@ -15530,6 +15530,22 @@
       "unconfirmed": [
         "https://jobs.ashbyhq.com/zapier/7dd68291-3696-4fd0-a5d0-24ab73d22fff"
       ]
+    },
+    "2026-10-31": {
+      "confirmed": [
+        "https://databricks.com/company/careers/open-positions/job?gh_jid=8926307002",
+        "https://jobs.ashbyhq.com/ashby/dc344264-ccec-47c1-b4fc-0862633b26ba",
+        "https://jobs.ashbyhq.com/horizon3ai/01f042cb-5b61-4c37-9998-8dc7fbb5d881",
+        "https://jobs.ashbyhq.com/n8n/019b16a4-cd72-4edf-89ca-5d05051a635b",
+        "https://jobs.ashbyhq.com/n8n/2c392f55-f31e-4503-8c8e-bae5be5f62c4",
+        "https://jobs.ashbyhq.com/n8n/6a343c1a-029e-420b-93f3-c4b547780629",
+        "https://jobs.ashbyhq.com/n8n/70098d15-bf0f-4fce-b415-310d38195e4e",
+        "https://jobs.ashbyhq.com/n8n/7a223f15-4d26-4515-837c-dc8a3bcd98d4",
+        "https://jobs.ashbyhq.com/pennylane/05fcdd87-4c9f-4f6d-a722-4406638565fb",
+        "https://www.coinbase.com/careers/positions/8334764?gh_jid=8334764",
+        "https://www.coinbase.com/careers/positions/8334767?gh_jid=8334767"
+      ],
+      "unconfirmed": []
     }
   }
 }
