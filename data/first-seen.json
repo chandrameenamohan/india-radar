@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "snapshot": "2026-10-31",
+  "snapshot": "2026-11-01",
   "note": "first_seen is the snapshot date a role's URL first appeared in a build. A role is confirmed only where its company's board was read on the previous snapshot AND on this one \u2014 both sides genuinely observed. Everything else is unconfirmed: we saw it for the first time, which is not the same as it being new. Only confirmed roles may be called new.",
   "observed": [
     "1Password",
@@ -15544,6 +15544,24 @@
         "https://jobs.ashbyhq.com/pennylane/05fcdd87-4c9f-4f6d-a722-4406638565fb",
         "https://www.coinbase.com/careers/positions/8334764?gh_jid=8334764",
         "https://www.coinbase.com/careers/positions/8334767?gh_jid=8334767"
+      ],
+      "unconfirmed": []
+    },
+    "2026-11-01": {
+      "confirmed": [
+        "https://databricks.com/company/careers/open-positions/job?gh_jid=8910842002",
+        "https://databricks.com/company/careers/open-positions/job?gh_jid=8910854002",
+        "https://databricks.com/company/careers/open-positions/job?gh_jid=8916466002",
+        "https://databricks.com/company/careers/open-positions/job?gh_jid=8922941002",
+        "https://job-boards.greenhouse.io/firmus/jobs/5464397008",
+        "https://job-boards.greenhouse.io/firmus/jobs/5466634008",
+        "https://job-boards.greenhouse.io/okx/jobs/8139942003",
+        "https://job-boards.greenhouse.io/talkdesk2/jobs/8344802",
+        "https://job-boards.greenhouse.io/talkdesk2/jobs/8344811",
+        "https://job-boards.greenhouse.io/xendit/jobs/7737035003",
+        "https://jobs.ashbyhq.com/pennylane/c4052c7b-e8aa-44a4-a543-1bb2e24098e9",
+        "https://jobs.ashbyhq.com/pennylane/d838ceaf-9d5b-47e3-a861-725c6dea3034",
+        "https://stripe.com/jobs/search?gh_jid=8336062"
       ],
       "unconfirmed": []
     }
