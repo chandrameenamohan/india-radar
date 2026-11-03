@@ -3,8 +3,8 @@
   "checked": 811,
   "unchecked": 2215,
   "counts": {
-    "listed": 359,
-    "no-target-roles": 452,
+    "listed": 363,
+    "no-target-roles": 448,
     "slug-unresolved": 2192,
     "probe-failed": 0,
     "empty-board-unverified": 10,
@@ -201,12 +201,14 @@
     "MOLOCO",
     "MUBI",
     "MURAL",
+    "Magic Eden",
     "MaintainX",
     "MarqVision",
     "Marshmallow",
     "Matillion",
     "Mattermost",
     "MeltPlan",
+    "Mem0",
     "Mercor",
     "Meter",
     "Meticulous",
@@ -263,6 +265,7 @@
     "Plaid",
     "Pleo",
     "Podium",
+    "Poolside",
     "PowerUs",
     "Project44",
     "Prove Identity",
@@ -288,6 +291,7 @@
     "Satispay",
     "Scale AI",
     "Scandit",
+    "SeekOut",
     "Semafor",
     "Semperis",
     "Sentry",
@@ -1950,7 +1954,7 @@
     "Machina Labs": "slug-unresolved",
     "Machine Zone": "slug-unresolved",
     "Magic": "no-target-roles",
-    "Magic Eden": "no-target-roles",
+    "Magic Eden": "listed",
     "Magic Leap": "slug-unresolved",
     "MagicBus": "slug-unresolved",
     "Maimai": "slug-unresolved",
@@ -1997,7 +2001,7 @@
     "Meesho": "slug-unresolved",
     "Mellohead": "slug-unresolved",
     "MeltPlan": "listed",
-    "Mem0": "no-target-roles",
+    "Mem0": "listed",
     "Membrion": "slug-unresolved",
     "Memfault": "no-target-roles",
     "Mending Health": "slug-unresolved",
@@ -2452,7 +2456,7 @@
     "Polyhedra Network": "slug-unresolved",
     "Polymarket": "slug-unresolved",
     "Pomelo Care": "slug-unresolved",
-    "Poolside": "no-target-roles",
+    "Poolside": "listed",
     "Pop Meals": "slug-unresolved",
     "PopSQL": "slug-unresolved",
     "Popcorn Labs": "slug-unresolved",
@@ -2747,7 +2751,7 @@
     "Securitize": "no-target-roles",
     "SeeQC": "slug-unresolved",
     "Seegrid": "slug-unresolved",
-    "SeekOut": "no-target-roles",
+    "SeekOut": "listed",
     "Seekr": "no-target-roles",
     "Seekr Technologies": "slug-unresolved",
     "Seezo": "slug-unresolved",
@@ -3422,20 +3426,20 @@
     "Insider": "Business Insider"
   },
   "countries": {
-    "India": 119,
+    "India": 122,
     "United Kingdom": 257,
     "Ireland": 53,
     "Germany": 102,
     "Netherlands": 45,
     "France": 62,
     "Spain": 65,
-    "Sweden": 34,
-    "Denmark": 16,
-    "Norway": 4,
+    "Sweden": 35,
+    "Denmark": 17,
+    "Norway": 5,
     "Finland": 8,
     "Japan": 58,
-    "Singapore": 73,
-    "Australia": 84,
+    "Singapore": 75,
+    "Australia": 86,
     "New Zealand": 6
   },
   "mca": {
@@ -3699,6 +3703,19 @@
         ]
       },
       {
+        "name": "MOLOCO",
+        "confidence": "prefix",
+        "candidates": [
+          {
+            "cin": "U62099HR2023FTC111870",
+            "name": "MOLOCO TECHNOLOGY INDIA PRIVATE LIMITED",
+            "incorporated": "2023-05-24",
+            "address": "5th Floor, Horizon Centre, DLF Phase V,Sector-43, Golf Course Road,,Dlf Qe,Gurgaon,Haryana,122002-India",
+            "status": "Active"
+          }
+        ]
+      },
+      {
         "name": "Moniepoint",
         "confidence": "prefix",
         "candidates": [
@@ -3806,6 +3823,19 @@
             "name": "RAZORPAY TECHNOLOGIES PRIVATE LIMITED",
             "incorporated": "2015-08-28",
             "address": "1st Floor, SJR Cyber   22, Laskar Hosur Road, Adugodi,Bangalore,Bangalore,Karnataka,560030-India",
+            "status": "Active"
+          }
+        ]
+      },
+      {
+        "name": "SeekOut",
+        "confidence": "prefix",
+        "candidates": [
+          {
+            "cin": "U62099KA2023FTC205613",
+            "name": "SEEKOUT TALENT INNOVATIONS INDIA PRIVATE LIMITED",
+            "incorporated": "2023-08-25",
+            "address": "4th Floor, Kabra Excelsior,,6/A, 80 Feet Rd, Koramangala 1A Block,,Bangalore South,Bangalore,Karnataka,560034-India",
             "status": "Active"
           }
         ]
