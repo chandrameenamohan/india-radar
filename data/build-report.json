@@ -1,13 +1,13 @@
 {
   "corpus_size": 3026,
-  "checked": 811,
-  "unchecked": 2215,
+  "checked": 809,
+  "unchecked": 2217,
   "counts": {
-    "listed": 364,
-    "no-target-roles": 447,
+    "listed": 365,
+    "no-target-roles": 444,
     "slug-unresolved": 2192,
-    "probe-failed": 0,
-    "empty-board-unverified": 10,
+    "probe-failed": 1,
+    "empty-board-unverified": 11,
     "not-qualified": 0,
     "another-companys-board": 13
   },
@@ -62,6 +62,7 @@
     "Cambridge Mobile Telematics",
     "Campfire",
     "Canary Technologies",
+    "CarbonChain",
     "Caribou",
     "Carta",
     "Cato Networks",
@@ -182,7 +183,6 @@
     "Komodo Health",
     "Kong",
     "Kpler",
-    "Lambda Labs",
     "LangChain",
     "LaunchDarkly",
     "Legion Health",
@@ -298,6 +298,7 @@
     "Sentry",
     "Shift",
     "ShopMy",
+    "Sift",
     "Sigma Computing",
     "SingleStore",
     "Slice",
@@ -409,7 +410,7 @@
     "AON3D": "no-target-roles",
     "ARCADE AI": "slug-unresolved",
     "ARQ": "listed",
-    "ASAPP": "no-target-roles",
+    "ASAPP": "probe-failed",
     "AUGMENTT HOLDCO": "slug-unresolved",
     "AVID Group": "slug-unresolved",
     "AXONIUS": "listed",
@@ -834,7 +835,7 @@
     "Capsule.Video": "slug-unresolved",
     "CaptivateIQ": "slug-unresolved",
     "Carbon Insurance": "slug-unresolved",
-    "CarbonChain": "no-target-roles",
+    "CarbonChain": "listed",
     "Cardless": "no-target-roles",
     "Care.Stat!": "slug-unresolved",
     "CareRev": "slug-unresolved",
@@ -1052,7 +1053,7 @@
     "Cyclops": "slug-unresolved",
     "Cyera": "slug-unresolved",
     "Cymmetria": "slug-unresolved",
-    "Cypher Games": "no-target-roles",
+    "Cypher Games": "empty-board-unverified",
     "Cyvl": "slug-unresolved",
     "D-ID": "slug-unresolved",
     "D-Wave Quantum": "slug-unresolved",
@@ -1824,7 +1825,7 @@
     "Labs Companies": "slug-unresolved",
     "Lago": "slug-unresolved",
     "Lambda": "slug-unresolved",
-    "Lambda Labs": "listed",
+    "Lambda Labs": "no-target-roles",
     "LanceDB": "no-target-roles",
     "Landed": "slug-unresolved",
     "LangChain": "listed",
@@ -2797,7 +2798,7 @@
     "Side": "slug-unresolved",
     "Sierra": "slug-unresolved",
     "Sieve": "slug-unresolved",
-    "Sift": "no-target-roles",
+    "Sift": "listed",
     "SigOpt": "slug-unresolved",
     "Sigma Computing": "listed",
     "Signify Holdings": "slug-unresolved",
@@ -3405,7 +3406,9 @@
     "xLight": "slug-unresolved",
     "zeroheight": "slug-unresolved"
   },
-  "departed": {},
+  "departed": {
+    "Lambda Labs": "no-target-roles"
+  },
   "websites": {
     "with_website": 1928,
     "slug_unresolved_with_website": 1198,
@@ -3428,19 +3431,19 @@
   },
   "countries": {
     "India": 121,
-    "United Kingdom": 258,
-    "Ireland": 53,
+    "United Kingdom": 260,
+    "Ireland": 52,
     "Germany": 102,
-    "Netherlands": 46,
+    "Netherlands": 47,
     "France": 63,
     "Spain": 65,
-    "Sweden": 35,
-    "Denmark": 18,
-    "Norway": 5,
+    "Sweden": 34,
+    "Denmark": 16,
+    "Norway": 6,
     "Finland": 8,
-    "Japan": 58,
-    "Singapore": 75,
-    "Australia": 88,
+    "Japan": 60,
+    "Singapore": 74,
+    "Australia": 90,
     "New Zealand": 6
   },
   "mca": {
@@ -3798,6 +3801,19 @@
             "name": "PARKER AVERY INDIA PRIVATE LIMITED",
             "incorporated": "2023-04-25",
             "address": "S. No. 257/1/2, Florencia,Flat No. C-404, Kaspate Wasti, Wakad,Haveli,Pune,Maharashtra,411057-India",
+            "status": "Active"
+          }
+        ]
+      },
+      {
+        "name": "Payward",
+        "confidence": "prefix",
+        "candidates": [
+          {
+            "cin": "U62013HR2025FTC134684",
+            "name": "PAYWARD TRADING INDIA PRIVATE LIMITED",
+            "incorporated": "2025-08-01",
+            "address": "Plot No 19 Second Floor,,Park,Info City, Sec 33,,Sadar Bazar,Gurgaon,Haryana,122001-India",
             "status": "Active"
           }
         ]
@@ -4405,6 +4421,33 @@
             "name": "CAMPFIRE LTD",
             "status": "dissolved",
             "incorporated": "2018-01-08",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "CarbonChain",
+        "confidence": "exact",
+        "why": "silent; 2 companies reach the exact tier",
+        "candidates": [
+          {
+            "number": "16240848",
+            "name": "CARBON-CHAIN LTD",
+            "status": "active",
+            "incorporated": "2025-02-10",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "06715922",
+            "name": "CARBON CHAIN LTD",
+            "status": "dissolved",
+            "incorporated": "2008-10-06",
             "locality": "",
             "postcode": "",
             "sic": [],
@@ -5539,15 +5582,15 @@
         ]
       },
       {
-        "name": "Horizon 3 AI",
+        "name": "Higgsfield",
         "confidence": "exact",
-        "why": "no website; one exact-tier name match",
+        "why": "silent; one exact-tier name match",
         "candidates": [
           {
-            "number": "16225773",
-            "name": "HORIZON3 AI UK LTD",
+            "number": "15149907",
+            "name": "HIGGS FIELD LTD",
             "status": "active",
-            "incorporated": "2025-02-03",
+            "incorporated": "2023-09-20",
             "locality": "",
             "postcode": "",
             "sic": [],
