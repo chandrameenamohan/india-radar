@@ -1,13 +1,13 @@
 {
   "corpus_size": 3026,
-  "checked": 809,
-  "unchecked": 2217,
+  "checked": 811,
+  "unchecked": 2215,
   "counts": {
-    "listed": 365,
-    "no-target-roles": 444,
+    "listed": 364,
+    "no-target-roles": 447,
     "slug-unresolved": 2192,
-    "probe-failed": 1,
-    "empty-board-unverified": 11,
+    "probe-failed": 0,
+    "empty-board-unverified": 10,
     "not-qualified": 0,
     "another-companys-board": 13
   },
@@ -152,7 +152,6 @@
     "Harmonic",
     "Harness",
     "HawkEye 360",
-    "Heidi Health",
     "Helsing",
     "HeyGen",
     "Higgsfield",
@@ -410,7 +409,7 @@
     "AON3D": "no-target-roles",
     "ARCADE AI": "slug-unresolved",
     "ARQ": "listed",
-    "ASAPP": "probe-failed",
+    "ASAPP": "no-target-roles",
     "AUGMENTT HOLDCO": "slug-unresolved",
     "AVID Group": "slug-unresolved",
     "AXONIUS": "listed",
@@ -1053,7 +1052,7 @@
     "Cyclops": "slug-unresolved",
     "Cyera": "slug-unresolved",
     "Cymmetria": "slug-unresolved",
-    "Cypher Games": "empty-board-unverified",
+    "Cypher Games": "no-target-roles",
     "Cyvl": "slug-unresolved",
     "D-ID": "slug-unresolved",
     "D-Wave Quantum": "slug-unresolved",
@@ -1579,7 +1578,7 @@
     "HealthSherpa": "no-target-roles",
     "Healthcare Triangle": "slug-unresolved",
     "Heap": "slug-unresolved",
-    "Heidi Health": "listed",
+    "Heidi Health": "no-target-roles",
     "Heimdall Labs": "slug-unresolved",
     "Helion Energy": "no-target-roles",
     "Helium Health": "slug-unresolved",
@@ -3407,7 +3406,7 @@
     "zeroheight": "slug-unresolved"
   },
   "departed": {
-    "Lambda Labs": "no-target-roles"
+    "Heidi Health": "no-target-roles"
   },
   "websites": {
     "with_website": 1928,
@@ -3431,25 +3430,25 @@
   },
   "countries": {
     "India": 121,
-    "United Kingdom": 260,
-    "Ireland": 52,
+    "United Kingdom": 259,
+    "Ireland": 51,
     "Germany": 102,
     "Netherlands": 47,
-    "France": 63,
+    "France": 61,
     "Spain": 65,
     "Sweden": 34,
     "Denmark": 16,
     "Norway": 6,
     "Finland": 8,
     "Japan": 60,
-    "Singapore": 74,
+    "Singapore": 73,
     "Australia": 90,
     "New Zealand": 6
   },
   "mca": {
     "records": 24102,
     "pulled": "2026-07-29",
-    "matched": 34,
+    "matched": 33,
     "held": [
       {
         "name": "6Sense",
@@ -5166,43 +5165,6 @@
         ]
       },
       {
-        "name": "FalconX",
-        "confidence": "exact",
-        "why": "silent; 3 companies reach the exact tier",
-        "candidates": [
-          {
-            "number": "16915902",
-            "name": "FALCONX LTD",
-            "status": "active",
-            "incorporated": "2025-12-17",
-            "locality": "",
-            "postcode": "",
-            "sic": [],
-            "kind": ""
-          },
-          {
-            "number": "15207390",
-            "name": "FALCON X LTD",
-            "status": "dissolved",
-            "incorporated": "2023-10-12",
-            "locality": "",
-            "postcode": "",
-            "sic": [],
-            "kind": ""
-          },
-          {
-            "number": "11923866",
-            "name": "FALCON X LTD",
-            "status": "dissolved",
-            "incorporated": "2019-04-03",
-            "locality": "",
-            "postcode": "",
-            "sic": [],
-            "kind": ""
-          }
-        ]
-      },
-      {
         "name": "Feedzai",
         "confidence": "exact",
         "why": "silent; one exact-tier name match",
@@ -5540,23 +5502,6 @@
             "name": "HARNESS LIMITED",
             "status": "dissolved",
             "incorporated": "2009-04-20",
-            "locality": "",
-            "postcode": "",
-            "sic": [],
-            "kind": ""
-          }
-        ]
-      },
-      {
-        "name": "Heidi Health",
-        "confidence": "exact",
-        "why": "no website; one exact-tier name match",
-        "candidates": [
-          {
-            "number": "15878893",
-            "name": "HEIDI HEALTH LTD",
-            "status": "active",
-            "incorporated": "2024-08-05",
             "locality": "",
             "postcode": "",
             "sic": [],
