@@ -1,11 +1,11 @@
 {
   "corpus_size": 3026,
-  "checked": 811,
-  "unchecked": 2215,
+  "checked": 810,
+  "unchecked": 2216,
   "counts": {
     "listed": 364,
-    "no-target-roles": 447,
-    "slug-unresolved": 2192,
+    "no-target-roles": 446,
+    "slug-unresolved": 2193,
     "probe-failed": 0,
     "empty-board-unverified": 10,
     "not-qualified": 0,
@@ -182,6 +182,7 @@
     "Komodo Health",
     "Kong",
     "Kpler",
+    "Lambda Labs",
     "LangChain",
     "LaunchDarkly",
     "Legion Health",
@@ -207,6 +208,7 @@
     "Marshmallow",
     "Matillion",
     "Mattermost",
+    "May Mobility",
     "MeltPlan",
     "Mem0",
     "Mercor",
@@ -249,7 +251,6 @@
     "PagerDuty",
     "PandaDoc",
     "Parker",
-    "Parloa",
     "Passionfroot",
     "Payward",
     "Peec AI",
@@ -260,7 +261,6 @@
     "PermitFlow",
     "Photoroom",
     "PhysicsX",
-    "PicsArt",
     "Pigment",
     "Plaid",
     "Pleo",
@@ -1824,7 +1824,7 @@
     "Labs Companies": "slug-unresolved",
     "Lago": "slug-unresolved",
     "Lambda": "slug-unresolved",
-    "Lambda Labs": "no-target-roles",
+    "Lambda Labs": "listed",
     "LanceDB": "no-target-roles",
     "Landed": "slug-unresolved",
     "LangChain": "listed",
@@ -1984,7 +1984,7 @@
     "Matternet": "slug-unresolved",
     "Matterport": "slug-unresolved",
     "Maxwell Labs": "slug-unresolved",
-    "May Mobility": "no-target-roles",
+    "May Mobility": "listed",
     "MayBern Solutions": "slug-unresolved",
     "Mayan": "slug-unresolved",
     "Maybell Quantum Industries": "slug-unresolved",
@@ -2347,7 +2347,7 @@
     "Parahelp": "slug-unresolved",
     "Parallel": "no-target-roles",
     "Parker": "listed",
-    "Parloa": "listed",
+    "Parloa": "slug-unresolved",
     "Parrot Software \ud83e\udd9c": "slug-unresolved",
     "Parse": "slug-unresolved",
     "PartnerStack": "slug-unresolved",
@@ -2415,7 +2415,7 @@
     "Pibit.ai": "slug-unresolved",
     "PickTrace": "no-target-roles",
     "PicnicAI": "no-target-roles",
-    "PicsArt": "listed",
+    "PicsArt": "no-target-roles",
     "Pierre": "slug-unresolved",
     "Pigment": "listed",
     "Pillar": "slug-unresolved",
@@ -3406,11 +3406,12 @@
     "zeroheight": "slug-unresolved"
   },
   "departed": {
-    "Heidi Health": "no-target-roles"
+    "Parloa": "slug-unresolved",
+    "PicsArt": "no-target-roles"
   },
   "websites": {
     "with_website": 1928,
-    "slug_unresolved_with_website": 1198,
+    "slug_unresolved_with_website": 1199,
     "slug_unresolved_without_website": 994
   },
   "shared_boards": {
@@ -3430,19 +3431,19 @@
   },
   "countries": {
     "India": 121,
-    "United Kingdom": 259,
-    "Ireland": 51,
+    "United Kingdom": 257,
+    "Ireland": 52,
     "Germany": 102,
-    "Netherlands": 47,
-    "France": 61,
-    "Spain": 65,
+    "Netherlands": 48,
+    "France": 59,
+    "Spain": 64,
     "Sweden": 34,
     "Denmark": 16,
     "Norway": 6,
     "Finland": 8,
-    "Japan": 60,
-    "Singapore": 73,
-    "Australia": 90,
+    "Japan": 62,
+    "Singapore": 71,
+    "Australia": 89,
     "New Zealand": 6
   },
   "mca": {
@@ -6578,23 +6579,6 @@
             "name": "PHYSICSX LIMITED",
             "status": "active",
             "incorporated": "2019-08-01",
-            "locality": "",
-            "postcode": "",
-            "sic": [],
-            "kind": ""
-          }
-        ]
-      },
-      {
-        "name": "PicsArt",
-        "confidence": "exact",
-        "why": "silent; one exact-tier name match",
-        "candidates": [
-          {
-            "number": "13741239",
-            "name": "PICSART UK LIMITED",
-            "status": "active",
-            "incorporated": "2021-11-12",
             "locality": "",
             "postcode": "",
             "sic": [],
