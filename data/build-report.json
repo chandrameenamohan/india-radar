@@ -1,11 +1,11 @@
 {
   "corpus_size": 3026,
-  "checked": 810,
-  "unchecked": 2216,
+  "checked": 809,
+  "unchecked": 2217,
   "counts": {
-    "listed": 364,
-    "no-target-roles": 446,
-    "slug-unresolved": 2193,
+    "listed": 365,
+    "no-target-roles": 444,
+    "slug-unresolved": 2194,
     "probe-failed": 0,
     "empty-board-unverified": 10,
     "not-qualified": 0,
@@ -152,6 +152,7 @@
     "Harmonic",
     "Harness",
     "HawkEye 360",
+    "Heidi Health",
     "Helsing",
     "HeyGen",
     "Higgsfield",
@@ -1578,7 +1579,7 @@
     "HealthSherpa": "no-target-roles",
     "Healthcare Triangle": "slug-unresolved",
     "Heap": "slug-unresolved",
-    "Heidi Health": "no-target-roles",
+    "Heidi Health": "listed",
     "Heimdall Labs": "slug-unresolved",
     "Helion Energy": "no-target-roles",
     "Helium Health": "slug-unresolved",
@@ -3204,7 +3205,7 @@
     "Virtualitics": "no-target-roles",
     "VisCardia": "slug-unresolved",
     "Visana Health": "slug-unresolved",
-    "Vise": "no-target-roles",
+    "Vise": "slug-unresolved",
     "Visier": "slug-unresolved",
     "Vitable Health": "no-target-roles",
     "Vitalize": "no-target-roles",
@@ -3405,13 +3406,10 @@
     "xLight": "slug-unresolved",
     "zeroheight": "slug-unresolved"
   },
-  "departed": {
-    "Parloa": "slug-unresolved",
-    "PicsArt": "no-target-roles"
-  },
+  "departed": {},
   "websites": {
     "with_website": 1928,
-    "slug_unresolved_with_website": 1199,
+    "slug_unresolved_with_website": 1200,
     "slug_unresolved_without_website": 994
   },
   "shared_boards": {
@@ -3431,9 +3429,9 @@
   },
   "countries": {
     "India": 121,
-    "United Kingdom": 257,
+    "United Kingdom": 258,
     "Ireland": 52,
-    "Germany": 102,
+    "Germany": 103,
     "Netherlands": 48,
     "France": 59,
     "Spain": 64,
@@ -3441,7 +3439,7 @@
     "Denmark": 16,
     "Norway": 6,
     "Finland": 8,
-    "Japan": 62,
+    "Japan": 63,
     "Singapore": 71,
     "Australia": 89,
     "New Zealand": 6
@@ -5503,6 +5501,23 @@
             "name": "HARNESS LIMITED",
             "status": "dissolved",
             "incorporated": "2009-04-20",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Heidi Health",
+        "confidence": "exact",
+        "why": "no website; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "15878893",
+            "name": "HEIDI HEALTH LTD",
+            "status": "active",
+            "incorporated": "2024-08-05",
             "locality": "",
             "postcode": "",
             "sic": [],
