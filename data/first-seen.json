@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "snapshot": "2026-11-07",
+  "snapshot": "2026-11-08",
   "note": "first_seen is the snapshot date a role's URL first appeared in a build. A role is confirmed only where its company's board was read on the previous snapshot AND on this one \u2014 both sides genuinely observed. Everything else is unconfirmed: we saw it for the first time, which is not the same as it being new. Only confirmed roles may be called new.",
   "observed": [
     "1Password",
@@ -16495,6 +16495,19 @@
         "https://job-boards.greenhouse.io/maymobility/jobs/8922412002",
         "https://jobs.ashbyhq.com/Lambda/13f69cd9-50c6-4a02-bb96-82d898b3235f"
       ]
+    },
+    "2026-11-08": {
+      "confirmed": [
+        "https://job-boards.greenhouse.io/firmus/jobs/5469389008",
+        "https://job-boards.greenhouse.io/firmus/jobs/5472003008",
+        "https://job-boards.greenhouse.io/firmus/jobs/5472075008",
+        "https://job-boards.greenhouse.io/firmus/jobs/5473849008",
+        "https://jobs.ashbyhq.com/cognition/6146f09d-285d-4538-be40-e1f3ffcdecd2",
+        "https://jobs.ashbyhq.com/encord/a7e7bb91-e0e3-4a37-8496-f048b06818fe",
+        "https://jobs.ashbyhq.com/n8n/cc7a3cf6-44ea-4a49-9a0b-f929dea2a0d7",
+        "https://jobs.lever.co/kpler/d0b15eec-6865-4e5a-9d73-a20ef069bf8e"
+      ],
+      "unconfirmed": []
     }
   }
 }

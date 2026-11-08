@@ -1,6 +1,6 @@
 {
   "schema_version": 10,
-  "snapshot": "2026-11-07",
+  "snapshot": "2026-11-08",
   "integrity": {
     "corpus_size": 3026,
     "checked": 809,
@@ -4274,12 +4274,12 @@
         },
         {
           "title": "Applied AI Architect",
-          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5076109008",
+          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5424310008",
           "locations": [
-            "Tokyo, Japan"
+            "Mumbai, India"
           ],
           "countries": [
-            "Japan"
+            "India"
           ],
           "workplace": null,
           "department": "Applied AI",
@@ -4302,12 +4302,12 @@
         },
         {
           "title": "Applied AI Architect",
-          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5424310008",
+          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5076109008",
           "locations": [
-            "Mumbai, India"
+            "Tokyo, Japan"
           ],
           "countries": [
-            "India"
+            "Japan"
           ],
           "workplace": null,
           "department": "Applied AI",
@@ -4372,12 +4372,40 @@
         },
         {
           "title": "Applied AI Architect, Partnerships",
+          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5390787008",
+          "locations": [
+            "Paris, France"
+          ],
+          "countries": [
+            "France"
+          ],
+          "workplace": null,
+          "department": "Applied AI",
+          "visa": "yes",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Applied AI Architect, Partnerships",
           "url": "https://job-boards.greenhouse.io/anthropic/jobs/5432583008",
           "locations": [
             "London, UK"
           ],
           "countries": [
             "United Kingdom"
+          ],
+          "workplace": null,
+          "department": "Applied AI",
+          "visa": "yes",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Applied AI Architect, Partnerships",
+          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5472677008",
+          "locations": [
+            "Sydney, Australia"
+          ],
+          "countries": [
+            "Australia"
           ],
           "workplace": null,
           "department": "Applied AI",
@@ -4406,34 +4434,6 @@
           ],
           "countries": [
             "Germany"
-          ],
-          "workplace": null,
-          "department": "Applied AI",
-          "visa": "yes",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Applied AI Architect, Partnerships",
-          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5472677008",
-          "locations": [
-            "Sydney, Australia"
-          ],
-          "countries": [
-            "Australia"
-          ],
-          "workplace": null,
-          "department": "Applied AI",
-          "visa": "yes",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Applied AI Architect, Partnerships",
-          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5390787008",
-          "locations": [
-            "Paris, France"
-          ],
-          "countries": [
-            "France"
           ],
           "workplace": null,
           "department": "Applied AI",
@@ -4498,12 +4498,12 @@
         },
         {
           "title": "Applied AI Engineer, Enterprise",
-          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5390795008",
+          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5390754008",
           "locations": [
-            "Munich, Germany"
+            "Paris, France"
           ],
           "countries": [
-            "Germany"
+            "France"
           ],
           "workplace": null,
           "department": "Applied AI",
@@ -4512,12 +4512,12 @@
         },
         {
           "title": "Applied AI Engineer, Enterprise",
-          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5390754008",
+          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5390795008",
           "locations": [
-            "Paris, France"
+            "Munich, Germany"
           ],
           "countries": [
-            "France"
+            "Germany"
           ],
           "workplace": null,
           "department": "Applied AI",
@@ -5016,6 +5016,20 @@
         },
         {
           "title": "Forward Deployed Engineer",
+          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5391016008",
+          "locations": [
+            "Munich, Germany"
+          ],
+          "countries": [
+            "Germany"
+          ],
+          "workplace": null,
+          "department": "Applied AI",
+          "visa": "yes",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Forward Deployed Engineer",
           "url": "https://job-boards.greenhouse.io/anthropic/jobs/5391021008",
           "locations": [
             "Paris, France"
@@ -5036,20 +5050,6 @@
           ],
           "countries": [
             "United Kingdom"
-          ],
-          "workplace": null,
-          "department": "Applied AI",
-          "visa": "yes",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Forward Deployed Engineer",
-          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5391016008",
-          "locations": [
-            "Munich, Germany"
-          ],
-          "countries": [
-            "Germany"
           ],
           "workplace": null,
           "department": "Applied AI",
@@ -5269,12 +5269,12 @@
         },
         {
           "title": "Manager, Forward Deployed Engineering",
-          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5471721008",
+          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5385634008",
           "locations": [
-            "Paris, France"
+            "London, UK"
           ],
           "countries": [
-            "France"
+            "United Kingdom"
           ],
           "workplace": null,
           "department": "Applied AI",
@@ -5283,12 +5283,12 @@
         },
         {
           "title": "Manager, Forward Deployed Engineering",
-          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5385634008",
+          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5471721008",
           "locations": [
-            "London, UK"
+            "Paris, France"
           ],
           "countries": [
-            "United Kingdom"
+            "France"
           ],
           "workplace": null,
           "department": "Applied AI",
@@ -5451,6 +5451,34 @@
         },
         {
           "title": "Regional Research Economist, Economic Research",
+          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5231205008",
+          "locations": [
+            "Singapore"
+          ],
+          "countries": [
+            "Singapore"
+          ],
+          "workplace": null,
+          "department": "Public Benefit",
+          "visa": "yes",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Regional Research Economist, Economic Research",
+          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5460524008",
+          "locations": [
+            "Bangalore, India"
+          ],
+          "countries": [
+            "India"
+          ],
+          "workplace": null,
+          "department": "Public Benefit",
+          "visa": "yes",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Regional Research Economist, Economic Research",
           "url": "https://job-boards.greenhouse.io/anthropic/jobs/5460521008",
           "locations": [
             "Tokyo, Japan"
@@ -5479,40 +5507,12 @@
         },
         {
           "title": "Regional Research Economist, Economic Research",
-          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5231205008",
-          "locations": [
-            "Singapore"
-          ],
-          "countries": [
-            "Singapore"
-          ],
-          "workplace": null,
-          "department": "Public Benefit",
-          "visa": "yes",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Regional Research Economist, Economic Research",
           "url": "https://job-boards.greenhouse.io/anthropic/jobs/5460515008",
           "locations": [
             "Sydney, Australia"
           ],
           "countries": [
             "Australia"
-          ],
-          "workplace": null,
-          "department": "Public Benefit",
-          "visa": "yes",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Regional Research Economist, Economic Research",
-          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5460524008",
-          "locations": [
-            "Bangalore, India"
-          ],
-          "countries": [
-            "India"
           ],
           "workplace": null,
           "department": "Public Benefit",
@@ -5773,12 +5773,12 @@
         },
         {
           "title": "Technical Deployment Lead",
-          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5391108008",
+          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5467153008",
           "locations": [
-            "London, UK"
+            "Paris, France"
           ],
           "countries": [
-            "United Kingdom"
+            "France"
           ],
           "workplace": null,
           "department": "Applied AI",
@@ -5787,12 +5787,12 @@
         },
         {
           "title": "Technical Deployment Lead",
-          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5467153008",
+          "url": "https://job-boards.greenhouse.io/anthropic/jobs/5391108008",
           "locations": [
-            "Paris, France"
+            "London, UK"
           ],
           "countries": [
-            "France"
+            "United Kingdom"
           ],
           "workplace": null,
           "department": "Applied AI",
@@ -7100,20 +7100,6 @@
       "ats": "greenhouse",
       "slug": "appsflyer",
       "roles": [
-        {
-          "title": "Account Manager",
-          "url": "https://careers.appsflyer.com/jobs/position/8923224002?gh_jid=8923224002",
-          "locations": [
-            "London"
-          ],
-          "countries": [
-            "United Kingdom"
-          ],
-          "workplace": null,
-          "department": "Sales",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
         {
           "title": "Customer Success Manager",
           "url": "https://careers.appsflyer.com/jobs/position/8916886002?gh_jid=8916886002",
@@ -11532,20 +11518,6 @@
         },
         {
           "title": "Channel Sales Engineer",
-          "url": "https://www.catonetworks.com/careers/careers-post/5015227101?gh_jid=5015227101",
-          "locations": [
-            "Tokyo Prefecture, Japan"
-          ],
-          "countries": [
-            "Japan"
-          ],
-          "workplace": null,
-          "department": "Sales - Sales Engineer",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Channel Sales Engineer",
           "url": "https://www.catonetworks.com/careers/careers-post/4967067101?gh_jid=4967067101",
           "locations": [
             "Amsterdam, North Holland, Netherlands; Brussels, Brussels-Capital, Belgium"
@@ -11555,6 +11527,20 @@
           ],
           "workplace": null,
           "department": "Sales Engineer EMEA",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Channel Sales Engineer",
+          "url": "https://www.catonetworks.com/careers/careers-post/5015227101?gh_jid=5015227101",
+          "locations": [
+            "Tokyo Prefecture, Japan"
+          ],
+          "countries": [
+            "Japan"
+          ],
+          "workplace": null,
+          "department": "Sales - Sales Engineer",
           "visa": "unknown",
           "hire_from_abroad": "unknown"
         },
@@ -16352,6 +16338,20 @@
           "department": "General & Administrative",
           "visa": "unknown",
           "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Program Manager - Field CTOs - EMEA",
+          "url": "https://jobs.ashbyhq.com/cognition/6146f09d-285d-4538-be40-e1f3ffcdecd2",
+          "locations": [
+            "London"
+          ],
+          "countries": [
+            "United Kingdom"
+          ],
+          "workplace": "onsite",
+          "department": "Customer Engineering",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
         }
       ],
       "countries": [
@@ -17006,20 +17006,6 @@
           ],
           "workplace": "hybrid",
           "department": "Customer Experience",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Country Director, India",
-          "url": "https://www.coinbase.com/careers/positions/7606826?gh_jid=7606826",
-          "locations": [
-            "Remote - India"
-          ],
-          "countries": [
-            "India"
-          ],
-          "workplace": "remote",
-          "department": "International Expansion",
           "visa": "unknown",
           "hire_from_abroad": "unknown"
         },
@@ -27749,6 +27735,20 @@
           "hire_from_abroad": "unknown"
         },
         {
+          "title": "Growth Associate",
+          "url": "https://jobs.ashbyhq.com/encord/a7e7bb91-e0e3-4a37-8496-f048b06818fe",
+          "locations": [
+            "London"
+          ],
+          "countries": [
+            "United Kingdom"
+          ],
+          "workplace": "onsite",
+          "department": "GTM",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
           "title": "Financial Analyst",
           "url": "https://jobs.ashbyhq.com/encord/60e9fe72-a087-493e-b74a-bf4add586e9a",
           "locations": [
@@ -29441,20 +29441,6 @@
           "hire_from_abroad": "unknown"
         },
         {
-          "title": "Data Centre Technician",
-          "url": "https://job-boards.greenhouse.io/firmus/jobs/5247708008",
-          "locations": [
-            "Melbourne, Victoria, Australia"
-          ],
-          "countries": [
-            "Australia"
-          ],
-          "workplace": null,
-          "department": "Data Centre Operations",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
           "title": "Engineering Manager, Software (AI Cloud)",
           "url": "https://job-boards.greenhouse.io/firmus/jobs/5406411008",
           "locations": [
@@ -29493,6 +29479,20 @@
           ],
           "workplace": null,
           "department": "Engineering and Technology",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Head of Digital Twin Platform",
+          "url": "https://job-boards.greenhouse.io/firmus/jobs/5472003008",
+          "locations": [
+            "Singapore"
+          ],
+          "countries": [
+            "Singapore"
+          ],
+          "workplace": null,
+          "department": "Technology",
           "visa": "unknown",
           "hire_from_abroad": "unknown"
         },
@@ -29791,6 +29791,20 @@
           "hire_from_abroad": "yes"
         },
         {
+          "title": "Project Systems Lead & Control, Construction & Development",
+          "url": "https://job-boards.greenhouse.io/firmus/jobs/5472075008",
+          "locations": [
+            "Sydney, New South Wales, Australia"
+          ],
+          "countries": [
+            "Australia"
+          ],
+          "workplace": null,
+          "department": "PMO, Project Control & Governance",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
           "title": "Senior AI Engineer, Agents & Applications",
           "url": "https://job-boards.greenhouse.io/firmus/jobs/5417755008",
           "locations": [
@@ -29931,6 +29945,20 @@
           "hire_from_abroad": "unknown"
         },
         {
+          "title": "Senior Planner - Construction, South East Asia",
+          "url": "https://job-boards.greenhouse.io/firmus/jobs/5473849008",
+          "locations": [
+            "Singapore"
+          ],
+          "countries": [
+            "Singapore"
+          ],
+          "workplace": null,
+          "department": "PMO, Project Control & Governance",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
           "title": "Senior Planner / Scheduler",
           "url": "https://job-boards.greenhouse.io/firmus/jobs/5432498008",
           "locations": [
@@ -30067,6 +30095,20 @@
           ],
           "workplace": null,
           "department": "Construction & Deployment",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Site Reliability Engineer - AI Infrastructure",
+          "url": "https://job-boards.greenhouse.io/firmus/jobs/5469389008",
+          "locations": [
+            "Singapore"
+          ],
+          "countries": [
+            "Singapore"
+          ],
+          "workplace": null,
+          "department": "Data Centre Operations",
           "visa": "unknown",
           "hire_from_abroad": "unknown"
         },
@@ -37747,20 +37789,6 @@
           "hire_from_abroad": "unknown"
         },
         {
-          "title": "Product Manager - Virtual Fencing",
-          "url": "https://jobs.ashbyhq.com/halter/d4b484f0-2e18-47cc-ba48-f1749b0f5397",
-          "locations": [
-            "Auckland"
-          ],
-          "countries": [
-            "New Zealand"
-          ],
-          "workplace": "onsite",
-          "department": "Product",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
           "title": "Regional Sales Manager (North Queensland)",
           "url": "https://jobs.ashbyhq.com/halter/053420c5-6eeb-481a-b526-1a74b4f60327",
           "locations": [
@@ -38333,20 +38361,6 @@
             "New Zealand"
           ],
           "workplace": "remote",
-          "department": "Product",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Product Manager - Mapping",
-          "url": "https://jobs.ashbyhq.com/halter/4170cd02-4d59-457b-9c58-d116b587153a",
-          "locations": [
-            "Auckland"
-          ],
-          "countries": [
-            "New Zealand"
-          ],
-          "workplace": "onsite",
           "department": "Product",
           "visa": "unknown",
           "hire_from_abroad": "unknown"
@@ -41089,20 +41103,6 @@
         },
         {
           "title": "Programme Manager - Air",
-          "url": "https://helsing.ai/jobs/4929769101?gh_jid=4929769101",
-          "locations": [
-            "Paris"
-          ],
-          "countries": [
-            "France"
-          ],
-          "workplace": null,
-          "department": "Campaigns & Programmes",
-          "visa": "unknown",
-          "hire_from_abroad": "yes"
-        },
-        {
-          "title": "Programme Manager - Air",
           "url": "https://helsing.ai/jobs/5000522101?gh_jid=5000522101",
           "locations": [
             "London"
@@ -41112,6 +41112,20 @@
           ],
           "workplace": null,
           "department": "Market",
+          "visa": "unknown",
+          "hire_from_abroad": "yes"
+        },
+        {
+          "title": "Programme Manager - Air",
+          "url": "https://helsing.ai/jobs/4929769101?gh_jid=4929769101",
+          "locations": [
+            "Paris"
+          ],
+          "countries": [
+            "France"
+          ],
+          "workplace": null,
+          "department": "Campaigns & Programmes",
           "visa": "unknown",
           "hire_from_abroad": "yes"
         },
@@ -41955,12 +41969,12 @@
         },
         {
           "title": "Systems Engineer - Interceptors",
-          "url": "https://helsing.ai/jobs/5024730101?gh_jid=5024730101",
+          "url": "https://helsing.ai/jobs/5024726101?gh_jid=5024726101",
           "locations": [
-            "Munich"
+            "London"
           ],
           "countries": [
-            "Germany"
+            "United Kingdom"
           ],
           "workplace": null,
           "department": "Systems Architecture",
@@ -41969,12 +41983,12 @@
         },
         {
           "title": "Systems Engineer - Interceptors",
-          "url": "https://helsing.ai/jobs/5024726101?gh_jid=5024726101",
+          "url": "https://helsing.ai/jobs/5024730101?gh_jid=5024730101",
           "locations": [
-            "London"
+            "Munich"
           ],
           "countries": [
-            "United Kingdom"
+            "Germany"
           ],
           "workplace": null,
           "department": "Systems Architecture",
@@ -45511,20 +45525,6 @@
           ],
           "workplace": "hybrid",
           "department": "Engineering",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Rotational Product Manager Program",
-          "url": "https://jobs.ashbyhq.com/iceye/ca582861-6f7d-4190-8b31-4738891dc0ea",
-          "locations": [
-            "Espoo"
-          ],
-          "countries": [
-            "Finland"
-          ],
-          "workplace": "hybrid",
-          "department": "Product",
           "visa": "unknown",
           "hire_from_abroad": "unknown"
         },
@@ -52163,6 +52163,20 @@
           ],
           "workplace": "hybrid",
           "department": "Business Units",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Machine Learning Engineering Manager (Power)",
+          "url": "https://jobs.lever.co/kpler/d0b15eec-6865-4e5a-9d73-a20ef069bf8e",
+          "locations": [
+            "United Kingdom"
+          ],
+          "countries": [
+            "United Kingdom"
+          ],
+          "workplace": "hybrid",
+          "department": "Engineering",
           "visa": "unknown",
           "hire_from_abroad": "unknown"
         },
@@ -63361,6 +63375,35 @@
           "hire_from_abroad": "unknown"
         },
         {
+          "title": "Senior Legal Counsel, Product",
+          "url": "https://jobs.ashbyhq.com/n8n/cc7a3cf6-44ea-4a49-9a0b-f929dea2a0d7",
+          "locations": [
+            "Berlin Office",
+            "Norway",
+            "Netherlands",
+            "London Office",
+            "Ireland",
+            "Denmark",
+            "United Kingdom",
+            "Spain",
+            "Sweden"
+          ],
+          "countries": [
+            "United Kingdom",
+            "Ireland",
+            "Germany",
+            "Netherlands",
+            "Spain",
+            "Sweden",
+            "Denmark",
+            "Norway"
+          ],
+          "workplace": "remote",
+          "department": "Finance & Legal",
+          "visa": "yes",
+          "hire_from_abroad": "unknown"
+        },
+        {
           "title": "Senior Product Engineer (TS/NodeJS/Vue)",
           "url": "https://jobs.ashbyhq.com/n8n/896c58a8-0388-4037-b265-82b15633a568",
           "locations": [
@@ -64021,6 +64064,7 @@
         "Netherlands",
         "France",
         "Spain",
+        "Sweden",
         "Denmark",
         "Norway",
         "Finland"
@@ -66980,7 +67024,7 @@
           "title": "AI Agent Engineer",
           "url": "https://www.observe.ai/position?gh_jid=5432596008",
           "locations": [
-            "Hyderabad, Telangana, India"
+            "Bengaluru "
           ],
           "countries": [
             "India"
@@ -67065,8 +67109,7 @@
         "India"
       ],
       "cities": [
-        "Bengaluru",
-        "Hyderabad"
+        "Bengaluru"
       ],
       "amount": null,
       "currency": null,
@@ -67713,12 +67756,12 @@
         },
         {
           "title": "Head of Communications and PR, APAC",
-          "url": "https://job-boards.greenhouse.io/okx/jobs/7741363003",
+          "url": "https://job-boards.greenhouse.io/okx/jobs/7741411003",
           "locations": [
-            "Singapore, Singapore"
+            "Australia; Sydney, New South Wales, Australia"
           ],
           "countries": [
-            "Singapore"
+            "Australia"
           ],
           "workplace": null,
           "department": "Global Marketing and Growth",
@@ -67727,12 +67770,12 @@
         },
         {
           "title": "Head of Communications and PR, APAC",
-          "url": "https://job-boards.greenhouse.io/okx/jobs/7741411003",
+          "url": "https://job-boards.greenhouse.io/okx/jobs/7741363003",
           "locations": [
-            "Australia; Sydney, New South Wales, Australia"
+            "Singapore, Singapore"
           ],
           "countries": [
-            "Australia"
+            "Singapore"
           ],
           "workplace": null,
           "department": "Global Marketing and Growth",
@@ -68567,12 +68610,12 @@
         },
         {
           "title": "Senior Manager PR and Communications APAC",
-          "url": "https://job-boards.greenhouse.io/okx/jobs/8089237003",
+          "url": "https://job-boards.greenhouse.io/okx/jobs/8089223003",
           "locations": [
-            "Singapore, Singapore"
+            "Australia; Sydney, New South Wales, Australia"
           ],
           "countries": [
-            "Singapore"
+            "Australia"
           ],
           "workplace": null,
           "department": "Global Marketing and Growth",
@@ -68581,12 +68624,12 @@
         },
         {
           "title": "Senior Manager PR and Communications APAC",
-          "url": "https://job-boards.greenhouse.io/okx/jobs/8089223003",
+          "url": "https://job-boards.greenhouse.io/okx/jobs/8089237003",
           "locations": [
-            "Australia; Sydney, New South Wales, Australia"
+            "Singapore, Singapore"
           ],
           "countries": [
-            "Australia"
+            "Singapore"
           ],
           "workplace": null,
           "department": "Global Marketing and Growth",
@@ -76623,6 +76666,20 @@
           "hire_from_abroad": "unknown"
         },
         {
+          "title": "Senior Research Machine Learning Engineer",
+          "url": "https://job-boards.eu.greenhouse.io/physicsx/jobs/4789202101",
+          "locations": [
+            "London, United Kingdom"
+          ],
+          "countries": [
+            "United Kingdom"
+          ],
+          "workplace": null,
+          "department": "Research",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
           "title": "Senior Simulation Engineer - Thermal Process",
           "url": "https://job-boards.eu.greenhouse.io/physicsx/jobs/5011110101",
           "locations": [
@@ -80672,7 +80729,7 @@
           "hire_from_abroad": "unknown"
         },
         {
-          "title": "Customer Service Team Manager - German bilingual",
+          "title": "Customer Service Team Manager - German bilingual (Barcelona)",
           "url": "https://job-boards.greenhouse.io/quince/jobs/5419920008",
           "locations": [
             "Spain - Barcelona"
@@ -81010,20 +81067,6 @@
           "hire_from_abroad": "unknown"
         },
         {
-          "title": "Senior Data Scientist ( Data Scientist III : Supply Chain Operations Research)",
-          "url": "https://job-boards.greenhouse.io/quince/jobs/5381607008",
-          "locations": [
-            "Bengaluru, Karnataka, India"
-          ],
-          "countries": [
-            "India"
-          ],
-          "workplace": null,
-          "department": "Supply Chain Engineering",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
           "title": "Senior Fraud Operations Coordinator",
           "url": "https://job-boards.greenhouse.io/quince/jobs/5434794008",
           "locations": [
@@ -81067,20 +81110,6 @@
         },
         {
           "title": "Senior Manager, Global Procurement (Materials)",
-          "url": "https://job-boards.greenhouse.io/quince/jobs/5416501008",
-          "locations": [
-            "Bangladesh; India; Pakistan"
-          ],
-          "countries": [
-            "India"
-          ],
-          "workplace": null,
-          "department": "Procurement",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Senior Manager, Global Procurement (Materials)",
           "url": "https://job-boards.greenhouse.io/quince/jobs/5443524008",
           "locations": [
             "France; Germany - Remote; Italy - Remote; United Kingdom"
@@ -81091,6 +81120,20 @@
             "France"
           ],
           "workplace": "remote",
+          "department": "Procurement",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Senior Manager, Global Procurement (Materials)",
+          "url": "https://job-boards.greenhouse.io/quince/jobs/5416501008",
+          "locations": [
+            "Bangladesh; India; Pakistan"
+          ],
+          "countries": [
+            "India"
+          ],
+          "workplace": null,
           "department": "Procurement",
           "visa": "unknown",
           "hire_from_abroad": "unknown"
@@ -88084,20 +88127,6 @@
       "roles": [
         {
           "title": "Abuse Investigator",
-          "url": "https://stripe.com/jobs/search?gh_jid=8172508",
-          "locations": [
-            "Dublin"
-          ],
-          "countries": [
-            "Ireland"
-          ],
-          "workplace": null,
-          "department": "8611 Security Analytics",
-          "visa": "unknown",
-          "hire_from_abroad": "unknown"
-        },
-        {
-          "title": "Abuse Investigator",
           "url": "https://stripe.com/jobs/search?gh_jid=8172487",
           "locations": [
             "Dublin"
@@ -88111,8 +88140,8 @@
           "hire_from_abroad": "unknown"
         },
         {
-          "title": "Account Executive, Benelux",
-          "url": "https://stripe.com/jobs/search?gh_jid=8322584",
+          "title": "Abuse Investigator",
+          "url": "https://stripe.com/jobs/search?gh_jid=8172508",
           "locations": [
             "Dublin"
           ],
@@ -88120,7 +88149,7 @@
             "Ireland"
           ],
           "workplace": null,
-          "department": "1185 Account Executives (EMEA)",
+          "department": "8611 Security Analytics",
           "visa": "unknown",
           "hire_from_abroad": "unknown"
         },
@@ -88761,6 +88790,20 @@
         {
           "title": "Account Executive, SaaS Platforms Grower",
           "url": "https://stripe.com/jobs/search?gh_jid=8241294",
+          "locations": [
+            "Dublin"
+          ],
+          "countries": [
+            "Ireland"
+          ],
+          "workplace": null,
+          "department": "1185 Account Executives (EMEA)",
+          "visa": "unknown",
+          "hire_from_abroad": "unknown"
+        },
+        {
+          "title": "Account Executive, SMB",
+          "url": "https://stripe.com/jobs/search?gh_jid=8322584",
           "locations": [
             "Dublin"
           ],
@@ -100154,12 +100197,12 @@
           "title": "Customer Support Engineer",
           "url": "https://job-boards.greenhouse.io/vercel/jobs/6230763004",
           "locations": [
-            "Remote - Australia"
+            "Hybrid - Sydney"
           ],
           "countries": [
             "Australia"
           ],
-          "workplace": "remote",
+          "workplace": "hybrid",
           "department": "Support",
           "visa": "unknown",
           "hire_from_abroad": "unknown"
