@@ -1,11 +1,11 @@
 {
   "corpus_size": 3026,
-  "checked": 809,
-  "unchecked": 2217,
+  "checked": 808,
+  "unchecked": 2218,
   "counts": {
-    "listed": 365,
-    "no-target-roles": 444,
-    "slug-unresolved": 2194,
+    "listed": 363,
+    "no-target-roles": 445,
+    "slug-unresolved": 2195,
     "probe-failed": 0,
     "empty-board-unverified": 10,
     "not-qualified": 0,
@@ -71,6 +71,7 @@
     "Cinder",
     "CircleCI",
     "Clear Street",
+    "Clever",
     "ClickUp",
     "Clipboard",
     "Coalition",
@@ -132,7 +133,6 @@
     "FourKites",
     "FullStory",
     "Fundamental",
-    "Gather AI",
     "Gauntlet Networks",
     "General Intuition",
     "Giga",
@@ -201,7 +201,6 @@
     "Lucis",
     "Luma AI",
     "MOLOCO",
-    "MUBI",
     "MURAL",
     "Magic Eden",
     "MaintainX",
@@ -259,7 +258,6 @@
     "Pendo",
     "Pennylane",
     "Peregrine",
-    "PermitFlow",
     "Photoroom",
     "PhysicsX",
     "Pigment",
@@ -267,7 +265,6 @@
     "Pleo",
     "Podium",
     "Poolside",
-    "PowerUs",
     "Project44",
     "Prove Identity",
     "PsiQuantum",
@@ -338,6 +335,7 @@
     "Thought Machine",
     "Tide",
     "Tines",
+    "Tipalti",
     "Together AI",
     "Torq",
     "Transmit Security",
@@ -926,7 +924,7 @@
     "Clearing Co of San Francisco": "slug-unresolved",
     "Clearwater Analytics Holdings": "slug-unresolved",
     "Clerq": "slug-unresolved",
-    "Clever": "no-target-roles",
+    "Clever": "listed",
     "ClickHouse": "slug-unresolved",
     "ClickUp": "listed",
     "ClinTrial Research": "slug-unresolved",
@@ -1451,7 +1449,7 @@
     "Gamma": "slug-unresolved",
     "Garage": "no-target-roles",
     "Garage Technologies": "slug-unresolved",
-    "Gather AI": "listed",
+    "Gather AI": "no-target-roles",
     "Gauntlet Networks": "listed",
     "Gecko Robotics": "no-target-roles",
     "Gem": "slug-unresolved",
@@ -1949,7 +1947,7 @@
     "MOLOCO": "listed",
     "MRToolworx": "slug-unresolved",
     "MTailor": "slug-unresolved",
-    "MUBI": "listed",
+    "MUBI": "no-target-roles",
     "MURAL": "listed",
     "MX": "slug-unresolved",
     "MachGen AI": "slug-unresolved",
@@ -2395,7 +2393,7 @@
     "Perfumeo": "slug-unresolved",
     "PerkCity": "slug-unresolved",
     "PerksHub (1-13)": "slug-unresolved",
-    "PermitFlow": "listed",
+    "PermitFlow": "no-target-roles",
     "Permutive": "no-target-roles",
     "Perplexity": "slug-unresolved",
     "Perplexity AI": "slug-unresolved",
@@ -2472,7 +2470,7 @@
     "Postscript": "no-target-roles",
     "Povio": "slug-unresolved",
     "PowerLattice Technologies": "slug-unresolved",
-    "PowerUs": "listed",
+    "PowerUs": "slug-unresolved",
     "Prague Technology": "slug-unresolved",
     "PraxisPro": "slug-unresolved",
     "Precision Fermentation": "slug-unresolved",
@@ -3043,7 +3041,7 @@
     "Tilt (f.k.a. Delphia)": "slug-unresolved",
     "Timescale": "slug-unresolved",
     "Tines": "listed",
-    "Tipalti": "no-target-roles",
+    "Tipalti": "listed",
     "Tiptap": "slug-unresolved",
     "Titan": "no-target-roles",
     "TitanX Holdings": "slug-unresolved",
@@ -3406,10 +3404,15 @@
     "xLight": "slug-unresolved",
     "zeroheight": "slug-unresolved"
   },
-  "departed": {},
+  "departed": {
+    "Gather AI": "no-target-roles",
+    "MUBI": "no-target-roles",
+    "PermitFlow": "no-target-roles",
+    "PowerUs": "slug-unresolved"
+  },
   "websites": {
     "with_website": 1928,
-    "slug_unresolved_with_website": 1200,
+    "slug_unresolved_with_website": 1201,
     "slug_unresolved_without_website": 994
   },
   "shared_boards": {
@@ -3428,26 +3431,26 @@
     "Insider": "Business Insider"
   },
   "countries": {
-    "India": 121,
-    "United Kingdom": 258,
-    "Ireland": 52,
-    "Germany": 103,
+    "India": 118,
+    "United Kingdom": 261,
+    "Ireland": 55,
+    "Germany": 101,
     "Netherlands": 48,
-    "France": 59,
-    "Spain": 64,
+    "France": 58,
+    "Spain": 63,
     "Sweden": 35,
-    "Denmark": 16,
+    "Denmark": 15,
     "Norway": 6,
     "Finland": 8,
-    "Japan": 63,
-    "Singapore": 71,
-    "Australia": 89,
+    "Japan": 62,
+    "Singapore": 70,
+    "Australia": 90,
     "New Zealand": 6
   },
   "mca": {
     "records": 24102,
     "pulled": "2026-07-29",
-    "matched": 33,
+    "matched": 31,
     "held": [
       {
         "name": "6Sense",
@@ -6199,23 +6202,6 @@
         ]
       },
       {
-        "name": "MUBI",
-        "confidence": "exact",
-        "why": "silent; one exact-tier name match",
-        "candidates": [
-          {
-            "number": "07385593",
-            "name": "MUBI UK LIMITED",
-            "status": "active",
-            "incorporated": "2010-09-23",
-            "locality": "",
-            "postcode": "",
-            "sic": [],
-            "kind": ""
-          }
-        ]
-      },
-      {
         "name": "MURAL",
         "confidence": "exact",
         "why": "silent; 4 companies reach the exact tier",
@@ -7286,6 +7272,33 @@
             "name": "TIDE LTD",
             "status": "dissolved",
             "incorporated": "2005-07-12",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Tipalti",
+        "confidence": "prefix",
+        "why": "silent; 2 companies reach the prefix tier",
+        "candidates": [
+          {
+            "number": "12471817",
+            "name": "TIPALTI EUROPE LTD",
+            "status": "active",
+            "incorporated": "2020-02-19",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "12420590",
+            "name": "TIPALTI SOLUTIONS LTD",
+            "status": "dissolved",
+            "incorporated": "2020-01-23",
             "locality": "",
             "postcode": "",
             "sic": [],
