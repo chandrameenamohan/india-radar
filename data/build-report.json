@@ -3,8 +3,8 @@
   "checked": 808,
   "unchecked": 2218,
   "counts": {
-    "listed": 363,
-    "no-target-roles": 445,
+    "listed": 364,
+    "no-target-roles": 444,
     "slug-unresolved": 2195,
     "probe-failed": 0,
     "empty-board-unverified": 10,
@@ -21,6 +21,7 @@
     "Abacum",
     "Agentio",
     "Airbnb",
+    "Airtable",
     "Algolia",
     "Alloy",
     "Alpaca",
@@ -469,7 +470,7 @@
     "Airbnb": "listed",
     "Airbyte": "no-target-roles",
     "Airfordable": "slug-unresolved",
-    "Airtable": "no-target-roles",
+    "Airtable": "listed",
     "Airwallex": "slug-unresolved",
     "Airware": "slug-unresolved",
     "Aiven": "slug-unresolved",
@@ -3404,12 +3405,7 @@
     "xLight": "slug-unresolved",
     "zeroheight": "slug-unresolved"
   },
-  "departed": {
-    "Gather AI": "no-target-roles",
-    "MUBI": "no-target-roles",
-    "PermitFlow": "no-target-roles",
-    "PowerUs": "slug-unresolved"
-  },
+  "departed": {},
   "websites": {
     "with_website": 1928,
     "slug_unresolved_with_website": 1201,
@@ -3432,20 +3428,20 @@
   },
   "countries": {
     "India": 118,
-    "United Kingdom": 261,
+    "United Kingdom": 258,
     "Ireland": 55,
-    "Germany": 101,
+    "Germany": 100,
     "Netherlands": 48,
     "France": 58,
     "Spain": 63,
-    "Sweden": 35,
+    "Sweden": 34,
     "Denmark": 15,
     "Norway": 6,
     "Finland": 8,
     "Japan": 62,
-    "Singapore": 70,
+    "Singapore": 71,
     "Australia": 90,
-    "New Zealand": 6
+    "New Zealand": 7
   },
   "mca": {
     "records": 24102,
@@ -4009,6 +4005,23 @@
             "name": "AIRBNB HABITAT CLEANING LTD",
             "status": "active",
             "incorporated": "2025-06-27",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Airtable",
+        "confidence": "exact",
+        "why": "silent; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "14440416",
+            "name": "AIRTABLE LIMITED",
+            "status": "dissolved",
+            "incorporated": "2022-10-25",
             "locality": "",
             "postcode": "",
             "sic": [],
@@ -5159,23 +5172,6 @@
             "name": "FAIRE LIMITED",
             "status": "dissolved",
             "incorporated": "2013-04-16",
-            "locality": "",
-            "postcode": "",
-            "sic": [],
-            "kind": ""
-          }
-        ]
-      },
-      {
-        "name": "Feedzai",
-        "confidence": "exact",
-        "why": "silent; one exact-tier name match",
-        "candidates": [
-          {
-            "number": "12661513",
-            "name": "FEEDZAI UK LIMITED",
-            "status": "active",
-            "incorporated": "2020-06-11",
             "locality": "",
             "postcode": "",
             "sic": [],
