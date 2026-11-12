@@ -1,11 +1,11 @@
 {
   "corpus_size": 3026,
-  "checked": 808,
-  "unchecked": 2218,
+  "checked": 807,
+  "unchecked": 2219,
   "counts": {
     "listed": 364,
-    "no-target-roles": 444,
-    "slug-unresolved": 2195,
+    "no-target-roles": 443,
+    "slug-unresolved": 2196,
     "probe-failed": 0,
     "empty-board-unverified": 10,
     "not-qualified": 0,
@@ -128,7 +128,6 @@
     "Flexport",
     "Focal Systems",
     "Focused Energy",
-    "Formance",
     "Forter",
     "Foundational Industries",
     "FourKites",
@@ -241,6 +240,7 @@
     "Observe.AI",
     "Odeko",
     "Odyssey",
+    "Oklo",
     "OneTrust",
     "Onebrief",
     "OpenAI",
@@ -269,6 +269,7 @@
     "Project44",
     "Prove Identity",
     "PsiQuantum",
+    "Pump",
     "Qonto",
     "Quantexa",
     "Quantum Metric",
@@ -293,7 +294,6 @@
     "SeekOut",
     "Semafor",
     "Semperis",
-    "Sentry",
     "Shift",
     "ShopMy",
     "Sift",
@@ -1404,7 +1404,7 @@
     "Font Awesome": "slug-unresolved",
     "FormX": "slug-unresolved",
     "Formal": "no-target-roles",
-    "Formance": "listed",
+    "Formance": "no-target-roles",
     "Foro Holdings": "slug-unresolved",
     "Fortastra": "no-target-roles",
     "Forte Labs": "slug-unresolved",
@@ -1721,7 +1721,7 @@
     "Isembard": "slug-unresolved",
     "Island": "slug-unresolved",
     "Isomorphic Labs": "listed",
-    "Iterable": "no-target-roles",
+    "Iterable": "slug-unresolved",
     "Ivalua": "listed",
     "Jasper": "slug-unresolved",
     "Jasper.ai": "another-companys-board",
@@ -2236,7 +2236,7 @@
     "Offchain Labs": "no-target-roles",
     "OkCredit": "slug-unresolved",
     "Okami Medical": "slug-unresolved",
-    "Oklo": "no-target-roles",
+    "Oklo": "listed",
     "Okteto": "slug-unresolved",
     "Olden Labs": "slug-unresolved",
     "Oleria": "empty-board-unverified",
@@ -2506,7 +2506,7 @@
     "PullRequest": "slug-unresolved",
     "Pulley": "no-target-roles",
     "Pulse": "no-target-roles",
-    "Pump": "no-target-roles",
+    "Pump": "listed",
     "Push Security": "slug-unresolved",
     "Pyka": "no-target-roles",
     "Pylon": "slug-unresolved",
@@ -2767,7 +2767,7 @@
     "Sendbird": "no-target-roles",
     "Sendwave": "slug-unresolved",
     "Sensera Systems": "slug-unresolved",
-    "Sentry": "listed",
+    "Sentry": "no-target-roles",
     "Sequen": "no-target-roles",
     "Sequifi": "slug-unresolved",
     "Sequome": "slug-unresolved",
@@ -3405,10 +3405,13 @@
     "xLight": "slug-unresolved",
     "zeroheight": "slug-unresolved"
   },
-  "departed": {},
+  "departed": {
+    "Formance": "no-target-roles",
+    "Sentry": "no-target-roles"
+  },
   "websites": {
     "with_website": 1928,
-    "slug_unresolved_with_website": 1201,
+    "slug_unresolved_with_website": 1202,
     "slug_unresolved_without_website": 994
   },
   "shared_boards": {
@@ -3427,26 +3430,26 @@
     "Insider": "Business Insider"
   },
   "countries": {
-    "India": 118,
-    "United Kingdom": 258,
+    "India": 119,
+    "United Kingdom": 259,
     "Ireland": 55,
     "Germany": 100,
     "Netherlands": 48,
-    "France": 58,
-    "Spain": 63,
+    "France": 56,
+    "Spain": 62,
     "Sweden": 34,
     "Denmark": 15,
-    "Norway": 6,
-    "Finland": 8,
+    "Norway": 7,
+    "Finland": 9,
     "Japan": 62,
-    "Singapore": 71,
-    "Australia": 90,
+    "Singapore": 72,
+    "Australia": 91,
     "New Zealand": 7
   },
   "mca": {
     "records": 24102,
     "pulled": "2026-07-29",
-    "matched": 31,
+    "matched": 32,
     "held": [
       {
         "name": "6Sense",
@@ -3824,6 +3827,19 @@
             "name": "PROJECT44 SOFTWARE SERVICES PRIVATE LIMITED",
             "incorporated": "2023-03-16",
             "address": "6th Floor, Zonasha IT Building,,Laxmi Sagar Layout, Mahadevapura,,Bangalore North,Bangalore,Karnataka,560048-India",
+            "status": "Active"
+          }
+        ]
+      },
+      {
+        "name": "Pump",
+        "confidence": "prefix",
+        "candidates": [
+          {
+            "cin": "U62099TS2023FTC175387",
+            "name": "PUMP BILLING TECHNOLOGIES INDIA PRIVATE LIMITED",
+            "incorporated": "2023-07-25",
+            "address": "Flat 101,Ganesh GHR & MSY,Plaza, Vittal Rao Nagar,,Shaikpet,Hyderabad,Telangana,500081-India",
             "status": "Active"
           }
         ]
@@ -5664,23 +5680,6 @@
         ]
       },
       {
-        "name": "Ivalua",
-        "confidence": "exact",
-        "why": "silent; one exact-tier name match",
-        "candidates": [
-          {
-            "number": "11800568",
-            "name": "IVALUA LTD.",
-            "status": "active",
-            "incorporated": "2019-01-31",
-            "locality": "",
-            "postcode": "",
-            "sic": [],
-            "kind": ""
-          }
-        ]
-      },
-      {
         "name": "Junction",
         "confidence": "exact",
         "why": "silent; one exact-tier name match",
@@ -6366,6 +6365,33 @@
             "name": "ODYSSEY LTD",
             "status": "active",
             "incorporated": "2001-08-07",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Oklo",
+        "confidence": "exact",
+        "why": "unreachable; 2 companies reach the exact tier",
+        "candidates": [
+          {
+            "number": "12419700",
+            "name": "OKLO LTD",
+            "status": "dissolved",
+            "incorporated": "2020-01-22",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "07894704",
+            "name": "OKLO LIMITED",
+            "status": "dissolved",
+            "incorporated": "2012-01-03",
             "locality": "",
             "postcode": "",
             "sic": [],
