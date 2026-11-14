@@ -3,8 +3,8 @@
   "checked": 806,
   "unchecked": 2220,
   "counts": {
-    "listed": 363,
-    "no-target-roles": 443,
+    "listed": 362,
+    "no-target-roles": 444,
     "slug-unresolved": 2197,
     "probe-failed": 0,
     "empty-board-unverified": 10,
@@ -37,6 +37,7 @@
     "AppDirect",
     "Applied Intuition",
     "AppsFlyer",
+    "Arketa",
     "Armada",
     "Ashby",
     "Aspora",
@@ -116,7 +117,6 @@
     "Factory",
     "Faire",
     "FalconX",
-    "Feedzai",
     "Fieldguide",
     "Finni Health",
     "Fireblocks",
@@ -329,7 +329,6 @@
     "Teamworks",
     "Teleport",
     "Tem",
-    "Tempo",
     "TensTorrent",
     "Teya",
     "Thought Machine",
@@ -557,7 +556,7 @@
     "Arintra": "slug-unresolved",
     "Arkea Bio": "slug-unresolved",
     "Arkenstone Defense": "slug-unresolved",
-    "Arketa": "no-target-roles",
+    "Arketa": "listed",
     "Armada": "listed",
     "Armadin": "slug-unresolved",
     "Armory": "slug-unresolved",
@@ -1317,7 +1316,7 @@
     "Fathom": "slug-unresolved",
     "Fazeshift": "no-target-roles",
     "Feather": "slug-unresolved",
-    "Feedzai": "listed",
+    "Feedzai": "no-target-roles",
     "Felicity AI": "slug-unresolved",
     "Felix Technologies": "slug-unresolved",
     "Fern": "slug-unresolved",
@@ -2998,7 +2997,7 @@
     "Tem": "listed",
     "Temelio": "slug-unresolved",
     "Templarbit": "slug-unresolved",
-    "Tempo": "listed",
+    "Tempo": "no-target-roles",
     "Temporal": "slug-unresolved",
     "TeneoSeven": "slug-unresolved",
     "Tennr": "no-target-roles",
@@ -3405,9 +3404,8 @@
     "zeroheight": "slug-unresolved"
   },
   "departed": {
-    "Arketa": "no-target-roles",
-    "Augmodo": "no-target-roles",
-    "Cambridge Mobile Telematics": "no-target-roles"
+    "Feedzai": "no-target-roles",
+    "Tempo": "no-target-roles"
   },
   "websites": {
     "with_website": 1928,
@@ -3430,20 +3428,20 @@
     "Insider": "Business Insider"
   },
   "countries": {
-    "India": 120,
+    "India": 119,
     "United Kingdom": 259,
     "Ireland": 55,
-    "Germany": 100,
+    "Germany": 97,
     "Netherlands": 48,
     "France": 56,
-    "Spain": 63,
+    "Spain": 64,
     "Sweden": 34,
     "Denmark": 15,
     "Norway": 7,
     "Finland": 9,
     "Japan": 62,
-    "Singapore": 72,
-    "Australia": 90,
+    "Singapore": 73,
+    "Australia": 89,
     "New Zealand": 7
   },
   "mca": {
@@ -4191,6 +4189,23 @@
             "name": "APPSFLYER UK LTD",
             "status": "active",
             "incorporated": "2016-06-23",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Arketa",
+        "confidence": "exact",
+        "why": "silent; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "06461694",
+            "name": "ARKETA LIMITED",
+            "status": "dissolved",
+            "incorporated": "2008-01-02",
             "locality": "",
             "postcode": "",
             "sic": [],
