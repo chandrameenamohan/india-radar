@@ -1,11 +1,11 @@
 {
   "corpus_size": 3026,
-  "checked": 806,
-  "unchecked": 2220,
+  "checked": 805,
+  "unchecked": 2221,
   "counts": {
-    "listed": 363,
-    "no-target-roles": 443,
-    "slug-unresolved": 2197,
+    "listed": 360,
+    "no-target-roles": 445,
+    "slug-unresolved": 2198,
     "probe-failed": 0,
     "empty-board-unverified": 10,
     "not-qualified": 0,
@@ -61,7 +61,6 @@
     "Campfire",
     "Canary Technologies",
     "CarbonChain",
-    "Caribou",
     "Carta",
     "Cato Networks",
     "Celonis",
@@ -181,7 +180,6 @@
     "Komodo Health",
     "Kong",
     "Kpler",
-    "Lambda Labs",
     "LangChain",
     "LaunchDarkly",
     "Legion Health",
@@ -276,7 +274,6 @@
     "Ramp",
     "Razorpay",
     "Reflection AI",
-    "Reka AI",
     "Replit",
     "Rigetti Computing",
     "Rillet",
@@ -840,7 +837,7 @@
     "Careerist": "slug-unresolved",
     "Caregility": "slug-unresolved",
     "Cargado": "slug-unresolved",
-    "Caribou": "listed",
+    "Caribou": "no-target-roles",
     "Carrot Fertility": "slug-unresolved",
     "Carson Group": "slug-unresolved",
     "Cart.com": "slug-unresolved",
@@ -1823,7 +1820,7 @@
     "Labs Companies": "slug-unresolved",
     "Lago": "slug-unresolved",
     "Lambda": "slug-unresolved",
-    "Lambda Labs": "listed",
+    "Lambda Labs": "no-target-roles",
     "LanceDB": "no-target-roles",
     "Landed": "slug-unresolved",
     "LangChain": "listed",
@@ -2134,7 +2131,7 @@
     "Navro Group": "slug-unresolved",
     "Nayya": "no-target-roles",
     "Nebia": "slug-unresolved",
-    "Nectar Social": "no-target-roles",
+    "Nectar Social": "slug-unresolved",
     "Negotiatus": "slug-unresolved",
     "Neko Health": "slug-unresolved",
     "Neo4j": "listed",
@@ -2598,7 +2595,7 @@
     "Reframe": "slug-unresolved",
     "RegScale": "slug-unresolved",
     "Regology": "slug-unresolved",
-    "Reka AI": "listed",
+    "Reka AI": "no-target-roles",
     "Relativity": "another-companys-board",
     "Relativity Space": "no-target-roles",
     "Relay": "slug-unresolved",
@@ -3405,12 +3402,14 @@
     "zeroheight": "slug-unresolved"
   },
   "departed": {
-    "AppDirect": "no-target-roles"
+    "Caribou": "no-target-roles",
+    "Lambda Labs": "no-target-roles",
+    "Reka AI": "no-target-roles"
   },
   "websites": {
     "with_website": 1928,
     "slug_unresolved_with_website": 1203,
-    "slug_unresolved_without_website": 994
+    "slug_unresolved_without_website": 995
   },
   "shared_boards": {
     "Bright": "BrightAI",
@@ -3428,19 +3427,19 @@
     "Insider": "Business Insider"
   },
   "countries": {
-    "India": 119,
-    "United Kingdom": 259,
+    "India": 120,
+    "United Kingdom": 256,
     "Ireland": 55,
-    "Germany": 98,
-    "Netherlands": 48,
-    "France": 57,
+    "Germany": 97,
+    "Netherlands": 47,
+    "France": 55,
     "Spain": 64,
-    "Sweden": 34,
+    "Sweden": 33,
     "Denmark": 15,
     "Norway": 7,
     "Finland": 9,
     "Japan": 64,
-    "Singapore": 73,
+    "Singapore": 72,
     "Australia": 89,
     "New Zealand": 7
   },
@@ -3967,7 +3966,7 @@
     "names": 220,
     "stated": 20,
     "pulled": "2026-08-02",
-    "matched": 15,
+    "matched": 13,
     "held": [
       {
         "name": "Airbnb",
@@ -6846,23 +6845,6 @@
             "name": "REFLECTION AI UK LTD.",
             "status": "active",
             "incorporated": "2025-03-06",
-            "locality": "",
-            "postcode": "",
-            "sic": [],
-            "kind": ""
-          }
-        ]
-      },
-      {
-        "name": "Reka AI",
-        "confidence": "exact",
-        "why": "silent; one exact-tier name match",
-        "candidates": [
-          {
-            "number": "14242489",
-            "name": "REKA AI LTD.",
-            "status": "active",
-            "incorporated": "2022-07-19",
             "locality": "",
             "postcode": "",
             "sic": [],
