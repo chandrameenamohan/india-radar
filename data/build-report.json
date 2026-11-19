@@ -1,11 +1,11 @@
 {
   "corpus_size": 3026,
-  "checked": 805,
-  "unchecked": 2221,
+  "checked": 803,
+  "unchecked": 2223,
   "counts": {
     "listed": 360,
-    "no-target-roles": 445,
-    "slug-unresolved": 2198,
+    "no-target-roles": 443,
+    "slug-unresolved": 2200,
     "probe-failed": 0,
     "empty-board-unverified": 10,
     "not-qualified": 0,
@@ -83,6 +83,7 @@
     "Conveo",
     "Cresta",
     "Cribl",
+    "Cross River Bank",
     "Culture Amp",
     "Curri",
     "Cursor",
@@ -133,7 +134,6 @@
     "Gauntlet Networks",
     "General Intuition",
     "Giga",
-    "Gigs",
     "GitLab",
     "Glean",
     "GoCardless",
@@ -255,6 +255,7 @@
     "Pendo",
     "Pennylane",
     "Peregrine",
+    "Permutive",
     "Photoroom",
     "PhysicsX",
     "Pigment",
@@ -338,7 +339,6 @@
     "Transmit Security",
     "Trigger.dev",
     "Triomics",
-    "TrueLayer",
     "Trulioo",
     "Tulip",
     "Turing",
@@ -1020,7 +1020,7 @@
     "Cribl": "listed",
     "Critical Loop": "no-target-roles",
     "Crosby": "slug-unresolved",
-    "Cross River Bank": "no-target-roles",
+    "Cross River Bank": "listed",
     "Crossmint": "slug-unresolved",
     "CrowdAI": "slug-unresolved",
     "Cruise": "slug-unresolved",
@@ -1464,7 +1464,7 @@
     "GetAccept": "slug-unresolved",
     "GiXsystem.ai": "slug-unresolved",
     "Giga": "listed",
-    "Gigs": "listed",
+    "Gigs": "slug-unresolved",
     "Gigster": "slug-unresolved",
     "Ginkgo Bioworks": "no-target-roles",
     "GitLab": "listed",
@@ -2391,7 +2391,7 @@
     "PerkCity": "slug-unresolved",
     "PerksHub (1-13)": "slug-unresolved",
     "PermitFlow": "no-target-roles",
-    "Permutive": "no-target-roles",
+    "Permutive": "listed",
     "Perplexity": "slug-unresolved",
     "Perplexity AI": "slug-unresolved",
     "Persist AI": "slug-unresolved",
@@ -3080,7 +3080,7 @@
     "Triplebyte": "slug-unresolved",
     "Tripledot": "slug-unresolved",
     "True Link": "no-target-roles",
-    "TrueLayer": "listed",
+    "TrueLayer": "slug-unresolved",
     "TrueMeter": "slug-unresolved",
     "TrueNorth": "slug-unresolved",
     "Truebill": "slug-unresolved",
@@ -3402,13 +3402,12 @@
     "zeroheight": "slug-unresolved"
   },
   "departed": {
-    "Caribou": "no-target-roles",
-    "Lambda Labs": "no-target-roles",
-    "Reka AI": "no-target-roles"
+    "Gigs": "slug-unresolved",
+    "TrueLayer": "slug-unresolved"
   },
   "websites": {
     "with_website": 1928,
-    "slug_unresolved_with_website": 1203,
+    "slug_unresolved_with_website": 1205,
     "slug_unresolved_without_website": 995
   },
   "shared_boards": {
@@ -3427,18 +3426,18 @@
     "Insider": "Business Insider"
   },
   "countries": {
-    "India": 120,
-    "United Kingdom": 256,
-    "Ireland": 55,
-    "Germany": 97,
-    "Netherlands": 47,
-    "France": 55,
-    "Spain": 64,
+    "India": 119,
+    "United Kingdom": 254,
+    "Ireland": 54,
+    "Germany": 95,
+    "Netherlands": 45,
+    "France": 56,
+    "Spain": 65,
     "Sweden": 33,
     "Denmark": 15,
-    "Norway": 7,
+    "Norway": 8,
     "Finland": 9,
-    "Japan": 64,
+    "Japan": 63,
     "Singapore": 72,
     "Australia": 89,
     "New Zealand": 7
@@ -3966,7 +3965,7 @@
     "names": 220,
     "stated": 20,
     "pulled": "2026-08-02",
-    "matched": 13,
+    "matched": 12,
     "held": [
       {
         "name": "Airbnb",
@@ -5048,43 +5047,6 @@
         ]
       },
       {
-        "name": "Dropbox",
-        "confidence": "exact",
-        "why": "silent; 3 companies reach the exact tier",
-        "candidates": [
-          {
-            "number": "12109589",
-            "name": "DROPBOX LIMITED",
-            "status": "active",
-            "incorporated": "2019-07-18",
-            "locality": "",
-            "postcode": "",
-            "sic": [],
-            "kind": ""
-          },
-          {
-            "number": "09874841",
-            "name": "DROPBOX LTD",
-            "status": "dissolved",
-            "incorporated": "2015-11-17",
-            "locality": "",
-            "postcode": "",
-            "sic": [],
-            "kind": ""
-          },
-          {
-            "number": "12993539",
-            "name": "DROP BOX LTD",
-            "status": "dissolved",
-            "incorporated": "2020-11-03",
-            "locality": "",
-            "postcode": "",
-            "sic": [],
-            "kind": ""
-          }
-        ]
-      },
-      {
         "name": "Druva",
         "confidence": "prefix",
         "why": "silent; 2 companies reach the prefix tier",
@@ -5331,63 +5293,6 @@
             "name": "GIGA LIMITED",
             "status": "dissolved",
             "incorporated": "2007-07-04",
-            "locality": "",
-            "postcode": "",
-            "sic": [],
-            "kind": ""
-          }
-        ]
-      },
-      {
-        "name": "Gigs",
-        "confidence": "prefix",
-        "why": "silent; 9 companies reach the prefix tier",
-        "candidates": [
-          {
-            "number": "13555626",
-            "name": "GIGS AND EVENTS LIMITED",
-            "status": "active",
-            "incorporated": "2021-08-09",
-            "locality": "",
-            "postcode": "",
-            "sic": [],
-            "kind": ""
-          },
-          {
-            "number": "09703450",
-            "name": "GIGS AND TOURING LTD",
-            "status": "active",
-            "incorporated": "2015-07-27",
-            "locality": "",
-            "postcode": "",
-            "sic": [],
-            "kind": ""
-          },
-          {
-            "number": "15954152",
-            "name": "GIGS 4 U PROPERTIES LIMITED",
-            "status": "active",
-            "incorporated": "2024-09-12",
-            "locality": "",
-            "postcode": "",
-            "sic": [],
-            "kind": ""
-          },
-          {
-            "number": "06145356",
-            "name": "GIGS 4 YOU LTD",
-            "status": "active",
-            "incorporated": "2007-03-08",
-            "locality": "",
-            "postcode": "",
-            "sic": [],
-            "kind": ""
-          },
-          {
-            "number": "11955154",
-            "name": "GIGS GEAR LTD",
-            "status": "active",
-            "incorporated": "2019-04-18",
             "locality": "",
             "postcode": "",
             "sic": [],
@@ -6599,6 +6504,23 @@
             "name": "PEREGRINE LTD",
             "status": "active",
             "incorporated": "2020-03-30",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Permutive",
+        "confidence": "exact",
+        "why": "silent; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "08738815",
+            "name": "PERMUTIVE LIMITED",
+            "status": "active",
+            "incorporated": "2013-10-18",
             "locality": "",
             "postcode": "",
             "sic": [],
