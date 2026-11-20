@@ -1,13 +1,13 @@
 {
   "corpus_size": 3026,
-  "checked": 803,
-  "unchecked": 2223,
+  "checked": 802,
+  "unchecked": 2224,
   "counts": {
     "listed": 360,
-    "no-target-roles": 443,
+    "no-target-roles": 442,
     "slug-unresolved": 2200,
     "probe-failed": 0,
-    "empty-board-unverified": 10,
+    "empty-board-unverified": 11,
     "not-qualified": 0,
     "another-companys-board": 13
   },
@@ -1192,7 +1192,7 @@
     "EarthOptics": "slug-unresolved",
     "EarthTraq": "slug-unresolved",
     "Easol": "slug-unresolved",
-    "EasyPost": "no-target-roles",
+    "EasyPost": "empty-board-unverified",
     "EchoTwin AI": "slug-unresolved",
     "EcoVadis": "slug-unresolved",
     "Ecolibrium": "slug-unresolved",
@@ -3401,10 +3401,7 @@
     "xLight": "slug-unresolved",
     "zeroheight": "slug-unresolved"
   },
-  "departed": {
-    "Gigs": "slug-unresolved",
-    "TrueLayer": "slug-unresolved"
-  },
+  "departed": {},
   "websites": {
     "with_website": 1928,
     "slug_unresolved_with_website": 1205,
@@ -3427,19 +3424,19 @@
   },
   "countries": {
     "India": 119,
-    "United Kingdom": 254,
+    "United Kingdom": 256,
     "Ireland": 54,
-    "Germany": 95,
-    "Netherlands": 45,
-    "France": 56,
-    "Spain": 65,
+    "Germany": 97,
+    "Netherlands": 46,
+    "France": 59,
+    "Spain": 66,
     "Sweden": 33,
     "Denmark": 15,
     "Norway": 8,
     "Finland": 9,
-    "Japan": 63,
-    "Singapore": 72,
-    "Australia": 89,
+    "Japan": 65,
+    "Singapore": 73,
+    "Australia": 90,
     "New Zealand": 7
   },
   "mca": {
