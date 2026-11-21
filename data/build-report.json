@@ -3,8 +3,8 @@
   "checked": 802,
   "unchecked": 2224,
   "counts": {
-    "listed": 360,
-    "no-target-roles": 442,
+    "listed": 358,
+    "no-target-roles": 444,
     "slug-unresolved": 2200,
     "probe-failed": 0,
     "empty-board-unverified": 11,
@@ -290,7 +290,6 @@
     "Scandit",
     "Securitize",
     "SeekOut",
-    "Semafor",
     "Semperis",
     "Shift",
     "ShopMy",
@@ -353,7 +352,6 @@
     "Verse Medical",
     "Vest",
     "Vivodyne",
-    "Wasabi",
     "Wayflyer",
     "Whop",
     "Wispr Flow",
@@ -2756,7 +2754,7 @@
     "Seis": "slug-unresolved",
     "Seismic": "slug-unresolved",
     "Selimor Investments": "slug-unresolved",
-    "Semafor": "listed",
+    "Semafor": "no-target-roles",
     "Semantix": "slug-unresolved",
     "Semperis": "listed",
     "SendHub": "slug-unresolved",
@@ -3228,7 +3226,7 @@
     "Wacai": "slug-unresolved",
     "Wander.com": "slug-unresolved",
     "Warmly,": "slug-unresolved",
-    "Wasabi": "listed",
+    "Wasabi": "no-target-roles",
     "Watershed": "no-target-roles",
     "Wave": "slug-unresolved",
     "WayUp": "slug-unresolved",
@@ -3401,7 +3399,10 @@
     "xLight": "slug-unresolved",
     "zeroheight": "slug-unresolved"
   },
-  "departed": {},
+  "departed": {
+    "Semafor": "no-target-roles",
+    "Wasabi": "no-target-roles"
+  },
   "websites": {
     "with_website": 1928,
     "slug_unresolved_with_website": 1205,
@@ -3427,17 +3428,17 @@
     "United Kingdom": 256,
     "Ireland": 54,
     "Germany": 97,
-    "Netherlands": 46,
+    "Netherlands": 47,
     "France": 59,
     "Spain": 66,
-    "Sweden": 33,
+    "Sweden": 32,
     "Denmark": 15,
     "Norway": 8,
     "Finland": 9,
     "Japan": 65,
     "Singapore": 73,
     "Australia": 90,
-    "New Zealand": 7
+    "New Zealand": 6
   },
   "mca": {
     "records": 24102,
@@ -5483,6 +5484,23 @@
             "name": "HIGGS FIELD LTD",
             "status": "active",
             "incorporated": "2023-09-20",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "Horizon 3 AI",
+        "confidence": "exact",
+        "why": "no website; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "16225773",
+            "name": "HORIZON3 AI UK LTD",
+            "status": "active",
+            "incorporated": "2025-02-03",
             "locality": "",
             "postcode": "",
             "sic": [],
