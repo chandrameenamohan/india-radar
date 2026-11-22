@@ -1,11 +1,11 @@
 {
   "corpus_size": 3026,
-  "checked": 802,
-  "unchecked": 2224,
+  "checked": 801,
+  "unchecked": 2225,
   "counts": {
     "listed": 358,
-    "no-target-roles": 444,
-    "slug-unresolved": 2200,
+    "no-target-roles": 443,
+    "slug-unresolved": 2201,
     "probe-failed": 0,
     "empty-board-unverified": 11,
     "not-qualified": 0,
@@ -821,7 +821,7 @@
     "Canix": "slug-unresolved",
     "Canva": "slug-unresolved",
     "Caper": "slug-unresolved",
-    "Capi Money": "no-target-roles",
+    "Capi Money": "slug-unresolved",
     "Capitalize": "slug-unresolved",
     "Capitol AI": "slug-unresolved",
     "Capitolis": "no-target-roles",
@@ -3399,13 +3399,10 @@
     "xLight": "slug-unresolved",
     "zeroheight": "slug-unresolved"
   },
-  "departed": {
-    "Semafor": "no-target-roles",
-    "Wasabi": "no-target-roles"
-  },
+  "departed": {},
   "websites": {
     "with_website": 1928,
-    "slug_unresolved_with_website": 1205,
+    "slug_unresolved_with_website": 1206,
     "slug_unresolved_without_website": 995
   },
   "shared_boards": {

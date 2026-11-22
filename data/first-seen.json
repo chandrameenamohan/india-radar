@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "snapshot": "2026-11-21",
+  "snapshot": "2026-11-22",
   "note": "first_seen is the snapshot date a role's URL first appeared in a build. A role is confirmed only where its company's board was read on the previous snapshot AND on this one \u2014 both sides genuinely observed. Everything else is unconfirmed: we saw it for the first time, which is not the same as it being new. Only confirmed roles may be called new.",
   "observed": [
     "1Password",
@@ -17683,6 +17683,13 @@
         "https://www.netskope.com/company/careers/open-positions/?gh_jid=8405460",
         "https://www.psiquantum.com/apply?gh_jid=8087214003",
         "https://www.scandit.com/careers/job-description/?gh_jid=8405367"
+      ],
+      "unconfirmed": []
+    },
+    "2026-11-22": {
+      "confirmed": [
+        "https://job-boards.greenhouse.io/togetherai/jobs/5302660007",
+        "https://www.highradius.com/about/careers-list/?gh_jid=8033172003"
       ],
       "unconfirmed": []
     }
