@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "snapshot": "2026-11-22",
+  "snapshot": "2026-11-23",
   "note": "first_seen is the snapshot date a role's URL first appeared in a build. A role is confirmed only where its company's board was read on the previous snapshot AND on this one \u2014 both sides genuinely observed. Everything else is unconfirmed: we saw it for the first time, which is not the same as it being new. Only confirmed roles may be called new.",
   "observed": [
     "1Password",
@@ -133,6 +133,7 @@
     "Granola",
     "Groww",
     "HackerRank",
+    "HaloBraid",
     "Halter",
     "Handshake",
     "Happl",
@@ -17692,6 +17693,19 @@
         "https://www.highradius.com/about/careers-list/?gh_jid=8033172003"
       ],
       "unconfirmed": []
+    },
+    "2026-11-23": {
+      "confirmed": [
+        "https://jobs.ashbyhq.com/Aspora/b7ecf8b8-98fb-41b0-a667-31417dce38d3",
+        "https://jobs.ashbyhq.com/exa/5542c2be-21df-46ae-99bc-1bb6292c4056",
+        "https://jobs.ashbyhq.com/legora/7614ed64-ca29-4416-af37-97fbd52c0f8e",
+        "https://jobs.ashbyhq.com/legora/bb0aaeaa-d380-4e88-be7a-12f738af574d",
+        "https://stripe.com/jobs/search?gh_jid=8407180",
+        "https://tulip.co/careers/job-posting/?gh_jid=8210566003"
+      ],
+      "unconfirmed": [
+        "https://jobs.ashbyhq.com/halobraid/8ecd8869-229f-474b-8042-ae788f353a87"
+      ]
     }
   }
 }
