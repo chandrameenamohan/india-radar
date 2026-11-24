@@ -3,8 +3,8 @@
   "checked": 801,
   "unchecked": 2225,
   "counts": {
-    "listed": 359,
-    "no-target-roles": 442,
+    "listed": 362,
+    "no-target-roles": 439,
     "slug-unresolved": 2201,
     "probe-failed": 0,
     "empty-board-unverified": 11,
@@ -88,7 +88,6 @@
     "Curri",
     "Cursor",
     "Cyberhaven",
-    "DailyPay",
     "Databricks",
     "Dataiku",
     "DeepL",
@@ -289,6 +288,7 @@
     "Satispay",
     "Scale AI",
     "Scandit",
+    "SeatGeek",
     "Securitize",
     "SeekOut",
     "Semperis",
@@ -321,6 +321,7 @@
     "Super",
     "Symphony",
     "Tailscale",
+    "Tala",
     "Talkdesk",
     "Tamara",
     "Tanium",
@@ -330,12 +331,14 @@
     "Tem",
     "TensTorrent",
     "Teya",
+    "The Athletic",
     "Thought Machine",
     "Tide",
     "Tines",
     "Tipalti",
     "Together AI",
     "Torq",
+    "Toss",
     "Transmit Security",
     "Trigger.dev",
     "Triomics",
@@ -1065,7 +1068,7 @@
     "Dadi Cinema": "slug-unresolved",
     "Daedalus": "slug-unresolved",
     "Daily": "slug-unresolved",
-    "DailyPay": "listed",
+    "DailyPay": "no-target-roles",
     "Daloopa": "slug-unresolved",
     "Dapper Labs": "slug-unresolved",
     "DarioHealth": "slug-unresolved",
@@ -2739,7 +2742,7 @@
     "Seam": "slug-unresolved",
     "Searchlight": "slug-unresolved",
     "Searchlight III CVL": "slug-unresolved",
-    "SeatGeek": "no-target-roles",
+    "SeatGeek": "listed",
     "Secoda": "slug-unresolved",
     "Second Measure": "slug-unresolved",
     "Secro": "slug-unresolved",
@@ -2964,7 +2967,7 @@
     "Tabnam": "slug-unresolved",
     "Tailscale": "listed",
     "Taiv": "slug-unresolved",
-    "Tala": "no-target-roles",
+    "Tala": "listed",
     "TaleMonster Games": "slug-unresolved",
     "Talkable": "slug-unresolved",
     "Talkdesk": "listed",
@@ -3010,7 +3013,7 @@
     "TetraScience": "slug-unresolved",
     "Teya": "listed",
     "Tezign": "slug-unresolved",
-    "The Athletic": "no-target-roles",
+    "The Athletic": "listed",
     "The Bank of London": "slug-unresolved",
     "The Brandtech Group": "slug-unresolved",
     "The Flex Company": "slug-unresolved",
@@ -3052,7 +3055,7 @@
     "Tongdun Technology": "slug-unresolved",
     "Torch": "slug-unresolved",
     "Torq": "listed",
-    "Toss": "no-target-roles",
+    "Toss": "listed",
     "Touareg Group Technologies": "slug-unresolved",
     "Tovala": "no-target-roles",
     "Tractable": "no-target-roles",
@@ -3400,7 +3403,9 @@
     "xLight": "slug-unresolved",
     "zeroheight": "slug-unresolved"
   },
-  "departed": {},
+  "departed": {
+    "DailyPay": "no-target-roles"
+  },
   "websites": {
     "with_website": 1928,
     "slug_unresolved_with_website": 1206,
@@ -3422,26 +3427,26 @@
     "Insider": "Business Insider"
   },
   "countries": {
-    "India": 119,
-    "United Kingdom": 257,
-    "Ireland": 54,
-    "Germany": 96,
+    "India": 117,
+    "United Kingdom": 259,
+    "Ireland": 53,
+    "Germany": 95,
     "Netherlands": 47,
-    "France": 59,
+    "France": 60,
     "Spain": 66,
     "Sweden": 32,
-    "Denmark": 15,
+    "Denmark": 14,
     "Norway": 8,
     "Finland": 9,
-    "Japan": 65,
-    "Singapore": 73,
-    "Australia": 90,
+    "Japan": 66,
+    "Singapore": 72,
+    "Australia": 91,
     "New Zealand": 6
   },
   "mca": {
     "records": 24102,
     "pulled": "2026-07-29",
-    "matched": 32,
+    "matched": 31,
     "held": [
       {
         "name": "6Sense",
@@ -3498,19 +3503,6 @@
             "name": "AVIATRIX SYSTEMS INDIA PRIVATE LIMITED",
             "incorporated": "2021-06-25",
             "address": "5th Floor, Godrej Indiranagar,Baiyyappanahalli, Old Madras Road,Bangalore North,Bangalore,Karnataka,560038-India",
-            "status": "Active"
-          }
-        ]
-      },
-      {
-        "name": "Cockroach Labs",
-        "confidence": "prefix",
-        "candidates": [
-          {
-            "cin": "U72200KA2022FTC163152",
-            "name": "COCKROACH LABS TECHNOLOGIES INDIA PRIVATE LIMITED",
-            "incorporated": "2022-06-29",
-            "address": "WeWork Roshni Tech Hub, 7B-102, Roshni Arcade,, Marathahalli Main Road, Lakshminarayana Pura, EPIP Zone, Chinnapanna Halli,Bangalore North,Bangalore,Karnataka,560037-India",
             "status": "Active"
           }
         ]
@@ -7189,6 +7181,63 @@
             "name": "TELEPORT LIMITED",
             "status": "dissolved",
             "incorporated": "1994-10-06",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
+        "name": "The Athletic",
+        "confidence": "prefix",
+        "why": "silent; 13 companies reach the prefix tier",
+        "candidates": [
+          {
+            "number": "11037254",
+            "name": "THE ATHLETIC CAMPUS LIMITED",
+            "status": "active",
+            "incorporated": "2017-10-30",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "07768123",
+            "name": "THE ATHLETIC EDGE LTD",
+            "status": "active",
+            "incorporated": "2011-09-09",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "12915817",
+            "name": "THE ATHLETIC GEAR SERVICES LTD",
+            "status": "active",
+            "incorporated": "2020-09-30",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "11992602",
+            "name": "THE ATHLETIC MEDIA COMPANY UK LTD.",
+            "status": "active",
+            "incorporated": "2019-05-13",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          },
+          {
+            "number": "10109645",
+            "name": "THE ATHLETIC NETWORK LTD",
+            "status": "dissolved",
+            "incorporated": "2016-04-07",
             "locality": "",
             "postcode": "",
             "sic": [],
