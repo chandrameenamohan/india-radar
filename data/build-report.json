@@ -3,8 +3,8 @@
   "checked": 801,
   "unchecked": 2225,
   "counts": {
-    "listed": 362,
-    "no-target-roles": 439,
+    "listed": 361,
+    "no-target-roles": 440,
     "slug-unresolved": 2201,
     "probe-failed": 0,
     "empty-board-unverified": 11,
@@ -116,6 +116,7 @@
     "Factory",
     "Faire",
     "FalconX",
+    "Feedzai",
     "Fieldguide",
     "Finni Health",
     "Fireblocks",
@@ -203,7 +204,6 @@
     "MarqVision",
     "Marshmallow",
     "Matillion",
-    "Mattermost",
     "May Mobility",
     "MeltPlan",
     "Mem0",
@@ -251,7 +251,6 @@
     "Passionfroot",
     "Payward",
     "Peec AI",
-    "Pelago",
     "Pendo",
     "Pennylane",
     "Peregrine",
@@ -1316,7 +1315,7 @@
     "Fathom": "slug-unresolved",
     "Fazeshift": "no-target-roles",
     "Feather": "slug-unresolved",
-    "Feedzai": "no-target-roles",
+    "Feedzai": "listed",
     "Felicity AI": "slug-unresolved",
     "Felix Technologies": "slug-unresolved",
     "Fern": "slug-unresolved",
@@ -1978,7 +1977,7 @@
     "Matic Robots": "no-target-roles",
     "Matillion": "listed",
     "Matrixport": "slug-unresolved",
-    "Mattermost": "listed",
+    "Mattermost": "no-target-roles",
     "Matternet": "slug-unresolved",
     "Matterport": "slug-unresolved",
     "Maxwell Labs": "slug-unresolved",
@@ -2376,7 +2375,7 @@
     "Peec AI": "listed",
     "Peer Global": "slug-unresolved",
     "PeerIslands Holdings": "slug-unresolved",
-    "Pelago": "listed",
+    "Pelago": "no-target-roles",
     "Peltier Technology": "slug-unresolved",
     "Pendo": "listed",
     "Pennylane": "listed",
@@ -3404,7 +3403,8 @@
     "zeroheight": "slug-unresolved"
   },
   "departed": {
-    "DailyPay": "no-target-roles"
+    "Mattermost": "no-target-roles",
+    "Pelago": "no-target-roles"
   },
   "websites": {
     "with_website": 1928,
@@ -3432,16 +3432,16 @@
     "Ireland": 53,
     "Germany": 95,
     "Netherlands": 47,
-    "France": 60,
+    "France": 59,
     "Spain": 66,
     "Sweden": 32,
-    "Denmark": 14,
-    "Norway": 8,
-    "Finland": 9,
-    "Japan": 66,
-    "Singapore": 72,
-    "Australia": 91,
-    "New Zealand": 6
+    "Denmark": 15,
+    "Norway": 9,
+    "Finland": 10,
+    "Japan": 65,
+    "Singapore": 73,
+    "Australia": 92,
+    "New Zealand": 5
   },
   "mca": {
     "records": 24102,
@@ -5160,6 +5160,23 @@
         ]
       },
       {
+        "name": "Feedzai",
+        "confidence": "exact",
+        "why": "silent; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "12661513",
+            "name": "FEEDZAI UK LIMITED",
+            "status": "active",
+            "incorporated": "2020-06-11",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
         "name": "Fieldguide",
         "confidence": "exact",
         "why": "silent; one exact-tier name match",
@@ -6401,23 +6418,6 @@
             "name": "PAYWARD LTD.",
             "status": "active",
             "incorporated": "2013-07-02",
-            "locality": "",
-            "postcode": "",
-            "sic": [],
-            "kind": ""
-          }
-        ]
-      },
-      {
-        "name": "Pelago",
-        "confidence": "exact",
-        "why": "silent; one exact-tier name match",
-        "candidates": [
-          {
-            "number": "OE023306",
-            "name": "PELAGO LIMITED",
-            "status": "registered",
-            "incorporated": "2023-02-06",
             "locality": "",
             "postcode": "",
             "sic": [],
