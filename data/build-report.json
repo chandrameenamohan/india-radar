@@ -198,6 +198,7 @@
     "Lucis",
     "Luma AI",
     "MOLOCO",
+    "MUBI",
     "MURAL",
     "Magic Eden",
     "MaintainX",
@@ -317,7 +318,6 @@
     "SumUp",
     "Suno",
     "Supabase",
-    "Super",
     "Symphony",
     "Tailscale",
     "Tala",
@@ -1945,7 +1945,7 @@
     "MOLOCO": "listed",
     "MRToolworx": "slug-unresolved",
     "MTailor": "slug-unresolved",
-    "MUBI": "no-target-roles",
+    "MUBI": "listed",
     "MURAL": "listed",
     "MX": "slug-unresolved",
     "MachGen AI": "slug-unresolved",
@@ -2928,7 +2928,7 @@
     "Sunfolding": "slug-unresolved",
     "Suno": "listed",
     "Supabase": "listed",
-    "Super": "listed",
+    "Super": "no-target-roles",
     "Super League Enterprise": "slug-unresolved",
     "SuperAnnotate AI": "slug-unresolved",
     "SuperSend": "slug-unresolved",
@@ -3403,8 +3403,7 @@
     "zeroheight": "slug-unresolved"
   },
   "departed": {
-    "Mattermost": "no-target-roles",
-    "Pelago": "no-target-roles"
+    "Super": "no-target-roles"
   },
   "websites": {
     "with_website": 1928,
@@ -3428,18 +3427,18 @@
   },
   "countries": {
     "India": 117,
-    "United Kingdom": 259,
+    "United Kingdom": 260,
     "Ireland": 53,
-    "Germany": 95,
+    "Germany": 96,
     "Netherlands": 47,
     "France": 59,
-    "Spain": 66,
+    "Spain": 65,
     "Sweden": 32,
     "Denmark": 15,
     "Norway": 9,
     "Finland": 10,
     "Japan": 65,
-    "Singapore": 73,
+    "Singapore": 72,
     "Australia": 92,
     "New Zealand": 5
   },
@@ -6138,6 +6137,23 @@
         ]
       },
       {
+        "name": "MUBI",
+        "confidence": "exact",
+        "why": "silent; one exact-tier name match",
+        "candidates": [
+          {
+            "number": "07385593",
+            "name": "MUBI UK LIMITED",
+            "status": "active",
+            "incorporated": "2010-09-23",
+            "locality": "",
+            "postcode": "",
+            "sic": [],
+            "kind": ""
+          }
+        ]
+      },
+      {
         "name": "MURAL",
         "confidence": "exact",
         "why": "silent; 4 companies reach the exact tier",
@@ -7029,53 +7045,6 @@
             "name": "SUMUP LIMITED",
             "status": "active",
             "incorporated": "2026-07-29",
-            "locality": "",
-            "postcode": "",
-            "sic": [],
-            "kind": ""
-          }
-        ]
-      },
-      {
-        "name": "Super",
-        "confidence": "exact",
-        "why": "silent; 4 companies reach the exact tier",
-        "candidates": [
-          {
-            "number": "NI710172",
-            "name": "SUPER LIMITED",
-            "status": "active",
-            "incorporated": "2024-02-18",
-            "locality": "",
-            "postcode": "",
-            "sic": [],
-            "kind": ""
-          },
-          {
-            "number": "14233353",
-            "name": "SUPER LIMITED",
-            "status": "dissolved",
-            "incorporated": "2022-07-13",
-            "locality": "",
-            "postcode": "",
-            "sic": [],
-            "kind": ""
-          },
-          {
-            "number": "13640511",
-            "name": "SUPER LIMITED",
-            "status": "dissolved",
-            "incorporated": "2021-09-23",
-            "locality": "",
-            "postcode": "",
-            "sic": [],
-            "kind": ""
-          },
-          {
-            "number": "04769077",
-            "name": "SUPER LTD",
-            "status": "dissolved",
-            "incorporated": "2003-05-19",
             "locality": "",
             "postcode": "",
             "sic": [],
