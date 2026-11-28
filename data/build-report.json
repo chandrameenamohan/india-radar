@@ -1,11 +1,11 @@
 {
   "corpus_size": 3026,
-  "checked": 801,
-  "unchecked": 2225,
+  "checked": 800,
+  "unchecked": 2226,
   "counts": {
-    "listed": 361,
-    "no-target-roles": 440,
-    "slug-unresolved": 2201,
+    "listed": 362,
+    "no-target-roles": 438,
+    "slug-unresolved": 2202,
     "probe-failed": 0,
     "empty-board-unverified": 11,
     "not-qualified": 0,
@@ -34,6 +34,7 @@
     "Anthropic",
     "Anyscale",
     "Apollo.io",
+    "AppDirect",
     "Applied Intuition",
     "AppsFlyer",
     "Arketa",
@@ -530,7 +531,7 @@
     "Apiphani": "no-target-roles",
     "Apollo": "no-target-roles",
     "Apollo.io": "listed",
-    "AppDirect": "no-target-roles",
+    "AppDirect": "listed",
     "AppWork Technologies": "slug-unresolved",
     "Applause Group": "slug-unresolved",
     "Applied Compute": "slug-unresolved",
@@ -716,7 +717,7 @@
     "BlockFi": "slug-unresolved",
     "Blockchain.com": "slug-unresolved",
     "Blockratize": "slug-unresolved",
-    "Blockstream": "no-target-roles",
+    "Blockstream": "slug-unresolved",
     "Blocktool": "slug-unresolved",
     "Bloom Institute of Technology": "slug-unresolved",
     "BloomThat": "slug-unresolved",
@@ -3405,7 +3406,7 @@
   "departed": {},
   "websites": {
     "with_website": 1928,
-    "slug_unresolved_with_website": 1206,
+    "slug_unresolved_with_website": 1207,
     "slug_unresolved_without_website": 995
   },
   "shared_boards": {
@@ -3424,12 +3425,12 @@
     "Insider": "Business Insider"
   },
   "countries": {
-    "India": 116,
+    "India": 117,
     "United Kingdom": 260,
     "Ireland": 53,
     "Germany": 96,
-    "Netherlands": 47,
-    "France": 59,
+    "Netherlands": 45,
+    "France": 58,
     "Spain": 65,
     "Sweden": 32,
     "Denmark": 15,
@@ -3437,13 +3438,13 @@
     "Finland": 10,
     "Japan": 64,
     "Singapore": 71,
-    "Australia": 90,
+    "Australia": 89,
     "New Zealand": 5
   },
   "mca": {
     "records": 24102,
     "pulled": "2026-07-29",
-    "matched": 31,
+    "matched": 32,
     "held": [
       {
         "name": "6Sense",
